@@ -115,12 +115,12 @@ The last foundamental ingeridient in modeling a random experiment, is to define 
 
 Suppose that $A, B \in \Omega$ is an event and $\mathbb{P}$ is a probability function. Then $\prob$ should satisfy the following properites:
 
-\begin{itemize}
+\begin{enumerate}
 
 \item $ 0 \leq \prob(A) \leq 1$
 \item $\prob(\Omega) = 1$
 \item For the events $E_1, E_2, ..., E_n \in \Omega$ that are mutually exclusive (i.e. disjoint events): $$\prob(\bigcup_{i} E_i) = \sum_i \prob(E_i)$$
-\end{itemize}
+\end{enumerate}
 
 
 \end{axiombox}
@@ -129,9 +129,80 @@ Suppose that $A, B \in \Omega$ is an event and $\mathbb{P}$ is a probability fun
 
 These axioms are called the foundamental axioms of probability and also the Kolmogorov axioms. We are free to define any kind of probabilty function that we want but it is important that 1) It should align with our common sense, 2) It should satisfy the Kolmogorov axioms. 
 
+Using the axioms above, we can observe and prove several interesting properties of the probability function. In the following box we have expressed some of them.
 
-\subsection{Foundamentals of The Probability}
+\begin{thmbox}{Basic Properties of the Probability Function}
 
-here we will descibe blu blu blu
+Suppose that $\prob$ is a probability function and $A,B \in \Omega$ are events of the sample space $\Omega$. We can show that the probability function has the following properties:
+
+\begin{enumerate}
+
+\item $\prob(\varnothing) = 0$
+
+\item If $A \subset B$ then $\prob(A) \leq \prob(B)$.
+
+\item $\prob(\overline{A}) = 1 - \prob(A)$.
+
+\item $\prob(A \cup B) = \prob(A) + \prob(B) - \prob(A \cap B)$.
+
+\end{enumerate}
+
+\end{thmbox}
 
 
+\begin{proof}
+The properties can be proved using the basic set theory theorems.
+
+\begin{enumerate}
+
+\item Since $\emptyset$ is the complement of $\Omega$, so these two sets are disjoint (i.e. $\emptyset \cap \Omega = \emptyset$). On the other hand from the set theory we know that $\emptyset \cup \Omega = \Omega$. So $\prob(\emptyset \cup \Omega) = \prob(\Omega)$. On the other hand, using the third axiom we can write: $\prob(\emptyset \cup \Omega) = \prob(\emptyset) + \prob(\Omega)$. Comparing the two recent equations we can conclude that $\prob(\emptyset) = 0$.
+
+
+
+\end{enumerate}
+
+
+
+The proofs for 2,3,4 are left as a exercise. However, the solutions can be found in the book "Statistical Modeling and Computation by Kroese" chapter 1. 
+
+
+\end{proof}
+
+
+
+\begin{example}{Defining a simple probability function}
+
+Let's define a probability function for the rolling n dice experiment that is both aligned with our common sense and also satisfy the Kolmogorov equations. Suppose that the $\Omega$ is the sample space and $E \in \Omega$ is an event. Then let's define:
+
+$$\prob(E) = \frac{\lvert E \rvert}{\lvert \Omega \rvert}$$
+
+in which the $\lvert E \rvert$ means the cardinality (number of elements) of the set $E$.
+
+\end{example}
+
+
+
+\subsection{Conditional Probability and Independentness}
+
+
+\subsection{Law of Total Probability}
+
+
+\subsection{Baye's Rule}
+
+\begin{example}{Tossing Coin}
+
+Choose one number in $\{1,2,\ldots,10\}$ randomly. Then toss that many dices. What is the probability that you get the sum equal to 3.
+
+\end{example}
+
+\begin{example}{Medical Test}
+
+Null Hypothesis ($H_0$): The person is \emph{not} healthy (so if the results of test is positive it means the null hypothesis is accepted and the person is infected and is not healthy). In a nutshell: positive test $\rightsquigarrow$ person is infected!
+
+Question: If the test if positive what is the probability that person is infected.
+\end{example}
+
+\begin{example}{Monty Hall Problem}
+Suppose that I have chose the box \#1 and the Monty Hall has opened the box \#2. What is the chance that the prise is in box \#1 and what is the probability that the prise is in box \#2. 
+\end{example}
