@@ -102,11 +102,34 @@ Utilizing the basic definitions along with the mathematical logic, we can derive
 \end{propbox}
 
 \begin{proof}
+The proof for some of the properties: \\
+\begin{itemize}
+\item $|z_1 z_2|= |z_1||z_2|$: To show this we first need to raise the both sides to the power 2:
+\[ |z_1 z_2|^2 = (z_1 z_2)\conj{(z_1 z_2)} = (z_1 \conj{z_1})(z_2 \conj{z_2}) = |z_1|^2|z_2|^2 \]. So by taking the square root of the both sides we will arrive at: $|z_1 z_2| = |z_1||z_2|$
+
+\item $(\conj{z})^k = \conj{(z^k)}$: Let's start from the right hand side:
+
+\[ \conj{(z^k)} = \conj{(\underbrace{z*z*z*\ldots*z}_\text{k times})} = \underbrace{\conj{z}*\conj{z}*\conj{z}*\ldots*\conj{z}}_\text{k times} = (\conj{z})^k\]
+\end{itemize}
 
 \end{proof}
 
 
 \begin{example}{Ordering Property in Complex Numbers}
+\emph{Question.} Show that we can not define any ordering property in the complex numbers.
+
+\begin{proof}
+Suppose that we \emph{can} define ordering property in the complex numbers. So two cases might arise for the $i$. It will be $i>0$ or $i<0$. 
+
+\begin{itemize}
+\item Let's assume that $i>0$. Since $f(x) = x^2$ is a strictly increasing function, then by arising two sides of the inequality to the power of two we will have: $i^2 = -1 > 0$ which is a contradiction.
+
+\item Let's assume that $i<0$. Since $i$ is smaller than zero, we can multiply the two sides of the inequality by $i$ but we should change the direction of the inequality sign. So we will have $i*i = -1 > 0$ which again arises a mathematical contradiction.
+\end{itemize}
+
+So we can conclude that we can not have any ordering property in the set of complex numbers.
+
+\end{proof}
 
 \end{example}
 
@@ -169,12 +192,17 @@ r^4 e^{4i\phi} = 16 = 16 e^{2n\pi i}
 \end{align*}
 
 So we will have: $r = 2$ and $\phi = \{ n \pi /2: n \in \mathbb{R} \} = \{ 0, \pi/2, \pi, 3\pi/2 \}$.
-
 \end{sol}
 
-
-
 \item $\frac{z}{1-z} = 1-5i$
+\begin{sol}
+\begin{flalign*}
+z  & = (1-z)(1-5i) \\
+& = 1-5i - z - 5iz \\
+& = \frac{1-5i}{2-5i} = \frac{(1-5i)(2+5i)}{29}
+\end{flalign*}
+
+\end{sol}
 \end{enumerate}
 
 
@@ -198,6 +226,7 @@ This can easily be shown by taking the complex conjugate from both sides of the 
 \begin{example}{Matrices with Complex Entries}
 
 \end{example}
+
 
 
 
