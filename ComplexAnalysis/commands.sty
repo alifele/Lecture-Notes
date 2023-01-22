@@ -1,7 +1,10 @@
 \ProvidesPackage{commands}
 
 
+%% Basic Packages and imports
+
 \usepackage{tikz}
+\usepackage{amsmath}
 \usepackage{amsmath} % AMS Math Package
 \usepackage{amsthm} % Theorem Formatting
 \usepackage{amssymb}    % Math symbols such as \mathbb
@@ -25,6 +28,7 @@
 \usepackage{xspace}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
+\tcbuselibrary{breakable}
 
 \let\vaccent=\v % rename builtin command \v{} to \vaccent{}
 \renewcommand{\v}[1]{\ensuremath{\mathbf{#1}}} % for vectors
@@ -39,6 +43,16 @@
 \newcommand{\ndiv}{\nmid}
 \newcommand{\bicon}{\Leftrightarrow}
 \newcommand{\imply}{\Rightarrow}
+
+
+
+%%%%%%%%%%%%% Newcommand definitions of MATH %%%%%%%%%%%
+
+%% Complex Analysis
+
+\newcommand{\conj}[1]{\overline{#1}}
+\renewcommand{\Re}{\operatorname{Re}}
+\renewcommand{\Im}{\operatorname{Im}}
 
 
 
@@ -150,13 +164,13 @@
 \renewcommand{\abs}[1]{\lvert #1 \rvert}
 \newcommand{\dc}{\substack{DC \\ \longleftrightarrow \\ \phantom{o}}}
 
-\newtcolorbox{defbox}[1]{colback=red!5!, colframe=red!75!black,fonttitle=\bfseries, title=Definition:\ #1}
-\newtcolorbox{thmbox}[1]{colback=blue!5, colframe=blue!55!black, fonttitle=\bfseries, title=Theorem:\ #1}
-\newtcolorbox{lembox}[1]{colback=blue!5, colframe=blue!55!black, fonttitle=\bfseries, title=Lemma: #1}
-\newtcolorbox{corbox}[1]{colback=blue!5, colframe=blue!55!black, fonttitle=\bfseries, title=Corollary:\ #1}
-\newtcolorbox{propbox}[1]{colback=blue!5, colframe=blue!55!black, fonttitle=\bfseries, title=Proposition:\ #1}
-\newtcolorbox{axiombox}[1]{colback=green!5, colframe=green!35!black, fonttitle=\bfseries, title=Axiom:\ #1}
-\newtcolorbox{example}[1]{colback=gray!10, colframe=white!40!black, fonttitle=\bfseries, title=Example:\ #1}
+\newtcolorbox{defbox}[1]{breakable, colback=red!5!, colframe=red!75!black,fonttitle=\bfseries, title=Definition:\ #1}
+\newtcolorbox{thmbox}[1]{breakable, colback=blue!5, colframe=blue!55!black, fonttitle=\bfseries, title=Theorem:\ #1}
+\newtcolorbox{lembox}[1]{breakable, colback=blue!5, colframe=blue!55!black, fonttitle=\bfseries, title=Lemma: #1}
+\newtcolorbox{corbox}[1]{breakable, colback=blue!5, colframe=blue!55!black, fonttitle=\bfseries, title=Corollary:\ #1}
+\newtcolorbox{propbox}[1]{breakable, colback=blue!5, colframe=blue!55!black, fonttitle=\bfseries, title=Proposition:\ #1}
+\newtcolorbox{axiombox}[1]{breakable, colback=green!5, colframe=green!35!black, fonttitle=\bfseries, title=Axiom:\ #1}
+\newtcolorbox{example}[1]{breakable, colback=gray!10, colframe=white!40!black, fonttitle=\bfseries, title=Example:\ #1}
 
 
 
