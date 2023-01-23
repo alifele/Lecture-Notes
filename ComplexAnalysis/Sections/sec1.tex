@@ -19,6 +19,8 @@ As discussed earlier, complex numbers system is a system in which we have a solu
 			\Im(z) = b
 		\end{align*}
 		
+		
+		
 		\hrule
 		
 		\item Two complex numbers $z_1 = a_1 + b_1 i$ and  $z_2 = a_2 + b_2 i$ are equal if:
@@ -206,8 +208,23 @@ We can also have some important inequalities in the complex numbers that often c
 	\end{align*}
 	This also represent that fact that multiplying a complex number by $i$ means a $\pi/2$ counterclockwise rotation. This becomes very clear if we consider the polar representation of complex numbers.
 	
+
 	\centering
-	\includegraphics[scale=0.4]{Images/fig_CyclicProperty.png}
+	\begin{tikzpicture}[inner sep=4mm]
+		%		\draw [step=0.5, gray!50!white, line width=0.1] (-2,-2) grid (2,2);
+		\node[red, circle, draw=black,inner sep=0.2cm] (1) at (1,0) {1};
+		\node[red, circle, draw=black,inner sep=0.23cm] (i) at (0,1) {i};
+		\node[red, circle, draw=black,inner sep=0.2cm] (-1) at (-1,0) {-1};
+		\node[red, circle, draw=black,inner sep=0.2cm] (-i) at (0,-1) {-i};
+		\draw[->, orange, line width=3] (1) to[out=90, in=0] node[sloped, black, anchor=south,inner sep=1mm] {$\times i$} (i);
+		\draw[->, orange, line width=3] (i) to[out=-180, in=90] node[sloped, black, anchor=south,inner sep=1mm] {$\times i$} (-1);
+		\draw[->, orange, line width=3] (-1) to[out=-90, in=180] node[sloped, black, anchor=north,inner sep=1mm] {$\times i$} (-i);
+		\draw[->, orange, line width=3] (-i) to[out=0, in=-90] node[sloped, black, anchor=north,inner sep=1mm] {$\times i$} (1);									;
+		
+		
+	\end{tikzpicture}
+
+
 
 \end{example}
 
@@ -298,20 +315,6 @@ The interesting fact about the complex plane that I like the most is that we can
 		\filldraw[blue!40!white, thick, dashed, draw=black, fill opacity=0.5] (0,0) circle (1.5cm);
 	\end{tikzpicture}
 	\caption{The planar set representing $ |z| \le 3 $}
-\end{figure}
-
-
-
-\begin{figure}[h!]
-	\centering
-	\begin{tikzpicture}[inner sep=4mm]
-m		\node at ( 0,2) [circle,draw] {};
-		\node at ( 0,1) [circle,draw] {};
-		\node at ( 0,0) [circle,draw] {};
-		\node at ( 1,1) [rectangle,draw] {};
-		\node at (-1,1) [rectangle,draw] {};
-	\end{tikzpicture}
-	\caption{Practicing with nodes}
 \end{figure}
 
 
