@@ -1,2 +1,1 @@
-Lecture note template
-
+Notes for the applied complex analysis.
