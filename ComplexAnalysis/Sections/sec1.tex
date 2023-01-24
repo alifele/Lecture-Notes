@@ -414,7 +414,38 @@ As discussed earlier, we can have Cartesian or polar representation of the compl
 	\caption{Polar and Cartesian representaion of complex number $z = x+iy$.}
 \end{figure}
 
-Based on the geometrical interpretation of the complex numbers, it feels natural that we define the argument using the inverse tangent function. $\phi = \arctan(\frac{x}{y})$.
+Based on the geometrical interpretation of the complex numbers, it feels natural that we define the argument using the inverse tangent function. $\phi = \arctan(\frac{x}{y})$. But according to the figure \ref{arctan plot}, the range of this function is defined in $(-\pi/2,\pi/2)$ interval. So for the complex points in the first and fourth quadrant we get a meanungful $\phi$ value but for the points in the second and the third quadrant, the interpretation of the $\phi$ does not work well. This probelm can be solved by considering the signs of the $\Re$ and $\Im$ parts of the complex number or considering the $\cos(\theta) = \frac{x}{r}$ and $sin(\theta) = \frac{y}{r}$ seperatly. The latter works because $sin$ and $cos$ uniquely determine the position (and hence the argument) of a complex number. For the former, the following definition determines a unique argument even for the points in the second and the fourth quadrant.
+
+\begin{equation*}
+	arg(z) = 
+	\begin{cases}
+		\arctan(y/x) + \pi/2 (1-\text{sgn}(x)) & \text{ if } x\neq 0 \\
+		\pi/2 \ \text{sgn}(y) 				   & \text{ if } x=0, y\neq 0 \\
+		\text{undefined}					   & \text{ if } x=y=0
+	\end{cases}
+\end{equation*}
+
+in which $\text{sgn}(x)$ is the sign function that returns the sign of its argument.
+
+\begin{figure}[h!]
+	\label{arctan plot}
+	\centering
+	\begin{tikzpicture}[scale=1.5]
+		\clip (-2,-2) rectangle (2,2);
+		\draw[step=pi/4, black!10!white, help lines](-2,-2) grid (2,2);
+		\draw [->, ultra thick] (-2,0) -- (2,0) node [right] {$\theta$};
+		\draw [->, ultra thick] (0,-1.9) -- (0,1.9) node [left] {};
+		\draw[ultra thick,samples=100,smooth,variable=\x,domain=-pi/1.4:pi/1.4,red]
+		plot(\x,{pi/180*atan(\x*8)});
+		\draw [dashed, gray] (pi/2,1.5) -- (pi/2,-1.5);
+		\draw [dashed, gray] (-pi/2,1.5) -- (-pi/2,-1.5);
+		\tick{0,pi/2}{0} node[left,fill=white] {$\pi/2$};
+		\tick{0,-pi/2}{0} node[left,fill=white] {$-\pi/2$};
+	\end{tikzpicture}
+	\caption{Plot of $y = \arctan(\theta)$ function. }
+\end{figure}
+
+
 
 
 
