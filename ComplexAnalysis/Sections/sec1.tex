@@ -310,14 +310,76 @@ The interesting fact about the complex plane that I like the most is that we can
 	\centering
 	\begin{tikzpicture}
 		\draw[step=0.5, black!10!white, help lines](-2.9,-2.9) grid (2.9, 2.9);
-		\draw[thick, ->] (-2.5,0) -- (2.5,0) node[anchor=south] {$\Im$};
-		\draw[thick, ->] (0,-2.5) -- (0,2.5) node[anchor=west]{$\Re$};
+		\draw[thick, ->] (-2.5,0) -- (2.5,0) node[anchor=south] {$\Re$};
+		\draw[thick, ->] (0,-2.5) -- (0,2.5) node[anchor=west]{$\Im$};
 		\filldraw[blue!40!white, thick, dashed, draw=black, fill opacity=0.5] (0,0) circle (1.5cm);
 	\end{tikzpicture}
 	\caption{The planar set representing $ |z| \le 3 $}
 \end{figure}
 
 
+
+\begin{example}{}
+	\emph{Question.} Derive the points in $\mathbb{C}$ that satisfy following conditions.
+	
+	\begin{enumerate}
+		\item $|z+2| = |z-1|$ \\
+		\emph{Solution.} There is not a single method that works the best for all of the problems. For this question, it is better to raise both sides of the eqution to the power 2.
+		\begin{align*}
+			|z+2|^2 &= |z-1|^2 \\
+			(z+2)\conj{(z+2)} &= (z-1) \conj{(z-1)} \\
+			(z+2)(\conj{z} + 2) &= (z-1) (\conj{z} - 1) \\
+			z \conj{z} + 2z + 2\conj{z} + 4 &= z \conj{z} - z - \conj{z} + 1 \\ 
+			z + 1 &= - \conj{z}
+		\end{align*}
+		So let's assume $z$ is in the form $z = x + iy$. By inserting this in equation above we will get:
+		\begin{align*}
+			(x+1) + iy = -x + iy
+		\end{align*}
+		So:
+		\begin{align*}
+			x &= \frac{1}{2}\\
+			y &= \text{any real number}
+		\end{align*}
+		
+		So the set of points satisfying this equation will be: \\ \\
+		\begin{center}
+			\begin{tikzpicture}[scale=1.5]
+				\draw[->, ultra thick] (-1,0) -- (2,0) node [right] {$\Re$};
+				\draw[->, ultra thick] (0,-1.5) -- (0,1.5) node [left] {$\Im$};
+				\draw[thick, dashed] (0.5,1.5) -- (0.5,-1.5);
+				\tick{0.5,0}{90} node[scale=1,below,fill=gray!15] {$\frac{1}{2}$};
+			\end{tikzpicture}
+		\end{center}
+	
+		\hrule
+		
+		\item $|z-1| = \Re{z} + 1$ \\
+		\emph{Solution. } For this question it is better to start with a general form of $z = x + iy$ and then substitute in the equation.
+		
+		\begin{align*}
+			|(x-1) + yi| &= x+1 \\
+			(x-1)^2 + y^2 &= (x+1)^2 \\
+			z^2 - 2x + 1 + y^2 &= x^2 + 2x + 1 \\
+			y^2 &= 4x
+		\end{align*}
+		So the points of complex plain that satisfy the equation will be like the curve:
+		\begin{center}
+			\begin{tikzpicture}[scale=1.5]
+				\draw [->, ultra thick] (-1,0) -- (2,0) node [right] {$\Re$};
+				\draw [->, ultra thick] (0,-1.5) -- (0,1.5) node [left] {$\Im$};
+				\draw[thick,samples=100,smooth,variable=\x,domain=0:2,red, dashed]
+				plot(\x,{(\x)^0.5}) node[above=1,right] {$V_L$}
+				plot(\x,{-(\x)^0.5});
+			\end{tikzpicture}
+		\end{center}
+	\end{enumerate}
+	
+
+
+
+
+\end{example}
 
 
 

@@ -53,12 +53,46 @@
 		\draw[->, orange, line width=3] (i) to[out=-180, in=90] node[sloped, black, anchor=south,inner sep=1mm] {$\times i$} (-1);
 		\draw[->, orange, line width=3] (-1) to[out=-90, in=180] node[sloped, black, anchor=north,inner sep=1mm] {$\times i$} (-i);
 		\draw[->, orange, line width=3] (-i) to[out=0, in=-90] node[sloped, black, anchor=north,inner sep=1mm] {$\times i$} (1);
-%										
-%										;
-
-		
 	\end{tikzpicture}
 	\caption{Practicing with nodes}
 \end{figure}
+
+
+
+
+\begin{figure}
+	\centering
+	\begin{tikzpicture}[scale=1.5]
+		\draw [->, ultra thick] (-1,0) -- (2,0) node [right] {$\Re$};
+		\draw [->, ultra thick] (0,-1.5) -- (0,1.5) node [left] {$\Im$};
+		\draw[thick,samples=100,smooth,variable=\x,domain=0:2,red, dashed]
+		plot(\x,{(\x)^0.5}) node[above=1,right] {$V_L$}
+		plot(\x,{-(\x)^0.5});
+	\end{tikzpicture}
+	\caption{Plotting the functions}
+\end{figure}
+
+
+\begin{figure}
+	\centering
+	\begin{tikzpicture}[scale=1.5]
+		\draw[->, ultra thick] (-1,0) -- (2,0) node [right] {$\Re$};
+		\draw[->, ultra thick] (0,-1.5) -- (0,1.5) node [left] {$\Im$};
+		\draw[thick, dashed] (0.5,1.5) -- (0.5,-1.5);
+		\tick{0.5,0}{90} node[scale=1,below,fill=gray!15] {$\frac{1}{2}$};
+	\end{tikzpicture}
+	\caption {Sample plot in $\mathbb{C}$}
+\end{figure}
+
+
+
+
+
+
+
+
+
+
+
 
 \end{document}
