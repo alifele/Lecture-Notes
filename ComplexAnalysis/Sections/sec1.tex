@@ -347,7 +347,7 @@ The interesting fact about the complex plane that I like the most is that we can
 			\begin{tikzpicture}[scale=1.5]
 				\draw[->, ultra thick] (-1,0) -- (2,0) node [right] {$\Re$};
 				\draw[->, ultra thick] (0,-1.5) -- (0,1.5) node [left] {$\Im$};
-				\draw[thick, dashed] (0.5,1.5) -- (0.5,-1.5);
+				\draw[thick, dashed, red] (0.5,1.5) -- (0.5,-1.5);
 				\tick{0.5,0}{90} node[scale=1,below,fill=gray!15] {$\frac{1}{2}$};
 			\end{tikzpicture}
 		\end{center}
@@ -369,17 +369,52 @@ The interesting fact about the complex plane that I like the most is that we can
 				\draw [->, ultra thick] (-1,0) -- (2,0) node [right] {$\Re$};
 				\draw [->, ultra thick] (0,-1.5) -- (0,1.5) node [left] {$\Im$};
 				\draw[thick,samples=100,smooth,variable=\x,domain=0:2,red, dashed]
-				plot(\x,{(\x)^0.5}) node[above=1,right] {$V_L$}
+				plot(\x,{(\x)^0.5})
 				plot(\x,{-(\x)^0.5});
 			\end{tikzpicture}
 		\end{center}
 	\end{enumerate}
-	
-
-
-
-
 \end{example}
+
+\subsection{* Discussion on the Argument of Complex Numbers}
+As discussed earlier, we can have Cartesian or polar representation of the complex number $z = x + iy $. The polar presentaion will be in the form $z = r e^{i \phi}$ in which $r$ is the modulus of $z$ and $\phi$ is so called the argument of the complex number. The modulus is defined as $r = \sqrt{x^2 + y^2} = |z|$. However, the argument definition is quite tricky. 
+
+
+\begin{figure}[h!]
+	\centering
+	\begin{tikzpicture}[scale=2]
+		\def\xmax{2.0}
+		\def\ymax{1.6}
+		\def\R{1.9}
+		\def\ang{35}
+		\coordinate (O) at (0,0);
+		\coordinate (R) at (\ang:\R);
+		\coordinate (-R) at (-\ang:\R);
+		\coordinate (X) at ({\R*cos(\ang)},0);
+		\coordinate (Y) at (0,{\R*sin(\ang)});
+		\coordinate (-Y) at (0,{-\R*sin(\ang)});
+		\node[fill=mydarkblue,circle,inner sep=0.8] (point) at (R) {};
+
+		\node[mydarkblue,above right=-2] at (R) {$z=x+iy=re^{i\phi}$};
+
+		\draw[dashed,mydarkblue] (Y) -- (point) -- ++ (0,{0.1-\R*sin(\ang)});
+
+		\draw[->,ultra thick] (-0.2*\xmax,0) -- (\xmax+0.05,0) node[right] {Re};
+		\draw[->,ultra thick] (0,-\ymax*0.2) -- (0,\ymax+0.05) node[left] {Im};
+		\draw[vector] (O) -- (point) node[pos=0.55,above left=-2] {$r$};
+
+		\draw pic[->,"$\theta$",mydarkblue,draw=mydarkblue,angle radius=23,angle eccentricity=1.24]
+		{angle = X--O--R};
+		
+		%\tick{X}{90} node[scale=0.9,left=6,below right=-2] {$x = r\cos\theta$};
+		\tick{X}{90} node[mydarkblue,scale=1,below=-1] {$x$};
+		\tick{Y}{ 0} node[mydarkblue,scale=1,left] {$y$}; %r\sin\theta = 
+
+	\end{tikzpicture}
+	\caption{Polar and Cartesian representaion of complex number $z = x+iy$.}
+\end{figure}
+
+Based on the geometrical interpretation of the complex numbers, it feels natural that we define the argument using the inverse tangent function. $\phi = \arctan(\frac{x}{y})$.
 
 
 
