@@ -1,0 +1,46 @@
+
+
+
+
+\section{Direct Methods}
+\subsection{LU Decomposition}
+
+\subsection{RQ Decomposition}
+
+\subsection{Guassian Elimination}
+
+\subsection{Tridiagonal Matrix}
+
+\subsection{Approximate Method}
+
+We want to solve the following system of equations:
+
+\[ \mat{A} x = b \].
+
+We set the matrix $\mat{A}$ to be: $\mat{A} = \mat{S} - \mat{T}$, in which $\mat{S}$ and $\mat{T}$ are the some matrices which are chosed in a smart way!. Let's plug in the new value of $\mat{A}$ in the system of linear equations:
+
+\begin{align*}
+	(\mat{S} - \mat{T}) x &= b \\
+	\mat{S} x &= \mat{T} x + b \\
+	x &= \invmat{S} (\mat{T} x + b) =  \invmat{S} \mat{T} x + \invmat{S} b \\
+	&\boxed{x = \invmat{S} \mat{T} x + \invmat{S} b}
+\end{align*}
+
+
+
+insert a guess
+evaluate the error through the iteration
+find a convergence rule
+
+\subsection{Jacobi Method}
+
+S is the identity matrix
+
+\subsection{Guass Seidel Method}
+
+S is the lower trianglar matrix
+
+
+
+
+
