@@ -23,10 +23,35 @@ We set the matrix $\mat{A}$ to be: $\mat{A} = \mat{S} - \mat{T}$, in which $\mat
 	(\mat{S} - \mat{T}) x &= b \\
 	\mat{S} x &= \mat{T} x + b \\
 	x &= \invmat{S} (\mat{T} x + b) =  \invmat{S} \mat{T} x + \invmat{S} b \\
-	&\boxed{x = \invmat{S} \mat{T} x + \invmat{S} b}
+\end{align*}
+So we will have:
+
+\begin{equation}
+	\boxed{x = \invmat{S} \mat{T} x + \invmat{S} b}
+	\label{equ:expandedEquation}
+\end{equation}
+
+Now let's plug in an initial guess $x_0$ in RHS of the the equation \ref{equ:expandedEquation} and name it $x_1$:
+
+
+
+\begin{align*}
+	x_1 &= \invmat{S} \mat{T} x_0 + \invmat{S} b \\
+	x_2 &= \invmat{S} \mat{T} x_1 + \invmat{S} b \\
+	& \vdots \\
+	x_n &= \invmat{S} \mat{T} x_{n-1} + \invmat{S} b
 \end{align*}
 
 
+To see if we have get closer to the actual solution of the system of equations, let's asume that the actual solution is $x$. So let's define the following errors:
+
+\begin{align*}
+	\epsilon_0 &= x - x_0 \\
+	\epsilon_1 &= x - x_1 \\
+	\epsilon_2 &= x - x_2 \\
+	& \vdots \\
+	\epsilon_n &= x - x_n 
+\end{align*}
 
 insert a guess
 evaluate the error through the iteration
