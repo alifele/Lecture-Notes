@@ -31,7 +31,7 @@ So we will have:
 	\label{equ:expandedEquation}
 \end{equation}
 
-Now let's plug in an initial guess $x_0$ in RHS of the the equation \ref{equ:expandedEquation} and name it $x_1$:
+Now let's plug in an initial guess $x_0$ in RHS of the the equation \ref{equ:expandedEquation} and name it $x_1$. Then we can do this repeatedly to get the following equations:
 
 
 
@@ -53,13 +53,40 @@ To see if we have get closer to the actual solution of the system of equations, 
 	\epsilon_n &= x - x_n 
 \end{align*}
 
-insert a guess
-evaluate the error through the iteration
-find a convergence rule
+By pluggin in $x_0 = x - \epsilon_0 $ in equation \ref{equ:expandedEquation} we will get:
+
+\begin{align*}
+	x_1 &= \invmat{S} \mat{T} (x-\epsilon_0) + \invmat{S}b \\ 
+	&= \underbrace{\invmat{S}\mat{T}x + \invmat{S}b}_{x} - \invmat{S}\mat{T}\epsilon_0 \\
+	&= x - \invmat{S}\mat{T}\epsilon_0 = x - \epsilon_1 \\
+	&\Rightarrow \boxed{ \epsilon_1 = \invmat{S}\mat{T} }
+\end{align*}
+
+Using the same logic we will get:
+
+\begin{equation}
+	\epsilon_n = (\invmat{S}\mat{T})^n
+\end{equation}
+
+So using this iterative method to find the approximate solution of the system of the linear equations, we will converge to the actual solution if the largest eigenvalue of the matrix $\invmat{S}\mat{T}$ is smaller than one. Now the only problem is to find the value of $\mat{S}$ is a clever way such that it meets the convergence criteria and is easy to invert. Note that the time complexity of inverting a matrix is $O(N^3)$. So an inapproporate choice of $\mat{S}$ will be very costly.
 
 \subsection{Jacobi Method}
+One idea for $\mat{S}$ is the identity matrix $\mathcal{I}$.
 
-S is the identity matrix
+\begin{equation}
+	\mat{S} = \mathcal{I} = 
+	\begin{pmatrix}
+		1 & 0  & \cdots & 0\\
+		0 & 1  & \cdots & 0\\
+		\vdots & \vdots & \ddots & \vdots \\
+		0 & 0 & \cdots & 1
+	\end{pmatrix}
+\end{equation}
+
+
+
+
+
 
 \subsection{Guass Seidel Method}
 
