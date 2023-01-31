@@ -58,7 +58,7 @@ All of the conic sections (ellipse, parabola, hyperbola) can be described with t
 \subsection{Intuitive Derivation of the Second Order PDEs}
 The three classes of the second order linear PDEs in table \ref{tab:PDE-types} can be derived intuitively using the continuity law (conservation law) and the constitutive law that is determined by the nature of the problem which is the subject of the following sections. 
  
-\subsubsection{Continuity or Conservation Laws}
+\subsubsection{Continuity Equation or Conservation Laws}
 The most important part of deriving the PDE equations is the continuity law or conservation law. This fact is imposed because of our common sense about nature. Suppose that we want to study the concentration of of a red ink in a infinitesimal cube. The continuity equation, in simple terms, state that the change of the concentration of the ink inside the infinitesimal cube is equal to the ink that has entered the cube from outside from its boundaries (we are assuming no source or sink of ink inside the cube). For instance, consider the infinitesimal box in figure \ref{fig:infbox}. The change of the concentration of the ink inside the cube is $\frac{\partial c}{\partial t}$. Because we know that there are no sources or sinks of ink inside the cube, then the change in the concentration is equal to the amount that comes in and goes out from the boundaries of the box. To put this in numbers, we introduce the important vector quantity \emph{flux} $ \Phi $. Flux is the amount of particles flow per unit area per unit time (see figure \ref{fig_fluxCrossSection}).
 
 \input{Images/fig_fluxCrossSection.tex}
@@ -84,7 +84,7 @@ Note that the negative sign in the LHS of the equation above is simply to match 
 So the net change in the number of particle in the box per $dt$ will be:
 
 \begin{align*}
-	-\frac{dN}{dt} &= \frac{dN_x}{dt} + \frac{dN_y}{dt} + \frac{dN_z}{dt} \\
+	-\frac{dN}{dt} &= - (\frac{dN_x}{dt} + \frac{dN_y}{dt} + \frac{dN_z}{dt}) \\
 	&= (\Phi_x(x+dx,y,z)-\Phi_x(x,y,z))dydz + \\
 	&\, (\Phi_y(x,y+dy,z)-\Phi_y(x,y,z)) dx dz + \\
 	&\, (\Phi_z(x,y,z+dz) - \Phi_z(x,y,z)) dx dy
@@ -110,6 +110,19 @@ In which $c = N/V$ is the concentration, $ \nabla $ is the divergence operator, 
 \end{defbox}
 
 
+\subsubsection{Conservation Law for Momentum}
+will be used to derive the wave equation
+
+
+\subsection{Constitutive Laws: Advection, Diffusion and Wave Equation}
+
+Having the continuity equation in hand makes the derivation PDEs very straight forward. We only need to insert the constitutive laws (which are enforced by the nature of the problem) in the continuity equations derived in the section above.
+
+
+\begin{itemize}
+	\item Fick's Law $\rightarrow$ Constitutive law for diffusion 
+	\item Hook's law $\rightarrow$ Constitutive law for the wave equation
+\end{itemize}
 
 
 
