@@ -1,0 +1,46 @@
+\section{Basics}
+Partial differential equations relate the partial derivatives of a function to each other. For example $f$ can be a function of spacial coordinates (like $x,y,z$ in the case of Cartesian coordinates), dynamical variable (like time), or any other kind of variables (like the space of genotypes g). For example suppose that $ \Phi(x,y) $ represents the electric potential of a point charge. Such function should satisfy the Laplace equation:
+
+\[	 \partial_{xx} \Phi + \partial_{yy} \Phi = 0	\]. 
+
+Note that the symbols $ \partial_{xx} $ and $ \partial_{yy} $ are short symbols for $ \frac{\partial}{\partial x^2} $ and $ \frac{\partial}{\partial y^2} $ respectively.
+
+\begin{defbox}{Order of PDE}
+	The order of a PDE is the highest derivative that occurs in the equation. 
+\end{defbox}
+
+Based on the definition above, the Laplace equation is a second order partial differential equation. 
+
+\subsection{Classification of The Second Order PDEs }
+
+There are three categories of the second order PDEs that every other type of a second order PDE can be converted to one of these kinds. The most general type of a second order PDE can be written as:
+
+\begin{equation}
+	A \partial_{xx} u + B \partial_{xy} u + C \partial_{yy} u + D \partial_{x} u + E \partial_{y} u + F u = k
+	\label{equ:GeneralSecondOrderPDE}
+\end{equation}
+
+In which the coefficients are all a function of $x,y$ (but not $ u $ in which case the PDE will be nonlinearx). Equation \ref{equ:GeneralSecondOrderPDE} can be summarized in a more compact form using the derivative operator $ \operatorname{L} $: 
+
+\[	 \operatorname{L} u = 0	\]
+
+in which:
+
+\[  \operatorname{L} = A \partial_{xx} + B \partial_{xy} + C \partial_{yy} + D \partial_{x} + E \partial_{y} + F \].
+
+The following table summarizes special categories of the lines second order PDEs that frequently occur in physical applications: \newline
+
+\begin{table}[]
+	\centering
+	\begin{tabular}{c|c|c|c|c}
+		PDE             & Analogous Quad Surf & $\Delta$ & Class      & Application               \\ \hline
+		$ u_t = u_{xx}$ & $T = x^2$           & 0        & parabolioc & Diffusion - Heat Equation \\ \hline
+		&                     &          &            &                           \\ \hline
+		&                     &          &            &                           \\ \hline
+		&                     &          &            &                          
+	\end{tabular}
+	\caption{}
+	\label{tab:my-table}
+\end{table}
+
+\subsection{Intuitive Derivation of the Second Order PDEs}
