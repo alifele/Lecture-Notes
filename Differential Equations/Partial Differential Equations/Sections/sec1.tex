@@ -30,15 +30,21 @@ in which:
 
 The following table summarizes special categories of the lines second order PDEs that frequently occur in physical applications: \newline
 
+
+% Please add the following required packages to your document preamble:
+
 \begin{table}[]
 	\centering
-	\begin{tabular}{c|c|c|c|c}
-		PDE             & Analogous Quad Surf & $\Delta$ & Class      & Application               \\ \hline
-		$ u_t = u_{xx}$ & $T = x^2$           & 0        & parabolioc & Diffusion - Heat Equation \\ \hline
-		&                     &          &            &                           \\ \hline
-		&                     &          &            &                           \\ \hline
-		&                     &          &            &                          
-	\end{tabular}
+	\resizebox{\textwidth}{!}{%
+		\begin{tabular}{ccccc}
+			\hline
+			PDE                     & Analogous Quad Surf & $\Delta$     & Class      & Application               \\ \hline
+			$ u_t = u_{xx}$         & $T = x^2$           & 0            & parabolioc & Diffusion - Heat Equation \\ \hline
+			$ u_{tt} = u_{xx} $     & $T^2 = x^2$         & $\Delta > 0$ & Hyperbolic & Wave Equation             \\ \hline
+			$ u_{xx} + u_{yy} = 0 $ & $x^2 + y^2 = 0$ & \multirow{2}{*}{$\Delta < 0$} & \multirow{2}{*}{Elliptic} & Laplace \\ \cline{1-2} \cline{5-5} 
+			$ u_{xx} + u_{yy} = c $ & $x^2 + y^2 = k$     &              &            & Poisson                   \\ \hline
+		\end{tabular}%
+	}
 	\caption{}
 	\label{tab:my-table}
 \end{table}
