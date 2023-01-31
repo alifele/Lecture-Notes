@@ -1,9 +1,8 @@
 \section{Basics}
 Partial differential equations relate the partial derivatives of a function to each other. For example $f$ can be a function of spacial coordinates (like $x,y,z$ in the case of Cartesian coordinates), dynamical variable (like time), or any other kind of variables (like the space of genotypes g). For example suppose that $ \Phi(x,y) $ represents the electric potential of a point charge. Such function should satisfy the Laplace equation:
 
-\[	 \partial_{xx} \Phi + \partial_{yy} \Phi = 0	\]. 
-
-Note that the symbols $ \partial_{xx} $ and $ \partial_{yy} $ are short symbols for $ \frac{\partial}{\partial x^2} $ and $ \frac{\partial}{\partial y^2} $ respectively.
+\[	 \partial_{xx} \Phi + \partial_{yy} \Phi = 0.	\]
+Note that the symbols $ \partial_{xx} $ and $ \partial_{yy} $ are short symbols for $ \frac{\partial^2}{\partial x^2} $ and $ \frac{\partial^2}{\partial y^2} $ respectively.
 
 \begin{defbox}{Order of PDE}
 	The order of a PDE is the highest derivative that occurs in the equation. 
@@ -22,7 +21,7 @@ There are three categories of the second order PDEs that every other type of a s
 
 In which the coefficients are all a function of $x,y$ (but not $ u $ in which case the PDE will be nonlinearx). Equation \ref{equ:GeneralSecondOrderPDE} can be summarized in a more compact form using the derivative operator $ \operatorname{L} $: 
 
-\[	 \operatorname{L} u = 0	\],
+\[	 \operatorname{L} u = 0,	\]
 
 in which:
 
@@ -44,7 +43,7 @@ All of the conic sections (ellipse, parabola, hyperbola) can be described with t
 	\resizebox{\textwidth}{!}{%
 		\begin{tabular}{|c|c|c|c|c|}
 			\hline
-			PDE                     & Analogous Quad Surf & $\Delta$     & Class      & Application               \\ \hline
+			PDE                     & Analogous conic sec. & $\Delta$     & Class      & Application               \\ \hline
 			$ u_t = u_{xx}$         & $T = x^2$           & 0            & parabolioc & Diffusion - Heat Equation \\ \hline
 			$ u_{tt} = u_{xx} $     & $T^2 = x^2$         & $\Delta > 0$ & Hyperbolic & Wave Equation             \\ \hline
 			$ u_{xx} + u_{yy} = 0 $ & $x^2 + y^2 = 0$ & \multirow{2}{*}{$\Delta < 0$} & \multirow{2}{*}{Elliptic} & Laplace \\ \cline{1-2} \cline{5-5} 
@@ -57,3 +56,60 @@ All of the conic sections (ellipse, parabola, hyperbola) can be described with t
 
 
 \subsection{Intuitive Derivation of the Second Order PDEs}
+The three classes of the second order linear PDEs in table \ref{tab:PDE-types} can be derived intuitively using the continuity law (conservation law) and the constitutive law that is determined by the nature of the problem which is the subject of the following sections. 
+ 
+\subsubsection{Continuity or Conservation Laws}
+The most important part of deriving the PDE equations is the continuity law or conservation law. This fact is imposed because of our common sense about nature. Suppose that we want to study the concentration of of a red ink in a infinitesimal cube. The continuity equation, in simple terms, state that the change of the concentration of the ink inside the infinitesimal cube is equal to the ink that has entered the cube from outside from its boundaries (we are assuming no source or sink of ink inside the cube). For instance, consider the infinitesimal box in figure \ref{fig:infbox}. The change of the concentration of the ink inside the cube is $\frac{\partial c}{\partial t}$. Because we know that there are no sources or sinks of ink inside the cube, then the change in the concentration is equal to the amount that comes in and goes out from the boundaries of the box. To put this in numbers, we introduce the important vector quantity \emph{flux} $ \Phi $. Flux is the amount of particles flow per unit area per unit time (see figure \ref{fig_fluxCrossSection}).
+
+\input{Images/fig_fluxCrossSection.tex}
+\input{Sections/fig_infcube.tex}
+
+
+\newpage
+
+Let's get back to the infinitesimal cube in figure \ref{fig:infbox} and derive the continuity equation. We can start we tracking the net change in the number of particles inside the cube due to the flux in x direction:
+
+\begin{align*}
+	-\frac{dN_x}{dt} &= \Phi_x(x,y,z) . (-dz dy) + \Phi_x(x +dx, y,z) . (dzdy) \\
+	 				&= (\Phi_x(x+dx,y,z)-\Phi_x(x,y,z))dydz 
+\end{align*}
+
+Note that the negative sign in the LHS of the equation above is simply to match the meaning of the two sides of the equations. For instance, if the RHS of the equation above is positive, it means that the net change of the number of particles in the box in negative (meaning that particles are leaving the box) which is equivalent to $ -\frac{dN}{dt} $. Similarly in the y and z direction:
+
+\begin{align*}
+	-\frac{dN_y}{dt} &= (\Phi_y(x,y+dy,z)-\Phi_y(x,y,z)) dx dz \\
+	-\frac{dN_z}{dt} &= (\Phi_z(x,y,z+dz) - \Phi_z(x,y,z)) dx dy
+\end{align*}
+
+So the net change in the number of particle in the box per $dt$ will be:
+
+\begin{align*}
+	-\frac{dN}{dt} &= \frac{dN_x}{dt} + \frac{dN_y}{dt} + \frac{dN_z}{dt} \\
+	&= (\Phi_x(x+dx,y,z)-\Phi_x(x,y,z))dydz + \\
+	&\, (\Phi_y(x,y+dy,z)-\Phi_y(x,y,z)) dx dz + \\
+	&\, (\Phi_z(x,y,z+dz) - \Phi_z(x,y,z)) dx dy
+\end{align*}
+
+
+By dividing the both sides of the above equation by the volume of the cube $ dV = dx dy dz $ we can write:
+
+\begin{equation*}
+	\frac{dc}{dt} = - (\partial_{x}\Phi_x + \partial_{y}\Phi_y + \partial_{z}\Phi_z) = -\mathbf{\nabla} . \Phi
+\end{equation*}
+
+In which $c = N/V$ is the concentration, $ \nabla $ is the divergence operator, and $ \Phi $ is the flux. 
+
+\begin{defbox}{Continuity Equation}
+	The following important relation is known as the continuity equation(or conservation law):
+	
+	\begin{equation}
+			\frac{dc}{dt} + \mathbf{\nabla} . \Phi = 0
+	\end{equation}
+
+	in which $\Phi$ is the flux, $c$ is the concentration, and $ \nabla $ is the divergence operator.
+\end{defbox}
+
+
+
+
+
