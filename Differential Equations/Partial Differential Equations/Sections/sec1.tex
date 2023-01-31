@@ -22,21 +22,27 @@ There are three categories of the second order PDEs that every other type of a s
 
 In which the coefficients are all a function of $x,y$ (but not $ u $ in which case the PDE will be nonlinearx). Equation \ref{equ:GeneralSecondOrderPDE} can be summarized in a more compact form using the derivative operator $ \operatorname{L} $: 
 
-\[	 \operatorname{L} u = 0	\]
+\[	 \operatorname{L} u = 0	\],
 
 in which:
 
 \[  \operatorname{L} = A \partial_{xx} + B \partial_{xy} + C \partial_{yy} + D \partial_{x} + E \partial_{y} + F \].
 
-The following table summarizes special categories of the lines second order PDEs that frequently occur in physical applications: \newline
+Because of the similarities of the equation \ref{equ:GeneralSecondOrderPDE} with the generic quadratic equation describing the conic sections, we call each class of second order PDEs with its corresponding conic section. The generic equation describing the conic sections is:
+
+\begin{equation}
+	A x^2 + B x y + C y^2 + D x + E y + K = 0.
+	\label{equ:ConicSections}
+\end{equation}
 
 
-% Please add the following required packages to your document preamble:
+All of the conic sections (ellipse, parabola, hyperbola) can be described with the equation \ref{equ:ConicSections} which is determined with the discriminant $ \Delta = B^2 - 4 A C $. for $ \Delta=0 $, $ \Delta > 0 $, and $ \Delta < 0 $ the conic section will be \textbf{parabolic}, \textbf{hyperbolic}, and \textbf{elliptic} respectively. Table \ref{tab:PDE-types} summarizes special categories of the linear second order PDEs that frequently occur in physical applications. \newline
+
 
 \begin{table}[]
 	\centering
 	\resizebox{\textwidth}{!}{%
-		\begin{tabular}{ccccc}
+		\begin{tabular}{|c|c|c|c|c|}
 			\hline
 			PDE                     & Analogous Quad Surf & $\Delta$     & Class      & Application               \\ \hline
 			$ u_t = u_{xx}$         & $T = x^2$           & 0            & parabolioc & Diffusion - Heat Equation \\ \hline
@@ -45,8 +51,9 @@ The following table summarizes special categories of the lines second order PDEs
 			$ u_{xx} + u_{yy} = c $ & $x^2 + y^2 = k$     &              &            & Poisson                   \\ \hline
 		\end{tabular}%
 	}
-	\caption{}
-	\label{tab:my-table}
+	\caption{A summary of the three class of second order linear PDE.}
+	\label{tab:PDE-types}
 \end{table}
+
 
 \subsection{Intuitive Derivation of the Second Order PDEs}
