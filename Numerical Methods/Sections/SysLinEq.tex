@@ -167,8 +167,72 @@ The under determined and over determined system of equation can be defined as th
 \end{defbox}
 
 
+Let's discuss finding the solution of an over determined system of equation through an example. Suppose that we want to solve the following system of equations to get the values of x, y.
+
+\begin{equation*}
+	\begin{pmatrix}
+		a_1  \\
+		a_2  \\
+
+	\end{pmatrix} 
+	\begin{pmatrix}
+		x \\
+	\end{pmatrix}
+	= \begin{pmatrix}
+		f_1 \\
+		f_2 \\
+	\end{pmatrix}
+\end{equation*}
+
+This is an over determined system of equation because there are 3 equations and 2 unknowns (which are $x, \text{and } y$). Let's look at the geometrical interpretation of this system to gain insights about its solutions. 
+
+\input{Images/fig_2dOverDetermined.tex}
+
+As it is clear from figure \ref{fig:Overdetermined2D}, it is not possible to construct vector $\overrightarrow{f}$ with any multiple of vector $\overrightarrow{a}$. Instead we can choose $x \overrightarrow{a}$ in a way that the error $|\overrightarrow{\epsilon}|^2 = |\overrightarrow{f} - x \overrightarrow{a}|^2$ minimum. We can calculate the appropriate value of $x$ in two ways: 1) using derivative and 2) using geometrical interpretation. For the first method let's write:
+
+\[ |\vect{\epsilon}|^2 = \vect{\epsilon}.\vect{\epsilon} = (\vect{f} - x\vect{a}).(\vect{f} - x\vect{a}) = |\vect{f}|^2 - 2x\vect{a}.\vect{f} + x^2\vect{a}.\vect{a} \]
+
+To find the appropriate value of $x$ that can minimize the value of $ \vect{\epsilon} $ we need to calculate the derivative of $ |\vect{\epsilon}|^2 $ with respect to $x$ and set it equal to zero:
+	
+\[ \frac{\partial |\vect{\epsilon}|}{\partial x} = 2x^* \vect{a} . \vect{a} - 2\vect{a}.\vect{f} = 0 \]. 
+
+So the value of $x^*$ that results in a minimum error vector will be equation to:
+
+\begin{equation}
+	x^* = \frac{\vect{a} . \vect{f}}{\vect{a}. \vect{a}}
+	\label{equ:minError2D}
+\end{equation}
+
+The equation \ref{equ:minError2D} can also be derived using an geometrical argument. Using simple geometrical reasoning, we can conclude that the error vector $\vect{\epsilon}$ will be minimum if it is perpendicular to the line carrying $\vect{a}$. Thus it means that:
+
+\[ \vect{\epsilon} . \vect{a} = (\vect{f} - x^* \vect{a}) . \vect{a} = \vect{f}\vect{a} - x^* \vect{a} \vect{a} = 0 \] 
+
+So we will be the equation \ref{equ:minError2D} from the above equation. 
 
 
+This argument can easily be generalized to higher dimensions. Let's consider a three dimensional over determined system:
+
+
+
+\begin{equation*}
+	\begin{pmatrix}
+		a_1 & b_1 \\
+		a_2 & b_2 \\
+		a_3 & b_3
+	\end{pmatrix} 
+	\begin{pmatrix}
+		x \\
+		y
+	\end{pmatrix}
+	= \begin{pmatrix}
+		f_1 \\
+		f_2 \\
+		f_3
+	\end{pmatrix}
+\end{equation*}
+
+
+\input{Images/fig_3dOverDeterminent.tex}
 
 
 
