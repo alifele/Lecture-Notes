@@ -2,22 +2,30 @@
 
 
 
-\section{Direct Methods}
+\section{Direct Methods to Solve the System of Equations}
 \subsection{LU Decomposition}
+
+Will be completed soon!
 
 \subsection{RQ Decomposition}
 
+Will be completed soon!
+
 \subsection{Guassian Elimination}
+
+Will be completed soon!
 
 \subsection{Tridiagonal Matrix}
 
-\subsection{Approximate Method}
+Will be completed soon!
 
-We want to solve the following system of equations:
+\section{Approximate Method to Solve the System of Equations}
+
+Suppose that want to solve the following system of equations:
 
 \[ \mat{A} x = b \].
 
-We set the matrix $\mat{A}$ to be: $\mat{A} = \mat{S} - \mat{T}$, in which $\mat{S}$ and $\mat{T}$ are the some matrices which are chosed in a smart way!. Let's plug in the new value of $\mat{A}$ in the system of linear equations:
+Let the matrix $\mat{A}$ to be: $\mat{A} = \mat{S} - \mat{T}$, in which $\mat{S}$ and $\mat{T}$ are the some matrices which are chosed in a smart way!. Let's plug in the new value of $\mat{A}$ in the system of linear equations:
 
 \begin{align*}
 	(\mat{S} - \mat{T}) x &= b \\
@@ -42,6 +50,13 @@ Now let's plug in an initial guess $x_0$ in RHS of the the equation \ref{equ:exp
 	x_n &= \invmat{S} \mat{T} x_{n-1} + \invmat{S} b
 \end{align*}
 
+So the iterative update equation can be written as:
+
+\begin{equation}
+	x_{i+1} = \invmat{S}\mat{T}x_i + \invmat{S}b
+	\label{equ:updateRuleWithInv}
+\end{equation}
+
 
 To see if we have get closer to the actual solution of the system of equations, let's asume that the actual solution is $x$. So let's define the following errors:
 
@@ -65,32 +80,93 @@ By pluggin in $x_0 = x - \epsilon_0 $ in equation \ref{equ:expandedEquation} we 
 Using the same logic we will get:
 
 \begin{equation}
-	\epsilon_n = (\invmat{S}\mat{T})^n
+	\epsilon_n = (\invmat{S}\mat{T})^n \epsilon_0
 \end{equation}
 
 So using this iterative method to find the approximate solution of the system of the linear equations, we will converge to the actual solution if the largest eigenvalue of the matrix $\invmat{S}\mat{T}$ is smaller than one. Now the only problem is to find the value of $\mat{S}$ is a clever way such that it meets the convergence criteria and is easy to invert. Note that the time complexity of inverting a matrix is $O(N^3)$. So an inapproporate choice of $\mat{S}$ will be very costly.
 
 \subsection{Jacobi Method}
-One idea for $\mat{S}$ is the identity matrix $\mathcal{I}$.
+One idea for $\mat{S}$ is a diagonal matrix that contains the diagonal elements of the matrix $ \mat{A} $
 
 \begin{equation}
-	\mat{S} = \mathcal{I} = 
+	\mat{S} =
 	\begin{pmatrix}
-		1 & 0  & \cdots & 0\\
-		0 & 1  & \cdots & 0\\
+		A_{11} & 0  & \cdots & 0\\
+		0 & A_{22}  & \cdots & 0\\
 		\vdots & \vdots & \ddots & \vdots \\
-		0 & 0 & \cdots & 1
+		0 & 0 & \cdots & A_{nn}
+	\end{pmatrix}
+\end{equation}
+
+And for $\mat{T}$, since $\mat{A} = \mat{S} - \mat{T}$, so we can write:
+
+\begin{equation}
+	\mat{T} = 
+	\begin{pmatrix}
+		0 & -A_{12} & \cdots & -A_{1n} \\
+		-A_{21} & 0 & \cdots & -A_{2n} \\
+		\vdots & \vdots & \ddots & \vdots \\
+		-A_{n1} & -A_{n2} & \cdots & 0
 	\end{pmatrix}
 \end{equation}
 
 
+Note that the conversion criteria (which is $|\lambda_{max}(\invmat{S}\mat{T})| < 1$) still need to be checked. This way of choosing $ \mat{S} $ and $ \mat{T} $ is interesting because calculating the inverse of a diagonal matrix has $O(N)$ time complexity. So calculating the RHS of the update equation (equation \ref{equ:updateRuleWithInv}) will have a lower time complexity.
 
 
 
 
 \subsection{Guass Seidel Method}
 
-S is the lower trianglar matrix
+The matrix $\mat{S}$ can be chosen in a way to be a lower triangular matrix:
+
+\begin{equation}
+	\mat{S} =
+	\begin{pmatrix}
+		A_{11} & 0  & \cdots & 0\\
+		A_{21} & A_{22}  & \cdots & 0\\
+		\vdots & \vdots & \ddots & \vdots \\
+		A_{n1} & A_{n2} & \cdots & A_{nn}
+	\end{pmatrix}
+\end{equation}
+
+So the matrix $\mat{T} $ will be:
+
+\begin{equation}
+	\mat{T} = 
+	\begin{pmatrix}
+		0 & -A_{12} & \cdots & -A_{1n} \\
+		0 & 0 & \cdots & -A_{2n} \\
+		\vdots & \vdots & \ddots & \vdots \\
+		0 & 0 & \cdots & 0
+	\end{pmatrix}
+\end{equation}
+
+
+With choosing $\mat{S}$ to be a triangular matrix, we can avoid calculating the $\invmat{S}$ for equation \ref{equ:updateRuleWithInv}. Instead we can write the update rule as:
+
+\begin{equation}
+	\mat{S}x_{i+1} = \mat{T}x_i + b
+	\label{equ:updateRule}
+\end{equation}
+
+and calculate $x_{i+1}$ via backward or forward substitution which has a $O(N^2)$ time complexity. Note that will this specific choice of $\mat{S}$ and $ \mat{T} $ we need to verify the conversion criteria to make sure the error will converge to the zero vector.
+
+
+\section{Solving Under Determined and Over Determined System of Equations}
+
+The under determined and over determined system of equation can be defined as the following:
+
+\begin{defbox}{Under Determined and Over Determined System of Equations}
+	\begin{itemize}
+		\item \textbf{Over determined system of equations:} If a system of linear equations has more equations than the number of variables then we will have an over determined system. An over determined system of equation will generally have \emph{no} solutions.
+		
+		\item \textbf{Under determined system of equations:} If a system of linear equations has more variables than the number of equations then we will have an under determined system. An under determined system of equation will generally have \emph{infinite} number of solutions.
+	\end{itemize}
+
+\end{defbox}
+
+
 
 
 
