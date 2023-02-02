@@ -213,7 +213,6 @@ So we will be the equation \ref{equ:minError2D} from the above equation.
 This argument can easily be generalized to higher dimensions. Let's consider a three dimensional over determined system:
 
 
-
 \begin{equation*}
 	\begin{pmatrix}
 		a_1 & b_1 \\
@@ -231,8 +230,19 @@ This argument can easily be generalized to higher dimensions. Let's consider a t
 	\end{pmatrix}
 \end{equation*}
 
+which can also be written in a more compact way:
+
+\begin{equation*}
+	\mat{A} \vect{X} = \vect{f}
+\end{equation*}
+
+
+
+This over determined system of equations can be represented geometrically. To emphasize our discussion on the over determined system of equation, we choose vectors $\vect{a}, \vect{b},$ and $\vect{f}$ in a way such that they are not in a plane. Let's assume the following configuration of vectors:
 
 \input{Images/fig_3dOverDeterminent.tex}
+
+As it is evident from figure \ref{fig:3DOverDetermined}, there are no ways to construct $\vect{f}$ from $x\vect{a} + y\vect{b}$ for any choice of coefficients $x$ and $y$ which is a hint that the system of equations is over determined. However, we can construct $x\vect{a} + y\vect{b}$ in a way that the error vector $\vect{\epsilon} = \vect{f} - (x\vect{a} + y\vect{b}) = \vect{f} - \mat{A}\vect{X}$ is minimum. According to the geometrical interpretation of the problem, this will happen when $\vect{\epsilon}$ is perpendicular to both $\vect{a}$ and $\vect{b}$. 
 
 
 
