@@ -21,8 +21,10 @@
 \numberwithin{equation}{section}
 \numberwithin{figure}{section}
 
+\newcommand{\vect}[1]{\ensuremath{\mathbf{#1}}} % for vectors
+
 \let\vaccent=\v % rename builtin command \v{} to \vaccent{}
-\renewcommand{\v}[1]{\ensuremath{\mathbf{#1}}} % for vectors
+
 \newcommand{\gv}[1]{\ensuremath{\mbox{\boldmath$ #1 $}}} 
 % for vectors of Greek letters
 \newcommand{\uv}[1]{\ensuremath{\mathbf{\hat{#1}}}} % for unit vector

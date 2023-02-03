@@ -1,0 +1,113 @@
+\section{What is a Matrix}
+
+A matrix is basically a notation convention that enables us to do some stuff more easily with a pencil and paper.  A very similar concept to this is the long division algorithm for for dividing two integers. For example consider the following long division (in French-European style) that we are all familiar with
+
+\begin{equation*}
+	\opdiv[decimalsepsymbol={,},displayintermediary=all,voperation=top]
+	{198}{12}
+\end{equation*}
+
+So this notation and algorithms is to use some calculations more continent when is done by hand with a pen and paper. So the matrix notation can also be though as a computation convention. To make stuff more clear, consider the following example. \newline
+
+\begin{example}{Simple Pen and Paper Calculations}
+	Consider $V$ which is written as:
+	\[ V = 2A + 3B + 4C \]
+	
+	Given the following relation between $A,B$, and $C$, rewrite $V$ in terms of $x,y$, and $z$.
+	\begin{align*}
+		A &= x + 2 y + 3 z \\
+		B &= 2 x - y + z \\
+		C &= -x -y + z
+	\end{align*}
+	
+	\emph{Solution 1.}
+	
+	To write $V$ in terms of $x,y$, and $z$ we write:
+	\begin{equation}
+		V = 2 (x + 2 y + 3 z) + 3 (2 x - y + z) + 4 (-x -y + z)
+	\end{equation}
+	
+	By arranging the terms using simple algebra we will have:
+	
+	\begin{equation}
+		V = (2+6-4)x + (4-3-4)y + (6+3+4)z  = 4x -3y + 13z
+	\end{equation}
+
+
+	\emph{Solution 2.}
+	
+	The calculations described in the first solution are not systematic. What I mean is that we started doing whatever we can do with you thinking about doing it in a more smart way that can also by systematically scaled to larger equations. This is where the matrices come into play. Matrices help us to do such calculations in a more algorithmic way (like the long division notation in which we do the calculations in a algorithmic way). \newline
+	
+	Let $\mathbb{B}$ be the set of all \emph{objects} that the $V$ is expanded in terms of and call this set as the \emph{basis} set. So for $\vect{V}= 2A + 3B + 4C$ we have the basis
+	\[ \mathbb{B}_1 = \{ A,B,C \}. \]
+	We can arrange the coefficients of $V$ in basis $\mathbb{B}_1$ in the following way:
+	\begin{equation*}
+		V_{\mathbb{B}_1}=
+		\begin{pmatrix}
+			2 \\
+			3 \\
+			4
+		\end{pmatrix}_{\mathbb{B}_1}
+	\end{equation*}
+	We call it the coordinates of $V$ in the basis $\mathbb{B}_1$. Since we want to write the vector $V$ in terms of $x,y$, and $z$, we need to introduce the new basis $\mathbb{B}_2$ in the following way:
+	
+	\begin{equation*}
+		\mathbb{B}_2 = \{ x,y,z \}
+	\end{equation*}
+	
+	 Since $A,B$, and $C$ are expressed in terms of $x,y$, and $z$, we can arrange the coordinates of $A,B$, and $C$ in the basis $\mathbb{B}_2$ in the following way:
+	 
+	 \begin{equation*}
+	 	L_{\mathbb{B}_1}^{\mathbb{B}_2} = \begin{pmatrix}
+	 		1 & 2 & -1 \\
+	 		2 & -1 & -1 \\
+	 		3 & 1 & 1
+	 	\end{pmatrix}_{\mathbb{B}_1}^{\mathbb{B}_2}
+	 \end{equation*}
+ 
+ 	in which every column is the coefficients $A,B$, and $C$ in the basis $\mathbb{B}_2$ respectively. Note the subscript and the superscripts of the matrix. This matrix means that its columns contains the coordinates of the basis $\mathbb{B}_1$ in the new basis $\mathbb{B}_2$. So when it is applied to any vector that is described in basis $\mathbb{B}_1$, we will get the components of that vector in the basis $\mathbb{B}_2$. In other words:
+ 	
+ 	\begin{equation*}
+ 		V_{\mathbb{B}_2} = L_{\mathbb{B}_1}^{\mathbb{B}_2} V_{\mathbb{B}_1}
+ 	\end{equation*}
+ 
+	\begin{equation*}
+		V_{\mathbb{B}_2} = 
+		\begin{pmatrix}
+			1 & 2 & -1 \\
+			2 & -1 & -1 \\
+			3 & 1 & 1
+		\end{pmatrix}_{\mathbb{B}_1}^{\mathbb{B}_2}
+		\begin{pmatrix}
+			2 \\
+			3 \\
+			4
+		\end{pmatrix}_{\mathbb{B}_1}
+	\end{equation*}
+
+	This matrix equation can be written in two ways:
+	
+	\begin{equation}
+		V_{\mathbb{B}_2} = 
+		2 \begin{pmatrix}
+			1 \\
+			2 \\
+			3
+		\end{pmatrix}_{\mathbb{B}_2} 
+		+ 3 \begin{pmatrix}
+			2 \\
+			-1 \\
+			1
+		\end{pmatrix}_{\mathbb{B}_2}
+		+ 4 \begin{pmatrix}
+			-1 \\
+			-1 \\
+			1
+		\end{pmatrix}_{\mathbb{B}_2}
+	\end{equation}
+
+	The equation above is equivalent to 
+	 
+\end{example}
+
+
