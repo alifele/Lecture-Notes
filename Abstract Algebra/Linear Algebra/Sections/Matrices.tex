@@ -141,3 +141,43 @@ So this notation and algorithms is to use some calculations more continent when 
 \end{example}
 
 
+
+
+\section{Change of Basis Matrix}
+
+As we discussed earlier, the matrix representation of a linear operator $\op{A} \in \vectSpace{L}(\vectSpace{V},\vectSpace{W})$ depends on the choice of basis $\mathbb{B}_{\vectSpace{V}}$ and $\mathbb{B}_\vectSpace{W}$ which are the basis of vector spaces $\vectSpace{V}$ and $ \vectSpace{W} $ respectively. Now suppose that that in the vector spaces $\vectSpace{V}$, the elements are described in basis $\mathbb{B}_1 = \{ \ket{e_i} \}_{i=1}^{N}$ but we want to change it to the basis $\basis{B}{2}{e'}{j}{N}$. We need to know the relation between these two basis that is assumed to be the following:
+
+\begin{equation}
+	\ket{e_i} = \sum_{j=1}^{N} \rho_{ji} \ket{e'_{j}}
+	\label{equ:changeOfMatrix:eInTermsOfePrime}
+\end{equation}
+
+Consider the vector $\ket{v}$ that is described in the basis $\mathbb{B}_1$ in the following way: 
+
+\begin{equation}
+	\ket{v} = \sum_{i=1}^{N} \alpha_i \ket{e_i} 
+	\label{equ:changeOfBasis:expansionOfvIne}
+\end{equation}
+
+\[ \ket{v} = \sum_{i=1}^{N} \alpha_i \ket{e_i} \] 
+
+The coefficients of the expansion are called the \emph{coordinates} of $\ket{v}$ in the basis $\mathbb{B}_1$ and can be shown like:
+
+\begin{equation}
+	\underline{v}_{\mathbb{B}_1} = \begin{pmatrix}
+		\alpha_1 \\
+		\alpha_2 \\
+		\vdots \\
+		\alpha_N
+	\end{pmatrix}_{\mathbb{B}_1}
+\end{equation}
+
+Now we can use the equation \ref{equ:changeOfMatrix:eInTermsOfePrime} to replace $\ket{e_i}$ in \ref{equ:changeOfBasis:expansionOfvIne} with $\ket{e'_j}$:
+
+\begin{equation}
+	\ket{v} = \sum_{i=1}^{N} \sum_{j=1}^{N}\alpha_i \rho_{ji} \ket{e'_j} = 
+	\label{equ:chanbeOfBasis:vInNewBasis}
+\end{equation}
+
+ equation above is equivalent t
+

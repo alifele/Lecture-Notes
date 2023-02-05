@@ -7,6 +7,7 @@
 \usepackage[dvips,letterpaper,margin=1in,bottom=0.7in]{geometry}
 \usepackage{commath}
 \usepackage{tensor}
+\usepackage{physics}
 \usepackage{mathtools}
 \usepackage{pgfplots}
 \usetikzlibrary{arrows.meta}
@@ -22,6 +23,9 @@
 \numberwithin{figure}{section}
 
 \newcommand{\vect}[1]{\ensuremath{\mathbf{#1}}} % for vectors
+\newcommand{\vectSpace}[1]{\mathcal{#1}}
+\renewcommand{\op}[1]{\operatorname{#1}}
+\newcommand{\basis}[5]{\mathbb{#1}_{#2} = \{ \ket{{#3}_{#4}} \}_{i=1}^{#5}}
 
 \let\vaccent=\v % rename builtin command \v{} to \vaccent{}
 
@@ -132,12 +136,7 @@
 \DeclareMathOperator{\arccsch}{arccsch}
 \DeclareMathOperator{\arccoth}{arccoth} 
 
-\newcommand{\Tr}{\mathrm{Tr}}
-\newcommand{\dyad}[2]{\lvert #1 \rangle \langle #2 \rvert}
-\newcommand{\ket}[1]{\lvert #1 \rangle}
-\newcommand{\bra}[1]{\langle #1 \rvert}
-\newcommand{\braket}[2]{\langle #1 \lvert #2 \rangle}
-\newcommand{\ip}[2]{\langle #1 \vert #2 \rangle}
+
 \newcommand{\mat}[1]{\begin{pmatrix} #1 \end{pmatrix}}
 \renewcommand{\abs}[1]{\lvert #1 \rvert}
 \newcommand{\dc}{\substack{DC \\ \longleftrightarrow \\ \phantom{o}}}
