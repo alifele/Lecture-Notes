@@ -175,9 +175,44 @@ The coefficients of the expansion are called the \emph{coordinates} of $\ket{v}$
 Now we can use the equation \ref{equ:changeOfMatrix:eInTermsOfePrime} to replace $\ket{e_i}$ in \ref{equ:changeOfBasis:expansionOfvIne} with $\ket{e'_j}$:
 
 \begin{equation}
-	\ket{v} = \sum_{i=1}^{N} \sum_{j=1}^{N}\alpha_i \rho_{ji} \ket{e'_j} = 
+	\ket{v} = \sum_{i=1}^{N} \sum_{j=1}^{N}\alpha_i \rho_{ji} \ket{e'_j} = \sum_{j=1}^{N} \sum_{i=1}^{N}\rho_{ji} \alpha_i  \ket{e'_j}  = \sum_{j=1}^{N} \eta_j \ket{e'_j}
 	\label{equ:chanbeOfBasis:vInNewBasis}
 \end{equation}
 
- equation above is equivalent t
+in which $\eta_j = \sum_{i=1}^{N}\rho_{ji} \alpha_i $ is the coordinates of $ \ket{v} $ in the new basis $\mathbb{B}_2$:
+
+\begin{equation*}
+	\underline{v}_{\mathbb{B}_2} = \begin{pmatrix}
+		\eta_1 \\
+		\eta_2 \\
+		\vdots \\
+		\eta_N
+	\end{pmatrix}_{\mathbb{B}_2}
+\end{equation*}
+
+
+The equation \ref{equ:chanbeOfBasis:vInNewBasis} can be written in the following matrix equation:
+
+\begin{equation}
+	\begin{pmatrix}
+		\eta_1 \\
+		\eta_2 \\
+		\vdots \\
+		\eta_N
+	\end{pmatrix}_{\mathbb{B}_2} = 
+	\underbrace{\begin{pmatrix}
+			\rho_{11} & \rho_{12} & \cdots & \rho_{1N}\\
+			\rho_{21} & \rho_{22} & \cdots & \rho_{2N}\\
+			\vdots    & \vdots    & \ddots & \vdots\\
+			\rho_{N1} & \rho_{N2} & \cdots & \rho_{NN} 
+		\end{pmatrix}_{\mathbb{B}_1}^{\mathbb{B}_2}}_{R}
+	\begin{pmatrix}
+		\alpha_1 \\
+		\alpha_2 \\
+		\vdots \\
+		\alpha_N
+	\end{pmatrix}_{\mathbb{B}_1} 
+\end{equation}
+
+
 
