@@ -24,6 +24,7 @@
 \numberwithin{figure}{section}
 
 \newcommand{\mat}[1]{\operatorname{#1}}
+\renewcommand{\matrix}[4]{\operatorname{#1}_{\mathbb{#2}_{#3}}^{\mathbb{#2}_{#4}}}
 
 \newcommand{\vect}[1]{\ensuremath{\mathbf{#1}}} % for vectors
 \newcommand{\vectSpace}[1]{\mathcal{#1}}
@@ -150,6 +151,7 @@
 \newtcolorbox{propbox}[1]{breakable,enhanced jigsaw,colback=blue!5, colframe=blue!55!black, fonttitle=\bfseries, title=Proposition:\ #1}
 \newtcolorbox{axiombox}[1]{breakable,enhanced jigsaw,colback=green!5, colframe=green!35!black, fonttitle=\bfseries, title=Axiom:\ #1}
 \newtcolorbox{example}[1]{breakable,enhanced jigsaw,colback=gray!5, colframe=white!40!black, fonttitle=\bfseries, title=Example:\ #1}
+\newtcolorbox{obsbox}[1]{breakable,enhanced jigsaw,colback=green!5, colframe=green!35!black, fonttitle=\bfseries, title=Observation:\ #1}
 
 
 

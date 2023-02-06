@@ -475,7 +475,7 @@ The idea behind the change of basis matrix and the matrices corresponding to lin
 	\end{pmatrix}_{\mathbb{B}_1}^{\mathbb{B}_2} \]
 
 	has the following interpretation:
-	\begin{quote}
+	\begin{quotation}
 		The operator A maps the basis vectors in the following way
 		\begin{align*}
 			\begin{pmatrix}
@@ -493,6 +493,10 @@ The idea behind the change of basis matrix and the matrices corresponding to lin
 			-3 \begin{pmatrix}
 				-1	\\
 				1
+			\end{pmatrix}_{\mathbb{B}_1} = 
+			\begin{pmatrix}
+				2	\\
+				-4
 			\end{pmatrix}_{\mathbb{B}_1}\\
 			\begin{pmatrix}
 				0	\\
@@ -500,7 +504,19 @@ The idea behind the change of basis matrix and the matrices corresponding to lin
 			\end{pmatrix}_{\mathbb{B}_1} & \xrightarrow{A} \begin{pmatrix}
 				-1	\\
 				3
-			\end{pmatrix}_{\mathbb{B}_2}
+			\end{pmatrix}_{\mathbb{B}_2} = 
+			-1 \begin{pmatrix}
+				1	\\
+				1
+			\end{pmatrix}_{\mathbb{B}_1}
+			3 \begin{pmatrix}
+				-1	\\
+				1
+			\end{pmatrix}_{\mathbb{B}_1} = 
+			\begin{pmatrix}
+				-4	\\
+				2
+			\end{pmatrix}_{\mathbb{B}_1}
 		\end{align*}
 		So $ A\ket{v} $ will be:
 		\[ A\ket{v} = 
@@ -513,7 +529,7 @@ The idea behind the change of basis matrix and the matrices corresponding to lin
 			3
 		\end{pmatrix}_{\mathbb{B}_2}
 		 \]
-	\end{quote}
+	\end{quotation}
 	
 	\emph{Case 2.}
 	
@@ -541,20 +557,124 @@ The idea behind the change of basis matrix and the matrices corresponding to lin
 		\} = 
 		\{ 
 		\begin{pmatrix}
-			-1/6 \\
-			1/6
-		\end{pmatrix}_{\mathbb{B}_1},
-		\begin{pmatrix}
 			-1/2 \\
 			-1/2
+		\end{pmatrix}_{\mathbb{B}_1},
+		\begin{pmatrix}
+			-1/6 \\
+			1/6
 		\end{pmatrix}_{\mathbb{B}_1}
 		\}
 	\end{align*}
+	Then the matrix
+	\[ \mat{A}_{\mathbb{B}_1}^{\mathbb{B}_2} = \begin{pmatrix}
+		-1	&	-1	\\
+		-3	&	3	
+	\end{pmatrix}_{\mathbb{B}_1}^{\mathbb{B}_2} \]
+	has the following interpretation:
 	
+	\begin{quotation}
+		The operator $ A $ maps the basis vectors in the following way:
+		\begin{align*}
+			\begin{pmatrix}
+				1	\\
+				0	
+			\end{pmatrix}_{\mathbb{B}_1} & \xrightarrow{A} 
+			\begin{pmatrix}
+				-1	\\
+				-3
+			\end{pmatrix}_{\mathbb{B}_2} = 
+			-1 \begin{pmatrix}
+				-1/2	\\
+				-1/2
+			\end{pmatrix}_{\mathbb{B}_1}
+			-3 \begin{pmatrix}
+				-1/6	\\
+				1/6
+			\end{pmatrix}_{\mathbb{B}_1} = 
+			\begin{pmatrix}
+				1	\\
+				0
+			\end{pmatrix}_{\mathbb{B}_1}\\
+			\begin{pmatrix}
+				0	\\
+				1	
+			\end{pmatrix}_{\mathbb{B}_1} & \xrightarrow{A} \begin{pmatrix}
+				-1	\\
+				3
+			\end{pmatrix}_{\mathbb{B}_2} = 
+			-1 \begin{pmatrix}
+				-1/2	\\
+				-1/2
+			\end{pmatrix}_{\mathbb{B}_1}
+			3 \begin{pmatrix}
+				-1/6	\\
+				1/6
+			\end{pmatrix}_{\mathbb{B}_1} = 
+			\begin{pmatrix}
+				0	\\
+				1
+			\end{pmatrix}_{\mathbb{B}_1}
+		\end{align*}
+	\end{quotation}
 	
-	
+	So the matrix $ \mat{A}_{\mathbb{B}_1}^{\mathbb{B}_2} $ acts as a change of basis matrix. That is because the $ \mat{A} $ does not change map the basis vectors in $ \mathbb{B}_1 $ to different vector.
+
 	
 \end{example}
+
+The following proposition box summarizes the observations of the discussed example:
+
+\begin{propbox}{Change of Basis Vector}
+	The matrix $ \mat{A}_{\mathbb{B}_1}^{\mathbb{B}_2} $ acts as a change of basis vector if the set of basis vectors $ \basis{B}{2}{e}{i}{N} $ are the columns of $ (\mat{A}_{\mathbb{B}_1}^{\mathbb{B}_2})^{-1} $ which is the inverse of $ \mat{A}_{\mathbb{B}_1}^{\mathbb{B}_2} $.
+\end{propbox}
+
+\subsection{Similarity Transformation}
+
+In the last section we studied that the basis transformation matrix $ \mat{R}_{\mathbb{B}_1}^{\mathbb{B}_2} $ describes the components of a vector $ \ket{v} $ in a new basis, which is achieved using the following relation
+\begin{equation*}
+	\underline{v}_{\mathbb{B}_2} = \mat{R}_{\mathbb{B}_1}^{\mathbb{B}_2} \underline{v}_{\mathbb{B}_1}
+\end{equation*}
+in which the $ 	\underline{v}_{\mathbb{B}_1} $ and $ \underline{v}_{\mathbb{B}_2} $ are the coordinates of $ \ket{v} $ in the basis $ \mathbb{B}_1 $ and $ \mathbb{B}_2 $ respectively. Now consider an operator $ A \in \operatorname{End}(\vectSpace{V}) $ that maps $ \ket{v} $ to $ \ket{w} = A\ket{v} $. The components of $ \ket{w} $ in the basis $ \mathbb{B}_1 $ can be calculated using: 
+\[  \underline{w}_{\mathbb{B}_1} = \mat{A}_{\mathbb{B}_1}^{\mathbb{B}_1} \underline{v}_{\mathbb{B}_1} \]
+
+On the other hand the components of vector $ \ket{v} $ and $ \ket{w} $ in the basis $ \mathbb{B}_2 $ can be calculated by applying the basis transformation matrix on the components of the mentioned vectors. In other words:
+\begin{equation}
+	\begin{split}
+		\underline{v}_{\mathbb{B}_2}  &= \mat{R}_{\mathbb{B}_1}^{\mathbb{B}_2} \underline{v}_{\mathbb{B}_1} \\
+		\underline{w}_{\mathbb{B}_2}  &= \mat{R}_{\mathbb{B}_1}^{\mathbb{B}_2} \underline{w}_{\mathbb{B}_1} 
+	\end{split}
+\end{equation}
+So the question that naturally arise is that what is the matrix $\mat{A}_{\mathbb{B}_2}^{\mathbb{B}_2} $ such that:
+\begin{equation}
+	\underline{w}_{\mathbb{B}_2} = \mat{A}_{\mathbb{B}_2}^{\mathbb{B}_2}  \underline{v}_{\mathbb{B}_2} 
+	\label{equ:SimilarityTrans:simTrans}
+\end{equation}
+The matrix $ \mat{A}_{\mathbb{B}_2}^{\mathbb{B}_2}  $ can easily be found using the following logic. Let's start with act of basis transformation matrix on the coordinates of $ \ket{w} $ in $ \mathbb{B}_1 $:
+\begin{align*}
+		\underline{w}_{\mathbb{B}_2}  &= 
+		\mat{R}_{\mathbb{B}_1}^{\mathbb{B}_2} \underline{w}_{\mathbb{B}_1} = 
+		\mat{R}_{\mathbb{B}_1}^{\mathbb{B}_2} \mat{A}_{\mathbb{B}_1}^{\mathbb{B}_1} \underline{v}_{\mathbb{B}_1}  = 
+		\mat{R}_{\mathbb{B}_1}^{\mathbb{B}_2} \mat{A}_{\mathbb{B}_1}^{\mathbb{B}_1} (\mat{R}_{\mathbb{B}_1}^{\mathbb{B}_2})^{-1} \underline{v}_{\mathbb{B}_2}
+\end{align*}
+By comparing the last term in the equation above with the equation \ref{equ:SimilarityTrans:simTrans} we can conclude
+\begin{LARGE}
+	\begin{equation}
+		\boxed{
+			\mat{A}_{\mathbb{B}_2}^{\mathbb{B}_2} = \mat{R}_{\mathbb{B}_1}^{\mathbb{B}_2} \mat{A}_{\mathbb{B}_1}^{\mathbb{B}_1} (\mat{R}_{\mathbb{B}_1}^{\mathbb{B}_2})^{-1} 
+		}
+	\end{equation}
+	\label{equ:changeOfBasis_compact}
+\end{LARGE}
+This is called a \textbf{similarity transformation} on $ \matrix{A}{B}{1}{1} $ and $ \matrix{A}{B}{2}{2} $ is said to be \textbf{similar} to $ \matrix{A}{B}{1}{1} $ 
+
+\begin{obsbox}{Matrix Representation Depends on the Choice of Matrix}
+	Note that in the similarity transformation 
+	\[ \mat{A}_{\mathbb{B}_2}^{\mathbb{B}_2} = \mat{R}_{\mathbb{B}_1}^{\mathbb{B}_2} \mat{A}_{\mathbb{B}_1}^{\mathbb{B}_1} (\mat{R}_{\mathbb{B}_1}^{\mathbb{B}_2})^{-1}  \] 
+	both $\mat{A}_{\mathbb{B}_2}^{\mathbb{B}_2} $ and $\mat{A}_{\mathbb{B}_1}^{\mathbb{B}_1} $ correspond to the single operator $ A \in \operatorname{End}(\vectSpace{V}) $. This is another important observation that the matrix representation of a liner operator \emph{depends on the choice of basis.}
+\end{obsbox}
+
+
 
 
 
