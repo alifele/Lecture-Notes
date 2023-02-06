@@ -298,6 +298,7 @@ That can also be written in a more compact form:
 	\label{equ:changeOfBasis_compact}
 \end{LARGE}
 
+
 The matrix $R$ is called the change of basis matrix. \newline
 
 \begin{example}{Change of Basis}
@@ -404,7 +405,155 @@ The matrix $R$ is called the change of basis matrix. \newline
 The idea behind the change of basis matrix and the matrices corresponding to linear operator are very similar and this similarity can lead to confusions. For example the equations \ref{equ:matrixAndLinearOperator_compact} and \ref{equ:changeOfBasis_compact} are very similar but are very different at the same time. In the former case the vector $ \ket{v} $ changes to another vector $ \ket{w} $ but in the latter case the vector $\ket{v} $ remains unchanged and only gets represented with new coordinates in the new basis. So when we can know that a matrix changes the basis only and keeps the vector unchanged or maps the vector into another vector? The following example would clarify the differences.
 
 \begin{example}{Linear Operators Matrices vs. Change of Basis Matrices}
-	content..
+	\emph{Question.}
+	
+	Consider the matrix $ \mat{A} $
+	
+	\[ \mat{A} = \begin{pmatrix}
+		-1	&	-1	\\
+		-3	&	3	
+	\end{pmatrix} \]
+
+	What is the effect of this matrix on a arbitrary vector $\ket{v} = \alpha_1 \ket{a_1} + \alpha_2 \ket{a_2}$? \newline
+	
+	\emph{Answer.}
+	
+	\emph{Case 1.}
+	
+	You might answer "it depends on the vector $ \ket{v} $". But the truth is that this question is not a correct question. As emphasized before, a matrix by itself is just a collection of numbers and does not have any meaning. By fixing the vector spaces and the corresponding basis vectors, then the matrix $ \mat{A} $ gets its meaning and corresponds to the a linear operator $ A \in \vectSpace{L}(\vectSpace{V},\vectSpace{V}) $. 
+	
+	Let's assume:
+	\begin{align*}
+		\mathbb{B}_1 &= \{ \ket{a_1}, \ket{a_2} \} = \{ 
+		\begin{pmatrix}
+			1 \\
+			0
+		\end{pmatrix}_{\mathbb{B}_1},
+		\begin{pmatrix}
+			0 \\
+			1
+		\end{pmatrix}_{\mathbb{B}_1}
+		\} \\
+		\mathbb{B}_2 &= \{ \ket{b_1}, \ket{b_2} \} = \{ 
+		\begin{pmatrix}
+			1 \\
+			0
+		\end{pmatrix}_{\mathbb{B}_2},
+		\begin{pmatrix}
+			0 \\
+			1
+		\end{pmatrix}_{\mathbb{B}_2}
+		\} = 
+		\{ 
+		\begin{pmatrix}
+			1 \\
+			1
+		\end{pmatrix}_{\mathbb{B}_1},
+		\begin{pmatrix}
+			-1 \\
+			1
+		\end{pmatrix}_{\mathbb{B}_1}
+		\}
+	\end{align*}
+	
+	So the vector $ \ket{v} $ can be written as:
+	\[ \ket{v} = 
+		\alpha_1 \begin{pmatrix}
+			1	\\
+			0
+		\end{pmatrix}_{\mathbb{B}_1} + 
+		\alpha_2 \begin{pmatrix}
+			0	\\
+			1
+		\end{pmatrix}_{\mathbb{B}_1}
+	 \]
+	
+	Then the matrix
+	\[ \mat{A}_{\mathbb{B}_1}^{\mathbb{B}_2} = \begin{pmatrix}
+		-1	&	-1	\\
+		-3	&	3	
+	\end{pmatrix}_{\mathbb{B}_1}^{\mathbb{B}_2} \]
+
+	has the following interpretation:
+	\begin{quote}
+		The operator A maps the basis vectors in the following way
+		\begin{align*}
+			\begin{pmatrix}
+				1	\\
+				0	
+			\end{pmatrix}_{\mathbb{B}_1} & \xrightarrow{A} 
+			\begin{pmatrix}
+				-1	\\
+				-3
+			\end{pmatrix}_{\mathbb{B}_2} = 
+			-1 \begin{pmatrix}
+				1	\\
+				1
+			\end{pmatrix}_{\mathbb{B}_1}
+			-3 \begin{pmatrix}
+				-1	\\
+				1
+			\end{pmatrix}_{\mathbb{B}_1}\\
+			\begin{pmatrix}
+				0	\\
+				1	
+			\end{pmatrix}_{\mathbb{B}_1} & \xrightarrow{A} \begin{pmatrix}
+				-1	\\
+				3
+			\end{pmatrix}_{\mathbb{B}_2}
+		\end{align*}
+		So $ A\ket{v} $ will be:
+		\[ A\ket{v} = 
+		\alpha_1 \begin{pmatrix}
+			-1	\\
+			-3
+		\end{pmatrix}_{\mathbb{B}_2} + 
+		\alpha_2 \begin{pmatrix}
+			-1	\\
+			3
+		\end{pmatrix}_{\mathbb{B}_2}
+		 \]
+	\end{quote}
+	
+	\emph{Case 2.}
+	
+	Let's consider the following sets as the basis
+	\begin{align*}
+		\mathbb{B}_1 &= \{ \ket{a_1}, \ket{a_2} \} = \{ 
+		\begin{pmatrix}
+			1 \\
+			0
+		\end{pmatrix}_{\mathbb{B}_1},
+		\begin{pmatrix}
+			0 \\
+			1
+		\end{pmatrix}_{\mathbb{B}_1}
+		\} \\
+		\mathbb{B}_2 &= \{ \ket{b_1}, \ket{b_2} \} = \{ 
+		\begin{pmatrix}
+			1 \\
+			0
+		\end{pmatrix}_{\mathbb{B}_2},
+		\begin{pmatrix}
+			0 \\
+			1
+		\end{pmatrix}_{\mathbb{B}_2}
+		\} = 
+		\{ 
+		\begin{pmatrix}
+			-1/6 \\
+			1/6
+		\end{pmatrix}_{\mathbb{B}_1},
+		\begin{pmatrix}
+			-1/2 \\
+			-1/2
+		\end{pmatrix}_{\mathbb{B}_1}
+		\}
+	\end{align*}
+	
+	
+	
+	
 \end{example}
 
 
