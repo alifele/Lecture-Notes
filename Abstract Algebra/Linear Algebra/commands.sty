@@ -1,6 +1,7 @@
 \ProvidesPackage{commands}
 
 \usepackage{amsmath} % AMS Math Package
+\usepackage{caption}
 \usepackage{amsthm} % Theorem Formatting
 \usepackage{amssymb}    % Math symbols such as \mathbb
 \usepackage{graphicx} % Allows for eps images
@@ -21,6 +22,8 @@
 \usepackage{siunitx}
 \numberwithin{equation}{section}
 \numberwithin{figure}{section}
+
+\newcommand{\mat}[1]{\operatorname{#1}}
 
 \newcommand{\vect}[1]{\ensuremath{\mathbf{#1}}} % for vectors
 \newcommand{\vectSpace}[1]{\mathcal{#1}}
@@ -137,7 +140,6 @@
 \DeclareMathOperator{\arccoth}{arccoth} 
 
 
-\newcommand{\mat}[1]{\begin{pmatrix} #1 \end{pmatrix}}
 \renewcommand{\abs}[1]{\lvert #1 \rvert}
 \newcommand{\dc}{\substack{DC \\ \longleftrightarrow \\ \phantom{o}}}
 

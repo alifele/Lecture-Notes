@@ -214,5 +214,111 @@ The equation \ref{equ:chanbeOfBasis:vInNewBasis} can be written in the following
 	\end{pmatrix}_{\mathbb{B}_1} 
 \end{equation}
 
+The matrix $R$ is called the change of basis matrix. \newline
+
+\begin{example}{Change of Basis}
+	Consider the following Cartesian plane:
+	\input{Images/changeOfBasis_example1.tex}
+	The vectors of the plain can be expressed using any arbitrary basis two of which are provided here as an example:
+	\begin{align*}
+		\mathbb{B}_1 &= \{ \ket{e_1}, \ket{e_2} \} = \{ 
+		\begin{pmatrix}
+			1 \\
+			0
+		\end{pmatrix}_{\mathbb{B}_1},
+		\begin{pmatrix}
+			0 \\
+			1
+		\end{pmatrix}_{\mathbb{B}_1}
+		\} \\
+		\mathbb{B}_2 &= \{ \ket{e'_1}, \ket{e'_2} \} = \{ 
+		\begin{pmatrix}
+			1 \\
+			0
+		\end{pmatrix}_{\mathbb{B}_2},
+		\begin{pmatrix}
+			0 \\
+			1
+		\end{pmatrix}_{\mathbb{B}_2}
+		\} = 
+		\{ 
+		\begin{pmatrix}
+			1 \\
+			1
+		\end{pmatrix}_{\mathbb{B}_1},
+		\begin{pmatrix}
+			-1 \\
+			1
+		\end{pmatrix}_{\mathbb{B}_1}
+		\}
+	\end{align*}
+
+	It is clear that the vector $ \ket{v} $ can be expanded like: 
+	\begin{equation}
+		\ket{v} = 2\ket{e_1} + \ket{e_2}
+		\label{equ:changeOfBasis:example:v_in_terms_of_B1}
+	\end{equation}
+	
+	So we can write:
+	\[ \underline{v}_{\mathbb{B}_1} = \begin{pmatrix}
+		2 \\
+		1
+	\end{pmatrix}_{\mathbb{B}_1} \]
+	in which $\underline{v}_{\mathbb{B}_1}$ is the coordinates of $ \ket{v} $ in the basis $ \mathbb{B}_1 $. Now suppose that we want to fine the coordinates of $ \ket{v} $ in the basis $ \mathbb{B}_2 $. To do that we need to write the $ \ket{e_1} $ and $ \ket{e_2} $ in terms of  $ \ket{e'_1} $ and $ \ket{e'_2} $ (i.e. find the coordinates of elements of $ \mathbb{B}_1 $ in the basis $ \mathbb{B}_2 $):
+	
+	\begin{equation}
+		\begin{split}
+			\ket{e_1} &= \ket{e'_1} - \ket{e'_2} \\
+			\ket{e_2} &= \ket{e'_1} + \ket{e'_2} 
+		\end{split}
+		\label{equ:changeOfBasis:example:B1_in_terms_of_B2}
+	\end{equation}
+
+	This can be written in the column vector format:
+	\begin{align*}
+		\underline{e_1}_{\mathbb{B}_2} &= \begin{pmatrix}
+			1 \\
+			-1
+		\end{pmatrix}_{\mathbb{B}_2} , \quad
+		\underline{e_1}_{\mathbb{B}_2} = \begin{pmatrix}
+			1 \\
+			1
+		\end{pmatrix}_{\mathbb{B}_2}
+	\end{align*}
+	By arranging these columns into the columns of matrix we will get the change of basis matrix:
+	\begin{equation*}
+		\mat{R} = \begin{pmatrix}
+			1 & 1 \\
+			-1 & 1
+		\end{pmatrix}_{\mathbb{B}_1}^{\mathbb{B}_2}
+	\end{equation*}
+
+	By inserting \ref{equ:changeOfBasis:example:B1_in_terms_of_B2} in \ref{equ:changeOfBasis:example:v_in_terms_of_B1} we can get the expanded form of $ \ket{v} $ in the new basis $\mathbb{B}_2$.
+	
+	\begin{equation*}
+		\ket{v} = 2 (\ket{e'_1} - \ket{e'_2}) + (\ket{e'_1} + \ket{e'_2} ) = 3 \ket{e'_1} -\ket{e'_2} 
+	\end{equation*}
+
+	The above calculations can also be done by applying the change of basis matrix $ \mat{R} $ on the coordinates of $ \ket{v} $ in $ \mathbb{B}_1 $, i.e. $ \underline{v}_{\mathbb{B}_1} $ :
+	\begin{equation*}
+		\underline{v}_{\mathbb{B}_2} = \begin{pmatrix}
+			1 & 1 \\
+			-1 & 1
+		\end{pmatrix}_{\mathbb{B}_1}^{\mathbb{B}_2}
+		\begin{pmatrix}
+			2 \\
+			1
+		\end{pmatrix}_{\mathbb{B}_1} = 
+	\begin{pmatrix}
+		3 \\
+		-1
+	\end{pmatrix}_{\mathbb{B}_2}
+	\end{equation*}
+\end{example}
+
+
+
+
+
 
 
