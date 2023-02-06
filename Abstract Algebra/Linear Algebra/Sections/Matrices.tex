@@ -140,10 +140,83 @@ So this notation and algorithms is to use some calculations more continent when 
 	 
 \end{example}
 
+\section{Linear Operators and Matrices}
+
+Consider the vector spaces $ \vectSpace{V}  $ and $ \vectSpace{W} $ by are spanned with $ \basis{B}{\vectSpace{V}}{a}{i}{N} $ and $ \basis{B}{\vectSpace{W}}{b}{j}{M} $ respectively. The act of a linear operator $ A \in \vectSpace{L}(\vectSpace{V},\vectSpace{W}) $ on the vector $ \ket{v} \in \vectSpace{V} $ can be specified by its act on the basis of that vector space $ \mathbb{B}_\vectSpace{V} $. Suppose that $ A $ acts on the basis vectors $ \ket{a_i} $ as the following:
+
+\begin{equation}
+	\begin{split}
+		\ket{w_i} = A \ket{a_i} = \sum_{j=1}^{M} \rho_{ji} \ket{b_j}
+	\end{split}
+\end{equation}
+
+in which $ \rho_{ji} $ are the components of $ \ket{w_i} $ in the basis $ \mathbb{B}_\vectSpace{W} $ and can be organized as column vectors:
+
+\begin{equation*}
+	\underline{w_i}_{\mathbb{B}_\vectSpace{W}} = \begin{pmatrix}
+		\rho_{1i} \\
+		\rho_{2i} \\
+		\vdots \\
+		\rho_{Mi}
+	\end{pmatrix}_{\mathbb{B}_\vectSpace{W}}
+\end{equation*}
+
+Now if $ A $ acts on the vector $ \ket{v} = \sum_{i=1}^{N} \alpha_i \ket{a_i} $ can be written as:
+
+\begin{equation*}
+	\ket{u} = A\ket{v} = A\sum_{i=1}^{N} \alpha_i \ket{a_i} = \sum_{i=1}^{N} \alpha_i A\ket{a_i} = \sum_{i=1}^{N} \alpha_i \sum_{j=1}^{M} \rho_{ji} \ket{b_j} =  \sum_{j=1}^{M} \underbrace{\sum_{i=1}^{N} \alpha_i \rho_{ji}}_{\eta_j}\ket{b_j} = \sum_{j=1}^{M} \eta_j \ket{b_j}
+\end{equation*}
+
+so the coordinates of the vector $ \ket{u} = A \ket{v} $ will be:
+
+\begin{equation}
+	\eta_j = \sum_{i=1}^{N} \alpha_i \rho_{ji}
+	\label{equ:LLinearOperatorAndMatrix:newComponents}
+\end{equation}
+
+which also can be written as:
+
+\begin{equation*}
+	\underline{u}_{\mathbb{B}_\vectSpace{W}} = \begin{pmatrix}
+		\eta_1 \\
+		\eta_2 \\
+		\vdots \\
+		\eta_j
+	\end{pmatrix}_{\mathbb{B}_\vectSpace{W}}
+\end{equation*}
+
+
+The above equation is very important and can be shown in matrix notation to make the idea more clear. To do this we need to build matrix $ \mat{A}_{\mathbb{B}_\vectSpace{V}}^{\mathbb{B}_\vectSpace{W}} $ by arranging the components of $\underline{w_i}_{\mathbb{B}_\vect{W}}$ as the columns of $ \mat{A}_{\mathbb{B}_\vectSpace{V}}^{\mathbb{B}_\vectSpace{W}} $:
+
+\begin{equation}
+	\mat{A}_{\mathbb{B}_\vectSpace{V}}^{\mathbb{B}_\vectSpace{W}} = \begin{pmatrix}
+		\rho_{11} & \rho_{12} & \cdots & \rho_{1N}\\
+		\rho_{21} & \rho_{22} & \cdots & \rho_{2N}\\
+		\vdots    & \vdots    & \ddots & \vdots\\
+		\rho_{M1} & \rho_{M2} & \cdots & \rho_{MN} 
+	\end{pmatrix}_{\mathbb{B}_{\vectSpace{V}}}^{\mathbb{B}_\vectSpace{W}}
+\end{equation}
+
+So the equation \ref{equ:LLinearOperatorAndMatrix:newComponents} can be written as:
+
+\begin{LARGE}
+	\begin{equation}
+		\boxed{
+		\underline{u}_{\mathbb{B}_\vectSpace{W}} = \mat{A}_{\mathbb{B}_\vectSpace{V}}^{\mathbb{B}_\vectSpace{W}} \underline{v}_{\mathbb{B}_\vectSpace{V}}
+		}
+	\end{equation}
+	\label{equ:matrixAndLinearOperator_compact}
+\end{LARGE}
+
+
+Note that a matrix does not have any meaning by itself and is just a collection of numbers. To correspond any matrix with a linear operator $ A \in \vectSpace{L}(\vectSpace{V},\vectSpace{W})$, we need to fix the basis vectors $ \mathbb{B}_{\vectSpace{V}} $ and $ \mathbb{B}_{\vectSpace{W}} $.
 
 
 
-\section{Change of Basis Matrix}
+
+
+
+\section{Change of Basis}
 
 As we discussed earlier, the matrix representation of a linear operator $\op{A} \in \vectSpace{L}(\vectSpace{V},\vectSpace{W})$ depends on the choice of basis $\mathbb{B}_{\vectSpace{V}}$ and $\mathbb{B}_\vectSpace{W}$ which are the basis of vector spaces $\vectSpace{V}$ and $ \vectSpace{W} $ respectively. Now suppose that that in the vector spaces $\vectSpace{V}$, the elements are described in basis $\mathbb{B}_1 = \{ \ket{e_i} \}_{i=1}^{N}$ but we want to change it to the basis $\basis{B}{2}{e'}{j}{N}$. We need to know the relation between these two basis that is assumed to be the following:
 
@@ -213,6 +286,17 @@ The equation \ref{equ:chanbeOfBasis:vInNewBasis} can be written in the following
 		\alpha_N
 	\end{pmatrix}_{\mathbb{B}_1} 
 \end{equation}
+
+That can also be written in a more compact form:
+
+\begin{LARGE}
+	\begin{equation}
+		\boxed{
+			\underline{v}_{\mathbb{B}_2} = \mat{R}_{\mathbb{B}_1}^{\mathbb{B}_2} \underline{v}_{\mathbb{B}_1}
+		}
+	\end{equation}
+	\label{equ:changeOfBasis_compact}
+\end{LARGE}
 
 The matrix $R$ is called the change of basis matrix. \newline
 
@@ -316,6 +400,12 @@ The matrix $R$ is called the change of basis matrix. \newline
 	\end{equation*}
 \end{example}
 
+
+The idea behind the change of basis matrix and the matrices corresponding to linear operator are very similar and this similarity can lead to confusions. For example the equations \ref{equ:matrixAndLinearOperator_compact} and \ref{equ:changeOfBasis_compact} are very similar but are very different at the same time. In the former case the vector $ \ket{v} $ changes to another vector $ \ket{w} $ but in the latter case the vector $\ket{v} $ remains unchanged and only gets represented with new coordinates in the new basis. So when we can know that a matrix changes the basis only and keeps the vector unchanged or maps the vector into another vector? The following example would clarify the differences.
+
+\begin{example}{Linear Operators Matrices vs. Change of Basis Matrices}
+	content..
+\end{example}
 
 
 
