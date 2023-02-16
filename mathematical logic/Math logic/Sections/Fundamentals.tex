@@ -10,8 +10,15 @@
 
 
 \begin{example}{Some Simple Problems Are Very Complex to Solve!}
-	Given a finite set of integers, are there any subset that its elements adds up to 10?
+	Given a finite set of integers, are there any subset that its elements adds up to 10? \\
+	
+	\emph{Some Notes: }This problem become very complex to solve even if the cardinality of the set of integers is as low as 20. That is because the number of subsets of a set with cardinal number $N$ is $2^N$. So for a set of integers that contains just 20 integers, we need to calculated the sum of all of its subsets that there are $ 2^{20} \approx 10^6$ of them. So the number of calculations scale with $2^N$ as the size of set increases. This is a terrifying thing for practical purposes! Assume that we increase the number of integers to be 40 (double the size it had before). This means that the amount of calculations to find the subsets that sums up to 10 will be roughly $ 10^{2*6} = 10^{12} $ which is one million times more calculations compared to the previous problem!
 \end{example}
 
 
-The problem stated above is an example of a \textbf{decision problem}
+The problem stated above is an example of a \textbf{decision problem}. Given input as specified (in this case a set of finite integers) a decision problem asks a question to be answered with a "yes" or "no".
+
+\begin{defbox}{Decision Problem}
+	\textbf{Decision Problem}: Given input as specified, decision problem asks a question to be answered with a "yes" or "no"
+	
+\end{defbox}
