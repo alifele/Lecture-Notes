@@ -24,7 +24,7 @@ Here at this point there are two ways to proceed with the proof. In the followin
 
 These two methods are not really two different methods. These are two different methods to think about the same thing are are actually two sides of a single coin!
 
-\begin{example}{Is $ n^2 $ Even or Odd}
+\begin{example}{Is $ n^2 $ Even or Odd?}
 	\textbf{Question.} Let $ n $ be an integer. prove that if $ n $ is even, then $ n^2 $ is also even. \\
 
 	\emph{Scratch Paper Stuff.} We are going to use direct proof method. So let's construct the first baby implication. let the statement $ P $ be:
@@ -48,8 +48,9 @@ These two methods are not really two different methods. These are two different 
 
 	By connecting these statements to each other with AND operator, we can write:
 	\[ ((P \imply P_1 ) \wedge (P_1 \imply P_2) \wedge (P_2 \imply P_3) \wedge (P_4 \imply Q)) \imply (P \imply Q) \]
-	Since all of the terms on the LHS is true, and the whole statement is also true (proved in \ref{equ:babyImplicationImplyBigImplicationProof}) we can infer (modus ponens) that the right hand side is also true. We need a little extra step here to complete the proof: Since the statement $ P $ is true, and the statement $ P \imply Q $ is also true, then we can infer (Modus Ponens) that $ Q $ is also true.
+	Since all of the terms on the LHS is true, and the whole statement is also true (proved in \ref{equ:babyImplicationImplyBigImplicationProof}) we can infer (modus ponens) that the right hand side is also true. We need a little extra step here to complete the proof: Since the statement $ P $ is true, and the statement $ P \imply Q $ is also true, then we can infer (Modus Ponens) that $ Q $ is also true. \qed \\
 	
-	\emph{Clean Proof.}
+	\emph{Clean Proof.} Assume $ n \in \mathbb{Z} $ is even. Using the definition of even numbers, we can write n as $ n=2k $ for some integer k. Now squaring the both sides of the equation and factoring 4 we can write: $ n^2 = 4k^2 = 2(2k^2) $. Since $ 2k^2 \in \mathbb{Z} $, it follows from the definition that $ n^2 $ is even. \qed
 	
 \end{example}
+
