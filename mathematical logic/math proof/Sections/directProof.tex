@@ -1,1 +1,55 @@
+\section{Direct Proof}
+It is often the case in the mathematical proof that we start with assuming the hypothesis of an implication is true and conclude with the truth of the conclusion of the implication. The general structure of those proves will be all similar. Suppose that we want to prove that the implication 
+\[ P \imply Q \]
+is true. When know that if $ P $ is false, then the statement will automatically be true. But if $ P $ is true, then the implication will be true only when the $ Q $ is true. So if we start by assuming that $ P $ is true and \emph{through linking smaller true implications} we arrive at the conclusion, then by using modus ponens we can infer that conclusion of the original implication is also true. In other words, to prove $ P \imply Q $ is true, we need to construct the following \textbf{true} implications:
+\begin{align*}
+	P &\imply P_1 \quad \text{is true} \\
+	P_1 &\imply P_2 \quad \text{is true} \\
+	P_2 &\imply P_3 \quad \text{is true} \\
+	 \vdots & \\
+	P_n &\imply Q \quad \text{is true}
+\end{align*}
 
+Then we can connect these statements with AND operator and have:
+\begin{equation}\label{equ:babyImpliactionsImplyBigImplication}
+	(P \imply P_1) \wedge (P_1 \imply P_2) \wedge \cdots \wedge (P_n \imply Q)) \imply (P \imply Q)
+\end{equation}
+
+
+Here at this point there are two ways to proceed with the proof. In the following section I'll discuss both of them:
+
+\textbf{The first method to proceed with the proof:} In this point of view, we assume that the statement $ P $ is true. Since the first baby implication is also true, then using Modus Ponens we can infer that $ P_1 $ is also true. Then since $ P_1 $ is true and the second baby implication is also true, then using Modus Ponens we can infer that $ P_2 $ is also true. Using the same logic we can infer that $ P_3, P_4, \cdots P_n $ are also true. And for the last time, since the last baby statement is true and $ P_n $ is also true, then we can infer (using Modus Ponens) $ Q $ is also true. So we started with the true hypothesis and we arrived at the true conclusion. So utilizing the truth table of implication we can infer that the implication $ P \imply Q $ is true. 
+
+\textbf{The second method to proceed with the proof:} The golden equation in utilizing this method is \ref{equ:babyImpliactionsImplyBigImplication}. From now on, when I mention RHS and LHS, I mean the right hand side and the left hand side of the equation \ref{equ:babyImpliactionsImplyBigImplication}. Since all of the statements in the LHS is true, then the whole statement in the LHS is also true. And since the statement LHS $ \imply $ RHS is also true (check out the equation \ref{equ:babyImplicationImplyBigImplicationProof}), then we can infer (modus ponens) that the LHS of the implication (i.e. $ P \imply Q $) is also true. So if P is true then Q is also true.
+
+These two methods are not really two different methods. These are two different methods to think about the same thing are are actually two sides of a single coin!
+
+\begin{example}{Is $ n^2 $ Even or Odd}
+	\textbf{Question.} Let $ n $ be an integer. prove that if $ n $ is even, then $ n^2 $ is also even. \\
+
+	\emph{Scratch Paper Stuff.} We are going to use direct proof method. So let's construct the first baby implication. let the statement $ P $ be:
+	\[ P \text{: integer n is even} \]
+	and let the statement $ P_1 $ be:
+	\[ P_1 \text{: n can be written as } n=2k, k \in \mathbb{Z} \]
+	From the definition of even numbers we know that the implication $ P \imply P_1 $ is true. Now lets construct the second baby implication. Let the statement $ P_2 $ be:
+	\[ P_2 \text{: the square root of } 2k \text{ is } 4k^2  \]
+	From the properties of the multiplication of integers we know that if $ a=b $ then $ ac = bc $ for any integer $ c $ and the since the $ a=b=c=2 $ is an special case of this property, then $ P_1 \imply P_2 $ is also true. Let's construct the third baby implication. Let the statement $ P_3 $ be:
+	\[ P_3 \text{: the integer } 4k^2 \text{ can be written as } 2(2k^2)\]
+	Considering the associativity property of the multiplication (i.e. $ (ab)c = a(bc) $) then we know that the statement $ P_2 \imply P_3 $ is also true.
+	And finally, we can utilize the definition of the even number once again and construct the following final baby implication step. Let $ Q $ be the statement
+	\[ Q: n=2(2k^2) \text{ is an even number} \]
+	Because of the definition of the even number we know that $ P_3 \imply P_4 $ is also true. So in a nutshell we have:
+	\begin{align*}
+		P &\imply P_1 \text{ is true (definition of even number)} \\
+		P_1 &\imply P_2 \text{ is true (property of integers)} \\ 
+		P_2 &\imply P_3 \text{ is true (associativity property of integers)} \\
+		P_4 &\imply Q \text{ is true (definition of even number)}
+	\end{align*}
+
+	By connecting these statements to each other with AND operator, we can write:
+	\[ ((P \imply P_1 ) \wedge (P_1 \imply P_2) \wedge (P_2 \imply P_3) \wedge (P_4 \imply Q)) \imply (P \imply Q) \]
+	Since all of the terms on the LHS is true, and the whole statement is also true (proved in \ref{equ:babyImplicationImplyBigImplicationProof}) we can infer (modus ponens) that the right hand side is also true. We need a little extra step here to complete the proof: Since the statement $ P $ is true, and the statement $ P \imply Q $ is also true, then we can infer (Modus Ponens) that $ Q $ is also true.
+	
+	\emph{Clean Proof.}
+	
+\end{example}
