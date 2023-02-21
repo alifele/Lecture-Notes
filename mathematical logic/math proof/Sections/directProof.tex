@@ -54,3 +54,19 @@ These two methods are not really two different methods. These are two different 
 	
 \end{example}
 
+You might be wondering what is the square block (i.e. \qedsymbol) at the end of each proof. This is called ``QED'' which stands for ``quod erat demonstrandum'' which means `` which was to be demonstrated''. There are also other symbols in common use for this purpose that $ \blacklozenge, \blacksquare $ are the most common alternatives.
+
+
+\subsection{Proof of Inequalities}
+Although there are not such a thing as a general recipe for mathematical proof. But we can add some kind of tricks to our tool kit. Here in this section I will describe one of them that might come very handy in dealing with inequalities. To better demonstrate the idea, I would like to proceed with an example.
+
+\begin{example}{Tricks in Working with Inequalities}
+	\textbf{Question.} Let $ x,y \in \mathbb{R}$. Then prove $x^2 + y^2 \geq 2xy$ \\
+	
+	\underline{\emph{Scratch Paper Proof.}} When dealing with inequalities, it is better by studying a difference derived from the inequality. Let's start with studying the expression $ x^2 + y^2 - 2xy $. As soon as we start dealing with this, we observe that we can write it as $ (x-y)^2 $. Since $ x-y \in \mathbb{R} $ then we know that $ (x-y)^2 >0 $. So we got the intuition that if we start with the difference of real numbers $ x,y $, we can square it and then utilize the fact that the square should be positive and then arrive at the conclusion. Let's put these insights into good words and have more cleaner version of proof that has the appropriate flow of logic. \qed \\
+	
+	\proof{Proof.} Let $ x,y $ be real numbers. Hence $ (x-y) \in \mathbb{R} $ and we can write $ (x-y)^2 \geq 0 $. Expanding this will give: $ (x-y)^2 = x^2 + y^2 -2xy \geq 0 $. This can be rewritten as: $ x^2 + y^2 \geq 2xy $. \qed
+	
+\end{example}
+
+So the trick in a nutshell is: To prove and inequality, start with studying a difference (maybe the RHS-LHS). This trick is far from being a general recipe for mathematical proof. There any MANY MANY MANY occasions that this will not work at all. So do not over use any trick in your toolbox.

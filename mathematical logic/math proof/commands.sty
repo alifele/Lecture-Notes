@@ -21,6 +21,9 @@
 \numberwithin{equation}{section}
 \numberwithin{figure}{section}
 
+
+\renewcommand{\proof}[1]{\underline{\emph{#1}}}
+
 \let\vaccent=\v % rename builtin command \v{} to \vaccent{}
 \renewcommand{\v}[1]{\ensuremath{\mathbf{#1}}} % for vectors
 \newcommand{\gv}[1]{\ensuremath{\mbox{\boldmath$ #1 $}}} 
