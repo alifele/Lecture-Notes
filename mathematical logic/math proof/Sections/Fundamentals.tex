@@ -1,4 +1,227 @@
-\section{Fundamentals}
+\section{A little Bit Logic and Some Definitions}
+Symbolic logic and mathematical proof are tightly coupled to each other and can even be thought of a same thing. That's why in my opinion, doing mathematical proof requires two things: being familiar with mathematical logic(symbolic logic) and writing the ideas cleanly. Here in this section we will practice the first factor (logic) and the second one will be practiced throughout this text.
+
+
+\subsection{Basic Logic Operations}
+First of all we start with the definition of statement.
+
+\begin{defbox}{statement}
+	An statement is a sentence to which a certain truth value can be assigned. So a mathematical statement should be True or False (can not be both at the same time and can not be non of them (the law of excluded middle)).
+\end{defbox}
+
+For example followings are some true statements:
+\begin{itemize}
+	\item It is raining
+	\item Aristotle is dead
+	\item 2 is equal to 4
+\end{itemize}
+
+However some sentences (for example the self referencing sentences) can not be though of as statements since we can not assign a truth value to them. If we try to assign any truth value then we will have contradiction. For example:
+
+\begin{itemize}
+	\item This sentence is False.
+	\item The set of all sets that do not contains themselves, contain itself. We can state this in a mathematical wording: Let $ A = \{ X | X  \notin X \} $ then $ A \in A $.
+\end{itemize}
+
+It is very likely to come up with some sentences that their truth value depends on the value of a specific variable in the sentence. For example "x is an even number". We call these sentences as the \textbf{open sentences}. \\
+
+
+You might agree that the statemented are not very interesting by their own. They do not have any dynamics. There are not any ways (at least so far) to combine them and generate new statements (with a certain truth value). Logic operators will do this for us. Logic operators are operators that can combine statements and produce new statements. It turns out that all of the logic operators can be boiled down to just two logic operators: NOT and AND.
+
+\subsubsection{NOT Operator}
+The act of a null operator on a statement will toggle its truth value. So NOT(True) will be false and NOT(False) will be True. Given this property of the NOT operator we can define it using its truth table
+
+\begin{defbox}{Not Operator}
+	NOT operator: NOT operator toggles the truth value of an statement and has the following truth table
+	\begin{center}
+		\begin{tabular}{|c|c|}
+		\hline
+		$ P $ & $ \neg P $ \\
+		\hline
+		0 & 1 \\
+		\hline
+		1 & 0 \\
+		\hline
+		\end{tabular}
+	\end{center}
+\end{defbox}
+
+The following statements are some examples of the act of the NOT operator:
+
+\begin{itemize}
+	\item $ \neg (\text{2 is even} )$ is $ (\text{2 is odd}) $
+	\item $ \neg (\text{Aristotle is dead}) $ is $ \text{Aristotle is alive} $
+\end{itemize}
+
+
+\subsubsection{AND Operator}
+AND operator (with symbol $ \wedge $) is a way to combine two statements and the truth value of the composite statement will be true only when both sub statements are true. So we can define the AND operator as following:
+
+\begin{defbox}
+	AND operator ($ \wedge $) combines two statements $ P, Q $ in the following way:
+	\begin{center}
+		\begin{tabular}{|c|c|c|}
+			\hline
+			P & Q & $ P \wedge Q $ \\
+			\hline
+			1 & 0 & 0 \\
+			\hline
+			1 & 1 & 1 \\
+			\hline
+			0 & 0 & 0 \\
+			\hline
+			0 & 1 & 0 \\
+			\hline
+		\end{tabular}
+	\end{center}
+\end{defbox}
+
+For example we can combine the following statements with AND operator and determine the truth value of the combined statement
+
+\begin{itemize}
+	\item (Aristotle is dead (True)) $\wedge$ (Aristotle was a man (True)) : True Statement
+	\item (4 is a prime number (False)) $\wedge$ (16 is an even number (False)): False Statement
+	\item (That cat is alive) $\wedge$ (That cat is dead): False Statement (regardless of the truth value of the statements)
+\end{itemize}
+
+\subsubsection{OR, Implication, and Bi conditional Implication}
+The operators AND and NOT are enough to express any kind of statements using the atomic statements. What I mean is that defining the AND and NOT operators for a computer is enough to parse and express any logical statements. However, to increase the readability for humans, we also define other logical operators based on the AND and NOT operators. \\
+
+\textbf{OR Operator:} OR is an important logical operator that we use in our everyday life very frequently. If we combine two statements (sub-statement) with OR operator then the resulting statement is always true unless the two sub-statements are false. 
+
+\begin{defbox}{OR Operator}
+	\textbf{OR Operator:} The OR operator (denoted by the symbol $\vee$) is defined as
+	\[ P \vee Q \equiv \neg (\neg P \wedge \neg Q) \]
+	Using the RHS of the equation above we can calculate the truth table of OR operator as the following
+	\begin{center}
+		\begin{tabular}{|c|c|c|}
+			\hline
+			P & Q & $ P \vee Q $ \\
+			\hline
+			1 & 0 & 1 \\
+			\hline
+			1 & 1 & 1 \\
+			\hline
+			0 & 0 & 0 \\
+			\hline
+			0 & 1 & 1 \\
+			\hline
+		\end{tabular}
+	\end{center}
+\end{defbox}
+
+\textbf{Implication:} Implication is one the most important logic operators that we will be using extensively in mathematical proof. The implication is not symmetric (unlike the AND and OR operators that were symmetric) the order is important. The following box defines implications and its truth table.
+
+\begin{defbox}{Implication}
+	\textbf{Implication}: The implications operator (denotes with the $\Rightarrow$ or $\rightarrow$ ) is defined as:
+	\[  P \Rightarrow Q \equiv \neg P \vee Q \]
+	In which $ P $ is called the \emph{hypothesis} or \emph{antecedent} and $ Q $ is called the \emph{conclusion} or \emph{consequent} and statement is read as is read as: 
+	\begin{quote}
+		P implies Q\\
+		If P then Q
+	\end{quote}
+	The truth table of the implication can be calculated using the RHS of its definition. 
+	\begin{center}
+		\begin{tabular}{|c|c|c|}
+			\hline
+			P & Q & $ P \Rightarrow Q $ \\
+			\hline
+			1 & 0 & 0 \\
+			\hline
+			1 & 1 & 1 \\
+			\hline
+			0 & 0 & 1 \\
+			\hline
+			0 & 1 & 1 \\
+			\hline
+		\end{tabular}
+	\end{center}
+
+The second and the third rows of the truth table has its own names which are "affirming the antecedent" and "denying the consequent" correspondingly.
+
+\end{defbox}
+
+The first and the second row the the truth table of the implication operator seems reasonable. However the third and the forth rows look quite bizarre considering our daily experiences of using implication. For example, similar to the forth row we can write:
+\begin{quote}
+	If Tabriz is in Europe, then Tehran is in Africa
+\end{quote}
+Although this might make sense (a little bit!) but we rarely use this kind of implication in our everyday life. Because of the bizarreness of these cases, we actually have a different names for them in symbolic logic.
+
+\textbf{Vacuously True:} If the hypothesis of an implication is false, then the implication is true no matter what is the truth value of its conclusion. In this case we say that the implication is vacuously true (the 3rd and 4th rows of the truth table of the implication). 
+
+\textbf{Trivially True:} If the conclusion of an implication is true, then the implication is always true, no matter what is the truth value of the hypothesis. In this situation, we call the statement to be trivially true (the 2nd and 4th rows of the truth table of the implication).
+
+
+\textbf{Modus Ponens:} By analyzing the truth table of the implication we can observe that if the implication is true, then there is only one case the the antecedent is true and the consequent is also true. So if we know an implication is true, then by knowing the truth of hypothesis, we can infer the truth of the conclusion. This is called \textbf{Modus Ponens} or \emph{affirming the antecedent}.
+
+\textbf{Modus Tollens:} Modus Tollens is quite opposite of the modus ponens. By looking at the truth table of the implication we can see that if the implication is true and the consequent is false, then the antecedent should also be false. So if we know that the implication is true, and the conclusion is false, then we can conclude that the hypothesis is false as well. This kind of inference is called \textbf{Modus Tollens} or \emph{denying the consequent} \\
+
+\textbf{Operations on the Implication}: Since the implication is polar (the order matters), then we can perform different kind of operations on it which are summarized as the following.
+
+\begin{defbox}{\text{Contrapositive, Converse, Inverse}}
+	Consider the implication
+	\[  P \Rightarrow Q  \]
+	Then we can define:\\
+	
+	\textbf{Contrapositive:}
+	\[  \neg Q \Rightarrow \neg P  \]
+	\textbf{Converse:}
+	\[  Q \Rightarrow P  \] 
+	\textbf{Inverse:}
+	\[ \neg P \Rightarrow \neg Q \]
+\end{defbox}
+
+It is easy to show that the contrapositive of an implication has the same truth value as the implication. Also, we can show that these three operations are connected to each other in a circular way. i.e.
+\begin{quote}
+	Contrapositive of Converse: Inverse \\
+	Converse of Inverse: Contrapositive \\
+	Inverse of Contrapositive: Converse
+\end{quote}
+
+
+\textbf{Chaining the Implications:} Often in the mathematical proof, we chain the implications to each other (smaller steps) to prove a bigger implication. This is possible since the following statement is a tautology (it is always true)
+\[  (P \imply Q) \wedge (Q \imply R) \imply (P \imply R)  \]
+By looking at the truth table of the RHS and LHS we can observe that those have same truth values.
+\begin{center}
+	\begin{tabular}{|c|c|c|c|c|c|c|c|}
+		\hline
+		P & Q & R & $ P \imply Q $ & $ Q \imply R $ & LHS & RHS & $ \text{LHS} \imply \text{RHS} $ \\
+		\hline
+		0 & 0 & 0 & 1 & 1 & 1 & 1 & 1 \\
+		\hline
+		0 & 0 & 1 & 1 & 1 & 1 & 1 & 1 \\
+		\hline
+		0 & 1 & 0 & 1 & 0 & 0 & 1 & 1 \\
+		\hline
+		0 & 1 & 1 & 1 & 1 & 1 & 1 & 1 \\
+		\hline
+		1 & 0 & 0 & 0 & 1 & 0 & 0 & 1 \\
+		\hline
+		1 & 0 & 1 & 0 & 1 & 0 & 1 & 1 \\
+		\hline
+		1 & 1 & 0 & 1 & 0 & 0 & 0 & 1 \\
+		\hline
+		1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 \\
+		\hline
+	\end{tabular}
+\end{center} 
+We can use the induction to show that we can link multiple implications as the following:
+\[ ((P \imply P_1) \wedge (P_1 \imply P_2) \wedge \cdots \wedge (P_n \imply Q)) \imply (P \imply Q) \]
+
+
+\textbf{Bi Conditional Implication:} The bi conditional implication is true when an implication and its converse is true at the same time.
+
+\begin{defbox}{BiConditional Implication}
+	The biconditional (represented with the symbol $\Leftrightarrow$) is defined as:
+	\[ (P \imply Q) \wedge (Q \imply P) \equiv P \Leftrightarrow Q \]
+\end{defbox}
+
+
+	
+
+
+\subsection{Axiom, Theorem, Corollary, Lemma, and Proposition }
+
 In this section we will review some basic definitions in the mathematical proof and mathematical logic.
 
 \begin{defbox}{Axiom}
