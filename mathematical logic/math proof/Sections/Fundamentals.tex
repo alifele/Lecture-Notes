@@ -57,7 +57,7 @@ The following statements are some examples of the act of the NOT operator:
 \subsubsection{AND Operator}
 AND operator (with symbol $ \wedge $) is a way to combine two statements and the truth value of the composite statement will be true only when both sub statements are true. So we can define the AND operator as following:
 
-\begin{defbox}
+\begin{defbox}{AND Operator}
 	AND operator ($ \wedge $) combines two statements $ P, Q $ in the following way:
 	\begin{center}
 		\begin{tabular}{|c|c|c|}
@@ -207,13 +207,34 @@ By looking at the truth table of the RHS and LHS we can observe that those have 
 \end{center} 
 We can use the induction to show that we can link multiple implications as the following:
 \[ ((P \imply P_1) \wedge (P_1 \imply P_2) \wedge \cdots \wedge (P_n \imply Q)) \imply (P \imply Q) \]
-
-
+\newpage
 \textbf{Bi Conditional Implication:} The bi conditional implication is true when an implication and its converse is true at the same time.
 
 \begin{defbox}{BiConditional Implication}
 	The biconditional (represented with the symbol $\Leftrightarrow$) is defined as:
-	\[ (P \imply Q) \wedge (Q \imply P) \equiv P \Leftrightarrow Q \]
+	\[ P \Leftrightarrow Q \equiv (P \imply Q) \wedge (Q \imply P) \]
+	and is read as:
+	\begin{quote}
+		P if and only if Q \\
+		P iff Q \\
+		P is necessary and sufficient condition for Q
+	\end{quote}
+	The truth table of the biconditional is as the following
+	\begin{center}
+	\begin{tabular}{|c|c|c|}
+		\hline
+		P & Q & $ P \Leftrightarrow Q $ \\
+		\hline
+		0 & 0 & 1 \\
+		\hline
+		0 & 1 & 0 \\
+		\hline
+		1 & 0 & 0 \\
+		\hline
+		0 & 1 & 1 \\
+		\hline
+	\end{tabular}
+	\end{center}
 \end{defbox}
 
 
