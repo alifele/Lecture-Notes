@@ -15,7 +15,7 @@
 \usepackage{hyperref}
 \usepackage{fullpage}
 \usepackage{enumerate}
-\usepackage[breakable]{tcolorbox}
+\usepackage[listings,skins,breakable]{tcolorbox}
 \tcbuselibrary{theorems}
 \usepackage{siunitx}
 \numberwithin{equation}{section}
@@ -149,7 +149,7 @@
 \newtcolorbox{corbox}[1]{colback=blue!5, colframe=blue!55!black, fonttitle=\bfseries, title=Corollary:\ #1}
 \newtcolorbox{propbox}[1]{colback=blue!5, colframe=blue!55!black, fonttitle=\bfseries, title=Proposition:\ #1}
 \newtcolorbox{axiombox}[1]{colback=green!5, colframe=green!35!black, fonttitle=\bfseries, title=Axiom:\ #1}
-\newtcolorbox{example}[1]{colback=gray!5, colframe=white!40!black, fonttitle=\bfseries, title=Example:\ #1}
+\newtcolorbox{example}[1]{breakable, enhanced jigsaw, colback=gray!5, colframe=white!40!black, fonttitle=\bfseries, title=Example:\ #1}
 
 
 

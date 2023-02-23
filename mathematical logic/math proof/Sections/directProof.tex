@@ -70,3 +70,129 @@ Although there are not such a thing as a general recipe for mathematical proof. 
 \end{example}
 
 So the trick in a nutshell is: To prove and inequality, start with studying a difference (maybe the RHS-LHS). This trick is far from being a general recipe for mathematical proof. There any MANY MANY MANY occasions that this will not work at all. So do not over use any trick in your toolbox.
+
+\begin{example}{Multiplying Inequalities}
+	\textbf{Question.} Let $ a,b,c,d \in \mathbb{R} $ and $ a > b > 0 $ and $ c > d > 0 $. Prove $ ac > bd $. \\
+	
+	\proof{Proof.} Since $ c > 0 $ and $ b > 0 $ then we can multiply $ c $ at the first inequality and $ b $ at the second inequality without changing the direction of the inequality sign. So we will have:
+	\begin{align*}
+		ac > bc > 0 \\
+		bc > bd > 0
+	\end{align*}
+	So by combining these two inequalities, we can have:
+	\[ ac > bd \]
+	
+	\proof{Scratch Paper Proof.} There is a reason that I am writing the scratch paper proof after the main proof. That is to show that how this kind of proof matches with the logical baby steps. Let the statements $ P_1, P_2 $ be defined as:
+	\begin{quote}
+		\centering
+		$ P_1: a>b>0 $ \\
+		$ P_2: c>d>0 $
+	\end{quote}
+	Let's define the statements $ P $ as an auxiliary statement in the following way:
+	\begin{quote}
+		\centering
+		$ P = P_1 \wedge P_2 $
+	\end{quote} 
+	utilizing the properties of the inequalities of real numbers (e.g. multiplying a negative number at both sides change the direction of inequality while multiplying a positive number do not change the direction) we can write the following \textbf{true} statements. 
+	\begin{quote}
+		\centering
+		$ P \imply Q_1 $ \\
+		$ P \imply Q_2 $ 
+	\end{quote}
+	in which $ Q_1, Q_2 $ are:
+	\begin{quote}
+		\centering
+		$ Q_1: ac > bc $ \\
+		$ Q_2: bc > bd $
+	\end{quote}
+	Since (trivially!) $ bc=bc $ so we can express the following \textbf{true} statement:
+	\begin{quote}
+		\centering
+		$ Q_1 \wedge Q_2 \imply R $
+	\end{quote}
+	in which $ R $ is:
+	\begin{quote}
+		\centering
+		$ R: ac>bd $
+	\end{quote}
+	Note that we have not yet shown that $ P = P_1 \wedge P_2 $ implies Q (although it might trivially make sense). To arrive at the $ P \imply Q $ from the baby steps, implicitly we are using the following tautology:
+	\begin{quote}
+		\centering
+		$ ((P \imply Q_1) \wedge (P \imply Q_2) \wedge (Q_1 \wedge Q_2 \imply R)) \imply (P \imply R) $
+	\end{quote}
+	This is a tautology because its truth value is always true:
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
+			\hline
+			P & Q & R & S & $ P \imply R $ & $ P \imply Q $ & $ R \wedge Q \imply S $ & LHS & RHS & LHS $ \imply $ RHS \\
+			\hline
+			0 & 0 & 0 & 0 & 1 & 1 & 1 & 1 & 1 & 1 \\
+			\hline
+			0 & 0 & 0 & 1 & 1 & 1 & 1 & 1 & 1 & 1 \\
+			\hline
+			0 & 0 & 1 & 0 & 1 & 1 & 1 & 1 & 1 & 1 \\
+			\hline
+			0 & 0 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 \\
+			\hline
+			0 & 1 & 0 & 0 & 1 & 1 & 1 & 1 & 1 & 1 \\
+			\hline
+			0 & 1 & 0 & 1 & 1 & 1 & 1 & 1 & 1 & 1 \\
+			\hline
+			0 & 1 & 1 & 0 & 1 & 1 & 0 & 0 & 1 & 1 \\
+			\hline
+			0 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 \\
+			\hline
+			1 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 1 \\
+			\hline
+			1 & 0 & 0 & 1 & 0 & 0 & 1 & 0 & 1 & 1 \\
+			\hline
+			1 & 0 & 1 & 0 & 1 & 0 & 1 & 0 & 0 & 1 \\
+			\hline
+			1 & 0 & 1 & 1 & 1 & 0 & 1 & 0 & 1 & 1 \\
+			\hline
+			1 & 1 & 0 & 0 & 0 & 1 & 1 & 0 & 0 & 1 \\
+			\hline
+			1 & 1 & 0 & 1 & 0 & 1 & 1 & 0 & 1 & 1 \\
+			\hline
+			1 & 1 & 1 & 0 & 1 & 1 & 0 & 0 & 0 & 1 \\
+			\hline
+			1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 \\
+			\hline
+		\end{tabular}
+	\end{center}
+	
+\end{example}
+
+
+Since I am in my very early phase of writing proofs for mathematical statements, I am going to do some proofs here (the questions are from the PLP book) to practice mathematical writing and thinking.
+
+
+\begin{example}{Even or Odd!}
+	\textbf{Question.} prove the following statements.
+	\begin{enumerate}
+		\item The product of two odd numbers is odd
+		\item The sum of two odd numbers is even
+		\item The sum of two even numbers is even
+		\item The sum of and even and and odd number is an odd number
+	\end{enumerate}
+
+	\proof{Proof 1.} Let $ a,b $ be two odd integers. So by the definition of odd numbers we can write them as: $ a = 2k+1, b = 2l+1 $ for some integers $ k,l $. By adding two integers and some simplification we will have: $ a+b = 2(k+l+1) $. Since $ k+l+1 $ is an integer, it follows from the definition even numbers that $ a+b $ is even.
+	
+	\proof{Logic Flow of Proof 1.}
+	Since we know that the following statement is a tautology:
+	\[ ((P_1 \imply Q) \wedge (P_2 \imply S)) \imply ((P_1 \wedge P_2) \imply (R \wedge S)) \equiv P \imply (R \wedge S) \]
+	in which $ P = P_1 \wedge P_2$
+	\begin{quote}
+		\centering 
+		$ P \imply Q $ is true
+	\end{quote}
+	in which:
+	\begin{quote}
+		\centering
+		$ P_1: $ The integer a is even \\
+		$ P_2: $ The integer b is even \\
+		$ P: P_1 \wedge P_2 $ \\
+		$ P_1: a=2k+1, b=2l+1,$ 
+	\end{quote}
+	
+\end{example}
