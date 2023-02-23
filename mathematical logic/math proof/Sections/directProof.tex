@@ -179,20 +179,33 @@ Since I am in my very early phase of writing proofs for mathematical statements,
 	\proof{Proof 1.} Let $ a,b $ be two odd integers. So by the definition of odd numbers we can write them as: $ a = 2k+1, b = 2l+1 $ for some integers $ k,l $. By adding two integers and some simplification we will have: $ a+b = 2(k+l+1) $. Since $ k+l+1 $ is an integer, it follows from the definition even numbers that $ a+b $ is even.
 	
 	\proof{Logic Flow of Proof 1.}
-	Since we know that the following statement is a tautology:
-	\[ ((P_1 \imply Q) \wedge (P_2 \imply S)) \imply ((P_1 \wedge P_2) \imply (R \wedge S)) \equiv P \imply (R \wedge S) \]
-	in which $ P = P_1 \wedge P_2$
-	\begin{quote}
-		\centering 
-		$ P \imply Q $ is true
-	\end{quote}
-	in which:
+	Consider the following statement which is a tautology: 
+	\begin{equation}\label{equ:ExampleEvenOddTautology}
+		((P_1 \imply Q) \wedge (P_2 \imply S)) \imply ((P_1 \wedge P_2) \imply (R \wedge S)) \equiv P \imply (R \wedge S)
+	\end{equation}
+	in which $ P = P_1 \wedge P_2$. \\
+	Now let $ P_1: $ integer $ a $ is odd, and $ P_2: $ integer $ b $ is odd. So the following statements are \textbf{ture}:
 	\begin{quote}
 		\centering
-		$ P_1: $ The integer a is even \\
-		$ P_2: $ The integer b is even \\
-		$ P: P_1 \wedge P_2 $ \\
-		$ P_1: a=2k+1, b=2l+1,$ 
+		$ P_1 \imply Q $ (is true: definition of odd number) \\
+		$ P_2 \imply S $ (is true: definition of odd number)
 	\end{quote}
-	
+	in which 
+	\begin{quote}
+		\centering
+		$ Q: a=2k+1, \quad k \in \mathbb{Z}$ \\
+		$ S: b=2l+1, \quad l \in \mathbb{Z} $ 
+	\end{quote}
+	Now considering the tautology \ref{equ:ExampleEvenOddTautology} and letting $ P = P_1 \wedge P_2 $, we know that the following statement is also \textbf{true}.
+	\begin{quote}
+		\centering 
+		$ P \imply Q \wedge S $ (is true)
+	\end{quote}
+	Now utilizing the property of integers (adding two sides of two equations) we can write the following \textbf{true} statement:
+	\[ Q \wedge S \imply R_1 \text{ (is true)} \]
+	in which
+	\begin{quote}
+		\centering
+		$ R_1: a+b = 2k+1 + 2l+1 $
+	\end{quote}
 \end{example}
