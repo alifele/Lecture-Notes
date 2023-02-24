@@ -181,7 +181,7 @@ Since I am in my very early phase of writing proofs for mathematical statements,
 	\begin{quote}
 		\centering
 		$ T: s $ is the product of two odd numbers $ a,b $ \\
-		$ U: s $ is even.
+		$ U: s $ is odd.
 	\end{quote}
 	so in this prove we want to evaluate the truth value of the following statement:
 	\[ T \imply U \]
@@ -224,23 +224,23 @@ Since I am in my very early phase of writing proofs for mathematical statements,
 	in which 
 	\begin{quote}
 		\centering
-		$ T_1: s = a+b = 2k+1 + 2l+1 $
+		$ T_1: s = 4kl + 2(k+l) + 1 $
 	\end{quote}
 	and once again utilizing the properties of integer arithmetic, we can write the following \textbf{true} statement:
 	\[ T_1 \imply T_2 \text{ (is true)} \]
 	in which $ T_2 $ is:
 	\begin{quote}
 		\centering
-		$ T_2: s = 2k+1 + 2l+1 = 2(k+l+1) $
+		$ T_2: s =  2(2kl + (k+l)) + 1 $
 	\end{quote}
-	since $ k+l+1 \in \mathbb{Z} $ we can finally follow the definition of odd number, and write the following \textbf{true} statement:
+	since $ 2kl + (k+l) \in \mathbb{Z} $ we can finally follow the definition of odd number, and write the following \textbf{true} statement:
 	\[ T_2 \imply U \]
-	in which the statement $ U $ is as defined before. Now it is time to chain the baby statement with AND and infer the original statement. However this should be done in two steps. The first steps is to use the following tautology to infer $ P_1 \wedge P_2 \imply T $ is a \textbf{true} statement:
+	in which the statement $ U $ is as defined before. Now it is time to chain the baby statement with AND and infer the original statement. However this should be done in two steps. The first step is to use the following tautology to infer $ P_1 \wedge P_2 \imply T $ is a \textbf{true} statement:
 	\begin{quote}
 		\centering
 		$ (P_1 \wedge P_2 \imply Q_1 \wedge Q_2) \wedge (Q_1 \wedge Q_2 \imply T) \imply (P_1 \wedge P_2) \imply T $
 	\end{quote}
-	and since we now know that $ P_1 \wedge P_2 \imply T $ is a true statement, assuming $ P_1 \wedge P_2 $ is  true, then using modus ponens we can infer that $ T $ is also a \textbf{true} statement. So we will have the following conclusion from the first step:
+	so we can infer that $ P_1 \wedge P_2 \imply T $ is a true statement. Then assuming $ P_1 \wedge P_2 $ is  true and using modus ponens we can infer that $ T $ is also a \textbf{true} statement. So we will have the following conclusion from the first step:
 	\begin{quote}
 		\centering
 		$ T: $ is a true statement
@@ -256,8 +256,9 @@ Since I am in my very early phase of writing proofs for mathematical statements,
 		$ T \imply U $ is a true statement.
 	\end{quote}
 	and since from the step 1 we know that $ T $ is true, then again modus ponens says that $ U $ is also true. \qed
+	\newline
 	
-	
+	\textbf{Important note:} This tedious way of proving such a simple statement, is not the way that we usually do math proof. Here I just wanted to demonstrate the logic proof behind the teeny tiny math proof in the first section.
 	
 	
 	
