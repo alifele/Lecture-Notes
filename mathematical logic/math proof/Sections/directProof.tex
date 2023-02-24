@@ -171,41 +171,98 @@ Since I am in my very early phase of writing proofs for mathematical statements,
 	\textbf{Question.} prove the following statements.
 	\begin{enumerate}
 		\item The product of two odd numbers is odd
-		\item The sum of two odd numbers is even
-		\item The sum of two even numbers is even
-		\item The sum of and even and and odd number is an odd number
 	\end{enumerate}
 
-	\proof{Proof 1.} Let $ a,b $ be two odd integers. So by the definition of odd numbers we can write them as: $ a = 2k+1, b = 2l+1 $ for some integers $ k,l $. By adding two integers and some simplification we will have: $ a+b = 2(k+l+1) $. Since $ k+l+1 $ is an integer, it follows from the definition even numbers that $ a+b $ is even.
+	\proof{Proof 1.} \\
+	Let $ a,b $ be two odd integers. So by the definition of odd numbers we can write them as: $ a = 2k+1, b = 2l+1 $ for some integers $ k,l $. By adding two integers and some simplification we will have: $ a+b = 2(k+l+1) $. Since $ k+l+1 $ is an integer, it follows from the definition even numbers that $ a+b $ is even. \qed \\
 	
-	\proof{Logic Flow of Proof 1.}
-	Consider the following statement which is a tautology: 
-	\begin{equation}\label{equ:ExampleEvenOddTautology}
-		((P_1 \imply Q) \wedge (P_2 \imply S)) \imply ((P_1 \wedge P_2) \imply (R \wedge S)) \equiv P \imply (R \wedge S)
-	\end{equation}
-	in which $ P = P_1 \wedge P_2$. \\
-	Now let $ P_1: $ integer $ a $ is odd, and $ P_2: $ integer $ b $ is odd. So the following statements are \textbf{ture}:
+	\proof{Logic Flow of the Proof 1.}
+	To make life easier, let's rewrite the statement that we want to prove:
 	\begin{quote}
 		\centering
-		$ P_1 \imply Q $ (is true: definition of odd number) \\
-		$ P_2 \imply S $ (is true: definition of odd number)
+		$ T: s $ is the product of two odd numbers $ a,b $ \\
+		$ U: s $ is even.
 	\end{quote}
+	so in this prove we want to evaluate the truth value of the following statement:
+	\[ T \imply U \]
+	
+	You might have guessed that the statement $ T $ does not seem to be an atomic statement (it is composite of smaller statement). So we can not directly start with the statement $ T $ and we first need to construct it with atomic sentences. Let $ P_1, P_2 $ be the following statements:
+	\begin{quote}
+		\centering
+		$ P_1: $ Integer $ a $ is odd \\
+		$ P_2: $ Integer $ b $ is odd
+	\end{quote}
+	Considering the definition of the odd numbers we know that the following statements are \textbf{true}
+	\begin{quote}
+		\centering
+		$ I_1: P_1 \imply Q_1 $ (is true)\\
+		$ I_2: P_2 \imply Q_2 $ (is true)
+	\end{quote}
+	in which $ Q_1, Q_2 $ are:
+	\begin{quote}
+		\centering
+		$ Q_1: a = 2k+1, \quad k \in \mathbb{Z} $ \\
+		$ Q_2: b = 2l+1, \quad l \in \mathbb{Z} $
+	\end{quote}
+	Now at this point we utilize the following \textbf{tautology}:
+	\begin{quote}
+		\centering
+		$ ((P_1 \imply Q_1) \wedge (P_2 \imply Q_2)) \imply ((P_1 \wedge P_2) \imply (Q_1 \wedge Q_2))  $
+	\end{quote}
+	Since $ I_1, I_2 $ are true, using the tautology above along with Modus Ponens, we can infer that the following statement is also true:
+	\begin{quote}
+		\centering
+		$ P_1 \wedge P_2 \imply Q_1 \wedge Q_2 $ (is true)
+	\end{quote}
+	Now we can construct the statement $ T $ with following \textbf{true} statement (that follows from the properties of the integer arithmetic) 
+	\begin{quote}
+		\centering
+		$ Q_1 \wedge Q_2 \imply T $
+	\end{quote}
+	with $ T $ defined as before. Following the rules of arithmetic of integers numbers we can write the following \textbf{true} statement.
+	\[ T \imply T_1 \text{ (is true)} \]
 	in which 
 	\begin{quote}
 		\centering
-		$ Q: a=2k+1, \quad k \in \mathbb{Z}$ \\
-		$ S: b=2l+1, \quad l \in \mathbb{Z} $ 
+		$ T_1: s = a+b = 2k+1 + 2l+1 $
 	\end{quote}
-	Now considering the tautology \ref{equ:ExampleEvenOddTautology} and letting $ P = P_1 \wedge P_2 $, we know that the following statement is also \textbf{true}.
-	\begin{quote}
-		\centering 
-		$ P \imply Q \wedge S $ (is true)
-	\end{quote}
-	Now utilizing the property of integers (adding two sides of two equations) we can write the following \textbf{true} statement:
-	\[ Q \wedge S \imply R_1 \text{ (is true)} \]
-	in which
+	and once again utilizing the properties of integer arithmetic, we can write the following \textbf{true} statement:
+	\[ T_1 \imply T_2 \text{ (is true)} \]
+	in which $ T_2 $ is:
 	\begin{quote}
 		\centering
-		$ R_1: a+b = 2k+1 + 2l+1 $
+		$ T_2: s = 2k+1 + 2l+1 = 2(k+l+1) $
 	\end{quote}
+	since $ k+l+1 \in \mathbb{Z} $ we can finally follow the definition of odd number, and write the following \textbf{true} statement:
+	\[ T_2 \imply U \]
+	in which the statement $ U $ is as defined before. Now it is time to chain the baby statement with AND and infer the original statement. However this should be done in two steps. The first steps is to use the following tautology to infer $ P_1 \wedge P_2 \imply T $ is a \textbf{true} statement:
+	\begin{quote}
+		\centering
+		$ (P_1 \wedge P_2 \imply Q_1 \wedge Q_2) \wedge (Q_1 \wedge Q_2 \imply T) \imply (P_1 \wedge P_2) \imply T $
+	\end{quote}
+	and since we now know that $ P_1 \wedge P_2 \imply T $ is a true statement, assuming $ P_1 \wedge P_2 $ is  true, then using modus ponens we can infer that $ T $ is also a \textbf{true} statement. So we will have the following conclusion from the first step:
+	\begin{quote}
+		\centering
+		$ T: $ is a true statement
+	\end{quote}
+	Now here comes the second part: considering the already derived true statement and linking them by AND we can write the following \textbf{tautology}:
+	\begin{quote}
+		\centering
+		$ ((T \imply T_1) \wedge (T_1 \imply T_2) \wedge (T_2 \imply U)) \imply (T \imply U) $ 
+	\end{quote}
+	Since the LHS of the above tautology is true, then modus ponens says the RHS should be true as well. So in summary we got:
+	\begin{quote}
+		\centering
+		$ T \imply U $ is a true statement.
+	\end{quote}
+	and since from the step 1 we know that $ T $ is true, then again modus ponens says that $ U $ is also true. \qed
+	
+	
+	
+	
+	
+	
+	
+
+	
 \end{example}
