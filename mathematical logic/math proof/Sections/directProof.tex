@@ -330,6 +330,32 @@ Since I am in my very early phase of writing proofs for mathematical statements,
 \end{example}
 
 
+\begin{example}{}
+	\textbf{Question.} We call a number $ n $ an \emph{integer root} if $ n^k=m $ for some $ k \in \mathbb{N} $ and $ m \in \mathbb{Z} $. For example $ \sqrt{7} $ is a root because $ (\sqrt{7})^2 = 7 $. However, $ \frac{5}{3} $ is not an integer root. Prove that if $ a $ and $ b $ are integer roots, then so is $ ab $. \\
+	
+	\proof{Proof.} Assume $ a,b \in \mathbb{Z} $ are integer roots. So there are $ k,l \in \mathbb{N} $ and $ m,n \in \mathbb{Z} $ such that $ a^k = m $ and $ b^l=n $. Raising the both sides of the first equation to the power $ l $ and second equation to the power $ k $ will yield $ a^{kl} = m^l $ and $ b^{kl} = n^k $. By multiplying two sides of equations we can write:
+	\[ (ab)^{lk} = m^l n^k \] 
+	Since $ k,l \in \mathbb{N} $ and $ m,n \in \mathbb{Z} $, $ m^l n^k \in \mathbb{Z} $ and $ lk \in \mathbb{N} $. So we can conclude that ab is also an integer root. \qed
+\end{example}
+
+\begin{example}{Faulty Proof}
+	\textbf{Question.} Consider the following faulty proof. Determine why is the proof faulty and then provide the correct proof.
+	\begin{quote}
+		\centering
+		Let $ x $ be a positive real number. If $ x<1 $ then $ 1 < \frac{3x+2}{5x} $
+	\end{quote}
+	
+	\proof{Faulty Proof.} Let $ x $ be positive. Then by multiplying the inequality 
+	\[ 1 < \frac{3x+2}{5} \]
+	by $ 5x $, which is positive, we obtain
+	\[ 5x < 3x + 2 \]
+	Collecting like terms, we have $ 2x < 2 $, and finally dividing by 2, we have $ x < 1 $. \\
+	
+	\proof{Discussion.} This is a faulty proof because the flow of the logic is not correct. Usually, in working with inequalities, sometimes it is beneficial to start with the conclusion and arrive at the hypothesis. Although doing this will give us some hint that what is the best starting position, we need to note that this flow of logic is not a proof and we need to re write the proof after getting some hints.
+	
+	\proof{Correct Proof.} Let $ x $ is a positive real number. Assume $ x < 1 $. By multiplying both sides in 2 and adding $ 3x $ to both sides we will get $ 5x < 3x+2 $. Since $ 5x \neq 0 $ and $ 5x > 0 $, so dividing both sides by $ 5x $ we will have: $ 1 < \frac{3x+2}{5x} $ which is the conclusion. \qed
+\end{example}
+
 
 
 
