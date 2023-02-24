@@ -259,11 +259,84 @@ Since I am in my very early phase of writing proofs for mathematical statements,
 	\newline
 	
 	\textbf{Important note:} This tedious way of proving such a simple statement, is not the way that we usually do math proof. Here I just wanted to demonstrate the logic proof behind the teeny tiny math proof in the first section.
+\end{example}
+
+\subsection{Some Proofs and Examples}
+
+
+\begin{example}{Even or Odd?}
+	\textbf{Question.} Prove that sum of two odd numbers is even. \\
 	
+	\proof{Proof.} let $ a,b $ be two odd integers. Then there are $ l,k \in \mathbb{Z} $ such that $ a = 2k+1, b = 2l+1 $. Hence \[ a+b = 2k+1+2l+1 = 2(k+l+1) \]
+	Since $ k,l $ are integers, $ k+l+1 \in \mathbb{Z} $. So it follows from definition that $ a+b $ odd.
+\end{example}
+
+\begin{example}{}
+	\textbf{Question.} Let $ n,a,b,x,y \in \mathbb{Z} $. if $ n|a $ and $ n|b $ then $ n|(ax+by) $ \\
 	
+	\proof{Proof.}
+	Assume $ a,b,x,y,n \in \mathbb{Z} $ and $ n|a $, and $ n|b $. There are $ k,l \in \mathbb{Z} $ such that 
+	\[ a = nk, \quad b = nl \]
+	Multiplying first and second equation is $ x,y $ correspondingly will yield:
+	\[ ax = xnk, \quad by = ynl \]
+	Adding the two equations and some basic arithmetic will results in: 
+	\[ax + by = nkx + nly = n(kx+ly)\]
+	Since $ k,lx,y \in \mathbb{Z} $, so $ kx+ly \in \mathbb{Z} $. So it follows from the definition that:
+	\[ n|ax + by \] 	\qed
+\end{example}
+
+\begin{example}{}
+	\textbf{Question.} Let $ n,a \in \mathbb{Z} $. Prove that if $ n|a $ and $ n|(a+1) $, then $ n=1 $ or $ n=-1 $ \\
 	
+	\proof{Proof.} Assume $ n,a \in \mathbb{Z} $ and $ n|a $ and $ n|(a+1) $. So there are $ k,l \in \mathbb{Z} $ such that $ a=nk $ and $ a+1 = nl $. Subtracting the first equation from the second one yields
+	\[ 1 = n(l-k) \]
+	Since $ (l-k) \in \mathbb{Z} $, we see $ n|1 $. Since $ n $ is an integer, the only possibilities are $ n=1 $ or $ n=-1 $
+\end{example}
+
+\begin{example}{}
+	\textbf{Question.} Let $ n \in \mathbb{Z} $. If $ 3|(n-4) $, then $ 3|(n^2-1) $ \\
 	
-	
+	\proof{Proof.} Assume $ n \in \mathbb{Z} $ and $ 3|(n-4) $. Then there is $ k \in  \mathbb{Z} $ such that $ n-4 = 3k $. Thus, $ n=3k+4 $, which implies
+	\[ n^2 - 1 = (3k+4)^2 - 1 = 9k^2 + 15 + 24k = 3 (3k^2 + 8k +5)  \]
+	Since $ (3k^2 + 8k +5) \in \mathbb{Z} $ so $ 3|(n^2-1) $ \qed
+\end{example}
+
+\begin{example}{This is a bad proof}
+	\textbf{Question.} Consider the following faulty proof. Explain why is that a faulty proof and provide the correct answer.
+	\begin{quote}
+		\centering
+		Let $ a,b $ and $ c $ be integers. if $ a|b $ and $ b|c $, then $ a|c $ \\
+	\end{quote}
 
 	
+	\proof{Faulty Proof.} Assume $ a,b,c \in \mathbb{Z} $ such that $ a|b $, and $ b|c $. So there is $ k \in \mathbb{Z} $ such that $ b=ak $ and $ c=bk $. Substituting $ b $ in the second equation yields:
+	\[c  = ak^2\]
+	Since $ k^2 \in \mathbb{Z} $, we see $ a|c $ \qed \newline
+	
+	\proof{Why is this faulty?} The proof provided above is a faulty proof since it has used the integer $ k $ in two different places. The fact that $ a|b $ and $ b|c $ means that $ b $ is an integer multiple of $ a $, and $ c $ is an integer multiple of $ b $ correspondingly and those integer multiples are not necessarily the same. So the proof is not correct although the logic and its flow is correct. The correct proof is as follows:
+	
+	\proof{Proof.} Assume $ a,b,c \in \mathbb{Z}$ and $ a|b $ and $ b|c $. So there are $ k,l \in \mathbb{Z} $ s.t. $ b=ka $ and $ c=bl $. By substituting $ b $ from first equation in the second one, we will get $ c=akl $. Since $ a,k \in \mathbb{Z} $, so $ ak \in \mathbb{Z} $ and we see $ a|c $
+	
 \end{example}
+
+\begin{example}{}
+	\textbf{Question.} The floor function, denoted by $ \lfloor x \rfloor $, is defined to be the function that takes a real number $ x $ and returns the greatest integer less than or equal to $ x $. This is also sometimes called the greatest integer function. Using this definition prove that
+	\[ x \in \mathbb{Z} \Leftrightarrow \floor{x} = x \] \\
+	
+	\proof{Proof: ($ \Leftarrow $ direction).} Let's start with the backward implication which is simpler. Assume $ \floor{x} = x $. Based on the definition of the floor function, it returns integer numbers as output. So $ \floor{x} = x \in \mathbb{Z} $.
+	
+	\proof{Proof: ($ \Rightarrow $ direction).} Assume $ x \in \mathbb{Z} $. From the definition of the floor function, we can infer $ \floor{x} \leq x $. On the other hand, since $ x \in \mathbb{Z} $, so $ x \leq x $. In other words, $ x $ is an integer that is less than or equal to $ x $. Moreover, by definition, $ \floor{x} $ is the largest integer less than $ x $. Combining this fact with the $ x \leq x $ inequality yields $ \floor{x} \geq x $. So $ \floor{x} \leq x \leq \floor{x} $, which implies $ \floor{x} = x $. \qed
+	
+\end{example}
+
+
+
+
+
+
+
+
+
+
+
+
