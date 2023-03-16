@@ -141,6 +141,39 @@ The second and the third rows of the truth table has its own names which are "af
 
 \end{defbox}
 
+\begin{example}{Deriving Implication Formula}
+	Let's derive the formula of implication using its truth table. As a reminder, we know that the implication has the following truth table:
+		\begin{center}
+		\begin{tabular}{|c|c|c|}
+			\hline
+			P & Q & $ P \Rightarrow Q $ \\
+			\hline
+			1 & 0 & 0 \\
+			\hline
+			1 & 1 & 1 \\
+			\hline
+			0 & 0 & 1 \\
+			\hline
+			0 & 1 & 1 \\
+			\hline
+		\end{tabular}
+	\end{center}
+
+	It is a common practice in digital electronics to express a truth table in two ways: "Sum of Products" or "Product of Sums"\footnote{see  section 6.4 of the book "Digital Electronics" by Anil Kumar Maini.}. Here I will be following the ``Sum of Products'' procedure. So we can write the truth table as:
+	\[ T = (\neg P \wedge \neg Q) \vee (\neg P \wedge Q) \vee (P \wedge Q). \]
+	Although it is common to represent the AND, OR, and NOT logic operations with the symbols $ \wedge, \vee, \neg $ respectively, but in the world of digital electronics they use the Boolean logic and represent AND with multiplication and OR with addition. So using that convention we can rewrite the statement as:
+	\[ T = (\bar{P}  \bar{Q}) + (\bar{P}  Q) + (P  Q), \]
+	in which the symbol $ \bar{P} $ means $ \neg P $. Now we can simplify the logic expression $ T $. For this purpose we can use all of the great tools developed in the world of digital electronics (like the karnaugh map \footnote{See section 6.5 and 6.6 in the same book.}), but here I will use the simple boolean arithmetic to simplify the statement. 
+	\begin{align*}
+		T & = (\bar{P}  \bar{Q}) + (\bar{P}  Q) + (P  Q) \\
+		& = \bar{P} (\bar{Q} + Q) + PQ = \bar{P} + PQ \\
+		& = \bar{P} (1 + Q) + PQ = \bar{P} + \bar{P}Q + PQ = \bar{P} + Q. 
+	\end{align*}
+	So the statement $ T $ in its simplified version will be like:
+	\[ T = \bar{P} + Q = \neg P \vee Q, \]
+	which is the same as the original formula provided in the definition of implication.
+\end{example}
+
 The first and the second row the the truth table of the implication operator seems reasonable. However the third and the forth rows look quite bizarre considering our daily experiences of using implication. For example, similar to the forth row we can write:
 \begin{quote}
 	If Tabriz is in Europe, then Tehran is in Africa
