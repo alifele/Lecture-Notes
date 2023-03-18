@@ -1,0 +1,88 @@
+\section{Sets}
+
+
+This section will be a very quick review on the set theory. I will not go through the details here because it will have a very large overlap with my other lecture notes (like the one for mathematical proof). So I will keep it shot and only include the questions that I managed to solve in this chapter.
+
+
+\begin{example}{ }
+	\underline{Question. }Let $ R,S,T $ be sets with $ R \subseteq S $. Show that $ R \cup T \subseteq S \cup T $.\\
+	
+	\underline{Solution.} Let $ R,S,T $ be sets. Then $ R \subseteq S $ means:
+	\[ R \subseteq S \equiv x \in R \imply x \in S. \]
+	By starting with the LHS of the statement that we want to prove, we can write:
+
+	\begin{align*}
+		R \cup T &= \{ x: x \in R \wedge x \in T \} \\
+		&= \{x: x \in S \wedge x \in T \}  \\
+		&= S \cup T.
+	\end{align*}
+	In which we utilized the fact that $ R \subseteq S $ and its equivalent implication statement. 
+
+
+\end{example}
+
+\begin{example}{Number of Subsets}
+	\underline{Question.} Show that the number of subsets of a set with $ n $ elements is equal to $ 2**n $. \\
+	
+	\underline{Solution.} This is a sort of a general proof with any set with any elements. However it is more beneficial with finding the number of subset of the set $ S = \{ 1,2,3, \hdots, n\} $ for some positive integer $ n $. We will use the proof by induction and start with counting the number of subsets of an empty set. Let set $ S_0 $ be an empty set. So the set of its subsets will be:
+	\[ \mathcal{P}(S_0) = \{ \emptyset \}. \]
+	So $ |\mathcal{P}(S_0)| = 2^0 = 1 $. Let $ S_1 = {1} $. Its power set will be:
+	\[ \mathcal{P}(S_1) = \{ \emptyset, \{ 1 \} \}, \]
+	hence $ |\mathcal{P}(S_1) | = 2^1 = 2 $. Let $ S_k = \{ 1,2,3,\hdots,k \} $ for integer $ k < n $. The induction hypothesis is $ |\mathcal{P}(S_k)| = 2^k $. Let's assume the induction hypothesis is true and we want to find the cardinality of the set $ S_{k+1} = \{1,2,3,\hdots, k,k+1\} $. Let's divide the number subsets of $ S_{k+1} $ into two sets, meaning:
+	\[ \mathcal{P}(S_{k+1}) = \mathcal{P}_1 \cup \mathcal{P}_2, \]
+	in which $ \mathcal{P}_1 $ is the set of all subsets that do not contain the element $ k+1 $ while $ \mathcal{P}_2 $ is the set of all subsets that do contain the element $ k+1 $. we know that $ \mathcal{P}_1 = \mathcal{P}(S_k) $ and $ \mathcal{P}_2 = \mathcal{P}(S_k \cup \{ k+1 \}) $. Since the cardinality of $ S_k $ is $ k $, using the induction hypothesis we know that $ |\mathcal{P}_1| = 2^k $ and $ |\mathcal{P}_2| = 2^{k} $. Since $ \mathcal{P}_1 \cap \mathcal{P}_2 = \emptyset $ so $ |P(S_{k+1})| = |\mathcal{P}_1 \cup \mathcal{P}_2| = 2^k + 2^k = 2^{k+1} $. \qed
+\end{example}
+
+\begin{example}{Distributive law}
+	\underline{Question. }Let $ R,S $ and $ T $ be any sets. Show that $ R \cup (S \cap T) = (R \cup S) \cap (R \cup T) $. \\
+	
+	\underline{Proof.} To show the equality of sets we need to show $ R \cup (S \cap T) \subseteq (R \cup S) \cap (R \cup T) $ and $ (R \cup S) \cap (R \cup T) \subseteq R \cup (S \cap T) $.\\
+	
+	\textbf{First inclusion.} We need to show $ R \cup (S \cap T) \subseteq (R \cup S) \cap (R \cup T) $ is true. This statement can be translated into the following implication: 
+	\[ x \in R \cup (S \cap T) \imply x \in (R \cup S) \cap (R \cup T) \quad \text{we need to show is true.}\]
+	
+	. Let's assume that the antecedent is true. Then we 
+	\[ x \in R \vee x \in (S \cap T)  \quad \text{is true.}\]
+	Then we have three cases where $ x \in R $ is true or $ x \in (S \cap T) $ is true or both are true at the same time. We really need to consider the first two cases as the third cases is obvious as we do the proof for the first and the second case. 
+	\begin{itemize}
+		\item $ x \in R  $ is true:
+		The following implications are true (following the properties of the unions of sets):
+		\begin{quote}
+			\centering
+			$ x \in R \imply x \in R \cup S $ (is true),\\
+			$ x \in R \imply x \in R \cup T $ (is true),
+		\end{quote}
+		and since we know $ x \in R $ is true, using Modus Ponens we can infer that $ x \in R \cup S $ and $ x \in R \cup T $ are also true. The following equivalence is true following the definition of intersection:
+		\[   (x \in R \cup S  \wedge  x \in R \cup T) \equiv  (x \in ((R \cup S)  \cap   (R \cup T)).  \]
+		And again using Modus Ponens we can infer that $  x \in ((R \cup S)  \cap   (R \cup T) $ is also true.  So we proved (for this single case) that $ R \cup (S \cap T) \subseteq (R \cup S) \cap (R \cup T) $ is true.
+		
+		\item $ x \in (S \cap T) $ is true:
+		This statement translates to $ x \in S \wedge  x \in T $ is true. So using the corresponding implications from the properties of intersection and then utilizing Modus Ponens, we can infer that $ (x \in S \cup R)  \wedge  (x \in T \cup R) $ is also true that translate into the expression $ x \in (R \cup S) \cap (R \cup R) $ is true. So the proof for this case is also complete.
+	\end{itemize}
+
+
+	\textbf{Second inclusion}. Here we need to show $ (R \cup S ) \cap (R \cup T) \subseteq R \cup (R \cap T) $ that similarly to the first part of the proof translates into the following implication:
+	\[ x \in (R \cup S ) \cap (R \cup T) \imply x \in R \cup (S \cap T) \quad \text{we need to show is true.} \]
+	Let's assume that $ x \in (R \cup S) \cap (R \cup T) $ is true. Then:
+	\begin{quote}
+		\centering
+		$ x \in (R \cup S) $ (is true), \\
+		$ x \in (R \cup T) $ (is true).
+	\end{quote}
+	which translates into the following cases:
+	\begin{enumerate}
+		\item $ x \in R \wedge x \in R \equiv x \in R.$
+		\item $ x \in R \wedge x \in T. $
+		\item $ x \in S \wedge x \in R. $
+		\item $ x \in S \wedge x \in T. $
+	\end{enumerate}
+
+	The cases $ 1,2,3 $ are similar to each other since $ x \in R $ is the common statement in all of them. Following the following implication from the properties of union
+	\[ x \in R \imply x \in R \cup (S \cap T), \]
+	and then using Modus Ponens we prove the second inclusion. 
+	However for the last case, we utilize the following true implication (that follows from the properties of unions in set theory)
+	\[ x \in S \wedge x \in T  \imply (x \in S \wedge x \in T) \vee  x \in R, \]
+	which is equivalent to:
+	\[ (x \in S \wedge x \in T) \vee  x \in R \equiv x \in R \cup (S \cap T). \]
+	which proves the second inclusion for the forth case and finishes the proof. \qed
+\end{example}
