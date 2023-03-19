@@ -1,5 +1,6 @@
 \section{Sets}
 
+\subsection{General Review on the Basics}
 
 This section will be a very quick review on the set theory. I will not go through the details here because it will have a very large overlap with my other lecture notes (like the one for mathematical proof). So I will keep it shot and only include the questions that I managed to solve in this chapter.
 
@@ -85,4 +86,58 @@ This section will be a very quick review on the set theory. I will not go throug
 	which is equivalent to:
 	\[ (x \in S \wedge x \in T) \vee  x \in R \equiv x \in R \cup (S \cap T). \]
 	which proves the second inclusion for the forth case and finishes the proof. \qed
+\end{example}
+
+
+\subsection{Relations}
+Relations of one of those fundamental topics in mathematics that is very simple and at the same time very important.
+
+\begin{defbox}{Relations}
+	Let $ S $ and $ T $ be sets. Then a \textbf{relation} from $ S $ to $ T $ is a subset $ \mathcal{R} $ of $ S \times T$. For $ s \in S $ and $ t \in T $ if $ (s,t) \in \mathcal{R} $, then we write $ S \mathcal{R} T $. In particular a relation on $ S $ is a subset of $ S^2 = S \times S $.
+\end{defbox}
+
+Relations can be studies thoroughly based on properties that they posses. But that will be the subject of math proof lecture notes and here I will only discuss a very important type or relations called equivalence relations. To understand the equivalence relations we need to know some terminology. 
+\begin{itemize}
+	\item \textbf{Reflexive Relation:} Let $ \mathcal{R} $ be a relation on $ S $. We say this relation is reflexive iff $ \forall x \in S, x \mathcal{R} x $. I need to emphasis that \emph{for every} element $ x \in S $ we should have $ x \mathcal{R} x $.
+	
+	\item \textbf{Symmetric Relation:} Let $ \mathcal{R} $ be a relation on $ S $. This relation is symmetric iff for $ a,b \in S $, $ a \mathcal{R}b  $ implies $ b \mathcal{R} a $. For example, on $ \mathbb{Z} $, neither $ \leq $ nor $ < $ are symmetric. However the $ \mathcal{R} $ defined as $ a \mathcal{R} b $ iff $ |a-b| \leq 10 $ is a symmetric relation.
+	 
+	\item \textbf{Transitive Relation:} Let $ \mathcal{R} $ be a relation on $ S $ and $ a,b,c \in S $. We say the relation is symmetric iff $ a \mathcal{R} b $ and $ b \mathcal{R} c $ imply $ a \mathcal{R} c $. 
+\end{itemize}
+
+
+\begin{example}{Relations}
+	\underline{Question.} Define relation $ \mathcal{R} $ on $ \mathbb{Z} $ via $ a \mathcal{R} b $ iff ab is even. Is this relation reflexive? Symmetric? Transitive? \\
+	
+	\underline{Solution.} This relation shows the ordered pairs in which at least one of the elements is an even number. So it will be ordered pairs of the form: $ (2k, 2l+1) $ or $ (2k+1, 2l) $ or $ (2k, 2l) $ for some integers $ k,l $. 
+	\begin{itemize}
+		\item So it turns out that this relation is not reflexive because we don't have the pairs of the form $ (2k+1, 2l+1) $. For example we don't have elements like $ (1,1) $ and etc in the relation. 
+		
+		\item This relation is symmetric. Suppose for $ a,b \in \mathbb{Z} $ we have $ a \mathcal{R} b $. Based on the definition of relation $ \mathcal{R} $ we have $ ab = 2k $ for some integer $ k $. It follows from the properties of integer arithmetic that $ ab = ba = 2k $ so $ b \mathcal{R} a $
+		
+		\item This relation is not transitive. As an counter example $ 1 \mathcal{R} 2 $ and $ 2 \mathcal{R} 3 $ but $ 1 \not \mathcal{R} 3 $ since $ 3 \neq 2k $ for any integer $ k $
+	\end{itemize}
+	
+	
+\end{example}
+
+\begin{example}
+	\underline{Question.} How many relations can be defined on the set $ A = \{ 1,2,3 \} $. How many of them are symmetric? \\
+	
+	\underline{Solution}. To find the number of total relations on the set $ A $, we need to know how many ordered pairs can be built from it. Since the ordered pair has two positions and each of them has $ 3 $ possibilities (the elements of the set $ A $), then we can build a total of $ 3*3 = 9 $ ordered pair. Let the set $ T $ be the set of all ordered pairs. Then the number of all relations on $ A $ will be the cardinal number of the power set of the set $ T $. This can be generalized to any set with $ n $ elements. Then the number of all relations can be defined on that set is:
+	\[ \text{Total number of relations} = 2^{n^2}\]
+	
+	To find the total number of relations that are symmetric, we need to build the atomic sets (smallest sets) that are symmetric:
+	\begin{align*}
+		S_1 &= \{ (1,1) \} \\
+		S_2 &= \{ (2,2) \} \\
+		S_3 &= \{ (3,3) \} \\
+		S_4 &= \{ (1,2), (2,1) \} \\
+		S_5 &= \{ (1,3), (3,1) \} \\
+		S_6 &= \{ (2,3), (3,2) \} 
+	\end{align*}
+	Any union of these sets will also be a symmetric relation on $ A $. So the total number of symmetric relations will be the cardinal number of the power set of the set $ S=\{S_1, S_2, S_3, S_4, S_5, S_6\} $ which is $ 2^6 = 64 $. This can be generalized to any set with $ n $ elements. Then the number of relations that are symmetric will be:
+	\[\text{Total number of symmetric relations} = 2^{n(n+1)/2}\]
+	You can gain insights about the prove of this relation by doing the same thing we did here for the set $  B = \{ 1,2,3,4 \} $ then you can see the pattern!
+	
 \end{example}
