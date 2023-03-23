@@ -299,7 +299,9 @@ Since I am in my very early phase of writing proofs for mathematical statements,
 	Adding the two equations and some basic arithmetic will results in: 
 	\[ax + by = nkx + nly = n(kx+ly)\]
 	Since $ k,lx,y \in \mathbb{Z} $, so $ kx+ly \in \mathbb{Z} $. So it follows from the definition that:
-	\[ n|ax + by \] 	\qed
+	\[ n|ax + by \] 	\qed \\
+	
+	\proof{Proof with another wording.} let $ n,a,b,x,y \in \mathbb{Z}$ and assume $ n|a $ and $ n|b $. So there are $ k,l \in \mathbb{Z} $ such that $ a = nk $ and $ b = nl $, hence $ ax = nkx $ and $ by = nly $. Adding two equations will result in $ ax+by = nkx + nly = n (kx+ly) $. Since $ k,l,x,y $ are integers, then so is $ kx+ly $. Then it follows from definition $ n|ax+by $ \qed
 \end{example}
 
 \begin{example}{}
@@ -315,7 +317,26 @@ Since I am in my very early phase of writing proofs for mathematical statements,
 	
 	\proof{Proof.} Assume $ n \in \mathbb{Z} $ and $ 3|(n-4) $. Then there is $ k \in  \mathbb{Z} $ such that $ n-4 = 3k $. Thus, $ n=3k+4 $, which implies
 	\[ n^2 - 1 = (3k+4)^2 - 1 = 9k^2 + 15 + 24k = 3 (3k^2 + 8k +5)  \]
-	Since $ (3k^2 + 8k +5) \in \mathbb{Z} $ so $ 3|(n^2-1) $ \qed
+	Since $ (3k^2 + 8k +5) \in \mathbb{Z} $ so $ 3|(n^2-1) $ \qed \\
+	
+	\proof{Proof with other wordings}. Let n be an integer and assume $ 3|(n-4) $. So there is an integer k such that $ n-4 = 3k $. Solving for $ n $ yields $ n=3k+4 $. Hence $ n^2 - 1 = 9k^2 + 15 + 24 = 3 (3k^2+5+6) = 3q $. Since $ k $ is an integer then so is $ q = 3k^2+5+6 $. So it follows from definition that $ 3|(n^2-1) $ \qed \\
+	
+	\proof{Proof with logical steps}. Let the statements $ P_1, P_2, P_3 $ and $ P_3 $ be:
+	\begin{quote}
+		$ P_1: 3|n-4, \quad n \in \mathbb{Z}, $ \\
+		$ P_2: n-4 = 3k, \quad k \in \mathbb{Z}, $ \\
+		$ P_3: n = 3k+4,  $ \\
+		$ P_4: n^2-1 = 9k^2 + 15 + 24 = 3 (3k^2+5+6) = 3q, \quad q \in \mathbb{Z} $, \\
+		$ P_5: 3|(n^2-1) $
+	\end{quote}
+	The following implications are true:
+	\begin{quote}
+		$ P_1 \imply P_2 $ is true (definition of divisibility), \\
+		$ P_2 \imply P_3 $ is true (integers arithmetic), \\
+		$ P_3 \imply P_4 $ is true (integers arithmetic), \\
+		$ P_4 \imply P_5 $ is true (definition of divisibility).
+	\end{quote}
+	By connecting these baby implications with the and operator and then utilizing the corresponding tautology and then using modus ponens we can infer that $ P_1 \imply P_2 $ is true.
 \end{example}
 
 \begin{example}{This is a bad proof}
