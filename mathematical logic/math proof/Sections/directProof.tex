@@ -396,6 +396,50 @@ Since I am in my very early phase of writing proofs for mathematical statements,
 
 
 
+\begin{example}{Square roots}
+	\proof{Question.} Without using calculus show that for two positive real numbers $ x,y $, 
+	\[ y>x \imply \sqrt{y}>\sqrt{x}. \] \\
+	
+	\proof{Proof.} Let $ x,y $ be two positive real numbers such that $ 0<x<y $. Then $ y-x>0 $. Then $ (\sqrt{y} - \sqrt{x})(\sqrt{y} + \sqrt{x}) > 0 $. Since $ x,y $ are two positive real numbers, so $ (\sqrt{y} + \sqrt{x}) > 0 $. Then we conclude $ \sqrt{y} - \sqrt{x} >0 $ \qed
+\end{example}
+
+\begin{example}{square roots again!}
+	\proof{Question.} Prove that for every positive real number we have
+	\begin{equation*}
+		\sqrt{ab}< \frac{a+b}{2}.
+	\end{equation*} \\
+
+	\proof{Scratch work stuff}. Let's begin with the inequality that we want to show and do some algebra with it.
+	\begin{align*}
+		&\sqrt{ab} < \frac{a+b}{2},\\
+		&ab < \frac{(a+b)^2}{4},\\
+		&4ab < a^2 + b^2 + 2ab,\\
+		&0 < (a-b)^2.
+	\end{align*}
+	
+	Note that this is not the correct flow of the logic for proof. However this scratch work gives us the hint that it might be better to start with the statement $ (a-b)^2 > 0 $. \\
+	
+	\proof{Proof.} Let $ a,b \in \mathbb{R} $ and with out the loss of generality we can assume that $ a>b $ hence $ a-b >0 $. By squaring both sides of the inequality we will have $ (a-b)^2 > 0 $ which yields $ a^2 + b^2 -2ab + 4ab > 4ab $. In the last step we have added the real number $ 4ab $ to the both sides of the inequality. So $ a^2 + b^2 + 2ab > 4ab $ hence $ (a+b)^2>4ab $. Since the square root function is a positive and increasing function, then we can apply it to the both sides of the inequality with out changing the direction of the inequality:
+	\[ a+b > 2 \sqrt{ab}, \] which then yields:
+	\[ \sqrt{ab} < \frac{a+b}{2}. \]
+\end{example}
+
+
+\begin{example}{square roots once again!}
+	\proof{Question.} Show that for $ x,y \in \mathbb{R} $ that $ x,y \geq 0 $ we have: 
+	\[\sqrt{x+y} \leq \sqrt{x} + \sqrt{y}.  \]
+	
+	\proof{Scratch paper work}. Let's start with the inequality that we want to show and do some algebra to see what happens:
+	\begin{align*}
+		&\sqrt{x+y} \leq \sqrt{x} + \sqrt{y}, \\
+		&x+y \leq x + y + 2\sqrt{xy}, \\
+		&0 \leq \sqrt{xy}.
+	\end{align*}
+	So it seems reasonable to start with the statement $ \sqrt{xy} \geq 0 $.
+	
+	\proof{Proof.} Let $ x,y \in \mathbb{R} $ and $ x,y \geq 0 $. Then $ xy \geq 0 $. Since square root function is a positive and increasing function then we can apply it to the both sides of the inequality and get: $ \sqrt{xy} \geq 0 $, hence $ 2 \sqrt{xy} \geq 0 $. Since we can add any real number to both sides of any inequality we do so with $ x+y $ which yields $ x+y+2\sqrt{xy} \geq x+y $. This equation can be written as: $ (\sqrt{x} + \sqrt{y})^2 \geq x+y $ and again by taking the square root of the both sides we will arrive at $ (\sqrt{x} + \sqrt{y}) \geq \sqrt{x+y}. $ \qed
+\end{example}
+
 
 
 
