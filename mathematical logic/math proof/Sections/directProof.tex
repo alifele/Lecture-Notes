@@ -258,7 +258,24 @@ Since I am in my very early phase of writing proofs for mathematical statements,
 	and since from the step 1 we know that $ T $ is true, then again modus ponens says that $ U $ is also true. \qed
 	\newline
 	
-	\textbf{Important note:} This tedious way of proving such a simple statement, is not the way that we usually do math proof. Here I just wanted to demonstrate the logic proof behind the teeny tiny math proof in the first section.
+	\textbf{Important note:} This tedious way of proving such a simple statement, is not the way that we usually do math proof. Here I just wanted to demonstrate the logic proof behind the teeny tiny math proof in the first section. \\
+	
+	\proof{Another proof with logical flow.} Considering the following statements:
+	\begin{quote}
+		$ P_1:$ $ a,b $ are two odd numbers, \\
+		$ P_2:$ $ a = 2k+1 $ and $ b=2l+1 $ for $ k,l \in \mathbb{Z} $, \\
+		$ P_3:$ $ (ab) = (2k+1)(2l+1) = 4kl+2(k+l)+1 = 2q+1 $ for $ q \in \mathbb{Z}, $ \\
+		$ P_4:$ $ ab $ is odd.
+	\end{quote}
+	On the other hand the following implications are true as well:
+	\begin{quote}
+		$ P_1 \imply P_2 $ is true (definition of odd numbers),
+		$ P_2 \imply P_3 $ is true (integers arithmetic properties),
+		$ P_3 \imply P_4 $ is true (definition of odd numbers),
+	\end{quote}
+	and using the following tautology
+	\[  ((P_1 \imply P_2) \wedge (P_2 \imply P_3) \wedge (P_3 \imply P_4)) \imply (P_1 \imply P_4)  \]
+	along with Modus Ponens to infer that the implication $ P_1 \imply P_2 $ is true.
 \end{example}
 
 \subsection{Some Proofs and Examples}
