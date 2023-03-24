@@ -17,7 +17,7 @@
 \usepackage{hyperref}
 \usepackage{fullpage}
 \usepackage{enumerate}
-\usepackage[breakable]{tcolorbox}
+\usepackage[listings,skins,breakable]{tcolorbox}
 \tcbuselibrary{theorems}
 \usepackage{siunitx}
 \numberwithin{equation}{section}
@@ -33,7 +33,7 @@
 \newcommand{\uv}[1]{\ensuremath{\mathbf{\hat{#1}}}} % for unit vector
 \newcommand{\avg}[1]{\left< #1 \right>} % for average
 \newcommand{\pdc}[3]{\left( \frac{\partial #1}{\partial #2}
- \right)_{#3}} % for thermodynamic partial derivatives
+	\right)_{#3}} % for thermodynamic partial derivatives
 \let\baraccent=\= % rename builtin command \= to \baraccent
 \newcommand{\divides}{\phantom{i} \arrowvert \phantom{i}}
 \newcommand{\ndiv}{\nmid}
@@ -108,30 +108,30 @@
 
 
 \renewenvironment{sol}
-  {\begin{proof}[Solution.]}
-  {\end{proof}}
+{\begin{proof}[Solution.]}
+{\end{proof}}
 \newenvironment{disproof}
-  {\begin{proof}[Disproof.]}
-  {\end{proof}}
+{\begin{proof}[Disproof.]}
+{\end{proof}}
 
 
 \newcommand{\heading}[1]{
-  \begin{tcolorbox}
-    \begin{center}
-    \begin{Large}
-      \textbf{Lecture Notes For:\ #1} \\
-      \vspace{5pt}
-    \end{Large}
-    \begin{large}
-          Ali Fele Paranj \\
-          alifele@student.ubc.ca \\
-          
-          \vspace{5pt}
-      \emph{\today}
-    \end{large}
-    \end{center}
-  \end{tcolorbox}
-  }
+\begin{tcolorbox}
+	\begin{center}
+		\begin{Large}
+			\textbf{Lecture Notes For:\ #1} \\
+			\vspace{5pt}
+		\end{Large}
+		\begin{large}
+			Ali Fele Paranj \\
+			alifele@student.ubc.ca \\
+			
+			\vspace{5pt}
+			\emph{\today}
+		\end{large}
+	\end{center}
+\end{tcolorbox}
+}
 
 \DeclareMathOperator{\arccosh}{arccosh}
 \DeclareMathOperator{\arcsinh}{arcsinh}
@@ -150,13 +150,15 @@
 \renewcommand{\abs}[1]{\lvert #1 \rvert}
 \newcommand{\dc}{\substack{DC \\ \longleftrightarrow \\ \phantom{o}}}
 
-\newtcolorbox{defbox}[1]{colback=red!5!, colframe=red!75!black,fonttitle=\bfseries, title=Definition:\ #1}
-\newtcolorbox{thmbox}[1]{colback=blue!5, colframe=blue!55!black, fonttitle=\bfseries, title=Theorem:\ #1}
-\newtcolorbox{lembox}[1]{colback=blue!5, colframe=blue!55!black, fonttitle=\bfseries, title=Lemma: #1}
-\newtcolorbox{corbox}[1]{colback=blue!5, colframe=blue!55!black, fonttitle=\bfseries, title=Corollary:\ #1}
-\newtcolorbox{propbox}[1]{colback=blue!5, colframe=blue!55!black, fonttitle=\bfseries, title=Proposition:\ #1}
-\newtcolorbox{axiombox}[1]{colback=green!5, colframe=green!35!black, fonttitle=\bfseries, title=Axiom:\ #1}
-\newtcolorbox{example}[1]{colback=gray!10, colframe=white!40!black, fonttitle=\bfseries, title=Example:\ #1}
+
+\newtcolorbox{defbox}[1]{breakable,enhanced jigsaw,colback=red!5!, colframe=red!75!black,fonttitle=\bfseries, title=Definition:\ #1}
+\newtcolorbox{thmbox}[1]{breakable,enhanced jigsaw,colback=blue!5, colframe=blue!55!black, fonttitle=\bfseries, title=Theorem:\ #1}
+\newtcolorbox{lembox}[1]{breakable,enhanced jigsaw,colback=blue!5, colframe=blue!55!black, fonttitle=\bfseries, title=Lemma: #1}
+\newtcolorbox{corbox}[1]{breakable,enhanced jigsaw,colback=blue!5, colframe=blue!55!black, fonttitle=\bfseries, title=Corollary:\ #1}
+\newtcolorbox{propbox}[1]{breakable,enhanced jigsaw,colback=blue!5, colframe=blue!55!black, fonttitle=\bfseries, title=Proposition:\ #1}
+\newtcolorbox{axiombox}[1]{breakable,enhanced jigsaw,colback=green!5, colframe=green!35!black, fonttitle=\bfseries, title=Axiom:\ #1}
+\newtcolorbox{example}[1]{breakable,enhanced jigsaw,colback=gray!5, colframe=white!40!black, fonttitle=\bfseries, title=Example:\ #1}
+
 
 
 

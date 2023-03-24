@@ -190,6 +190,82 @@ in which the $\lvert E \rvert$ means the cardinality (number of elements) of the
 
 \subsection{Baye's Rule}
 
+
+\subsection{Some Solved Problems}
+
+
+
+\begin{example}{Hats problem}
+	\underline{Question.} In a party, three men through their hats on a table and then pick a hat in a random. What is the probability that non of men has got their own hats.  \\
+	
+	\underline{Solutions.} We can solve this question in two ways. The first solution is kind of intuitive and very short. However, to get use to the mathematical structure of the probability theory, I have also forced my self to solve this problem with the usual notation of the conditional probability. This is a very important thing to practice. Because the real world problems are so massive that there are no ways to tackle them with the intuition. That is why I really need to get equipped with the standard machinery of the statistical stuff that works no matter what is the size of problem! \\
+	
+	\underline{Solution 1.} This problem can be though of as a permutation problem. In other words we have the numbers $ 1,2,3 $ and we want to permute them in a way that non of them has its previous position. I will utilize the matrix like notation for the permutation here. The set of all of permutations of $ 1,2,3 $ is:
+	\[ \Omega = \{ 
+	\begin{pmatrix}
+		1 & 2 & 3 \\
+		1 & 2 & 3
+	\end{pmatrix},
+	\begin{pmatrix}
+		1 & 2 & 3 \\
+		1 & 3 & 2
+	\end{pmatrix},
+	\begin{pmatrix}
+		1 & 2 & 3 \\
+		2 & 3 & 1
+	\end{pmatrix},
+	\begin{pmatrix}
+		2 & 2 & 3 \\
+		2 & 3 & 2
+	\end{pmatrix},
+	\begin{pmatrix}
+		1 & 2 & 3 \\
+		3 & 2 & 1
+	\end{pmatrix},
+	\begin{pmatrix}
+		1 & 2 & 3 \\
+		3 & 1 & 2
+	\end{pmatrix}
+	\},
+	\]
+	
+	To elaborate more about this notation, as an instance, the permutation
+	\[ \begin{pmatrix}
+		1 & 2 & 3 \\
+		3 & 1 & 2
+	\end{pmatrix} \]
+	means that the first man had picked up the third man's had. The second man had picked up the first man's had and the third man has picked up the second man's hat. So in fact the set $ \Omega $ is in fact the sample space of our random experiment. So the probability that no one will pick his own hat is $ P(E) = \frac{2}{6} = \frac{1}{3}$.
+	
+	\underline{Solution 2.} In this section I will use the inclusion-exclusion identity along with the concept of the conditional probability. First let's define the following events:
+	\begin{quote}
+		$ E_1 $: The first man has picked up his own hat. \\
+		$ E_2 $: The second man has picked up his own hat. \\
+		$ E_3 $: The third man has picked up his own hat. 
+	\end{quote}
+	
+	Given this definitions, we can compute $ P(E_i) $ for $ i \in \{1,2,3\} $, and $ P(E_i \cap E_j) $ for $ i,j \in {1,2,3} $ and $ i \neq j $ and finally $ P(E_1 \cap E_2 \cap E_3) $.
+	
+	The first expression $ P(E_i) $ is very easy to calculate. Since every man picks his own hat in a random way, then $ P(E_i) = 1/3 $. To calculate $ P(E_i \cap E_j) $ we need to use the law of conditional probability: 
+	\begin{align*}
+		P(E_i \cap E_j) = P(E_i | E_j) P(E_j).
+	\end{align*}
+	We know that $ P(E_j) = 1/3 $. And for $ P(E_i | E_j) $, it means that what is the chance that given one man has chosen his hat right, then other man would choose his hat right. Imagine the scenario. One man has chosen his hat right. Then there are two hats on the table and the other man wants to choose his hat. The chance that he gets his own hat is 1/2. So $ P(E_i | E_j)  = 1/6 $.
+	As the last step we need to calculate $ P(E_1 \cap P_2 \cap E_3) $. Again using the conditional probability we can rewrite this as: 
+	\[ P(E_1 \cap E_2 \cap E_3) = P(E_1 | E_2 \cap E_3) P(E_2 \cap E_3). \]
+	As calculated in the last step $ P(E_1 | E_2) $ is 1/6. And $ P(E_1 | E_2 \cap E_3) $ is 1. Since when both $ E_2 $ and $ E_3 $ has gotten their hats right, then there is only one hat remaining on the table. So the first person will get his hat right with 1 probability. So in conclusion $ P(E_1 \cap E_2 \cap E_3) = 1/6 $
+	
+	Now it is time to use the inclusive-exclusive law: 
+	\begin{align*}
+		P(E_1 \cup E_2 \cup E_3) &= P(E_1) + P(E_2) + P(E_3) - P(E_1 \cap E_2) \\
+		& - P(E_1 \cap E_3) - P(E_2 \cap E_3) + P(E_1 \cap E_2 \cap E_3) \\
+		& =1/3 + 1/3 + 1/3 - 1/6 - 1/6 - 1/6 + 1/6 = 1 - 1/3 = 2/3
+	\end{align*}
+	
+	However note that this is not the final answer. $ P(E_1 \cup E_2 \cup E_3) $ shows the probability that at least on of the men had picked up a right hat. So the answer to the original question will be $ 1-P(E_1 \cup E_2 \cup E_3) = 1-2/3 = 1/3. $
+	
+\end{example}
+
+
 \begin{example}{Tossing Coin}
 
 Choose one number in $\{1,2,\ldots,10\}$ randomly. Then toss that many dices. What is the probability that you get the sum equal to 3.

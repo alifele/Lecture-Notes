@@ -1,7 +1,52 @@
 \section{More Logic and Proof by Contrapositive}  
 
+\subsection{Logical Equivalence}
+
 In this section we will learn how to manipulate logical statement and possibly convert them into equivalent logical statements. What we mean by an equivalent statements is an statement that has a truth table exactly like original one. So Let's highlight this with the following definition box.
 
 \begin{defbox}{Equivalent statements}
-	Two statements are equivalent if and only if they have a similar truth tables.
+	Two statements $ P,Q $ are equivalent if and only if their truth table is the same. The statement ``$ P $ and $ Q $ have a same truth table'' can by written as:
+	\begin{quote}
+		\centering
+		$ P \Leftrightarrow Q $ is a tautology.
+	\end{quote}
+	For a easier notation, this equivalence between logical statements can be written as:
+	\[ P \equiv Q \]
 \end{defbox} 
+
+As an obvious example, two statements $ P \wedge Q $ and $ Q \wedge P $ has the same truth table. So we can say:
+\begin{quote}
+	\centering
+	$P \wedge Q \Leftrightarrow Q \wedge P$ is a tautology.
+\end{quote}
+
+Which means if RHS is 1 then the LHS is 1 (and vise versa) and similarly if RHS is 0 then LHS is 0 (and of course vise versa)
+
+\proof{The importance of equivalent statements}. Some times there is an statement $ P $ that is quite challenging to proof. However we can transform it to another statement (say $ Q $) which is easier to proof. Since $ P $ and $ Q $ has the same truth table (are logically equivalent), then proving $ Q $ implies proving $ P $ which was our aim to prove.
+
+\begin{thmbox}{Important Logical Equivalences}
+	\begin{itemize}
+		\item implication: $ P \imply Q  \equiv ( \neg P \vee Q)$,
+		\item Contrapositive: $ (P \imply Q) \equiv (\neg Q \imply \neg P) $,
+		\item Biconditional: $ P \Leftrightarrow Q \equiv ((P \imply Q) \wedge (Q \imply P)) $,
+		\item Double negation: $ \neg (\neg (P))  \equiv P $,
+		\item Commutative laws: \begin{itemize}
+			\item $ P \vee Q \equiv Q \vee P $,
+			\item $ P \wedge Q \equiv Q \wedge P $,
+		\end{itemize}
+		\item Associative laws: \begin{itemize}
+			\item $ P \vee (Q \vee R) \equiv (P \vee Q) \vee R $,
+			\item $ P \wedge (Q \wedge R) \equiv (P \wedge Q) \wedge R $,
+		\end{itemize}
+		\item Distributive laws: \begin{itemize}
+			\item $ P \vee (Q \wedge R) \equiv (P \vee Q) \wedge (P \vee R) $,
+			\item $ P \wedge (Q \vee R) \equiv (P \wedge Q) \vee (P \wedge R) $,
+		\end{itemize}
+		\item DeMorgan's laws: \begin{itemize}
+			\item $ \neg (P \vee Q) \equiv (\neg P \wedge \neg Q) $,
+			\item $ \neg (P \wedge Q) \equiv (\neg P \vee \neg Q) $.
+		\end{itemize}
+	\end{itemize}
+\end{thmbox}
+
+\proof{Proof.} All of these equivalence statements can be proved easily by computing the truth tables of the equivalent statements and observing that they have the same truth table. 
