@@ -14,7 +14,7 @@
 *.cb2
 .*.lb
 *.gz
-
+*.txss2
 
 ## Intermediate documents:
 *.dvi
