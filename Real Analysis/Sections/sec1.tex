@@ -1,10 +1,11 @@
-\section{Study Log}
+\section{Topology of Real Numbers}
+ 
 
-\subsection{March 13 Notes}
+\subsection{Introduction and Some Historical Notes}
 
-Ancient Greek scientists knew how to construct the rational and irrational numbers (like $ \sqrt{2} $) with a compass and straightedge. But they did not know how to construct the number $\pi $ with that setting. This problem was known for them as \emph{the problem of squaring a circle.} In 1666, Newton showed that $ \pi $ can be constructed with an infinite sum.
+In this section we will construct the set of real numbers from the integers. We will assume that we know the integers and its basic arithmetic properties. However the fact is that the set of integers can be constructed by the set of positive integers (natural number) that can be constructed using the concept of the cardinality of a set and the set of all subsets of a set.
 
-It was in late 1600's that Newton and Leibniz had vague notions of "limit" and "infinity". It was until early 1800's that there were no rigorous mathematical definition of these concepts. For example stuff by Fourier (like infinite Fourier series) made Laplace and Lagrange very uneasy! The infinite and limit concepts were more like a toolbox that were working very well on certain physical problems (for example in solving the PDE for hear equation). Finally In the early 1800s, a revolution happened in making these concepts precise. For example works done by Cauchy in 1820's and Weierstrass and Riemann (1850's and 1860's) had a significant contribution on these concepts.  
+Ancient Greek scientists knew how to construct the rational and irrational numbers (like $ \sqrt{2} $) with a compass and straightedge. But they did not know how to construct the number $\pi $ with that setting. This problem was known for them as \emph{the problem of squaring a circle.} In 1666, Newton showed that $ \pi $ can be constructed with an infinite sum. It was in late 1600's that Newton and Leibniz had vague notions of "limit" and "infinity". It was until early 1800's that there were no rigorous mathematical definition of these concepts. For example stuff by Fourier (like infinite Fourier series) made Laplace and Lagrange very uneasy! The infinite and limit concepts were more like a toolbox that were working very well on certain physical problems (for example in solving the PDE for hear equation). Finally In the early 1800s, a revolution happened in making these concepts precise. For example works done by Cauchy in 1820's and Weierstrass and Riemann (1850's and 1860's) had a significant contribution on these concepts.  
 
 \subsubsection{A little note about Leopold Kronecker}
 
@@ -18,29 +19,26 @@ And Su continues explaining that Kronecker was a finitist (following the finitis
 Strangely, the quote that I have written above by Kronecker was his reply to the Lindemann when he proved that the number pi is a transcendental number. It is believed that he said "this is a beautiful but proves nothing. transcendental numbers do not exist!!"
 
 
-\subsubsection{Technical Stuff I learned}
+\subsection{Constructing Rational Numbers}
 
-Professor talked about relations is general and also the properties (reflexivity, symmetry, transitivity) and the equivalence relation. This was necessary to teach because he then used these topics to construct the rational numbers out of integer numbers. He defined the rational numbers as:
+To construct the rational numbers from integers, we need to use the concept of relations on a set. I will not talk about the concept of relations here as it is covered in other lecture notes. The relation that is of our interest is called a \textbf{equivalence relation}. Equivalence relation is a relation that has three properties called \textit{reflexivity}, \textit{symmetry}, and \textit{transitivity}. We can define the rational numbers as:
 
 \[ \mathcal{Q} = \{ \frac{a}{b} | a,b \in \mathcal{Z}, b \neq 0 \}. \]
 
-He defined the notation $ \frac{\cdot}{\cdot} $ as a equivalence relation. He said the $ \frac{a}{b} $ is a representation of the ordered pair $ (a,b) $. We say $ (a,b) ~ (c,d) $ if and only if $ ad = bc $. The relation $ ~ $ is indeed a equivalence relation and this relation is in fact the equality relation for the rational numbers. For example $ \frac{3}{5} = \frac{6}{10} $ because $ 3*10 = 6*5 $.
+The notation $ \frac{\cdot}{\cdot} $ as a equivalence relation: the $ \frac{a}{b} $ is a representation of the ordered pair $ (a,b) $. We say $ (a,b) ~ (c,d) $ if and only if $ ad = bc $. The relation $ ~ $ is indeed a equivalence relation and this relation is in fact the equality relation for the rational numbers. For example $ \frac{3}{5} = \frac{6}{10} $ because $ 3*10 = 6*5 $.
 
 It is very easy to show that this relation is an equivalence relation. However to check the transitivity property, we need to use the cancellation law. Keep in mind that we have not yet defied division for integers and the cancellation law is the next best thing to the division. The cancellation law for the integers is:
 
 \[ ab = ac, \quad a \neq 0 \quad \imply \quad b=c \]
 
 
-\subsection{March 24 Notes}
 
 So far we learned that we can construct the set of rational numbers like the following set:
 \[ \mathbb{Q} = \{ \frac{a}{b} | a,b \in \mathbb{Z}, b \neq 0 \}. \]
-
 However the question arise that what is the meaning of $ \frac{a}{b} $. This is simply a representative of class of an equivalence defined on $ \mathbb{Z} \times (\mathbb{Z}\backslash\{0\})$. The relation is defined as this:
 \begin{quote}
 	let $ a,b,c,d \in \mathbb{Z} $ and $ b,d \neq 0 $. Then we write $ (a,b) \sim (c,d) $ if and only if $ ad = bc $. Then $ \frac{a}{b} $ is an equivalence class such that: \[ \frac{a}{b} = \{ (c,d) \in \mathbb{Z} \times (\mathbb{Z}\backslash\{0\}) | (a,b) \sim (c,d) \} \]
 \end{quote}
-
 As an example $ \frac{1}{2} = \{ (1,2), (2,4), (3,6), \cdots \} $.
 
 \subsubsection{Defining addition for the rational numbers}
@@ -96,7 +94,7 @@ which clearly shows that  $ (ac,bd) \sim (a'c', b'd') $ hence
 \[ \frac{ac}{bd} =  \frac{a'c'}{b'd'}. \]
 
 
-\subsubsection{Does $ \mathbb{Q} $ extends $ \mathbb{Z} $}.
+\subsubsection{Does $ \mathbb{Q} $ extends $ \mathbb{Z} $?}.
 
 With the following correspondence (for $ n \in \mathbb{Z} $)
 \[ \frac{n}{1} \leftrightarrow n, \]
@@ -194,3 +192,58 @@ Field is one of many algebraic structures (like groups, rings, vector spaces, et
 
 	So we can observe that $ A_2, A_3, M_1, M_2 $ follows from the commutativity and associativity properties of the integers (which are considered as a ring).
 \end{example}
+
+
+\subsubsection{Constructing the Real Numbers from Rational Numbers}
+
+The rational numbers extends the set of integers in a very useful way. But it turns out that there are many holes in the set of rational numbers; i.e. there are some real numbers (real in the sense that we can construct some length equal to it on a paper) but that does not belong to the set of rational numbers. A very famous example is $\sqrt{2}$ that has been known from the ancient Greek. This number is the hypotenuse of a right triangle with sides equal to 1 (using the Pythagorean theorem). However we can prove that this number is not rational number.  \\
+
+\textit{Proof.} Let $x$ be number s.t. $x^2 = 2$. We claim that this number can not be a rational number. To show this, let's assume that $x$ is rational. So we can write $x$ as: 
+\[ x = \{ x = \frac{a}{b} | x^2 = 2, b \neq 0,  (a,b) = 1 \}  \]
+Note that we require $(a,b)=1$ (i.e. relatively prime) as an extra condition since we know that in the class of equivalence with the representative $\frac{a}{b}$, there is an element $\frac{c}{d}$ such that $(a,b) ~ (c,d) $ (since $(c,d)$ belongs to the $\frac{a}{b}$) and $c,d$ are relatively prime. So we can write $x^2 = \frac{a^2}{b^2} = 2$. Then $a^2 = 2 b^2$. We can easily show (by contrapositive) that if $a^2$ is even, then $a$ is even as well. So for some integer $k$ we can write $a = 2k$. Then $b^2 = 2 k^2$, so $b$ is also even. Hence for some integer $l$, $b = 2l$, and this is a contradiction because $a,b$ are not relatively prime.
+
+Now that we observed numbers like $\sqrt{x}$ are not rational, then we can say that the set of rational number $\mathbb{Q}$ does not have the \textbf{least upper bound property}.
+
+\begin{defbox}{Least Upper Bound Property}
+	A set $S$ is said to have the least upper bound property every nonempty subset of $S$ that is bounded above (thus has an upper bound), has a least upper bound (i.e. supremum) as well. 
+\end{defbox}
+
+It is clear from the definition that the set $\mathbb{Q}$ does not have a least upper bound property since the set  \[A =\{ x \in \mathbb{Q} | x^2 < 2 \} \]has an upper bound (like 2) but does not have a least upper bound. This indicates the wholes present in the set of rational numbers. However, we can extend the idea of rational numbers in a way that contains the set of rational numbers as a subset and also fills in the gaps. We can do that in many ways one of which is the concept of Dedekind cuts. Here is the definition of a Dedekind cut:
+
+\begin{defbox}{Dedekind cut}
+	A Dedekind cut $\alpha$ is a \textbf{subset of rational numbers} that has the following properties:
+	\begin{enumerate}
+		\item The set is not trivial (i.e. is not empty and does not contain all of the rationals),
+		\item is closed downwards. In other words $(x \in \alpha \wedge q \in \mathbb{Q}) \wedge q < x \imply q \in \alpha$, and 
+		\item has no largest element. In other words: $\forall x \in \alpha, \exists r \in \alpha \quad s.t. \quad x<r$.
+	\end{enumerate} 
+\end{defbox}
+
+The set of real numbers can be defined using the idea of the Dedekind cuts in the following way:
+
+\begin{defbox}{The Set of Real Number}
+	The set of real numbers denoted by $\mathbb{R}$ is the set of all cuts:
+	\[ \mathbb{R} = \{ \alpha: \alpha \text{ is a cut} \}. \]
+\end{defbox}
+
+So when we refer to the real number $\sqrt{2}$, it is a set that:
+\[ \sqrt{2} = \{ q \in \mathbb{Q} : x^2 < 2 \}. \]
+Remember that this set (which is also a cut) itself had not sup in the set of rational numbers. However the set of all such cuts (that we denoted that set as the set of real number), will have the least upper bound property. For an instance:
+\[ \sup \{ x \in \mathbb{R} : x^2 < 2 \} = \{ x \in \mathbb{Q} : x^2 < 2 \} \]
+
+We can define the addition and multiplication operations for these sets (cuts) in a proper way that extends the idea of addition and multiplication for rationals (thus integers). Also, we can show that the set of real numbers also posses the order relations ($\alpha < \beta \quad iff \quad \alpha \subset \beta$). So we can show that the set of rational numbers form an \textbf{ordered field}. In fact we can show that the set of rational numbers is the only ordered field with the least upper bound property and for any other ordered field there is a one-to-one correspondence (bijective) between its elements and the set of real numbers. As an instance, we can define the addition and multiplication for the real number as:
+\begin{defbox}{Addition and Multiplication for Real Numbers}
+	Let $\alpha$ and $\beta$ be two Dedekind cuts. Then:
+	\begin{align*}
+		\alpha + \beta &= \{ r+s : r \in \alpha, s \in \beta \}, \\
+		\alpha * \beta &= \{ rs  : r \in \alpha, s \in \beta \}
+	\end{align*}
+\end{defbox} 
+
+One of the important things to check when defining a \textbf{binary operator} on a set ($O: S \rightarrow S$) is to check if the result of the operation still is in the set. So it is a good practice to show that $\alpha + \beta$ and $\alpha * \beta$ are still considered as cuts. 
+
+
+\subsubsection{Note that I need to add them to the main text}
+\begin{itemize}
+	\item In a field, just one element (that is the additive identity) should have no inverse (no any other thing).
+\end{itemize}
