@@ -1,0 +1,196 @@
+\section{Study Log}
+
+\subsection{March 13 Notes}
+
+Ancient Greek scientists knew how to construct the rational and irrational numbers (like $ \sqrt{2} $) with a compass and straightedge. But they did not know how to construct the number $\pi $ with that setting. This problem was known for them as \emph{the problem of squaring a circle.} In 1666, Newton showed that $ \pi $ can be constructed with an infinite sum.
+
+It was in late 1600's that Newton and Leibniz had vague notions of "limit" and "infinity". It was until early 1800's that there were no rigorous mathematical definition of these concepts. For example stuff by Fourier (like infinite Fourier series) made Laplace and Lagrange very uneasy! The infinite and limit concepts were more like a toolbox that were working very well on certain physical problems (for example in solving the PDE for hear equation). Finally In the early 1800s, a revolution happened in making these concepts precise. For example works done by Cauchy in 1820's and Weierstrass and Riemann (1850's and 1860's) had a significant contribution on these concepts.  
+
+\subsubsection{A little note about Leopold Kronecker}
+
+In the lecture note by Francis Su in youtube, he talks about this famous saying from Kronecker:
+\begin{quote}
+	God created the integers. All else is the work of man!
+\end{quote}
+
+And Su continues explaining that Kronecker was a finitist (following the finitism school of thoughts). When I heard this discussion his argue with Cantor came in my mind. In the Wikipedia page of Cantor we read that Kronecker was calling him as a "scientific charlatan", a "renegade" and a "corrupter of youth". So there is a connection with him being a finitist and having serious arguments with Cantor. It is also very interesting for me that one of his contributions which is Kronecker delta function kind of works with integers both in its index and its output!
+
+Strangely, the quote that I have written above by Kronecker was his reply to the Lindemann when he proved that the number pi is a transcendental number. It is believed that he said "this is a beautiful but proves nothing. transcendental numbers do not exist!!"
+
+
+\subsubsection{Technical Stuff I learned}
+
+Professor talked about relations is general and also the properties (reflexivity, symmetry, transitivity) and the equivalence relation. This was necessary to teach because he then used these topics to construct the rational numbers out of integer numbers. He defined the rational numbers as:
+
+\[ \mathcal{Q} = \{ \frac{a}{b} | a,b \in \mathcal{Z}, b \neq 0 \}. \]
+
+He defined the notation $ \frac{\cdot}{\cdot} $ as a equivalence relation. He said the $ \frac{a}{b} $ is a representation of the ordered pair $ (a,b) $. We say $ (a,b) ~ (c,d) $ if and only if $ ad = bc $. The relation $ ~ $ is indeed a equivalence relation and this relation is in fact the equality relation for the rational numbers. For example $ \frac{3}{5} = \frac{6}{10} $ because $ 3*10 = 6*5 $.
+
+It is very easy to show that this relation is an equivalence relation. However to check the transitivity property, we need to use the cancellation law. Keep in mind that we have not yet defied division for integers and the cancellation law is the next best thing to the division. The cancellation law for the integers is:
+
+\[ ab = ac, \quad a \neq 0 \quad \imply \quad b=c \]
+
+
+\subsection{March 24 Notes}
+
+So far we learned that we can construct the set of rational numbers like the following set:
+\[ \mathbb{Q} = \{ \frac{a}{b} | a,b \in \mathbb{Z}, b \neq 0 \}. \]
+
+However the question arise that what is the meaning of $ \frac{a}{b} $. This is simply a representative of class of an equivalence defined on $ \mathbb{Z} \times (\mathbb{Z}\backslash\{0\})$. The relation is defined as this:
+\begin{quote}
+	let $ a,b,c,d \in \mathbb{Z} $ and $ b,d \neq 0 $. Then we write $ (a,b) \sim (c,d) $ if and only if $ ad = bc $. Then $ \frac{a}{b} $ is an equivalence class such that: \[ \frac{a}{b} = \{ (c,d) \in \mathbb{Z} \times (\mathbb{Z}\backslash\{0\}) | (a,b) \sim (c,d) \} \]
+\end{quote}
+
+As an example $ \frac{1}{2} = \{ (1,2), (2,4), (3,6), \cdots \} $.
+
+\subsubsection{Defining addition for the rational numbers}
+So far we know how to add two integers but what does actually mean to add two rational numbers? We can throw any definitions that we want but we need to keep in mind that the definition should be well defined. In a sense that the definition does not depend on the representative of the class that we pick. For instance let's define the sum of rational numbers as:
+
+\begin{quote}
+	\textbf{A proposed definition for summation.} Let $ a,b,c,d \in \mathbb{Z} $ and $ b,d \neq 0 $. Then let's define the summation of the rational numbers as the following:
+	\[ \frac{a}{b} + \frac{c}{d} = \frac{a+b}{c+d}.  \]
+\end{quote}
+
+The problem with the definition above is that it is not well defined, i.e. the result of the sum depends on the choice of representative for the class of interest. To illustrate that better let's do the following summation:
+\[ \frac{1}{2} + \frac{5}{3} = \frac{6}{5} \]
+Now let's pick other representatives of the classes $ \frac{1}{2} $ and $ \frac{5}{3} $ which can be for instance $ \frac{7}{14} $ and $ \frac{10}{6} $. Now we expect to get a same result as before if we sum these two fractions:
+\[ \frac{7}{14} + \frac{10}{6} = \frac{17}{20}  \]
+It is clear that $ \frac{17}{20} $ and $ \frac{6}{5} $ are not equivalent. So if we define the summation in the specified way, then it is not well defined. 
+
+Also there is another problem. Defining the summation in this way will not extent the notion of sum for the integers. You can try summing $ \frac{5}{1} + \frac{4}{1} $ and observe that the result is not the same as $ 5+4=9 $.
+
+Let's define that summation in the following way that is both well defined and also extends the notion of summation of the integers. 
+
+\begin{defbox}{Defining summation for the rational numbers}
+	Let $ \frac{a}{b} $ and $ \frac{c}{d} $ be two rational numbers. Then we define the summation for rational numbers as:
+	\[ \frac{a}{b} + \frac{c}{d} = \frac{ad + bc}{bd} \]
+\end{defbox}
+
+To show that this definition is we ll defined, Let $ \frac{a}{b},\frac{c}{d},\frac{a'}{b'},\frac{c'}{d'} $ be rational numbers such that $ (a,b) \sim (a',b') $ and $ (c,d) \sim (c', d') $. We need to show that
+ \[ \frac{ad+bc}{bd} = \frac{a'd' + b'c'}{b'd'} \]
+ 
+\underline{Proof.} Since $ (a,b) \sim (a',b') $, then we can write $ ab' = a'b $ and similarly since $ (c,d) \sim (c',d') $ then $ cd' = c'd $. Since $ b,b',d,d' \neq 0 $, then we can multiply $ bb' $ to the both sides of the second equation and $ dd' $ to both sides of the first equation. Then we will have:
+\begin{align*}
+	ab'dd' &= a'bdd', \\
+	bb'cd' &= bb'c'd.
+\end{align*}
+By adding both sides of these equations then we will have: 
+\begin{align*}
+	ab'dd' + bb'cd' &= a'bdd' + bb'c'd, \\
+	(b'd')(ad+bc) &= (bd)(a'd' + b'c').
+\end{align*}
+This clearly shows that $ (ad+bc, bd) \sim (a'd'+b'c', b'd') $ hence \[\frac{ad+bc}{bd} = \frac{a'd' + b'c'}{b'd'} \]
+
+
+Now we can define the multiplication for the rational numbers.
+\begin{defbox}{Multiplication of the rational numbers}
+	Let $ \frac{a}{b} $ and $ \frac{c}{d} $ be rational numbers. Then we define the multiplication for the rational numbers as:
+	\[ \frac{a}{b} \frac{c}{d} = \frac{ac}{bd} \]
+\end{defbox}
+
+Similar to the last part, we can show that this definition is well defined. Namely we can show that for rational numbers $ \frac{a}{b},\frac{a'}{b'},\frac{c}{d},\frac{c'}{d'} $ that $ (a,b) \sim (a',b') $ and $ (c,d) \sim (c',d') $, we have $ (ac,bd) \sim (a'c', b'd') $.
+
+\underline{Proof.} Since $ (a,b) \sim (a',b') $ and $ (c,d) \sim (c',d') $ so $ ab' = a'b $ and $ cd' = c'd $. By multiplying both sides of the equation we will have:
+\[ a'bc'd = ab'cd', \] 
+which clearly shows that  $ (ac,bd) \sim (a'c', b'd') $ hence
+\[ \frac{ac}{bd} =  \frac{a'c'}{b'd'}. \]
+
+
+\subsubsection{Does $ \mathbb{Q} $ extends $ \mathbb{Z} $}.
+
+With the following correspondence (for $ n \in \mathbb{Z} $)
+\[ \frac{n}{1} \leftrightarrow n, \]
+we can show that the set $ \{ \frac{n}{1} | n\in \mathbb{Z} \} $ behaves exactly like the set of integers. In other words we say these two sets are isomorphic.
+
+\subsubsection{Orders in $ \mathbb{Q} $}
+We know that the elements of $ \mathbb{Z} $ are ordered (some elements are smaller or larger than the other ones). So the natural question that arise is that will this order be still valid for the points in $ \mathbb{Q} $? To answer this question we need to rigorously define the order relation in $ \mathbb{Z} $.
+
+\begin{defbox}{Definition of Order}
+	An order on a set $ S $ is a relation $ < $ satisfying:
+	\begin{itemize}
+		\item Low of trichotomy: $ \forall x,y \in S $, the only one of the following statements are true
+		\[ x<y, \quad x=y, \quad y<x \]
+		
+		\item Transitivity: For $ x,y,z \in S $, $ x<y $ and $ y<z $ implies $ x<z $.
+	\end{itemize}
+\end{defbox}
+
+
+Note that this is a general definition of order on a set and is not restricted to our usual definition of order between real numbers. However, we can define the notion of the "usual" order in $ \mathbb{Z} $ like the following:
+
+\begin{defbox}{Order Relation on $ \mathbb{Z} $}
+	The order relation on $ \mathbb{Z} $ denoted with the symbol $ < $ is defined as the following. Let $ a,b \in \mathbb{Z} $. We say $ a<b $ if and only if $ a-b $ a positive integer. The set of positive integers are defined as $ \{ 1,2,3,4,\cdots \} $.
+\end{defbox}
+
+\begin{example}{Dictionary Oder on $\mathbb{Z}$}
+	As stated earlier, we can extend the definition of order. A \textbf{dictionary order} on $\mathbb{Z}^2$ is the relation $\lessdot$ such that for $(a_1, a_2), (b_1,b_2) \in \mathbb{Z}^2$ we write $(a_1, a_2) \lessdot (b_1, b_2)$ if and only if  $(a_1 < b_1) $و and if $a_1 = b_1$, then $ a_2 < b_2 $. \\
+	For example, given this relation we can write:
+	$(3,4) \lessdot (5,1), (1,0) \lessdot (1,10), (3,1) \lessdot (3,5)$
+\end{example}
+
+
+
+\begin{defbox}{Positive rational numbers}
+	We say the rational number $ \frac{a}{b} $ is positive if the integer $ ab $ is positive. 
+\end{defbox}
+
+\begin{defbox}{Ordering of rational numbers}
+	We say $ \frac{a}{b} < \frac{c}{d}$ if $ \frac{c}{d} - \frac{a}{b} $ is a positive rational number.
+\end{defbox}
+
+Given the ordering property of the rational numbers, we can look at the rational numbers with a new perspective.
+
+
+\subsubsection{$ \mathbb{Q} $ Is a Field!}
+Field is one of many algebraic structures (like groups, rings, vector spaces, etc). 
+
+\begin{defbox}{Field}
+	A field is a set $ F $ along with two operations $ +, \times $ that holds the following properties:
+	\begin{itemize}
+		\item $ (A_1): $ The set $ F $ is closed under $ + $. 
+		\item $ (A_2): $ $ + $ is commutative.
+		\item $ (A_3): $ $ + $ is associative.
+		\item $ (A_4): $ Every element in $ F $ has a additive inverse
+		\item $ (A_5): $ Every element in $ F $ has a additive identity (call it 0)
+		\item $ (M_1): $ The set $ F $ is closed under $ \times $.
+		\item $ (M_2): $ $ \times $ is commutative.
+		\item $ (M_3): $ $ \times $ is associative.
+		\item $ (M_4): $ Every element in $ F $ (except for the additive inverse) has an multiplicative inverse.
+		\item $ (M_5): $ Even element in $ F $ has an multiplicative identity (call it 1).
+		\item $ (D_1): $ The operator $ \times $ distributes over $ + $.
+	\end{itemize}
+\end{defbox}
+
+\begin{example}{$ \mathbb{Q} $ is a field}
+	\underline{Question.} Show that the set of rational numbers is a field.  \\
+	
+	\underline{Solution.} We can start with finding the additive and multiplicative inverses and identities. It is obvious that:
+	\begin{itemize}
+		\item Additive identity: $ \frac{0}{1} $.
+		\item Additive inverse for $ \frac{a}{b}$: $ \frac{-a}{b} $.
+		\item Multiplicative identity: $ \frac{1}{1} $.
+		\item Multiplicative inverse for $ \frac{a}{b} $: $ \frac{b}{a} $
+	\end{itemize}
+
+	Now we need to show that the conditions $ A_1, A_2, A_3, M_1, M_2, M_3, D_1 $ holds.
+	Let $ a,b \in \mathbb{Z} $. Then we know that $ a+b $ and $ ab $ are also integers and are in $ \mathbb{Z} $. So $ A_1, M_1 $ immediately follows from the definition of addition and multiplication for the rational numbers. 
+	\begin{itemize}
+		
+		\item $ A_2 $: We need to show that $ \frac{a}{b} + \frac{c}{d} = \frac{c}{d} + \frac{a}{b} $
+		By following the addition defined for the rational numbers, we can write the expression for the LHS and RHS seperately and observe that those two are equal. So for LHS we have:
+		\[  \frac{a}{b} + \frac{c}{d} = \frac{ad + bc}{bd} \]
+		
+		\item $ (A_3) $: We need to show $ (\frac{a}{b} + \frac{c}{d}) + \frac{e}{f} = \frac{a}{b} + (\frac{c}{d} + \frac{e}{f})   $
+		
+		Following the definition of addition for the rational numbers, for the LHS we can write:
+		\[ \frac{ad+bc}{bd} + \frac{e}{f} = \frac{fad + fbc + edb}{bdf} \]
+		And for the RHS we can write:
+		\[ \frac{a}{b} + \frac{cf + de}{df} = \frac{adf + bcf + bde}{bdf} \]
+		Because of the associativity and commutativity properties of $ Z $, we can conclude that $ \text{RHS} = \text{LHS} $. 
+		
+		
+	
+	\end{itemize}
+
+	So we can observe that $ A_2, A_3, M_1, M_2 $ follows from the commutativity and associativity properties of the integers (which are considered as a ring).
+\end{example}
