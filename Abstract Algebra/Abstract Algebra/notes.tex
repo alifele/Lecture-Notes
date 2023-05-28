@@ -1,4 +1,4 @@
-\documentclass[10pt]{article}
+\documentclass[10pt,oneside]{book}
 %\usepackage[sc]{mathpazo}
 \usepackage{commands}
 \hypersetup{colorlinks = true}
@@ -19,12 +19,14 @@
 
 \heading{Abstract Algebra}
 
-
-
+{\let\clearpage\relax \tableofcontents} 
 \newpage
+
+
+\chapter{Sets and Modular Arithmetic}
 \input{Sections/sets.tex}
-\newpage
 \input{Sections/Modular Arithmetic.tex}
+\chapter{Introduction to Groups}
 
 
 

@@ -1,9 +1,73 @@
-\section{Induction and well ordering}
+\section{Modular Arithmetic}
 
-Here in this section I will go through some topics in modular arithmetic which are the basis for more complicated stuff in the later chapters. Let's begin with the well ordering axiom.
+%Here in this section I will go through some topics in modular arithmetic which are the basis for more complicated stuff in the %later chapters. Let's begin with the well ordering axiom.
 
-\begin{defbox}{Well Ordering Axiom}
-	Well Ordering Axiom: Let $ S $ be a set. We say this set is well ordered if for each subset of it, we can find a smallest element in that subset. 
+%\begin{defbox}{Well Ordering Axiom}
+%	Well Ordering Axiom: Let $ S $ be a set. We say this set is well ordered if for each subset of it, we can find a smallest %element in that subset. 
+%\end{defbox}
+
+%At first this might sound obvious. But with this definition the set $ \mathbb{R}^{+} $ is not a well ordered set. But the set of %natural integers $ \mathbb{N} $ is indeed a well ordered set. 
+
+Given any set, we can put an equivalence relation on the set and then look at the set of all equivalence classes of the that relation. This new set will often has very nice properties that can be utilized for different purposes. In fact, the set of rational numbers ($\mathbb{Q}$) is derived in exactly the same way from the integers ($\mathbb{Z}$).
+
+
+\begin{defbox}{Definition of rational numbers}
+	Let $\mathbb{Z}$ be the set of integers. Then define the following equivalence relation on this set:
+	\[ (a,b) \sim (c,d) \quad iff \quad ad = bc. \]
+	This equivalence relation will produce the following equivalence classes:
+	\[ \frac{a}{b} = \{ (x,y): (a,b) \sim (x,y) \}. \]
+	The set of all rational numbers is in fact the set of all equivalence classes defined as above.
 \end{defbox}
 
-At first this might sound obvious. But with this definition the set $ \mathbb{R}^{+} $ is not a well ordered set. But the set of natural integers $ \mathbb{N} $ is indeed a well ordered set. 
+Now we can define the addition and multiplication between the elements of the new set. 
+
+\begin{defbox}{Addition and Multiplication in $\mathbb{Q}$}
+	Let $\mathbb{Q}$ be the set of all rational numbers. Then the multiplication and addition is defined as:
+	\[ \frac{a}{b} + \frac{c}{d}  = \frac{ad + bc}{cd},\]
+	\[ \frac{a}{b} * \frac{c}{d} = \frac{ac}{bd}. \]
+\end{defbox}
+
+Note that $\frac{a}{b}$ is not a single number. But in fact it is the set of all ordered pairs of integers that has relation with that. As an example $\frac{1}{2} = \{ (1,2), (-1,-2), (2,4), (-2,-4), (3,6), (-3,-6), \cdots \}$. Then the new definitions of addition and multiplication will me more appreciated. Also note that we need to show that these new operations are well-defined. This means that we need to show that the result will not depend on the choice of representative of a class. For example if $(a,b) \sim (a',b')$ and $(c,d) \sin (c',d')$, then we should have $\frac{a}{b} + \frac{c}{d} = \frac{a'}{b'} + \frac{c'}{d'}. $ But this kind of construction we can build more richer sets. In the example shown above, the set $\mathbb{Q}$ has much richer structure than the set $\mathbb{Z}$. Using the Dedekind construction we can build the set of real numbers $\mathbb{R}$ from the set of rationals. 
+
+We can put another equivalence relation on the set of integers and get new sets. One good candidate is the modulus relation. As a very quick reminder, we say that two integers $a,b$ are equal modulus $n$ if both of them has the same reminder if divided by $n$. For example $\mod{5}{8}{3}$. Or we can have the following alternative definition:
+
+\begin{defbox}{Modulus}
+	Let $a,b \in \mathbb{Z}$ and $n \geq 2$ and $n \in \mathbb{N}$. Then we say $a$ is \textbf{congruent} to $b$ \textbf{modulo} $n$, and write $\modd{a}{b}{n}$, if $n|(a-b)$; that is, if $a$ and $b$ have the same reminder when divided by $n$. Note that although the standard notation is the one written above, but for the sake of simplicity I will write $\mod{a}{b}{n}$ instead of the standard notation.
+\end{defbox}
+
+
+Now we can use this concept to define an equivalence relation on the set of integers. We can define this relation as: integers $a,b$ has the relation $a \sim b$ if $a$ and $b$ are congruent to each other modulo $n.$ We can show that this relation is a equivalence relation. Because:
+\[ \forall a \in \mathbb{Z},\ \mod{a}{a}{n}, \quad \text{(Reflective property).} \]
+This is obviously true since $n | 0$ for all integers $n \geq 2$. The other property that we need to check is the symmetric property. Let $a,b \in \mathbb{Z}$, then
+\[ \mod{a}{b}{n} \imply \mod{b}{a}{n}, \quad \text{Symmetric property}. \]
+This is also true since $n|(a-b)  \imply n|(b-a)$. And lastly, we need to check the transitivity property. Let $a,b,c \in \mathbb{Z}$, then:
+\[ ((\mod{a}{b}{n}) \wedge (\mod{b}{c}{n})) \imply \mod{a}{c}{n}, \quad \text{transitivity property}. \]
+This is true since $\mod{a}{b}{n}$ means $k_1 = (a-b)/n$ for some integer $k_1$. Similarly, $\mod{b}{c}{n}$ means that $\exists k_2 \in \mathbb{Z}$ such that $k_2 = (c-b)/n$. Now by adding these two equations we will have $k_1 + k_2 = \frac{c-a}{n}$. So we can write $\mod{a}{c}{n}$.
+Having this relation on a set will make the equivalence classes $[a]_{n} = \{ x: \mod{a}{x}{n} \}$. The following definition defines a very important set called the set of integers modulo n.
+
+\begin{defbox}{Set of integers modulo n}
+	Let $n \geq 1$ be an integer. The of \textbf{integers modulo n}, denoted by $\mathbb{Z}_n$, is the set of all equivalence classes of $\mathbb{Z}$ with respect to the equivalence relation $\mod{a}{b}{n}$ for $a,b \in \mathbb{Z}$. We call these the congruent classes modulo n. Specifically $\mathbb{Z}_n = \{ [0],[1],[2],\cdots,[n-1] \}$.
+\end{defbox}
+
+
+\begin{example}{Set of integers modulo 4}
+	The set of integers modulo 4 is $\mathbb{Z} = \{ [0],[1],[2],[3] \}$, where
+	\begin{align*}
+		[0] &= \{ \cdots,-8,-4,0,4,8,\cdots \},\\
+		[1] &= \{ \cdots,-7,-3,1,5,9,\cdots \},\\
+		[2] &= \{ \cdots,-6,-2,2,6,10,\cdots \},\\
+		[3] &= \{ \cdots,-5,-1,3,7,11,\cdots \}.
+	\end{align*}
+\end{example}
+
+In the similar way that we defined the addition and multiplication on the set of rational numbers, we can define the same kind of operations on the set of integers modulo $n$. For that we can have the following definition:
+
+\begin{defbox}
+	Let $[a], [b] \in \mathbb{Z}_n$. Then we can define the multiplication and addition as:
+	\begin{align*}
+		[a] + [b] &= [a+b], \\
+		[a][b] &= [ab].
+	\end{align*}
+\end{defbox}
+
+Exactly the same way that we showed for the addition and multiplication of rational numbers, we need to show that this definition is well-defined, meaning that the result does not depend of the representative of the equivalence classes. In other words if $\mod{a}{a'}{n}$ and $\mod{b}{b'}{n}$, then $[a] + [b] = [a'] + [b']$.
