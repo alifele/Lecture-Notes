@@ -269,3 +269,14 @@ Seeing these properties give me the hint that $(H,\circ,+)$ form something very 
 \begin{thmbox}{Algebraic structure of the bijective maps}
 	The set of all bijective maps from $S$ to $T$ form a non-abelian group (as explained above).
 \end{thmbox}
+
+\begin{thmbox}{Inverse Function Theorem}
+	Let $\alpha: A \rightarrow B$ be a \textit{bijective} function. Then there exists a bijective function $\beta: B \rightarrow A$ such that $(\beta \circ \alpha)(x) = x$ for all $x \in A$ and $(\alpha \circ \beta)(y) = y$ for all $y \in B$. 
+\end{thmbox}
+
+\textit{Proof.} The function $\alpha$ is a bijection. Then $\forall y \in B,\ \exists x \in A,$ such that $y=\alpha(x)$. Then we can \textit{define} the function $\beta$ to be $\beta(y) = x$. Then from this definition it follows that $(\beta \circ \alpha)(x) = \beta (\alpha (x)) = \beta(y) = x$. Also, for $y\in B$, choosing $x$ such that $\alpha(x)=y$, from definition we will have $\beta(y)=x$ which will lead to $(\alpha \circ \beta)(y)=\alpha (\beta (y))= \alpha(x)=y$. It remains to show that $\beta$ is bijective. If $\beta(y_1) = \beta(y_2)$, then \[ \alpha(\beta(y_1))  = \alpha(\beta(y_2)) = y_1 = y_2, \]
+so $\beta$ is injective. Also, $\beta$ is onto, since $\forall x \in A,\ \exists y \in B$, such that $\beta(y)=x$. It is enough to set $y = \alpha(x)$. \qed 	 
+
+\begin{example}{Permutation Function}
+	A \textit{permutation} is a \textit{bijective} function from $S$ to $S$. For example the function $F:\mathbb{R} \rightarrow \mathbb{R}$ give by $F(x) = x^3$ is a permutation of $\mathbb{R}$.
+\end{example}
