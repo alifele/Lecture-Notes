@@ -1,0 +1,242 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+
+\usepackage{physics}
+\usepackage{amsmath}
+\usepackage{tikz}
+\usepackage{mathdots}
+\usepackage{yhmath}
+\usepackage{cancel}
+\usepackage{color}
+\usepackage{siunitx}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{amssymb}
+\usepackage{gensymb}
+\usepackage{tabularx}
+\usepackage{extarrows}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usetikzlibrary{fadings}
+\usetikzlibrary{patterns}
+\usetikzlibrary{shadows.blur}
+\usetikzlibrary{shapes}
+
+
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue!10!red,
+	urlcolor=green!10!red
+}
+
+
+\usepackage[left=2.00cm, right=2.00cm]{geometry}
+\title{{\Huge Some Notes on} {\tiny infinitesimals}}
+\author{Ali Fele Paranj}
+\begin{document}
+	
+\maketitle
+\section{Introduction}
+
+When I was at 3rd grade in high school (Iran), I studied the 17th century concepts like limits, differentiation, integrals, etc for the first time. Due to the limited time in the school, we learned those concepts as if they were some useful tools (indeed they are!) But then what is the difference between me (who wants to be a mathematician) and a religious person (who believes in what his religion says)? I would say, NO difference! That is because both of us believe in something that "another" person has taught us that is true! Yes, both of us can make our own reasoning and arguments to "proof" that everything make sense. However, this kind of proof is a very nasty one and lacks the formal logic (at least in the case of mathematical example!).
+
+Then I entered the Sharif university in Iran as a undergraduate physics student. As of today that I am writing this note, Sharif has been the top rank university in Iran. Being at a top rank university, I was thinking that anything I have been taught is the most correct version of it! From the very first courses that I had in physics department, we had derivatives and integrals in almost any discussions. Our professors were using these tools as smooth as a piece of butter and the students were doing the same (or at least pretending that they know what they do!) Since I had learned calculus as a tool, I couldn't really go "of the road" with the related concepts and I just had to replicate what I see and learn! At that time, everything was very good (was it?) and I didn't have any troubles in doing so (did I?). But after a while, when I forget all those things that I saw and learned from our professors, I started to remember the tools once I was master of them. You could easily guess what happened! Most of the stuff didn't make sense anymore! For example, when I started to review the thermodynamics from the book "thermal physics" I again saw that the author uses the concepts like
+\[ dS = \frac{dQ}{T}, \]
+or 
+\[ W = -P dV, \]
+and I had a very hard time to understand them. Or as another example, I remember one question in which there were a tank that was filling with water and we were asked to do some calculation on something! In the answer, it has been argued that suppose that the tank is so large that infinitesimal increase in water content do not result in the change of water height. Or another example, In solving one question we had to assume that a certain thermodynamic system is so large that despite the increase in the thermal energy of the system, the temperature does not change. In all of these assumptions, if you were doubted about the truth of ask any kind of question like "how is this possible?" then you would face lots of none sense explanations plus some laughter from your classmates!
+
+All of those challenges were because of the concept of "infinitesimals" which were everywhere. For example, one of the concepts that I had problems with was the derivation of the formula for the compressive work $W = -P dV.$ Schroeder derives this formula with the following argument: Assume that you push the piston in a way that it moves with constant speed (so the acceleration is zero). If this action moves the piston inwards $\Delta x$, then the work done by you on the system in $W = F \Delta x$. Since the force on piston can depend on the position of the piston (as you push more, you need more force to push more since the pressure inside the chamber is increased), then the change in x should be very small or "infinitesimal" so that the force is not changed. So the correct expression will be $W = F dx$ .Then since the acceleration is zero, the force you are exerting equals the force that gas exerts on the piston which is $F_\text{gas to piston} = P A$. So we can write $W = P A dx = -P dV$. So he concludes that expression for the compressive work on an ideal gas is
+\[ W = -P dV, \]
+with the condition that the change in volume is so "small" or in other words in an "infinitesimal" amount that the pressure does not change in the process. And if we want to compute the work for a larger change in volume, then we had to sum up all of those tiny changes. Voilà, integrals!
+\[ W = - \int_{V_i}^{V_f} P dV.\]
+In our thermodynamics class, these formulas were like "Yep! that makes sense", but for me, were yet some other non sense stuff along with the examples that I shared before.
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.25]{images/piston}
+	\caption{Deriving the formula for the compressive work. This figure is from the book "An introduction thermal physics (2021)" by Daniel V. Schroeder}
+	\label{fig:piston}
+\end{figure}
+
+\section{Down with Infinitesimals!}
+All of the challenges that I had were solely because of this concept: "infinitesimals!" For some time, I thought I am very bad at physics, then I started thinking maybe I am not intelligent enough to learn physics, then for few months I pretended I know how these things work, etc. But none of them were the solution for this problem. The disability to digest the idea of infinitesimals, was keeping me away from mathematics, because I was thinking I will have absolutely no chance in understanding what is happening there because I can not understand even the simple concept like infinitesimals. But this expectation changed when I took some courses from math department at UBC, specially the course taught be Leah Keshet on the cell scale mathematical modeling. Then I started to do more self study in mathematics (for example in real analysis through the youtube lecture series by Francis Su, or Abstract Algebra by Benedict Gross), I noticed that everything is crystal clear in mathematics. You have access to almost everything. The definitions are there, the axioms are there and you can utilize the tools of logic to wander around in the math land! So I started to think again about my previous observations about the infinitesimals and all of troubles that I had with them. For the first time in my life, I looked at the problem from another point of view. I suspected that "there might be something wrong with infinitesimals" instead of saying that I am bad at physics or I don't have enough intelligence to understand those stuff. 
+
+As soon as I changed my assumptions about infinitesimals, I found out that there are and there have been "many" things wrong with infinitesimals now and also throughout the history. In the Wikipedia page of \href{https://en.wikipedia.org/wiki/Differential_of_a_function}{Differential of a funciton}, I read that there have been several serious criticisms against the use of infinitesimals in mathematics. For example in the book \textbf{The Analyst} (subtitled \textbf{A Discourse Addressed to an Infidel Mathematician: Wherein It Is Examined Whether the Object, Principles, and Inferences of the Modern Analysis Are More Distinctly Conceived, or More Evidently Deduced, Than Religious Mysteries and Points of Faith}). These are some quotes from that book:
+\begin{quote}
+	...the fallacious way of proceeding to a certain Point on the Supposition of an Increment, and then at once shifting your Supposition to that of no Increment . . . Since if this second Supposition had been made before the common Division by o, all had vanished at once, and you must have got nothing by your Supposition. Whereas by this Artifice of first dividing, and then changing your Supposition, you retain 1 and $nx^{n-1}$. But, notwithstanding all this address to cover it, the fallacy is still the same.
+\end{quote}
+Or another very famous quote:
+\begin{quote}
+	It must, indeed, be acknowledged, that [Newton] used Fluxions, like the Scaffold of a building, as things to be laid aside or got rid of, as soon as finite Lines were found proportional to them. But then these finite Exponents are found by the help of Fluxions. Whatever therefore is got by such Exponents and Proportions is to be ascribed to Fluxions: which must therefore be previously understood. And what are these Fluxions? The Velocities of evanescent Increments? And what are these same evanescent Increments? They are neither finite Quantities nor Quantities infinitely small, nor yet nothing. May we not call them the Ghosts of departed Quantities?
+\end{quote}
+
+Reading these quote from that book, gave me more confidence that there should be something tricky with infinitesimals. I had a very revealing feeling when I read the following paragraph from the Wikipedia page of "Differential of a function":
+
+\begin{quote}
+	In physical treatments, such as those applied to the theory of thermodynamics, the infinitesimal view still prevails. Courant \& John (1999, p. 184) reconcile the physical use of infinitesimal differentials with the mathematical impossibility of them as follows. The differentials represent finite non-zero values that are smaller than the degree of accuracy required for the particular purpose for which they are intended. Thus "physical infinitesimals" need not appeal to a corresponding mathematical infinitesimal in order to have a precise sense.
+\end{quote}
+
+Then I decided to take a closer look at the reference of the quote above and by simply searching the term "infinitesimals" in the book and reading the surrounding text, I got to know what the the story behind all of these stuff. I'll copy and paste those pieces of text so that you can read the whole details:
+
+\begin{quote}
+	One of the great achievements of Greek mathematics was the
+	reducticn of mathematical statements and theorems in a logically
+	coherent way to a small number of very simple postulates or axioms,
+	the well-known axioms of geometry or the rules of arithmetic governing
+	relations among a few basic objects, such as integers or geometrical
+	points. The basic objects originate as abstractions or idealizations
+	from physical reality. The axioms, whether considered as "evident"
+	from a philosophical point of view or merely as overwhelmingly
+	plausible, are accepted without proof; on them the crystalized structure
+	of mathematics rests. For many centuries the axiomatic Euclidean mathematics was accepted as a model for mathematical style and even
+	imitated for other intellectual endeavors. (For example, philosophers,
+	such as Descartes and Spinoza, tried to make their speculations more
+	convincing by presenting them axiomatically or, as they said, "more
+	geometrico. ")
+	The axiomatic method was discarded when after the stagnation during
+	the Middle Ages mathematics in union with natural science started an
+	explosively vigorous development based on the new calculus. Ingenious
+	pioneers vastly extending the scope of mathematics could not be
+	hampered by having to subject the new discoveries to consistent
+	logical analysis and thus in the seventeenth century an invocation of
+	intuitive evidence became a widely used substitute for deductive proof.
+	Mathematicians of first rank operated with the new concepts guided
+	by an unerring feeling for the correctness of the results, sometimes
+	even with mystical associations as in references to "infinitesimals" or
+	"infinitely small quantities." Faith in the sweeping power of the new
+	manipulations of calculus carried the investigators far along paths
+	impossible to travel if subjected to the limitations of complete rigor.
+	Only the sure instinct of great masters could guard against gross errors.
+	The uncritical but enormously fruitful enthusiasm of the early period
+	gradually met with countercurrents which rose to full strength in the
+	nineteenth century but did not impede the development of constructive
+	analysis initiated earlier. Many of the great mathematicians of the
+	nineteenth century, in particular Cauchy and Weierstrass, played a role
+	in the effort toward critical reappraisal. The result was not only a
+	new and firm foundation of analysis, but also increased lucidity and
+	simplicity as a basis for further remarkable progress.
+	An important goal was to replace indiscriminate reliance on imprecise
+	"intuition" by precise reasoning based on operations with numbers; for
+	naive geometric thinking leaves an undesirable margin of vagueness as
+	we shall see time and again in the following chapters. For example,
+	the general concept of a continuous curve eludes geometrical intuition.
+	A continuous curve, representing a continuous function, as defined
+	earlier, need not have a definite direction at every point; we can even
+	construct continuous functions whose graphs nowhere have a direction,
+	or to which no length can be assigned.
+	Yet one must never forget that abstract deductive reasoning is
+	merely one aspect of mathematics while the driving motivation and the
+	great universal scope of analysis stem from physical reality and
+	intuitive geometry.
+	This supplement will provide a rigorous buttressing (with some
+	repetitions) for basic concepts treated intuitively earlier in this chapter. 
+	
+	\textit{Richard Courant \& Fritz John \\ 
+		Introduction to Calculus and Analysis (Volume I, pp 87-88)}
+\end{quote}
+
+Here is another quote from the same book. I enjoyed reading every single word of this:
+
+\begin{quote}
+	In Leibnitz's notation the passage to the limit in the process of
+	differentiation is symbolically expressed by replacing the symbol !1
+	by the symbol d, motivating Leibnitz's symbol for the derivative
+	defined by the equation 
+	\[\frac{dy}{dx} = \lim_{\Delta x \rightarrow 0} \frac{\Delta y}{\Delta x}\]
+	If we wish to obtain a clear grasp of the meaning of the differential
+	calculus, we must beware of the old fallacy of imagining the derivative
+	as the quotient of two "quantities" $dy$ and $dx$ which are actually
+	"infinitely small." The difference quotient $\Delta y/\Delta x$ has a meaning only
+	for differences $\Delta x$ which are not equal to zero. After forming this
+	genuine difference quotient we must perform the passage to the limit by
+	means of a transformation or some other device which also in the limit
+	avoids division by zero. It does not make sense to suppose that first
+	$\Delta x$ and $\Delta y$ go through something like a limiting process and reach
+	values which are infinitesimally small but still not zero, so that $\Delta x$ and
+	$\Delta y$ are replaced by "infinitely small quantities" or "infinitesimals"
+	dx and dy, and that the quotient of these quantities is then formed.
+	Such a conception of the derivative is incompatible with mathematical
+	clarity; in fact, it is entirely meaningless. For many people it undoubtedly has a certain charm of mystery, always associated with the
+	word "infinite"; in the early days of the differential calculus even
+	Leibnitz himself was capable of combining these vague mystical ideas 
+	with a thoroughly clear handling of the limiting process. But today the
+	mysticism of infinitely small quantities has no place in the calculus.
+	The notation of Leibnitz, however, is not merely suggestive in itself,
+	but it is actually extremely flexible and useful. The reason is that in
+	many calculations and formal transformations we can deal with the
+	symbols $dy$ and $dx$ exactly as if they were ordinary numbers. By
+	treating $dx$ and $dy$ like numbers we can give neater expression to many
+	calculations which can admittedly be carried out without their use. In
+	the following chapters we shall see this fact verified over and over
+	again and shall find ourselves justified in making free and repeated use
+	of it, provided we do not lose sight of the symbolical character of the
+	signs $dy$ and $dx$. 
+	
+	
+	\textit{Richard Courant \& Fritz John \\ 
+		Introduction to Calculus and Analysis (Volume I, pp 171-172)}
+\end{quote}
+
+Another interesting piece from the same book:
+
+\begin{quote}
+	Earlier we used the symbol $dy/dx$ purely symbolically to denote the
+	limit of the quotient $\Delta y / \Delta x$ for $\Delta x$ tending to zero. With our present
+	definition of the differentials $dy$ and $dx$ the derivative $dy/dx$ can actually
+	be considered as the ordinary quotient of $dy$ and $dx$. Here, however,
+	$dy$ and $dx$ are now not in any sense "infinitely small" quantities or
+	"infinitesimals;" such an interpretation would be devoid of meaning.
+	Instead $dy$ and $dx$ are well-defined linear functions of $h = \Delta x$ which for
+	large $\Delta x$ may have large numerical values. There is nothing remarkable
+	in the fact that the quotient $dy/dx$ of those quantities has the same value
+	as the derivative $f'(x)$. This is merely a tautology restating the definition
+	of $dy$ as$ f'(x) dX$.
+	
+	\textit{Richard Courant \& Fritz John \\ 
+		Introduction to Calculus and Analysis (Volume I, pp 180)}
+\end{quote}
+
+The final passage from the same book concludes my note. I really suggest you find this book and read it.
+
+\begin{quote}
+	In applying mathematics to natural phenomena we never deal with
+	precisely known quantities. Whether a length is exactly a meter is a
+	question which cannot be decided by any experiment and which consequently has no physical meaning. Moreover, there is no immediate
+	physical meaning in saying that the length of a material rod is rational
+	or irrational; we can always measure it with any desired degree of accuracy by rational numbers, and the only meaningful question is
+	whether we can manage to perform such a measurement using rational
+	numbers with relatively small denominators. Just as the question of
+	rationality or irrationality in the rigorous sense of "exact mathematics"
+	has no physical meaning, carrying out limiting processes in applications
+	is usually not more than a mathematical idealization. 
+	
+	The practical-and overwhelming-significance of such idealizations
+	lies in the fact that through the idealizations analytical expressions
+	become essentially simpler and more manageable. For example, it is
+	vastly simpler and more convenient to work with the notion of instantaneous velocity, which is a function of only one definite instant of
+	time, than with the notion of average velocity between two different
+	instants. Without such idealization every scientific investigation of
+	nature would be condemned to hopeless complications and would
+	bog down at the outset. 
+	
+	We do not intend to enter into a philosophical discussion of the
+	relationship of mathematics to reality. For the sake of better understanding of the theory, it should be emphasized that in applications we
+	have the right to replace a derivative by a difference quotient and vice
+	versa, provided only that the differences are small enough to guarantee
+	a sufficiently close approximation. The physicist, the biologist, the
+	engineer, or anyone else who has to deal with these ideas in practice will
+	therefore have the right to identify the difference quotient with the
+	derivative within his limits of accuracy. The smaller the increment
+	$h = dx$ of the independent variable, the more accurately can he represent the increment $\Delta y = f(x + h) - f(x)$ by the differential $dy = hf'(x)$. As long as he keeps knowingly within the limits of accuracy required by the problem, he might even be permitted to speak of the
+	quantities $dx = h$ and $dy = hf'(x)$ as "infinitesimals." These "physically infinitesimal" quantities have a precise meaning. They are variables with values which are finite, unequal to zero, and chosen small enough for the given investigation, for example, smaller than a fractional part of a wavelength or smaller than the distance between two electrons in an atom; in general, smaller than the degree of accuracy required. 
+\end{quote}
+
+
+
+
+\end{document}
+
+
