@@ -4,7 +4,7 @@
 
 %% Packages
 
-\usepackage[dvips,letterpaper,margin=1.5in]{geometry}
+\usepackage[dvips,letterpaper,margin=1.3in]{geometry}
 %\usepackage{geometry}
 \usepackage{commath}
 \usepackage{tensor}
@@ -90,6 +90,33 @@
 \newcommand{\infint}{\int_{-\infty}^{\infty}}
 \renewcommand{\=}[1]{\stackrel{#1}{=}} % for putting numbers above 
 \renewcommand{\emptyset}{\varnothing}
+\newcommand{\diagMat}[2]{\begin{pmatrix}
+		#1 & 0 \\
+		0 & #2
+\end{pmatrix}}
+\newcommand{\diagMatFour}[4]{\begin{pmatrix}
+		#1 & 0 & 0 & 0 \\
+		0 & #2 & 0 & 0 \\
+		0 & 0 & #3 & 0 \\
+		0 & 0 & 0 & #4 \\
+\end{pmatrix}}
+
+\newcommand{\eigvect}[2]{v_#1^{[#2]}}
+\newcommand{\vspan}[1]{\operatorname{Span}\{#1\}}
+\newcommand{\vectt}[2]{\begin{bmatrix}
+		#1 \\
+		#2
+\end{bmatrix}}
+\newcommand{\vecttt}[3]{\begin{bmatrix}
+		#1 \\
+		#2 \\
+		#3
+\end{bmatrix}}
+\newcommand{\matt}[4]{\begin{pmatrix}
+		#1 & #2 \\
+		#3 & #4
+\end{pmatrix}}
+
 
 \DeclareMathOperator{\arccosh}{arccosh}
 \DeclareMathOperator{\arcsinh}{arcsinh}
@@ -97,6 +124,7 @@
 \DeclareMathOperator{\arcsech}{arcsech}
 \DeclareMathOperator{\arccsch}{arccsch}
 \DeclareMathOperator{\arccoth}{arccoth} 
+
 
 
 
@@ -124,12 +152,7 @@
 %% Environments
 \newtheorem{prop}{Proposition}
 \newtheorem{thm}{Theorem}[section]
-\newtheorem{axiom}{Axiom}[section]
-\newtheorem{p}{Problem}[section]
-\newtheorem{problem}{}
-\newtheorem{lem}{Lemma}[section]
-\theoremstyle{definition}
-\newtheorem{dfn}{Definition}
+
 
 
 
@@ -139,7 +162,7 @@
   \begin{tcolorbox}
     \begin{center}
     \begin{Large}
-      \textbf{#1} \\
+      \textbf{Lecture Notes For:\ #1} \\
       \vspace{5pt}
     \end{Large}
     \begin{large}
@@ -195,5 +218,28 @@
 	%\par\medskip				%% Spacing setting 
 	}
 	{\end{Remark}}
+	
+\newenvironment{ans}{
+	\vspace{5pt}
+	\hrule
+	\par\medskip\noindent
+	\emph{Answer. }
+	\par\medskip
+	}
+	{\medskip}
+	
+\newcounter{question}[section]	
+\newenvironment{question}{
+	\refstepcounter{question}
+	\par\medskip\noindent
+	\textbf{Question~\thequestion.}
+	%\par\medskip
+}
+{\medskip}
+	
+	
+	
+	
+	
 
 
