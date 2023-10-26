@@ -1,0 +1,89 @@
+\section{Poincare Map}
+
+When dealing with dynamical systems that has periodic orbits, one useful machinery to study the stability of those orbits is to use Poincare map. We will explore the idea in the following example
+
+
+\begin{question}
+	Consider the dynamical system described by the following ODE system.
+	\begin{align*}
+		\dot{x}_1 = x_1 - \omega x_2 - x_1^3 - x_1 x_2^2, \\
+		\dot{x}_2 = \omega x_1 + x_2 - x_1^2x_2 - x_2^3,
+	\end{align*}
+	in which $\omega>0$. Analyze the behaviour of this system near the equilibrium points and the periodic orbits.
+	
+\end{question}
+	\begin{ans}
+	The study the behaviour of the system near the equilibrium points, we first need to find them. So we solve the following equation
+	\[ \vectt{\dot{x}_1}{\dot{x}_2} = \vectt{0}{0}. \]
+	By analyzing the ODE system we can infer that $X=(0,0)^T$ a solution of the equation above. So the point $X=(0,0)^T$ is an equilibrium point. To study the stability of this equilibrium point, we need to linearize the system near the equilibrium point. 
+	\[ F_X(X)|_{X=0} = \matt{(f_1)_{x_1}}{(f_1)_{x_2}}{(f_2)_{x_1}}{(f_2)_{x_2}}_{X=0} = \matt{1}{-\omega}{\omega}{1}\]
+	Since the trance and determinant are both positive, then the origin is unstable.
+	
+	However, to analyze the stability of the periodic orbits, we need to find them in the first place. To find the periodic orbit in this example, it is more convenient to convert this ODE system to the polar coordinate in which we have
+	\[ x_1 = r \cos\theta, \qquad x_2 = r \sin\theta, \]
+	in which $r>0$ and $\theta = \mathbb{S}^1$, in which $\mathbb{S}^1$ is the unit circle. Substituting in the ODE system and utilizing the chain rule, then we can write
+	\begin{align*}
+		\dot{r}\cos\theta - r\dot{\theta}\sin\theta &= r\cos\theta - r\omega\sin\theta - r^3\cos^3\theta - r^3\cos\theta\sin^2\theta, \\
+		\dot{r}\sin\theta + r\dot{\theta}\cos\theta &= r\omega\cos\theta + r\sin\theta - r^3\cos^2\theta\sin\theta - r^3\sin^3\theta.
+	\end{align*}
+	Multiplying the first equation in $\sin\theta$ and the second one in  $\cos\theta$ and then subtracting them, And then multiplying the second equation in $\cos\theta$ and the first one in $\sin\theta$ and then adding the equations will yield in
+	\begin{align*}
+		\dot{r} &= r - r^3,\\
+		\dot{\theta} &= \omega.
+	\end{align*}
+	It is clear that
+	\[ p^0(t) = \vectt{r(t)}{\theta(t)} = \vectt{1}{\omega t \mod2\pi}, \]
+	a solution of the this ODE system (because, simply, it satisfies the differential equation). Also, this is a periodic orbit with period $T = 2\pi/\omega$, since
+	\[ p^0(t+2\pi/\omega) = \vectt{1}{(\omega t + 2\pi)\mod2\pi} = \vectt{1}{\omega t}. \]
+	We can also write this periodic orbit in the original $x_1$ and $x_2$ coordinates
+	\begin{align*}
+		p_X^0(t) = \vectt{r(t)\cos(\theta(t))}{t(t)\sin(\theta(t))} = \vectt{\cos(\omega t)}{\sin(\omega t)}.
+	\end{align*}		
+	Note that we write $\sin(\theta)$ instead of $\sin(\theta \mod2\pi)$, because they are the same and the modulu operator is kind of defined in the definition of $\sin$ and $\cos$ functions. 
+	
+	Now we can evaluate the stability of this periodic orbit in two ways: 1. staying in the polar coordinate, 2. translating stuff to the original rectangular coordinate.
+	
+	\textbf{Poincare map in the polar coordinate.}		
+	
+	Drawing the phase space of this system in the polar coordinates makes to build intuition what is happening here.
+	\input{Images/PoincareMapPolarCoordinateExample1.tex}
+	Now we can choose $\Sigma \subset \R\times\mathbb{S}^1$ on which $F(r,\theta)\neq 0$. We choose
+	\[ \Sigma = \{ (r, \theta): \theta =0 \mod2 \}. \]
+	Obviously, in this subset of state space we have
+	\[ F(r, \theta) = \vectt{r - r^3}{\omega} \neq \vectt{0}{0} \quad \forall (r,\theta) \in \Sigma.\]
+	Let $p_0^0 = p^0(t) = (1,0)^T \in \Sigma$. Now let's define a coordinate $\xi\in\R$ for $\Sigma$, by 
+	\[ r = 1 + \xi. \]
+	With this definition $\xi=0$ corresponds to the point $p_0^0 \in \Sigma$. Fix an arbitrary value of $\xi_0$. Now we are interested to know starting from $(1+\xi_0,0)$ as initial value of the dynamical system, when and where we will return to $\Sigma$. So we need to solve
+	\begin{align*}
+		\dot{r} = r - r^3, \qquad &r(0) = 1+\xi_0,\\
+		\dot{\theta} = \omega, \qquad &\theta(0) = 0.
+	\end{align*}
+	We can use elementary methods to solve this initial value problem. So we will get
+	\begin{align*}
+		r(t,\xi_0) &= \frac{e^t}{\sqrt{(1+\xi)^{-2} - 1 + e^{2t}}}, \\
+		\theta(t) &= \omega t \mod2\pi.
+	\end{align*}
+	From the definition of $\Sigma$, it is clear that the time of first return is when $\theta(T_0) = 2\pi$, so $T_0=2\pi/\omega$. Thus the value $r$ in the first return will be $r_1 = r(T_0,\xi_0)$, and the value of $\xi$ in the first return will be $\xi_1 = r_1-1$. So, we basically got
+	\[ \xi_1= r(2\pi/\omega,\xi_0).  \]
+	Since the return time is always $T = 2\pi/\omega$, then we can conclude
+	\[ \xi_{k+1} = r(2\pi/\omega, \xi_k). \]
+	This is the Poincare map $P: \R \to \R$ and we have
+	\[ P(\xi) = \frac{e^{2\pi/\omega}}{\sqrt{(1+\xi)^{-2} - 1 + e^{4\pi/\omega}}} - 1. \]
+	
+	We can analyze the fixed point of this map using linearization. First observe that $\xi=0$ is a fixed point since $P(0) = 0$. With linearization argument at $\xi=0$ we have
+	\[ P_\xi(\xi) |_{\xi=0} = e^{-4\pi/\omega} < 1. \] 
+	Thus the origin is a stable equilibrium point. This is also clear form the cobweb plot of this map
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=0.7\linewidth]{Images/PoincareMapCobwebFig1}
+		\caption{Cobweb plot of the poincare map.}
+		\label{fig:poincaremapcobwebfig1}
+	\end{figure}
+	
+\end{ans} 
+
+
+%\frac{e^{\left(\frac{2\pi}{o}\right)}}{\sqrt{\left(1+x\right)^{\left(-2\right)}-1+e^{\frac{4\pi}{o}}}}-1
+
+%%  (e^(2pi/20))/((1+x)^(-2) - 1 + e^(4pi/20))^(0.5)
+

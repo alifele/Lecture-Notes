@@ -1,4 +1,190 @@
 \section{Sets and Functions}
 
 \subsection{Basic Set Theory}
-\input{Sections/SetsAndFunctionsQuestions/Q1.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% StartQuestion %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\begin{question} 
+	If $A, B$ and $C$ are sets. prove the followings:
+	\begin{enumerate}[(a)]
+		\item $A \cap (B \cup C) = (A \cap B) \cup (A \cap C)$. \label{section-a}
+		\item $C \textbackslash (A \cup B) = (C \textbackslash A) \cap (C \backslash B)$.
+		\item $C \backslash (A \cap B) = (C \backslash A) \cup (C \backslash B) $.
+	\end{enumerate}
+\end{question}
+\begin{ans}
+	\begin{enumerate}[(a)]
+		\item 
+		\begin{proof}
+			Let $P, Q$, and $R$ be logical statements. We can show (using the truth table) that the following biconditional implication is a tautology. \[ P \wedge (Q \vee R) \Leftrightarrow (P \wedge Q) \vee (P \wedge R). \]
+			Now let $x \in A \cap (B \cup C)$. Then $x \in A \wedge (x \in B \vee x \in C)$. Using the tautology above we can write $(x \in A \wedge x \in B) \vee (x \in A \wedge x \in C)$, thus $x \in (A \cap B) \cup (A \cap C) $, which means $A \cap (B \cap C) \subset (A \cap B) \cup (A \cap C)$. Conversely, let $x \in (A \cap B) \cup (A \cap C)$. By definition $(x \in A \wedge x \in B) \vee (x \in A \wedge x \in C)$. With the similar logic as above we can infer $(A \cap B) \cup (A \cap C) \subset A \cap (B \cup C)$. Thus $A \cap (B \cup C) = (A \cap B) \cup (A \cap C)$.
+		\end{proof}
+		
+		\item 
+		\begin{proof}
+			Let $x \in C \backslash (A \cup B)$. By definition $x \in C \wedge x \notin (A \cup B) \biImp x \in C \wedge x \in \overline{A \cup B} \biImp x \in C \wedge x \in \bar{A} \cap \bar{B} \biImp x \in C \wedge (x \notin A \wedge x \notin B)$. Finally, using the following tautology 
+			\[ P \wedge (Q \wedge R) \Leftrightarrow (P \wedge Q) \wedge (P \wedge R), \]
+			we can write $(x \in C \wedge x \notin A) \wedge (x \in C \wedge x \notin B) \biImp x \in (C \backslash A) \cap (C \backslash B) $, thus $C \textbackslash (A \cup B) subset (C \textbackslash A) \cap (C \backslash B)$. The converse can be shown is true following the similar logic as below, thus inferring $C \textbackslash (A \cup B) = (C \textbackslash A) \cap (C \backslash B)$.
+		\end{proof}
+		
+		\item \begin{proof}
+			Let $x \in C \backslash (A \cap B)$. By definition $x \in C \wedge x \notin (A \cap B) \biImp x \in C \wedge x \in \overline{A \cap B} \biImp x \in C \wedge x \in \bar{A} \cup \bar{B} \biImp x \in C \wedge (x \notin A \vee x \notin B)$. Using the tautology in section (a),
+			we can write $(x \in C \wedge x \notin A) \vee (x \in C \wedge x \notin B) \biImp x \in (C \backslash A) \cup (C \backslash B) $, thus $C \textbackslash (A \cap B) \subset (C \textbackslash A) \cup (C \backslash B)$. The converse can be shown is true following the similar logic as below, thus inferring $C \textbackslash (A \cap B) = (C \textbackslash A) \cup (C \backslash B)$.
+		\end{proof}
+	\end{enumerate}
+\end{ans}
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% EndQuestion %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+
+\subsection{Functions}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% StartQuestion %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\begin{question}
+	\label{question:FunctionSetManipulation}
+	Let $f: A \rightarrow B$. Let $C, C_1$, and $C_2$ be subsets of $A$, and let $D$ be a subset of $B$. Prove the followings. 
+	\begin{enumerate}[(a)]
+		\item If $f$ is one-to-one, then $f(C_1 \cap C_2) = f(C_1) \cap f(C_2)$.
+		\item If $f$ is one-to-one, then $f^{-1}(f(C))=C$.
+		\item If $f$ is onto, then $f(\preIm{f}(D)) = D$. 
+	\end{enumerate}
+\end{question}
+\begin{ans}
+	\begin{enumerate}[(a)]
+		\item 
+		\begin{proof}
+			Let $C_1, C_2 \in A$. Then $f(C_1 \cap C_2) = \{ y \in B : y = f(x), x \in C_1 \cap C_2 \} = \{  y \in B : y = f(x), x \in C_1 \wedge x \in C_2 \}$. Let $\tilde{y} \in f(C_1 \cap C_2)$. Then from the definition above, $\tilde{y} = f(\tilde{x}) \quad \text{s.t.} \quad \tilde{x} \in C_1 \wedge \tilde{x} \in C_2 $. Using the definition of function, we can write $\tilde{y} \in f(C_1) \wedge \tilde{y} \in f(C_2) \biImp \tilde{y} \in f(C_1) \cap f(C_2)$. Thus $f(C_1 \cap C_2) \subset f(C_1) \cap f(C_2)$. Conversely, let $y \in (f(C_1) \cap f(C_2))$. Then by definition
+			\begin{align*}
+				y \in f(C_1) \Rightarrow \exists x_1 \in C_1 \st y = f(x_1), \\
+				y \in f(C_2) \Rightarrow \exists x_2 \in C_2 \st y = f(x_2). 
+			\end{align*}
+			Since $f$ is one-to-one, then $f(x_1) = f(x_2) \Rightarrow x = x_1 = x_2$. Thus $x \in C_1 \cap C_2, y = f(x) \in f(C_1 \cap C_2)$. So $f(C_1) \cap f(C_2) \subset f(C_1) \cap f(C_2)$. Finally we can conclude $f(C_1 \cap C_2) = f(C_1) \cap f(C_2)$.
+		\end{proof}
+		\item 
+		\begin{proof}
+			Let $C \in A$, and $a \in f^{-1}(f(C))$. Since $f^{-1}(f(C)) = \{ x \in A: f(x) \in f(C) \}$, then $f(a) \in f(C)$. Thus $\exists x_c \in C \st f(a) = f(x_c)$. Since $f$ is one-to-one, then $a = x_c \biImp a \in C$. So we will have $f^{-1}(f(C)) \subset C$ .Conversely, let $a \in C$. Then by definition $f(a) \in f(C) \biImp f(a) \in f^{-1}(f(C))$. So $C \subset f^{-1}(f(C)) $. So we can conclude $f^{-1}(f(C))=C$.
+		\end{proof}
+		\item 
+		\begin{proof}
+			Let $D \subset B$, $b \in D$. Since $f$ is onto, then $\exists a \in A \st b = f(a)$, thus $a \in \preIm{f}(D)$. And by definition $b \in f(\preIm{f}(D))$, thus $D \subset f(\preIm{f}(D))$. Conversely, Let $b \in f(\preIm{f}(D))$. Then $\exists a \in \preIm{f}(D) \st f(a)=b $, hence from definition it follows that $b \in D$, implying $f(\preIm{f}(D)) \subset D$. So we conclude that $f(\preIm{f}(D)) = D$.
+		\end{proof}
+	\end{enumerate}
+\end{ans}
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% EndQuestion %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% StartQuestion %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\begin{question}
+	For all sub-sections of Question \autoref{question:FunctionSetManipulation} construct a specific example in which the indicated equation fails. (Of course the given hypothesis will have to be false too.)
+\end{question}
+\begin{ans}
+	\begin{enumerate}[(a)]
+		\item \text{\\include{Q4a.tex}}
+		\item From the figure below, it is clear that $\tilde{x} \in \preIm{f}(f(C))$ but $\tilde{x} \notin C$, thus $\preIm{f}(f(C)) \nsubset C$.
+		\input{Images/FunctionsFig1.tex}
+		\item In the figure below, the set $\tilde{D} \subset D$, shown as a shaded region, has not been mapped (since we assume that $f$ is not onto). Then for any $b \in \tilde{D}$ we have $b \notin f(\preIm{f}(D))$, thus $D \nsubset f(\preIm{f}(D))$.
+		\input{Images/FunctionsFig2.tex}
+	\end{enumerate}
+\end{ans}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% EndQuestion %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% StartQuestion %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\begin{question}
+	{Question 8}. Let $f: A \rightarrow B$ and let $C \subseteq A$. Answer the followings.
+	\begin{enumerate}[(a)]
+		\item Proof or counterexample: $f(A\backslash C) \subseteq f(A) \backslash f(C)$.
+		\item Proof or counterexample: $f(A\backslash C) \supseteq f(A) \backslash f(C)$.	
+		\item What condition on $f$ will guarantee $f(A\backslash C) = f(A) \backslash f(C)$. \\
+
+	\end{enumerate}
+	\begin{ans}
+		\begin{enumerate}[(a)]
+			\item \begin{proof}
+				Let $y \in B \st y \in f(A \backslash C)$. From definition $y = f(\tilde{x})\ \text{for some}\ \tilde{x} \in A \backslash C \biImp \tilde{x} \in A \wedge \tilde{x} \notin C$. Now construct the function in a way that $\exists x_c \in C \st f(x_c) = f(\tilde{x})$. Thus $f$ is \textbf{not} \oo. So $y = f(\tilde{x}) = f(x_c) \in f(C)$. We can write:
+				\begin{align*}
+					y &\in f(C), \\
+					y &\in f(C) \cup \overline{f(A)}, \\
+					y &\in \overline{(\overline{f(C)} \cap f(A))}, \\
+					y &\notin \overline{f(C)} \cap f(A),\\
+					y &\notin f(A) \backslash f(C).
+				\end{align*}
+				Thus $f(A\backslash C) \nsubset f(A) \backslash f(C)$.
+			\end{proof}
+			
+			\item \begin{proof}
+				Let $y \in B \st y \in f(A) \backslash f(C)$. So $y \in f(A) \wedge y \notin f(C)$. From definition $y = f(x_1)$ for some $x_1 \in A$ and $y = f(x_2)$ for some $x_2 \notin C$. Then if $f$ is \oo, $y=f(x_1) = f(x_2) \Rightarrow x = x_1 = x_2$, in which $x \in A \wedge x \notin C$, hence $x \in A\backslash C$. So from definition $y \in f(A\backslash C)$ which implies $f(A\backslash C) \supseteq f(A) \backslash f(C)$.
+			\end{proof}
+			
+			\item $f$ should be \oo to guarantee $f(A\backslash C) = f(A) \backslash f(C)$. Proof is provided in (a) and (b).
+		\end{enumerate}
+	\end{ans}
+\end{question}
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% EndQuestion %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% StartQuestion %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{question}
+	\begin{enumerate}[(a)]
+		\item Suppose $f: X \rightarrow X$ is a function, and define $g=f \o f$. Prove: if $g(x)=x$ for all $x \in X$, then $f$ is \oo and onto.
+		\item Extend the results in (a) to the function $g = f \o f \o \hdots \o f$ defined by compositing $f$ by itself $n$ times. Show that the results is valid for each $n \in \N$.
+	\end{enumerate}
+\end{question}
+
+\begin{ans}
+	\begin{enumerate}[(a)]
+		\item 
+		\begin{proof}
+			Lets first prove that $f$ is \oo. Let $x_1 \neq x_2 \in X \st f(x_1) = f(x_2)$. By definition $f(f(x_1)) = f(f(x_2)) \biImp g(x_1) = g(x_2) \biImp x_1 = x_2$, thus $f$ is \oo.
+			
+			Now we prove that $f$ is onto. $\forall y \in X$, setting $x=f(y)\in X$ will yield $y = f(x) = f(f(y)) = g(y) = y$. Thus $f$ is onto.
+		\end{proof}
+		\item 
+		\begin{proof}
+			First we prove that $f$ is \oo.  Let $x_1 \neq x_2 \in X \st f(x_1) = f(x_2)$. By definition $f(f(x_1)) = f(f(x_2)) \biImp f(f(f(x_1))) = f(f(f(x_2))) \biImp  f(f(\hdots f(x_2) \hdots)) = f(f(\hdots f(x_1) \hdots)) \biImp g(x_1) = g(x_2) \biImp x_1 = x_2$, thus $f$ is \oo.
+			
+			Now we prove that $f$ is onto. $\forall y \in X$, setting $x=(\overbrace{f \o f \o \hdots \o f}^{n-1})(y)\in X$ will yield $y = f(x) = (\overbrace{f \o f \o \hdots \o f}^{n})(y) = g(y) = y$. Thus $f$ is onto.
+			
+			Now by induction we can infer that this is true $\forall n \in \N$.
+		\end{proof}
+	\end{enumerate}
+\end{ans}
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% EndQuestion %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% StartQuestion %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{question}
+	Let $f: A \rightarrow B$ and $g: B \rightarrow C$ be given functions. Use the symbol $g \circ f$ to denote the function from $A$ to $C$ defined by $(g \circ f)(x) = g(f(x))$ for all $x \in A$. Prove the followings. 
+	
+	\begin{enumerate}[(a)]
+		\item If $f$ and $g$ are one-to-one, then $g \circ f$ is one-to-one.
+		\item If $g \o f$ is \oo, then $f$ is \oo.
+		\item If $f$ is onto and $g \o f$ is \oo, then $g$ is \oo.
+		\item It can happen that $g \o f$ is \oo, but $g$ is not. 
+	\end{enumerate}
+\end{question}
+\begin{ans}
+	\begin{enumerate}[(a)]
+		\item \begin{proof}
+			Let $x_1 \neq x_2 \in A \st (g \o f)(x_1)  = (g \o f)(x_2)$. Since $g$ is \oo then $f(x_2) = f(x_1)$. Similarly, since $f$ is \oo, then $x_1 = x_2$, hence $g \o f$ is \oo.
+		\end{proof}
+		\item \begin{proof}
+			Let $x_1 \neq x_2 \in A \st f(x_1) = f(x_2)$. By definition of a function we can write $g(f(x_1)) = g(f(x_2)) \biImp (g \o f)(x_1) = (g \o f)(x_2)$. Since $g \o f$ is \oo, then $x_1 = x_2$. This then implies that  $f$ is \oo. 
+		\end{proof}
+		\item \begin{proof}
+			Let $b_1 \neq b_2 \in B \st g(b_1) = g(b_2)$. Since $f$ is onto, then for $b_1, b_2 \in B, \exists a_1, a_2 \in A, \st b_1 = f(a_1), b_2 = f(a_2)$. So we can write $g(f(a_1)) = g(f(a_2))$. Since $g \o f$ is \oo, $a_1 = a_2$. From definition of a function it follows $b_1 = f(a_1) = f(a_2) = b_2$, hence implies $g$ is \oo.
+		\end{proof}
+		\item \begin{proof}
+			The following figure shows a specific example in which $g \o f$ is \oo, however $g$ is not. 
+			\input{Images/FunctionsFig3.tex}
+		\end{proof}
+	\end{enumerate}
+\end{ans}
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% EndQuestion %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
+
+
+

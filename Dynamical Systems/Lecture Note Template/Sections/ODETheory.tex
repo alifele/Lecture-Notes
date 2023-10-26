@@ -1,0 +1,38 @@
+\section{Systems of Linear Differential Equations}
+
+In dealing with the systems of linear differential equations we encounter
+\[ \dot{x} = A(t) x, \tag{\twonotes} \]
+where $x = x(t) \in \R^n $. It turns out that this system of linear differential equations has $n$ linearly independent solutions
+\[ \{x_1(t), x_2(t), \hdots, x_n(t)\}. \]
+It is important to note that the span of all of these solutions is a n-dimensional subspace of the all continuous function from $\R^n$ to $\R^n$. Thus any particular solution of the ODE can be expressed as the linear combination of the solutions stated above, i.e.
+\[ x(t) = \sum_{i=1}^{n} c_i x_i(t). \tag{1} \]
+To show all of these ideas in a neat matrix form, we construct the matrix $\Psi(t)$ called a fundamental matrix (note that this is not unique) as
+\[ \Psi(t) = [ x_1(t), x_2(t), \hdots, x_n(t) ], \]
+that is a matrix whose $j$th column is $x_j(t)$. With this notation in hand we can express any particular solutions of the ODE system as
+\[ x(t) = \Psi(t) c. \tag{2} \]
+Note that so far nothing serious is happening. What happened is that we just defined the matrix $\Psi(t)$ just to be able to write the equation (1) in a more fancy matrix notation (2).
+
+So far, the functions $\{x_1(t), x_2(t), \hdots, x_n(t)\}$ where acting like the basis of the space they span. However, we can find another basis that is more interesting. Consider the functions $\{ X_1(t), X_2(t), \hdots, X_n(t) \}$ where satisfy the $(\twonotes)$ as well as 
+\[ X_1(t_0) = \hat{e}_1,\ X_2(t_0) = \hat{e}_2,\ \hdots\ ,\ X_n(t_0) = \hat{e}_n, \]
+where $\hat{e}_j$ is the standard basis of $\R^n$. Note that we can calculate these functions easily since by equation (2) we can write
+\[ X_j(t) = \Psi(t) c_j \implies c_j = \inv{\Psi}(t) X_j(t) \implies c_j = \inv{\Psi}(t_0) \hat{e}_j. \]
+Thus any of $X_j(t)$ can be written as
+\[ X_j(t) = \Psi(t) \inv{\Psi}(t_0)\hat{e}_j \]
+So we can now construct a new fundamental matrix $M(t,t_0)$ as 
+\[ M(t,t_0) = [ X_1(t), X_2(t), X_3(t), \hdots, X_n(t) ]. \]
+This fundamental matrix is useful when dealing with initial values problems, i..e
+\[ \dot{x} = A(t) x,\qquad x(t_0) = x_0. \tag{\eighthnote}\] 
+In this case the solution to initial values problem can be written as
+\[ x(t) = \phi(t,t_0,x_0) = M(t,t_0) x_0. \]
+That is simply because, since $M(t,t_0)$ is a fundamental matrix, then any solution can be written as $x(t)=M(t,t_0)c$, where $c\in\R^n$. Let $t=t_0$, then we will have $x_0 = x(t_0) = M(t_0,t_0) c  = I c = c$, thus $c = x_0$.
+
+
+Apart from being useful in solving initial values problems, $M(t,t_0)$ has the following properties as well. In fact, $M(t,t_0)$ is an example of a \textit{flow operator}. Also, derivative of $M(t,t_0)$ is given by
+\[ \dfrac{d}{dt} M(t,t_0) = A(t) M(t,t_0). \]
+That is because substituting $x(t) = M(t,t_0) x_0$ in $(\eighthnote)$ will yield in 
+\begin{align*}
+	\frac{d}{dt} M(t,t_0) x_0 = A(t) M(t,t_0) x_0, \\
+	(\frac{d}{dt} M(t,t_0) - A(t) M(t,t_0))x_0 = 0.
+\end{align*}
+Since this is true for all $x_0$, then 
+\[ \frac{d}{dt} M(t,t_0) = A(t) M(t,t_0). \] \qed
