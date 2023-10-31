@@ -1,0 +1,59 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{xcolor}
+\usepackage{nameref}
+\usepackage{hyperref}
+\usepackage{xspace}
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\abs}[1]{|#1|\xspace}
+\title{What The Hell is Analysis?}
+\author{Ali Fele Paranj}
+\begin{document}
+	\maketitle
+
+	\section{Introduction}
+	In this document I will be talking about ``mathematical analysis'' and contextualize its ideas and purposes. This is an informal writing about only my own understanding of the topic, and there is no claim that this is a comprehensive study. Analysis and all sort of things connected to it, were always kind of mysterious for me during my studies. It was really easy for me to follow the ideas of integration and differentiation, the sequences and their limits, the series, etc, but it was VERY hard for me to internalize those subjects. Because of the way that I have been taught in undergrad, the whole idea of analysis were looking kind of heuristic attempts to do something! In the physics class, teacher was using the ideas of infinitesimals to solve the hanging rope problem, and on the other hand, in the math 101 class, the instructor was yelling that there is nothing called infinitesimals. Also, he was insisting that $f'(x)=\frac{df}{dx}$ is JUST a symbolic representation and the right hand side is not a quotient at all, so it is NOT true to write it as $df = f'(x) dx$. But ..., come on! Our physics teacher handles it like a butter and yet his answers are not wrong and he claims that you can literally put a satellite in the earth orbit using his formulas. These kind of never ending question and paradoxes were with me, and apparently, it was with other people throughout the history \footnote{look at the book The Analyst (subtitled A Discourse Addressed to an Infidel Mathematician: Wherein It Is Examined Whether the Object, Principles, and Inferences of the Modern Analysis Are More Distinctly Conceived, or More Evidently Deduced, Than Religious Mysteries and Points of Faith) George Berkeley. }. In this short article, I am going to share my thoughts on the context of mathematical analysis and its glorious ideas.
+	
+	\section{Mathematics Without Analysis}
+	Mathematics, as the practice of our ancients, was \emph{mostly} discrete as well as finite mathematics. What I mean by finite will be more clear as we go though this. One of the central objects in mathematics is set and all sort of structures that we put on that. For example the set of natural numbers, integers, groups, (sets with more built-in tools), matrices, etc. The idea of modern mathematics is to start with these objects (kind of discrete) and build bigger structures. Constructing the set of rational numbers from the set of integers is a very great example of this way of thinking.
+	\subsection{Constructing The Set of Rational Numbers Using The Set of Integers}
+	Consider the 2-fold Cartesian product the set of integers, i.e. $A = \Z \times \Z\backslash\{0\}$. Define the following equivalence class on this set 
+	\[(a,b), (c,d) \in A, \quad (a,b) \sim (c,d) \Longleftrightarrow ad = bc. \]
+	Denote the equivalence classes as
+	\[ \frac{a}{b} = \{ (c,d)\in A: (a,b)\sim(c,d)\}. \]
+	The set of all equivalent classes of this relation on $A$ (i.e. $A/\!\sim$) forms the objects that we know as rational numbers. In fact the rational number $\frac{a}{b}$ is just an equivalence class (thus it is actually a set) containing all other integer pairs $(c,d)$ such that $(a,b)\sim(c,d)$. For instance
+	\[ \frac{1}{2} = \{ (1,2),(-1,-2),(2,4),(-2,-4),\cdots \}. \]
+	We can carefully define the arithmetic with these sets and makes sure that they are well defined (does not depend on the choice of representative from the equivalence class). For instance we can define addition as
+	\[ \frac{a}{b} + \frac{c}{d} = \{ (n,m) \in A: n = ad+bc, m=bd \}. \] 
+	Then all of a sudden we can see that the set $A/\!\sim$ along with the new arithmetic defined contains the set of integers in a special way ($n\in\Z$ will be in the equivalence class $\frac{n}{1}$) that extends the arithmetic on integers.
+	
+	These sort of construction is VERY common in mathematics, like in group theory quotient spaces in topology, and quotient group (or factor group) in group theory.
+
+	
+	\section{Mathematics With Analysis}
+	Analysis, is basically the practice of making new structures out of the old ones (like the one discussed in 2.1), but has something special that is kind on unnatural for us as a human being living in a world full of finite stuff. Imagining the infinity is very hard (and to be honest, impossible, except if you decide to convince yourself that you understand it!), let alone exploring the behaviour of the world formed in the infinity. Analysis makes this possible. It helps to understand the infinity in a operational way (so that you do operations with it) and makes new structures out of the old ones. The weird thing about infinity is that it is quite not parallel with our definition of the word infinity in our natural language. In mathematics, you can take a set, study the world formed in the infinity (it will make more sense as we go through this. Be patient!) and this world formed in the infinity can be still be used to make other worlds in its own infinity. Lots of words infinity! Let's see an example!
+	\subsection{Constructing The Set of $\R$eal Number}
+	Before doing this, we need to talk about a central idea in analysis. A sequence! A sequence in a set, is basically a function from the set of natural numbers to that set. In symbols, a sequence in the set of rational numbers is $f:\N\to\Q,\ n\mapsto a_n$. (The idea of a sequence is something like the idea of a path in a set, i.e. $\gamma:[a,b]\to D$).  
+	
+	
+	
+	
+	\section{UNDER CONSTRUCTION}
+	This section is the under construction section! Meaning I will list ideas and topics here that I will add to this document over time
+	\begin{itemize}
+		\item Using sequences in $\Q$ and putting relation on the set of all Cauchy sequences in $\Q$ leads to the construction of $\R$, which is the infinite world created by the sequences. Like the sequence $3, 3.1, 3.14, 3.141, \cdots$ apparently leads somewhere. What is the \emph{thing} that it approaches, and what is the behaviour of those \emph{things}? The world consisting of those \emph{things} is a world formed at the infinity. Analysis helps us to discover the behaviour of such worlds located at the infinity.
+		\item We can study the sequences on $\R$ and put relations on them and form new structures. However, we can do something else as well. We can consider the set of all sequences in $\R$ that has a special property, from which one interesting property is to force the series $\sum \abs{x_n}^p < \infty$. The set of all sequences satisfying this property is called $\ell^p$ space or sequence space. 
+		\item Now that we have familiarity with the alien world formed above $\Q$,i.e. $\R$, we can define functions from the universe of these aliens to the same universe. These functions can have a very special property, which we call it being continuous. The continuous functions can do very cool and interesting things that are studied in topology.
+		\item The parallel between $\N$ and $\R$ is very similar to the parallel between $\ell^p$ (sequence space) and $L^p$ (function space)
+		\item Again, by applying some limiting arguments on $L^p$, we can define transformations on $L^p$, like \emph{integration}, and \emph{differentiation}. We can note the algebraic structures that these transformations have. We can study the relation between those transformations, that leads to the fundamental theorem of calculus, etc.
+		\item We can study the ideas of differentiation and integration on bigger structures of $\R$ (e.x. $R^n,\ n\in\N$) and have generalizations of fundamental theorem of calculus, and different variations of differentiation and integration. This leads to the ideas of vector calculus.
+		\item We can construct a new set of number using $\R$ and a new element $i$ and form the set of complex number $\C$. We can study the algebraic properties of this new set. Also we can study the differentiation and integration in this new set, which leads to very cool results like Cauchy-Riemann theorem, Cauchy integral formula, etc. We can also find the parallels between this and vector calculus.
+	\end{itemize}
+\end{document}
