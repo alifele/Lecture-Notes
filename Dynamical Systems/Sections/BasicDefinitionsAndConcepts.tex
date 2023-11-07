@@ -1,0 +1,37 @@
+\section{Basic Definitions and Concepts}
+
+We will devote this section to basic definitions of dynamical systems and the core ideas. For this reason, this chapter, will be served as a main references for the definitions used anywhere in this note. Because of this nature, there might be a little consistency in the material in this section and the concepts will be scattered all over the place!
+
+
+\begin{defbox}{Stable set of an invariant set}
+	Let $S$ be in invariant set of a dynamical system, then it stable set $W^s(S)$, is the set of all states, whose orbits approach $S$ forward in time. In other words
+	\[ W^s(S) = \{ x\in X:\ d(\phi^t x, S) \to 0,\ as\ t\to+\infty \}, \]
+	in which $X$ is the state space, $d:X\times X\to \R$ is a metric function
+\end{defbox}
+
+For instance, consider the following system
+\[ \dot{X} = \matt{-\lambda_1}{0}{0}{-\lambda_2} X, \]
+where $X\in\R^2,\ 0<\lambda_1<\lambda_2$. The solution of this system is 
+\[ X(t) = e^{At}X_0 = \matt{e^{-\lambda_1t}}{0}{0}{-\lambda_2t}\vectt{x_1(0)}{x_2(0)}. \]
+For this system, the invariant sets are the origin $S_1 = {(0,0)}$, $S_2=\vspan{(0,1)^T}$, and $S_3=\vspan{(1,0)^T}$. The following figure shows a basic phase portrait of this system.
+\input{Images/BasicDefs_StableSet.tex}
+
+Thus the stable sets of the invariant sets of this system will be
+\[ W^s(S_1)=\R^2,\qquad W^s(S_2)=\R^2, \qquad W^s(S_3)=\R^2. \]
+
+With a similar logic, we can define the \textbf{unstable set $ W^u(S)$} of in invariant set, which is the set of all states whose orbits approach $S$ \emph{backward} in time.
+
+\begin{corbox}
+	The stable, and unstable sets of an invariant set, are invariant sets themselves.
+\end{corbox}
+\begin{proof}
+	Here we proof the statement for the unstable set only, however, the proof logic for both of them is similar. We proceed with the proof by contradiction. Assume that $W^s(S)$ is not a invariant set. This means that 
+	\[ \exists x_0\in W^s(S),\ \exists t^*\in\R, \st\ \phi^{t^*} x_0 = z_0  \notin W^s(S).  \]
+	So $\lim_{t\to\infty} d(\phi^t z_0, S) \neq 0$. On the other hand, because of  $\phi^{s+t}x_0 = \phi^s (\phi^t x_0)$ we have
+	\begin{align*}
+		\phi^{t^*}x_0 = z_0 \ \Leftrightarrow\ \phi^{t-t^*}(\phi^{t^*}x_0)= \phi^{t-t^*} z_0\ \Leftrightarrow\ \phi^t x = \phi^{t-t^*} z_0,
+	\end{align*}
+	which implies that the distance between $\phi^{t-t^*}z_0$ and the set $S$ goes to zero, which contradicts our assumption. So we conclude that the stable set of an invariant set, is an invariant set itself.
+
+\end{proof}
+

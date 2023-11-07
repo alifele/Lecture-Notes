@@ -118,6 +118,9 @@
 \end{pmatrix}}
 
 
+
+\renewcommand{\phi}{\varphi}
+
 \DeclareMathOperator{\arccosh}{arccosh}
 \DeclareMathOperator{\arcsinh}{arcsinh}
 \DeclareMathOperator{\arctanh}{arctanh}
@@ -184,12 +187,21 @@
 \newtcolorbox{Defbox}[2]{breakable,enhanced jigsaw,colback=red!5!, colframe=red!75!black,fonttitle=\bfseries, title=Definition~#1. #2.}
 \newtcolorbox{thmbox}[1]{breakable,enhanced jigsaw,colback=blue!5, colframe=blue!55!black, fonttitle=\bfseries, title=Theorem:\ #1}
 \newtcolorbox{lembox}[1]{breakable,enhanced jigsaw,colback=blue!5, colframe=blue!55!black, fonttitle=\bfseries, title=Lemma: #1}
-\newtcolorbox{corbox}[1]{breakable,enhanced jigsaw,colback=blue!5, colframe=blue!55!black, fonttitle=\bfseries, title=Corollary:\ #1}
+\newtcolorbox{Corbox}[1]{breakable,enhanced jigsaw,colback=blue!5, colframe=blue!55!black, fonttitle=\bfseries, title=Corollary:\ #1}
 \newtcolorbox{propbox}[1]{breakable,enhanced jigsaw,colback=blue!5, colframe=blue!55!black, fonttitle=\bfseries, title=Proposition:\ #1}
 \newtcolorbox{Remark}[1]{breakable,enhanced jigsaw,colback=green!5, colframe=green!35!black, fonttitle=\bfseries, title=Remark~#1}
 \newtcolorbox{Example}[2]{breakable,enhanced jigsaw,colback=gray!5, colframe=white!40!black, fonttitle=\bfseries, title=Example~#1. #2}
 
 
+
+\newcounter{CorCounter}[section]
+\newenvironment{corbox}[1][]{
+	\refstepcounter{CorCounter}	%% setting the counter
+	\par\medskip\noindent		%% setting the spacings	
+	\begin{Corbox}{\thesection.\theCorCounter}	%% Creating the tcolorbox
+		\par\medskip				%% Spacing setting 
+	}
+	{\end{Corbox}}
 
 \newcounter{defcounter}[section]
 \newenvironment{defbox}[2][]{
