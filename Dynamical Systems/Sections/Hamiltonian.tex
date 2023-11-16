@@ -1,0 +1,65 @@
+\section{Introduction to Hamiltonian Systems}
+
+Assuming extra structures in a vector field leads to systems that are easier to analyze. One of such systems is the Hamiltonian systems. A Hamiltonian system is
+\[ \dot{x} = f(x) \]
+where $x \in \R^{2s}$, and $x = (q,p)$ where $q=(q_1,\cdots,q_s)\in\R^s,\ p=(p_1,\cdots,p_s)\in\R^s$. Also, the vector field $f: \R^{2s}\to \R^{2s}]$ has a special property which is
+\[ f(x)=f(q,p)=(H_p(q,p),-H_q(q,p)) = (\partialDer{p_1},\cdots,\partialDer{p_s},-\partialDer{q_1},\cdots,-\partialDer{q_s})H(q,p). \]
+where $H: \R^{2s}\to R$ is the Hamiltonian function. In other words we have
+\[ \dot{q} = H_p (q,p),\qquad \dot{p}=- H_q(q,p). \]
+
+
+
+\begin{corbox}
+	If $x(t)$ is a solution of a Hamiltonian system, then $\frac{d}{dt} H(x(t)) = 0$, hence $H(x(t))=c$ is a constant. Thus, all solutions remain on the level sets of the Hamiltonian function, which is known as conservation of energy.
+\end{corbox}
+\begin{proof}
+	We need to calculate $\frac{d}{dt}H(x(t))$ via the chain rule.
+	\[ \frac{d}{dt}H(x(t)) = \sum_{i=1}^{2s} \frac{\partial H}{\partial x_i} \frac{d x_i}{dt} = \sum_{i=1}^{s} \frac{\partial H}{\partial q_i} \frac{d q_i}{dt} + \sum_{i=1}^{s} \frac{\partial H}{\partial p_i} \frac{d p_i}{dt} = \sum_{i=1}^{s} -\frac{d p_i}{d t} \frac{d q_i}{dt} + \sum_{i=1}^{s} \frac{d q_i}{d t} \frac{d p_i}{dt} = 0\]
+\end{proof}
+
+
+This is a very useful property of Hamiltonian systems. That is because we can easily draw the phase portrait as the set of all level sets of the Hamiltonian functions. Following two examples will help to illustrate this point. 
+
+\begin{example}
+	Consider the following non-Linear oscillator:
+	\[ \ddot{u} - u + u^3 = 0. \]
+	To analyze this system, first we need to write it in the form of a system of first order ODEs. Let $q = u, p = \dot{u}$. Then we can write the system as
+	\[ \dot{q} = v, \qquad \dot{p}=q - q^3. \]
+	We can analyze this system using the level curves of the Hamiltonian function. We can find the Hamiltonian as
+	\[ H(q,p) = \frac{1}{2} p^2 + \frac{1}{2} q^2 - \frac{1}{4} q^4 . \]
+
+	\begin{center}
+		\includegraphics[width=0.4\linewidth]{HamiltonianExample1}
+	\end{center}
+	
+	The figure above shows the graph of this function. The orbits in the phase portrait is simply the level curves of this function. 
+\end{example}
+
+The level curves of the dynamical system analyzed above worth more analysis. The following is the phase portrait of the dynamics
+
+
+\begin{gnuplot}[terminal=epslatex, terminaloptions=color]
+	set contour base
+	set cntrparam levels auto 10
+	unset key
+	set grid
+	set xrange [-2:2]
+	set yrange [-2:2]
+	set isosamples 40
+	unset ztics
+	f(x, y) = 0.5*y**2 - 0.5*x**2 + 0.25*x**4
+	splot f(x, y)
+\end{gnuplot}
+
+As we can see in the figure above, the equilibria $p^\circ = (0,0)$ is sort of special. By linearization argument at the origin, we see that the Jacobian matrix has two eigenvalues, one of which is positive and the other one is negative. Thus we conclude that the equilibria is unstable and is in fact a saddle point. However, we can see that some orbits emerge from it and comeback to it again! We call such orbits homoclinic orbits. 
+
+\begin{defbox}
+	\textbf{Homoclinic} orbits are the orbits that emerge from one equilibria point and return to it again. In other words, the points of homoclinic orbit approach the equilibrium point from which the orbit emerged, as $t\to\pm\infty$.
+	
+	More formally, consider the continuous dynamical system 
+	\[ \dot{x} = f(x), \]
+	and assume there is an equilibrium point at $x_0$. A solution $x(t)$ is a homoclinic orbit if
+	\[ x(t) \to x_0,\quad as \quad t\to\pm\infty. \]
+\end{defbox}
+
+Homoclinic orbits are in fact the intersection of stable and unstable manifolds (see \autoref{def:StableUnstableManifold}) of an equilibrium point. 

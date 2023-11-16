@@ -1,0 +1,71 @@
+\chapter{Hausdorff Topological Spaces}
+
+\section{Basic Notions and Definitions}
+In this section we will cover the basic notions and definitions. Let's start with the definition of an open ball in $\R^k$
+
+\begin{defbox}[Open Ball in $\R^k$]
+	Let $x\in\R^k$. An open ball centered at $x$ with radius $r$ is the set
+	\[ \ball{r}{x} = \{ y\in \R^k: d(y,x)<r \}, \]
+	where $d:\R^k \times \R^k \to \R$ is a metric function.
+\end{defbox}
+
+Using the notion of open ball, we can define the notion of open sets in $\R^k$. Note that, we can define open sets in a more abstract way by demanding some axioms to be true (the way that we define open sets in point-set topology). 
+
+\begin{defbox}[Open Set in $\R^k$]
+	Let $U\subseteq \R^k$. $U$ is open if 
+	\[ \forall x\in \R^k,\ \exists \ball{r}{x} \st \ball{r}{x} \subseteq U. \]
+\end{defbox}
+
+A very useful intuition about open sets is that we can move around any points of the set (sufficiently small) and still be in the set. In other words, we can perturb the points of an open set (a sufficiently small perturbation) and still remain in the set. 
+
+\begin{remark}
+	An open ball is an open set. This is not tautological statement. The word ``open'' in the notion of open ball, has nothing to do with the word ``open'' in the notion of open set. however, we can show that an open ball is indeed an open set, thus deserves the name ``open''. In more accurate language 
+	\begin{quote}
+		Let $\hat{x}\in\R^k,\ \hat{r}\in\R,\ U=\ball{\hat{r}}{\hat{x}}$. Then $U$ is an open set.
+	\end{quote}
+\end{remark}
+\begin{proof}
+	The proof of remark above can be facilitated by considering the following diagram.
+
+	\input{Images/OpenBallisOpenSet.tex}
+	
+	Considering the visual idea, we can proceed with the proof. Let $x\in U$. Then let $r^* = r - d(x,\hat{x})$ and $\epsilon < r^*$. This implies that $d(x,\hat{x})=\hat{r}-r^*$. We claim that $\ball{\epsilon}{x} \subseteq U$. Indeed, let $\mu \in \ball{\epsilon}{x} $. By definition $d(\mu,x)<\epsilon<r^*$. Thus
+	\[ d(\hat{x},\mu) \leq d(\hat{x},x) + d(x,\mu) < (\hat{r}-r^*) + r^* = \hat{r}. \]
+	Thus we showed that $\mu \in \ball{\epsilon}{x}$ implies $\mu \in \ball{\hat{r}}{\hat{x}}$. Thus we can conclude that $\ball{\epsilon}{x} \subseteq \ball{\hat{r}}{\hat{x}}$, for any choice of $x$. Thus $U$ is an open set. 
+\end{proof}
+
+\begin{defbox}[The Usual Topology on $\R^k$]
+	The set $\mathcal{T} = \{ U \subseteq \R^k: U \text{ is an open set} \}$, is called the usual ``topology'' on $\R^k$.
+\end{defbox}
+Note that we will cover the notion of topology on a set later, but the purpose of this definition is just to keep in mind that $\mathcal{T}$ is the set of all open sets of $\R^k$. From this notion, here comes the important definition of a neighborhood of a set.
+
+\begin{defbox}[Neighborhood of $x$]
+	Let $x \in \R^k$. Then Neighborhood of $x$ is
+	\[ \mathcal{N}(x) = \{ S \in \mathcal{P}(\R^k):\ \exists U \in \mathcal{T} \st x\in U \subseteq S\}. \]
+	In other words, A neighborhood of $x\in\R^k$, is the collection of all subsets of $\R^k$, such that contains an open set containing $x$.
+\end{defbox}
+The way that we define a neighborhood of a point as above, is to emphasis that there is no pressure to restrict the notion of neighborhood to open balls only. In fact, any subset of $\R^k$ containing $x\in\R^k$, that can contains an open set (not necessarily an open ball) who contains $x$ is a neighborhood of point $x$. The following corollary put this broad definition into a good use.
+\begin{corbox}
+	Let $S \in \mathcal{N}(x), x\in\R^k$. Then $\exists \ball{r}{x}$ for some $r>0$, such that $x\in\ball{r}{x}\subseteq S$.
+\end{corbox}
+Based on this corollary that follows immediately from the definition of neighborhood, we can conclude that whenever we are given with $S\in\mathcal{N}(x)$ for $x\in\R^k$, then we can always find an open ball centered at $x$ with sufficiently small radius. 
+
+Using all of these notions and definitions, we can now generalize the idea of convergence of a sequence
+\begin{propbox}
+	Converges $x_n \to \hat{x}$ in $\R^k$ can be expressed equivalently as 
+	\begin{enumerate}[(a)]
+		\item $\forall \epsilon>0,\ \exists N>0\ :\ \forall n>N,\ x_n \in \ball{\epsilon}{\hat{x}}. \quad or \quad \forall \ball{\epsilon}{\hat{x}},\ \exists N>0\ :\ \forall n>N, x_n \in \ball{\epsilon}{\hat{x}}. $
+		\item $\forall S \in \mathcal{N}(\hat{x}),\ \exists N>0\ :\ \forall n>N,\ x_n \in S.$
+	\end{enumerate}
+\end{propbox}
+
+\begin{proof}
+	Since the statements (a) and (b) are equivalent, then we need to proof the both ways. Both proofs are straight and can be deduced by following the definitions.
+	\begin{itemize}
+		\item [(a)$\implies$(b)]: Given $S\in \mathcal{N}(\hat{x}),\ \exists \ball{r}{\bar{x}}$ for $r>0$ sufficiently small. Let $r=\epsilon$. Since (a) is true, then $\exists N>0$ such that $\forall n>N$ we have $x_n \in \ball{\epsilon}{\hat{x}} \subseteq S$.
+		\item [(b)$\implies$(a)]: Given $\epsilon>0$, let $S = \ball{\epsilon}{\hat{x}}$. Then since (b) is true, then $\exists N>0$ suc that $\forall n>N$ we have $x_n \in S$, thus we conclude $x_n \in \ball{\epsilon}{\hat{x}}$. 
+	\end{itemize}
+\end{proof}
+
+
+

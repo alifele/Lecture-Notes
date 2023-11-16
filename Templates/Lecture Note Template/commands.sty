@@ -36,7 +36,7 @@
 \usepackage{xspace}
 \usetikzlibrary{fadings}
 \usetikzlibrary{patterns}
-usetikzlibrary{shadows.blur}
+\usetikzlibrary{shadows.blur}
 \usetikzlibrary{shapes}
 
 
@@ -52,14 +52,13 @@ usetikzlibrary{shadows.blur}
 \usepackage{tabularx}
 \usepackage{extarrows}
 \usepackage{afterpage}
-\useoackage{caption}
-\captionsetup{width=0.8\linewidth}
-
+\usepackage{wrapfig}
 
 
 
 
 %% MATH Commands
+\newcommand{\ball}[2]{\mathcal{B}_{#1}(#2)}
 \newcommand{\bicon}{\Leftrightarrow}
 \newcommand{\imply}{\Rightarrow}
 \newcommand{\Arg}[1]{\mathrm{Arg}\left({#1}\right)}
@@ -121,6 +120,9 @@ usetikzlibrary{shadows.blur}
 \end{pmatrix}}
 
 
+
+\renewcommand{\phi}{\varphi}
+
 \DeclareMathOperator{\arccosh}{arccosh}
 \DeclareMathOperator{\arcsinh}{arcsinh}
 \DeclareMathOperator{\arctanh}{arctanh}
@@ -180,25 +182,46 @@ usetikzlibrary{shadows.blur}
   }
 
 
+\definecolor{propColor}{rgb}{0, 0.47, 0.6} % RGB(0, 204, 255) equivalent
 
 
 
 
-\newtcolorbox{Defbox}[2]{breakable,enhanced jigsaw,colback=red!5!, colframe=red!75!black,fonttitle=\bfseries, title=Definition~#1. #2.}
+
+\newtcolorbox{Defbox}[2]{breakable,enhanced jigsaw,colback=red!5!, colframe=red!75!black,fonttitle=\bfseries, title=Definition~#1. #2}
 \newtcolorbox{thmbox}[1]{breakable,enhanced jigsaw,colback=blue!5, colframe=blue!55!black, fonttitle=\bfseries, title=Theorem:\ #1}
 \newtcolorbox{lembox}[1]{breakable,enhanced jigsaw,colback=blue!5, colframe=blue!55!black, fonttitle=\bfseries, title=Lemma: #1}
-\newtcolorbox{corbox}[1]{breakable,enhanced jigsaw,colback=blue!5, colframe=blue!55!black, fonttitle=\bfseries, title=Corollary:\ #1}
-\newtcolorbox{propbox}[1]{breakable,enhanced jigsaw,colback=blue!5, colframe=blue!55!black, fonttitle=\bfseries, title=Proposition:\ #1}
+\newtcolorbox{Corbox}[1]{breakable,enhanced jigsaw,colback=blue!5, colframe=blue!55!black, fonttitle=\bfseries, title=Corollary:\ #1}
+\newtcolorbox{Propbox}[1]{breakable,enhanced jigsaw,colback=blue!5, colframe=propColor, fonttitle=\bfseries, title=Proposition:\ #1}
 \newtcolorbox{Remark}[1]{breakable,enhanced jigsaw,colback=green!5, colframe=green!35!black, fonttitle=\bfseries, title=Remark~#1}
 \newtcolorbox{Example}[2]{breakable,enhanced jigsaw,colback=gray!5, colframe=white!40!black, fonttitle=\bfseries, title=Example~#1. #2}
 
 
 
+\newcounter{PropCounter}[section]
+\newenvironment{propbox}[1][]{
+	\refstepcounter{PropCounter}	%% setting the counter
+	\par\medskip\noindent		%% setting the spacings	
+	\begin{Propbox}{\thesection.\thePropCounter}	%% Creating the tcolorbox
+		\par\medskip				%% Spacing setting 
+	}
+	{\end{Propbox}}
+
+
+\newcounter{CorCounter}[section]
+\newenvironment{corbox}[1][]{
+	\refstepcounter{CorCounter}	%% setting the counter
+	\par\medskip\noindent		%% setting the spacings	
+	\begin{Corbox}{\thesection.\theCorCounter}	%% Creating the tcolorbox
+		\par\medskip				%% Spacing setting 
+	}
+	{\end{Corbox}}
+
 \newcounter{defcounter}[section]
-\newenvironment{defbox}[2][]{
+\newenvironment{defbox}[1][]{
 		\refstepcounter{defcounter}	%% setting the counter
 		\par\medskip\noindent		%% setting the spacings	
-		\begin{Defbox}{\thesection.\thedefcounter}{#2}	%% Creating the tcolorbox
+		\begin{Defbox}{\thesection.\thedefcounter}{#1}	%% Creating the tcolorbox
 		\par\medskip				%% Spacing setting 
 		}
 		{\end{Defbox}}

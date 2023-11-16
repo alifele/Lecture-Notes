@@ -6,8 +6,7 @@ We will devote this section to basic definitions of dynamical systems and the co
 \begin{defbox}[Stable set of an invariant set]
 	Let $S$ be in invariant set of a dynamical system, then it stable set $W^s(S)$, is the set of all states, whose orbits approach $S$ forward in time. In other words
 	\[ W^s(S) = \{ x\in X:\ d(\phi^t x, S) \to 0,\ as\ t\to+\infty \}, \]
-	in which $X$ is the state space, $d:X\times X\to \R$ is a metric function.
-	\label{def:StableUnstableManifold}
+	in which $X$ is the state space, $d:X\times X\to \R$ is a metric function
 \end{defbox}
 
 For instance, consider the following system
@@ -40,29 +39,6 @@ With a similar logic, we can define the \textbf{unstable set $ W^u(S)$} of in in
 \begin{defbox}[\text{Stable, Unstable and Center Subspace}]
 	Consider the dynamical system 
 	\[ \dot{x} = f(x) \approx [\mathcal{D}f](x^*)x, \]
-	in which $x\in X,\ f:X\to X $. Also $[\mathcal{D}f]$ represents Jacobian matrix evaluated at $x^*\in X$ which is an equilibrium point, i.e. $f(x^*)=0$. The eigenspace (and possibly generalized eigenspace) $\vspan{\eigvect{j}{1},\cdots,\eigvect{j}{m}}$ associated with the eigenvalue $\lambda_j$ is
-	\begin{itemize}
-		\item stable subspace, if $\Re{\lambda_j} < 0$,
-		\item unstable subspace, if $\Re{\lambda_j}>0$,
-		\item center subspace, if $\Re{\lambda_j}=0$.
-	\end{itemize}
+	in which $x\in X,\ f:X\to X $. Also $[\mathcal{D}f]$ represents Jacobian matrix
 \end{defbox}
-
-For instance, consider the linear dynamical system 
-\[ \dot{X} = A X, \]
-where $X\in\R^6$, and the matrix $A$ is given as
-\[ A = 
-\begin{pmatrix}
-	\lambda_1 & -\omega_1 & 0 & 0 & 0 & 0 \\
-	\omega_1 & \lambda_1 & 0 & 0 & 0 & 0 \\
-	0 & 0 & -\lambda_2 & 1 & 0 & 0 \\
-	0 & 0 & 0 & -\lambda_3 & 0 & 0 \\
-	0 & 0 & 0 & 0 & 0 & -\omega_2 \\
-	0 & 0 & 0 & 0 & \omega_2 & 0
-\end{pmatrix},
-\]
-where $\lambda_j > 0$ for $j=1,2,3$. Also $\omega_1>0, \omega_2>0$. Then the stable, unstable, and center subspaces associated with the origin will be like the following figure.
-\input{Images/BasicDefs_StableUnstableCenterSubspaces.tex}
-
-
 
