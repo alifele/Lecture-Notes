@@ -5,4 +5,47 @@ In this section I will cover the basics of calculus which I have used throughout
 \subsection{Level Curves}
 Here, I will focus my arguments to 2D scalar function and vector fields, as it is easier to imagine and also plot. However, it can easily been generalized to higher dimensions. 
 
-Let $F: \R^2 \to \R$ be a function. This function is called a scalar function, as it assigns an scalar value to each point in the $\R^2$ plane. 
+Let $F: \R^2 \to \R$ be a function. This function is called a scalar function, as it assigns an scalar value to each point in the $\R^2$ plane. This function can be visualized using it graph which is 
+\[ \text{Graph}(F) = \{ (x,y,z) \in \R^3: z = F(x,y) \}, \]
+which is basically a surface in 3D. Consider the following plots which represent the graph of different scalar function.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=1\linewidth]{Images/ScalarFunctions}
+\end{figure}
+
+As we can see in the figure above, graph of a scalar function is not always very informative, as certain portions of the function might not be visible due to the projection of the 3d plot. Another idea is to use level curves of the function to represent it. Level curves of a scalar function is defined as
+\[ LC_c(F) = \{ (x,y)\in\R^2: F(x,y)=c,\ c\in \R \}. \]
+Or as an alternative definition, a level curve of $F$ is a path $\gamma:\R\to\R^2$ that satisfies
+\[ F(\gamma(t)) = c. \]
+The following figure represents the level curves of the functions represented in the figure above.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=1\linewidth]{Images/ScalarFunctionsLevelCurves.pdf}
+\end{figure}
+
+\newpage
+The time derivative of the function $F\circ\gamma$ is zero. The time derivative of $F\circ\gamma$ is the directional derivative of $F$ in the direction of $\gamma'(t)$ evaluated at $\gamma(t)$. Because
+\[ \frac{d}{dt} F(\gamma(t)) =  \frac{\partial F}{\partial x}\big|_{\gamma(t)} \gamma'_1(t) + \frac{\partial F}{\partial y}\big|_{\gamma(t)} \gamma'_2(t) = \nabla F \big|_{\gamma(t)} \cdot \gamma'(t) = D_{\gamma'(t)} F \big|_{\gamma(t)}.\]
+
+Thus a level curve of $F(x,y)$ passing through $p = (p_1, p_2)\in\R^2$, is a curve $\gamma(t) = (\gamma_1(t),\gamma_2(t))$ that is the solution of the following initial value problem
+\[ F_x (\gamma(t)) \gamma'_1(t) + F_y(\gamma(t)) \gamma'_2(t) =0, \qquad \gamma(0) = p.\]
+Let $x = x(t) = \gamma_1(t)$ and $y = y(t) = \gamma_2(t)$. Then the equation above can be written as
+\[ F_x(x,y) x' + F_y(x,y) y' = 0, \qquad x(0)=p_1,\ y(0)=p_2.\]
+This differential equation determines the level curve corresponding to $F(x,y)=F(p_1,p_2)$. We can write $y$ in terms of $x$ as 
+\[ y = f(x) = (\gamma_2 \circ \gamma_1^{-1}) (x) \]
+Thus the time derivative of $y$ can be written as $y' = \frac{d y}{dx} x'$. Assuming $x' \neq 0$ we can simplify the differential equation above as
+\[ \frac{df}{dx} = \frac{- F_x(x,y)}{F_y(x,y)},\qquad f(p_0) = p_1. \]
+Solving this initial value problem will determine the desired level curve. 
+
+\begin{example}
+	We want to find the level curve of $F(x,y) = x^2 + y^2$ which passes through $(1,1)\in\R^2$. To do this, we need to solve the following initial value problem
+	\[ \frac{dy}{dx} = -\frac{2x}{2y}, \qquad y(1) = 1. \]
+	By the method of separation of variables we will get
+	\[ y^2 + x^2 = 1, \]
+	which is a circle passing through the origin and radius 1. 
+\end{example}
+
+Note that we could do the whole business with following the concept of implicit differentiation (see a Calculus text book like Stewart).
+

@@ -21,6 +21,7 @@
 \usepackage{cancel}
 \numberwithin{equation}{section}
 \numberwithin{figure}{section}
+\usepackage{titlesec}
 
 
 \usepackage[utf8]{inputenc}
@@ -45,6 +46,8 @@
 
 
 
+
+
 \usepackage{physics}
 \usepackage{mathdots}
 \usepackage{yhmath}
@@ -59,6 +62,7 @@
 
 \usepackage[miktex]{gnuplottex}  % Use 'miktex' option if you are using MiKTeX, otherwise remove it
 
+\usepackage{pgfplots}
 
 
 
@@ -127,6 +131,8 @@
 
 \newcommand{\partialDer}[1]{\frac{\partial}{\partial #1}}
 \renewcommand{\phi}{\varphi}
+\renewcommand{\mod}[1]{\ (\operatorname{mod}\, #1)}
+
 
 \DeclareMathOperator{\arccosh}{arccosh}
 \DeclareMathOperator{\arcsinh}{arcsinh}
@@ -187,18 +193,40 @@
   }
 
 
+\definecolor{propColor}{rgb}{0, 0.47, 0.6} % RGB(0, 204, 255) equivalent
+
+\definecolor{mainColor}{RGB}{0, 204, 255}
+\definecolor{darkerShade}{RGB}{0, 163, 204}
+\definecolor{lighterTint}{RGB}{102, 229, 255}
+\definecolor{contrastingDark}{RGB}{0, 102, 153}
+\definecolor{softGray}{RGB}{230, 230, 230}
+\definecolor{vibrantTeal}{RGB}{0, 153, 153}
+\definecolor{deepBlue}{RGB}{0, 51, 102}
+\definecolor{warmOrange}{RGB}{255, 128, 0}
 
 
 
 
-\newtcolorbox{Defbox}[2]{breakable,enhanced jigsaw,colback=red!5!, colframe=red!75!black,fonttitle=\bfseries, title=Definition~#1. #2}
+
+\newtcolorbox{Defbox}[2]{breakable,enhanced jigsaw,colback=yellow!4, colframe=warmOrange,fonttitle=\bfseries, title=Definition~#1. #2}
+
 \newtcolorbox{thmbox}[1]{breakable,enhanced jigsaw,colback=blue!5, colframe=blue!55!black, fonttitle=\bfseries, title=Theorem:\ #1}
 \newtcolorbox{lembox}[1]{breakable,enhanced jigsaw,colback=blue!5, colframe=blue!55!black, fonttitle=\bfseries, title=Lemma: #1}
-\newtcolorbox{Corbox}[1]{breakable,enhanced jigsaw,colback=blue!5, colframe=blue!55!black, fonttitle=\bfseries, title=Corollary:\ #1}
-\newtcolorbox{propbox}[1]{breakable,enhanced jigsaw,colback=blue!5, colframe=blue!55!black, fonttitle=\bfseries, title=Proposition:\ #1}
+\newtcolorbox{Corbox}[1]{breakable,enhanced jigsaw,colback=blue!5, colframe=vibrantTeal, fonttitle=\bfseries, title=Corollary:\ #1}
+\newtcolorbox{Propbox}[1]{breakable,enhanced jigsaw,colback=blue!5, colframe=propColor, fonttitle=\bfseries, title=Proposition:\ #1}
 \newtcolorbox{Remark}[1]{breakable,enhanced jigsaw,colback=green!5, colframe=green!35!black, fonttitle=\bfseries, title=Remark~#1}
-\newtcolorbox{Example}[1]{breakable,enhanced jigsaw,colback=gray!5, colframe=white!40!black, fonttitle=\bfseries, title=Example~#1}
+\newtcolorbox{Example}[1]{breakable,enhanced jigsaw,colback=gray!5, colframe=deepBlue, fonttitle=\bfseries, title=Example~#1}
 
+
+
+\newcounter{PropCounter}[section]
+\newenvironment{propbox}[1][]{
+	\refstepcounter{PropCounter}	%% setting the counter
+	\par\medskip\noindent		%% setting the spacings	
+	\begin{Propbox}{\thesection.\thePropCounter}	%% Creating the tcolorbox
+		\par\medskip				%% Spacing setting 
+	}
+	{\end{Propbox}}
 
 
 \newcounter{CorCounter}[section]

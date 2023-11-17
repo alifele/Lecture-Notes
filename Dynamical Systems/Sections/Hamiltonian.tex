@@ -1,4 +1,6 @@
-\section{Introduction to Hamiltonian Systems}
+\section{Hamiltonian Systems and Lyapunov Function}
+
+\subsection{Hamiltonian Systems}
 
 Assuming extra structures in a vector field leads to systems that are easier to analyze. One of such systems is the Hamiltonian systems. A Hamiltonian system is
 \[ \dot{x} = f(x) \]
@@ -63,3 +65,90 @@ As we can see in the figure above, the equilibria $p^\circ = (0,0)$ is sort of s
 \end{defbox}
 
 Homoclinic orbits are in fact the intersection of stable and unstable manifolds (see \autoref{def:StableUnstableManifold}) of an equilibrium point. 
+
+
+\subsection{Lyapunov Function}
+
+Lyapunov functions can be thought of generalization of Hamiltonian systems. Lyapunov function are tools that enable us to determine the invariant sets of the dynamics as well as the stability of the equilibrium points. The concept behind using Lyapunov functions is that for every scalar function $F:X\to \R$, there is a corresponding natural vector field. This vector field is the gradient of the scalar function. The gradient determines the iso-curves of the scalar function, i.e. the curves on which the value of the scalar function is constant. For a scalar field chosen carefully, these level curves are also closed, thus we will have the notions like the interior of the level curves, etc. These regions (i.e. interior of the level curves) along with the gradient vector field can help in determining the behaviour of a dynamical system.
+
+The argument here focuses on $\R^2$, as it is easier to visualize. However, the general idea can easily be extended to higher dimensions. Let a dynamical system be defined as
+\[ \dot{x} = f(x), \]
+where $x\in\R^2$ and $f:\R^2 \to \R^2$. Also, let $L:\R^2\to\R$ be a scalar function. The gradient of this scalar is a vector field $\nabla L$. If for a region $U \subseteq \R^2$ we have
+\[ \nabla L \big|_{x} \cdot f(x) \leq 0 \quad \forall\ x\in U, \]
+And the compact (closed and bounded) set 
+\[ \overline{R} = \{ x\in\R^2:\ L(x) \leq c,\ c\in\R\} \]
+be contained in $U$, then $\overline{R}$ is a \emph{positively invariant} set. Considering the figure below, this fact can be justified intuitively.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.4\linewidth]{Images/LyapunovFunction.png}
+\end{figure}
+
+Here are some intuitive explanations of this fact
+\begin{itemize}
+	\item $\nabla L \cdot f$ evaluated at point $p\in\R^2$ is in fact the directional derivative of the scalar field at point $p$ along the direction determined by $f$. Thus if $\nabla L \cdot f\leq 0$ in some region, then the value of $L$ along any path whose tangent is determined by $f(x)$ (which is in fact the solution of the ODE) will decrease or remain constant. Thus any such path whose one of its points is in $\overline{R}$ will remain in $\overline{R}$.
+	
+	\item $\nabla L \cdot f$ determines the projection of $f$ on $\nabla L$ at each point $x\in\R^2$. Since $\nabla L \cdot \gamma(t)=0$ for any level curve $\gamma(t)$ for which $L(\gamma(t)) = c$, then $\nabla L \cdot f \leq 0$ means that any path whose tangent is determined by $f(x)$ (i.e. solutions of the ODE) won't leave the region $\overline{R}$.
+	
+	\item We can treat this fact more formally which is easier to follow. Let $x(t)$ be the solution of the ODE provided above, thus $\dot{x}(t) = f(x(t))$. Then by the chain rule we can write
+	\[ \frac{d}{dt} L(x(t)) = \nabla L \big|_{x(t)} \cdot f(x(t)).  \]
+	Then $\nabla L \cdot f \leq 0$ in a region $U$ means that the value of $L(x(t))$ can not increase. Thus if a compact region $\overline{R} = \{ x\in\R^2: L(x)\leq c,\ c\in\R \}$ is contained at $U$, then the solution $x(t)$ can not leave this region since the the value of $L(x(t))$ can not increase for $t\to\R$.
+\end{itemize}
+
+Such a smartly chosen scalar function is called a Lyapunov function. Other than determining positively invariant sets, Lyapunov function can also help to determine the stability of the equilibrium points of the dynamics.
+
+\begin{propbox}
+	Consider the dynamical system described by
+	\[ \dot{x} = f(x), \]
+	where $x\in\R^n$ and $f:\R^n \to \R^n$. Let $L:\R^n\to\R$ be a Lyapunov function such that $\nabla L \cdot f \leq 0$ in a region $U \subseteq \R^n$. Then
+	\begin{itemize}
+		\item If $\overline{R}=\{x\in\R^n:\ L(x)\leq c,\ c\in\R\}$ is compact and $\overline{R}\subseteq U $ then 
+		\begin{center}
+			\boxed{\overline{R} \text{ is positively invariant}} 
+		\end{center}
+		\item If $p^0$ is an equilibrium point, and $L(p^0)$ is an \emph{isolated local minimum} of $L$, then
+		\begin{center}
+			\boxed{p^0 \text{ is Lyapunov stable}.} 
+		\end{center}
+		\item If \textbf{in addition to the condition above}, we have $\nabla F \cdot f < 0$ in $U\backslash\{p^0\}$, then 
+		\begin{center}
+			\boxed{p^0 \text{ is stable}.}
+		\end{center}
+	\end{itemize}
+\end{propbox}
+
+In the following example we explore this useful tool.
+\begin{example}
+	In this example we want to analyze the damped planar pendulum system described by
+	\[ \ddot{\theta} + \delta \dot{\theta} + \sin\theta  = 0,\quad \theta \in \mathbb{S}^1.\]
+	To analyze this system, we first need to write it in the form of a system of ODEs. Let $x_1 = \theta$ and $x_2 = \dot{\theta}$, where $x=(x_1,x_2)\in\mathbb{S}^1\times\R$. Then we can write
+	\begin{align*}
+		\dot{x}_1 &= x_2,\\
+		\dot{x}_2 &= -\delta x_2 - \sin x_1,
+	\end{align*}
+	The equilibria points are 
+	\[ p^0_{[1]} = (0\mod{2\pi},0), \quad p^0_{[2]} = (\pi \mod{2\pi},0). \]
+	Now by the linearization argument we can determine the stability of these equilibria. The Jacobian matrix is
+	\[ [Df] = \matt{0}{1}{-\cos x_1}{-\delta}. \]
+	Evaluating this matrix at the equilibria points we will get
+	\[ [Df](p^0_{[1]}) = \matt{0}{1}{-1}{-\delta}, \quad [Df](p^0_{[2]}) = \matt{0}{1}{1}{-\delta} \]
+	For $p^0_{[1]}$ we have $\Delta>0$ and $\sigma<0$, thus $\lambda^1_1\leq\lambda^1_2<0$ which implies that $p^0_{[1]}$ is stable equilibrium and a hyperbolic sink. However, for $ p^0_{[2]}$ we have $\Delta<0$ and $\sigma<0$ which implies $\lambda^2_1 < 0 < \lambda^2_2$, implying the equilibrium is a hyperbolic saddle.
+	
+	Let $L = \frac{1}{2} x_2^2 - \cos(x_1)$ be a Lyapunov function. Note that this is in fact the Hamiltonian of a simple harmonic oscillator (whose ODE is $\ddot{\theta} + \sin\theta = 0$). This is a Lyapunov function since 
+	\[ \nabla L \cdot f = (\sin(x_1),x_2)\cdot (x_2, -\delta x_2 - \sin(x_1)) = -\delta x_2^2 \leq 0. \]
+	Let $\overline{R}=\{x\in\R^2: L(x)\leq0\}$. The following figure shows the boundary of the set $\overline{R}$. As we can visually see, all of the arrows determined by the vector field $f$ are pointing towards the interior of this region, which is also reflected by $\nabla L \cdot f \leq 0$ inside any open ball containing $\overline{R}$. Thus we can conclude that $\overline{R}$ is \textbf{positively invariant}. 
+	\begin{center}
+		\includegraphics[width=0.5\linewidth]{Images/LyapunovExample.pdf}
+	\end{center}
+	
+	Furthermore, since $p^0_{[1]}$ is an isolated local minimum for $L(x)$ (check $\nabla L \big|_{x=(0,0)} = 0$), thus we can conclude that $p^0_{[1]}$ is Lyapunov stable.
+
+\end{example}
+
+
+
+
+
+
+
+
