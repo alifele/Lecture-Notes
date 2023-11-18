@@ -1,27 +1,99 @@
 \chapter{Hausdorff Topological Spaces}
 
-\section{Basic Notions and Definitions}
-In this section we will cover the basic notions and definitions. Let's start with the definition of an open ball in $\R^k$
+
+
+The following is a section of the great book ``Mathematical Discovery'' by Bruckner.
+\begin{quote}
+	Professional mathematicians must adhere to strict standards in their work. This entails providing precise definitions, even for seemingly familiar concepts. Such precision often requires the use of complex technical tools and methods. A mathematician must possess a clear understanding of fundamental concepts, such as the precise definition of a "curve," the mathematical interpretation of "traversing a curve with the inside to the left," the formal description of the number of "holes" in a pretzel, and the mathematical definition of area.
+	
+	\textbf{	It's important to note that this level of rigor and precision is not typically present when a mathematician initially approaches a problem and begins working on a solution.} In the early stages, ideas tend to be more abstract and intuitive. The refinement and meticulousness become evident only in the final drafts of mathematical work.
+\end{quote}
+
+Thus, we first need to have a discussion that show that the ideas behind the abstractions and generalizations are achievable by careful studying the mathematical objects already around us. This this section focuses to motivate the reader towards the more abstract concepts.
+
+Thus we will discuss that the $\R^n$ along with the Euclidean distance has some special properties (which later will be generalized to the concept of metric spaces), and then we will see that the notion of Euclidean distance give rise to special sets called open ball which will give rise to the notion of open sets. We will study the properties of these open sets and later we will study what if we define the notion of open sets on its own (without any need to any particular metric) which will lead to the notions and ides of topological spaces. 
+
+\section{Motivation}
+Consider the set $\R^k$ which is a $k$ fold Cartesian product of our favorite set $\R$!. We can also extend the notion of Euclidean distance in $\R$ (which was simply $\abs{x-y}$ for $x,y\in\R$) to $\R^k$ as follows
+\[ \abs{x-y} = \sqrt{\sum_{i=1}^{k} (y_i - x_i)^2}, \qquad x=(x_1,\cdots,x_k),\ y=(y_1,\cdots,y_k) \in \R^k. \]
+
+We can easily observe that the Euclidean distance is a function $d:\R^k\times \R^k \to\R$ that satisfies the following properties
+\begin{enumerate}[(i)]
+	\item $\abs{x-y} \geq 0, \quad \abs{x-y}=0 \biImp x=y$,
+	\item $\abs{x-y} = \abs{y-x}$,
+	\item $\abs{x-y} \leq \abs{x-z} + \abs{z-y}$
+\end{enumerate}
+Later, We will study the generalized idea of such functions defined on a set which will give rise to the concept of metric spaces.
+
+Now, we intuitively define the notion of ``open ball'' centered at $x\in\R^k$ with radius $r\in\R$ as follows
+\[ \ball{x}{r} = \{ y\in\R^k:\ \abs{x-y}<r \}. \]
+Then we define a set $A\subseteq\R^k$ to be a open set such that for every element $x\in\A$, we can have an open ball $\ball{x}{r}$ for some $r\in\R$ which is contained in $A$. More formally we can write
+\[ \forall x \in A,\ \exists r>0 \st x\in\ball{x}{r}\subseteq\R^k. \] 
+Since this notion is a very central one (as we will find out later), for $\R^k$, we have the notion of the set of all open sets of $\R^k$, for which we write $\mathcal{T}$.
+ 
+Then we can go a little bit beyond the immediate intuition and define the notion of the set of all neighborhoods of $x$ as
+\[ \mathcal{N}(x) = \{ S\subseteq \R^k:\ \exists u\in\mathcal{T},\ x\in u\subseteq S \} . \]
+It immediately follows from the definition that all open balls containing $x$ (not necessarily containing $x$) are in $\mathcal{N}(x)$, along with other sets which satisfies the required property. We are now in a good shape to study the properties of the open sets $u\in\mathcal{T}$. We claim the followings are some of such properties (which as it will turn out are the central properties in some sense)
+\begin{enumerate}[(i)]
+	\item \[\emptyset,\ \R^k \in \mathcal{T}.\]
+	\item \[\forall \mathcal{G} \subseteq \mathcal{T} \wh \bigcup_{g\in\mathcal{G}}g \in \mathcal{T}.\]
+	\item \[ U_1,\cdots,U_n \in \mathcal{T},\ n\in\N \implies \bigcap_{i=1}^{n}U_i \in \mathcal{T}.\]
+	\item \[ \forall x,y\in\R^k,\ \exists U,V \in \mathcal{T} \st x\in U,\ y\in V,\quad U\cap V = \emptyset. \]
+\end{enumerate}
+
+
+\begin{proof}
+	TO BE ADDED.
+\end{proof}
+
+Since the notion of open sets is closely related with the distance function, thus there is no surprise that it can be used to express the ideas of convergence of a sequence in $\R^k$ (such a fundamental concept in analysis) with the new terminology. For instance, the following two statements are logically equivalent for $x_n\to\hat{x}$
+\begin{enumerate}[(i)]
+	\item $\forall \epsilon>0,\ \exists N>0,\st \forall n>N \wh \abs{x_n-\hat{x}} < \epsilon$.
+	\item $\forall S \in \mathcal{N}(\hat{x}),\ \exists N>0,\st \forall n > N \wh x_n \in S$.
+\end{enumerate}
+\begin{proof}
+	TO BE ADDED.
+\end{proof}
+
+\section{Metric Spaces}
+Although $\R^k$ is a very useful set synthesized in a special way to meet most of our requirements (for instance the completeness arguments in the sense of Cauchy sequence, least upper bound property, and etc.) but not every set we encounter is $\R^k$. We can have sets that are globally very different than the ``\emph{flat}'' $\R^k$, for instance $\mathbb{S}^1$ (unit circle), $\mathbb{S}^1 \times \mathbb{S}^1$ (a tours), etc. One of the main approaches in dealing with such structures is to ``locally'' convert it  (in a useful way) to a collection (or atlas) of subsets of $\R^k$ and then work with the original ``alien'' set in an indirect way by focusing on these local images in $\R^k$. Apart from this approach, it is also useful to generalize the notions of distance in a set, which will enable us working with other classes of abstract structures without relying on $\R^k$, as some of them are way larger than $\R^k$. For instance, consider the set of all bounded function $f:[0,1]\to\R$. This set has a cardinality that is bigger than the cardinality of continuum. Also, might want to work with sets that are discrete in nature, like $\N$ which their cardinality is less than $\R^k$. So relying on $\R^k$ for all purposes is not feasible, thus it might be a good idea to have the notion of distance between elements in set.
+
+\begin{defbox}[Metric Space]
+	A metric space is simply $(X,d)$ in which $X$ is a  set and $d:X\times X \to \R$ is a function called metric that satisfies the following properties
+	
+	\begin{enumerate}[(i)]
+		\item $d(x,y) \geq 0,\quad d(x,y) =0 \biImp x=y$.
+		\item $d(x,y) = d(y,x)$.
+		\item $d(x,y) \leq d(x,z) + d(z,y)$.
+	\end{enumerate}
+	In which $x,y,z\in X$. 
+\end{defbox}
+Now we can easily see that all of the notions like open balls, open sets, and etc. which we defined for $\R^k$ can also be defined for a metric space. We can define different metrics on a particular set based on our demands. In fact there are infinitely many ways to come up with a metric function. \textbf{One of our main tasks in studying metric spaces is to show that there are some properties of a metric space that are independent of a particular defined metric}. As we will see later, this will give rise to more abstract construct called topological spaces. 
 
 \begin{defbox}[Open Ball in $\R^k$]
-	Let $x\in\R^k$. An open ball centered at $x$ with radius $r$ is the set
-	\[ \ball{r}{x} = \{ y\in \R^k: d(y,x)<r \}, \]
-	where $d:\R^k \times \R^k \to \R$ is a metric function.
+	Let $(X,d)$ be a metric space. An open ball centered at $x\in X$ with radius $r$ is the set
+	\[ \ball{r}{x} = \{ y\in X: d(y,x)<r \}, \]
 \end{defbox}
 
-Using the notion of open ball, we can define the notion of open sets in $\R^k$. Note that, we can define open sets in a more abstract way by demanding some axioms to be true (the way that we define open sets in point-set topology). 
 
 \begin{defbox}[Open Set in $\R^k$]
-	Let $U\subseteq \R^k$. $U$ is open if 
-	\[ \forall x\in \R^k,\ \exists \ball{r}{x} \st \ball{r}{x} \subseteq U. \]
+	Let $(X,d)$ be a metric space and let $U\subseteq X$. $U$ is open if 
+	\[ \forall x\in X,\ \exists \ball{r}{x} \st \ball{r}{x} \subseteq U. \]
+	We denote the set of all open sets of $X$ as $\mathcal{T}$.
 \end{defbox}
 
 A very useful intuition about open sets is that we can move around any points of the set (sufficiently small) and still be in the set. In other words, we can perturb the points of an open set (a sufficiently small perturbation) and still remain in the set. 
 
+\begin{defbox}[Neighborhood of $x$]
+	Let $(X,d)$ be a metric space. Then the set of all neighborhoods of $x$ is
+	\[ \mathcal{N}(x) = \{ S \in \mathcal{P}(X):\ \exists U \in \mathcal{T} \st x\in U \subseteq S\}. \]
+	In other words, A neighborhood of $x\in X$, is the collection of all subsets of $X$, such that contains an open set containing $x$.
+\end{defbox}
+
 \begin{remark}
-	An open ball is an open set. This is not tautological statement. The word ``open'' in the notion of open ball, has nothing to do with the word ``open'' in the notion of open set. however, we can show that an open ball is indeed an open set, thus deserves the name ``open''. In more accurate language 
+	An open ball is an open set. This is not a tautological statement. The word ``open'' in the notion of open ball, has nothing to do with the word ``open'' in the notion of open set. however, we can show that an open ball is indeed an open set, thus deserves the name ``open''. In more accurate language 
 	\begin{quote}
-		Let $\hat{x}\in\R^k,\ \hat{r}\in\R,\ U=\ball{\hat{r}}{\hat{x}}$. Then $U$ is an open set.
+		Let $\hat{x}\in X,\ \hat{r}\in\R,\ \text{and define } U=\ball{\hat{r}}{\hat{x}}$. Then $U$ is an open set.
 	\end{quote}
 \end{remark}
 \begin{proof}
@@ -34,16 +106,34 @@ A very useful intuition about open sets is that we can move around any points of
 	Thus we showed that $\mu \in \ball{\epsilon}{x}$ implies $\mu \in \ball{\hat{r}}{\hat{x}}$. Thus we can conclude that $\ball{\epsilon}{x} \subseteq \ball{\hat{r}}{\hat{x}}$, for any choice of $x$. Thus $U$ is an open set. 
 \end{proof}
 
+Following our arguments in the motivation section, we argued that the open sets of $\R^k$ satisfy some properties. If you read the proof closely, we used no facts very special about the Euclidean distance other than the properties described in the definition of a metric space. Thus it is not a surprise if we observe that those properties also hold for a general metric space. 
+
+\begin{propbox}
+	Let $(X,d)$ be a metric space. Then the open sets determined by $d$ satisfy the following properties
+	\begin{enumerate}[(i)]
+		\item $X,\emptyset \in \mathcal{T}$.
+		\item $\mathcal{G}\subseteq \mathcal{T} \implies \bigcup_{g\in\mathcal{G}} g \in \mathcal{T}$.
+		\item $U_1,\hdots,U_n \in \mathcal{T} \implies \bigcap_{i=1}^{n}U_i \in \mathcal{T}$.
+		\item $\forall x,y\in X,\ \exists U,V \in \mathcal{T} \st x\in U,\ y\in\ V,\ U\cap V = \emptyset$.
+	\end{enumerate}
+\end{propbox}
+\begin{proof}
+	TO BE ADDED.
+\end{proof}
+
+
+\subsection{Convergence in Metric Spaces}
+So far, we only hand the notion of sequence in sets like $\R,\Z,\Q$, etc. and we developed the notion of convergence of a sequence by $\epsilon-N$ business. Remember that a sequence is a fundamental concept which enables us to discover the word which could be reached via the infinitely long road of sequences! For a detailed discussion see my opinion piece titled by ``What the Hell is Analysis?''. Now, the beauty of metric spaces is that we can analyze sequences in abstract metric spaces. This is automatically done via the structure of the metric function 
+
+The great thing about metric spaces is that we can now have the notion of sequence and also
+
+\subsection{UNDER CONSTRUCTION}
 \begin{defbox}[The Usual Topology on $\R^k$]
 	The set $\mathcal{T} = \{ U \subseteq \R^k: U \text{ is an open set} \}$, is called the usual ``topology'' on $\R^k$.
 \end{defbox}
 Note that we will cover the notion of topology on a set later, but the purpose of this definition is just to keep in mind that $\mathcal{T}$ is the set of all open sets of $\R^k$. From this notion, here comes the important definition of a neighborhood of a set.
 
-\begin{defbox}[Neighborhood of $x$]
-	Let $x \in \R^k$. Then Neighborhood of $x$ is
-	\[ \mathcal{N}(x) = \{ S \in \mathcal{P}(\R^k):\ \exists U \in \mathcal{T} \st x\in U \subseteq S\}. \]
-	In other words, A neighborhood of $x\in\R^k$, is the collection of all subsets of $\R^k$, such that contains an open set containing $x$.
-\end{defbox}
+
 The way that we define a neighborhood of a point as above, is to emphasis that there is no pressure to restrict the notion of neighborhood to open balls only. In fact, any subset of $\R^k$ containing $x\in\R^k$, that can contains an open set (not necessarily an open ball) who contains $x$ is a neighborhood of point $x$. The following corollary put this broad definition into a good use.
 \begin{corbox}
 	Let $S \in \mathcal{N}(x), x\in\R^k$. Then $\exists \ball{r}{x}$ for some $r>0$, such that $x\in\ball{r}{x}\subseteq S$.
