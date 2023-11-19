@@ -458,6 +458,42 @@ The notion of the base of topology is a very useful and practical tool to analyz
 	Not all families of subsets of a set \( X \) form a base for a topology on \( X \). Under some conditions detailed below, a family of subsets will form a base for a (unique) topology on \( X \), obtained by taking all possible unions of subfamilies. Such families of sets are very frequently used to define topologies. A weaker notion related to bases is that of a \emph{subbase} for a topology. Bases for topologies are also closely related to \emph{neighborhood bases}.
 \end{quote}
 
+There are many ways to interpret the idea of topological bases. Here, we will cover two of them.
+\begin{defbox}
+	Let $(X,\mathcal{T})$ be a topological space. Then $\mathcal{B} \subseteq \mathcal{T}$ is a basis for topology if and only if $\forall U \in \mathcal{T}$ there exists $B \subseteq \mathcal{B}$ such that $\bigcup B = U$. 
+\end{defbox}
+
+The definition above, focuses on an existing topological space with given $\mathcal{T}$. However, we can have a quite opposite point of view, with some flavors of reverse engineering. Consider the following proposition.
+
+\begin{propbox}
+	Let $X$ be a  non-empty set. Take a collection of subsets $\mathcal{B} \subseteq \mathcal{P}(X)$. Try using the sets in $\mathcal{B}$ to define the notion of neighborhood of $x\in X$ as follows
+	\[ \mathcal{N}(x) = \{ S \subseteq x:\ \exists U \in \mathcal{B} \st x \in U \subseteq S \}. \]
+	Then declare a set $G \subseteq X$ to be ``open'' if and only of $G \in \mathcal{N}(x)$ holds for all $x\in G$.
+	
+	The construction above, defines a Hausdorff topological space if $\mathcal{B}$ satisfies the following properties. 
+	\begin{enumerate}[(a)]
+		\item $\bigcap \mathcal{B} = X $ [i.e. every point in $X$ belongs to at least one set $B \in \mathcal{B}$].
+		\item Whenever $B_1, B_2 \in \mathcal{B}$ and $x \in B_1 \cap B_2$, then there exists some $B \in \mathcal{B}$ such that $x \in B \subseteq B_1 \cap B_2$.
+		\item $\forall x,y \in X$ we have $B_1, B_2 \in \mathcal{B}$ such that $x \in B_1$ and $x \in B_2$ while $B_1 \cap B_2 = \emptyset$.
+	\end{enumerate} 
+
+	Such a set $\mathcal{B}$ is called a base for $\mathcal{T}$.
+\end{propbox}
+
+
+\begin{proof}
+	TO BE ADDED.
+\end{proof}
+
+\begin{example}
+	Let $(\R, d)$ be a metric space in which $d$ is the Euclidean metric. This metric induces the notion of open balls in $(\R, d)$. Consider the set
+	\[ \mathcal{B} = \{ \ball{\epsilon}{x}:\ \epsilon, x \in \Q \}. \]
+	There are in fact balls which are centered at rational numbers and has rational radius. We can prove that this set is a basis for $(\R, \mathcal{T})$ in which $\mathcal{T}$ is the usual topology. We can show that via definition of basis (i.e. to show that every $U \in \mathcal{T}$) can be written as a union of subsets of $\mathcal{B}$, or, alternatively, we can show $\mathcal{B}$ is basis via showing that we can construct $\mathcal{T}$ via the construction discussed in the proposition above (which boils down to showing that $\mathcal{B}$ satisfies the required conditions).
+	
+	The basis $\mathcal{B}$ is interesting since it is countable. The topological spaces that admit a countable basis are called \emph{second-countable} spaces.  
+\end{example}
+
+
 \section{UNDER CONSTRUCTION}
 \begin{defbox}[The Usual Topology on $\R^k$]
 	The set $\mathcal{T} = \{ U \subseteq \R^k: U \text{ is an open set} \}$, is called the usual ``topology'' on $\R^k$.
