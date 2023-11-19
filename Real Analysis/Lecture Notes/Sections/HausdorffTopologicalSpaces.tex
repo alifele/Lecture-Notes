@@ -314,8 +314,74 @@ Note that the notion of closed set is \textbf{not} the negation of open sets. Th
 \end{proof}
 
 \begin{defbox}
-	Let $(X,\mathcal{T})$ be a topological space. Then 
+	Let $(X,\mathcal{T})$ be a topological space with $A \subseteq X$. Then the closure of $A$ is defined as
+	\[ \overline{A} = ((A^c)^\circ)^c \]
 \end{defbox}
+
+From the definition, we can conclude the following corollary
+\begin{corbox}
+	Let $(X,\mathcal{T})$ be a topological space with $A,B \subseteq X$. Then we have
+	\[ A \subseteq B \implies \overline{A} \subseteq \overline{B} \]
+\end{corbox}
+\begin{proof}
+	We can prove the statement following some basic set operations
+	\[ A \subseteq B \implies A^c \supseteq B^c \implies (A^c)^\circ \supseteq (B^c)^\circ \implies ((A^c)^\circ)^c \subseteq ((B^c)^\circ)^c. \]
+\end{proof}
+
+There is a very beautiful parallel between the notions of interior of a set and the closure of a set. For instance, the closure of a set, is the smallest closed set containing the original set. The parallel interior points and the closure is very similar to the parallel between infimum (biggest lower bound) and supremum (least upper bound).
+
+\begin{propbox}
+	\begin{enumerate}[(a)]
+		\item $\overline{A}$ is closed and $A \subseteq \overline{A}$
+		\item If $F$ is closed and $A \subseteq F$, then $\overline{A} \subseteq F$.
+		\item $A$ is closed if and only if $A = \overline{A}$.
+	\end{enumerate}
+\end{propbox}
+
+\begin{proof} The proof for each statement is as follows:
+	\begin{enumerate}[(a)]
+		\item From definition, the closure of a set is a compliment of an open set (complement of $(A^c)^\circ$). Thus it is closed by definition. Further more, let $x\in A$. Then $x\notin A^c \implies x\notin (A^c)^\circ$. Thus $x \in ((A^c)^\circ)^c$, hence $A \subseteq \overline{A}$. Also, we can present this proof in a different way as follows
+		\[ (A^c)^\circ \subseteq A^c \implies ((A^c)^\circ)^c \supseteq A. \]
+		\item Since $F$ is closed, then $F^\circ$ is open, and since it is open then $(F^c)^\circ = F^c$. Then we can write
+		\[ A \subseteq F \implies A^c \supseteq F^c \implies (A^c)^\circ \supseteq F^c \implies ((A^c)^\circ)^c \subseteq F. \]
+		\item This also follows immediately from the properties of open sets. For the first part, assume $A$ is closed. Then $A^c$ is open, and is the same as its interior, i.e. $(A^c)^\circ = A^c$. Computing the complements of both sides will result in $((A^c)^\circ)^c = A$, thus $\overline{A} = A$. As for the converse, Assume $A = \overline{A}$. Thus from definition $A = ((A^c)^\circ)^c$. Then $A^c = (A^c)^\circ$. This implies that $A^c$ is open, hence $A$ is closed. 
+	\end{enumerate}
+\end{proof}
+
+\section{Boundary Points}
+\begin{defbox}
+	Let $(X,\mathcal{T})$ be a topological space with $A \subseteq X$. Then $x\in X$ is a \emph{boundary point} of $A$ if 
+	\[ \forall U\in \mathcal{T} \cap \mathcal{N}(x),\ U \cap A \neq \emptyset,\ U \cap A^c \neq \emptyset. \]
+	The set of all boundary points of $A$ is denoted as $\partial A$. 
+\end{defbox}
+
+Few points to easily digest the above definition. First, $U \in \mathcal{T} \cap \mathcal{N}(x)$ in words means $U$ is an open set containing $x$. Also, note that the boundary point of $A$ can be in $A$ or in $A^c$. Also, equivalently, we can express the definition as $x$ is a boundary point of $A$ if $\forall U\in \mathcal{N}(x),\ U \cap A \neq \emptyset,\ U \cap A^c \neq \emptyset$. 
+
+\begin{corbox}
+	Let $(X,\mathcal{T})$ be a topological space with $A \subseteq X$. Then 
+	\[ \partial (A) = \partial (A^c). \]
+\end{corbox}
+\begin{proof}
+	This follows immediately from the definition and the symmetrical appearance of $A$ and $A^c$ in the definition, such that interchanging their position does not matter.
+\end{proof}
+
+\begin{propbox}
+	Let $(X,\mathcal{T})$ be a topological space. Then 
+	\begin{enumerate}[(a)]
+		\item $\partial A = \overline{A} \cap \overline{A^c}$.
+		\item $A$ is closed if and only if $\partial A \subseteq A$; also, $\overline{A} = A \cup \partial A$.
+		\item $A$ is open if and only if $\partial A \subseteq A^c$; also, $A^\circ = A \backslash \partial A$.
+	\end{enumerate}
+\end{propbox}
+
+\begin{proof}
+	TO BE ADDED.
+\end{proof}
+
+
+
+\section{Limit Points and Isolated Points}
+
 
 \section{UNDER CONSTRUCTION}
 \begin{defbox}[The Usual Topology on $\R^k$]
