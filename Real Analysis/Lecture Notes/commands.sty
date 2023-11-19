@@ -182,18 +182,24 @@
   }
 
 
-\definecolor{propColor}{rgb}{0, 0.47, 0.6} % RGB(0, 204, 255) equivalent
+%\definecolor{propColor}{rgb}{0, 0.47, 0.6} % RGB(0, 204, 255) equivalent
+\definecolor{propColor}{HTML}{33658a}
+\definecolor{remarkColor}{HTML}{2f4858}
+\definecolor{corColor}{HTML}{86bbd8}
+\definecolor{defColor}{RGB}{242, 100, 25}
 
 
 
 
 
-\newtcolorbox{Defbox}[2]{breakable,enhanced jigsaw,colback=red!5!, colframe=red!75!black,fonttitle=\bfseries, title=Definition~#1. #2}
+
+
+\newtcolorbox{Defbox}[2]{breakable,enhanced jigsaw,colback=red!5!, colframe=defColor ,fonttitle=\bfseries, title=Definition~#1. #2}
 \newtcolorbox{thmbox}[1]{breakable,enhanced jigsaw,colback=blue!5, colframe=blue!55!black, fonttitle=\bfseries, title=Theorem:\ #1}
-\newtcolorbox{lembox}[1]{breakable,enhanced jigsaw,colback=blue!5, colframe=blue!55!black, fonttitle=\bfseries, title=Lemma: #1}
-\newtcolorbox{Corbox}[1]{breakable,enhanced jigsaw,colback=blue!5, colframe=blue!55!black, fonttitle=\bfseries, title=Corollary:\ #1}
+\newtcolorbox{lembox}[1]{breakable,enhanced jigsaw,colback=blue!5, colframe=corColor!90!black, fonttitle=\bfseries, title=Lemma: #1}
+\newtcolorbox{Corbox}[1]{breakable,enhanced jigsaw,colback=blue!5, colframe=corColor!50!black, fonttitle=\bfseries,  title=Corollary:\ #1}
 \newtcolorbox{Propbox}[1]{breakable,enhanced jigsaw,colback=blue!5, colframe=propColor, fonttitle=\bfseries, title=Proposition:\ #1}
-\newtcolorbox{Remark}[1]{breakable,enhanced jigsaw,colback=green!5, colframe=green!35!black, fonttitle=\bfseries, title=Remark~#1}
+\newtcolorbox{Remark}[1]{breakable,enhanced jigsaw,colback=remarkColor!5, colframe=remarkColor, fonttitle=\bfseries, title=Remark~#1}
 \newtcolorbox{Example}[2]{breakable,enhanced jigsaw,colback=gray!5, colframe=white!40!black, fonttitle=\bfseries, title=Example~#1. #2}
 
 
@@ -203,7 +209,7 @@
 	\refstepcounter{PropCounter}	%% setting the counter
 	\par\medskip\noindent		%% setting the spacings	
 	\begin{Propbox}{\thesection.\thePropCounter}	%% Creating the tcolorbox
-		\par\medskip				%% Spacing setting 
+		\par				%% Spacing setting 
 	}
 	{\end{Propbox}}
 
@@ -213,7 +219,7 @@
 	\refstepcounter{CorCounter}	%% setting the counter
 	\par\medskip\noindent		%% setting the spacings	
 	\begin{Corbox}{\thesection.\theCorCounter}	%% Creating the tcolorbox
-		\par\medskip				%% Spacing setting 
+		\par				%% Spacing setting 
 	}
 	{\end{Corbox}}
 
@@ -222,7 +228,7 @@
 		\refstepcounter{defcounter}	%% setting the counter
 		\par\medskip\noindent		%% setting the spacings	
 		\begin{Defbox}{\thesection.\thedefcounter}{#1}	%% Creating the tcolorbox
-		\par\medskip				%% Spacing setting 
+		\par				%% Spacing setting 
 		}
 		{\end{Defbox}}
 
@@ -231,7 +237,7 @@
 		\refstepcounter{example}	%% setting the counter
 		\par\medskip\noindent		%% setting the spacings	
 		\begin{Example}{\thesection.\theexample}{#2}	%% Creating the tcolorbox
-		\par\medskip				%% Spacing setting 
+		\par				%% Spacing setting 
 		}
 		{\end{Example}}
 		
