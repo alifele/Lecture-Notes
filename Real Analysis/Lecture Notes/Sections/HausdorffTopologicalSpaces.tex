@@ -349,6 +349,7 @@ There is a very beautiful parallel between the notions of interior of a set and 
 \end{proof}
 
 \section{Boundary Points}
+So far, we studied the notion of open sets that had some information about the interior of a set, and also we studied the notion of closed sets that has some information about the complement of a set. The notion of boundary of a set, kind of ties these two concepts to each other. In fact, as we will prove later, the boundary of a set, is the intersection of the closure of a set with the closure of its complement.
 \begin{defbox}
 	Let $(X,\mathcal{T})$ be a topological space with $A \subseteq X$. Then $x\in X$ is a \emph{boundary point} of $A$ if 
 	\[ \forall U\in \mathcal{T} \cap \mathcal{N}(x),\ U \cap A \neq \emptyset,\ U \cap A^c \neq \emptyset. \]
@@ -375,13 +376,87 @@ Few points to easily digest the above definition. First, $U \in \mathcal{T} \cap
 \end{propbox}
 
 \begin{proof}
-	TO BE ADDED.
+	The proof of each section is as follows:
+	\begin{enumerate}[(a)]
+		\item This proof has two sections. First we show that $\partial A \subseteq \overline{A} \cap \overline{A^c}$. We use the proof by contrapositive. Let $x\notin \overline{A} \cap \overline{A^c}$. Thus $x\notin ((A^c)^\circ)^c \cap (A^\circ)^c$. Then by De Morgan's law we have $x \in (A^c)^\circ \cap A^\circ$. This says that $x$ should be in the interior of $A$ or $A^c$, each of which implies that $x \notin \partial A$. That is because
+		\begin{align*}
+			& x \in (A^c)^\circ \implies \exists U \in \mathcal{T}:\ x\in U \subseteq A^c \implies A \notin \partial A\\
+			& x \in A^\circ \implies \exists V \in \mathcal{T}:\ x\in V \subseteq A \implies A \notin \partial A.
+		\end{align*}
+		However for the converse, we show $x \notin \partial A$ leads to $x \notin \overline{A} \cap \overline{A^c}$ (i.e. contrapositive of the actual statement that we need to prove). Let $x \notin \partial A$. Then $\exists U \in \mathcal{N}(x)$ such that $U \cap A = \emptyset$ or $U \cap A^c = \emptyset$, each of which implies $x \notin \overline{A} \cap \overline{A^c}$. Indeed $U \cap A = \emptyset$ implies $x \notin \overline{A}$, thus $x \notin \closure{A} \cap \closure{A^c}$. Similarly $U \cap A^c = \emptyset$ implies $x \notin \closure{A^c}$, thus $x \notin \closure{A} \cap \closure{A^c}$.
+		
+		\item This proof has two sections. THIS PROOF TO BE COMPLETED. 
+		\begin{itemize}
+			\item For the first part, we want to show that $A$ is closed implies $\partial A \subseteq A$. For this purpose we can take very different ways, i.e. to use the the tools already developed (like the one we proved in section (a)), or to use the basic definitions. For instance to assume that we want to use the tool developed in part (a). Let $x \in \partial A$. So, from (a) we can write $x \in \closure{A}  \cap \closure{A^c} \biImp x \in ((A^c)^\circ)^c \cap (A^\circ)^c$. Since $A$ is closed, then $A^c$ is open. This implies that $A^c = (A^c)^\circ$. Thus $x \notin (A^c)^\circ \cup A^\circ \biImp  x \notin A^c \cap A^\circ \biImp x \in A \cap (A^\circ)^c$, thus $x \in A$. This concludes that $x \in A$, hence $\partial A \subseteq A.$
+			
+			However, we can take slightly  different approaches as well. Since $A$ is open, then $A^c$ is closed. To show $\partial A \subseteq A$ we can show by contrapositive i.e. $x\notin A \implies x \notin \partial A$. Since $x\notin A$, then $x \in A^c$, and since $A^c$ is open then $x \in (A^c)^\circ$. This implies $x \notin ((A^c)^\circ)^c$, thus $x \notin \closure{A}$. From (a), again, we can conclude that $x \notin \partial A$.
+		\end{itemize}
+		
+	\end{enumerate}
 \end{proof}
 
 
 
 \section{Limit Points and Isolated Points}
 
+
+\section{Sequential Characterization}
+Naturally, we have the concept of sequences and limits of sequences in metric spaces. On the other hand, we studied that the topological spaces are generalized form of metric spaces. This means that all of topological concepts we covered so far (i.e. open sets, closed sets, interior points, closure, limit points, etc) can be characterized with the notion of a sequence and convergence in metric spaces. This is very important since sequences are some tools that are easier to conceive intuitively. 
+
+The concept of limit point in the topological sense is easier to characterize sequentially, and then characterize other notions using the interplay between the limit point and those concepts. The following proposition reveals a very important characterization.
+
+
+\begin{propbox}
+	In a metric space $(X,d)$ with $A \subseteq X$. the followings are equivalent
+	\begin{enumerate}[(a)]
+		\item $x$ is a limit point of $A$
+		\item There exists a sequence $x_n$ with distinct elements such that $x_n \to x$.
+	\end{enumerate}
+\end{propbox}
+
+We can have a similar approach and characterize the notion of isolated points with the notion of sequences in a metric space. Since the set of isolated points of $A$ is $A \backslash A'$, then we can have the following proposition.
+
+
+\begin{propbox}
+	Let $(X,d)$ be a metric space with $A \subseteq X$. Then $x \in A$ is an isolated point of $A$ is there are no sequence with distinct elements that approach $x$.
+\end{propbox} 
+
+\begin{proof}
+	TO BE ADDED.
+\end{proof}
+
+One of the useful interplay between the notion of limit point and the notion of open sets is the following proposition.
+
+\begin{propbox}
+	Let $(X,\mathcal{T})$ be a topological space. Then
+	\[ G \in \mathcal{T} \Longleftrightarrow G \cap (G^c)' = \emptyset, \]
+	in which $(\cdot)'$ denotes the set of all limit points.
+\end{propbox}
+
+Using this interplay we can have a sequential characterization of the notion of open set.
+
+\begin{propbox}
+	Let $(X,d)$ be a metric space. Then $A \subseteq X$ is open if and only there are no sequences approaching $x$ with distinct elements all of which lies in $A^c$.
+\end{propbox}
+
+As we saw before, the notion of boundary points is very crucial, since the notion of interior points and also closure of a set can be define using that (i.e. $A^\circ = A \backslash \partial A$ and $\closure{A}= A \cup \partial A$). The following proposition makes a connection between the notion of a boundary point in topological space and the notion of sequence and its limit in a metric space.
+
+\begin{propbox}
+	Let $(X,d)$ be a metric space. Then $x \in \partial A$ if and only if there exist two sequence $x_n$ and $y_n$ such that $x_n \to x$ and $y_n \to x$, and $x_n \in A,\ y_n \in A^c$ for all $n$ sufficiently large. 
+\end{propbox}
+
+\begin{proof}
+	Let $x \in \partial A$. Since $(X,d)$ is a topological space, then $\forall \epsilon > 0,\ \exists \ball{\epsilon}{x}$ such that $\ball{\epsilon}{x} \cap A \neq \emptyset$ and $\ball{\epsilon}{x} \cap A^c \neq \emptyset$. We construct the sequences $\seq{x}$ and $\seq{y}$ with the following construction. For a given $n \in \N$, let $\epsilon=1/n$. Then pick $x_n \in \ball{\epsilon}{x} \cap A$ and $y_n \in \ball{\epsilon}{x} \cap A^c$. Due to the construction, we have $x_n\to x$ also $y_n \to x$ with the required property that $x_n \in A$ and $y_n \in A^c$ for all $n \in \N$.
+\end{proof}
+
+
+\subsection{Base of Topology}
+The notion of the base of topology is a very useful and practical tool to analyze relatively complex topological spaces. The following is from the Wikipedia article about the notion  of bases of a topology
+\begin{quote}
+	Bases are ubiquitous throughout topology. The sets in a base for a topology, which are called \emph{basic open sets}, are often easier to describe and use than arbitrary open sets. Many important topological definitions such as \emph{continuity} and \emph{convergence} can be checked using only basic open sets instead of arbitrary open sets. Some topologies have a base of open sets with specific useful properties that may make checking such topological definitions easier.
+	
+	Not all families of subsets of a set \( X \) form a base for a topology on \( X \). Under some conditions detailed below, a family of subsets will form a base for a (unique) topology on \( X \), obtained by taking all possible unions of subfamilies. Such families of sets are very frequently used to define topologies. A weaker notion related to bases is that of a \emph{subbase} for a topology. Bases for topologies are also closely related to \emph{neighborhood bases}.
+\end{quote}
 
 \section{UNDER CONSTRUCTION}
 \begin{defbox}[The Usual Topology on $\R^k$]
