@@ -60,10 +60,10 @@ Also there is another problem. Defining the summation in this way will not exten
 
 Let's define that summation in the following way that is both well defined and also extends the notion of summation of the integers. 
 
-\begin{defbox}[Defining summation for the rational numbers]
+\begin{definition}[Defining summation for the rational numbers]
 	Let $ \frac{a}{b} $ and $ \frac{c}{d} $ be two rational numbers. Then we define the summation for rational numbers as:
 	\[ \frac{a}{b} + \frac{c}{d} = \frac{ad + bc}{bd} \]
-\end{defbox}
+\end{definition}
 
 To show that this definition is we ll defined, Let $ \frac{a}{b},\frac{c}{d},\frac{a'}{b'},\frac{c'}{d'} $ be rational numbers such that $ (a,b) \sim (a',b') $ and $ (c,d) \sim (c', d') $. We need to show that
  \[ \frac{ad+bc}{bd} = \frac{a'd' + b'c'}{b'd'} \]
@@ -82,10 +82,10 @@ This clearly shows that $ (ad+bc, bd) \sim (a'd'+b'c', b'd') $ hence \[\frac{ad+
 
 
 Now we can define the multiplication for the rational numbers.
-\begin{defbox}[Multiplication of the rational numbers]
+\begin{definition}[Multiplication of the rational numbers]
 	Let $ \frac{a}{b} $ and $ \frac{c}{d} $ be rational numbers. Then we define the multiplication for the rational numbers as:
 	\[ \frac{a}{b} \frac{c}{d} = \frac{ac}{bd} \]
-\end{defbox}
+\end{definition}
 
 Similar to the last part, we can show that this definition is well defined. Namely we can show that for rational numbers $ \frac{a}{b},\frac{a'}{b'},\frac{c}{d},\frac{c'}{d'} $ that $ (a,b) \sim (a',b') $ and $ (c,d) \sim (c',d') $, we have $ (ac,bd) \sim (a'c', b'd') $.
 
@@ -104,7 +104,7 @@ we can show that the set $ \{ \frac{n}{1} | n\in \mathbb{Z} \} $ behaves exactly
 \subsection{Orders in $ \mathbb{Q} $}
 We know that the elements of $ \mathbb{Z} $ are ordered (some elements are smaller or larger than the other ones). So the natural question that arise is that will this order be still valid for the points in $ \mathbb{Q} $? To answer this question we need to rigorously define the order relation in $ \mathbb{Z} $.
 
-\begin{defbox}[Definition of Order]
+\begin{definition}[Definition of Order]
 	An order on a set $ S $ is a relation $ < $ satisfying:
 	\begin{itemize}
 		\item Low of trichotomy: $ \forall x,y \in S $, the only one of the following statements are true
@@ -112,14 +112,14 @@ We know that the elements of $ \mathbb{Z} $ are ordered (some elements are small
 		
 		\item Transitivity: For $ x,y,z \in S $, $ x<y $ and $ y<z $ implies $ x<z $.
 	\end{itemize}
-\end{defbox}
+\end{definition}
 
 
 Note that this is a general definition of order on a set and is not restricted to our usual definition of order between real numbers. However, we can define the notion of the "usual" order in $ \mathbb{Z} $ like the following:
 
-\begin{defbox}[Order Relation on $ \mathbb{Z} $]
+\begin{definition}[Order Relation on $ \mathbb{Z} $]
 	The order relation on $ \mathbb{Z} $ denoted with the symbol $ < $ is defined as the following. Let $ a,b \in \mathbb{Z} $. We say $ a<b $ if and only if $ a-b $ a positive integer. The set of positive integers are defined as $ \{ 1,2,3,4,\cdots \} $.
-\end{defbox}
+\end{definition}
 
 \begin{example}{Dictionary Oder on $\mathbb{Z}$}
 	As stated earlier, we can extend the definition of order. A \textbf{dictionary order} on $\mathbb{Z}^2$ is the relation $\lessdot$ such that for $(a_1, a_2), (b_1,b_2) \in \mathbb{Z}^2$ we write $(a_1, a_2) \lessdot (b_1, b_2)$ if and only if  $(a_1 < b_1) $و and if $a_1 = b_1$, then $ a_2 < b_2 $. \\
@@ -129,13 +129,13 @@ Note that this is a general definition of order on a set and is not restricted t
 
 
 
-\begin{defbox}[Positive rational numbers]
+\begin{definition}[Positive rational numbers]
 	We say the rational number $ \frac{a}{b} $ is positive if the integer $ ab $ is positive. 
-\end{defbox}
+\end{definition}
 
-\begin{defbox}[Ordering of rational numbers]
+\begin{definition}[Ordering of rational numbers]
 	We say $ \frac{a}{b} < \frac{c}{d}$ if $ \frac{c}{d} - \frac{a}{b} $ is a positive rational number.
-\end{defbox}
+\end{definition}
 
 Given the ordering property of the rational numbers, we can look at the rational numbers with a new perspective.
 
@@ -143,7 +143,7 @@ Given the ordering property of the rational numbers, we can look at the rational
 \subsection{$ \mathbb{Q} $ Is a Field!}
 Field is one of many algebraic structures (like groups, rings, vector spaces, etc). 
 
-\begin{defbox}[Field]
+\begin{definition}[Field]
 	A field is a set $ F $ along with two operations $ +, \times $ that holds the following properties:
 	\begin{itemize}
 		\item $ (A_1): $ The set $ F $ is closed under $ + $. 
@@ -158,7 +158,7 @@ Field is one of many algebraic structures (like groups, rings, vector spaces, et
 		\item $ (M_5): $ Even element in $ F $ has an multiplicative identity (call it 1).
 		\item $ (D_1): $ The operator $ \times $ distributes over $ + $.
 	\end{itemize}
-\end{defbox}
+\end{definition}
 
 \begin{example}{$ \mathbb{Q} $ is a field}
 	\underline{Question.} Show that the set of rational numbers is a field.  \\
@@ -205,27 +205,27 @@ Note that we require $(a,b)=1$ (i.e. relatively prime) as an extra condition sin
 
 Now that we observed numbers like $\sqrt{x}$ are not rational, then we can say that the set of rational number $\mathbb{Q}$ does not have the \textbf{least upper bound property}.
 
-\begin{defbox}[Least Upper Bound Property]
+\begin{definition}[Least Upper Bound Property]
 	A set $S$ is said to have the least upper bound property every nonempty subset of $S$ that is bounded above (thus has an upper bound), has a least upper bound (i.e. supremum) as well. 
-\end{defbox}
+\end{definition}
 
 It is clear from the definition that the set $\mathbb{Q}$ does not have a least upper bound property since the set  \[A =\{ x \in \mathbb{Q} | x^2 < 2 \} \]has an upper bound (like 2) but does not have a least upper bound. This indicates the wholes present in the set of rational numbers. However, we can extend the idea of rational numbers in a way that contains the set of rational numbers as a subset and also fills in the gaps. We can do that in many ways one of which is the concept of Dedekind cuts. Here is the definition of a Dedekind cut:
 
-\begin{defbox}[Dedekind cut]}\
+\begin{definition}[Dedekind cut]
 	A Dedekind cut $\alpha$ is a \textbf{subset of rational numbers} that has the following properties:
 	\begin{enumerate}
 		\item The set is not trivial (i.e. is not empty and does not contain all of the rationals),
 		\item is closed downwards. In other words $(x \in \alpha \wedge q \in \mathbb{Q}) \wedge q < x \imply q \in \alpha$, and 
 		\item has no largest element. In other words: $\forall x \in \alpha, \exists r \in \alpha \quad s.t. \quad x<r$.
 	\end{enumerate} 
-\end{defbox}
+\end{definition}
 
 The set of real numbers can be defined using the idea of the Dedekind cuts in the following way:
 
-\begin{defbox}[The Set of Real Number]
+\begin{definition}[The Set of Real Number]
 	The set of real numbers denoted by $\mathbb{R}$ is the set of all cuts:
 	\[ \mathbb{R} = \{ \alpha: \alpha \text{ is a cut} \}. \]
-\end{defbox}
+\end{definition}
 
 So when we refer to the real number $\sqrt{2}$, it is a set that:
 \[ \sqrt{2} = \{ q \in \mathbb{Q} : x^2 < 2 \}. \]
@@ -233,13 +233,13 @@ Remember that this set (which is also a cut) itself had not sup in the set of ra
 \[ \sup \{ x \in \mathbb{R} : x^2 < 2 \} = \{ x \in \mathbb{Q} : x^2 < 2 \} \]
 
 We can define the addition and multiplication operations for these sets (cuts) in a proper way that extends the idea of addition and multiplication for rationals (thus integers). Also, we can show that the set of real numbers also posses the order relations ($\alpha < \beta \quad iff \quad \alpha \subset \beta$). So we can show that the set of rational numbers form an \textbf{ordered field}. In fact we can show that the set of rational numbers is the only ordered field with the least upper bound property and for any other ordered field there is a one-to-one correspondence (bijective) between its elements and the set of real numbers. As an instance, we can define the addition and multiplication for the real number as:
-\begin{defbox}[Addition and Multiplication for Real Numbers]
+\begin{definition}[Addition and Multiplication for Real Numbers]
 	Let $\alpha$ and $\beta$ be two Dedekind cuts. Then:
 	\begin{align*}
 		\alpha + \beta &= \{ r+s : r \in \alpha, s \in \beta \}, \\
 		\alpha * \beta &= \{ rs  : r \in \alpha, s \in \beta \}
 	\end{align*}
-\end{defbox} 
+\end{definition} 
 
 One of the important things to check when defining a \textbf{binary operator} on a set ($O: S \rightarrow S$) is to check if the result of the operation still is in the set. So it is a good practice to show that $\alpha + \beta$ and $\alpha * \beta$ are still considered as cuts. 
 

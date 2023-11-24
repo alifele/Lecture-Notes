@@ -58,7 +58,7 @@ Since the notion of open sets is closely related with the distance function, thu
 \section{Metric Spaces}
 Although $\R^k$ is a very useful set synthesized in a special way to meet most of our requirements (for instance the completeness arguments in the sense of Cauchy sequence, least upper bound property, and etc.) but not every set we encounter is $\R^k$. We can have sets that are globally very different than the ``\emph{flat}'' $\R^k$, for instance $\mathbb{S}^1$ (unit circle), $\mathbb{S}^1 \times \mathbb{S}^1$ (a tours), etc. One of the main approaches in dealing with such structures is to ``locally'' convert it  (in a useful way) to a collection (or atlas) of subsets of $\R^k$ and then work with the original ``alien'' set in an indirect way by focusing on these local images in $\R^k$. Apart from this approach, it is also useful to generalize the notions of distance in a set, which will enable us working with other classes of abstract structures without relying on $\R^k$, as some of them are way larger than $\R^k$. For instance, consider the set of all bounded function $f:[0,1]\to\R$. This set has a cardinality that is bigger than the cardinality of continuum. Also, might want to work with sets that are discrete in nature, like $\N$ which their cardinality is less than $\R^k$. So relying on $\R^k$ for all purposes is not feasible, thus it might be a good idea to have the notion of distance between elements in set.
 
-\begin{defbox}[Metric Space]
+\begin{definition}[Metric Space]
 	A metric space is simply $(X,d)$ in which $X$ is a  set and $d:X\times X \to \R$ is a function called metric that satisfies the following properties
 	
 	\begin{enumerate}[(i)]
@@ -67,28 +67,28 @@ Although $\R^k$ is a very useful set synthesized in a special way to meet most o
 		\item $d(x,y) \leq d(x,z) + d(z,y)$.
 	\end{enumerate}
 	In which $x,y,z\in X$. 
-\end{defbox}
+\end{definition}
 Now we can easily see that all of the notions like open balls, open sets, and etc. which we defined for $\R^k$ can also be defined for a metric space. We can define different metrics on a particular set based on our demands. In fact there are infinitely many ways to come up with a metric function. \textbf{One of our main tasks in studying metric spaces is to show that there are some properties of a metric space that are independent of a particular defined metric}. As we will see later, this will give rise to more abstract construct called topological spaces. 
 
-\begin{defbox}[Open Ball in $\R^k$]
+\begin{definition}[Open Ball in $\R^k$]
 	Let $(X,d)$ be a metric space. An open ball centered at $x\in X$ with radius $r$ is the set
 	\[ \ball{r}{x} = \{ y\in X: d(y,x)<r \}, \]
-\end{defbox}
+\end{definition}
 
 
-\begin{defbox}[Open Set in $\R^k$]
+\begin{definition}[Open Set in $\R^k$]
 	Let $(X,d)$ be a metric space and let $U\subseteq X$. $U$ is open if 
 	\[ \forall x\in X,\ \exists \ball{r}{x} \st \ball{r}{x} \subseteq U. \]
 	We denote the set of all open sets of $X$ as $\mathcal{T}$.
-\end{defbox}
+\end{definition}
 
 A very useful intuition about open sets is that we can move around any points of the set (sufficiently small) and still be in the set. In other words, we can perturb the points of an open set (a sufficiently small perturbation) and still remain in the set. 
 
-\begin{defbox}[Neighborhood of $x$]
+\begin{definition}[Neighborhood of $x$]
 	Let $(X,d)$ be a metric space. Then the set of all neighborhoods of $x$ is
 	\[ \mathcal{N}(x) = \{ S \in \mathcal{P}(X):\ \exists U \in \mathcal{T} \st x\in U \subseteq S\}. \]
 	In other words, A neighborhood of $x\in X$, is the collection of all subsets of $X$, such that contains an open set containing $x$.
-\end{defbox}
+\end{definition}
 
 \begin{remark}
 	An open ball is an open set. This is not a tautological statement. The word ``open'' in the notion of open ball, has nothing to do with the word ``open'' in the notion of open set. however, we can show that an open ball is indeed an open set, thus deserves the name ``open''. In more accurate language 
@@ -108,7 +108,7 @@ A very useful intuition about open sets is that we can move around any points of
 
 Following our arguments in the motivation section, we argued that the open sets of $\R^k$ satisfy some properties. If you read the proof closely, we used no facts very special about the Euclidean distance other than the properties described in the definition of a metric space. Thus it is not a surprise if we observe that those properties also hold for a general metric space. 
 
-\begin{propbox}
+\begin{proposition}
 	Let $(X,d)$ be a metric space. Then the open sets determined by $d$ satisfy the following properties
 	\begin{enumerate}[(i)]
 		\item $X,\emptyset \in \mathcal{T}$.
@@ -116,7 +116,7 @@ Following our arguments in the motivation section, we argued that the open sets 
 		\item $U_1,\hdots,U_n \in \mathcal{T} \implies \bigcap_{i=1}^{n}U_i \in \mathcal{T}$.
 		\item $\forall x,y\in X,\ \exists U,V \in \mathcal{T} \st x\in U,\ y\in\ V,\ U\cap V = \emptyset$.
 	\end{enumerate}
-\end{propbox}
+\end{proposition}
 \begin{proof}
 	TO BE ADDED.
 \end{proof}
@@ -127,12 +127,12 @@ So far, we only hand the notion of sequence in sets like $\R,\Z,\Q$, etc. and we
 
 For instance, in finding the solution of a particular ordinary differential equation, we can can come up with an iteration process (which is known as contraction mapping) which acts on the space of function. Then we can prove that the trajectory of points created by repeated application of the map on some initial point, will converge (in the sense that the distance between the output $n$th iteration of the map on the initial point and the point that it converges to is getting closed to zero). This leads to the well-known ``Picard-Lindelöf'' theorem which states that under some conditions, an initial value problem has unique solution.
 
-\begin{defbox}
+\begin{definition}
 	Let $(X,d)$ be a metric space. Then the sequence $\seq{x}$ converges to $\hat{x}\in X$ if
 	\[ \forall \epsilon>0,\ \exists N>0:\ \forall n>N \wh d(x_n,\hat{x})<\epsilon\ (\equiv  x_n \in \ball{\epsilon}{\hat{x}}) \]
 	Or alternatively, using the notion of Neighborhood
 	\[ \forall S \in \mathcal{N}(\hat{x}),\ \exists N>0:\ \forall n>N \wh x_n \in S.  \]
-\end{defbox}
+\end{definition}
 
 We can show that these two definitions are in fact equivalent by following argument
 \begin{proof}
@@ -148,14 +148,14 @@ Another interesting fact to consider about the metric spaces is the interplay be
 
 The following proposition defines the notion of open sets in a metric space (which we originally define by the notion of open balls) using the idea of sequences and their convergence. 
 
-\begin{propbox}
+\begin{proposition}
 	In a metric space $(X,d)$, with subset $A$, the following are equivalent:
 	\begin{enumerate}[(a)]
 		\item $A$ is an open set.
 		\item For every $x\in A$, and every sequence $\seq{x}$ obeying $x_n\to x$, one has $x_n\in A$ for all $n$ sufficiently large. That is 
 		\[ \exists N \in \N:\ \forall n>N,\ x_n \in A. \]
 	\end{enumerate}
-\end{propbox}
+\end{proposition}
 
 
 \begin{proof}
@@ -173,14 +173,14 @@ The following proposition defines the notion of open sets in a metric space (whi
 \section{Hausdorff Topological Spaces}
 Metric spaces are natural extensions to the idea of $R^k$ along with the Euclidean distance function. However, we can go even further, and show that some notions we encountered before are really independent of a particular metric. All such arguments are under the umbrella of topological spaces. 
 
-\begin{defbox}
+\begin{definition}
 	A topological space has two arguments: A set $X$, and a family $\mathcal{T}$ of subsets of $X$ called ``the open sets'', that have the following properties. 
 	\begin{enumerate}[(i)]
 		\item Both $\emptyset$ and $X$ are in $\mathcal{T}$.
 		\item Any union of open sets is open. That is for any subset $\mathcal{G} \subseteq \mathcal{T}$ one has $\bigcap \mathcal{G} \in \mathcal{T}$.
 		\item Any intersection of \textbf{finitely many} open sets is open. That is if $N\in \N$ and $U_1, \cdots, U_n \in \mathcal{T}$, then $U_1 \cap \cdots \cap U_n \in \mathcal{T}$.
 	\end{enumerate}
-\end{defbox}
+\end{definition}
 
 Given the definition above, we can now have the following important remark. 
 
@@ -200,25 +200,25 @@ So from now on, all of our definitions and proofs will be in a topological setti
 	\item Let $X = \{1,2,3\}$ and $\mathcal{T}=\{ \{1,2\}, \{1,3\}, \{1\}, \{1,2,3\},\emptyset \}$. This is an example of non-Hausdorff topology, where there are not enough open sets available to isolate some points of the set via disjoint open sets. For instance, there are not disjoint open sets in $U,V \in \mathcal{T}$ such that $1\in U$ and $2\in V$. The following figure represents the configuration of the open sets.
 	\input{Images/topolExampleOpens.tex}
 \end{itemize}
-\newpage
+
 
 
 
 
 \subsection{Neighborhoods and Interior Points}
-\begin{defbox}
+\begin{definition}
 	Let $(X,\mathcal{T})$ be a topological space. Then for $x\in X$, we write $\mathcal{N}(x)$ to denote the set of all neighborhoods of $x$ defined as 
 	\[ \mathcal{N}(x) = \{ S \subset X:\ \exists u\in\mathcal{T} \st x\in u \subseteq S \}. \]
-\end{defbox}
+\end{definition}
 Every open set containing $x\in X$ belongs to $\mathcal{N}(x)$. Often, some non-open sets do, too.
 
-\begin{lembox}{}
+\begin{lemma}{}
 	Let $(X, \mathcal{T})$ be a topological space. Then the following are equivalent
 	\begin{enumerate}[(a)]
 		\item $A \in \mathcal{T}$.
 		\item $\forall x\in A \wh A \in \mathcal{N}(x)$.
 	\end{enumerate}
-\end{lembox}
+\end{lemma}
 \begin{proof} The proof is as follows: 
 	\begin{itemize}
 		\item $(a) \implies (b)$: Since $A$ is open, then trivially, for $x\in A$ we have $x\in A \subseteq A$. Thus following the definition of $\mathcal{N}(x)$ we conclude that $A \in  \mathcal{N}(x)$.
@@ -230,15 +230,15 @@ Every open set containing $x\in X$ belongs to $\mathcal{N}(x)$. Often, some non-
 
 The beautiful fact about topological spaces is that since they contain the metric spaces as a special case, then it means that we can generalize the ideas of ``interior'', ``boundary'', etc. using purely topological arguments.
 
-\begin{defbox}
+\begin{definition}
 	Let $A$ be any set in a topological space $(X,\mathcal{T})$. The set of interior points of $A$ are defined as
 	\[ A^{\circ} = \{ x\in A:\ \exists U\in \mathcal{T} \st x\in U \subseteq A \}. \]
-\end{defbox}
+\end{definition}
 
-\begin{corbox}
+\begin{corollary}
 	Let $(X,\mathcal{T})$ be a topological space and $A,B \subseteq X$. Then 
 	\[ A \subseteq B \implies A^\circ \subseteq B^\circ. \]
-\end{corbox}
+\end{corollary}
 \begin{proof}
 	This corollary follows immediately from the definition. Let $x\in A^\circ$. Then $\exists U \in \mathcal{T}$ such that $x\in U \subseteq A \subseteq B$. Then $x \in B^\circ$ as well.   
 \end{proof}
@@ -246,14 +246,14 @@ The beautiful fact about topological spaces is that since they contain the metri
 The corollary above, somehow give the intuition, that $A^\circ$ is in some sense, the largest open set contained in $A$.
 
 
-\begin{propbox}
+\begin{proposition}
 	Let $(X,\mathcal{T})$ be a topological space and $A$ any set in $X$. Then 
 	\begin{enumerate}[(a)]
 		\item $A^\circ$ is open, and $A^\circ \subseteq A$.
 		\item If $G$ is open and $G \subseteq A$, then $G \subseteq A^\circ$.
 		\item $A$ is open if and only if $A = A^\circ$.
 	\end{enumerate}
-\end{propbox}
+\end{proposition}
 \begin{proof}
 	The proof for different parts of the proposition are as follows
 	\begin{enumerate}[(a)]
@@ -273,19 +273,19 @@ The corollary above, somehow give the intuition, that $A^\circ$ is in some sense
 \section{Closed sets and Closure}
 The interplay between true and false statements in logic, in which the latter is the negation of the former, leads to concepts like ``De Morgan's'' law. Because of this particular law, we have the dual concept of open sets, which we know as closed sets. There is nothing special about open sets that the notion of closed sets lack. They both are two sides of a single thing. So, we can actually build the whole concepts of topology out of closed sets.
 
-\begin{defbox}
+\begin{definition}
 	Let $(X,\mathcal{T})$ be a topological space. Then $A \subseteq X$ is a closed set if and only if it complement $A^c$ is an open set. 
-\end{defbox}
+\end{definition}
 
 Note that the notion of closed set is \textbf{not} the negation of open sets. Thus we can have sets that are both open and closed, while we can have sets that are neither open not closed. For instance, in every topological space, the sets $\emptyset$ and $X$ are always both open and closed (sometimes called clopen sets).
 
-\begin{lembox}{}
+\begin{lemma}{}
 	Let $(X,\mathcal{T})$ be a topological space with $A \subseteq X$. Then the following two statements are equivalent.
 	\begin{enumerate}[(a)]
 		\item $A$ is closed.
 		\item For every $x \notin A$, $\exists U \in \mathcal{N}(x)$ such that $U \subseteq A^c$.
 	\end{enumerate}
-\end{lembox}
+\end{lemma}
 \begin{proof}
 	The proof will have two sections as follows:
 	\begin{itemize}
@@ -294,13 +294,13 @@ Note that the notion of closed set is \textbf{not} the negation of open sets. Th
 	\end{itemize}
 \end{proof}
 
-\begin{propbox}
+\begin{proposition}
 	Let $(X,\mathcal{T})$ be a topological space. Then 
 	\begin{enumerate}[(a)]
 		\item Any intersection of closed sets is closed.
 		\item Finite union of closed sets is closed.
 	\end{enumerate}
-\end{propbox}
+\end{proposition}
 \begin{proof}
 	The De Morgan's law play a central role in the proof.
 	\begin{enumerate}[(a)]
@@ -313,16 +313,16 @@ Note that the notion of closed set is \textbf{not} the negation of open sets. Th
 	\end{enumerate}
 \end{proof}
 
-\begin{defbox}
+\begin{definition}
 	Let $(X,\mathcal{T})$ be a topological space with $A \subseteq X$. Then the closure of $A$ is defined as
 	\[ \overline{A} = ((A^c)^\circ)^c \]
-\end{defbox}
+\end{definition}
 
 From the definition, we can conclude the following corollary
-\begin{corbox}
+\begin{corollary}
 	Let $(X,\mathcal{T})$ be a topological space with $A,B \subseteq X$. Then we have
 	\[ A \subseteq B \implies \overline{A} \subseteq \overline{B} \]
-\end{corbox}
+\end{corollary}
 \begin{proof}
 	We can prove the statement following some basic set operations
 	\[ A \subseteq B \implies A^c \supseteq B^c \implies (A^c)^\circ \supseteq (B^c)^\circ \implies ((A^c)^\circ)^c \subseteq ((B^c)^\circ)^c. \]
@@ -330,13 +330,13 @@ From the definition, we can conclude the following corollary
 
 There is a very beautiful parallel between the notions of interior of a set and the closure of a set. For instance, the closure of a set, is the smallest closed set containing the original set. The parallel interior points and the closure is very similar to the parallel between infimum (biggest lower bound) and supremum (least upper bound).
 
-\begin{propbox}
+\begin{proposition}
 	\begin{enumerate}[(a)]
 		\item $\overline{A}$ is closed and $A \subseteq \overline{A}$
 		\item If $F$ is closed and $A \subseteq F$, then $\overline{A} \subseteq F$.
 		\item $A$ is closed if and only if $A = \overline{A}$.
 	\end{enumerate}
-\end{propbox}
+\end{proposition}
 
 \begin{proof} The proof for each statement is as follows:
 	\begin{enumerate}[(a)]
@@ -350,30 +350,30 @@ There is a very beautiful parallel between the notions of interior of a set and 
 
 \section{Boundary Points}
 So far, we studied the notion of open sets that had some information about the interior of a set, and also we studied the notion of closed sets that has some information about the complement of a set. The notion of boundary of a set, kind of ties these two concepts to each other. In fact, as we will prove later, the boundary of a set, is the intersection of the closure of a set with the closure of its complement.
-\begin{defbox}
+\begin{definition}
 	Let $(X,\mathcal{T})$ be a topological space with $A \subseteq X$. Then $x\in X$ is a \emph{boundary point} of $A$ if 
 	\[ \forall U\in \mathcal{T} \cap \mathcal{N}(x),\ U \cap A \neq \emptyset,\ U \cap A^c \neq \emptyset. \]
 	The set of all boundary points of $A$ is denoted as $\partial A$. 
-\end{defbox}
+\end{definition}
 
 Few points to easily digest the above definition. First, $U \in \mathcal{T} \cap \mathcal{N}(x)$ in words means $U$ is an open set containing $x$. Also, note that the boundary point of $A$ can be in $A$ or in $A^c$. Also, equivalently, we can express the definition as $x$ is a boundary point of $A$ if $\forall U\in \mathcal{N}(x),\ U \cap A \neq \emptyset,\ U \cap A^c \neq \emptyset$. 
 
-\begin{corbox}
+\begin{corollary}
 	Let $(X,\mathcal{T})$ be a topological space with $A \subseteq X$. Then 
 	\[ \partial (A) = \partial (A^c). \]
-\end{corbox}
+\end{corollary}
 \begin{proof}
 	This follows immediately from the definition and the symmetrical appearance of $A$ and $A^c$ in the definition, such that interchanging their position does not matter.
 \end{proof}
 
-\begin{propbox}
+\begin{proposition}
 	Let $(X,\mathcal{T})$ be a topological space. Then 
 	\begin{enumerate}[(a)]
 		\item $\partial A = \overline{A} \cap \overline{A^c}$.
 		\item $A$ is closed if and only if $\partial A \subseteq A$; also, $\overline{A} = A \cup \partial A$.
 		\item $A$ is open if and only if $\partial A \subseteq A^c$; also, $A^\circ = A \backslash \partial A$.
 	\end{enumerate}
-\end{propbox}
+\end{proposition}
 
 \begin{proof}
 	The proof of each section is as follows:
@@ -398,6 +398,7 @@ Few points to easily digest the above definition. First, $U \in \mathcal{T} \cap
 
 
 \section{Limit Points and Isolated Points}
+The notion of a limit point is very important in a topological space, as it has a very intuitive sequential characterization in a metric space, and has a very interesting connection with other topological notions such as closed and open sets.
 
 
 \section{Sequential Characterization}
@@ -406,20 +407,30 @@ Naturally, we have the concept of sequences and limits of sequences in metric sp
 The concept of limit point in the topological sense is easier to characterize sequentially, and then characterize other notions using the interplay between the limit point and those concepts. The following proposition reveals a very important characterization.
 
 
-\begin{propbox}
+\begin{proposition}
+	\label{sequential}
 	In a metric space $(X,d)$ with $A \subseteq X$. the followings are equivalent
 	\begin{enumerate}[(a)]
 		\item $x$ is a limit point of $A$
 		\item There exists a sequence $x_n$ with distinct elements such that $x_n \to x$.
 	\end{enumerate}
-\end{propbox}
+\end{proposition}
+\begin{proof}
+	This proof will have two parts as follows.
+	\begin{itemize}
+		\item $(a) \implies (b)$. We assume that $x$ is a limit point of $A$ and we need to come up with a smartly designed sequence with distinct elements, all of which lies in $A$ such that $x_n \to x$. Since $x \in  A'$, then $\forall \mathbb{B}(x;r)$ for $r\in \R$ we have $\mathbb{B}(x;r) \cap A \neq \emptyset$. Let $r_1 = 1$. Choose $x_1 \in  \mathbb{B}(x;r_1) \cap A$. Let $r_2 = d(x_1,x)/2$ and choose $x_2 \in \mathbb{B}(x;r_2) \cap A$. Similarly, let $r_3 = d(x_2,x)/2$ and choose $x_3 \in \mathbb{B}(x;r_3) \cap A$, and we continue the construction. Then, due to the construction, all of the elements of $\seq{x}$ has distinct elements. Also since $d(x_n,x)\leq 2^{-n}$, then $x_n \to x$. This complete the proof.
+		
+		\item $(b) \implies (a)$. We assume that there is a sequence $\seq{x}$ with distinct elements in $A$ that approaches $x$. Let $S \in \mathcal{N}(x)$. The from definition there is a ball $\mathbb{B}[x;r)$ for some $r\in \R$ such that $\mathbb{B}[x;r) \subseteq S$. On the other hand, from the definition of convergence we know $\exists N>0$ such that $\forall n>N$ we have $x_n \in \mathbb{B}[x;r)$. Since $x_n$ has all distinct elements, then $\mathbb{B}[x;r)$ still contains $x_n$ excluding at most one element. Hence $S\backslash\{x\} \cap A \neq \emptyset$. Since $S$ was chosen arbitrary, then this is true for all $S \in \mathcal{N}(x)$. This completes the proof.
+	\end{itemize} 
+	
+\end{proof}
 
 We can have a similar approach and characterize the notion of isolated points with the notion of sequences in a metric space. Since the set of isolated points of $A$ is $A \backslash A'$, then we can have the following proposition.
 
 
-\begin{propbox}
+\begin{proposition}
 	Let $(X,d)$ be a metric space with $A \subseteq X$. Then $x \in A$ is an isolated point of $A$ is there are no sequence with distinct elements that approach $x$.
-\end{propbox} 
+\end{proposition} 
 
 \begin{proof}
 	TO BE ADDED.
@@ -427,23 +438,23 @@ We can have a similar approach and characterize the notion of isolated points wi
 
 One of the useful interplay between the notion of limit point and the notion of open sets is the following proposition.
 
-\begin{propbox}
+\begin{proposition}
 	Let $(X,\mathcal{T})$ be a topological space. Then
 	\[ G \in \mathcal{T} \Longleftrightarrow G \cap (G^c)' = \emptyset, \]
 	in which $(\cdot)'$ denotes the set of all limit points.
-\end{propbox}
+\end{proposition}
 
 Using this interplay we can have a sequential characterization of the notion of open set.
 
-\begin{propbox}
+\begin{proposition}[Sequential characterization of open sets]
 	Let $(X,d)$ be a metric space. Then $A \subseteq X$ is open if and only there are no sequences approaching $x$ with distinct elements all of which lies in $A^c$.
-\end{propbox}
+\end{proposition}
 
 As we saw before, the notion of boundary points is very crucial, since the notion of interior points and also closure of a set can be define using that (i.e. $A^\circ = A \backslash \partial A$ and $\closure{A}= A \cup \partial A$). The following proposition makes a connection between the notion of a boundary point in topological space and the notion of sequence and its limit in a metric space.
 
-\begin{propbox}
+\begin{proposition}
 	Let $(X,d)$ be a metric space. Then $x \in \partial A$ if and only if there exist two sequence $x_n$ and $y_n$ such that $x_n \to x$ and $y_n \to x$, and $x_n \in A,\ y_n \in A^c$ for all $n$ sufficiently large. 
-\end{propbox}
+\end{proposition}
 
 \begin{proof}
 	Let $x \in \partial A$. Since $(X,d)$ is a topological space, then $\forall \epsilon > 0,\ \exists \ball{\epsilon}{x}$ such that $\ball{\epsilon}{x} \cap A \neq \emptyset$ and $\ball{\epsilon}{x} \cap A^c \neq \emptyset$. We construct the sequences $\seq{x}$ and $\seq{y}$ with the following construction. For a given $n \in \N$, let $\epsilon=1/n$. Then pick $x_n \in \ball{\epsilon}{x} \cap A$ and $y_n \in \ball{\epsilon}{x} \cap A^c$. Due to the construction, we have $x_n\to x$ also $y_n \to x$ with the required property that $x_n \in A$ and $y_n \in A^c$ for all $n \in \N$.
@@ -459,13 +470,13 @@ The notion of the base of topology is a very useful and practical tool to analyz
 \end{quote}
 
 There are many ways to interpret the idea of topological bases. Here, we will cover two of them.
-\begin{defbox}
+\begin{definition}
 	Let $(X,\mathcal{T})$ be a topological space. Then $\mathcal{B} \subseteq \mathcal{T}$ is a basis for topology if and only if $\forall U \in \mathcal{T}$ there exists $B \subseteq \mathcal{B}$ such that $\bigcup B = U$. 
-\end{defbox}
+\end{definition}
 
 The definition above, focuses on an existing topological space with given $\mathcal{T}$. However, we can have a quite opposite point of view, with some flavors of reverse engineering. Consider the following proposition.
 
-\begin{propbox}
+\begin{proposition}
 	Let $X$ be a  non-empty set. Take a collection of subsets $\mathcal{B} \subseteq \mathcal{P}(X)$. Try using the sets in $\mathcal{B}$ to define the notion of neighborhood of $x\in X$ as follows
 	\[ \mathcal{N}(x) = \{ S \subseteq x:\ \exists U \in \mathcal{B} \st x \in U \subseteq S \}. \]
 	Then declare a set $G \subseteq X$ to be ``open'' if and only of $G \in \mathcal{N}(x)$ holds for all $x\in G$.
@@ -478,7 +489,7 @@ The definition above, focuses on an existing topological space with given $\math
 	\end{enumerate} 
 
 	Such a set $\mathcal{B}$ is called a base for $\mathcal{T}$.
-\end{propbox}
+\end{proposition}
 
 
 \begin{proof}
@@ -494,29 +505,59 @@ The definition above, focuses on an existing topological space with given $\math
 \end{example}
 
 
+\subsection{Summary}
+Here in this section we are going to summarize all of the properties of topological spaces.
+
+\begin{summary}[Open sets and the interior points]
+	Let $(X,\mathcal{T})$ be a topological spaces. Then $A \in \mathcal{T}$ is called an open set and has the following properties
+	\begin{itemize}
+		\item $A$ is open if and only if $A = A^\circ$.
+		\item $A$ is open if and only if $\forall x \in A \wh A \in \mathcal{N}(x)$.
+		\item $A$ is open if and only if $A \cap (A^c)' = \emptyset$.
+		\item $A^\circ = A \backslash \partial A$
+	\end{itemize}
+\end{summary}
+
+\begin{summary}[Closed sets and the closure]
+	Let $(X,\mathcal{T})$ be a topological space. Then
+	\begin{itemize}
+		\item $F$ is closed if and only if $F^c$ is open.
+		\item $F$ is closed if and only if $F = \closure{F}$.
+		\item $F$ is closed if and only if $F' \subseteq F$.
+		\item $\closure{F} = F \cup \partial F$. 
+	\end{itemize}
+\end{summary}
+
+\begin{summary}[Subset preserving operations!]
+	Let $(X,\mathcal{T})$ be a topological space, and $A,B \subseteq X$. If $A \subseteq B$, then 
+	\begin{itemize}
+		\item $A^\circ \subseteq B^\circ$.
+		\item $\closure{A} \subseteq \closure{B}$.
+		\item $A' \subseteq B'$.
+	\end{itemize}
+\end{summary}
+
 \section{UNDER CONSTRUCTION}
-\begin{defbox}[The Usual Topology on $\R^k$]
+\begin{definition}[The Usual Topology on $\R^k$]
 	The set $\mathcal{T} = \{ U \subseteq \R^k: U \text{ is an open set} \}$, is called the usual ``topology'' on $\R^k$.
-\end{defbox}
+\end{definition}
 Note that we will cover the notion of topology on a set later, but the purpose of this definition is just to keep in mind that $\mathcal{T}$ is the set of all open sets of $\R^k$. From this notion, here comes the important definition of a neighborhood of a set.
 
 
 The way that we define a neighborhood of a point as above, is to emphasis that there is no pressure to restrict the notion of neighborhood to open balls only. In fact, any subset of $\R^k$ containing $x\in\R^k$, that can contains an open set (not necessarily an open ball) who contains $x$ is a neighborhood of point $x$. The following corollary put this broad definition into a good use.
-\begin{corbox}
+\begin{corollary}
 	Let $S \in \mathcal{N}(x), x\in\R^k$. Then $\exists \ball{r}{x}$ for some $r>0$, such that $x\in\ball{r}{x}\subseteq S$.
-\end{corbox}
+\end{corollary}
 Based on this corollary that follows immediately from the definition of neighborhood, we can conclude that whenever we are given with $S\in\mathcal{N}(x)$ for $x\in\R^k$, then we can always find an open ball centered at $x$ with sufficiently small radius. 
 
 Using all of these notions and definitions, we can now generalize the idea of convergence of a sequence
-\begin{propbox}
+\begin{proposition}
 	Converges $x_n \to \hat{x}$ in $\R^k$ can be expressed equivalently as 
 	\begin{enumerate}[(a)]
 		\item $\forall \epsilon>0,\ \exists N>0\ :\ \forall n>N,\ x_n \in \ball{\epsilon}{\hat{x}}. \quad or \quad \forall \ball{\epsilon}{\hat{x}},\ \exists N>0\ :\ \forall n>N, x_n \in \ball{\epsilon}{\hat{x}}. $
 		\item $\forall S \in \mathcal{N}(\hat{x}),\ \exists N>0\ :\ \forall n>N,\ x_n \in S.$
 	\end{enumerate}
-\end{propbox}
-
-
+\end{proposition}
 
 
 

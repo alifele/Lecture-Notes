@@ -155,13 +155,139 @@
 
 
 
+
+
+
+
+
+\definecolor{HighDark}{HTML}{003652}
+\definecolor{MedDark}{HTML}{3E80B6}
+\definecolor{LowDark}{HTML}{00798C}
+\definecolor{HighLight}{HTML}{EDAE49}
+\definecolor{LowLight}{HTML}{D1495B}
+
+
+
+
+
+%%%----------------------------------------------------------------------------------
+%							# Chapther, Section, Subsections #
+%%%----------------------------------------------------------------------------------
+
+\usepackage[
+explicit, % Specify section names explicitly in \titleformat with #1
+newparttoc, % Required for writing the part toc entry number in a standard way (overriding default LaTeX behavior) so the titletoc package can style it
+]{titlesec} % Required for modifying sections
+
+%
+
+
+
+\newcommand{\thechapterimage}{}
+\newcommand{\chapterimage}[1]{\renewcommand{\thechapterimage}{#1}}
+
+% Command to store the current whitespace above the chapter title box for all future chapters, can be changed at any time in the document
+\newcommand{\thechapterspaceabove}{}
+\newcommand{\chapterspaceabove}[1]{\renewcommand{\thechapterspaceabove}{#1}}
+
+% Command to store the current whitespace below the chapter title box for all future chapters, can be changed at any time in the document
+\newcommand{\thechapterspacebelow}{}
+\newcommand{\chapterspacebelow}[1]{\renewcommand{\thechapterspacebelow}{#1}}
+
+
+
+\chapterimage{Images/math4LargeEdited.jpg} % Chapter heading image
+\chapterspaceabove{6.10cm} % Whitespace from the top of the page to the chapter title on chapter pages
+\chapterspacebelow{6.25cm}
+
+
+
+
+\newcommand{\outputchaptertitle}[2]{
+	\begin{tikzpicture}[remember picture,overlay]
+		% If a chapter image has been specified
+		\expandafter\ifstrequal\expandafter{\thechapterimage}{}{}{
+			% Output the chapter image
+			\node[
+			anchor=north west, % Anchor point on the image
+			inner sep=0pt, % Inner padding
+			] at (current page.north west) {\includegraphics[angle=-90,width=\paperwidth]{\thechapterimage}};
+		}
+		% Box with the chapter title
+		\draw[anchor=west] (current page.north west) node [
+		anchor=north west, % Anchor point of the chapter box
+		xshift=\Gm@lmargin, % Horizontal distance from the left side of the page
+		yshift=-\thechapterspaceabove, % Vertical distance from the top of the page
+		line width=3pt, % Border line thickness
+		rounded corners=10pt, % Rounded corners amount
+		draw=HighLight!80!black, % Border line color
+		fill=LowDark!10, % Box background color
+		fill opacity=0.7, % Background transparency
+		text opacity=1, % Text transparency
+		inner ysep=12.5pt, % Inner vertical padding
+		inner xsep=20pt, % Inner horizontal padding
+		align=flush left, % Text alignment inside box
+		text width=1.2\linewidth, % Box width (wider than page to go off the right side)
+		font=\huge\sffamily\bfseries, % Font styling for chapter title
+		] {\color{LowDark!90!black}\parbox{0.85\linewidth}{\strut\raggedright\expandafter\ifstrequal\expandafter{#1}{}{}{#1. }#2\vspace{-3pt}}}; % Chapter title in a fixed width box for wrapping
+	\end{tikzpicture}
+}
+
+% Numbered chapters
+\titleformat
+{\chapter} % Section type being modified
+[block] % Shape type, can be: hang, block, display, runin, leftmargin, rightmargin, drop, wrap, frame
+{\outputchaptertitle{\thechapter}{#1}} % Format of the whole section
+{} % Format of the section label
+{0cm} % Space between the title and label
+{} % Code before the label
+[] % Code after the label
+
+
+\titlespacing*{\chapter}{0pt}{0pt}{\thechapterspacebelow} % Spacing around section titles, the order is: left, before and after
+
+
+\titleformat
+{\section} % Section type being modified
+[block] % Shape type, can be: hang, block, display, runin, leftmargin, rightmargin, drop, wrap, frame
+{\bfseries\sffamily\Large} % Format of the whole section
+{\llap{\textcolor{orange}{\thesection}\hspace{1em}}\textcolor{HighDark!80!black}{#1}} % Format of the section label
+{0cm} % Space between the title and label
+{} % Code before the label
+[] % Code after the label
+
+
+\titleformat
+{\subsection} % Section type being modified
+[block] % Shape type, can be: hang, block, display, runin, leftmargin, rightmargin, drop, wrap, frame
+{\bfseries\sffamily\large} % Format of the whole section
+{\llap{\textcolor{orange}{\thesubsection}\hspace{1em}}\textcolor{HighDark!80!black}{#1}} % Format of the section label
+{0cm} % Space between the title and label
+{} % Code before the label
+[] % Code after the label
+
+
+\titleformat
+{\subsubsection} % Section type being modified
+[block] % Shape type, can be: hang, block, display, runin, leftmargin, rightmargin, drop, wrap, frame
+{\bfseries\sffamily} % Format of the whole section
+{\llap{{\thesubsubsection}\hspace{1em}}#1} % Format of the section label
+{0cm} % Space between the title and label
+{} % Code before the label
+[] % Code after the label
+
+
+
+
+%%%----------------------------------------------------------------------------------
+%									# Environemnts #
+%%%----------------------------------------------------------------------------------
+
+
+
 %% Environments
 \newtheorem{prop}{Proposition}
 \newtheorem{thm}{Theorem}[section]
-
-
-
-
 
 
 \newcommand{\heading}[1]{
@@ -193,86 +319,184 @@
 
 
 
-
-
-\newtcolorbox{Defbox}[2]{breakable,enhanced jigsaw,colback=red!5!, colframe=defColor ,fonttitle=\bfseries, title=Definition~#1. #2}
-\newtcolorbox{thmbox}[1]{breakable,enhanced jigsaw,colback=blue!5, colframe=blue!55!black, fonttitle=\bfseries, title=Theorem:\ #1}
-\newtcolorbox{lembox}[1]{breakable,enhanced jigsaw,colback=blue!5, colframe=corColor!90!black, fonttitle=\bfseries, title=Lemma: #1}
-\newtcolorbox{Corbox}[1]{breakable,enhanced jigsaw,colback=blue!5, colframe=corColor!50!black, fonttitle=\bfseries,  title=Corollary:\ #1}
-\newtcolorbox{Propbox}[1]{breakable,enhanced jigsaw,colback=blue!5, colframe=propColor, fonttitle=\bfseries, title=Proposition:\ #1}
-\newtcolorbox{Remark}[1]{breakable,enhanced jigsaw,colback=remarkColor!5, colframe=remarkColor, fonttitle=\bfseries, title=Remark~#1}
-\newtcolorbox{Example}[2]{breakable,enhanced jigsaw,colback=gray!5, colframe=white!40!black, fonttitle=\bfseries, title=Example~#1. #2}
-
-
-
-\newcounter{PropCounter}[section]
-\newenvironment{propbox}[1][]{
-	\refstepcounter{PropCounter}	%% setting the counter
-	\par\medskip\noindent		%% setting the spacings	
-	\begin{Propbox}{\thesection.\thePropCounter}	%% Creating the tcolorbox
-		\par				%% Spacing setting 
-	}
-	{\end{Propbox}}
-
-
-\newcounter{CorCounter}[section]
-\newenvironment{corbox}[1][]{
-	\refstepcounter{CorCounter}	%% setting the counter
-	\par\medskip\noindent		%% setting the spacings	
-	\begin{Corbox}{\thesection.\theCorCounter}	%% Creating the tcolorbox
-		\par				%% Spacing setting 
-	}
-	{\end{Corbox}}
-
-\newcounter{defcounter}[section]
-\newenvironment{defbox}[1][]{
-		\refstepcounter{defcounter}	%% setting the counter
-		\par\medskip\noindent		%% setting the spacings	
-		\begin{Defbox}{\thesection.\thedefcounter}{#1}	%% Creating the tcolorbox
-		\par				%% Spacing setting 
-		}
-		{\end{Defbox}}
-
-\newcounter{example}[section]
-\newenvironment{example}[2][]{
-		\refstepcounter{example}	%% setting the counter
-		\par\medskip\noindent		%% setting the spacings	
-		\begin{Example}{\thesection.\theexample}{#2}	%% Creating the tcolorbox
-		\par				%% Spacing setting 
-		}
-		{\end{Example}}
-		
-\newcounter{remark}[section]
-%\stepcounter{remark}
-\newenvironment{remark}[1][]{
-	\refstepcounter{remark}	%% setting the counter
-	\par\medskip\noindent		%% setting the spacings	
-	\begin{Remark}{\thesection.\theremark}	%% Creating the tcolorbox
-	%\par\medskip				%% Spacing setting 
-	}
-	{\end{Remark}}
-	
-\newenvironment{ans}{
-	\vspace{5pt}
-	\hrule
-	\par\medskip\noindent
-	\emph{Answer. }
-	\par\medskip
-	}
-	{\medskip}
-	
-\newcounter{question}[section]	
-\newenvironment{question}{
-	\refstepcounter{question}
-	\par\medskip\noindent
-	\textbf{Question~\thequestion.}
-	%\par\medskip
-}
-{\medskip}
+%% Style for the boxed theorem like structures
+\newtheoremstyle{blacknumbox} % Theorem style name
+{4pt} % Space above
+{6pt} % Space below
+{\normalfont} % Body font
+{} % Indent amount
+{} % Theorem head font
+{} % Punctuation after theorem head
+{0.25em} % Space after theorem head
+{\small\sffamily\bfseries\thmname{#1}~\thmnumber{#2} % Theorem text (e.g. Theorem 2.1)
+	\thmnote{\sffamily\bfseries---~#3.\hspace{0.25em}}} % Optional theorem note
 	
 	
+%% Style for the unboxed theorem like structures --> Example
+\newtheoremstyle{blacknumNOTboxExample} % Theorem style name
+{6pt} % Space above
+{6pt} % Space below
+{\normalfont} % Body font
+{} % Indent amount
+{} % Theorem head font
+{} % Punctuation after theorem head
+{0.25em} % Space after theorem head
+{\small\sffamily\bfseries{\raisebox{1.25pt}{\tiny\ensuremath{\blacksquare}}}~\thmname{#1}~\thmnumber{#2} % Theorem text (e.g. Theorem 2.1)
+	\thmnote{\the\thm@notefont\sffamily\bfseries---~#3.\hspace{0.25em}}} % Optional theorem note
 	
 	
+%% Style for the unboxed theorem like structures --> remark - problem - solution
+\newtheoremstyle{blacknumNOTbox} % Theorem style name
+{6pt} % Space above
+{6pt} % Space below
+{\normalfont} % Body font
+{} % Indent amount
+{} % Theorem head font
+{} % Punctuation after theorem head
+{0.25em} % Space after theorem head
+{\small\sffamily\bfseries~\thmname{#1}~\thmnumber{#2} % Theorem text (e.g. Theorem 2.1)
+	\thmnote{\the\thm@notefont\sffamily\bfseries---~#3.\hspace{0.25em}}} % Optional theorem note
 	
+
+
+\theoremstyle{blacknumbox}	
+\newtheorem{definitionT}{Definition}[chapter]
+\newtheorem{theoremT}{Theorem}[chapter]
+\newtheorem{propositionT}{Proposition}[chapter]
+\newtheorem{corollaryT}{Corollary}[chapter]
+\newtheorem{lemmaT}{Lemma}[chapter]
+\newtheorem{summaryT}{Summary}[chapter]
+
+
+\theoremstyle{blacknumNOTboxExample}
+\newtheorem{exampleT}{Example}[chapter]
+\newtheorem*{remark}{Remark}
+
+
+\theoremstyle{blacknumNOTbox}
+\newtheorem{problem}{Problem}[chapter]
+\newtheorem*{solution}{Solution}
+
+
+
+
+%%% Boxed ones: Definition - Theorem - Proposition - Corollary - Lemma - Summary
+%%% Unboxed ones: Remark - Example - Problem - Solution
+
+
+%%% Colors for Boxes
+%% Definition - Summary: HighLight
+%% Theorem: LowLight
+%% Proposition: MedDark
+%% Lemma - Corollary: HighDark
+
+\usepackage{mdframed}
+
+
+%% Definition box
+\newmdenv[
+skipabove=7pt, % Whitespace above box
+skipbelow=7pt, % Whitespace below box
+rightline=false, % Right line visible
+leftline=true, % Left line visible
+topline=false, % Top line visible
+bottomline=false, % Bottom line visible
+backgroundcolor=HighLight!10, % BackgroundColor
+linecolor=HighLight, % Border color
+linewidth=4pt, % Border width
+innerleftmargin=5pt, % Inside left margin width
+innerrightmargin=5pt, % Inside right margin width
+innertopmargin=0pt, % Inside top margin height
+innerbottommargin=5pt, % Inside bottom margin height
+leftmargin=0cm, % Outside left margin width
+rightmargin=0cm % Outside right margin width
+]{defBox}
+
+
+%% Summary box
+\newmdenv[
+skipabove=7pt, % Whitespace above box
+skipbelow=7pt, % Whitespace below box
+rightline=true, % Right line visible
+leftline=true, % Left line visible
+topline=false, % Top line visible
+bottomline=false, % Bottom line visible
+backgroundcolor=HighLight!5, % BackgroundColor
+linecolor=LowLight, % Border color
+linewidth=4pt, % Border width
+innerleftmargin=5pt, % Inside left margin width
+innerrightmargin=5pt, % Inside right margin width
+innertopmargin=0pt, % Inside top margin height
+innerbottommargin=5pt, % Inside bottom margin height
+leftmargin=0cm, % Outside left margin width
+rightmargin=0cm % Outside right margin width
+]{summaryBox}
+
+%% Theorem box
+\newmdenv[
+skipabove=7pt, % Whitespace above box
+skipbelow=7pt, % Whitespace below box
+rightline=false, % Right line visible
+leftline=true, % Left line visible
+topline=false, % Top line visible
+bottomline=false, % Bottom line visible
+backgroundcolor=LowLight!10, % BackgroundColor
+linecolor=LowLight, % Border color
+linewidth=4pt, % Border width
+innerleftmargin=5pt, % Inside left margin width
+innerrightmargin=5pt, % Inside right margin width
+innertopmargin=0pt, % Inside top margin height
+innerbottommargin=5pt, % Inside bottom margin height
+leftmargin=0cm, % Outside left margin width
+rightmargin=0cm % Outside right margin width
+]{theoremBox}
+
+%% Proposition box
+\newmdenv[
+skipabove=7pt, % Whitespace above box
+skipbelow=7pt, % Whitespace below box
+rightline=false, % Right line visible
+leftline=true, % Left line visible
+topline=false, % Top line visible
+bottomline=false, % Bottom line visible
+backgroundcolor=MedDark!10, % BackgroundColor
+linecolor=MedDark, % Border color
+linewidth=4pt, % Border width
+innerleftmargin=5pt, % Inside left margin width
+innerrightmargin=5pt, % Inside right margin width
+innertopmargin=0pt, % Inside top margin height
+innerbottommargin=5pt, % Inside bottom margin height
+leftmargin=0cm, % Outside left margin width
+rightmargin=0cm % Outside right margin width
+]{propositionBox}
+
+\newmdenv[
+skipabove=7pt, % Whitespace above box
+skipbelow=7pt, % Whitespace below box
+rightline=false, % Right line visible
+leftline=true, % Left line visible
+topline=false, % Top line visible
+bottomline=false, % Bottom line visible
+backgroundcolor=HighDark!5, % BackgroundColor
+linecolor=HighDark, % Border color
+linewidth=4pt, % Border width
+innerleftmargin=5pt, % Inside left margin width
+innerrightmargin=5pt, % Inside right margin width
+innertopmargin=0pt, % Inside top margin height
+innerbottommargin=5pt, % Inside bottom margin height
+leftmargin=0cm, % Outside left margin width
+rightmargin=0cm % Outside right margin width
+]{lemmaCorBox}
+
+
+\newenvironment{definition}{\begin{defBox}\begin{definitionT}}{\end{definitionT}\end{defBox}}
+\newenvironment{theorem}{\begin{theoremBox}\begin{theoremT}}{\end{theoremT}\end{theoremBox}}
+\newenvironment{proposition}{\begin{propositionBox}\begin{propositionT}}{\end{proppositionT}\end{propositionBox}}
+\newenvironment{lemma}{\begin{lemmaCorBox}\begin{lemmaT}}{\end{lemmaT}\end{lemmaCorBox}}
+\newenvironment{summary}{\begin{summaryBox}\begin{summaryT}}{\end{summaryT}\end{summaryBox}}
+\newenvironment{corollary}{\begin{lemmaCorBox}\begin{corollaryT}}{\end{corollaryT}\end{lemmaCorBox}}
+\newenvironment{example}{\begin{exampleT}}{\hfill{\tiny\ensuremath{\blacksquare}}\end{exampleT}\end{exampleT}}
+
+
 
 
