@@ -1,6 +1,1 @@
-Lecture note template
-
-
-The template is adopted from: https://github.com/RioWeil
-
-
+# Lecture notes for $\mathbb{R}$eal Analysis
