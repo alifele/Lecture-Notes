@@ -1,1 +1,1 @@
-# Lecture notes for $\mathbb{R}$eal Analysis
+# Lecture notes for $\mathbb{R}\text{eal}$ Analysis
