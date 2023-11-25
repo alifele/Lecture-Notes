@@ -122,33 +122,6 @@ Following our arguments in the motivation section, we argued that the open sets 
 \end{proof}
 
 
-The metric spaces can be very abstract, like the space of all functions with a suitable metric indeed forms a metric space. However, this space is infinite dimensional and its cardinality is even larger than the cardinality of continuum. However, following the following definition we can decide if certain subsets of those abstract spaces are bounded or not.
-\begin{definition}[Bounded sets in a metric space]
-	Let $(X,d)$ be a metric space and $A \subseteq X$. Then $A$ is bounded, if there exist $R \in \R$ and $x \in X$ such that $X \subseteq \ball{R}{x}$
-\end{definition}
-
-
-Also, one interesting fact about the metric space, is that, no matter what is the nature of metric space, the union of all cocentric ball with natural numbers as their radius, centered at any point of the metric space covers the whole space. The following proposition makes this more formal.
-
-\begin{proposition}
-	\label{prop:CocentericBallsCoveringMetricSpace}
-	Let $(X,d)$ be a metric space and $x \in X$. Then for 
-	\[ \mathcal{G} = \{ \ball{r}{x}: r \in \N \}, \]
-	we have
-	\[ X = \bigcup \mathcal{G}. \]
-\end{proposition}
-\begin{proof}
-	Let $y \in X$. Then $d(x,y) = R$ for some $R \in \R$. Since $\exists N \in \N$ such that $R < N$, then $y \in \ball{n}{x}$ for all $n \geq N$. As for the converse, let $x \in \bigcup \mathcal{G}$. Then trivially $x \in X$. This completes the proof.
-\end{proof}
-
-\autoref{prop:CocentericBallsCoveringMetricSpace} is a very interesting result. It is somehow fascinating that every metric space can be covered with countable number of cocentric open balls. 
-
-
-\begin{remark}
-	One thing that the reader might note is the construct called ``long line'' which is a topological space which is longer than the real line in some sense. The long line consists of an uncountable number of copies of $[0,1)$ ``pasted together'' end-to-end. This is a topological space and not a metric space. Thus out argument remains valid
-\end{remark} 
-
-
 \subsection{Convergence in Metric Spaces}
 So far, we only hand the notion of sequence in sets like $\R,\Z,\Q$, etc. and we developed the notion of convergence of a sequence by $\epsilon-N$ business. Remember that a sequence is a fundamental concept which enables us to discover the word which could be reached via the infinitely long road of sequences! For a detailed discussion see my opinion piece titled by ``What the Hell is Analysis?''. Now, the beauty of metric spaces is that we can analyze sequences in abstract metric spaces. This is automatically done via the structure of the metric function as for any pair $(x,y)\in X\times X$ it returns a real number which carries some intuitive information about the closeness of the points. So the if sequence $\{x_n\}$ whose elements live in $X$, converge to $\hat{x}\in X$, then this fact is basically translates to a bunch of real numbers approaching $0$ which can be easily analyzed using numerous tools we have already developed (like the squeeze theorem, etc.)
 
@@ -573,70 +546,9 @@ We start with the definition of compactness.
 	In words, a set is compact, if every open cover admits a finite sub-cover.
 \end{definition}
 
-
 \begin{remark}
-	Compactness is the next best thing to finiteness. It's so valuable that when it is absent, we sometimes switch to a new topology in which compactness is present. 
+	Compactness is the next best thing to the finiteness.
 \end{remark}
-
-Furthermore, the notion of compactness is expressing the fact that if $K \subseteq X$ is compact, then we can find an open set $G$ that can be constructed via union of only finite ingredients in $\mathcal{T}$ and $K \subseteq G$.
-
-\begin{lemma}
-	Let $(X,\mathcal{T})$ be a topological space. Then $S \subseteq X$ finite, is a compact set.
-\end{lemma}
-
-\begin{proof}
-	Let $\mathcal{G} \subseteq \mathcal{T}$ be an open cover for $S = \{x_1, \cdots, x_N\}$ for some $N \in \N$. Then since $S \subseteq \bigcap \mathcal{G}$, then each $x_i \in S$ belongs to some $G_i$ in $\mathcal{G}$. Then $\{G_1, \cdots, G_N \}$ is a sub-cover that is finite.
-\end{proof}
-
-\begin{lemma}
-	Let $(\R, \abs{\cdot})$ be a metric space. Then $\Z \subseteq \R$ is not compact.
-\end{lemma}
-
-\begin{proof}
-	To show $\Z \subseteq \R$ is not compact, we need to find an open cover that fails to have a finite sub-cover. Let $\mathcal{G} = \{ \ball{1/4}{x}: x\in \Z \}$. $\mathcal{G}$ is an open cover, but it fails to have any sub-cover. Since any $G \in \mathcal{G}$ covers only one integers, and for any choice of $N \in \N$ the sub-cover $H = \{ G_1, \cdots, G_N\}$ won't cover all of $\Z$. Thus $\Z$ is not compact. 
-\end{proof}
-
-The following is a very important proposition which helps in making some intuition about the compact sets.
-
-\begin{proposition}
-	Let $(X,d)$ be a metric space, and $K \subseteq X$ compact. Then $K$ is bounded.
-\end{proposition}
-
-\begin{proof}
-	Let $x \in X$. Then from \autoref{prop:CocentericBallsCoveringMetricSpace} we define
-	\[ \mathcal{G} =  \{ B_r(x): r \in \N \}, \]
-	and we get $X = \bigcup \mathcal{G}$. Then $K \subseteq \mathcal{G}$. Thus $\mathcal{G}$ is an open cover. Since $\mathcal{K}$ is compact, then there is a finite sub-cover $ \mathcal{H} = \{ B_{r_1}(x), \cdots, B_{r_N}(x) \}$ for some $N \in \N$, such that $K \subseteq \bigcup \mathcal{H}$. Let $r = \max \{r_1, \cdots, r_N\}$ and $z \in K$. Then $\exists B_{r_i}(x) \in \mathcal{H}$ such that $z \in B_{r_i}(x) \subseteq B_r(x)$. Thus $K \subseteq B_r(x)$. This shows that $K$ is bounded. 
-\end{proof}
-
-
-
-
-\begin{lemma}
-	In $(\R,\abs{\cdot})$, the set $S = \{1/n: n \in \N \}$ is not compact, but the set $\closure{S} = S \cup \{0\}$ is compact. 
-\end{lemma}
-
-\begin{proof}
-	To show that $S$ is not compact, we can easily show that there is an open cover that fails to have a finite sub-cover. A great candidate for that is a family of open sets each of which contains only one $x \in S$. Consider 
-	\[ \mathcal{G} = \{ \ball{r}{n}: n \in \N, r = 1/(n+1)^2 \}. \]
-	This is an open cover all if its elements are open sets and $S \subseteq \mathcal{G}$. Since each element of $\mathcal{G}$ contains only one element of $S$, then $\mathcal{G}$ fails to have finite subset that covers $S$. Thus $S$ is not compact.
-	
-	The second part of proof is to show that $S \cup \closure{S}$ is compact. Let $\mathcal{G}$ be an open cover. Then there is an open set $G \in \mathcal{G}$ such that $0 \in G$. Since $G$ is open and contains 0, and also the sequence $\{1/n\}$ goes to 0, then $\exists N \in \N$ such that $\forall n > N$ we have $1/n \in G$. Thus $G$ contains all but finitely many elements of $S$. However for each $1/n$ with $1 \leq n \leq N$ we have $G_n \in \mathcal{G}$ such that contains $1/n$. Thus $\{ G, G_1, \cdots, G_N \}$ is a finite sub-cover, thus the set $S\cup \closure{S}$ is compact.
-\end{proof}
-
-
-\begin{remark}
-	The proposition above can be extended to show that for any convergent sequence in any metric space, the closure of the range is compact.
-\end{remark}
-
-\begin{proposition}
-	Let $(X,\mathcal{T})$ be a topological space and $K \subseteq X$ compact. Then $K$ is closed. In other words, in any topological space, a compact set contains all of its limit points. 
-\end{proposition}
-
-
-
-
-
-
 
 \section{UNDER CONSTRUCTION}
 \begin{definition}[The Usual Topology on $\R^k$]
