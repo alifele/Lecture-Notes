@@ -628,14 +628,52 @@ The following is a very important proposition which helps in making some intuiti
 	The proposition above can be extended to show that for any convergent sequence in any metric space, the closure of the range is compact.
 \end{remark}
 
+The following proposition is an important one, as it is true only in Hausdorff topological spaces, and not in general topological spaces.
+
 \begin{proposition}
-	Let $(X,\mathcal{T})$ be a topological space and $K \subseteq X$ compact. Then $K$ is closed. In other words, in any topological space, a compact set contains all of its limit points. 
+	\label{prop:CompactSetIsClosedHausdorff}
+	Let $(X,\mathcal{T})$ be a \textbf{Hausdorff} topological space and $K \subseteq X$ compact. Then $K$ is closed. In other words, in any Hausdorff topological space, a compact set contains all of its limit points. 
 \end{proposition}
 
+\begin{proof}
+	Since this proposition is only true for Hausdorff topological spaces, then we have the hint that we should use some properties specific to the Hausdorff topological spaces. We want to show that $K^c$ is open. Since an open set is a neighborhood of all of its elements, thus for $y \in K^c$ we need to find an open set $S$ such that $y \in S \subseteq K^c$.
+	
+	Let $y \in K^c$. Then since $\forall x \in K$, there exists $U_x, V_x \in \mathcal{T}$ such that $ x \in U_x$ and $y \in V_x$ and $U_x \cap V_x = \empty$. This is the same as writing $V_x \subseteq U_x^c$. Clearly, $\mathcal{G} = \{ U_x: x \in K \}$ is an open cover for $K$. But since $K$ is compact, then $\mathcal{G}$ admits an open sub-cover. Thus $\exists x_1, \cdots, x_N \in K$ for some $N \in \N$ such that $K \subseteq \bigcup_{i=1}^{N} U_{x_i}$. Then we can write
+	\[ K^c \supseteq \bigcap_{i=1}^{N} U_{x_i}^c \supseteq \bigcap_{i=1}^{N} V_{x_i}. \]
+	Note that $S = \bigcap_{i=1}^{N} V_{x_i} $ is open as it is finite intersection of open sets, and due to the construction $y \in S$. Thus $ y \in S \subseteq K^c$. This implies that the set $K^c$ is open, which implies the set $K$ is closed. This completes the proof. 
+\end{proof}
 
+\begin{remark}
+	It is very important to note that \autoref{prop:CompactSetIsClosedHausdorff} is \textbf{only} true for the Hausdorff topological spaces. For instance let $X = \{1,2,3\}$, and $\mathcal{T} = \{ \emptyset, X, \{1\} \}$. Then $(X,\mathcal{T})$ is a topological spaces that is not Hausdorff (as there are no disjoint open sets separating $1,2 \in X$). The set $\{2\}$ is compact (as it is finite), but it is not closed (since its complement is not open).
+\end{remark}
 
+The following proposition highlights how the property of compactness of a set gets inherited by certain type of its subsets. 
 
+\begin{proposition}
+	\label{prop:CloseSubSetOfCompactIsCompact}
+	Let $(X,\mathcal{T})$ be a topological space and $K \subseteq X$ is compact. Then
+	\[ F \subseteq K \text{ closed} \implies F \text{ is compact}. \]
+\end{proposition}
 
+\begin{proof}
+	There are two ways to proof this. Beginner's way and Pro's way!
+	\begin{itemize}
+		\item \textbf{Beginner's proof.} Since $F$ is closed, then $F^c$ is open, hence it is neighborhood of all of its elements. Thus $\forall x \in F^c,\ \exists u_x \in \mathcal{T}$ such that $x \in u \subseteq F^c$, which also implies $u_x \cap F = \emptyset$. Let $\mathcal{U} = \{u_x: x\in F^c\}$. Now let $\mathcal{G}$ be an open cover for $F$. Then $\mathcal{U} \cup \mathcal{G}$ is an open cover for $K$ as every $z \in K$ belongs to at lest one open set in $\mathcal{U}$ or in $\mathcal{G}$. Since $K$ is compact, thus it admits finite sub-cover $H = \{H_1, \cdots H_N\} \subseteq \mathcal{U} \cup \mathcal{G}$ for some $N \in \N$ such that $\forall z \in K$ we have some $H_i \in H$ such that $z \in H_i$. Let $y \in F$. Then $\exists H_i \in H$ such that $y \in H_i$. But note that $y$ does not belong to any $u_x \in \mathcal{U}$. Thus $H_i \subseteq \mathcal{G}$. So we can conclude that $H$ has a subset $\mathcal{H}$ that all if its elements belongs to $\mathcal{G}$, which implies $\mathcal{H}$ is a finite sub-cover for $F$. Thus we conclude that $F$ is compact.
+		\item \textbf{Pro's Proof.} Let $\mathcal{G} = \{ G_\alpha, \alpha \in A \}$ be an open cover for $F$, in which $A$ is an index set. Since $F$ is closed, then $F^c$ is open, and $\mathcal{G} \cup \{F^c\}$ is an open cover for $K$. On the other hand, since $K$ is compact, thus there is a sub-cover consisting of $G_{\alpha_1},\cdots,G_{\alpha_N}$ for some $N\in\N$ and possibly $F^c$. Then 
+		\[ K \subseteq (F^c) \cup (\bigcup_{i=1}^{N} G_{\alpha_n}). \]
+		Let $y \in F\subseteq K$. Then $\exists G_{\alpha_n}$ for some $n\leq N$ such that $y \in G_{\alpha_n}$. Thus $\{ G_{\alpha_1},\cdots,G_{\alpha_n} \}$ is a finite sub-cover and this concludes the proof.
+	\end{itemize}
+\end{proof}
+
+Using \autoref{prop:CloseSubSetOfCompactIsCompact} we can have some useful corollaries for special topological spaces, like Hausdorff topological space. 
+
+\begin{corollary}
+	Let $(X,\mathcal{T})$ be a HTS, and $K \subseteq X$ compact, and $F \subseteq X$ closed. Then
+	\[ F \cap K \text{ is compact}. \]
+\end{corollary}
+\begin{proof}
+	This immediately follows from \autoref{prop:CloseSubSetOfCompactIsCompact} and \autoref{prop:CompactSetIsClosedHausdorff}. Since $(X,\mathcal{T})$ is an HTS, and $K$ is compact, then $K$ is closed, which implies $K\cap F$ is closed (since F is closed and any intersection of closed sets is closed). Thus $K \cap F \subseteq K$ is compact.  
+\end{proof}
 
 
 \section{UNDER CONSTRUCTION}
