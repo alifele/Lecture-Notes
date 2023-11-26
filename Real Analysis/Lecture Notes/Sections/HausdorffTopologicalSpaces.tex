@@ -197,6 +197,49 @@ The following proposition defines the notion of open sets in a metric space (whi
 \end{proof}
 
 
+\section{Completeness of Metric Spaces}
+
+First we start with the notion of Cauchy sequences.
+\begin{definition}[Cauchy sequences]
+	Let $(X,d)$ be a metric space and $\seq{x}$ a sequence in $X$. Then $\seq{x}$ is Cauchy if 
+	\[  \forall \epsilon > 0:\ \exists N>0 \st \forall n,m > N \wh d(x_n, x_m) < \epsilon.  \]
+\end{definition}
+
+And then we have the following very important definition.
+
+\begin{definition}[Complete metric space]
+	Let $(X,d)$ be a metric space. This space is complete, if every Cauchy sequence has a limit in $X$.
+\end{definition}
+
+The following proposition lists some of the important and basic properties of Cauchy sequences.
+
+\begin{proposition}
+	Let $(X,d)$ be a metric space. Then 
+	\begin{enumerate}[(I)]
+		\item Every converging sequence is Cauchy.
+		\item Every Cauchy sequence is bounded.
+	\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+	The proof for different items are as follows.
+	\begin{enumerate}[(I)]
+		\item Assume $\epsilon>0$ is given and $\{x_n\}$ converges to $\hat{x} \in K$. From the properties of metric function we have
+		\[ d(x_n, x_m) \leq d(x_n,\hat{x}) + d(x_m,\hat{x}). \]
+		Since $\seq{x}$ converges, then $\exists N_1 > 0$ such that $\forall n > N_1$ we have $d(x_n,\hat{x}) < \epsilon/2$. So for $n,m > N$ we have
+		\[  d(x_n, x_m) \leq d(x_n,\hat{x}) + d(x_m,\hat{x}) < \epsilon,\]
+		thus $\seq{x}$ is Cauchy.
+		
+		\item Fix $\epsilon=1$. Then since $\seq{x}$ is Cauchy, then $\exists N > 0$ such that $d(x_N, x_m) < 1 $ for all $m > N$. Let
+		\[ \hat{R} = \{ d(x_N, x_n):\ n < N, n \in \N \}. \]
+		Let $ R = \max\set{1,\hat{R}}$. Thus due the the construction we have
+		\[ x_n \in \ball{R}{x_N}, \quad \forall n \in \N. \]
+		This completes the proof.
+
+	\end{enumerate}
+\end{proof}
+
+
 \section{Hausdorff Topological Spaces}
 Metric spaces are natural extensions to the idea of $R^k$ along with the Euclidean distance function. However, we can go even further, and show that some notions we encountered before are really independent of a particular metric. All such arguments are under the umbrella of topological spaces. 
 
@@ -678,10 +721,11 @@ Using \autoref{prop:CloseSubSetOfCompactIsCompact} we can have some useful corol
 Also, the following is a very important corollary of the proposition above, which will be used later to prove the Heine-Borel theorem.
 
 \begin{corollary}
+	\label{cor:InfiniteSubsetOfCompactSetNotEmptDerSet}
 	Let $(X,\mathcal{T})$ be a topological space and $K \subseteq X$ is compact. If $A \subseteq K$ is an infinite set, then $A' \neq \emptyset$.
 \end{corollary}
 \begin{proof}
-	We proceed with the proof by contrapositive. Assume $A \subseteq K$ is a finite set. Then since $A' = \emptyset$, then $\closure A = A \cup A' = A$, hence $A$ is closed. Since $A \subseteq K$, then $A$ is also compact. Then since $A' = \emptyset$, then $\forall x \in A$, we can fine open $S_x \in \mathcal{N}(x)$ such that $A \cap S_x = \emptyset$. Let $\mathcal{S} = \set{S_x:\ x \in A}$. Due to the construction $\mathcal{S}$ is an open cover of $A$. But since $A$ is compact, then there exists $\set{S_{x_1},\cdots,S_{x_N}}$ for some $N \in \N$ such that covers $A$. However, $S_{x_i}$s are disjoint (because of the construction), then each $S_{x_i}$ contains only one element $x_i$, thus the set $A$ is finite. This completes the proof via showing that the contrapositive is true.
+	We proceed with the proof by contrapositive. Assume $A \subseteq K$ is a finite set. Then since $A' = \emptyset$, then $\closure A = A \cup A' = A$, hence $A$ is closed. Since $A \subseteq K$, then $A$ is also compact. Then since $A' = \emptyset$, then $\forall x \in A$, we can fine open $S_x \in \mathcal{N}(x)$ such that $A \cap S_x \backslash \{x\} = \emptyset$, i.e. $S_x$ contains no other elements of $A$. Let $\mathcal{S} = \set{S_x:\ x \in A}$. Due to the construction $\mathcal{S}$ is an open cover of $A$. But since $A$ is compact, then there exists $\set{S_{x_1},\cdots,S_{x_N}}$ for some $N \in \N$ such that covers $A$. However, $S_{x_i}$s are disjoint (because of the construction), then each $S_{x_i}$ contains only one element $x_i$, thus the set $A$ is finite. This completes the proof via showing that the contrapositive is true.
 \end{proof}
 
 \subsection{Characterization of Compact Using Closed Sets}
@@ -744,6 +788,25 @@ There is a beautiful parallel between the notion of finite intersection property
 	\end{itemize}
 \end{proof}
 
+
+\subsection{Sequential Characterization of Compact Sets}
+
+Similar to the other notions we have encountered so far, in a metric space, a compact sets has a sequential characterization. The following theorem is a very central and important theorem for metric spaces. The Heine-Borel theorem follows as a corollary of the theorem below.
+
+\begin{theorem}
+	Let $(X,d)$ be a metric space with $K \subseteq X$. Then The following are equivalent.
+	\begin{enumerate}[(a)]
+		\item The set $K$ is compact.
+		\item Every sequence $\seq{x}$ in $K$ has a converging sub-sequence, whose limit lies in $K$.
+	\end{enumerate}
+\end{theorem}
+\begin{proof}
+	This theorem has two parts as follows.
+	\begin{enumerate}[(a)]
+		\item $(a) \implies (b)$ Let $\seq{x}$ be a sequence in $K$, and $A = \{ x_n:\ n\in\N \}$. If $A$ is finite, then $\seq{x}$ has a constant sub-sequence, thus $(b)$ follows trivially. However, if $A$ is not finite, then by \autoref{cor:InfiniteSubsetOfCompactSetNotEmptDerSet} we know that $A' \neq \emptyset$. Also since $A \subseteq K$ implies $A' \subseteq K'$ but since $K$ is a compact set in an HTS, then $K$ is closed, hence $A' \subseteq K$. Let $z \in A',\ m \in \N$, and $\epsilon=1/m$. Then $\mathbb{B}(z;\epsilon) \cap A \neq \emptyset$. Thus $\exists n_m \in \N$ such that $x_{n_m}\neq z$ and $x_{n_m} \in A$. The sub-sequence $\{x_{n_k}\}$ approaches the point $z$. This completes the proof.
+		\item $(b) \implies (a)$
+	\end{enumerate}
+\end{proof}
 
 %Before going through the proof, it is better to demonstrate this fact using a specific example. 
 %
