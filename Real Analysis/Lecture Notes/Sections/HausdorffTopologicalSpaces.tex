@@ -675,6 +675,90 @@ Using \autoref{prop:CloseSubSetOfCompactIsCompact} we can have some useful corol
 	This immediately follows from \autoref{prop:CloseSubSetOfCompactIsCompact} and \autoref{prop:CompactSetIsClosedHausdorff}. Since $(X,\mathcal{T})$ is an HTS, and $K$ is compact, then $K$ is closed, which implies $K\cap F$ is closed (since F is closed and any intersection of closed sets is closed). Thus $K \cap F \subseteq K$ is compact.  
 \end{proof}
 
+Also, the following is a very important corollary of the proposition above, which will be used later to prove the Heine-Borel theorem.
+
+\begin{corollary}
+	Let $(X,\mathcal{T})$ be a topological space and $K \subseteq X$ is compact. If $A \subseteq K$ is an infinite set, then $A' \neq \emptyset$.
+\end{corollary}
+\begin{proof}
+	We proceed with the proof by contrapositive. Assume $A \subseteq K$ is a finite set. Then since $A' = \emptyset$, then $\closure A = A \cup A' = A$, hence $A$ is closed. Since $A \subseteq K$, then $A$ is also compact. Then since $A' = \emptyset$, then $\forall x \in A$, we can fine open $S_x \in \mathcal{N}(x)$ such that $A \cap S_x = \emptyset$. Let $\mathcal{S} = \set{S_x:\ x \in A}$. Due to the construction $\mathcal{S}$ is an open cover of $A$. But since $A$ is compact, then there exists $\set{S_{x_1},\cdots,S_{x_N}}$ for some $N \in \N$ such that covers $A$. However, $S_{x_i}$s are disjoint (because of the construction), then each $S_{x_i}$ contains only one element $x_i$, thus the set $A$ is finite. This completes the proof via showing that the contrapositive is true.
+\end{proof}
+
+\subsection{Characterization of Compact Using Closed Sets}
+Since the notions of closedness and openess of sets are quite dual, then we expect for every notion characterized using open sets, have a dual characterization using the notions of closed sets, and the notion of compactness is no difference. We start with the following definition.
+
+\begin{definition}[Finite intersection property]
+	A family of sets $\mathcal{F}$ has the \textbf{finite intersection property} if whenever $N \in \N$ and $F_1, \cdots, F_N$ are sets in $\mathcal{F}$, one has $\bigcap_{n=1}^N F_n \neq \empty$.
+\end{definition}
+
+\begin{example}
+	The following sets has the finite intersection properties.
+	\begin{itemize}
+		\item $\mathcal{F} = \{ [-1,1],[-0.5,0.5],[-0.25,0.25]\}$.
+		\item $\mathcal{G} = \set{ \set{1,2,3}, \set{2,3}, \set{3} }$.
+		\item $\mathcal{H} = \{ [-1/n,1/n]:\ n\in\N \}$.
+	\end{itemize}
+\end{example}
+
+There is a beautiful parallel between the notion of finite intersection property and having a finite sub-cover. The following theorem makes this parallel more clear.
+
+\begin{theorem}[Characterization of compact sets with closed sets]
+	\label{thm:ClosedCharacterCompact}
+	Given a HTS $(X,\mathcal{T})$ and a \textbf{closed} set $K \subseteq X$, then the following are equivalent.
+	\begin{enumerate}[(a)]
+		\item $K$ is \textbf{compact}.
+		\item Every collection of \textbf{closed} subsets of $K$ with \textbf{finite intersection property}, has a \textbf{non-empty intersection}.
+	\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+	Here, I will proved two proves for this theorem.
+	
+	\begin{itemize}
+		\item \textbf{First Proof.} The proof will have two parts.
+		\begin{itemize}
+			\item [\LEFTcircle] $(a) \implies (b)$ Let $K\subseteq X$ be compact, and also let $\indexSet{F}{\alpha}{A}$ be a collection of closed subsets of $K$ with finite intersection property. We claim that $\bigcap_{\alpha\in A} F_\alpha$ is non-empty. Suppose otherwise, i.e. $\bigcap_{\alpha\in A} F_\alpha = \emptyset$. Then since $X = \emptyset^c$, we have
+			\[ K \subseteq (\bigcap_{\alpha\in A} F_\alpha)^c = \bigcup_{\alpha \in A} F_\alpha^c. \]
+			Since $K$ is compact, then there is $J \subseteq A$ finite such that $K \subseteq \bigcup_{\alpha\in J} F_\alpha^c$. Using the De Morgan's law we can write
+			\[ \bigcap_{\alpha\in J} F_\alpha \subseteq K^c. \]
+			However, since $F_\alpha \subseteq K$ for  all $\alpha \in A$, then $\bigcap_{\alpha\in J} F_\alpha = \emptyset$. This contradicts the fact that $\mathcal{F}$ has finite intersection property.
+			\item [\RIGHTcircle] $(b) \implies (a)$ Assume $\mathcal{G} = \{G_\alpha\}_{\alpha\in A}$ an open cover for $K$. We are safe to assume $G_\alpha \cap K \neq \emptyset$ for all $\alpha \in A$. We want to show that $K$ has a finite sub-cover. In other words $\exists J \subseteq A$ and finite such that $\indexSet{G}{\alpha}{J}$ is a finite open cover for $K$. We use the idea of proof by contradiction. So assume $K$ fails to have a finite sub-cover. Thus $\forall J \subseteq A$ and finite, one has $K \not\subseteq \bigcup_{\alpha\in J} G_\alpha$. Thus $K \backslash (\bigcup_{\alpha\in J} G_\alpha) \not= \emptyset.$ By a careful design of a collection of closed subsets of $K$ that has finite intersection property but fails to have a non-empty intersection, we can finish the proof. Let $F_\alpha = K \backslash G_\alpha$. Clearly $F_\alpha$ is closed and $F_\alpha \subseteq K$. We claim that $\mathcal{F} = \set{F_\alpha:\ \alpha \in A}$ has finite intersection property. That is because for any finite $J \subseteq A$ we have
+			\[ \bigcap_{\alpha\in J} F_\alpha = \bigcap_{\alpha\in J}(K \cap G_\alpha^c) = K \cap (\bigcap_{\alpha\in J} G_\alpha^c) =  K \cap (\bigcup_{\alpha\in J} G_\alpha)^c = K \backslash (\bigcup_{\alpha\in J} G_\alpha) \neq \emptyset. \]
+			However, since $\mathcal{G}$ is an open cover for $K$ and $K \subseteq \bigcup \mathcal{G}$, then 
+			\[ \bigcap_{\alpha\in A} F_\alpha = \bigcap_{\alpha\in A}(K \cap G_\alpha^c) = K \cap (\bigcap_{\alpha\in A} G_\alpha^c) =  K \cap (\bigcup_{\alpha\in A} G_\alpha)^c = K \backslash (\bigcup_{\alpha\in A} G_\alpha) = \emptyset.  \]
+			This contradicts $(b)$, thus we conclude that there is a finite open cover. 
+		\end{itemize} 
+		\item \textbf{Second Proof.} This proof uses the idea of contrapositive. Thus, instead of showing $(a) \biImp (b)$ we show $\neg (a) \implies \neg (b)$.
+		\begin{itemize}
+			\item [$\eighthnote$] $\neg (b) \implies \neg(a)$. Since we assume $(b)$ is not true, then there exists a collection of closed subsets of $K$, i.e. $\mathcal{F} = \indexSet{F}{\alpha}{A}$ with finite intersection property that fails to have a non-empty intersection. We want to construct an open cover for $K$ that fails to have a sub-cover. Let $G_\alpha = F_\alpha^c$. Clearly $G_\alpha$ is open. We claim that $\mathcal{G} = \indexSet{G}{\alpha}{A}$ is an open cover for $K$ that fails to have any sub-cover. $\mathcal{G}$ is an open cover for $K$. Because
+			\[ \bigcup_{\alpha \in A} G_\alpha = \bigcup_{\alpha\in A} F_\alpha^c = [\bigcap_{\alpha\in A} F_\alpha]^c  = [\emptyset]^c = X, \]
+			and since $K \subseteq X$ then $K \subseteq \bigcup_{\alpha \in A} G_\alpha $, hence $\mathcal{G}$ is an open cover for $K$. Also, $\mathcal{G}$ fails to admit a sub-set as sub-cover for $K$. That is because, for any finite $J \subseteq A$ we have
+			\[ K \backslash (\bigcup_{\alpha \in J} G_\alpha) = K \cap (\bigcup_{\alpha \in J} F^c_\alpha)^c  =  K \cap (\bigcap_{\alpha \in J} F_\alpha) \neq \emptyset  \]
+			The last term in the expression above is not empty due to the finite intersection property of $\mathcal{F}$. Thus $K$ fails to have any finite sub-cover.
+			\item [$\twonotes$] $\neg (a) \implies \neg(b)$. Since $(a)$ is not true, then it has an open cover $\indexSet{G}{\alpha}{A}$ that fails to have any finite sub-cover. We assume $G_\alpha \cap K \neq \emptyset$ for all $\alpha \in A$. In other words $K \subseteq \bigcup_{\alpha\in A} G_\alpha$ but for any finite subset $J \subseteq A$ we have $K \not\subseteq \bigcup_{\alpha\in J} G_\alpha$. Let $F_\alpha = K \backslash G_\alpha$. Since $K$ and $G_\alpha^c$ are closed, then $F_\alpha$ is also closed and due to the construction $F_\alpha \subseteq K$. We claim that the collection $\mathcal{F} = \indexSet{F}{\alpha}{A}$ has finite intersection property, but fails to have a non-empty intersection. $\mathcal{F}$ has finite intersection property, since for any finite$J \subseteq A$ we have
+			\[ \bigcap_{\alpha \in J} F_\alpha = K \cap (\bigcap_{\alpha\in J} G_\alpha^c) = K \cap (\bigcup_{\alpha\in J} G_\alpha)^c =  K \backslash (\bigcup_{\alpha\in J} G_\alpha) \neq \emptyset.  \]
+			The last term in the expression above is not empty since $K$ fails to have any finite sub-cover. However, 
+			\[ \bigcap_{\alpha \in A} F_\alpha = K \cap (\bigcap_{\alpha\in A} G_\alpha^c) = K \cap (\bigcup_{\alpha\in A} G_\alpha)^c =  K \backslash (\bigcup_{\alpha\in A} G_\alpha) =  K \backslash \mathcal{G} = \emptyset,  \]
+			since $\mathcal{G}$ is an open cover for $K$.
+		\end{itemize}
+	\end{itemize}
+\end{proof}
+
+
+%Before going through the proof, it is better to demonstrate this fact using a specific example. 
+%
+%\begin{example}
+%	Let $(X,\mathcal{T})$ be the HTS of interest, where the topology is induced via the Euclidean metric. To show $(a) \biImp (b)$, we show the contraventions $\neg (b) \implies \neg (a)$ and . 
+%\end{example}
+%
+%
+%
+%\begin{itemize}
+%	\item $\neg (a) \implies \neg (b)$. We want to show that if $K$ is not compact, then there exist a collection of closed subsets of $K$ with finite intersection property that fails to have a non-empty intersection. Let $K = \{ 1,1/2,1/3,1/4,\cdots \}$. Then $\mathcal{F} = \set{ K_1,K_2,\cdots }$ where $K_i = \{ 1/n:\ n\in \N, n>i \}$ is a set of 
+%\end{itemize}
+
+
+\newpage
 
 \section{UNDER CONSTRUCTION}
 \begin{definition}[The Usual Topology on $\R^k$]
