@@ -215,27 +215,37 @@ The following proposition lists some of the important and basic properties of Ca
 
 \begin{proposition}
 	Let $(X,d)$ be a metric space. Then 
-	\begin{enumerate}[(I)]
+	\begin{enumerate}[(i)]
 		\item Every converging sequence is Cauchy.
 		\item Every Cauchy sequence is bounded.
+		\item Every closed subset of a complete metric space, is complete.
+		\item If a Cauchy sequence $\seq{x}$ has a converging sub-sequence that converges to some point $\hat{x}$, then the full original Cauchy sequence must converge to $\hat{x}$.
+		\item Every compact metric space is complete.
 	\end{enumerate}
 \end{proposition}
 
 \begin{proof}
 	The proof for different items are as follows.
-	\begin{enumerate}[(I)]
+	\begin{enumerate}[(i)]
 		\item Assume $\epsilon>0$ is given and $\{x_n\}$ converges to $\hat{x} \in K$. From the properties of metric function we have
 		\[ d(x_n, x_m) \leq d(x_n,\hat{x}) + d(x_m,\hat{x}). \]
 		Since $\seq{x}$ converges, then $\exists N_1 > 0$ such that $\forall n > N_1$ we have $d(x_n,\hat{x}) < \epsilon/2$. So for $n,m > N$ we have
 		\[  d(x_n, x_m) \leq d(x_n,\hat{x}) + d(x_m,\hat{x}) < \epsilon,\]
-		thus $\seq{x}$ is Cauchy.
+		thus $\seq{x}$ is Cauchy. \qed
 		
 		\item Fix $\epsilon=1$. Then since $\seq{x}$ is Cauchy, then $\exists N > 0$ such that $d(x_N, x_m) < 1 $ for all $m > N$. Let
 		\[ \hat{R} = \{ d(x_N, x_n):\ n < N, n \in \N \}. \]
 		Let $ R = \max\set{1,\hat{R}}$. Thus due the the construction we have
 		\[ x_n \in \ball{R}{x_N}, \quad \forall n \in \N. \]
-		This completes the proof.
-
+		This completes the proof. \qed
+		
+		\item Let $\seq{x}$ be a Cauchy sequence in $F$. Thus $A = \{x_n:\ n\in\N \} \subseteq F \subseteq X$. Since $\seq{x}$ is also at $X$, then it converges to $\hat{x}\in X$. From definition of limit point (or derived set) we have $\hat{x} \in A'$. On the other hand $A \subseteq F \biImp A' \subseteq F'$. Since $F$ is closed, then $F' \subseteq F$. This implies $A' \subseteq F$. Thus $\hat{x} \in F$. This shows that $F$ is complete.    \qed
+		
+		\item Let $x_{n_k}$ be the converging sub-sequence, i.e. $x_{n_k} \to \hat{x}$ as $k \to \infty$. For a given $\epsilon$, since $\seq{x}$ is Cauchy, then $\exists N_1 > 0$ such that $\forall n,n_k > N_1$ we have $d(x_n, x_{n_k})<\epsilon/2$. Also, since $\{x_{n_k}\}$ is converging to $\hat{x}$, then $\exists N_2 > 0$ such that $\forall n_k, n_l > N_2$ we have $d(x_{n_l}, x_{n_k}) < \epsilon/2$. Let $N = \max\set{N_1,N_2}$. Then $\forall n > N$ (also $n_k > N$) we have
+		\[ d(x_n, \hat{x}) \leq d(x_n, x_{n_k}) + d(x_{n_k},\hat{x}) < \epsilon/2 + \epsilon/2 = \epsilon.\]
+ 		Thus the original sequence converges to $\hat{x}$. \qed
+ 		
+ 		\item Every compact metric space is sequentially compact (see \autoref{thm:SequencialCompactness}), thus every sequence has a convergent sub-sequence that converges to a point in the metric space. Let $\seq{x}$ be a Cauchy sequence. This will have a converging sub-sequence that converges to a point in $\hat{x} \in X$. But as we showed in (iv), this sequence itself converges to $\hat{x}$. Thus $X$ is complete.
 	\end{enumerate}
 \end{proof}
 
@@ -794,6 +804,7 @@ There is a beautiful parallel between the notion of finite intersection property
 Similar to the other notions we have encountered so far, in a metric space, a compact sets has a sequential characterization. The following theorem is a very central and important theorem for metric spaces. The Heine-Borel theorem follows as a corollary of the theorem below.
 
 \begin{theorem}
+	\label{thm:SequencialCompactness}
 	Let $(X,d)$ be a metric space with $K \subseteq X$. Then The following are equivalent.
 	\begin{enumerate}[(a)]
 		\item The set $K$ is compact.
