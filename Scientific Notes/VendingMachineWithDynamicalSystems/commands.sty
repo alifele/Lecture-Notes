@@ -1,0 +1,271 @@
+\ProvidesPackage{commands}
+
+
+
+%% Packages
+
+\usepackage[dvips,letterpaper,margin=1.3in]{geometry}
+%\usepackage{geometry}
+\usepackage{commath}
+\usepackage{tensor}
+\usepackage{mathtools}
+\usepackage{pgfplots}
+\usetikzlibrary{arrows.meta}
+\usepackage{xcolor}
+\usepackage{float}
+%\usepackage{fullpage}[style={margin,empty}]
+\usepackage{enumerate}
+\usepackage[listings,skins,breakable]{tcolorbox}
+\tcbuselibrary{theorems}
+\usepackage{siunitx}
+\usepackage{cancel}
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
+
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{graphicx}
+\usepackage[colorlinks=true, linkcolor=blue]{hyperref}
+\usepackage{nameref}
+\usepackage{xcolor}
+\usepackage[shortlabels]{enumitem}
+\usepackage{tikz}
+\usepackage{wasysym}
+\usepackage{xspace}
+\usetikzlibrary{fadings}
+\usetikzlibrary{patterns}
+\usetikzlibrary{shadows.blur}
+\usetikzlibrary{shapes}
+
+
+
+\usepackage{physics}
+\usepackage{mathdots}
+\usepackage{yhmath}
+%\usepackage{cancel}
+\usepackage{siunitx}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{gensymb}
+\usepackage{tabularx}
+\usepackage{extarrows}
+\usepackage{afterpage}
+\usepackage{wrapfig}
+
+
+
+
+%% MATH Commands
+\newcommand{\ball}[2]{\mathcal{B}_{#1}(#2)}
+\newcommand{\bicon}{\Leftrightarrow}
+\newcommand{\imply}{\Rightarrow}
+\newcommand{\Arg}[1]{\mathrm{Arg}\left({#1}\right)}
+\newcommand{\limi}[1]{\lim_{#1 \rightarrow \infty}}
+\newcommand{\limni}[1]{\lim_{#1 \rightarrow -\infty}}
+\newcommand{\intinf}{\int_{-\infty}^{\infty}}
+\newcommand{\biImp}{\Leftrightarrow}
+\newcommand{\st}{\ \text{s.t.}\ }
+\newcommand{\wh}{\ \text{we have}\ }
+\newcommand{\preIm}[1]{#1^{-1}}
+\newcommand{\nsubset}{\not \subset}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Pset}[1]{\mathcal{P}(#1)}
+\renewcommand{\o}{\circ}
+\newcommand{\oo}{one-to-one\xspace}
+\renewcommand{\abs}[1]{|#1|}
+\renewcommand{\Re}[1]{\operatorname{Re}(#1)}
+\renewcommand{\Im}[1]{\operatorname{Im}(#1)}
+\newcommand{\conj}[1]{\overline{#1}}
+\newcommand{\floor}[1]{\lfloor #1 \rfloor}
+\newcommand{\ceil}[1]{\lceil #1 \rceil}
+\newcommand{\inv}[1]{#1^{-1}}
+\newcommand{\seq}[1]{\{#1_n\}}
+\newcommand{\AND}{\ \text{and }\xspace}
+\newcommand{\pow}[2]{#1^{#2}}
+\renewcommand{\set}[1]{\{#1\}}
+\newcommand{\infint}{\int_{-\infty}^{\infty}}
+\renewcommand{\=}[1]{\stackrel{#1}{=}} % for putting numbers above 
+\renewcommand{\emptyset}{\varnothing}
+\newcommand{\diagMat}[2]{\begin{pmatrix}
+		#1 & 0 \\
+		0 & #2
+\end{pmatrix}}
+\newcommand{\diagMatFour}[4]{\begin{pmatrix}
+		#1 & 0 & 0 & 0 \\
+		0 & #2 & 0 & 0 \\
+		0 & 0 & #3 & 0 \\
+		0 & 0 & 0 & #4 \\
+\end{pmatrix}}
+
+\newcommand{\eigvect}[2]{v_#1^{[#2]}}
+\newcommand{\vspan}[1]{\operatorname{Span}\{#1\}}
+\newcommand{\vectt}[2]{\begin{bmatrix}
+		#1 \\
+		#2
+\end{bmatrix}}
+\newcommand{\vecttt}[3]{\begin{bmatrix}
+		#1 \\
+		#2 \\
+		#3
+\end{bmatrix}}
+\newcommand{\matt}[4]{\begin{pmatrix}
+		#1 & #2 \\
+		#3 & #4
+\end{pmatrix}}
+
+
+
+\renewcommand{\phi}{\varphi}
+
+\DeclareMathOperator{\arccosh}{arccosh}
+\DeclareMathOperator{\arcsinh}{arcsinh}
+\DeclareMathOperator{\arctanh}{arctanh}
+\DeclareMathOperator{\arcsech}{arcsech}
+\DeclareMathOperator{\arccsch}{arccsch}
+\DeclareMathOperator{\arccoth}{arccoth} 
+
+
+
+
+%% Physics Commands
+\newcommand{\xhat}{\hat{\v{x}}}
+\newcommand{\yhat}{\hat{\v{y}}}
+\newcommand{\zhat}{\hat{\v{z}}}
+\newcommand{\rhat}{\hat{\v{r}}}
+\newcommand{\shat}{\hat{\v{s}}}
+\newcommand{\phihat}{\hat{\bm{\phi}}}
+\newcommand{\thetahat}{\hat{\bm{\theta}}}
+\newcommand{\m}[1]{\begin{pmatrix}#1\end{pmatrix}}
+\newcommand{\paulix}{\begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}}
+\newcommand{\pauliy}{\begin{pmatrix} 0 & -i \\ i & 0 \end{pmatrix}}
+\newcommand{\pauliz}{\begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix}}
+\newcommand{\imatrix}{\begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}}
+\newcommand{\zmatrix}{\begin{pmatrix} 0 & 0 \\ 0 & 0 \end{pmatrix}}
+\renewcommand{\dyad}[2]{\lvert #1 \rangle \langle #2 \rvert}
+\renewcommand{\ket}[1]{\lvert #1 \rangle}
+\renewcommand{\bra}[1]{\langle #1 \rvert}
+\renewcommand{\braket}[2]{\langle #1 \lvert #2 \rangle}
+
+
+
+%% Environments
+\newtheorem{prop}{Proposition}
+\newtheorem{thm}{Theorem}[section]
+
+
+
+
+\definecolor{heading}{RGB}{112,66,20}
+
+\newcommand{\heading}[1]{
+  \begin{tcolorbox}[colback=heading!10]
+    \begin{center}
+    \begin{LARGE}
+      \textbf{\ #1} \\
+      \vspace{5pt}
+    \end{LARGE}
+    \begin{large}
+          Ali Fele Paranj \\
+          alifele@student.ubc.ca \\
+          
+          \vspace{5pt}
+      \emph{\today}
+    \end{large}
+    \end{center}
+  \end{tcolorbox}
+  }
+
+
+\definecolor{propColor}{rgb}{0, 0.47, 0.6} % RGB(0, 204, 255) equivalent
+
+
+
+
+
+\newtcolorbox{Defbox}[2]{breakable,enhanced jigsaw,colback=red!5!, colframe=red!75!black,fonttitle=\bfseries, title=Definition~#1. #2}
+\newtcolorbox{thmbox}[1]{breakable,enhanced jigsaw,colback=blue!5, colframe=blue!55!black, fonttitle=\bfseries, title=Theorem:\ #1}
+\newtcolorbox{lembox}[1]{breakable,enhanced jigsaw,colback=blue!5, colframe=blue!55!black, fonttitle=\bfseries, title=Lemma: #1}
+\newtcolorbox{Corbox}[1]{breakable,enhanced jigsaw,colback=blue!5, colframe=blue!55!black, fonttitle=\bfseries, title=Corollary:\ #1}
+\newtcolorbox{Propbox}[1]{breakable,enhanced jigsaw,colback=blue!5, colframe=propColor, fonttitle=\bfseries, title=Proposition:\ #1}
+\newtcolorbox{Remark}[1]{breakable,enhanced jigsaw,colback=green!5, colframe=green!35!black, fonttitle=\bfseries, title=Remark~#1}
+\newtcolorbox{Example}[2]{breakable,enhanced jigsaw,colback=gray!5, colframe=white!40!black, fonttitle=\bfseries, title=Example~#1. #2}
+
+
+
+\newcounter{PropCounter}[section]
+\newenvironment{propbox}[1][]{
+	\refstepcounter{PropCounter}	%% setting the counter
+	\par\medskip\noindent		%% setting the spacings	
+	\begin{Propbox}{\thesection.\thePropCounter}	%% Creating the tcolorbox
+		\par\medskip				%% Spacing setting 
+	}
+	{\end{Propbox}}
+
+
+\newcounter{CorCounter}[section]
+\newenvironment{corbox}[1][]{
+	\refstepcounter{CorCounter}	%% setting the counter
+	\par\medskip\noindent		%% setting the spacings	
+	\begin{Corbox}{\thesection.\theCorCounter}	%% Creating the tcolorbox
+		\par\medskip				%% Spacing setting 
+	}
+	{\end{Corbox}}
+
+\newcounter{defcounter}[section]
+\newenvironment{defbox}[1][]{
+		\refstepcounter{defcounter}	%% setting the counter
+		\par\medskip\noindent		%% setting the spacings	
+		\begin{Defbox}{\thesection.\thedefcounter}{#1}	%% Creating the tcolorbox
+		\par\medskip				%% Spacing setting 
+		}
+		{\end{Defbox}}
+
+\newcounter{example}[section]
+\newenvironment{example}[2][]{
+		\refstepcounter{example}	%% setting the counter
+		\par\medskip\noindent		%% setting the spacings	
+		\begin{Example}{\thesection.\theexample}{#2}	%% Creating the tcolorbox
+		\par\medskip				%% Spacing setting 
+		}
+		{\end{Example}}
+		
+\newcounter{remark}[section]
+%\stepcounter{remark}
+\newenvironment{remark}[1][]{
+	\refstepcounter{remark}	%% setting the counter
+	\par\medskip\noindent		%% setting the spacings	
+	\begin{Remark}{\thesection.\theremark}	%% Creating the tcolorbox
+	%\par\medskip				%% Spacing setting 
+	}
+	{\end{Remark}}
+	
+\newenvironment{ans}{
+	\vspace{5pt}
+	\hrule
+	\par\medskip\noindent
+	\emph{Answer. }
+	\par\medskip
+	}
+	{\medskip}
+	
+\newcounter{question}[section]	
+\newenvironment{question}{
+	\refstepcounter{question}
+	\par\medskip\noindent
+	\textbf{Question~\thequestion.}
+	%\par\medskip
+}
+{\medskip}
+	
+	
+	
+	
+	
+
+

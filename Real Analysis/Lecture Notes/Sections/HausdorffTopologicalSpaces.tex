@@ -249,6 +249,40 @@ The following proposition lists some of the important and basic properties of Ca
 	\end{enumerate}
 \end{proof}
 
+The following proposition is a very important one that has numerous use cases in the filed of functional analysis.
+
+\begin{proposition}
+	For any non-empty set $S$, let $M(S)$ denote the set of all bounded real-valued functions on S. In symbols we have
+	\[ M(S) = \{ f:S\to \R\ :\ \sup_{x\in S}\abs{f(x)}< \infty \}. \]
+	define $d: M(S)\times M(S) \to \R$ as 
+	\[ d(f,g)= \sup_{x\in S}\abs{f(x)-g(x)}. \]
+	The $(M(S),d)$ is a \textbf{complete metric space.}
+\end{proposition}
+
+\begin{proof}
+	First we need to show that this is actually a metric space, i.e. the function $d$ satisfies the metric properties. --> TOBE ADDED
+	
+	For the second part, which is more important, is to show that this metric space is actually complete. To show this, let $\seq{f}$ be a Cauchy sequence in $M(S)$. Thus from definition we have
+	\[ \forall \epsilon >0,\ \exists N>0\:\ \forall n,m>N \wh \sup_{x\in S}\abs{f_n(x)-f_m(x)} < \epsilon. \]
+	From the definition of suprimum (least upper bound), we can conclude that
+	\[ \forall x\in S \wh \abs{f_n(x) - f_m(x)} < \epsilon. \]
+	This means that for every $x\in S$ the sequence $f_n(x)$ forms a Cauchy sequence in $\R$, thus it converges to some value, say $\hat{f}(x)$. We claim that the Cauchy sequence $\seq{f}$ converges to $\hat{f}$. To show this we need to first show that $\hat{f} \in M(S)$ and the show that $f_n \to \hat{f}$.
+	
+	To show $\hat{f} \in M(S)$ we seek help from an special function $\textbf{0}$ which assigns the value $0 \in \R$ to every $x\in S$. Since $\seq{f}$ is Cauchy, then it is bounded, thus $\exists R > 0$ such that $f_n \in \ball{R}{\textbf{0}}$ for all $n \in \N$. Using the definition of open ball we can write
+	\[ \sup_{x\in S}\abs{f_n(x) - \textbf{0}(x)} = \sup_{x\in S}\abs{f_n(x)} < R. \]
+	From the definition of $\sup$ we can conclude that 
+	\[ \forall x\in S,\ \forall n\in \N \wh f_n(x) < R. \]
+	By $n\to \infty$ we can write
+	\[ \forall x\in S \wh \hat{f}(x) < R \implies \sup_{x\in S}\abs{\hat{f}(x)} \leq R. \]
+	This shows that $\hat{f} \in M(S)$.
+	
+	To show that $f_n \to \hat{f}$, let $\epsilon>0$ be given. Then since for every $x\in A$ the sequence $f_n(x)$ converges to $\hat{f}(x)$ we can fine $N_x \in \N$ such that $\forall n > N_x$ we have $\abs{f_n(x) - \hat{f}(x)} < \epsilon/2$. Let $N = \sup\{N_x\}$. We know that $N < +\infty$ since otherwise it means that there exists $N_x$ for some $x\in A$ that is larger than any real number, which contradicts the fact that $f_n(x)$ converges to $\hat{f}(x)$. Now $\forall n>N_x$ we have
+	\[ \forall x\in S:\ \abs{f_n(x) - \hat{f}(x)} < \epsilon/2. \]
+	This implies
+	\[ \sup_{x\in S} \abs{f_n(x) - \hat{f}(x)} \leq \epsilon/2 < \epsilon. \]
+	Thus $f \to \hat{f}$, and this completes the proof.
+\end{proof}
+
 
 \section{Hausdorff Topological Spaces}
 Metric spaces are natural extensions to the idea of $R^k$ along with the Euclidean distance function. However, we can go even further, and show that some notions we encountered before are really independent of a particular metric. All such arguments are under the umbrella of topological spaces. 
@@ -815,7 +849,7 @@ Similar to the other notions we have encountered so far, in a metric space, a co
 	This theorem has two parts as follows.
 	\begin{enumerate}[(a)]
 		\item $(a) \implies (b)$ Let $\seq{x}$ be a sequence in $K$, and $A = \{ x_n:\ n\in\N \}$. If $A$ is finite, then $\seq{x}$ has a constant sub-sequence, thus $(b)$ follows trivially. However, if $A$ is not finite, then by \autoref{cor:InfiniteSubsetOfCompactSetNotEmptDerSet} we know that $A' \neq \emptyset$. Also since $A \subseteq K$ implies $A' \subseteq K'$ but since $K$ is a compact set in an HTS, then $K$ is closed, hence $A' \subseteq K$. Let $z \in A',\ m \in \N$, and $\epsilon=1/m$. Then $\mathbb{B}(z;\epsilon) \cap A \neq \emptyset$. Thus $\exists n_m \in \N$ such that $x_{n_m}\neq z$ and $x_{n_m} \in A$. The sub-sequence $\{x_{n_k}\}$ approaches the point $z$. This completes the proof.
-		\item $(b) \implies (a)$
+		\item $(b) \implies (a)$ TOBEADDED
 	\end{enumerate}
 \end{proof}
 

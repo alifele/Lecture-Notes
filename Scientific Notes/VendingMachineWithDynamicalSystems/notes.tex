@@ -1,0 +1,36 @@
+\documentclass[10pt]{article}
+\usepackage{commands}
+
+
+
+\begin{document}
+
+
+
+
+
+
+
+
+
+ \begin{tikzpicture}[remember picture,overlay]
+         % If a chapter image has been specified
+%         \expandafter\ifstrequal\expandafter{Images/vendingMachine.png}{}{}{
+	                 % Output the chapter image
+	                 \node[
+	                 anchor=north west, % Anchor point on the image
+	                 inner sep=0pt, % Inner padding
+	                 ] at (current page.north west) {\includegraphics[angle=0,height=\paperheight]{Images/vendingMachine.png}};
+%	         }
+ \end{tikzpicture} 
+ 
+  
+  \vspace{-1cm}
+\heading{How to Make a Coffee Vending Machine using Dynamical Systems!}
+
+
+\newpage
+
+\input{Sections/SetsAndFunctions.tex}
+
+\end{document}
