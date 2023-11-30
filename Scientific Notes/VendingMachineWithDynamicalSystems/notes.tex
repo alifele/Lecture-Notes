@@ -1,4 +1,4 @@
-\documentclass[10pt]{article}
+\documentclass[12pt]{article}
 \usepackage{commands}
 
 
@@ -25,12 +25,36 @@
  \end{tikzpicture} 
  
   
-  \vspace{-1cm}
-\heading{How to Make a Coffee Vending Machine using Dynamical Systems!}
+  \vspace{-1.8cm}
+\heading{How to Make a Coffee Vending Machine Using Dynamical Systems!}
 
 
 \newpage
 
-\input{Sections/SetsAndFunctions.tex}
+\section{Introduction}
+This a an informal writing to share some ridiculous thoughts on making a vending using dynamical systems! I know this is a very inaccurate title, but what I really mean is to utilize the hysteresis mechanism that appears in some dynamical systems to design a very simple finite automate, from which we can easily design a simple vending machine.   
+
+
+\section{Hysteresis in Dynamical Systems}
+Some dynamical systems has a kind of ``memory'' or ``hysteresis'', in which the change in the state of the system in the bifurcation point depends on the specific direction that we approach the critical value for bifurcation. Although we can come up with much more simpler systems who admits hysteresis, here I am actually going to consider the following system
+\[ \dot{x}= rx + x^3 - x^5, \]
+where $\dot{x}$ means the time derivative of $x\in \R$, and $r\in\R$\ is a constant. By doing the bifurcation analysis on this particular system, we soon find out that the system has a pitchfork bifurcation and its bifurcation diagram is something like the following figure.
+\input{Images/bifurcation.tex}
+
+As we can see from the figure above, this system admits stable and unstable steady states for different values of the control parameter $r$. However, the interesting point for us here is the hysteresis mechanism that is hidden in the bifurcation diagram. The following figure makes this more clear. 
+
+\input{Images/hysteresis.tex}
+
+We call the upper branch of the stable steady state $\hat{x}_u$ (in which $u$ stands for up) and the middle branch of the stable steady state as $\hat{x}_d$ (in which $d$ stands for down). As we can trace on the diagram, starting with a steady state on the upper branch, and then decreasing the value of $r$, until we reach the bifurcation point at $r_d$, the state of the state suddenly jumps to $\hat{x}_d$, and it remains there for any sufficiently small perturbation around $r_d$. Then increasing the value of $r$, until we reach $r_u$ causes another jump in the steady state from the middle branch back to the upper branch. 
+
+This phenomena is really similar to the finite state machine, where we have discrete states and the transition between states is governed by the system input. Also, as we have seen in the digital electronic, we can design systems that the transition in their state depends on the \emph{rising edge} or \emph{falling edge} of the signal, and the parallel here with that notion, is the specific way in which we approach the critical points. Consider the following finite state machine diagram for this system.
+\input{Images/finiteStateMachine.tex}
+
+
+Thus in theory, we can put together a bunch of dynamical systems with hysteresis effect and fine tune their transition critical values and also engineer their sensitivity (falling edge transition or raising edge). For instance the following plot show a bunch of hypothetical critical values engineered for a hypothetical task.
+
+\input{Images/transitionEngineering.tex}
+
+Making a coffee vending machine using finite state machine is a classic homework problem in an undergraduate digital design course \footnote{A quick google search on ``vending machine with finite state machine'' will reveal lots of web pages as well as YouTube videos on some solved problems.}. It is needless to note that making a coffee vending machine with the hysteresis mechanism of dynamical systems is not practical and efficient design and this article is just intended to demonstrate the notion of hysteresis in a tangible way.
 
 \end{document}
