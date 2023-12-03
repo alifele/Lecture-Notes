@@ -11,11 +11,55 @@ By letting $\xi = x - x_0$ we can now write
 \[ \dot{\xi} = f_x(0,\alpha_0) \xi. \]
 This is a very simple ODE whose solution is the exponential function. Thus we will have
 \begin{align*}
-	f_x(0,\alpha_0) < 0 \implies \text{$x_0$ is stable}.\\
-	f_x(0,\alpha_0) > 0 \implies \text{$x_0$ is unstable}.
+	f_x(x_0,\alpha_0) &< 0 \implies \text{$x_0$ is stable}.\\
+	f_x(x_0,\alpha_0) &> 0 \implies \text{$x_0$ is unstable}.\\
+	f_x(x_0,\alpha_0) &=0 \implies \text{more terms from the Taylor's series is needed. } 
 \end{align*}
-Another way of seeing this is the following figure
-
+Another way of seeing this is the following figure. Note that we can still determine the type of stability by looking at the graph, despite the fact that in the classification above we have said that in that case more terms from the Taylor's series is needed. The point is that when we are looking at the graph, we automatically infer the higher order terms of the Taylor's series as well and that is why we arrive at the right conclusion often.
 \input{Images/review.tex}
 
-\subsection{Fold (Saddle-Note) Bifurcation}
+It turns out that because of the smooth dependence of the function $f$ on both parameters, by sufficiently small enough perturbation of the parameter $\alpha$ from $\alpha_0$ the stability type of the equilibrium point will remain the same up to topological equivalence. For example in the figure below, the type of equilibrium point has remained the same (in this case stable equilibrium) with sufficiently small perturbation of parameter $\alpha$.
+
+\input{Images/TopologicalTypeRemainsTheSame.tex}
+
+However, when $f_x(x_0,\alpha_0) = 0$, then it is possible that any perturbation of parameter $\alpha$ leads to the emergence or disappearance of a new type of equilibrium point, in which we say we have a \emph{bifurcation}. 
+
+
+\subsection{Intuitive Explanation of Bifurcation}
+In this section we will cover the intuitive explanation behind the notion of bifurcation and different types, and the next section we will cover the theory behind it and discuss the topological normal forms.
+\subsubsection{Fold (Saddle-Note) Bifurcation}
+The fold bifurcation is one of the simple type bifurcations where a saddle and a node emerges from blue sky as we vary the parameter $\alpha$. Following the line of reasoning from the section above, assume $f(x,\alpha_0)$ looks like the following in the neighborhood of the point $x_0$.
+
+\input{Images/IntuitiveFoldBifurcation.tex}
+
+Then as we can clearly see, any small perturbation of $\alpha$ will lead ot emergence or disappearance of new equilibria out of blue sky. We can not intuitively say that the requirements for such a bifurcation is the followings
+\begin{enumerate}[(i)]
+	\item $f(x_0,\alpha_0) = 0$,
+	\item $f_x(x_0,\alpha_0) = 0$,
+	\item $f_\alpha(x_0, \alpha_0) \neq 0$,
+	\item $f_{xx}(x_0,\alpha_0) = \neq 0$.
+\end{enumerate}
+
+It is also informative to look at the branching diagram on the $(\alpha-x)$ plane.
+
+\input{Images/BranchingDiagramFoldBifurcation.tex}
+
+
+\subsubsection{Transcritical Bifurcation}
+Another possible way that the function $f(x,\alpha)$ might change in the neighborhood of $x_0$ is the following diagram.
+
+\input{Images/TranscriticalBifurcation.tex}
+
+We can observe that the $f(x,\alpha)$ has a form like $f(x,\alpha) = \alpha (x-x_0) - (x-x_0)^2$. We can see that two equilibria corresponding to $\alpha>\alpha_0$ turns into a saddle type equilibria when $\alpha = \alpha_0$ and then turn into two equilibria points for $\alpha<\alpha_0$. The following branching diagram summarizes this fact.
+
+\input{Images/TranscriticalBranchingDaiagram.tex}
+
+Again, we can intuitively say that the function $f(x,\alpha)$ should have the following conditions in order to exhibit a Transcritical bifurcation.
+
+\begin{enumerate}[(i)]
+	\item $f(x_0,\alpha_0) = 0$,
+	\item $f_x(x_0,\alpha_0) = 0$,
+	\item $f_{xx}(x_0,\alpha_0) \neq  0$,
+	\item $f_{\alpha x} (x_0,\alpha_0) \neq 0$.
+\end{enumerate}
+Note that $f_{\alpha x} = \frac{d}{d\alpha} \frac{df}{dx}$, which simply is the rate of change of the $x-$slope of $f(x,\alpha)$ with change in $\alpha$.
