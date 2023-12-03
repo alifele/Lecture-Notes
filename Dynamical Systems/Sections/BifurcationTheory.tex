@@ -1,0 +1,21 @@
+\section{Bifurcation Theory}
+
+Here in this section we will explore the ideas of the bifurcation theory in the dynamical systems. This is a very important topic since it can give explanation for some sudden change that we see in the nature (for example the type I and type II phase transition in the thermodynamics). We will study them with the following classification.
+
+\subsubsection{A Quick Review}
+Consider the following family of dynamical systems parameterized by one parameter $\alpha$. 
+\[ \dot{x} = f(x,\alpha), \]
+where $f:\R \times \R \to \R$, and $x,\alpha \in \R$. And assume $f(x_0,\alpha_0)=0$, thus for $\alpha=\alpha_0$ the point $x_0$ is an equilibrium point. Now we can do the linearization at the equilibrium point and determine the type of stability. Thus after linearization we will have
+\[ \dot{x} = f_x(x_0,\alpha_0) (x-x_0). \]
+By letting $\xi = x - x_0$ we can now write
+\[ \dot{\xi} = f_x(0,\alpha_0) \xi. \]
+This is a very simple ODE whose solution is the exponential function. Thus we will have
+\begin{align*}
+	f_x(0,\alpha_0) < 0 \implies \text{$x_0$ is stable}.\\
+	f_x(0,\alpha_0) > 0 \implies \text{$x_0$ is unstable}.
+\end{align*}
+Another way of seeing this is the following figure
+
+\input{Images/review.tex}
+
+\subsection{Fold (Saddle-Note) Bifurcation}

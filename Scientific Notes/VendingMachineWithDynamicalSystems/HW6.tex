@@ -1,0 +1,99 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage{xcolor}
+\usepackage{nameref}
+\usepackage{hyperref}
+\usepackage{enumerate}
+\usepackage{mdframed}
+
+%\theoremstyle{definition}
+%\newtheorem{question}{Question}
+%
+%\theoremstyle{remark}
+%\newtheorem*{answer}{Answer}
+
+
+\newcommand{\abs}[1]{|#1|}
+
+
+\definecolor{QuestionColor}{RGB}{0, 115, 230} % Royal Blue
+\definecolor{AnswerColor}{RGB}{0, 150, 136}   % Teal
+
+
+\newtheoremstyle{blacknumbox} % Theorem style name
+{0pt} % Space above
+{0pt} % Space below
+{\normalfont} % Body font
+{} % Indent amount
+{} % Theorem head font
+{} % Punctuation after theorem head
+{0.25em} % Space after theorem head
+{\small\sffamily\bfseries\thmname{#1}~\thmnumber{#2} % Theorem text (e.g. Theorem 2.1)
+	\thmnote{\sffamily\bfseries---~#3.\hspace{0.25em}}} % Optional theorem note
+
+\theoremstyle{blacknumbox}
+\newtheorem{corollaryT}{Question}
+
+\newmdenv[
+skipabove=7pt, % Whitespace above box
+skipbelow=4pt, % Whitespace below box
+rightline=false, % Right line visible
+leftline=true, % Left line visible
+topline=false, % Top line visible
+bottomline=false, % Bottom line visible
+linecolor=orange, % Line color
+linewidth=4pt, % Line width
+backgroundcolor=orange!5, % Background color
+innerleftmargin=5pt, % Inside left margin width
+innerrightmargin=5pt, % Inside right margin width
+innertopmargin=5pt, % Inside top margin height
+innerbottommargin=5pt, % Inside bottom margin height
+leftmargin=0cm, % Outside left margin width
+rightmargin=0cm % Outside right margin width
+]{cBox}
+
+\newenvironment{question}{\begin{cBox}\begin{corollaryT}}{\end{corollaryT}\end{cBox}}
+
+\theoremstyle{blacknumbox}
+\newtheorem*{answerT}{Answer}
+
+\newmdenv[
+skipabove=0pt, % Whitespace above box
+skipbelow=10pt, % Whitespace below box
+rightline=false, % Right line visible
+leftline=true, % Left line visible
+topline=false, % Top line visible
+bottomline=false, % Bottom line visible
+linecolor=cyan, % Line color
+linewidth=4pt, % Line width
+backgroundcolor=cyan!5, % Background color
+innerleftmargin=5pt, % Inside left margin width
+innerrightmargin=5pt, % Inside right margin width
+innertopmargin=5pt, % Inside top margin height
+innerbottommargin=5pt, % Inside bottom margin height
+leftmargin=0cm, % Outside left margin width
+rightmargin=0cm % Outside right margin width
+]{answerBox}
+
+\newenvironment{answer}{\begin{answerBox}\begin{answerT}}{\end{answerT}\end{answerBox}}
+
+
+
+\begin{document}
+	
+	\input{Q1.tex}
+	\input{Q2.tex}
+	\input{Q3.tex}
+	\input{Q4.tex}
+	\input{Q5.tex}
+	\input{Q6.tex}
+	\input{Q7.tex}
+	\input{Q8.tex}
+	\input{Q9.tex}
+	\input{Q10.tex}
+	
+
+	
+\end{document}
