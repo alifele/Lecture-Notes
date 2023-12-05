@@ -63,3 +63,26 @@ Again, we can intuitively say that the function $f(x,\alpha)$ should have the fo
 	\item $f_{\alpha x} (x_0,\alpha_0) \neq 0$.
 \end{enumerate}
 Note that $f_{\alpha x} = \frac{d}{d\alpha} \frac{df}{dx}$, which simply is the rate of change of the $x-$slope of $f(x,\alpha)$ with change in $\alpha$.
+
+
+\subsubsection{Pitchfork Bifurcation}
+In the pitchfork bifurcation, a stable equilibrium point turns into two stable equilibrium points separated by an unstable equilibrium point (in the case of the super-critical one). In this bifurcation, the vector field changes as depicted by the following figure.
+\input{Images/pitchForkBifurcationFunctionChange.tex}
+
+The dependence of $f(x,\alpha)$ on the variable $(x,\alpha)$ has the form $f(x,\alpha) = \xi_\alpha \xi_x - \xi_x^3$, where $\xi_\alpha = \alpha - \alpha_0$ and $\xi_x = x - x_0$.
+
+Also, the following figure shows that branching diagram for the pitchfork bifurcation.
+\input{Images/pitchForkBranchingDiagram.tex}
+
+Again, we can intuitively figure out what conditions the functions $f(x,\alpha)$ should satisfy in order to have this kind of bifurcation.
+
+\begin{enumerate}[(i)]
+	\item $f(x-x_0,\alpha)$ be locally odd (in the neighborhood of $x_0$) with respect to $x$, i.e. $f(-(x-x_0),\alpha) = - f(x-x_0,\alpha)$ and $f(x_0,\alpha_0) =0 $. The local oddness also leads to 
+	\begin{enumerate}[(a)]
+		\item $f(x_0,\alpha) = 0$,
+		\item $f_{xx}(x,\alpha)=0$, as well as any other even derivative.
+	\end{enumerate} 
+	\item $f_x(x_0,\alpha_0) =0$,
+	\item $f_{xxx}(x_0,\alpha_0) \neq 0$,
+	\item $f_{\alpha x} (x_0,\alpha_0) \neq 0$.
+\end{enumerate}

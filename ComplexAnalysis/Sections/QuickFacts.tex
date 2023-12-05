@@ -1,0 +1,67 @@
+\section{Quick Facts}
+
+\begin{fact}[Harmonic Function]
+	Let $f: D \to \C$ be a holomorphic function in the connected open set $D \subseteq \C$, where $f(x,y) = u(x,y) + i v(x,y)$ where $u,v: \R^2 \to \R$. Then the function $u,v$ are harmonic functions.
+\end{fact}
+
+\begin{proof}
+	Since $f$ is holomorphic in the open connected subset $D \subseteq \C$, then it means that the function $u,v$ satisfy the Cauchy-Riemann equations, the first derivatives exists, and are continuous. As we will show later, in fact $u,v$ are smooth function, so any higher derivative exists and is continuous.
+	From Cauchy-Riemann we have
+	\[ u_x = v_y, \quad u_y = - v_x. \]
+	Calculating the second derivatives will yield
+	\[ u_{xx} = v_{yx}, \quad u_{yy} = -v_{xy}. \]
+	Note that since $u,v$ are smooth, then $v_{xy} = v_{yx}$. Then we can conclude that 
+	\[ u_xx + u_yy = 0, \]
+	which indicates that $u$ is a harmonic function (it satisfies the Laplace equation). The same reasoning works for $v$.
+\end{proof}
+
+\hrule
+
+\begin{fact}[Harmonic Conjugate Function]
+	Let $u: \Omega \to R$ be a harmonic function define on the connected open set $\Omega \subseteq \R^2$. Then $v: \Omega \to \R$ is a \emph{harmonic conjugate} of $u$ if and only if the function $f$ of the complex variable $z := x+iy \in \Omega $ is holomorphic.
+\end{fact}
+
+\begin{exm}
+	\label{exm:harmonicConjugateExample}
+	Construct an analytic function whose real part is $u(x,y) = x^3 - 3xy^2 + y$.
+\end{exm}
+
+
+\begin{answer}
+	Let $f(z) = u(x,y)+i v(x,y)$ holomorphic as required. Then it should satisfy the Cauchy-Riemann equations.
+	\[ v_y = 3x^2 - 3y^2 , \quad v_x = 6xy -1. \]
+	Integrating the first expression yields in  $v(x,y) = 3x^2y - y^3 + f(x)$ and differentiating it and comparing it with the second expression above yields $f(x) = -x + C$ for some $C \in \R$. Thus a complex conjugate of $u(x,y)$ will be
+	\[ v(x,y) = 3x^2y + y^3 - x + C. \]
+\end{answer}
+
+\hrule
+
+\begin{fact}
+	Let $f: \Omega \to \C$ where $\Omega \subseteq \C$ is an open connected set. Assume $f(x+iy) = u(x,y) + i v(x,y)$. If $f$ is holomorphic at $\Omega$, then $v$ is a harmonic conjugate function of $u$. Further more, the level sets of these function are perpendicular to each other everywhere in the domain $\Omega$.
+\end{fact}
+
+\begin{proof}
+	let $(x_0,y_0) \in \Omega$. The gradient of $u$ and $v$ are given as
+	\[ \nabla u = (u_x, u_y), \quad \nabla v = (v_x, v_y). \]
+	When evaluated at $(x_0, y_0)$, they will be the vectors perpendicular to the corresponding level curves. We calculate the inner product of these vectors.
+	\[ \nabla u (x_0, y_0) \cdot \nabla v(x_0, v_0) = u_x(x_0,y_0) y_x(x_0, y_0) + u_y(x_0, y_0) v_y(x_0, y_0) \]
+	Since $f$ is holomorphic at $\Omega$, then it satisfies the Cauchy-Riemann equations. Thus we get 
+	\[ \nabla u (x_0, y_0) \cdot \nabla v(x_0, v_0) = 0. \] 
+	This implies that the level curves are perpendicular.
+\end{proof}
+The following figure shows this fact for the harmonic conjugate functions we calculated in Example \autoref{exm:harmonicConjugateExample}.
+\begin{center}
+	\includegraphics[scale=0.5]{Images/HarmonicConjugate.png}
+\end{center}
+
+
+\hrule
+
+\begin{fact}[Harmonic Conjugacy is Not Symmetric]
+	If $v$ is a harmonic conjugate of $u$, then it means that $f(x+iy)=u(x,y) + i v(x,y)$ is holomorphic at the open, connected disk of definition. Then this implies that $if(x+iy)=-v + iu$ is holomorphic as well. Thus we conclude that $u$ is a harmonic conjugate of $-v$.
+\end{fact}
+
+\hrule
+\begin{fact}[The parallel between Picard iteration and Newton's method]
+	As we know from Galois theory, there are no closed form formula for the roots of polynomials of order 5 and higher. On the other hand, from the fundamental theorem of algebra we know that such roots exists and the number of roots is in fact the same as the degree of polynomials (multiplicity counted). However, in general, to find the roots of the degree 5 or higher polynomials we use the methods like the Newton's method. There is a beautiful parallel between this and the Picard iteration in finding the solution of an ODE. In both cases, we use an iterative approach to find the solution of a particular equation.
+\end{fact}

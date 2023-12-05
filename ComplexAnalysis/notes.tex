@@ -1,11 +1,15 @@
 \documentclass[12pt]{article}
-\usepackage[sc]{mathpazo}
+
 \usepackage{commands}
 \hypersetup{colorlinks = true}
 \let\oldphi\phi 
 \let\phi\varphi 
 \let\varphi\oldphi
 
+
+\newtheorem{fact}{Fact}[section]
+\newtheorem{exm}{Example}[section]
+\newtheorem*{answer}{Answer}
 
 
 \begin{document}
@@ -24,6 +28,8 @@ The content of this lecture note will be mostly based on the course MATH 305 (Ap
 
 \newpage
 \input{Sections/sec1.tex}
+\newpage
+\input{Sections/QuickFacts.tex}
 
 
 \end{document}
