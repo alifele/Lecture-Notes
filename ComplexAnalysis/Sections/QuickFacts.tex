@@ -1,5 +1,7 @@
 \section{Quick Facts}
 
+\subsection{Analytic Functions}
+
 \begin{fact}[Harmonic Function]
 	Let $f: D \to \C$ be a holomorphic function in the connected open set $D \subseteq \C$, where $f(x,y) = u(x,y) + i v(x,y)$ where $u,v: \R^2 \to \R$. Then the function $u,v$ are harmonic functions.
 \end{fact}
@@ -64,4 +66,58 @@ The following figure shows this fact for the harmonic conjugate functions we cal
 \hrule
 \begin{fact}[The parallel between Picard iteration and Newton's method]
 	As we know from Galois theory, there are no closed form formula for the roots of polynomials of order 5 and higher. On the other hand, from the fundamental theorem of algebra we know that such roots exists and the number of roots is in fact the same as the degree of polynomials (multiplicity counted). However, in general, to find the roots of the degree 5 or higher polynomials we use the methods like the Newton's method. There is a beautiful parallel between this and the Picard iteration in finding the solution of an ODE. In both cases, we use an iterative approach to find the solution of a particular equation.
+\end{fact}
+
+\hrule
+
+\begin{fact}
+	A Taylor expansion about 0 is called a Maclaurin form or Maclaurin series.
+\end{fact}
+
+
+
+\subsection{Polynomials and Rational Functions}
+
+\begin{fact}
+	Every non-constant polynomial with complex coefficients has at least one zero in $\C$. It immediately follows that every polynomial of degree $n$ denoted by $P_n(z)$ with complex coefficients has exactly $n$ zeros in $\C$ (counting multiplicities). Thus we can factor every polynomial as
+	\[ P_n(z) = a_n (z-z_1)^{d_1}(z-z_2)^{d_2} \hdots (z-z_k)^{d_k}, \]
+	where $d_1 + d_2 + \cdots + d_k = n$.
+	
+	Then when we say the polynomial $P_n(z)$ has zero of order $m$, it means that we can write it as
+	\[ P_n(z) = (z-z_0)^m Q(z), \]
+	where $Q(z)$ is a degree $n-m$ polynomial such that $Q(z_0) \neq 0$.
+\end{fact}
+
+
+\hrule
+
+
+\begin{fact}
+	We can use the following trick to expand any polynomial about any $z_0 \in \C$. For instance, we want to express the polynomial $P_3(z) = -2z^3 -4z^2 + 10z + 12$ in terms of powers of $(z-1)$. To do this we can write $P_3(z) = a_0 + a_1(z-1)+a_2(z-1)^2 + a_3(z-1)^3$, and it only remains to determine the coefficients. It immediately reveals that 
+	\begin{align*}
+		P_3(1) &= a_0, \\
+		P_3'(1) &= a_1, \\
+		P_3''(1) &= 2 a_2, \\
+		P_3'''(1) &= 2\cdot 3 a_3.
+	\end{align*}
+	thus we can easily calculate the unknown coefficients. 
+\end{fact}
+
+
+\hrule
+
+\begin{fact}[Poles of a Function]
+	A rational function is a function that the ratio of two polynomials. I.e.
+	\[ R_{r,s}(z) = \frac{P_r(z)}{Q_s(z)}. \]
+	The rational function is not defined at the zeros of the denominator. However, we can cancel out any common zeros in the denominator and numerator and then arrive at the following expression
+	\[ F(z) = \frac{a_m(z-z_1)(z-z_2)\cdots(z-z_m)}{b_n(z-\xi_1)(z-\xi_2)\cdots(z-\xi_n)} \]
+	Note that the common zeros of the numerator and the denominator are canceled. Then the set $\{ \xi_1, \xi_2, \cdots, \xi_n \}$ are the poles of the rational function $F$. However, if we want to also count the multiplicities, we can write
+	\[ F(z) = \frac{a_m(z-z_1)^{d_1}(z-z_2)^{d_2}\cdots(z-z_k)^{d_k}}{b_n(z-\xi_1)^{t_1}(z-\xi_2)^{t_2}\cdots(z-\xi_l)^{t_l}}, \]
+	from which we can infer that for example $\xi_1$ is a pole of degree $t_1$, etc.
+	
+	\textbf{In a nutshell,} the zero of order $m$ of denominator is the pole of degree $m$ of the rational function. Thus it immediately follows that if $\xi_1$ is the pole of order $t_1$ of  $F(z)$, then we can write
+	\[ H(z) = (z-\xi_1)^{t_1} F(z), \] 
+	in which we have
+	\[ \lim_{z\to \xi_1} H(z) \neq 0 < \infty. \]
+	
 \end{fact}
