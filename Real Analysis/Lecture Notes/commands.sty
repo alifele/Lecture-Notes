@@ -372,6 +372,7 @@ newparttoc, % Required for writing the part toc entry number in a standard way (
 
 \theoremstyle{blacknumNOTboxExample}
 \newtheorem{exampleT}{Example}[chapter]
+\newtheorem{problemT}{Problem}[chapter]
 \newtheorem*{remark}{Remark}
 
 
@@ -499,7 +500,9 @@ rightmargin=0cm % Outside right margin width
 \newenvironment{lemma}{\begin{lemmaCorBox}\begin{lemmaT}}{\end{lemmaT}\end{lemmaCorBox}}
 \newenvironment{summary}{\begin{summaryBox}\begin{summaryT}}{\end{summaryT}\end{summaryBox}}
 \newenvironment{corollary}{\begin{lemmaCorBox}\begin{corollaryT}}{\end{corollaryT}\end{lemmaCorBox}}
-\newenvironment{example}{\begin{exampleT}}{\hfill{\tiny\ensuremath{\blacksquare}}\end{exampleT}\end{exampleT}}
+\newenvironment{example}{\begin{exampleT}}{\hfill{\tiny\ensuremath{\blacksquare}}\end{exampleT}}
+
+\renewenvironment{problem}{\begin{problemT}}{\hfill{\tiny\ensuremath{\blacksquare}}\end{problemT}}
 
 \newcommand{\definitionTautorefname}{Definition}
 \newcommand{\theoremTautorefname}{Theorem}
@@ -508,6 +511,7 @@ rightmargin=0cm % Outside right margin width
 \newcommand{\summaryTautorefname}{Summary}
 \newcommand{\corollaryTautorefname}{Corollary}
 \newcommand{\exampleTautorefname}{Example}
+
 
 
 

@@ -1,0 +1,27 @@
+\chapter{Sequences and Limits}
+
+\begin{problem}
+	Show that the following properties hold for arbitrary countable sets.
+	\begin{enumerate}[(a)]
+		\item All subsets of countable sets are countable.
+		\item Any union of a pair of countable sets is countable.
+	\end{enumerate}
+\end{problem}
+
+
+
+\begin{proof}
+	~\vspace{2pt}
+	\begin{enumerate}[(a)]
+		\item Let $A$ be a countable set, and $C \subseteq A$ be a subset. Since $A$ is countable, then there is a numeration for its elements, i.e.
+		\[ A = \{ a_1, a_2, \cdots \}. \]
+		Then for $x \in C$, there exists $n \in \N$ such that $x = a_n$. Define $g: C \to \N$, and let $g(x) = n$. Since $g$ is one-to-one, then $C$ is at most countable.
+		
+		\item Let $A, B$ be countable sets, and $X = A \cup B$. If $A, B$ are finite, then the statement is trivially true. But if $A, B$ are infinite, then since $A$ and $B$ are countable, then there exists bijection
+		\begin{align*}
+			g_A: A \to \N, \\
+			g_B: B \to \N.\\
+		\end{align*}
+		Let $x \in A \backslash B$. Then $g_A(x) = n$ for some $n \in \N$. Define $f: X \to \N$ and let $f(x) = 2n$. Also for $y \in B$, we have $g_B(y) = m$, then define $f(y) = 2m+1$. Due to the construction, the function $f$ is one-to-one, and since $\N$ is countable, then $X$ is at most countable.
+	\end{enumerate}
+\end{proof}

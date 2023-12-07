@@ -121,3 +121,87 @@ The following figure shows this fact for the harmonic conjugate functions we cal
 	\[ \lim_{z\to \xi_1} H(z) \neq 0 < \infty. \]
 	
 \end{fact}
+
+
+\hrule
+
+
+\begin{fact}[Partial Fraction Decomposition]
+	The rational functions $R_{m,n} = \frac{P_m(z)}{Q_n(z)}$ can be written as partial fractions. Note that when $m>n$, we first need to do the long division and then do the partial fraction. The following example makes this more clear.
+\end{fact}
+
+\begin{exm}
+	Do partial fraction decomposition for the following rational function.
+	\[ F(z) = \frac{2z^4+7z^3+10z^2+6z+1}{z^3+3z^2+3z+1}. \]
+\end{exm}
+
+\begin{answer}
+	First we need to do the long division, since the degree of the numerator is larger than the degree of denominator. After doing the long division we will have
+	\[ F(z) = 2z + 1 + \frac{z^2 + 2z + 1}{z^3+3z^2+3z+1}. \]
+	Now we can do the partial fraction decomposition on the second term. We can write it as
+	\[ P(z) = \frac{z^2 + 2z + 1}{(z+1)^3} = \frac{A_0^{(1)}}{(z-1)^3} + 
+	\frac{A_1^{(1)}}{(z-1)^2} + \frac{A_2^{(1)}}{(z-1)} \]
+	Now by some linear algebra and solving the system of equations we will get
+	\[ P(z) = \frac{1}{(z-1)^3} + 
+	\frac{-1}{(z-1)^2} + \frac{1}{(z-1)}. \]
+	Finally, we can write
+	\[ F(z) = 2z + 1 +  \frac{1}{(z-1)^3} + 
+	\frac{-1}{(z-1)^2} + \frac{1}{(z-1)}. \]
+	Later, we will see that this is in fact the Laurent expansion of the function $F(z)$. 
+\end{answer}
+
+\hrule
+
+\begin{fact}[Trick For Partial Fraction Decomposition]
+	We can do partial fraction decomposition in a more elegant way. Complex analysis is a place that geometry, analysis and algebra meet each other. As we replaced the algebraic operations in expanding a polynomial about an arbitrary point, by analysis and calculating the derivatives, there is no surprise that such a substitution is possible here as well. Also, we can see this blend of analysis and algebra as a hint that\textbf{ analysis has a very clean algebraic manifestation in the space of polynomials.  } The following example makes this link more clear. 
+\end{fact}
+
+\begin{exm}
+	Do partial fraction decomposition for the following rational function.
+	\[ F(z) = \frac{2z^4+7z^3+10z^2+6z+1}{z^3+3z^2+3z+1}. \]
+\end{exm}
+
+\begin{answer}
+	As we saw in the question above,we can write  $F(z)$ as 
+	\[ F(z) = 2z + 1 + \frac{z^2 + 2z + 1}{z^3+3z^2+3z+1}. \] 
+	Denote the last term as
+	\[ P(z) = \frac{z^2 + 2z + 1}{z^3+3z^2+3z+1} = \frac{z^2 + 2z + 1}{(z+1)^3}. \]
+	Now the trick is as follows. Assume we have the partial fraction in the following from
+	\[ P(z)  = \frac{A_0^{(1)}}{(z+1)^3} + \frac{A_1^{(1)}}{(z+1)^2} + \frac{A_2^{(1)}}{(z+1)}. \]
+	Thus the problem is now to find the values of the coefficients. We can it easily by multiplying both sides at $(z+1)^3$. Then we will have
+	\[ Q(z) = (z+1)^3 P(z) = A_0^{(1)} + A_1^{(1)} (z+1) + A_2^{(1)}(z+1)^2 .\]
+	It immediately follows that 
+	\begin{align*}
+		A_0^{(1)} &= \lim_{z\to-1} Q(z), \\
+		A_1^{(1)} &= \lim_{z\to-1} \frac{d}{dz} Q(z), \\
+		A_1^{(2)} &= \lim_{z\to-1} \frac{1}{2!} \frac{d^2}{dz^2} Q(z).
+	\end{align*}
+	Note that we have used the notion of the limit in the above equations (instead of direct substitution) because $P(z)$ and thus $Q(z)$ is not defined at the point $z = -1$.
+\end{answer}
+
+
+\hrule 
+
+\begin{fact}
+	If $P(z) = a_n (z-z_1)^{d_1} (z-z_2)^{d_2} \cdots (z-z_r)^{d_r}$, then the partial fraction expansion of the logarithmic derivative $P'/P$ is given by
+	
+	\[ \frac{P'(z)}{P(z)} = \frac{d_1}{z-z_1} + \frac{d_2}{z-z_2} + \cdots + \frac{d_r}{z-z_r}. \]
+\end{fact}
+
+\begin{proof}
+	It immediately follows from the generalization of the derivative rule $(fgh)' = f'gh + fg'h + fgh'.$
+\end{proof}
+
+\hrule
+
+\begin{fact}
+	If $P(z)$ is any polynomial defined on the complex plane, then all of the zeros of $P'(z)$ lie in the convex hull of the zeros of $P(z)$.
+\end{fact}
+
+\begin{proof}
+	See the questions 18,19,20, and 21 of Exercise 3.1, Snider book. 
+\end{proof}
+
+\hrule
+
+
