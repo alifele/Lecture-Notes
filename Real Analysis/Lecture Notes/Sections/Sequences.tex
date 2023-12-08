@@ -1,14 +1,18 @@
 \chapter{Sequences and Limits}
 
+
+\begin{proposition}[Sequential characterization of countable sets]
+	Let $X$ be a countable set. Then, $X$ is a range of some sequence $\{x_n\}$. To put it on other words, there is an \emph{onto} function $f: \N \to X$.
+\end{proposition}
+
 \begin{problem}
 	Show that the following properties hold for arbitrary countable sets.
 	\begin{enumerate}[(a)]
 		\item All subsets of countable sets are countable.
 		\item Any union of a pair of countable sets is countable.
+
 	\end{enumerate}
 \end{problem}
-
-
 
 \begin{proof}
 	~\vspace{2pt}
@@ -23,5 +27,171 @@
 			g_B: B \to \N.\\
 		\end{align*}
 		Let $x \in A \backslash B$. Then $g_A(x) = n$ for some $n \in \N$. Define $f: X \to \N$ and let $f(x) = 2n$. Also for $y \in B$, we have $g_B(y) = m$, then define $f(y) = 2m+1$. Due to the construction, the function $f$ is one-to-one, and since $\N$ is countable, then $X$ is at most countable.
+
 	\end{enumerate}
+\end{proof}
+
+
+\begin{problem}
+	\label{prob:unionOfCountableManyisCountable}
+	Show that the following property holds for countable sets: If
+	\[ S_1, S_2, S_3, \cdots \]
+	is a sequence os countable sets of real numbers,then the set $S$ formed by taking all elements that belong to at least one of the sets $S_i$ is also a countable set. 
+\end{problem}
+
+\begin{proof}
+	Let
+	\[ X = \bigcup_{i \in \N} S_i. \]
+	Let $x \in X$. Then there exists $I \subseteq \N$ such that $\forall i \in I$ we have $x \in S_i$. Let $m = \min(I)$. Note that due to the construction of $X$, the set $I$ is not empty, and since it is a subset of natural numbers, then there exists a unique minimum. So far, we have $x \in S_m$. Since $S_m$ is countable, then there exists $f_m: S_m \to \N$ one-to-one (note that since there is a possibility that $S_m$ might be finite, then requiring $f_m$ be one-to-one, given that the co-domain is countable is enough for expressing the fact $f_m$ is at most countable). Thus $f_m(x)=n$ for some $n \in \N$. Define $F: X \to \N \times \N$, and let $F(x) = (m,n)$. Do the the construction of $F$, it is one-to-one, and since $\N \times \N$ is countable, then $X$ is at most countable. 
+\end{proof}
+
+
+\begin{problem}
+	Let $X$ be a family of sets, and $\sim$ a relation on $X$ defined as below,
+	\[ A, B \in X,\ A\sim B \biImp \exists f: A \to B,\ \text{a bijection}. \]
+	In words, when $A \sim B$ we can say $A$ and $B$ have the same cardinality. Show that $\sim$ is an equivalence relation. 
+	
+	\textbf{A side note:} There are lots of parallel notions for this in mathematics. For example in topology, a homeomorphism (bijective and continuous) define an equivalence relation on topological spaces, in differential geometry, a diffeomorphism does the job, in group theory, an isomorphism is the parallel notion, and in general, all of these notions are generalized with the notion of morphism in category theory.
+\end{problem}
+
+\begin{proof}
+	~\vspace{2pt}
+	\begin{enumerate}[(a)]
+		\item \textbf{Reflexivity.} Let $A \in X$. Then $id_A: A \to A$, is an bijective map (identity map). Thus $A \sim A$.
+		\item \textbf{Symmetry.} Let $A, B \in X$, and $A \sim B$. Thus we know $\exists f: A \to B$, a bijection. Let $g = f^{-1}: B \to  A$. Due to the construction $g$ is also bijective. Thus $B \sim A$.
+		\item \textbf{Transitivity.} Let $A, B, C \in X$, $A \sim B$, and $B \sim A$. Then $\exists f: A\to B$ and $g: B \to C$ injective. Define $h: A \to B$, $h = g \circ f$. Due to the construction, $h$ is also bijective. Thus $A \sim C$.
+	\end{enumerate}
+\end{proof}
+
+
+\begin{problem}
+	We define a real number to be \emph{algebraic} is it is a solution of some polynomial equation
+	\[ a_n x^n + a_{n-1}x^{n-1} + \cdots + a_1 x + a_0 = 0, \]
+	where all the coefficients are integers. A real number that is not algebraic, is called a transcendental number. Prove that the set of all algebraic numbers is countable.
+\end{problem}
+
+\begin{proof}
+	The set of all polynomials of degree $n-1$ is identified with $\Z^{n}$, which is countable. Thus the set all such polynomials is 
+	\[  X = \bigcup_{n\in\N} \Z^{n}.\]
+	As we proved in the Problem \autoref{prob:unionOfCountableManyisCountable}, $X$ is countable. On the other hand, every polynomial has a countable number of zeros. Thus The set of all zeros of all polynomial with integer coefficients is countable.
+\end{proof}
+
+\begin{problem}
+	Let $\seq{s}$ be a sequence in $\R$ converging to $L \in \R$. Prove that the following definition is the equivalent to the original definition of converges.
+	\[ \forall m \in \N,\ \exists N\in\N:\ \forall n> N \wh \abs{s_n - L} < 1/m.  \]
+	\textbf{Side note.} This is a useful equivalent definition of convergence, because to check a sequence converges is enough to check the definition above for the integer $m$'s only.
+\end{problem}
+\begin{proof}
+	The fact that the original definition implies the definition above is trivial. It suffice to let $\epsilon = 1/m$. However, for the converse, we assume that the definition above is true and we want to infer the original definition of convergence. Let $\epsilon>0$ is give. Then $\exists m \in \N$ such that $1/m < \epsilon$ (The Archimedes property for real numbers). On the other hand since we have assumed that the altered definition is true, them $\exists N \in \N$ such that $\forall n >N$ we have
+	\[ \abs{s_n - L} < 1/m < \epsilon. \]
+	This completes the proof.
+\end{proof}
+
+
+\begin{problem}
+	If $\{s_n\}$ is a sequence of positive real numbers converging to a positive number $L$, show that $\{\sqrt{s_n}\}$ converges to $\sqrt{L}$.
+\end{problem}
+\begin{proof}
+	Since $s_n \to L$, then $\exists N_1 > 0$ such that $\forall n > N_1$ we have $s_n < L+1$. Thus $\sqrt{s_n}<\sqrt{L+1}$, which implies $\sqrt{s_n} + \sqrt{L} < \sqrt{L+1} + \sqrt{L} = M$, for $M \in \R$. For a given $\epsilon>0$ let $\epsilon_0 = M \epsilon$. We know $\exists N_2>0$ such that $n>N_2$ we have $\abs{s_n - L} = \abs{\sqrt{s_n} - \sqrt{L}} \abs{\sqrt{s_n}+\sqrt{L}} < \epsilon_0$. Then $\abs{\sqrt{s_n} - \sqrt{L}} < \epsilon_0 /M = \epsilon $. This completes the proof.
+\end{proof}
+
+
+\begin{problem}
+	Show that the sequence 
+	\[ a_n = n^p + \alpha_1 n^{p-1} + \alpha_2 n^{p-2} + \cdots + \alpha_p  \]
+	diverges to $\infty$, where $p$ is a positive integer and $\alpha_1, \alpha_2, \cdots, \alpha_p$ are real numbers (positive or negative). 
+\end{problem}
+
+\begin{proof}
+	We construct the sequence $\{b_n\}$ such that $b_n \leq a_n$ always hold.
+	\[ b_n = n^p - \abs{\alpha_1}n^{p-1} -\abs{\alpha_2}n^{p-2}  - \cdots - \abs{\alpha_p}. \]
+	To demonstrate the proof in a more clear way, we assume $p=4$. Now we can solve the following inequalities
+	\begin{align*}
+		1/4 n^4 - \abs{\alpha_1}n^3 > 1/8 n^4 &\implies n > \abs{8\alpha_1},\\
+		1/4 n^4 - \abs{\alpha_2}n^2 > 1/8 n^4 &\implies n > \abs{8\alpha_2}^{1/2},\\
+		1/4 n^4 - \abs{\alpha_3}n^1 > 1/8 n^4 &\implies n > \abs{8\alpha_3}^{1/3},\\
+		1/4 n^4 - \abs{\alpha_4}n > 1/8 n^4 &\implies n > \abs{8\alpha_4}^{1/4},\\
+	\end{align*}
+	Let $N = \max\{ \abs{8\alpha_1}, \abs{8\alpha_2}^{1/2},\abs{8\alpha_3}^{1/3},\abs{8\alpha_4}^{1/4}\}$. Then for $n > N$ all of the inequalities above holds. Thus we can write
+	\[  n^4 + \alpha_1 n^3 + \alpha_2 n^2 + \alpha_3 n + \alpha_4 > n^4 - \abs{\alpha_1}n^3 - \abs{\alpha_2}n^2 - \abs{\alpha_3} n - \abs{\alpha_4} > 1/2 n^4. \]
+	Since the very last term ($1/2n^4$) diverges, then the sequence $a_n$ diverges.
+\end{proof}
+
+
+\begin{problem}
+	Prove that if $\seq{s}$ bounded, then $\{s_n/n\}$ converges.
+\end{problem}
+\begin{proof}
+	We propose that the $s_n/n \to 0$. Since $s_n$ is bounded, then there is $M>0$ such that $\abs{s_n}<M$ for all $n \in \N$. For a given $\epsilon>0$, let choose a natural number $N>M/\epsilon$. Then $\forall n>N$ we have
+	\[ \abs{s_n/n} < \abs{s_n}/\abs{n} < M/\abs{n} < M\epsilon/M = \epsilon. \]
+	This implies that $\{s_n/n\}$ converges to zero.
+\end{proof}
+
+\begin{problem}[Order property in limits]
+	Let $\seq{t}$ and $\seq{s}$ be two real sequences that converge to $T$ and $S$ respectively, and also $\forall n \in \N$ we have $s_n \leq t_n$. Prove that $T \leq S$
+	
+	\textbf{Side note:} By this proof you will show that the limits preserve the order property, and this fact is the main idea behind the squeeze theorem.
+\end{problem} 
+
+\begin{proof}
+	Since $t_n \geq s_n$ for all $n\in\N$, then $t_n - s_n \geq 0$. Thus $t_n - s_n \pm T \pm S < 0$, and we can re-arrange the terms as $(t_n - T) + (S - s_n) + (T-S) >0$. On the other hand, since $s_n \to S$ and $t_n \to T$, then for $\epsilon>0$ there exists $N_1 > 0, N_2 > 0$ such that $n>N_1$ implies $\abs{s_n - S} < \epsilon/2$ and $n>N_2$ implies $\abs{t_n - T} < \epsilon/2$. Let $N = \max\{N_1,N_2\}$. So $\forall n>N$ we will have
+	\[ \epsilon/2 + \epsilon/2 + (T-S) > (t_n - T) + (S - s_n) + (T-S) > 0. \]
+	This implies $T-S > -\epsilon$ for all $\epsilon>0$. Thus we conclude $T- S \geq 0 \implies T > S$.
+\end{proof}
+
+
+\begin{problem}
+	A careless student gives the following as a proof of the squeeze theorem. Find the flaw:
+	
+	"If \(\lim_{{n \to \infty}} s_n = \lim_{{n \to \infty}} t_n = L\), then take limits in the inequality \(s_n \leq x_n \leq t_n\) to get \(L \leq \lim_{{n \to \infty}} x_n \leq L\). This can only be true if \(\lim_{{n \to \infty}} x_n = L\)."
+	
+\end{problem}
+\begin{proof}
+	Formally, the student turns the inequality into two pieces, i.e. $s_n \leq x_n$ and $x_n \leq t_n$ and tries to apply the order property of limits to each of them. But the problem is that the squeeze theorem only states that $s_n$ and $t_n$ has limits and does not have any information about the existence of limit for $x_n$. Thus we can not simply apply the limit to the inequality and infer the squeeze theorem.
+\end{proof}
+
+\begin{problem}
+	Let $\{s_n\}$ be a sequence of positive numbers. Show that the condition
+	\[ \lim_{n\to\infty} \frac{s_{n+1}}{s_n} < 1 \]
+	implies $s_n \to 0$.
+\end{problem}
+\begin{proof}
+	Let $\lim_{n\to\infty}\frac{s_{n+1}}{s_n} = \alpha < 1 $. Also, since $\forall n\in\N$ we have $s_n > 0$, then $\alpha\geq0$. So $0 \leq \alpha < 1$. Define $d = (1-\alpha)/2$, thus $1/2 \leq d < 1$ and $d > \alpha$ (in fact, $d$ is sandwiched between $\alpha$ and 1). Since $s_{n+1}/s_n \to \alpha$, then $\exists N_1 > 0$ such that $\forall n>N_1$ we have
+	\[ \frac{s_{n+1}}{s_n} < d \implies s_{n+1}<d s_n \implies s_{n+1}< d s_n < d^2 s_{n-1} < \cdots < d^n s_1. \]
+	Since all $s_n$ are positive, then $s_1 = c d$, for some $c \in \R$. Thus we can write the inequality above as
+	\[ s_{n+1} < d^{n+1}c \implies s_n < d^n c. \]
+	Now we can proceed with the $\epsilon-N$ proof directly, or we can use squeeze theorem. We know that 
+	\[ 0 \leq s_n < d^n c. \]
+	Since both $0$ and $d^n$ converges to zero, then $s_n$ also converges to zero, i.e. $s_n \to 0$.
+\end{proof}
+
+\begin{problem}
+	Let $\{s_n\}$ be a sequence of positive numbers. Show that the condition
+	\[ \lim_{n\to\infty} \frac{s_{n+1}}{s_n} > 1 \]
+	then $s_n \to \infty$.
+\end{problem}
+
+\begin{proof}
+	Let $\lim_{n\to\infty} \frac{s_{n+1}}{s_n} = \alpha > 1$. Define $d = 1 + (\alpha - 1)/2$ (in fact $d$ is sandwiched between 1 and $\alpha$). Since $s_{n+1}/s_n \to \alpha$, then $\exists N>0$ such that $\forall n>N$ we have $s_{n+1}/s_n > d$. As we seen in the solution of the problem above, this implies 
+	\[ s_n > d^n c, \]
+	where $c = s_1/d$. Now we can proceed with the $M-N$ proof to show that $s_n$ actually diverges.
+\end{proof}
+
+\begin{problem}
+	Let $\{s_n\}$ be a real sequence that is non-decreasing and bounded. Then prove that 
+	\[ s_n \to \sup_{n\in\N}(s_n). \]
+\end{problem}
+\begin{proof}
+	Let $L = \sup_{n\to \infty} s_n$. Since $s_n \in \R$ for all $n \in \N$, and is bounded, then the suprimum exists and $L \in \R$. Let $\epsilon>0$ be given, and define $\beta = L - \epsilon$. Since $L$ is the least upper bound for the sequence, then for $\exists N \in \N$ such that $s_N > \beta$, and since $s_n$ is non-decreasing, $\forall n>N$ we have $s_n > \beta \implies \abs{s_n - L} < \epsilon$. This implies that $s_n \to L$ as $n\to\infty$.
+\end{proof}
+
+\begin{problem}
+	Decide on the convergence of the following sequence.
+	\[ \sqrt{2}, \sqrt{2+\sqrt{2}}, \sqrt{2+\sqrt{2+\sqrt{2}}}, \cdots \]
+\end{problem}
+
+\begin{proof}
+	This sequence converges, since it is increasing and bounded. The fact that this sequence is increasing is trivial, but for being bounded we start with
+	\[ \boxed{\sqrt{2}< 2}  \implies 2+\sqrt{2} < 4 \implies \boxed{\sqrt{2+\sqrt{2}} < 2} \implies 2+\sqrt{2+\sqrt{2}}<4 \implies \boxed{\sqrt{2+\sqrt{2+\sqrt{2}}<2}} \implies \cdots. \]
+	Thus as we can see, all of the terms of the sequence is less than 2. Thus this sequence converges.
 \end{proof}
