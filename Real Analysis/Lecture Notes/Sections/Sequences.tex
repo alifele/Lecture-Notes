@@ -195,3 +195,19 @@
 	\[ \boxed{\sqrt{2}< 2}  \implies 2+\sqrt{2} < 4 \implies \boxed{\sqrt{2+\sqrt{2}} < 2} \implies 2+\sqrt{2+\sqrt{2}}<4 \implies \boxed{\sqrt{2+\sqrt{2+\sqrt{2}}<2}} \implies \cdots. \]
 	Thus as we can see, all of the terms of the sequence is less than 2. Thus this sequence converges.
 \end{proof}
+
+\begin{problem}
+	Prove that the monotone convergence theorem is equivalent to the nested interval theorem. The following states the nested interval theorem. Given a sequence of nested intervals $[a_n, b_n]$ such that $a_n < b_n$, and has the following arrangement 
+	\[ [a_1, b_1] \supset [a_2, b_2] \supset [a_3, b_3] \supset \cdots, \]
+	and the $a_n - b_n \to 0$ (i.e. the length of the intervals shrinks to zero), then there is exactly one element at the intersection of the intervals.
+\end{problem}
+\begin{proof}
+	~\vspace{2pt}
+	\begin{enumerate}[(i)]
+		\item \textbf{The monotone convergence theorem implies the nested intervals theorem.} Assume that we have the nested intervals with its length shrinking to zero, then we want to show that there is only one element at the intersection.
+		Construct the sequence $\{a_n\}$ and $\{b_n\}$ as follows
+		\[a_n: a_1, a_2, a_3, \hdots, \quad b_n: b_1, b_2, b_3, \hdots. \]
+		Then it follows from the properties of nested intervals that $\{a_n\}$ is a non-decreasing sequence with $b_1$ as an upper bound, while $\{b_n\}$ is a non-increasing sequence with $a_1$ as a lower bound. Thus both sequences converge and we denote $a_n \to A$ and $b_n \to B$. Since $a_n < b_n$ for all $n\in \N$, thus $A \leq B$. We claim that $A = B$. Assume other wise, i.e. $A<B$. Let $D = B - A$. Then for any given $n \in \N$ we have $a_n \leq A < B \leq b_n,$ which implies $b_n - a_n > D$, which means $a_n - b_n$ can not converge to zero, which contradicts our assumption. Thus $A=B$. Also $A=B$ is the only common point in all the intervals. If there were other $C$ contained in all of the intervals, then it would imply $C \leq A$ and $C \geq B$, thus $A = B = C$. This completes the proof.
+	\end{enumerate}
+
+\end{proof}
