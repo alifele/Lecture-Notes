@@ -197,17 +197,72 @@
 \end{proof}
 
 \begin{problem}
-	Prove that the monotone convergence theorem is equivalent to the nested interval theorem. The following states the nested interval theorem. Given a sequence of nested intervals $[a_n, b_n]$ such that $a_n < b_n$, and has the following arrangement 
+	Prove that the monotone convergence theorem implies the following version of the nested interval theorem. Given a sequence of nested intervals $[a_n, b_n]$ such that $a_n < b_n$, and has the following arrangement 
 	\[ [a_1, b_1] \supset [a_2, b_2] \supset [a_3, b_3] \supset \cdots, \]
 	and the $a_n - b_n \to 0$ (i.e. the length of the intervals shrinks to zero), then there is exactly one element at the intersection of the intervals.
 \end{problem}
 \begin{proof}
-	~\vspace{2pt}
-	\begin{enumerate}[(i)]
-		\item \textbf{The monotone convergence theorem implies the nested intervals theorem.} Assume that we have the nested intervals with its length shrinking to zero, then we want to show that there is only one element at the intersection.
+		Assume that we have the nested intervals with its length shrinking to zero, then we want to show that there is only one element at the intersection.
 		Construct the sequence $\{a_n\}$ and $\{b_n\}$ as follows
 		\[a_n: a_1, a_2, a_3, \hdots, \quad b_n: b_1, b_2, b_3, \hdots. \]
 		Then it follows from the properties of nested intervals that $\{a_n\}$ is a non-decreasing sequence with $b_1$ as an upper bound, while $\{b_n\}$ is a non-increasing sequence with $a_1$ as a lower bound. Thus both sequences converge and we denote $a_n \to A$ and $b_n \to B$. Since $a_n < b_n$ for all $n\in \N$, thus $A \leq B$. We claim that $A = B$. Assume other wise, i.e. $A<B$. Let $D = B - A$. Then for any given $n \in \N$ we have $a_n \leq A < B \leq b_n,$ which implies $b_n - a_n > D$, which means $a_n - b_n$ can not converge to zero, which contradicts our assumption. Thus $A=B$. Also $A=B$ is the only common point in all the intervals. If there were other $C$ contained in all of the intervals, then it would imply $C \leq A$ and $C \geq B$, thus $A = B = C$. This completes the proof.
-	\end{enumerate}
-
 \end{proof}
+
+\begin{problem}
+	Prove that the nested interval theorem (stated as below) implies the monotone convergence theorem. 
+	\begin{quote}
+		For any sequence of intervals of real numbers $I_1 = [a_1, b_1], I_2 = [a_2, b_2]$ that are nested, i.e.
+		\[ I_1 \supseteq I_2 \supseteq I_3 \supseteq \cdots, \]
+		we have 
+		\[ \bigcap_{n\in\N} I_n \neq \emptyset. \]
+	\end{quote}
+\end{problem}
+
+\begin{proof}
+	We will prove the monotone convergence theorem here only by considering the convergence of a non-decreasing sequence. The proof for other case (non-increasing sequence) will be very similar. Let $\{a_n\}$ be a non-deceasing and bounded sequence in $\R$. Let $B$ denote the set of all upper bounds of the sequence $a_n$. Then define
+	\[ b_n = \min\{\{\frac{k}{2^n}: k\in\Z\} \cap B \}. \]
+	With this choice of $B$, we will get the following nested sequences
+	\[ [a_1, b_1] \supseteq [a_2, b_2] \supseteq [a_3,b_3] \supseteq \cdots. \]
+	By the nested interval theorem, we know that the intersection of these intervals is not empty. Let $\alpha \in \bigcap_{n\in\N} I_n$, in which $I_n = [a_n,b_n]$. Thus $a_n \leq \alpha \leq b_n$. On the other hand, due to the construction of $b_n$, it follows that $\forall n\in \N$ we have $b_n - 1/2^{n} \notin B$, thus $\exists N_1 \in \N$ such that $a_N > b_n - 2^{-n}$, and since $\{a_n\}$ is non-decreasing, then $\forall n>N$ we have $a_n > b_n-2^{-n}$. Thus for all $n>N$ we have
+	\[ b_n - 2^{-n} \leq a_n \leq \alpha \leq b_n. \]
+	This implies $\abs{a_n - \alpha} = \alpha - a_n < 2^{-n}$. So for a given $\epsilon>0$ we can choose $n$ large enough that $n>N$ and also $2^{-n} < \epsilon$. Thus $\abs{a_n - \alpha} < \epsilon.$ This shows $a_n \to \alpha$. Thus we proved that the nested interval property implies the convergence of the monotone and bounded sequences. 
+\end{proof}
+
+
+\begin{problem}
+	Let $\{x_n\}$ be a bounded sequence. Prove if every convergent subsequence of $\{x_n\}$ converges to zero, then $x_n \to 0$.
+\end{problem}
+\begin{proof}
+	We use proof by contrapositive. I.e., we prove that if $x_n$ does not converge to zero, then there exist a convergent subsequence of $\{x_n\}$ that does not go to zero. Assume $x_n$ does not converge to zero. Then $\exists D>0$ such that $\forall N\in\N$, there exists $n>N$ such that $\abs{x_n} > D$. However, since the sequence is bounded, we can write the last expression as $D < \abs{x_n} < M$ for some $M\in \R$. Now the subsequence $\{x_{n_k}\}$ where $\forall k \in\N,\ D< \abs{x_{n_k}}<M$. This subsequence itself has a converging subsequence that does not converge to $0$. (the existence of a converging subsequence is guaranteed since 
+	$\{x_n\}$ it is bounded and all its elements are real numbers). On the other hand, the subsequence of $\{x_{n_k}\}$ is also a subsequence of the original sequence. Thus we have found a subsequence that does not converge. This completes the proof.
+ \end{proof}
+ 
+ \begin{problem}
+ 	Give an example of a sequence that has subsequences converging to every natural numbers (and not any other number).
+ \end{problem}
+ \begin{proof}
+ 	First note that the sequence $\{1/n\}$ converges to 0 as $n\to\infty$. Now we can use a diagonalization argument similar to the Cantor's diagonalization argument to construct the desired sequence. The following organization does the job.
+ 	\begin{center}
+ 		 \includegraphics[width=0.4\textwidth]{Images/diagSequence.png}
+ 	\end{center}
+
+ \end{proof}
+ 
+ \begin{problem}
+ 	If a sequence $\{x_n\}$ has a property that 
+ 	\[ \lim_{n\to\infty} x_{2n} = \lim_{n\to\infty}x_{2n+1} = L,  \]
+ 	prove that the sequence converges to $L$.
+ \end{problem}
+ \begin{proof}
+ 	Let $\{x_{n_k}\}$ and $\{x_{n_l}\}$ be sub-sequences define by $n_k = 2k$ and $n_l = 2l+1$. From the assumption we have $x_{n_k} \to L$ and $x_{n_l}\to L$.
+ 	Let $\epsilon>0$ be given. Then there exist integers $K_1$ and $L_1$ such that for all $k>K_1$ and all $l > L_1$ we have $\abs{x_{n_k} - L} < \epsilon$ and $\abs{x_{n_l} - L} < \epsilon$. Choose $Q = \max\{K_1, L_1\}$. Then $\forall l,k > Q$ we have
+ 	\[ \abs{x_{n_k} = L} < \epsilon, \quad \abs{x_{n_l} - L} < \epsilon. \]
+ 	This implies that $\forall n>N$ where $N = 2Q$ we have 
+ 	\[ \abs{x_n - L} < \epsilon. \]
+ 	This we conclude that the sequence $\seq{x}$ converges to $L$.
+  \end{proof}
+  
+  \begin{problem}
+  	Suppose that a $\{x_n\}$ sequence has a property that every sub-sequence has a further subsequences convergent to $L$. Prove that $x_n \to L$.
+  \end{problem}
+
