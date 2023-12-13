@@ -284,6 +284,25 @@
 	Prove that every bounded monotonic sequence is Cauchy (do not assume the monotone convergent theorem).
 \end{problem}
 \begin{proof}
-	content
+	We need to use some notion of completeness of $\R$. We will use that the infimum or suprimum exists for the bounded sequences. Also, we will demonstrate the proof for non-decreasing sequences, but it is similar to extend the proof for non-increasing sequences as well. Let $\{x_n\}$ be a bounded non-decreasing sequences. Then the suprimum of the sequences exists. Let $L = \sup_{n\in\N}\{x_n\}$. Let $\epsilon>0$ be given. Since $L$ is the least upper bound, then $\exists N>0$ such that $L-\epsilon < x_N \leq L$. Furthermore, since the sequences is non-decreasing, in fact $\forall n>N$ we have $L- \epsilon < x_n < L$, thus the distance between any two elements passed $N$ should be less than $\epsilon$. I.e., $\forall n,m > N$ we have $\abs{x_n - x_m} < \epsilon$. This completes the proof.
+\end{proof}
+
+\begin{problem}
+	Let $\{a_n\}$ be a sequence of positive real numbers. Proof the following identity.
+	\[ \liminf \frac{a_{n+1}}{a_n} \leq \liminf \sqrt[n]{a_n} \leq \limsup \sqrt[n]{a_n} \leq \limsup \frac{a_{n+1}}{a_n} \]
+\end{problem}
+
+\begin{proof}
+	Let $\beta_1 = \limsup \frac{a_{n+1}}{a_n}$ and $\beta_2 = \limsup \sqrt[n]{a_n}$. Let $B_1 > \beta_1$. Then we can find a natural number $N$ such that $\forall n>N$ we have $a_{n+1}/a_n < B_1$. This implies $a_n < B_1^n C$ for some $C \in\R$. Then we have
+	\[ \sqrt[n]{a_n} < B_1 \sqrt[n]{C} \implies \limsup \sqrt[n]{a_n} \leq B_1 \implies  \boxed{\limsup \sqrt[n]{a_n} \leq \limsup \frac{a_{n+1}}{a_n}}.  \]
+	
+	Similarly, let $\alpha_1 = \liminf \frac{a_{n+1}}{a_n}$ and $\alpha_2 = \liminf \sqrt[n]{a_n}$, and $A_1 < \alpha_1$. Then we can find an integer $N$ such that $\forall n>N$, for some $C \in \R$ we have
+	\begin{align*}
+		a_{n+1}/a_n > A_1 \implies a_n > A_1^n C \implies \sqrt[n]{a_n} > A_1 \sqrt[n]{C} \implies \limsup \sqrt[n]{a_n} \geq A_1 \\
+		 \implies \boxed{\limsup \sqrt[n]{a_n} \geq \limsup \frac{a_{n+1}}{a_n}}. 
+	\end{align*}
+	 Putting all together we have
+	 \[  \liminf \frac{a_{n+1}}{a_n} \leq \liminf \sqrt[n]{a_n} \leq \limsup \sqrt[n]{a_n} \leq \limsup \frac{a_{n+1}}{a_n} \]
+
 \end{proof}
 
