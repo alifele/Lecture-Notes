@@ -514,6 +514,11 @@ Few points to easily digest the above definition. First, $U \in \mathcal{T} \cap
 \section{Limit Points and Isolated Points}
 The notion of a limit point is very important in a topological space, as it has a very intuitive sequential characterization in a metric space, and has a very interesting connection with other topological notions such as closed and open sets.
 
+\begin{definition}
+	Let $(X,\mathcal{T})$ be a topological space. A point $x \in X$ is a limit point of $A \subseteq X$ if 
+	\[ \forall U \in \mathcal{N}(x), \wh (U\backslash\{x\}) \cap A \neq \emptyset.  \]
+\end{definition}
+
 
 \section{Sequential Characterization}
 Naturally, we have the concept of sequences and limits of sequences in metric spaces. On the other hand, we studied that the topological spaces are generalized form of metric spaces. This means that all of topological concepts we covered so far (i.e. open sets, closed sets, interior points, closure, limit points, etc) can be characterized with the notion of a sequence and convergence in metric spaces. This is very important since sequences are some tools that are easier to conceive intuitively. 
@@ -891,4 +896,29 @@ Using all of these notions and definitions, we can now generalize the idea of co
 \end{proposition}
 
 
+\section{Problems}
 
+\begin{problem}
+	Give an example of each of the following or prove that no such a set exists.
+	\begin{enumerate}[(i)]
+		\item A non-empty set with no accumulation points and no isolated points.
+		\item A non-empty set with no interior points and no isolated points.
+		\item A non-empty set with no boundary points and not isolated points.
+	\end{enumerate}
+\end{problem}
+\begin{proof}
+	~\vspace{2pt}
+	\begin{enumerate}[(i)]
+		\item No such a set exists. Because $A^{iso} = A \backslash A'$. Thus if $x\notin A'$, then $x \in A^{iso}$.
+		\item $(\R^2,\mathcal{T})$, with the usual topology. Then any closed curve in the plane will have this property.
+		\item $\R$ in $(\R,\mathcal{T})$ with usual topology.
+	\end{enumerate}
+\end{proof}
+
+
+\begin{problem}
+	Must every boundary point of set be also an accumulation point of that set?
+\end{problem}
+\begin{proof}
+	We want to check if $\partial A \subseteq A'$. While this intuitively might look correct, but an isolated point of a set is indeed a boundary point. However, it is not an accumulation point. 
+\end{proof}
