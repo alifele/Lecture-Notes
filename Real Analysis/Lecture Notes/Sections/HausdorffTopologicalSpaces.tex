@@ -1,4 +1,4 @@
-\chapter{Hausdorff Topological Spaces}
+$\chapter{Hausdorff Topological Spaces}
 
 
 
@@ -922,3 +922,47 @@ Using all of these notions and definitions, we can now generalize the idea of co
 \begin{proof}
 	We want to check if $\partial A \subseteq A'$. While this intuitively might look correct, but an isolated point of a set is indeed a boundary point. However, it is not an accumulation point. 
 \end{proof}
+
+\begin{problem}
+	Let $E$ be a set and $\{x_n\}$ a sequence of distinct points, not necessarily elements of $E$. Suppose that $\lim_{n\to\infty}x_n = x$ and that $x_{2n} \in E$ and $x_{2n+1} \notin E$ for all $n\in\N$. Show that $x$ is a boundary point of $E$.
+\end{problem}
+\begin{proof}
+	Since $x_n \to x$, then all of its subsequences converge to $x$. Thus $\forall U \in \mathclap{N}(x)$, we can find $N>0$ such that $\forall n>N$ we have $x_{2n} \in U$ and $x_{2n+1} \in U$. Thus $U \cap E \neq \emptyset$ and $U \cap E^c \neq \emptyset$. This proves that $x$ indeed a boundary point.
+\end{proof}
+\begin{problem}
+	Show that a set, all of whose points are isolated, must be closed.
+\end{problem}
+\begin{proof}
+	This statement is vacuously true (as a set with all isolated points has not limit points, thus it vacuously contains all of its limit points.) However, here, we will provide a detailed proof using the first principles. Let $F$ be a set that all of its points are isolated points. Thus for every $x \in F$ we can find an open set $U_x \in \mathcal{T}$ such that $U_x \cap F = \{x\}$. Consider $F^c$. Then the set $G_x = U_x \backslash \{x\}$ is open, since $\{x\}$ is closed. Thus $\forall y \in G_x$ we can fine an open set $V \in \mathcal{T}$ such that $V \subseteq G_x \subseteq F^c$. This implies that $F^c$ is indeed open, thus $F$ is closed. 
+\end{proof}
+
+\begin{problem}
+	Show that the closure operation has the following properties.
+	\begin{enumerate}[(i)]
+		\item $E_1 \subseteq E_2 \implies \closure{E_1} \subseteq \closure{E_2}$.
+		\item $\closure{E_1 \cup E_2} = \closure{E_1} \cup \closure{E_2}$.
+		\item $\closure{E_1 \cap E_2} \subset \closure{E_1} \cap \closure{E_2}$.
+		\item Give an example of two sets $E_1$ and $E_2$ such that 
+		\[ \closure{E_1 \cap E_2} \neq \closure{E_1} \cap \closure{E_2}. \]
+	\end{enumerate}
+\end{problem}
+
+\begin{proof}
+	~\vspace{2pt}
+	\begin{enumerate}[(i)]
+		\item
+		\begin{enumerate}
+			\item \textbf{First method.} We will use the definition that $\closure{E} = ((E^c)^\circ)^c$, and also the fact that $E_1 \subseteq E_2 \implies E_1^\circ \subseteq E_2^\circ$. Then we can write
+			\[ E_1 \subseteq E_2 \implies E_1^c \supseteq E_2^c \implies (E_1^c)^{\circ} \supseteq (E_2^c)^\circ \implies ((E_1^c)^\circ)^c \subseteq ((E_2^c)^\circ)^c \implies \boxed{\closure{E_1} \subseteq \closure{E_2}}. \]
+			\item \textbf{Second method.} Let $E_1 \subseteq E_2$. Then it follows that $E_1' \subseteq E_2'$. That is because for $x\in E_1$, for all $U \in \mathcal{N}(x)$ we have $U \backslash \{x\} \cap E_1 \neq \emptyset$. However since $E_1 \subseteq E_2$ then $U \backslash \{x\} \cap E_2 \neq \emptyset$. Then it follows that $E_1 \cup E_1' \subseteq E_2 \cup E_2'$, hence $\closure{E_1} \subseteq \closure{E_2}$.
+		\end{enumerate}
+		\item From definition, it follows that 
+		\[ \closure{E_1 \cup E_2} = (E_1 \cup E_2) \cup (E_1 \cup E_2) = (E_1 \cup E_1') \cup (E_2 \cup E_2') = \closure{E_1} \cup \closure{E_2}. \]
+		
+		\item First we need to prove $(E_1\cap E_2)' \subseteq E_1' \cap E_2'$ (note that the equality might also hold, however, we are only interested in the $\subseteq$ case). Let $x \in (E_1 \cap E_2)'$. Then $\forall U \in \mathcal{N}(x)$ we have $U\backslash\{x\} \cap {(E_1 \cap E_2)} \neq \emptyset$. Thus $U\backslash\{x\}\cap E_1 \neq \emptyset$ and $U\backslash\{x\}\cap E_2 \neq \emptyset$, which implies $x \in E_1' \cap E_2'$. \\
+		Now let $y \in \closure{E_1 \cap E_2}$. Then from definition we can write
+		\[ y \in (E_1\cap E_2) \cup (E_1 \cap E_2)'. \]
+		Then it means $y \in E_1\cap E_2$ or $y \in (E_1 \cap E_2)'$. Since the a set is always a subset of its closure, then the former implies $y \in \closure{E_1}\cap\closure{E_2}$. Also, from the latter we have $y \in (E_1 \cap E_2)'$ we implies $y \in E_1' \cap E_2'$. Since the derived set is a subset of the closure of a set, then $y \in \closure{E_1} \cap \closure{E_2}$. This completes the proof.
+	\end{enumerate} 
+\end{proof}
+
