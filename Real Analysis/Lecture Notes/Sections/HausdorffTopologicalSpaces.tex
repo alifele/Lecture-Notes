@@ -963,6 +963,25 @@ Using all of these notions and definitions, we can now generalize the idea of co
 		Now let $y \in \closure{E_1 \cap E_2}$. Then from definition we can write
 		\[ y \in (E_1\cap E_2) \cup (E_1 \cap E_2)'. \]
 		Then it means $y \in E_1\cap E_2$ or $y \in (E_1 \cap E_2)'$. Since the a set is always a subset of its closure, then the former implies $y \in \closure{E_1}\cap\closure{E_2}$. Also, from the latter we have $y \in (E_1 \cap E_2)'$ we implies $y \in E_1' \cap E_2'$. Since the derived set is a subset of the closure of a set, then $y \in \closure{E_1} \cap \closure{E_2}$. This completes the proof.
+		
+		\item We basically want to show case where the following statements is true
+		\[ (E_1 \cup E_1') \cap (E_2 \cup E_2') \not\subseteq (E_1 \cap E_2) \cup (E_1' \cap E_2'). \]
+		Let $E_1$ be an open set, and $E_2$ be a set with $x\in E_2$, an isolated point, such that $x \in \partial E_1$. Then $\closure{E_1 \cap E_2} = \emptyset $ while $\closure{E_1} \cap \closure{E_2} = \{x\}$.
 	\end{enumerate} 
 \end{proof}
 
+\begin{problem}
+	Show that for any sets $E_1, E_2$ in a topological space $(X,\mathcal{T})$ we have
+	\[ (E_1 \cup E_2)^\circ \supseteq E_1^\circ \cup E_2^\circ. \]
+	Also, give an example of two sets $E_1$ and $E_2$ such that 
+	\[ (E_1 \cup E_2)^\circ \neq E_1^\circ \cup E_2^\circ. \]
+\end{problem}
+\begin{proof}
+	Let $x \in E_1^\circ \cup E_2^\circ$. Then $x \in E_1^\circ$ or $x \in E_2^\circ$. In the former case, since $E_1^\circ$ is an open set, so $E_1^\circ \in \mathcal{N}(x)$. Thus $\exists U \in \mathcal{T}$ such that $x \in U \subseteq E_1$. This implies that $x\in U \subseteq E_1 \cup E_2$. Thus $x \in (E_1\cup E_2)^\circ.$ The proof for the latter case is also very similar. Thus we can conclude that $(E_1 \cup E_2)^\circ \supseteq E_1^\circ \cup E_2^\circ$. \\
+	As for the example, Let $E_1$ and $E_2$ be two closed sets that part of their boundary is the same, i.e. $\partial E_1 \cap \partial E_2 = G \neq \emptyset$. Then $G$ is not boundary of $E_1 \cup E_2$ anymore, thus $G \subseteq (E_1 \cup E_2)^\circ$. However, $G \not\subseteq E_1^\circ E_2^\circ$, since $G \not\subseteq E_1^\circ$ and $G \not\subseteq E_2^\circ$, as it was a boundary set for both $E_1$ and $E_2$.
+\end{proof}
+
+\begin{problem}
+	Let $(X,\mathcal{T})$ be a topological space, and $E \subseteq X$. Prove that $E'$ is closed.
+\end{problem}
+ 
