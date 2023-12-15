@@ -984,4 +984,42 @@ Using all of these notions and definitions, we can now generalize the idea of co
 \begin{problem}
 	Let $(X,\mathcal{T})$ be a topological space, and $E \subseteq X$. Prove that $E'$ is closed.
 \end{problem}
+\begin{proof}
+	~\vspace{2pt}
+	\begin{enumerate}[(i)]
+		\item \textbf{First method.}
+			Let $x \in (E')^c$. Then $x \notin E'$. This implies that we can fine an open set $U \in \mathcal{T} \cap \mathcal{N}(x)$ such that $U\backslash\{x\} \cap E = \emptyset$. We claim that $U\backslash\{x\} \cap E' = \emptyset$. Because otherwise, there is $y \in U\backslash\{x\} $ and $y \in E'$. From the former, we conclude that $\exists V \in \mathcal{T}$ such that $y \in V \subseteq U\backslash\{x\}$ (because $U\backslash\{x\}$ is an open set, thus belongs to $\mathcal{N}(y)$ for all $y\in U\backslash\{x\}$). On the other hand, the latter implies $V\backslash\{y\} \cap E \neq \emptyset$. These two implies $U\backslash\{x\} \cap E \neq \emptyset$ which is a contradiction to the original assumptions. We then conclude $U\backslash\{x\} \subseteq (E')^c$. Thus $x \in U \subseteq (E')^c$, which implies $(E')^c$ is open, hence $E'$ is closed.
+		\item \textbf{Second method.}
+			We can use the fact that a set is closed if and only if it is equal to its closure. So we can write
+			\[ \closure{E'} = E' \cup E''. \]
+			Then what remains to be proved is to prove that $E'' \subseteq E'$. We use the contrapositive arguments. I.e., we want to prove for $x \in X$, we have $x \notin E'$ implies $x \notin E''$. Lets assume $x \notin E'$. Thus we can find an open set $U \in \mathcal{T} \cap \mathcal{N}(x)$ such that $U\backslash\{x\} \cap E =\emptyset$. We claim $U\backslash\{x\} \cap E' = \emptyset$ as well. Because otherwise $y$ such that $ y \in U\backslash\{x\} $ and  $y \in E'$. The former implies existence of open set $V \in \mathcal{T}$ such that $x \in V \subseteq U$. However, the latter, implies $V\backslash\{y\} \cap E \neq \emptyset$. Thus we conclude $U\backslash\{x\} \cap E \neq \emptyset$, which is contradiction. Thus $U\backslash\{x\} \cap E' = \emptyset$. Thus by contrapositive we can conclude $E'' \subseteq E'$. So
+			\[ \closure{E'} = E', \]
+			which implies the closeness of $E'$.
+	\end{enumerate}
+
+\end{proof}
+
+\begin{problem}
+	Let $(X,\mathcal{T})$ be a topological space, and $A \subseteq X$. Prove that $A^\circ$ is open.
+\end{problem}
+\begin{proof}
+	Let $x \in A^\circ$. Then $\exists U \in \mathcal{T}$ such that $x \in U \subseteq A$. Then $\forall z \in U$ we can find an open set $V \in \mathcal{T}$ such that $z \in V \subseteq U$ (because every open set belongs to $\mathcal{N}$ all of its elements). Thus $z \in A^\circ$. This implies $x\in U \subseteq A^\circ$. Thus $A^\circ \in \mathcal{N}(x)$ for all $x \in A^\circ$. We can now conclude $A^\circ$ is open.
+\end{proof}
+
+\begin{problem}
+	Let $(X,\mathcal{T})$ be a topological space and $A \subseteq X$. Then prove the followings.
+	\begin{enumerate}[(a)]
+		\item $A$ is open if and only if $A^\circ = A$.
+		\item $A$ is closed if and only if $\closure{A} = A$
+	\end{enumerate}
+\end{problem}
+\begin{proof}
+	\begin{enumerate}[(a)]
+		\item 
+		\item 
+		\begin{enumerate}[(i)]
+			\item \textbf{Method 1.} We use the identity $\closure{A} = A \cup A'$. Thus we just need to prove $A$ is closed if and only if $A' \subseteq A$. Assume $A$ is closed, then $A^c$ is open. Now we want to prove $A' \subseteq A$. By the contrapositive argument, we can instead prove $x\notin A$ implies $x \notin A'$. Let $x \in A^c$ (which we have assumed is open). Then $\exists U \in \mathcal{T}$ such that $x \in U \subseteq A^c$. Thus $U \subseteq A = \emptyset$, in particular $U \backslash \{x\} \subseteq A = \emptyset$. Thus $x \notin A'$. So we proved that closeness of $A$ implies $A' \subseteq A$. For the converse, we have 
+		\end{enumerate}
+	\end{enumerate}
+\end{proof}
  
