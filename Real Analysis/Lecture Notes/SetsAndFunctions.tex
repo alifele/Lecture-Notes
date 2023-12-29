@@ -13,3 +13,25 @@
 \begin{remark}
 
 \end{remark}
+
+
+
+\section{Problems}
+\begin{problem}
+	Let $X,Y$ be sets and $B \subseteq Y$. Prove
+	\[ \inv{f}(B^c) = \inv{f}(B)^c. \]
+\end{problem}
+
+\begin{proof}
+	First we show $\inv{f}(B^c) \subseteq \inv{f}(B)^c$. Let $x \in \inv{f}(B^c)$. Then $f(x) \in B^c \implies f(x) \notin B \implies x \notin \inv{f}(B) \implies x \in \inv{f}(B)^c$. For the other direction, assume $x \in \inv{f}(B)^c$. Then $x \notin \inv{f}(B) \implies f(x) \notin B \implies f(x) \in B^c \implies x \in \inv{f}(B^c)$. 
+\end{proof}
+
+\begin{problem}
+	Suppose both $f_1, f_2: X\to Y$ are continuous, where $X$ and $Y$ are Hausdorff topological spaces. Then prove that for any $Q \subseteq X$ we have
+	\[ [f_1(q) = f_2(q) \quad \forall q\in Q ] \implies [f_1(x) = f_2(x) \quad \forall x\in\closure{Q}].\]
+\end{problem}
+\begin{proof}
+	We will prove by contrapositive. The contrapositive will be
+	\[ [\exists x \in \closure{Q} \st f_1(x) \neq f_2(x)] \implies [\exists q \in Q \st f_1(q) \neq f_2(q)].  \]
+	Let $x\in \closure{Q}$ such that $f_1(x) \neq f_2(x)$. $x \in \closure{Q}$ implies $x \in Q$ or $x\in Q'$. In the former case, there is nothing to prove the consequent of the statement. Thus let $x \in Q'$. Also let $U,V \in \mathcal{T}_Y$ such that $f_1(x)\in U$ and $f_2(x) \in V$ and $U\cap V = \emptyset$. Since $f_1$ and $f_2$ are continuous, then $\inv{f_1}(U)$ and $\inv{f_2}(V)$ are both open and contains $x$. Since $\inv{f_1}(U) \cap \inv{f_2}(V)$ is open, then $\exists G \in \mathcal{T}$ such that $x \in G \subseteq \inv{f_1}(U) \cap \inv{f_2}(V)$. Furthermore, since $x \in G'$, then $\exists q \in Q \st q \in G$. Thus $f_1(q) \in U$ and $f_2(q) \in V$ and since $U \cap V = \emptyset$ then $f_1(q) \neq f_2(q)$ and this completes the proof.
+\end{proof}
