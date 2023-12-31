@@ -49,3 +49,31 @@ Solving this initial value problem will determine the desired level curve.
 
 Note that we could do the whole business with following the concept of implicit differentiation (see a Calculus text book like Stewart).
 
+\begin{example}
+	In this example we are calculating the level-curves of the Lotka-Voltera model given as (nondimensionalized)
+	\[ \dot{x} = x(1-y), \qquad \dot{y} = \delta y (x-1). \]
+	To find the level curves, assume there exists a function $H:\R^2 \to \R$ such that 
+	\[ \frac{d}{dt} H(X(t))=0, \]
+	where $X(t) = (x(t),y(t))^T \in \R^2$ such that $\dot{X} = F(X)$, where $F:\R^2 \to \R^2$ is the RHS of the Lotka-Voltera system. In other words, $X(t)$ is a solution of the model that satisfies the differential equation. By chain rule we can write
+	\[ H_x(x(t), y(t)) \dot{x}(t) + H_y(x(t),y(t)) \dot{y}(t) = 0. \tag{\smiley}  \]
+	The equation $(\smiley)$ is the central equation and is very important. First, assume that $H_y(x(t),y(t)) \neq 0$ for all $t\in \R$. Then we can use the implicit function theorem and write $y = y(x)$. Thus $\dot{y}(t) = y' \dot{x}(t)$. And assuming $\dot{x}(t) \neq 0$ for all $t\in \R$ we can write $(\smiley)$ as 
+	\[ y' = -\frac{ H_x(x(t), y(t))}{ H_y(x(t), y(t))}. \]
+	On the other hand, we know that $\dot{x}(t) = f_1(x,y)$ and $\dot{y}(t) = f_2(x,y)$, where $f_1$ and $f_2$ are the component functions of the vector field $F$. Thus $(\smiley)$ we lead to 
+	\[ -\frac{ H_x(x(t), y(t))}{ H_y(x(t), y(t))} = \frac{f_2(x,y)}{f_1(x,y)}.  \]
+	Thus we can write
+	\[ \frac{dy}{dx} = \frac{f_2(x,y)}{f_1(x,y)}. \]
+	Using the specific vector field for the Lotka-Voltera model we can write
+	\[ \frac{dy}{dx} = \frac{\delta y(x-1)}{x(1-y)}. \]
+	Now we can solve this ODE by the method of the separation of variables.
+	\[ \frac{1-y}{y} dy = \delta \frac{x-1}{x} dx. \]
+	By integrating the two sides of the equation we will have
+	\[ \ln(y) - y = \delta (x - \ln(x)) + c. \]
+	Thus the level curves of the function 
+	\[ H(x,y) = \ln(y) - y - \delta (x - \ln(x))  \]
+	will yield the trajectories of the Lotka-voltera system in the $(x,y)$ plane. The following figure represents these curves for $\delta = 1.9$.
+	\begin{center}
+		\includegraphics[width=0.4\textwidth]{Images/LotkaVolterraLevelCurves.png}
+	\end{center}
+
+\end{example}
+
