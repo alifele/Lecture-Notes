@@ -1,4 +1,4 @@
-\section{Sporadic Calculus}
+\section{Random Tips and Tricks}
 
 In this section I will cover the basics of calculus which I have used throughout the text. 
 
@@ -77,3 +77,22 @@ Note that we could do the whole business with following the concept of implicit 
 
 \end{example}
 
+
+\section{Complexifying and Realifying A Vector Field}
+Sometimes, it is very beneficial to express a particular vector field in complex variables, as it can possibly simplify the expression a lot. For instance, consider the following vector field.
+\begin{align*}
+	\dot{x}_1 = \mu x_1 - \omega x_2 + b(x_1^3 + x_1x_2^2),\\
+	\dot{x}_2 = \omega x_1 + \mu x_2 + b(x_2^3 + x_1^2x_2).
+\end{align*}
+This vector field looks very messy in the rectangular coordinates. However, if we assume $x_1$ and $x_2$ are the real and imaginary parts of a complex variable $z$, i.e. $z = x_1 + ix_2$, then we can simplify the vector field a lot. After doing the transformation, we will have only one expression for the ODE system, as a complex variable is naturally 2D. To do the change of variable, we have several options. The very first elementary option is to follow our nose, and use the linear algebra constructs. Note that since $x_1$ is the real part of $z$ and $x_2$ is the imaginary part, then the following identities hold
+\[ x_1 = \frac{z +\bar{z}}{2}, \quad x_2 = \frac{z - \bar{z} }{2i}. \]
+Thus in vector notation we have
+\[ \vectt{x_1}{x_2} = \frac{1}{2}\matt{1}{1}{-i}{i} \vectt{z}{\bar{z}}. \]
+Now we can substitute the equations in the expression for the ODE system to find the expression in terms of the new variable $z$. The second option, is to be a little bit careful and try to compute $\dot{z} = \dot{x}_1 + i \dot{x}_2$, and try to group the terms in a neat way to produce $z = x_1 + i x_2$ terms to be substituted with $z$, while trying to make terms like $\mu + i\omega$ to replace it with $\lambda$. 
+
+After following either of ways, we will have
+\[ \dot{z} = \lambda z + b z \abs{z}^2, \]
+where $\lambda = \mu + i\omega$. This is a huge step forward. The expression in terms of $z$ is much more neat and we can easily see what is going on with the dynamics. It is super easy to determine the contribution of the higher order terms in the dynamics, which was quite hard to accomplish when we were working with the rectangular coordinates.
+
+Now, in order to get the expression back in the rectangular coordinates, we can substitute $z = x + iy$ in the expression for $\dot{z}$ and try to group the terms and separate the real and imaginary parts to determine the expressions for $x_1$ as well as for $x_2$. Equivalently, we can use the following coordinate change
+\[  \vectt{z}{\bar{z}} = \matt{1}{i}{1}{-i} \vectt{x_1}{x_2}.  \]
