@@ -87,7 +87,43 @@ Again, we can intuitively figure out what conditions the functions $f(x,\alpha)$
 	\item $f_{\alpha x} (x_0,\alpha_0) \neq 0$.
 \end{enumerate}
 
+\subsubsection*{More Theoretical Treatment of the Hopf Bifurcation}
+In this section we will derive the results above in a more analytic way. Assume we have the following family dynamical systems
+\[ \dot{x} = f(x,\alpha) \]
+where $f:\R^1 \times \R^1 \to \R^1$. Also assume that the vector field $f$ is odd with respect to $x$. I.e.
+\[ f(-x,\alpha) = -f(x,\alpha). \]
+This will immediately lead to 
+\[ f(0,\alpha) = 0,\ f_{xx}(0,\alpha) = 0,\ f_{xxxx}(0,\alpha) = 0,\ \cdots. \]
+Also, assume that for the special value of $\alpha = \alpha_0$ we have
+\[ f_x(0,\alpha_0) = 0. \]
+In this case, there is a chance that we have a bifurcation (since changing the value of $\alpha$ through $\alpha_0$ might change the sign of $f_x(0,\alpha)$ which will lead to a bifurcation.) Now we can expand the vector field around the bifurcation point as follows
+\[ f(x,\alpha) = \underbrace{f(0,\alpha)}_{=0} + \underbrace{f_x(0,\alpha)}_{=f_{x}(0,\alpha_0) + f_{x\alpha}(0,\alpha_0)(\alpha - \alpha_0)+\cdots}x + 1/6\underbrace{f_{xxx}(0,\alpha)}_{=f_{xxx}(0,\alpha_0)+\cdots}x^3 + \mathcal{O}(\abs{x^5}) \]
+Now let $a = f_{x\alpha}(0,\alpha_0) \neq 0 $ and $b = 1/6 f_{xxx}(0,\alpha_0) \neq 0$. So the vector field can be written like
+\[ f(x,\alpha) = a(\alpha-\alpha_0)x + bx^3 + \cdots = x (a(\alpha-\alpha_0)+bx^2 + \cdots)=  x\hat{f}(x,\alpha), \]
+in which the higher order terms do not change the topological behaviour. Also, from this expression of the vector field, it is clear that $x=0$ is a branch of equilibria. We can find the other branch by letting $\hat{f}(x,\alpha) = 0$. We can do so by ignoring all of higher order terms and solve $x$ in terms of $\alpha$ and find the second branch of equilibria. However, we want to be fancy and use implicit function theorem! It is clear from the expression for $\hat{f}(x,\alpha)$ that $\hat{f}_\alpha(0,\alpha_0) = a \neq 0$. Thus we can write $\alpha = g(x)$ where $g(0) =\alpha_0$ and also $\hat{f}(x,g(x)) = 0$ for $\alpha$ belonging to some interval containing the special value $\alpha_0$. We can do such by the implicit function theorem. The implicit function theorem also states that the function $g$ is smooth. Thus we can write its Taylor expansion as follows
+\[ g(x) =\underbrace{ g(0)}_{=\alpha_0} + \underbrace{g'(0)}_{=c_1}x + \underbrace{g''(0)/2}_{=c_2}x^2+ \mathcal{O}(\abs{x}^3). \]
+We can substitute the expression above in $\hat{f}(x,g(x)) = a(g(x)-\alpha_0) + bx^2 + \cdots = 0$, and find the coefficients $c_i$. By doing so we will find
+\[ a(c_1x + c_2x^2 + \cdots) + bx^2 = 0 \implies c_1 = 0,\quad c_2 = \frac{-b}{a}, \cdots. \]
+Thus the expression for $g(x)$ will be
+\[ \alpha = g(x) = \alpha_0 + \frac{-b}{a}x^2 . \]
+All of this trouble was to be fancy and solve $\hat{f}(x,\alpha)=0$. The simpler way is to simply ignore the higher order terms in $\hat{f}(x,\alpha)$ and solve the equation $\hat{f}(x,\alpha)=0$. I.e.
+\[ \hat{f}(x,\alpha) \approx a(\alpha-\alpha_0) + bx^2 \implies \alpha = \alpha_0 -\frac{b}{a} x^2. \]
+This will define the second branch of equilibria. The next step is to determine the stability of these equilibrium points that can be done by determining the sign of the vector field around the equilibrium branches. For instance, fix $b<0$ and $a>0$. Then we will have
+\input{Images/PitchForkBifurcation.tex}
+\FloatBarrier
+Note that the vertical axis represents $x$ while the horizontal axis represents $\alpha$. We can do the same kind of analysis on the sign of the vector field when $a$ and $b$ has other combination of signs.
 
+\subsubsection*{Generalized Pitchfork Bifurcation}
+Consider the following family of vector fields
+\[ \dot{x} = f(x,\alpha), \]
+where $f: \R^1 \times \R^1 \to \R^1$. Also, assume that the vector field is constrained in such a way that on $p^0_1(\alpha)$, where $0 = p^0_1(\alpha_0)$, we have
+\[ f(p^0_1(\alpha),\alpha) = 0,\quad f_{xx}(p^0_1(\alpha),\alpha) = 0, \]
+for all $\alpha$ in some interval containing the special value $\alpha_0$. Thus, clearly $(p^0_1(\alpha),\alpha)$ is a branch of equilibrium, and in particular, $(0,\alpha_0)$ is an equilibrium point on this branch. Furthermore, assume that 
+\[ f_x(0,\alpha_0) = 0, \] 
+which implies that $(0,\alpha_0)$ is a non-hyperbolic equilibrium point. Thus there is a chance that we observe a bifurcation as we pass the value of $\alpha$ through $\alpha_0$.
+
+
+ 
 \section{Local Bifurcation Theory for Maps}
 In this section we will develop our theory to study the bifurcation for the maps.
 
@@ -107,7 +143,7 @@ By substituting the equation above in the recursive form of the map we will get
 \end{align*}
 So we can now write the map as
 \[ u \mapsto \mu(\alpha)u + \hat{f}_2(\alpha)u^2 + \hat{f}_3(\alpha)u^3 + \mathcal{O}(\abs{u}^4). \]
-First, notice that, in order to have the bifurcation, the value of $\mu(\alpha)$ should cross $-1$ at $\alpha_0$ transversally (i.e. have values other than $-1$ at the points arbitrary close to $\alpha_0$). Thus we need to have $a = \mu'(\alpha_0) \neq 0$. The next step is a very crucial one. The following example makes this step much more sensible.
+First, notice that, in order to have the bifurcation, the value of $\mu(\alpha)$ should cross $-1$ at $\alpha_0$ transversally (i.e. have values other than $-1$ at the points arbitrary close to $\alpha_0$). Thus we need to have $-a = \mu'(\alpha_0) \neq 0$. The next step is a very crucial one. The following example makes this step much more sensible.
 
 \begin{example}
 	Let $f(x) = x+ax^{2}+bx^{3}+cx^{4}$ where $a=-2.6, b=6.8$, and $c=-10$. Define a new identity non-linear transformation as 
@@ -142,3 +178,16 @@ We do the following transformation
 \[ u = v + h_2(\alpha) v^2. \]
 Now we substitute the expression for $u$ and try to choose $h_2(\alpha)$ in a way that makes the coefficient of $v^2$ zero or very small. By substituting we will have
 \[ v_{k+1} + h_2(\alpha)v_{k+1}^2 = \mu(\alpha)(v_k+h_2(\alpha)v_k^2) + \hat{f}_2(\alpha)(v_k+h_2(\alpha)v_k^2)^2 + \hat{f}_3(\alpha)(v_k+h_2(\alpha)v_k^2)^3 + \cdots. \]
+(assume $v_{k+1}^2$ is the same as $v_k^2$. I don't know the reason yet but I will update the notes as soon as I notice.) Then we can write
+\begin{align*}
+	 v_{k+1} = \mu(\alpha)v_k + (\mu(\alpha)h_2(\alpha) + \hat{f}_2(\alpha)-h_2(\alpha))v_k^2 + (2\hat{f}_2(\alpha)h_2(\alpha)+\hat{f}_3(\alpha))v_k^3 + \cdots. 
+\end{align*}
+Thus simply by letting
+\[ h_2(\alpha) = \frac{\hat{f}_2(\alpha)}{1-\mu(\alpha)} \]
+the coefficient of $v_k^2$ will be zero and the map will transform into
+\[ v \mapsto \mu(\alpha)v + g_3(\alpha)v^3 + \mathcal{O}(\abs{v}^4), \]
+where $-b = g_3(\alpha_0) = [\hat{f}_2(\alpha_0)]^2 + \hat{f}_3(\alpha_0)$. Now expanding the map around $\alpha_0$ will result in 
+\[ v \mapsto -(1+a(\alpha-\alpha_0))v + g_3(\alpha_0)v^3 + \mathcal{O}(\abs{v}^4 + \abs{\alpha-\alpha_0}^2\abs{v} + \abs{\alpha-\alpha_0}\abs{v}^3).   \]
+In short, the vector field will be
+\[ v \mapsto -v - a\beta v - bv^3 + \cdots, \]
+where we used the transformation $\alpha = \beta + \alpha_0$.
