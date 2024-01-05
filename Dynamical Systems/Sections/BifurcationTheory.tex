@@ -87,7 +87,7 @@ Again, we can intuitively figure out what conditions the functions $f(x,\alpha)$
 	\item $f_{\alpha x} (x_0,\alpha_0) \neq 0$.
 \end{enumerate}
 
-\subsubsection*{More Theoretical Treatment of the Hopf Bifurcation}
+\subsubsection*{More Theoretical Treatment of the Pitchfork Bifurcation}
 In this section we will derive the results above in a more analytic way. Assume we have the following family dynamical systems
 \[ \dot{x} = f(x,\alpha) \]
 where $f:\R^1 \times \R^1 \to \R^1$. Also assume that the vector field $f$ is odd with respect to $x$. I.e.
@@ -135,9 +135,26 @@ Further more, we require $a  = \lambda'(\alpha_0) \neq  0$. By the chain rule we
 By these conditions ($a \neq 0$ and $b\neq 0$) we will have the simplified vector field as
 \[ \dot{u} = a(\alpha - \alpha_0) u + bu^3 + \order{\abs{u}^4} \]
 
-Thus as we can see, even in the generalized setting for the Hopf bifurcation, by the use of appropriate change of coordinates, we can still write the vector field very similar to the case where the vector field was a symmetric function.
+Thus as we can see, even in the generalized setting for the Pitchfork bifurcation, by the use of appropriate change of coordinates, we can still write the vector field very similar to the case where the vector field was a symmetric function.
 
+\subsubsection{Some General Notes about Pitchfork Bifurcation}
+The pitchfork bifurcation is a very important bifurcation as it appears in many systems, and even more important than that, it is the bifurcation lying behind other bifurcations like the Hopf bifurcation, flop (period doubling bifurcation) for maps, etc. In fact, for the Hopf bifurcation we have
+\[  
+\begin{cases}
+	\dot{r}=a\alpha r + br^3,\\
+	\dot{\theta} = w.
+\end{cases}
+\]
+And for the period doubling bifurcation for maps, the normal form of the second iterate map is
+\[ y \mapsto y + a\alpha y + by^3.\]
+In all of these situations, the curve $a\alpha y + by^3$ is crossing ``something'' in one way or another. The following figure makes this more clear. Further more, the interesting fact is that we can actually get the normal form of the pitchfork bifurcation by simply integrating (with respect to $x$) of the normal form of the fold bifurcation.
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=1\linewidth]{Images/PtichforkBifurcationIsTheKing}
+	\label{fig:ptichforkbifurcationistheking}
+\end{figure}
 
+\FloatBarrier
  
 \section{Local Bifurcation Theory for Maps}
 In this section we will develop our theory to study the bifurcation for the maps.
