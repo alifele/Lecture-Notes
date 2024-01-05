@@ -120,7 +120,22 @@ where $f: \R^1 \times \R^1 \to \R^1$. Also, assume that the vector field is cons
 \[ f(p^0_1(\alpha),\alpha) = 0,\quad f_{xx}(p^0_1(\alpha),\alpha) = 0, \]
 for all $\alpha$ in some interval containing the special value $\alpha_0$. Thus, clearly $(p^0_1(\alpha),\alpha)$ is a branch of equilibrium, and in particular, $(0,\alpha_0)$ is an equilibrium point on this branch. Furthermore, assume that 
 \[ f_x(0,\alpha_0) = 0, \] 
-which implies that $(0,\alpha_0)$ is a non-hyperbolic equilibrium point. Thus there is a chance that we observe a bifurcation as we pass the value of $\alpha$ through $\alpha_0$.
+which implies that $(0,\alpha_0)$ is a non-hyperbolic equilibrium point. Thus there is a chance that we observe a bifurcation as we pass the value of $\alpha$ through $\alpha_0$. To analyze the system we use the following coordinate change.
+\[ x = p^0_1(\alpha) + u. \]
+Substituting in the ODE for $x$ we will have
+\[ (p^0_1)'(\alpha)\dot{\alpha} + \dot{u} = f(p^0_1(\alpha) + u,\alpha).\]
+Now we can expand the vector field as
+\[ \dot{u} = \underbrace{f(p^0_1(\alpha),\alpha)}_{=0} + \underbrace{f_x(p^0_1(\alpha),\alpha)}_{\lambda(\alpha)}u + \underbrace{f_{xx}(p^0_1(\alpha),\alpha)}_{=0}u^2/2 + f_{xxx}(p^0_1(\alpha),\alpha)u^3/6 + \order{\abs{u}^4}. \]
+Thus in short we will have
+\[ \dot{u} = \lambda(\alpha)u + \frac{1}{6}\underbrace{f_{xxx}(p^0_1(\alpha),\alpha)}_{f_{xxx}(0,\alpha_0) + \order{\alpha-\alpha_0}} u^3 + \order{\abs{u}^4}. \]
+We require $b = 1/6 f_{xxx}(0,\alpha_0) \neq 0$. Also, we can expand $\lambda(\alpha)$ as
+\[ \lambda(\alpha) = \underbrace{\lambda(\alpha_0)}_{f_x(0,\alpha_0)=0} + \lambda'(\alpha_0)(\alpha-\alpha_0) + \order{\abs{\alpha-\alpha_0}^2}. \]
+Further more, we require $a  = \lambda'(\alpha_0) \neq  0$. By the chain rule we can write
+\[  a = \lambda'(\alpha_0) = \frac{d}{d\alpha} f_x(p^0_1(\alpha),\alpha) \big|_{\alpha=\alpha_0} = \underbrace{f_{xx}(0,\alpha_0)}_{=0}(p^0_1)'(\alpha_0) + f_{x\alpha}(0,\alpha_0).  \] 
+By these conditions ($a \neq 0$ and $b\neq 0$) we will have the simplified vector field as
+\[ \dot{u} = a(\alpha - \alpha_0) u + bu^3 + \order{\abs{u}^4} \]
+
+Thus as we can see, even in the generalized setting for the Hopf bifurcation, by the use of appropriate change of coordinates, we can still write the vector field very similar to the case where the vector field was a symmetric function.
 
 
  
