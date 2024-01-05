@@ -88,5 +88,57 @@ Again, we can intuitively figure out what conditions the functions $f(x,\alpha)$
 \end{enumerate}
 
 
-\section{Local Bifurcation Theory}
-In this section we will have a more rigorous treatment of the bifurcation in dynamical systems. We will start with the fold or saddle-node bifurcation.
+\section{Local Bifurcation Theory for Maps}
+In this section we will develop our theory to study the bifurcation for the maps.
+
+\subsection{Flip or Period Doubling Bifurcation}
+Consider the following family of maps
+\[ x \mapsto f(x,\alpha) \]
+where $x \in \R^1,\ \alpha \in \R^1$, and $f: \R^1\times\R^1 \to \R$ is a smooth vector family of vector fields. Assume that at $(p^0_0, \alpha_0)$ we have
+\[ f(p_0^0, \alpha_0) = p_0^0, \qquad f_x(p_0^0, \alpha_0) = -1. \]
+This means that the point $p_0^0$ is an equilibrium point that is non-hyperbolic. Then there is a high chance that some bifurcation is going to happen (since $f_x(p^0_0,\alpha_0)=-1)$). First, notice that there is a smooth branch of equilibria containing $p_0^0$. To show this, let $G(x,\alpha) = f(x,\alpha) - x$. Then it immediately follows that $G(p_0^0, \alpha_0) = 0$ and $G_x(p_0^0,\alpha_0) = -2 \neq 0$. Thus using the implicit function theorem, we can write $x = p^0(\alpha)$, where $p_0^0 = p^0(\alpha_0)$. Furthermore, we have
+\[ f(p^0(\alpha),\alpha) = p^0(\alpha) \]
+since $p^0(\alpha)$ is actually a branch of equilibria. To determine the behavior of the system near the equilibrium points, we can do the following change of variable
+\[ x = p^0(\alpha) + u. \]
+By substituting the equation above in the recursive form of the map we will get
+\begin{align*}
+	p^0(\alpha) + u_{k+1} &= f(p^0(\alpha)+u,\alpha) \\
+	&= \underbrace{f(p^0(\alpha),\alpha)}_{p^0(\alpha)} + \underbrace{f_x(p^0(\alpha),\alpha)}_{\mu(\alpha)}u_k + \underbrace{1/2f_{xx}(p^0(\alpha),\alpha)}_{\hat{f}_2(\alpha)}u_k^2 + \underbrace{1/6f_{xxx}(p^0(\alpha),\alpha)}_{\hat{f}_3(\alpha)}u_k^3 + \mathcal{O}(\abs{u_k}^4).
+\end{align*}
+So we can now write the map as
+\[ u \mapsto \mu(\alpha)u + \hat{f}_2(\alpha)u^2 + \hat{f}_3(\alpha)u^3 + \mathcal{O}(\abs{u}^4). \]
+First, notice that, in order to have the bifurcation, the value of $\mu(\alpha)$ should cross $-1$ at $\alpha_0$ transversally (i.e. have values other than $-1$ at the points arbitrary close to $\alpha_0$). Thus we need to have $a = \mu'(\alpha_0) \neq 0$. The next step is a very crucial one. The following example makes this step much more sensible.
+
+\begin{example}
+	Let $f(x) = x+ax^{2}+bx^{3}+cx^{4}$ where $a=-2.6, b=6.8$, and $c=-10$. Define a new identity non-linear transformation as 
+	\[ x = y+dy^{2}+gy^{3}+hy^{4}+jy^{5}+ky^{6}+ly^{7}+my^{8}. \]
+	Find the coefficients of the transformation such that $f(y)$ has zero or small coefficients for the terms with lower order. 
+	
+	\begin{ans}
+		To find the answer, we simply substitute the transformation into $f(x)$ and then find the coefficients such that the terms with lower order (lower powers) be zero or be minimum. We can do so using symbolic tools in python or other programming languages. The final results for the coefficients will be
+		\[ d=2.6,\ g=6.72,\ h=9.48,\ j=−30.8,\ k=−266.1,\ l=−515.2,\ m=5619.4  \]
+		
+		And the expression for $f(z)$ will be
+		\begin{align*}
+			f(z) = & -9.9718 \times 10^{15} z^{32} + 3.6575 \times 10^{15} z^{31} + 1.3862 \times 10^{15} z^{30} \\
+			& - 2.7004 \times 10^{11} z^{29} - 2.1478 \times 10^{11} z^{28} - 3.1614 \times 10^{10} z^{27} \\
+			& + 9.3739 \times 10^{9} z^{26} + 4.1132 \times 10^{9} z^{25} + 4.1196 \times 10^{9} z^{24} \\
+			& - 3.6990 \times 10^{8} z^{23} - 5.1383 \times 10^{8} z^{22} - 1.0269 \times 10^{8} z^{21} \\
+			& + 1.1804 \times 10^{7} z^{20} + 1.1487 \times 10^{7} z^{19} + 2.9077 \times 10^{6} z^{18} \\
+			& + 4.9065 \times 10^{5} z^{17} - 4.7806 \times 10^{5} z^{16} - 1.2066 \times 10^{5} z^{15} \\
+			& - 3.7331 \times 10^{3} z^{14} + 5.7317 \times 10^{3} z^{13} + 1.8873 \times 10^{3} z^{12} \\
+			& + 239.716 z^{11} - 46.1615 z^{10} - 66.1136 z^{9} + z.
+		\end{align*}
+		In the figure below, we can easily see that the $f(y)$ is much more linear than $f(x)$ near the origin. 
+		\begin{center}
+			\includegraphics[width=0.5\textwidth]{Images/NearIdentityTransformation.png}
+		\end{center}
+	\end{ans}
+\end{example}
+
+Back to our business with the map we were analyzing that now look like this:
+\[ u \mapsto \mu(\alpha)u + \hat{f}_2(\alpha)u^2 + \hat{f}_3(\alpha)u^3 + \mathcal{O}(\abs{u}^4). \]
+We do the following transformation
+\[ u = v + h_2(\alpha) v^2. \]
+Now we substitute the expression for $u$ and try to choose $h_2(\alpha)$ in a way that makes the coefficient of $v^2$ zero or very small. By substituting we will have
+\[ v_{k+1} + h_2(\alpha)v_{k+1}^2 = \mu(\alpha)(v_k+h_2(\alpha)v_k^2) + \hat{f}_2(\alpha)(v_k+h_2(\alpha)v_k^2)^2 + \hat{f}_3(\alpha)(v_k+h_2(\alpha)v_k^2)^3 + \cdots. \]
