@@ -78,7 +78,7 @@ Note that we could do the whole business with following the concept of implicit 
 \end{example}
 
 
-\section{Complexifying and Realifying A Vector Field}
+\subsection{Complexifying and Realifying A Vector Field}
 Sometimes, it is very beneficial to express a particular vector field in complex variables, as it can possibly simplify the expression a lot. For instance, consider the following vector field.
 \begin{align*}
 	\dot{x}_1 = \mu x_1 - \omega x_2 + b(x_1^3 + x_1x_2^2),\\
@@ -96,3 +96,54 @@ where $\lambda = \mu + i\omega$. This is a huge step forward. The expression in 
 
 Now, in order to get the expression back in the rectangular coordinates, we can substitute $z = x + iy$ in the expression for $\dot{z}$ and try to group the terms and separate the real and imaginary parts to determine the expressions for $x_1$ as well as for $x_2$. Equivalently, we can use the following coordinate change
 \[  \vectt{z}{\bar{z}} = \matt{1}{i}{1}{-i} \vectt{x_1}{x_2}.  \]
+
+\subsection{What Happens When Turning a Matrix to a Jordan Normal Form}
+Linear algebra is amazing as it handles many messy processes and computations in a very neat and clean way. However, it is always a great practice to ask this question that ``What I would have done if I didn't know linear algebra?''. Here we will explain the answer to this question in turning a matrix to Jordan normal form. 
+
+For any real matrix, the complex eigenvalues always comes in pairs. I.e. if a real matrix happen to have a complex eigenvalue $\lambda_1 = \mu+i\omega$, then there is certainly another eigenvalue $\lambda_2 = \mu-i\omega$. Also, the eigenvectors associated with any pair of complex conjugate eigenvalues are always complex conjugate themselves. I.e. assume that $q$ is the eigenvector associated with the eigenvalue $\lambda_1$, then $\bar{q}$ is the eigenvector associated with the eigenvector $\lambda_2$. The following shows the process of turning a $2\times2$ matrix into its Jordan normal form to observe that what is really happening under the hood.
+
+Consider the following system of ODE
+\[ \dot{u} = Au, \qquad A = \matt{a_{11}}{a_{12}}{a_{21}}{a_{22}}. \]
+where $A$ has two complex eigenvalues $\lambda_1 = \mu + i\omega$ and $\lambda_2 = \mu - i\omega$, and associated with them two complex conjugate eigenvectors $q = \vectt{q_1}{q_2} = \vectt{x_1}{x_2} + i\vectt{y_1}{y_2}$ and $\bar{q} = \vectt{\bar{q_1}}{\bar{q_2}}$, where $q_1, q_2 \in \C$. Now there are two distinct paths that can take us to the Jordan normal form of the matrix. One is to turn the matrix into it Real normal form first and then turn it into the Jordan normal form, and then other one is to directly transform the matrix to its Jordan normal form. For the first path, in order to transfer the matrix $A$ to its real normal form, we do the following coordinate change
+\[  u = \matt{\Re{q_1}}{-\Im{q_1}}{\Re{q_2}}{-\Im{q_2}} v = \matt{x_1}{-y_1}{x_2}{-y_2} v = P_1 v.  \]
+where we have assumed that $\lambda_1$ is the eigenvalue with positive imaginary part. Then the ODE system will be
+\[ \dot{v} = \inv{P_1}AP_1 v = R v. \]
+After this transformation, the matrix $R$ will be like below
+\[ R = \matt{\mu}{-\omega}{\omega}{\mu}. \]
+Now turning this matrix to the Jordan normal form (a diagonal matrix with the complex eigenvalues sitting in the main diagonal) has a clear explanation that we described in the previous section as Complexifying a vector field. By evaluating the matrix $R$ it turns out that it has two eigenvectors as $r_1 = \frac{1}{2}\vectt{1}{-i}$ and $r_2 = \frac{1}{2}\vectt{1}{i}$. Thus we need to do the following change of variable to turn the matrix into its normal form
+\[ v = \frac{1}{2}\matt{1}{1}{-i}{i} \xi = P_2 \xi. \]
+In the components we will have
+\[ 
+v_1 = \frac{1}{2}(\xi_1 + \xi_2),\qquad v_2 = \frac{1}{2i}(\xi_1 - \xi_2).
+\]
+And then the ODE system will be
+\[ \dot{\xi} = \inv{P_2}RP_2\ \xi = \inv{P_2}\inv{P_1}A P_1 P_2\ \xi =  J \xi,   \]
+where the matrix $J$ will be
+\[ J = \matt{\mu+i\omega}{0}{0}{\mu-i\omega}. \]
+Thus it turns out that in fact $\xi_1$ is the complex conjugate of $\xi_2$, and this step in changing the real normal form to Jordan normal form is the same as simply letting
+\[ \xi = v_1 + i v_2. \]
+I.e. letting the components of the vector $v$ be the real and imaginary part of the complex variable $\xi$.
+
+However, it is also possible to get here directly from $A$, by simply doing the following coordinate change
+\[ u = P\hat{z} = \matt{q_1}{\bar{q_1}}{q_2}{\bar{q_2}} \vectt{z_1}{z_2}, \]
+and we can predict that $z_2$ is in fact the complex conjugate of $z_1$. By letting $z_1 = \bar{z_1}$ we can write
+\[ u = \matt{q_1}{\bar{q_1}}{q_2}{\bar{q_2}} \vectt{z_1}{\bar{z_1}}  \]
+which is simply listing the eigenvectors in the column of a vector when we do the general diagonalization. In this direct transformation we in fact set
+\[ u_1 = q_1z_1 + \conj{q_1 z_1},\qquad u_2 = q_2z_1 + \conj{q_2z_1}, \]
+or in a vector notation (let $z = z_1 = z_2$) we will have
+\[ u = qz + \conj{qz}. \]
+Now, the only question that remains is the is there a way to express $z_1$ neatly in terms of $u_1$ and $u_2$, as we did in transforming the real normal form to the Jordan normal form? The answer is yes, but it required a little bit more careful treatment. We know that $q$ is the eigenvector of the matrix $A$ with eigenvalue $\lambda$. We define the eigenvector of the adjoint matrix $A^*$ with eigenvalue $\conj{\lambda}$ to be $p$. I.e. 
+\[ A^* p = \conj{\lambda} p. \]
+Then $\dotprod{p}{\bar{q}} = 0$. That is because 
+\[ \lambda \dotprod{p}{\bar{q}} = \dotprod{\conj{\lambda}p}{\bar{q}} = \dotprod{A^*p}{\bar{q}} = \dotprod{p}{A\bar{q}} = \dotprod{p}{\conj{\lambda q}} = \conj{\lambda}\dotprod{p}{\bar{q}},  \]
+and since $\lambda - \conj{\lambda} = 2i\omega \neq 0$, then $\dotprod{p}{\bar{q}} = 0$. Also we can show (I don't know how yet) that
+\[ \dotprod{p}{q} \neq 0,\]
+and we can normalize $p$ in a way that $\dotprod{p}{q} = 1$. With this setting, and observing that $u = zq + \conj{zq}$ it is very easy to observe that
+\[ z = \dotprod{p}{u}. \]
+It is now clear that in the special case where we were transforming the real normal form to Jordan normal form the vector $p$ was actually
+\[ p = \vectt{1}{-i}. \]
+
+
+
+
+

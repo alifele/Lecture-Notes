@@ -266,9 +266,6 @@ where we used the transformation $\alpha = \beta + \alpha_0$.
 \section{Poincare Normal Form and Projection Method}
 The nonlinear close to identity transformation that we did above, is make the vector field more linear close to the origin and make the lower order coefficients of the expansion around the origin to be as small as possible. Note that all of the nonlinear close to identity transformations are one-to-one when we are sufficiently near the origin. Thus the transformation has inverse, from which we can retrieve the original values.
 
-The nature of the non-linear close to identity transformation is quite messy. Thus we need to develop some theoretical setting in order to handle the mess of it. There are two ways to do that: Poincare-Birkhoff normal form theorem and the projection method. No surprise that we see the use of linear algebra to do some large scale computations pretty much automatically. We start with the Poincare-Birkhoff normal form theorem.
-
-\subsection{Poincare-Birkhoff Normal Form Theorem}
-As we explained above, this method is used to do some large scale calculations pretty much automatically by using the ideas form linear algebra. 
+The nature of the non-linear close to identity transformation is quite messy. Thus we need to develop some theoretical setting in order to handle the mess of it. There are two ways to do that: Poincare-Birkhoff
 
 
