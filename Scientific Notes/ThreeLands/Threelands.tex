@@ -1,0 +1,51 @@
+\documentclass[10pt,a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{fontspec}
+\usepackage{calligra}
+\usepackage[T1]{fontenc}
+
+\usepackage{amssymb,amsfonts,amsmath}
+\usepackage{xcolor}
+\usepackage{nameref}
+\usepackage{hyperref}
+
+%\title{\calligra\LARGE The Tale of Three Lands}
+\title{\fontfamily{pzc}\selectfont The Tale of Three Lands}
+
+%\title{The Story of the Three Lands}
+\begin{document}
+\maketitle
+
+\subsubsection*{Some Motivation}
+	
+The motivation behind this writing is based on my own experience, and since there is a high chance that others have had the same feelings. The story begins with my undergraduate years where I was trying to attend and audit as much classes as possible.  But there was a very wired thing happening as I was trying to do so. The classes were starting to contradict each other! For instance, on the real analysis class, the instructor was saying ``set $A \subseteq Z$ is finite, thus it is guaranteed that has a minimum''. But in the class of ``data structures and algorithms'', if you reply to the question ``how to find the minimum of a list of numbers'', with ''well the list is finite so it has a minimum there'' then you would hear nothing but the laughter of other for such a silly answer. Or, when you sit in the class of real analysis and instructor says that ``this function $f$ is Riemann integrable because the upper integral and the lower integral are equal'', the writing the same answer on the Calculus exam will give you mark 0!. Yet for another example, in the theoretical ODE class, after some trouble, you achieve to the conclusion that that specific classes of ODE, have a unique solution. Knowing this will not guarantee any success in any engineering course on ODEs. As another example, it is common to see some space of functions in the classes of numerical PDE courses, like $C_0^1$, etc. and the level of accuracy of the instructor in distinguishing the complete spaces from the non-complete ones might surprise you! But if you happen to write those kind of theoretical settings in a applied numerical PDE exam, you will get a very solid zero!
+
+\medskip
+
+All I am trying to say is that when attending some theoretical courses in math department, they seem to be very useless and just kind of non-functional tautology. For instance what is useful in defining $C^1[0,1]$ to be the set of all continouse functions from $[a,b]$ to real numbers? Why you wouldn't define such a very abstract and maybe useless notion when you are doing your homework? Why you have never defined anything like ``the space of all algorithms that can sort an array'' in non of your homeworks. Is this because these kind of stuff are non-operational, and thus deserves no credits in the homework marking?
+	
+	
+\medskip
+Also, you might have had some experiences that at some classes, the instructor tells some concepts that are very straightforward to understand intuitively. However, then the instructor starts by writing stuff in a weird mathematical formal notation, that kills the intuitive aspect of the subject. For instance, we all know what a graph is, but if you try to follow its formal mathematical definition, then you will find that it is expressed in a weirdly complicated way. The same is true when you talk about the notion of say simple random walks on a graph. Then when you start to write it down in mathematical way, then the stuff get quite messy.  Does these experiences tells us that we need to avoid such a translation to mathematical notation? Or it worth it to practice all of those mathematical notation?
+
+
+\medskip
+All of the discussions above were to convey the idea that there are in fact (at least) three worlds (lands) that we are facing with: The land of intuition, the land of mathematics, the land of computation. Each of these worlds has some important feathers that others do not have, but they are all equally important and critical.
+
+\subsubsection*{The Tree Lands: Intuition, Mathematics and Logic, And Computation}
+
+With the current trends in the education, and the very high demand for people specialized at some ``skills'', the general theme of the education is really just sampling the ``Computation'' and the ``Intuition'' worlds and people rarely encounter the ``mathematics and logic'' world, except if you be a math student. The world of mathematics and logic, can be easily skipped if you just want to be a ``worker bee'' in the society, i.e. if you want to lean some tools (softwares, packages, solvers, etc) and you want only use them in a black box mode. However, to have gain the skill of the critical thinking, and to enter the world of the ``developers'' of the mathematical notions and theorems, then you need to be very familiar with the math and logic world as well.
+
+
+\medskip
+I can talk about the importance of the ``math and logic'' land for many days. But if I want to share some examples, often times, expressing a notion/concept in mathematical notation enables us to possibly utilize a level of abstraction. I.e. to abstract away the unnecessary details of the problem and use the canonical notions and theorems to solve a particular problem. For example, if you correctly express the problem of the walk of a drunk man on a graph in a math language, then you will soon find out that this system is in fact the same as a iterative map and all of the theorems developed for iterative maps can now be used for your oddly sound problem!
+\medskip
+
+Also, one amazing fact about the world of logic and mathematics is that logic can easily take you somewhere that is almost impossible to get there if you solely rely on your intuition. You will feel this if you take a proof based course. Then you will understand that you can start with VERY basic notions, concepts and definitions that seem to be very very useless at first, but then by following the arrows of logic arrive at some true statements that seem to be extraordinarily add. For example in the real analysis, one starts with the terribly boring notions of making rational out of integers, and then making reals out of rationals. But the using some other machinates developed along the way, one finally arrives at the statements like ``any sequence of real numbers in [0,1] has a converging subsequence'' which is really odd at first sight!
+
+Now, one unanswered question that remains is ``what is the good use of some strange spaces like ``the spaces of all continouse functions from $[0,1]$ to reals''? There is no single answer to this question and any possible answer gets better as one sees more examples and gets more experiences. But we can look at this at least from two different perspectives. One is that all of such definitions serve as a ``type'' like thing that we are all used to it. It really defines the type of some mathematical structure. Once we specify the type, then we can start studying all of the object of that type. Second, we can also have some useful operational things out of such ``the space of all somethings'' definitions. One of the very important examples is the notion of vector space the linear algebra, and the notion of span. These notions all have the same kind of definitions (like ``all of the linear combinations of basis vectors''). As you can also see in those examples, we can still derive some very useful and operations tools out of such ``the set of all'' definitions. 
+
+
+
+\end{document}
