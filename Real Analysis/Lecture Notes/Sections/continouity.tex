@@ -1,0 +1,28 @@
+\chapter{Continuity}
+In this section we will cover the topics related to the continuity of functions from one topological space to another topological space. Also, we will put much emphasis on the properties of continouse functions from one metric space to anther metric space (in particular functions from $\R \to \R$). The notion of continuity is one of the central concepts in analysis which shows up anywhere there is a trace of analysis!
+
+\section{Continouse Functions}
+We start with the most general definition of a continouse function in a topological setting.
+
+\begin{definition}
+	Let $(X,\mathcal{T}_X)$ and $(Y,\mathcal{T}_Y)$ be two topological spaces. We say a function $f: X \to Y$ is continouse [on $(X,\mathcal{T}_X$] iff
+	\[ \forall G \in \mathcal{T}_Y \wh \inv{f}(G) \in \mathcal{T}_X. \]f
+	Note that $\inv{f}(G)$ means the pre-image of the set $G$, and does not mean the inverse of the function $f$.
+\end{definition}
+In words, a function from $X$ to $Y$ is continouse if the pre-image of every open set in $Y$ is also an open set in $X$. 
+
+\begin{lemma}
+	$f: X \to Y$ is continouse if and only if $\inv{f}(C)$ is closed for every closed set $C$ in $Y$.
+\end{lemma}
+
+\begin{proof}
+	First, we need to prove the following identity
+	\[ \inv{f}(C^c) = (\inv{f}(C))^c. \]
+	To show this we first show $\inv{f}(C^c) \subseteq (\inv{f}(C))^c$. Let $x \in \inv{f}(C^c)$. Then
+	\begin{align*}
+		x \in \inv{f}(C^c) \implies f(x) \in C^c \implies f(x) \notin C \implies x \notin \inv{f}(C) \implies x \in (\inv{f}(C))^c.
+	\end{align*}
+	Then we need to show $ (\inv{f}(C))^c \subseteq \inv{f}(C^c) $. Let $x\in(\inv{f}(C))^c$. Then 
+	\[ x\in(\inv{f}(C))^c \implies x \notin \inv{f}(C) \implies f(x)\notin C \implies f(x) \in C^c \implies x \in \inv{f}(C^c). \]
+	Thus we proved that $\inv{f}(C^c) = (\inv{f}(C))^c$. Now to prove the lemma, for the $\implies$ direction, we assume that $f$ is continouse. Let $C \subseteq Y$ be a closed set. Then $C^c \in \mathcal{T}_Y$. Since $f$ is continouse, then $\inv{f}(C^c) \in \mathcal{T}_X$. From the identity we proved above, it immediately follows that $(\inv{f}(C))^c \in T_x$, thus $\inv{f}(C)$ is closed.  Now for the other direction, we assume that $\inv{f}(C)$ is closed for every closed set $C$ in $Y$. Let $G \in \mathcal{T}_Y$. Then $G^c$ is closed. From our assumption, we know that $\inv{f}(G^c) = (\inv{f}(G))^c$ is closed. Thus $\inv{f}(G) \in \mathcal{T}_X$. So the pre-image of $G$ is open. Then we conclude that $f$ is continouse.
+\end{proof}
