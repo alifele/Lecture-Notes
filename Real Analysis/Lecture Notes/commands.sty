@@ -22,6 +22,7 @@
 \numberwithin{equation}{section}
 \numberwithin{figure}{section}
 \usepackage{caption}
+\usepackage{placeins}
 
 \usetikzlibrary{matrix}
 
@@ -61,6 +62,8 @@
 
 %% MATH Commands
 \newcommand{\ball}[2]{\mathcal{B}_{#1}(#2)}
+\newcommand{\ballCO}[2]{\mathbb{B}[#1,#2)}  	%% ball closed-open  B[x,r)
+\newcommand{\ballCC}[2]{\mathbb{B}[#1,#2]}		%% ball closed-closed B[x,r]
 \newcommand{\bicon}{\Leftrightarrow}
 \newcommand{\imply}{\Rightarrow}
 \newcommand{\Arg}[1]{\mathrm{Arg}\left({#1}\right)}

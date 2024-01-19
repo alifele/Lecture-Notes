@@ -1,7 +1,7 @@
 \chapter{Continuity}
 In this section we will cover the topics related to the continuity of functions from one topological space to another topological space. Also, we will put much emphasis on the properties of continouse functions from one metric space to anther metric space (in particular functions from $\R \to \R$). The notion of continuity is one of the central concepts in analysis which shows up anywhere there is a trace of analysis!
 
-\section{Continouse Functions}
+\section{Basic Definitions and Characterizations}
 We start with the most general definition of a continouse function in a topological setting.
 
 \begin{definition}
@@ -25,4 +25,48 @@ In words, a function from $X$ to $Y$ is continouse if the pre-image of every ope
 	Then we need to show $ (\inv{f}(C))^c \subseteq \inv{f}(C^c) $. Let $x\in(\inv{f}(C))^c$. Then 
 	\[ x\in(\inv{f}(C))^c \implies x \notin \inv{f}(C) \implies f(x)\notin C \implies f(x) \in C^c \implies x \in \inv{f}(C^c). \]
 	Thus we proved that $\inv{f}(C^c) = (\inv{f}(C))^c$. Now to prove the lemma, for the $\implies$ direction, we assume that $f$ is continouse. Let $C \subseteq Y$ be a closed set. Then $C^c \in \mathcal{T}_Y$. Since $f$ is continouse, then $\inv{f}(C^c) \in \mathcal{T}_X$. From the identity we proved above, it immediately follows that $(\inv{f}(C))^c \in T_x$, thus $\inv{f}(C)$ is closed.  Now for the other direction, we assume that $\inv{f}(C)$ is closed for every closed set $C$ in $Y$. Let $G \in \mathcal{T}_Y$. Then $G^c$ is closed. From our assumption, we know that $\inv{f}(G^c) = (\inv{f}(G))^c$ is closed. Thus $\inv{f}(G) \in \mathcal{T}_X$. So the pre-image of $G$ is open. Then we conclude that $f$ is continouse.
+\end{proof}
+
+\begin{example}
+	In any metric space $(X,d)$, for any point $p \in X$, the function $f: X \to \R$ defined as
+	\[ f(x) = f(x,p), \qquad x\in \R, \]
+	is continouse. \\
+	\begin{proof}
+		To show this, we need to show that $\inv{f}(G)$, where $G$ is open in $\R$, is open in $X$. Let $U = (a,b)$ be an interval in $\R$ for some $a,b\in\R$. We will have three cases of such interval, where $a>0,b>0$, $a<0, b>0$, and $a<0, b<0$. In the third case, $\inv{f}(U) = \emptyset$ which is indeed open. For the first case, we have
+		\[ \inv{f}(U) = \ballCO{p}{b} \backslash \ballCC{p}{a} = \ballCO{p}{b} \cup (\ballCC{p}{a})^c. \]
+		The right hand side is the intersection of two open sets. Thus $\inv{f}(U)$ is open. For the second case, where $a<0, b>0$, the calculations becomes even simpler since 
+		\[ \inv{f}(U) = \ballCO{p}{b} \]
+		which is clearly an open set in the metric space $X$. To complete the proof, we need to also consider more complicated open sets in $\R$ which is the union of intervals. Let $G$ be an open set in $\R$ with usual topology. Then $G$ is a union of intervals $G  = \bigcup_i G_i$, where $G_i$ are intervals. 
+	\end{proof}
+\end{example}
+The following theorem, characterizes the behaviour of continouse functions on dense sets. 
+\begin{theorem}
+	Let $f_1,f_2: X \to Y$, where $(X,\mathcal{T}_X)$ and $(Y,\mathcal{T}_Y)$ are Hausdorff topological spaces, and $f_1$ and $f_2$ are continouse. Then for any $Q\subseteq X$ we have
+	\[ \left[ f_1(x) = f_2(x)\ \forall x\in Q \right] \implies \left[ f_1(x) = f_2(x)\ \forall x\in\closure{Q} \right]. \]
+\end{theorem}
+\begin{proof}
+	In the proof of this theorem, we will utilize the fact that the spaces are Hausdorff spaces (i.e. every two point can be distinguished by two disjoint open sets). The following figure will make the proof idea more tangible.
+	
+	Let $x \in \closure{Q}$. Then $x \in Q \cup \partial Q$. If $x \in Q$, then there is nothing to prove. When $x \in \partial Q \]$, then we proceed with the proof by contradiction. Assume $f_1(x) \neq f_2(x)$. Then since $Y$ is a Hausdorff topological spaces, we can fine open sets $u_1, u_2 \in \mathcal{T}_Y$ such that $f_1(x) \in u_1$ and $f_2(x) \in u_2$ but $u_1 \cap u_2  =\emptyset$. Then consider the pre-image of these open sets. Since $f$ is continouse, then $\inv{f_1}(u_1)$ and $\inv{f_2}(u_2)$ are open sets in $X$ that contains $x$. Let $v = \inv{f_1}(u_1) \cap \inv{f_2}(u_2)$. $v$ is open in $X$ that contains $x$. Since $x$ is a boundary point, then $v \cap Q \neq \emptyset$. Let $y \in v \cap Q$. Then $f_1(y) \in u_1$ and $f_2(y) \in u_2$ but since $f_1(y) = f_2(y)$, then $u_1 \cap u_2 \neq \emptyset$. This contradicts our initial assumption that $u_1$ and $u_2$ are disjoint. This completes the proof.
+	\input{Images/Continouity_CntFuncOnDenseSet.tex}
+	
+	\FloatBarrier
+\end{proof}
+
+\begin{remark}
+	The theorem above indicates that if two continouse function from $\R \to \R$, agree on all values of the form $m/2^n$, for all $m\in\Z$ and $n\in \Z$, then they should agree on the whole real line.
+\end{remark}
+
+\section{Continuity and Compactness}
+The compactness of the domain of a continouse function has many interesting implications.
+
+\begin{theorem}[Continouse image of a compact set]
+	Let $f:X\to Y$ be a continouse function, and $X$ compact. Then $f(X)$ is compact in $Y$.
+\end{theorem}
+\begin{proof}
+	Let $\mathcal{G} = \{G_\alpha\}_{\alpha\in I}$ be an open cover for $f(X)$. Then we claim that $\tilde{\mathcal{G}} = \{ \inv{f}(G_\alpha) \}_{\alpha \in I}$ is also an open cover for $X$. That is because
+	\[ \forall x \in X,\ \exists \alpha \in I \st f(x) \in G_\alpha \implies x \in \inv{f}(G_\alpha),\]
+	thus the $\tilde{\mathcal{G}}$ covers every element of the set $X$. Since $X$ is compact, then there exists a finite sub-cover. I.e. there exists $I' \subseteq I$ finite such that $\tilde{\mathcal{G}}' = \{  \inv{f}(G_\alpha)  \}_{\alpha \in I'}$ is a finite cover for $X$. Now we claim that $\mathcal{G}' = \{  G_\alpha \}_{\alpha \in I'}$ is also a finite sub-cover for $f(X)$. This is true since for every $y \in f(X)$ we have
+	\[ \inv{f}(y) \in X \implies \exists \alpha \in I' \st \inv{f}(y) \in \inv{f}(G_\alpha) \implies y \in G_\alpha. \]
+	Thus $\mathcal{G}'$ covers every element of the set $f(X)$, thus it is a valid finite sub-cover for $\mathcal{G}$. This completes the proof.
 \end{proof}
