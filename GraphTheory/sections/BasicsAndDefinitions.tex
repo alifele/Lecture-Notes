@@ -1,0 +1,24 @@
+\chapter{Basics and Definitions}
+Here in this chapter we will cover the sporadic definitions, theorems, and proofs for the graph theory to get ready for the upcoming chapters. So expect a high diversity and less coherency for the material covered in this chapter. 
+
+
+\section{Basic Definitions and Notions of Graph Theory}
+
+\begin{definition}
+	The complement of graph $G=(V,E)$ is defined to be
+	\[ \bar{G} = (V,E^c) = (V,\binom{V}{2} - E). \]
+\end{definition}
+
+The following definition happens to be one of the central definitions in the realm of graph theory.
+\begin{definition}
+	Two graphs $G,H$ are isomorphic if there exists a bijection $\phi: V(G) \to V(H)$ such that it preserves the edges, i.e.
+	\[ xy \in E(G) \implies \phi(x)\phi(y) \in E(H). \]
+\end{definition}
+The intuitive description of isomorphism between two graphs is that we can change one to the other one by just moving around the vertices and not connecting/disconnecting any edges. Combining the notion of the complement of a graph with the notion of isomorphic graphs we can have the following theorem.
+
+\begin{theorem}
+	Two graphs are isomorphic if and only of their complement are isomorphic.
+\end{theorem} 
+\begin{proof}
+	This proof will have two direction. For the forward direction, Let $G$ and $H$ be two isomorphic graphs (i.e. there exists a structure preserving bijection $\phi$ between the vertex set of two graphs). Let $xy$ be a non-edge in $G$. I.e. $xy \in E(\bar{G})$ or equivalently $xy \notin E(G)$. Then it follows that $\phi(x)\phi(y) \notin E(H)$ which is equivalent to $\phi(x)\phi(y) \in E(\bar{H})$. Thus we can conclude that the same $\phi$ is a structure preserving map from $\bar{G}$ to $\bar{H}$ as well, thus $\bar{G}$ and $\bar{H}$ are isomorphism as well. The proof for the converse is very similar to the structure of the proof presented above.
+\end{proof}
