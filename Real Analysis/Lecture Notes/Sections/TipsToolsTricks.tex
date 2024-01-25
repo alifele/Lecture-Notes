@@ -1,0 +1,67 @@
+\chapter{Useful Tips, Tools, and Tricks for $\R$eal Analysis}
+
+
+In this chapter we will cover some useful tips and tricks in solving the problem. This is not a complete and comprehensive list of tricks, and the list will grow larger as I encounter more of these in different resources.
+
+\begin{trick}
+	There is a way to produce multiplication from squaring and addition/difference. Suppose that a set $S$ is closed under squaring, as well as addition and subtraction. Thus if $a,b \in S$ then $a+b \in S$, $a-b\in S$, thus $(a-b)^2 \in s$ as well as $(a+b)^2\in S$. Thus $(a+b)^2 - (a-b)^2 \in S$ as well. Thus
+	\[  (a+b)^2 - (a-b)^2 = 4ab \in S. \]
+	Thus we can conclude that being closed under addition, subtraction, and squaring, leads to being closed under multiplication as well.
+\end{trick}
+One useful use of this trick is in when we try to prove if $f$ and $g$ are Riemann–Stieltjes integrable, then we want prove that $fg$ is also Riemann–Stieltjes integrable. We do so by observing that $f,g$ are RS integrable, then so is $f+g$ and $f-g$ (which are proved by simpler theorem) and also $f^2$ is RS integrable. Thus from the trick above we can conclude that $fg$ is also RS integrable. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Construction Zone}
+Some tricks for real analysis. I will expand this list and also explain each one with its particular use case throughout this chapter
+
+
+\begin{enumerate}
+
+\item archimedes
+\item well ordering principle
+\item unpack defn
+\item IVT
+\item MVT
+\item three equiv. defn for cts.
+\item sequential compactness
+\item heine borel
+\item bolzano weierstrass
+\item lim $x_n=L$ iff limsup $x_n=\liminf x_n=L$
+\item sequential characterization of open, closed sets, and others
+\item union of countable set is countable
+\item add subtrace and multiply divide
+\item define new set or function and play with it
+\item construct sequence
+\item triangle inequality
+\item X compact then f:X->R has max/min in X and f(X) compact
+\item work backwards and apply previous results
+\item contrapositives
+\item denseness of Q in R
+\item finite intersection prop
+\item cantor intersection thm
+\item squeeze thm
+\item limit laws
+\item monotone convergence thm
+\item show seq cauchy (by completeness)
+\item diff between squares
+\item exploit the defn of convergence
+\item consider all cases
+\item maybe try proof by contradiction
+\item ep ball defn of x in cl(A)
+\item if A is subset of B and B closed then cl(A) is subset of B
+\item if A is subset of B and A open then A subset of int(A)
+\item HTS1-HTS4
+
+\end{enumerate}
+

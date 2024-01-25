@@ -372,6 +372,7 @@ newparttoc, % Required for writing the part toc entry number in a standard way (
 \newtheorem{corollaryT}{Corollary}[chapter]
 \newtheorem{lemmaT}{Lemma}[chapter]
 \newtheorem{summaryT}{Summary}[chapter]
+\newtheorem{trickT}{Trick}[chapter]
 
 
 \theoremstyle{blacknumNOTboxExample}
@@ -392,7 +393,7 @@ newparttoc, % Required for writing the part toc entry number in a standard way (
 
 
 %%% Colors for Boxes
-%% Definition - Summary: HighLight
+%% Definition - Summary - Trick: HighLight
 %% Theorem: LowLight
 %% Proposition: MedDark
 %% Lemma - Corollary: HighDark
@@ -420,7 +421,7 @@ rightmargin=0cm % Outside right margin width
 ]{defBox}
 
 
-%% Summary box
+%% Summary box and Trick Box
 \newmdenv[
 skipabove=7pt, % Whitespace above box
 skipbelow=7pt, % Whitespace below box
@@ -503,6 +504,12 @@ rightmargin=0cm % Outside right margin width
 \newenvironment{proposition}{\begin{propositionBox}\begin{propositionT}}{\end{propositionT}\end{propositionBox}}
 \newenvironment{lemma}{\begin{lemmaCorBox}\begin{lemmaT}}{\end{lemmaT}\end{lemmaCorBox}}
 \newenvironment{summary}{\begin{summaryBox}\begin{summaryT}}{\end{summaryT}\end{summaryBox}}
+
+
+\newenvironment{trick}{\begin{summaryBox}\begin{trickT}}{\end{trickT}\end{summaryBox}}
+
+
+
 \newenvironment{corollary}{\begin{lemmaCorBox}\begin{corollaryT}}{\end{corollaryT}\end{lemmaCorBox}}
 \newenvironment{example}{\begin{exampleT}}{\hfill{\tiny\ensuremath{\blacksquare}}\end{exampleT}}
 

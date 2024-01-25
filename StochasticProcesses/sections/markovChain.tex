@@ -1,0 +1,19 @@
+\chapter{Markov Chain}
+
+
+\begin{example}
+	It is a good practice to derive the value of the transition probability of a simple Markov chain using the first principles. Consider the Markov chain representing a lamp that turns on with probability $1/2$ and turns off with probability $1/2$, and stays at the old state with probability $1/2$. Thus we will have the following diagram for this Markov chain.
+	\input{Images/explicitDerivationMarkovChainExample.tex}\\
+	In this example, the state space is $S = \{0,1\}$, and the sample space is
+	\[ \Omega = \{ (x_1,x_2,\cdots): x_i \in S \} \]
+	which is basically the set of all sequences of one's and zero's. Given this, the random variables $(X_n)_n$ defined t be
+	\[  X_n (\omega) = x_n, \]  
+	where $\omega \in \Omega$ and $x_n$ is the $n$-th letter in $\omega$. Intuitively speaking, we know that 
+	\[  P(1,0) = \prob(X_{n+1} = 1 | X_n = 0) = \frac{1}{2}. \]
+	However, here we want to derive that number more explicitly by working directly with the elements of the probability space. First, we need to determine the event associated with $X_{n+1} = 1$. This is the event that has elements where the $n+1$-th position is 1. I.e.
+	\[  E = \{  (x_1,x_2, \cdots, x_n, 1, x_{n+2}, \cdots) : x_i \in S\}.  \]
+	Similarly, we have
+	\[ F = \{ (x_1,x_2, \cdots, x_{n-1},0,x_{n+1},\cdots): x_i \in S \}. \]
+	So we have
+	\[ \prob(X_{n+1} = 1 | X_n = 0)  = \prob(E|F) = \frac{\prob(E\cap F)}{\prob(F)} =\frac{\prob(E\cap F)}{\prob(F\cap E) + \prob(F\cap E^c)} = \frac{\frac{1}{\abs{\Omega}}}{\frac{1}{\abs{\Omega}} + \frac{1}{\abs{\Omega}}} = \frac{1}{2}. \]
+\end{example}
