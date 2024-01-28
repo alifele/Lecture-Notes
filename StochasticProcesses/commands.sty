@@ -62,7 +62,7 @@
 
 %% MATH Commands
 
-\newcommand{\prob}{\mathcal{P}}
+\newcommand{\prob}{\mathbb{P}}
 
 
 \newcommand{\ball}[2]{\mathcal{B}_{#1}(#2)}
@@ -371,6 +371,7 @@ newparttoc, % Required for writing the part toc entry number in a standard way (
 
 \theoremstyle{blacknumbox}	
 \newtheorem{definitionT}{Definition}[chapter]
+\newtheorem*{notationT}{Notation}
 \newtheorem{theoremT}{Theorem}[chapter]
 \newtheorem{propositionT}{Proposition}[chapter]
 \newtheorem{corollaryT}{Corollary}[chapter]
@@ -391,12 +392,12 @@ newparttoc, % Required for writing the part toc entry number in a standard way (
 
 
 
-%%% Boxed ones: Definition - Theorem - Proposition - Corollary - Lemma - Summary
+%%% Boxed ones: Definition - Theorem - Proposition - Corollary - Lemma - Summary - Notation - 
 %%% Unboxed ones: Remark - Example - Problem - Solution
 
 
 %%% Colors for Boxes
-%% Definition - Summary: HighLight
+%% Definition - Notation - Summary: HighLight
 %% Theorem: LowLight
 %% Proposition: MedDark
 %% Lemma - Corollary: HighDark
@@ -404,7 +405,7 @@ newparttoc, % Required for writing the part toc entry number in a standard way (
 \usepackage{mdframed}
 
 
-%% Definition box
+%% Definition box - Notation box
 \newmdenv[
 skipabove=7pt, % Whitespace above box
 skipbelow=7pt, % Whitespace below box
@@ -503,6 +504,9 @@ rightmargin=0cm % Outside right margin width
 
 
 \newenvironment{definition}{\begin{defBox}\begin{definitionT}}{\end{definitionT}\end{defBox}}
+
+\newenvironment{notation}{\begin{defBox}\begin{notationT}}{\end{notationT}\end{defBox}}
+
 \newenvironment{theorem}{\begin{theoremBox}\begin{theoremT}}{\end{theoremT}\end{theoremBox}}
 \newenvironment{proposition}{\begin{propositionBox}\begin{propositionT}}{\end{propositionT}\end{propositionBox}}
 \newenvironment{lemma}{\begin{lemmaCorBox}\begin{lemmaT}}{\end{lemmaT}\end{lemmaCorBox}}

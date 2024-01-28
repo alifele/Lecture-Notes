@@ -1,5 +1,10 @@
 \chapter{Markov Chain}
 
+\begin{notation}
+	Let $(X_n)_{n\geq0}$ be a Markov chain on the state space $S$, $x\in S$, and let $E$ be an event. Then
+	\[  \prob_x(E) = \prob(E|X_0=x) . \]
+\end{notation}
+
 
 \begin{example}
 	It is a good practice to derive the value of the transition probability of a simple Markov chain using the first principles. Consider the Markov chain representing a lamp that turns on with probability $1/2$ and turns off with probability $1/2$, and stays at the old state with probability $1/2$. Thus we will have the following diagram for this Markov chain.
@@ -16,4 +21,174 @@
 	\[ F = \{ (x_1,x_2, \cdots, x_{n-1},0,x_{n+1},\cdots): x_i \in S \}. \]
 	So we have
 	\[ \prob(X_{n+1} = 1 | X_n = 0)  = \prob(E|F) = \frac{\prob(E\cap F)}{\prob(F)} =\frac{\prob(E\cap F)}{\prob(F\cap E) + \prob(F\cap E^c)} = \frac{\frac{1}{\abs{\Omega}}}{\frac{1}{\abs{\Omega}} + \frac{1}{\abs{\Omega}}} = \frac{1}{2}. \]
+	Note that $\prob(E\cap F) = \frac{1}{\abs{\Omega}}$, since out of many combinations of the sequence of zeros and ones, there is one one sequence whose $n$-th place is 0 and $n+1$-th place is 1. Furthermore, $\prob(F\cap E^c) = \frac{1}{\abs{\Omega}}$ as there is only one string where its $n$-th and $(n+1)$-th string are both zero. 
 \end{example}
+
+\begin{example}[Gambler's Ruin]
+	Suppose Alice and Bob have in total of $N$ coins. Alice and Bob play a game with a fair coin. When Alice wins, gets a coin from Bop, and vise versa. What is the probability that Alice wins if she starts with $0\leq a \leq N$ coins.
+	
+	\begin{solution}
+		There are many ways to tackle a probability problem like this and the solution presented here is not the only way to find the solution to this problem. We want to model this with Markov chain whose state space is $\{0,1,2,\cdots,N\}$. Thus $X_n$ represents the fortune of Alice after playing the games for $n$ times. 
+		\input{Images/GamblersRuinExample.tex} \\
+		Let $p_a$ be the probability of Alice wining if she starts with $a$ coins. First, observe that $p_0 = 0$ and $p_N= 1$. Let $E$ denote that event of Alice wining the whole game. Also, let $F_1$ be the event in which she looses the first game and $F_2$ the event in which she wins the first game. Then
+		\[ p_a = \prob_a(E) =  \underbrace{\prob_a(E | F_1)}_{\prob(E|F_1,X_0=a)} \prob(F_1) + \underbrace{\prob_a(E|F_1^c)}_{\prob(E|F_1^c,X_0=a)}\prob(F_1^c) \]
+		(note that this identity is actually true for any set $F_1$, but here $F_1$ is the specific event explained above). The probability that she looses or wins the first game is $\frac{1}{2}$. Also, observe that $\prob_a(E|F_1) = p_{a+1}$ (since if she wins the first game she will have one more coin) and $\prob_a(E|F_1^c) = p_{a-1}$. Thus 
+		\[ p_a = \frac{1}{2}p_{a+1} + \frac{1}{2}p_{a-1}. \]
+		Now we can solve this recurrent equation with the characterization polynomial which is $2 = X + 1/X$ or $X^2 - 2X + 1 = (X-1)^2 = 0$. Thus the characteristic polynomial has a double root. Thus 
+		\[ p_a = (Aa + B)(1)^a = Aa + B. \]
+		Since $p_0 = 0,\ p_N =1$, then it turns out that
+		\[ p_a = \frac{a}{N}. \]
+	\end{solution}
+\end{example}
+
+\begin{example}[Gambler's Ruin with Draw]
+	Let Alice and Bob play Rock-Paper-Scissors. If Alice and Bob has a total of $N$ coins, and at each play, the winner gets one coin from the loser, what is the probability that Alice will win the game if he starts with $a$ coins. When they draw, then they repeat the game (or equivalently, they play another game without any coins exchange).
+	
+	\begin{solution}
+		We need to do a first step analysis similar to what we did before. Let $E$ be the event that Alice wins the whole game, and the event $F=F_{-1}\cup F_0 \cup F_1$ where
+		\begin{quote}
+			$F_{-1}$: Alice loses the first game,\\
+			$F_0$: Alice draws the first game,\\
+			$F_1$: Alice wins the first game.
+		\end{quote}
+		It is clear that $\prob(F) = 1$, since the components are mutually disjoint. Thus $E\cap F_{-1},\ E\cap F_0,\ E\cap F_1$ are also mutually disjoints where. Thus we can write
+		\[\prob_a(E) = \prob_a(E\cap F_{-1}) + \prob_a(E\cap F_0) + \prob_a(E\cap F_1)
+				= \prob_a(E|F_{-1})\prob_a(F_{-1}) + \prob_a(E|F_0)\prob_a(F_0) + \prob_a(E|F_1)\prob_a(F_1).
+		\]
+		Since the game is fair we know
+		\[ \prob_a(F_{-1}) = \prob_a(F_0) = \prob_a(F_1) = \frac{1}{3}.  \]
+		Furthermore, we know
+		\[ \prob_a(E|F_{-1}) = p_{a-1}, \qquad \prob_a(E|F_0) = p_a, \qquad \prob_a(E|F_1) = p_{a+1}. \]
+		Thus the first step analysis will lead to the following identity.
+		\[  \prob_a(E) = p_a = \frac{1}{3} ( p_{a-1} + p_{a} + p_{a+1}),\]
+		which after simplification becomes
+		\[ 2p_a = p_{a-1} + p_{a+1}, \]
+		which is the same recursive formula we got in the previous example. So the possibility of the draw, will not change the behaviour of the system.
+	\end{solution}
+\end{example}
+
+
+\begin{proposition}[First step argument]
+	Let $(X_n)_{n\geq 0}$ be a Markov chain on the state space $S$. Let $x\in S$, and $W,Z \subset S$. Let $B$ be any event. Then
+	\[ \prob_x(B) = \sum_{y:x\sim y} \prob_y(B)P(x,y). \]
+	\label{prop:FirstTimeStepArgument}
+\end{proposition}
+\begin{proof}
+	To prove the proposition above, we Let $E_i = \{ X_0=x, X_1=y_i \}$ where $y_i \sim x$. So, in words, we say that the event $E_i$ has occurred if $X_1 = y_i$. It is clear that $E_i \cap E_j = \emptyset$ where $i\neq j$. Thus $\bigcup_{i}(B\cap E_i) = B$. Thus 
+	\[ \prob_x(B) = \sum_{i} \prob_x(B \cap E_i) = \sum_{i}\prob_x(B|E_i)\prob_x(E_i). \]
+	In which $\prob_x(E_i) = \prob(E_i|X_0=x) = \prob(X_1=y_i|X_0=x) = P(x,y_i)  $. Also \[\prob_x(B|E_i) = \prob(B|X_1=y_i, X_0=x) = \prob(B|X_1=y_i) = \prob_{y_i}(B),\].
+	in which we have used the Markov property. Thus we can write
+	\[ P_x(B) = \sum_i \prob_{y_i}(B)P(x,y_i). \]
+\end{proof}
+
+
+\begin{example}
+	Consider the a simple random walker on the following graph. Let $B = \{ T_{\tilde{x}} < T_{\set{\tilde{z},\tilde{y}}} \}$. Compute the probability $\prob_0(B)$.
+	
+	\begin{center}
+		\begin{tikzpicture}[scale=1.5, every node/.style={circle, draw}]
+			\tikzstyle{every node}=[circle, draw, fill=white,
+			inner sep=0pt, minimum width=10pt]
+			
+			\node[fill=cyan!50] (a) at (0,0) {0};
+			\node[fill=orange!50] (z1) at (1/2,0) {$z$};
+			\node[fill=orange!50] (z2) at (2/2,0) {};
+			\node[fill=orange!50] (z3) at (3/2,0) {\ };
+			\node[fill=orange!50] (z4) at (4/2,0) {\ };
+			\node[fill=red!50] (ze) at (5/2,0) {$\tilde{z}$};
+			
+			\node[fill=orange!50] (x1) at (-1/2,1/2) {$x$};
+			\node[fill=green!50] (xe) at (-1,1) {$\tilde{x}$};
+			
+			\node[fill=orange!50] (y1) at (-1/2,-1/2) {$y$};
+			\node[fill=orange!50] (y2) at (-2/2,-2/2) {};
+			\node[fill=red!50] (ye) at (-3/2,-3/2) {$\tilde{y}$};
+			
+			
+			\draw (a) -- (z1);
+			\draw (z1) -- (z2);
+			\draw (z2) -- (z3);
+			\draw (z3) -- (z4);
+			\draw (z4) -- (ze);
+			
+			\draw (a) -- (y1);
+			\draw (y1) -- (y2);
+			\draw (y2) -- (ye);
+			
+			\draw (a) -- (x1);
+			\draw (x1) -- (xe);
+			
+		\end{tikzpicture}
+	\end{center}
+	
+	\begin{solution}
+		This problem is simply asking what is the probability that we hit $\tilde{x}$ state before hitting any of $\tilde{y}$ or $\tilde{z}$ states, given the fact that the random walker starts from the state $0$. To keep unnecessary details out of the way, we have only labeled the vertices that we will use in our analysis. We will have the following notation to simplify the solution
+		\[ p_v = \prob_v(B), \]
+		where $v$ is any vertex in the graph. Note that starting at 0, i.e. $X_0=0$, then going to any of the states $x,y$, or $z$, are mutually disjoint events, and the probability of the union of these events is one. With our first time step analysis (see \autoref{prop:FirstTimeStepArgument}) we can write
+		\[ \prob_0(B) = \frac{1}{3} ( p_x + p_y + p_z). \]
+		Now we need to analyze each of terms in the RHS. Let's start with $p_z$. Consider two events $\{ T_0 < T_{\tilde{z}}  \}$ and $\{ T_0 > T_{\tilde{z}}  \}$, where the first time is the event where the random walker hits the $0$ state before hitting the $\tilde{z}$ step first, and the second one is the vice versa. These two events are disjoint and the probability of the union is 1. Thus we write the conditional expansion of $p_z$ based on these events
+		\[ p_z = \prob_z(B) = \prob_z(B|T_0 < T_{\tilde{z}})\prob_z(T_0 < T_{\tilde{z}}) + \prob_z(B|T_0 > T_{\tilde{z}})\prob_z(T_0 > T_{\tilde{z}}). \]
+		We know that $\prob_z(B|T_0 > T_{\tilde{z}}) = \prob(B|X_0=z,X_i=\tilde{z})$ for some $i > 0$. From Markov property it follows that 
+		\[ \prob(B|X_0=z,X_i=\tilde{z}) = \prob(B|X_i=\tilde{z}) = \prob(B|X_0 = \tilde{z})  = p_{\tilde{z}}.\]
+		Also $\prob_z(B|T_0<T_{\tilde{z}}) = \prob_0(B) = p_0$ by the Markov property. Lastly, $\prob_z(T_0<T_{\tilde{z}})$ is determined by the Gambler's ruin method we say before, which is basically
+		\[ \prob_z(T_0 < T_{\tilde{z}}) = \frac{5}{4}, \qquad \prob_z(T_0>T_{\tilde{z}}) = \frac{1}{5}. \]
+		By doing the same kind of analysis for $p_x$ as well as $p_y$ we will get
+		\[ p_z = \frac{4}{5}p_0 , \qquad p_y = \frac{2}{3}p_0, \qquad p_x =\frac{1}{2}p_0 + \frac{1}{2}. \]
+		Now by substituting in the identity we got from the first time step argument, we can fine that 
+		\[ p_0 = \frac{15}{31}, \]
+		And this completes our solution for the problem.
+	\end{solution}
+	
+\end{example}
+
+\begin{example}
+	Consider the graph $\gamma=  (V,E)$ drawn below. Set $Z = \{2,3\}$, and $W = \set{6,9}$. Compute $\prob_0(T_Z<T_W)$. In colors: we start at blue, win if we reach green, and lose of we reach red.
+	
+	\begin{center}
+		\begin{tikzpicture}[scale=1.5, every node/.style={circle, draw}]
+			\tikzstyle{every node}=[circle, draw, fill=orange!50,
+			inner sep=0pt, minimum width=10pt]
+			
+			\node[fill=blue!50] (n0) at (1/2,0) {0};
+			\node (n1) at (0/2,0) {1};
+			\node[fill=green!50] (n2) at (-1/2,-1/2) {2};
+			\node[fill=green!50] (n3) at (-1/2,1/2) {3};
+			\node (n4) at (-2/2,2/2) {4};
+			\node (n5) at (2/2,-1/2) {5};
+			\node[fill=red!50] (n6) at (3/2,-2/2) {6};
+			\node (n7) at (2/2,1/2) {7};
+			\node (n8) at (3/2,2/2) {8};
+			\node[fill=red!50] (n9) at (3/2,0/2) {9};
+
+			
+			\draw (n0) -- (n1);
+			\draw (n1) -- (n2);
+			\draw (n1) -- (n3);
+			\draw (n3) -- (n4);
+			\draw (n0) -- (n7);
+			\draw (n0) -- (n5);
+			\draw (n5) -- (n6);
+			\draw (n7) -- (n9);
+			\draw (n7) -- (n8);
+			
+		\end{tikzpicture}
+	\end{center}
+\end{example}
+
+\begin{solution}
+	As always, we start with our powerful tool in hand, which is the first step argument (which is basically a special form of the more general conditional expansion). We start with first step argument at state $0$. We will get
+	\[ \prob_0(B) = \frac{1}{3} (\prob_1(B) + \prob_7(B) + \prob_5(B) ), \]
+	and now we need to analyze each of the terms in the right hand side. We start with $\prob_5(B)$ which is the most straight forward one. As we saw in the last example, we can analyze this state with a conditional expansion on the two disjoint events, whose union probability is 1. Let those two events be $\set{T_6 < T_0}$ (where the random walker hits the state $6$ before hitting the state $0$), and $\set{T_6 > T_0}$, where the random walker hits the state $0$ before hitting the state $6$. Thus the expansion will be
+	\[ \prob_5(B) = \prob_5(B|T_6 < T_0) \prob_5(T_6 < T_0) + \prob_5(B|T_6 > T_0)\prob_5(T_6 > T_0). \]
+	We know that if we hit the state $6$ before $0$, we have no chance to hit any of the green states (we will lose). Thus
+	\[ \prob_5(B|T_6<T_0) = 0. \]
+	And from the Gambler's ruin we know that $\prob_5(T_6>T_0) = 1/2$, and from the Markov property we know that $\prob_5(B|T_6>T_0) = \prob_0(B)$, because the conditional probability $\prob_5(B|T_6>T_0)$ is basically stating what is the probability of $B$ happening, if we start from $5$ and $X_i = 0$ for some $i$ in the future. Thus 
+	\[ \prob_5(B) = \frac{\prob_0(B)}{2}. \]
+	Now, we need to analyze the term $\prob_1(B)$. Again, at this step, we do another first step analysis.
+	\[  \prob_1(B) = \frac{1}{3} (\underbrace{\prob_3(B)}_{=1} + \underbrace{\prob_2(B)}_{=1} +\prob_0(B)) = \frac{2+\prob_0(B)}{3}. \]
+	Note that from the assumption, we know that if we reach any of green states, then we are declared winner, that is why we have $\prob_3(B) = \prob_2(B) = 1$. Now it only remains to analyze the term $\prob_7(B)$. Again, similar to the case above, we do a first time step argument
+	\[ \prob_7(B) = \frac{1}{3} ( \prob_0(B) + \underbrace{\prob_8(B)}_{=\prob_7(B)} + \underbrace{\prob_9(B)}_{=0} ) \implies \prob_7(B) = \frac{\prob_0(B)}{2}.\]
+	Note that $\prob_8(B) = \prob_7(B)$ by a first stem analysis when starting at the state $8$. Putting all of these terms back to the original identity we derived the first, we can conclude that 
+	\[ p_0 = \prob_0(B) = \frac{2}{5}. \]
+\end{solution}
+
