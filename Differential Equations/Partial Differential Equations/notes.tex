@@ -1,4 +1,4 @@
-\documentclass[12pt]{article}
+\documentclass[12pt]{book}
 % \usepackage[sc]{mathpazo}
 \usepackage{commands}
 \hypersetup{colorlinks = true}
@@ -9,14 +9,23 @@
 
 
 \begin{document}
+	
+	
 
+\begin{tikzpicture}[remember picture,overlay]
+	% If a chapter image has been specified
+	\expandafter\ifstrequal\expandafter{\thechapterimage}{}{}{
+		% Output the chapter image
+		\node[
+		anchor=north west, % Anchor point on the image
+		inner sep=0pt, % Inner padding
+		] at (current page.north west) {\includegraphics[angle=90,width=\paperwidth]{Images/math4OriginalSinze.jpg}};
+	}
+\end{tikzpicture}
+\vspace{7cm}
+\heading{Theory of PDEs}
 
-
-\heading{Partial Differential Equations}
-
-This lecture note is mostly based on the course MATH 257 Partial Differential Equations at UBC (2023). However I have also expanded the contents and examples from the following books.
-
-\newpage
+\tableofcontents
 
 \input{Sections/sec1.tex}
 

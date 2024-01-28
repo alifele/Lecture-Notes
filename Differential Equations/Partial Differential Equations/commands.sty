@@ -1,13 +1,11 @@
 \ProvidesPackage{commands}
 
 
-\usepackage{multirow}
-\usepackage{graphicx}
-\usepackage{amsmath} % AMS Math Package
-\usepackage{amsthm} % Theorem Formatting
-\usepackage{amssymb}    % Math symbols such as \mathbb
-\usepackage{graphicx} % Allows for eps images
-\usepackage[dvips,letterpaper,margin=1in,bottom=0.7in]{geometry}
+
+%% Packages
+
+\usepackage[dvips,letterpaper,margin=1.3in]{geometry}
+%\usepackage{geometry}
 \usepackage{commath}
 \usepackage{tensor}
 \usepackage{mathtools}
@@ -15,54 +13,134 @@
 \usetikzlibrary{arrows.meta}
 \usepackage{xcolor}
 \usepackage{float}
-\usepackage{hyperref}
-\usepackage{fullpage}
+%\usepackage{fullpage}[style={margin,empty}]
 \usepackage{enumerate}
-\usepackage[breakable]{tcolorbox}
+\usepackage[listings,skins,breakable]{tcolorbox}
 \tcbuselibrary{theorems}
 \usepackage{siunitx}
+\usepackage{cancel}
 \numberwithin{equation}{section}
 \numberwithin{figure}{section}
+\usepackage{caption}
+\usepackage{placeins}
 
-\let\vaccent=\v % rename builtin command \v{} to \vaccent{}
-\renewcommand{\v}[1]{\ensuremath{\mathbf{#1}}} % for vectors
-\newcommand{\gv}[1]{\ensuremath{\mbox{\boldmath$ #1 $}}} 
-% for vectors of Greek letters
-\newcommand{\uv}[1]{\ensuremath{\mathbf{\hat{#1}}}} % for unit vector
-\newcommand{\avg}[1]{\left< #1 \right>} % for average
-\newcommand{\pdc}[3]{\left( \frac{\partial #1}{\partial #2}
- \right)_{#3}} % for thermodynamic partial derivatives
-\let\baraccent=\= % rename builtin command \= to \baraccent
-\newcommand{\divides}{\phantom{i} \arrowvert \phantom{i}}
-\newcommand{\ndiv}{\nmid}
+\usetikzlibrary{matrix}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{graphicx}
+\usepackage[colorlinks=true, linkcolor=blue]{hyperref}
+\usepackage{nameref}
+\usepackage{xcolor}
+\usepackage[shortlabels]{enumitem}
+\usepackage{tikz}
+\usepackage{wasysym}
+\usepackage{xspace}
+\usetikzlibrary{fadings}
+\usetikzlibrary{patterns}
+\usetikzlibrary{shadows.blur}
+\usetikzlibrary{shapes}
+
+
+
+\usepackage{physics}
+\usepackage{mathdots}
+\usepackage{yhmath}
+%\usepackage{cancel}
+\usepackage{siunitx}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{gensymb}
+\usepackage{tabularx}
+\usepackage{extarrows}
+\usepackage{afterpage}
+\usepackage{wrapfig}
+
+
+
+
+%% MATH Commands
+\newcommand{\ball}[2]{\mathcal{B}_{#1}(#2)}
+\newcommand{\ballCO}[2]{\mathbb{B}[#1,#2)}  	%% ball closed-open  B[x,r)
+\newcommand{\ballCC}[2]{\mathbb{B}[#1,#2]}		%% ball closed-closed B[x,r]
 \newcommand{\bicon}{\Leftrightarrow}
 \newcommand{\imply}{\Rightarrow}
-
-
-\newcommand{\sol}{\\ \\ \emph{Solution.}}
-\newcommand{\soln}{\emph{Solution.}}
-\newcommand{\pset}[1]{\mathcal{P}({#1})}
-\newcommand{\rel}{\mathrel{R}}
-\newcommand{\nrel}{\not \mathrel{R}}
 \newcommand{\Arg}[1]{\mathrm{Arg}\left({#1}\right)}
 \newcommand{\limi}[1]{\lim_{#1 \rightarrow \infty}}
 \newcommand{\limni}[1]{\lim_{#1 \rightarrow -\infty}}
-\newcommand{\rie}{\mathcal{R}}
 \newcommand{\intinf}{\int_{-\infty}^{\infty}}
+\newcommand{\biImp}{\Leftrightarrow}
+\newcommand{\st}{\ \text{s.t.}\ }
+\newcommand{\wh}{\ \text{we have}\ }
+\newcommand{\preIm}[1]{#1^{-1}}
+\newcommand{\nsubset}{\not \subset}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Pset}[1]{\mathcal{P}(#1)}
+\renewcommand{\o}{\circ}
+\newcommand{\oo}{one-to-one\xspace}
+\renewcommand{\abs}[1]{|#1|}
+\renewcommand{\Re}[1]{\operatorname{Re}(#1)}
+\renewcommand{\Im}[1]{\operatorname{Im}(#1)}
+\newcommand{\conj}[1]{\overline{#1}}
+\newcommand{\floor}[1]{\lfloor #1 \rfloor}
+\newcommand{\ceil}[1]{\lceil #1 \rceil}
+\newcommand{\inv}[1]{#1^{-1}}
+\newcommand{\seq}[1]{\{#1_n\}}
+\newcommand{\AND}{\ \text{and }\xspace}
+\newcommand{\pow}[2]{#1^{#2}}
+\renewcommand{\set}[1]{\{#1\}}
 \newcommand{\infint}{\int_{-\infty}^{\infty}}
-
 \renewcommand{\=}[1]{\stackrel{#1}{=}} % for putting numbers above 
 \renewcommand{\emptyset}{\varnothing}
-\renewcommand{\H}{\mathcal{H}}
+\newcommand{\diagMat}[2]{\begin{pmatrix}
+		#1 & 0 \\
+		0 & #2
+\end{pmatrix}}
+\newcommand{\diagMatFour}[4]{\begin{pmatrix}
+		#1 & 0 & 0 & 0 \\
+		0 & #2 & 0 & 0 \\
+		0 & 0 & #3 & 0 \\
+		0 & 0 & 0 & #4 \\
+\end{pmatrix}}
 
-%\dif is differential symbol
-%\od[n-th deriv]{f}{x}, n-th deriv can be left out for 1
-%\pd does same thing as above, for partial derivatives
-%adding t (ex. \tpd) will make it text style, d (ex. \dpd) will make it display style
-%\md will do mixed derivatives. ex. \md{f}{5}{x}{2}{y}{3}
-%\eval[optional argument]{first argument} is a command for the notation of an expression denoted by the first argument evaluated at a particular condi- tion. The value for the optional argument ranges from 0 to 4 with higher values resulting in larger delimiters. The default value for the optional argument is -1 which results in automatic sizing for the delimiters. For example, \eval{f(\epsilon)}_{\epsilon=0}
-%\enVert}[optional argument]{first argument}is a command which enclose the argument in double vert-bar delimiters.
-%\fullfunction{first argument}....{fifth argument}isacommandwhich nicely formats a function. The first argument denotes the function name, the second the domain and the third the image of the function. The forth is the parameter which is mapped to the expression denoted by argument five. E.g.:\fullfunction{f}{\mathbb R}{\mathbb R}{x}{\sqrt{x}}
+\newcommand{\eigvect}[2]{v_#1^{[#2]}}
+\newcommand{\vspan}[1]{\operatorname{Span}\{#1\}}
+\newcommand{\vectt}[2]{\begin{bmatrix}
+		#1 \\
+		#2
+\end{bmatrix}}
+\newcommand{\vecttt}[3]{\begin{bmatrix}
+		#1 \\
+		#2 \\
+		#3
+\end{bmatrix}}
+\newcommand{\matt}[4]{\begin{pmatrix}
+		#1 & #2 \\
+		#3 & #4
+\end{pmatrix}}
+
+\newcommand{\closure}[1]{\overline{#1}}
+
+\renewcommand{\phi}{\varphi}
+
+\DeclareMathOperator{\arccosh}{arccosh}
+\DeclareMathOperator{\arcsinh}{arcsinh}
+\DeclareMathOperator{\arctanh}{arctanh}
+\DeclareMathOperator{\arcsech}{arcsech}
+\DeclareMathOperator{\arccsch}{arccsch}
+\DeclareMathOperator{\arccoth}{arccoth} 
+
+\newcommand{\indexSet}[3]{\{#1_{#2}\}_{#2\in#3}}
+
+
+
+
+%% Physics Commands
 \newcommand{\xhat}{\hat{\v{x}}}
 \newcommand{\yhat}{\hat{\v{y}}}
 \newcommand{\zhat}{\hat{\v{z}}}
@@ -70,42 +148,152 @@
 \newcommand{\shat}{\hat{\v{s}}}
 \newcommand{\phihat}{\hat{\bm{\phi}}}
 \newcommand{\thetahat}{\hat{\bm{\theta}}}
-
-
 \newcommand{\m}[1]{\begin{pmatrix}#1\end{pmatrix}}
 \newcommand{\paulix}{\begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}}
 \newcommand{\pauliy}{\begin{pmatrix} 0 & -i \\ i & 0 \end{pmatrix}}
 \newcommand{\pauliz}{\begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix}}
 \newcommand{\imatrix}{\begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}}
 \newcommand{\zmatrix}{\begin{pmatrix} 0 & 0 \\ 0 & 0 \end{pmatrix}}
+\renewcommand{\dyad}[2]{\lvert #1 \rangle \langle #2 \rvert}
+\renewcommand{\ket}[1]{\lvert #1 \rangle}
+\renewcommand{\bra}[1]{\langle #1 \rvert}
+\renewcommand{\braket}[2]{\langle #1 \lvert #2 \rangle}
 
-\providecommand{\fr}{\frac}
-\providecommand{\RR}{\mathbb{R}}
-\providecommand{\NN}{\mathbb{N}}
-\providecommand{\ZZ}{\mathbb{Z}}
-\providecommand{\QQ}{\mathbb{Q}}
-\providecommand{\CC}{\mathbb{C}}
-\providecommand{\II}{\mathbb{I}}
-\providecommand{\seq}{\subseteq}
-\providecommand{\e}{\epsilon}
+
+
+
+
+
+
+
+\definecolor{HighDark}{HTML}{003652}
+\definecolor{MedDark}{HTML}{3E80B6}
+\definecolor{LowDark}{HTML}{00798C}
+\definecolor{HighLight}{HTML}{EDAE49}
+\definecolor{LowLight}{HTML}{D1495B}
+
+
+
+
+
+%%%----------------------------------------------------------------------------------
+%							# Chapther, Section, Subsections #
+%%%----------------------------------------------------------------------------------
+
+\usepackage[
+explicit, % Specify section names explicitly in \titleformat with #1
+newparttoc, % Required for writing the part toc entry number in a standard way (overriding default LaTeX behavior) so the titletoc package can style it
+]{titlesec} % Required for modifying sections
+
 %
+
+
+
+\newcommand{\thechapterimage}{}
+\newcommand{\chapterimage}[1]{\renewcommand{\thechapterimage}{#1}}
+
+% Command to store the current whitespace above the chapter title box for all future chapters, can be changed at any time in the document
+\newcommand{\thechapterspaceabove}{}
+\newcommand{\chapterspaceabove}[1]{\renewcommand{\thechapterspaceabove}{#1}}
+
+% Command to store the current whitespace below the chapter title box for all future chapters, can be changed at any time in the document
+\newcommand{\thechapterspacebelow}{}
+\newcommand{\chapterspacebelow}[1]{\renewcommand{\thechapterspacebelow}{#1}}
+
+
+
+\chapterimage{Images/math4LargeEdited.jpg} % Chapter heading image
+\chapterspaceabove{6.10cm} % Whitespace from the top of the page to the chapter title on chapter pages
+\chapterspacebelow{6.25cm}
+
+
+
+
+\newcommand{\outputchaptertitle}[2]{
+	\begin{tikzpicture}[remember picture,overlay]
+		% If a chapter image has been specified
+		\expandafter\ifstrequal\expandafter{\thechapterimage}{}{}{
+			% Output the chapter image
+			\node[
+			anchor=north west, % Anchor point on the image
+			inner sep=0pt, % Inner padding
+			] at (current page.north west) {\includegraphics[angle=0,width=\paperwidth]{\thechapterimage}};
+		}
+		% Box with the chapter title
+		\draw[anchor=west] (current page.north west) node [
+		anchor=north west, % Anchor point of the chapter box
+		xshift=\Gm@lmargin, % Horizontal distance from the left side of the page
+		yshift=-\thechapterspaceabove, % Vertical distance from the top of the page
+		line width=3pt, % Border line thickness
+		rounded corners=10pt, % Rounded corners amount
+		draw=HighLight!80!black, % Border line color
+		fill=LowDark!10, % Box background color
+		fill opacity=0.7, % Background transparency
+		text opacity=1, % Text transparency
+		inner ysep=12.5pt, % Inner vertical padding
+		inner xsep=20pt, % Inner horizontal padding
+		align=flush left, % Text alignment inside box
+		text width=1.2\linewidth, % Box width (wider than page to go off the right side)
+		font=\huge\sffamily\bfseries, % Font styling for chapter title
+		] {\color{LowDark!90!black}\parbox{0.85\linewidth}{\strut\raggedright\expandafter\ifstrequal\expandafter{#1}{}{}{#1. }#2\vspace{-3pt}}}; % Chapter title in a fixed width box for wrapping
+	\end{tikzpicture}
+}
+
+% Numbered chapters
+\titleformat
+{\chapter} % Section type being modified
+[block] % Shape type, can be: hang, block, display, runin, leftmargin, rightmargin, drop, wrap, frame
+{\outputchaptertitle{\thechapter}{#1}} % Format of the whole section
+{} % Format of the section label
+{0cm} % Space between the title and label
+{} % Code before the label
+[] % Code after the label
+
+
+\titlespacing*{\chapter}{0pt}{0pt}{\thechapterspacebelow} % Spacing around section titles, the order is: left, before and after
+
+
+\titleformat
+{\section} % Section type being modified
+[block] % Shape type, can be: hang, block, display, runin, leftmargin, rightmargin, drop, wrap, frame
+{\bfseries\sffamily\Large} % Format of the whole section
+{\llap{\textcolor{orange}{\thesection}\hspace{1em}}\textcolor{HighDark!80!black}{#1}} % Format of the section label
+{0cm} % Space between the title and label
+{} % Code before the label
+[] % Code after the label
+
+
+\titleformat
+{\subsection} % Section type being modified
+[block] % Shape type, can be: hang, block, display, runin, leftmargin, rightmargin, drop, wrap, frame
+{\bfseries\sffamily\large} % Format of the whole section
+{\llap{\textcolor{orange}{\thesubsection}\hspace{1em}}\textcolor{HighDark!80!black}{#1}} % Format of the section label
+{0cm} % Space between the title and label
+{} % Code before the label
+[] % Code after the label
+
+
+\titleformat
+{\subsubsection} % Section type being modified
+[block] % Shape type, can be: hang, block, display, runin, leftmargin, rightmargin, drop, wrap, frame
+{\bfseries\sffamily} % Format of the whole section
+{\llap{{\thesubsubsection}\hspace{1em}}#1} % Format of the section label
+{0cm} % Space between the title and label
+{} % Code before the label
+[] % Code after the label
+
+
+
+
+%%%----------------------------------------------------------------------------------
+%									# Environemnts #
+%%%----------------------------------------------------------------------------------
+
+
+
+%% Environments
 \newtheorem{prop}{Proposition}
 \newtheorem{thm}{Theorem}[section]
-\newtheorem{axiom}{Axiom}[section]
-\newtheorem{p}{Problem}[section]
-\newtheorem{problem}{}
-\usepackage{cancel}
-\newtheorem{lem}{Lemma}[section]
-\theoremstyle{definition}
-\newtheorem{dfn}{Definition}
-
-
-\renewenvironment{sol}
-  {\begin{proof}[Solution.]}
-  {\end{proof}}
-\newenvironment{disproof}
-  {\begin{proof}[Disproof.]}
-  {\end{proof}}
 
 
 \newcommand{\heading}[1]{
@@ -126,31 +314,215 @@
   \end{tcolorbox}
   }
 
-\DeclareMathOperator{\arccosh}{arccosh}
-\DeclareMathOperator{\arcsinh}{arcsinh}
-\DeclareMathOperator{\arctanh}{arctanh}
-\DeclareMathOperator{\arcsech}{arcsech}
-\DeclareMathOperator{\arccsch}{arccsch}
-\DeclareMathOperator{\arccoth}{arccoth} 
 
-\newcommand{\Tr}{\mathrm{Tr}}
-\newcommand{\dyad}[2]{\lvert #1 \rangle \langle #2 \rvert}
-\newcommand{\ket}[1]{\lvert #1 \rangle}
-\newcommand{\bra}[1]{\langle #1 \rvert}
-\newcommand{\braket}[2]{\langle #1 \lvert #2 \rangle}
-\newcommand{\ip}[2]{\langle #1 \vert #2 \rangle}
-\newcommand{\mat}[1]{\begin{pmatrix} #1 \end{pmatrix}}
-\renewcommand{\abs}[1]{\lvert #1 \rvert}
-\newcommand{\dc}{\substack{DC \\ \longleftrightarrow \\ \phantom{o}}}
-
-\newtcolorbox{defbox}[1]{colback=red!5!, colframe=red!75!black,fonttitle=\bfseries, title=Definition:\ #1}
-\newtcolorbox{thmbox}[1]{colback=blue!5, colframe=blue!55!black, fonttitle=\bfseries, title=Theorem:\ #1}
-\newtcolorbox{lembox}[1]{colback=blue!5, colframe=blue!55!black, fonttitle=\bfseries, title=Lemma: #1}
-\newtcolorbox{corbox}[1]{colback=blue!5, colframe=blue!55!black, fonttitle=\bfseries, title=Corollary:\ #1}
-\newtcolorbox{propbox}[1]{colback=blue!5, colframe=blue!55!black, fonttitle=\bfseries, title=Proposition:\ #1}
-\newtcolorbox{axiombox}[1]{colback=green!5, colframe=green!35!black, fonttitle=\bfseries, title=Axiom:\ #1}
-\newtcolorbox{example}[1]{colback=gray!5, colframe=white!40!black, fonttitle=\bfseries, title=Example:\ #1}
+%\definecolor{propColor}{rgb}{0, 0.47, 0.6} % RGB(0, 204, 255) equivalent
+\definecolor{propColor}{HTML}{33658a}
+\definecolor{remarkColor}{HTML}{2f4858}
+\definecolor{corColor}{HTML}{86bbd8}
+\definecolor{defColor}{RGB}{242, 100, 25}
 
 
 
-\newcommand{\DC}{\substack{DC \\ \longleftrightarrow \\ \phantom{o}}}
+
+
+%% Style for the boxed theorem like structures
+\newtheoremstyle{blacknumbox} % Theorem style name
+{4pt} % Space above
+{6pt} % Space below
+{\normalfont} % Body font
+{} % Indent amount
+{} % Theorem head font
+{} % Punctuation after theorem head
+{0.25em} % Space after theorem head
+{\small\sffamily\bfseries\thmname{#1}~\thmnumber{#2} % Theorem text (e.g. Theorem 2.1)
+	\thmnote{\sffamily\bfseries---~#3.\hspace{0.25em}}} % Optional theorem note
+	
+	
+%% Style for the unboxed theorem like structures --> Example
+\newtheoremstyle{blacknumNOTboxExample} % Theorem style name
+{6pt} % Space above
+{6pt} % Space below
+{\normalfont} % Body font
+{} % Indent amount
+{} % Theorem head font
+{} % Punctuation after theorem head
+{0.25em} % Space after theorem head
+{\small\sffamily\bfseries{\raisebox{1.25pt}{\tiny\ensuremath{\blacksquare}}}~\thmname{#1}~\thmnumber{#2} % Theorem text (e.g. Theorem 2.1)
+	\thmnote{\the\thm@notefont\sffamily\bfseries---~#3.\hspace{0.25em}}} % Optional theorem note
+	
+	
+%% Style for the unboxed theorem like structures --> remark - problem - solution
+\newtheoremstyle{blacknumNOTbox} % Theorem style name
+{6pt} % Space above
+{6pt} % Space below
+{\normalfont} % Body font
+{} % Indent amount
+{} % Theorem head font
+{} % Punctuation after theorem head
+{0.25em} % Space after theorem head
+{\small\sffamily\bfseries~\thmname{#1}~\thmnumber{#2} % Theorem text (e.g. Theorem 2.1)
+	\thmnote{\the\thm@notefont\sffamily\bfseries---~#3.\hspace{0.25em}}} % Optional theorem note
+	
+
+
+\theoremstyle{blacknumbox}	
+\newtheorem{definitionT}{Definition}[chapter]
+\newtheorem{theoremT}{Theorem}[chapter]
+\newtheorem{propositionT}{Proposition}[chapter]
+\newtheorem{corollaryT}{Corollary}[chapter]
+\newtheorem{lemmaT}{Lemma}[chapter]
+\newtheorem{summaryT}{Summary}[chapter]
+\newtheorem{trickT}{Trick}[chapter]
+
+
+\theoremstyle{blacknumNOTboxExample}
+\newtheorem{exampleT}{Example}[chapter]
+\newtheorem{problemT}{Problem}[chapter]
+\newtheorem*{remark}{Remark}
+
+
+\theoremstyle{blacknumNOTbox}
+\newtheorem{problem}{Problem}[chapter]
+\newtheorem*{solution}{Solution}
+
+
+
+
+%%% Boxed ones: Definition - Theorem - Proposition - Corollary - Lemma - Summary
+%%% Unboxed ones: Remark - Example - Problem - Solution
+
+
+%%% Colors for Boxes
+%% Definition - Summary - Trick: HighLight
+%% Theorem: LowLight
+%% Proposition: MedDark
+%% Lemma - Corollary: HighDark
+
+\usepackage{mdframed}
+
+
+%% Definition box
+\newmdenv[
+skipabove=7pt, % Whitespace above box
+skipbelow=7pt, % Whitespace below box
+rightline=false, % Right line visible
+leftline=true, % Left line visible
+topline=false, % Top line visible
+bottomline=false, % Bottom line visible
+backgroundcolor=HighLight!10, % BackgroundColor
+linecolor=HighLight, % Border color
+linewidth=4pt, % Border width
+innerleftmargin=5pt, % Inside left margin width
+innerrightmargin=5pt, % Inside right margin width
+innertopmargin=0pt, % Inside top margin height
+innerbottommargin=5pt, % Inside bottom margin height
+leftmargin=0cm, % Outside left margin width
+rightmargin=0cm % Outside right margin width
+]{defBox}
+
+
+%% Summary box and Trick Box
+\newmdenv[
+skipabove=7pt, % Whitespace above box
+skipbelow=7pt, % Whitespace below box
+rightline=true, % Right line visible
+leftline=true, % Left line visible
+topline=false, % Top line visible
+bottomline=false, % Bottom line visible
+backgroundcolor=HighLight!5, % BackgroundColor
+linecolor=LowLight, % Border color
+linewidth=4pt, % Border width
+innerleftmargin=5pt, % Inside left margin width
+innerrightmargin=5pt, % Inside right margin width
+innertopmargin=0pt, % Inside top margin height
+innerbottommargin=5pt, % Inside bottom margin height
+leftmargin=0cm, % Outside left margin width
+rightmargin=0cm % Outside right margin width
+]{summaryBox}
+
+%% Theorem box
+\newmdenv[
+skipabove=7pt, % Whitespace above box
+skipbelow=7pt, % Whitespace below box
+rightline=false, % Right line visible
+leftline=true, % Left line visible
+topline=false, % Top line visible
+bottomline=false, % Bottom line visible
+backgroundcolor=LowLight!10, % BackgroundColor
+linecolor=LowLight, % Border color
+linewidth=4pt, % Border width
+innerleftmargin=5pt, % Inside left margin width
+innerrightmargin=5pt, % Inside right margin width
+innertopmargin=0pt, % Inside top margin height
+innerbottommargin=5pt, % Inside bottom margin height
+leftmargin=0cm, % Outside left margin width
+rightmargin=0cm % Outside right margin width
+]{theoremBox}
+
+%% Proposition box
+\newmdenv[
+skipabove=7pt, % Whitespace above box
+skipbelow=7pt, % Whitespace below box
+rightline=false, % Right line visible
+leftline=true, % Left line visible
+topline=false, % Top line visible
+bottomline=false, % Bottom line visible
+backgroundcolor=MedDark!10, % BackgroundColor
+linecolor=MedDark, % Border color
+linewidth=4pt, % Border width
+innerleftmargin=5pt, % Inside left margin width
+innerrightmargin=5pt, % Inside right margin width
+innertopmargin=0pt, % Inside top margin height
+innerbottommargin=5pt, % Inside bottom margin height
+leftmargin=0cm, % Outside left margin width
+rightmargin=0cm % Outside right margin width
+]{propositionBox}
+
+
+%% Lemma - Corollary Box
+\newmdenv[
+skipabove=7pt, % Whitespace above box
+skipbelow=7pt, % Whitespace below box
+rightline=false, % Right line visible
+leftline=true, % Left line visible
+topline=false, % Top line visible
+bottomline=false, % Bottom line visible
+backgroundcolor=LowDark!90!black!5, % BackgroundColor
+linecolor=LowDark!95!black, % Border color
+linewidth=4pt, % Border width
+innerleftmargin=5pt, % Inside left margin width
+innerrightmargin=5pt, % Inside right margin width
+innertopmargin=0pt, % Inside top margin height
+innerbottommargin=5pt, % Inside bottom margin height
+leftmargin=0cm, % Outside left margin width
+rightmargin=0cm % Outside right margin width
+]{lemmaCorBox}
+
+
+\newenvironment{definition}{\begin{defBox}\begin{definitionT}}{\end{definitionT}\end{defBox}}
+\newenvironment{theorem}{\begin{theoremBox}\begin{theoremT}}{\end{theoremT}\end{theoremBox}}
+\newenvironment{proposition}{\begin{propositionBox}\begin{propositionT}}{\end{propositionT}\end{propositionBox}}
+\newenvironment{lemma}{\begin{lemmaCorBox}\begin{lemmaT}}{\end{lemmaT}\end{lemmaCorBox}}
+\newenvironment{summary}{\begin{summaryBox}\begin{summaryT}}{\end{summaryT}\end{summaryBox}}
+
+
+\newenvironment{trick}{\begin{summaryBox}\begin{trickT}}{\end{trickT}\end{summaryBox}}
+
+
+
+\newenvironment{corollary}{\begin{lemmaCorBox}\begin{corollaryT}}{\end{corollaryT}\end{lemmaCorBox}}
+\newenvironment{example}{\begin{exampleT}}{\hfill{\tiny\ensuremath{\blacksquare}}\end{exampleT}}
+
+\renewenvironment{problem}{\begin{problemT}}{\end{problemT}}
+
+\newcommand{\definitionTautorefname}{Definition}
+\newcommand{\theoremTautorefname}{Theorem}
+\newcommand{\propositionTautorefname}{Proposition}
+\newcommand{\lemmaTautorefname}{Lemma}
+\newcommand{\summaryTautorefname}{Summary}
+\newcommand{\corollaryTautorefname}{Corollary}
+\newcommand{\exampleTautorefname}{Example}
+
+
+
+
