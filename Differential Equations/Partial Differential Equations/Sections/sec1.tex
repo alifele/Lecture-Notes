@@ -1,4 +1,57 @@
 \chapter{Introduction}
+
+
+
+
+\section{Some Random Calculus}
+In this section I will cover some basic calculus concepts which will be used in the later chapters. I start with the Divergence theorem
+
+\begin{theorem}[Divergence theorem]
+	Let $F:\R^3 \to \R^3$ be a vector field defined on $\Omega \subset \R$. Then
+	\[ \int_{\Omega}\div{F}dV = \int_{\partial \Omega} F \cdot d\vec{s} \]
+\end{theorem}
+
+By letting $F = \phi\nabla\psi$, the theorem above helps us to define a similar notion to integration by parts in higher dimensions. To see this, first observe that
+\[ \div{\phi\nabla\psi} = \nabla\phi\cdot\nabla\psi + \phi\underbrace{\nabla^2\psi}_{\div{(\nabla\psi)}}.  \]
+You can check this by simply writing the equation term by term. Then the divergence theorem for $\phi\nabla\psi$ will be
+\[ \int_\Omega \div{(\phi\nabla\psi)}dV = \int_\Omega (\nabla\phi\cdot\nabla\psi + \phi \nabla^2\phi) dV = \int_{\partial\Omega}\phi\nabla\psi\cdot d\vec{s}. \]
+By rearranging the terms we will have
+\[ \int_\Omega \nabla\phi\cdot\nabla\psi dV = \int_{\partial\Omega}\psi\nabla\phi \cdot d\vec{s} - \int_\Omega \phi \div{(\nabla\phi)} dV \].
+To make this identity more similar to the integration by parts in 1D, let $F=\nabla\psi$. Then we will have the following theorem
+\begin{theorem}[Integration by parts in higher dimensions]
+	Let $F:\R^3\to\R^3$ be a vector field, and $\phi:\R^3\to\R$ an scalar function, both defined on $\Omega$. Then 
+	\[\int_\Omega (F\cdot \nabla\phi)dV = \int_{\partial\Omega}\phi F \cdot d\vec{s} - \int_{\Omega}\phi \div{F} dV.  \]
+\end{theorem}
+
+
+By applying the divergence theorem on $F = \psi\nabla\phi - \phi\nabla\psi$, and using the identity $\div{(\psi\nabla\phi) = \nabla\psi\cdot\nabla\phi - \psi\nabla^2\psi}$, we can derive the Green's second identity.
+\begin{theorem}[Green's second identity]
+	Let $\phi,\psi: \R^3 \to \R$ defined on some region $\Omega$. Then 
+	\[ \int_\Omega (\psi\nabla^2\phi - \phi\nabla^2\psi)dV = \int_{\partial\Omega}(\psi\nabla\phi-\phi\nabla\psi)\cdot d\vec{s}. \]
+\end{theorem}
+
+
+\section{Some Random Linear Algebra}
+
+\subsubsection{Self-adjoint matrices}
+\begin{definition}[Self adjoint matrix]
+	A matrix $M: V \to V$ is self adjoint if and only if and only if
+	\[ \dotProd{v}{Mu} = \dotProd{Mv}{u} \]
+	for $v,u \in V$. In words, $M = M^* = (\conj{M})^T$.
+\end{definition}
+
+\begin{proposition}
+	The set of all basis sets for a vector space $V$ is identical with the set of all non-singular and self-adjoint operators $M: V\to V$ up to matrix similarity
+\end{proposition}
+\begin{proof}
+	This is not a formal proof, but an informal discussion of the idea. Every self-adjoint matrix has a set of orthogonal eigenvectors that can be considered as a basis. 
+\end{proof}
+
+
+
+
+\section{Classification of The Second Order PDEs }
+
 Partial differential equations relate the partial derivatives of a function to each other. For example $f$ can be a function of spacial coordinates (like $x,y,z$ in the case of Cartesian coordinates), dynamical variable (like time), or any other kind of variables (like the space of genotypes g). For example suppose that $ \Phi(x,y) $ represents the electric potential of a point charge. Such function should satisfy the Laplace equation:
 
 \[	 \partial_{xx} \Phi + \partial_{yy} \Phi = 0.	\]
@@ -9,8 +62,6 @@ Note that the symbols $ \partial_{xx} $ and $ \partial_{yy} $ are short symbols 
 \end{definition}
 
 Based on the definition above, the Laplace equation is a second order partial differential equation. 
-
-\subsection{Classification of The Second Order PDEs }
 
 There are three categories of the second order PDEs that every other type of a second order PDE can be converted to one of these kinds. The most general type of a second order PDE can be written as:
 
