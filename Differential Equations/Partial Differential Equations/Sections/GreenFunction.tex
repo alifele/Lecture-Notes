@@ -1,1 +1,53 @@
 \chapter{Green's Function}
+
+
+In my opinion, Green's function is nothing other than expressing the solution of a problem in a nice and clean way. So I would say it acts more like a level of abstraction thing that helps to express the solution of a particular problem in a special way that can be used for more higher level thinking for further development, that otherwise would be very hard. I other words, I believe Green's function is basically looking at a solution from a different perspective. I know that all of these statements are pretty wage, but you might get some kind of similar feeling after reading this chapter!
+
+
+\section{Green's function in linear algebra}
+Consider the following linear equation
+\[ Mu = f, \]
+where $M$ is a \emph{symmetric} $n\times n$ matrix with $\det(M) \neq 0$, and $u,v \in \R^n$. Our problem is to find $u$ given the known matrix $M$ and $f$. The most simple way to approach this problem is basically 
+\[ u = \inv{M}f. \]
+To be honest, this is not a solution at all! This expression literally stating $Mu=f$ in an equivalent way. It is basically saying the vector $u$ can be calculated by the act of the inverse mapping $\inv{M}$ on the input function $f$. Now we can seek different ways to find this inverse mapping, which we are not discussing here. 
+
+Instead, we are going to discuss another very simple approach, that turns out the be generalization to infinite dimensional spaces as well! The strategy is basically utilizing the fact that every non-singular symmetric function defines a natural set of orthogonal basis vector (which are actually the eigenvectors of the matrix )for the space. Let 
+\[ \mathbb{B} = \set{v_i}_{i=1}^{n} \]
+be the set of all eigenvectors of $M$, which corresponding eigenvalues $\set{\lambda_1, \lambda_2, \cdots, \lambda_i}$ (note that these eigenvalues need not to be all distinct). All these things wants to say that we have a unique factorization of every vector in the space in terms of these eigenvectors. So we can write
+\[ \vec{u} = \sum_{i=1}^{n} \hat{u}_i \vec{v}_i, \qquad \vec{f} = \sum_{i=1}^{n} \hat{f}_i \vec{v}_i.   \]
+Now, simply by substituting the terms in $Mu = f$, and matching the terms we will get
+\[  \hat{u}_i = \frac{\hat{f}_i}{\lambda_i}.  \] 
+Voila! we solved the system of equations, and the solution basically is
+\[ u = \sum_{i=1}^{n} \frac{\hat{f}_i}{\lambda_i} v_i. \]
+At this stage, you might finish you job and head towards the home being proud of yourself in solving this problem. But, we can do just a little bit modification to the expression above and view things from a different angle, which turns out the be very useful when considering certain problems in infinite dimensions (like ODEs and PDEs).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
