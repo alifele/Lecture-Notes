@@ -11,16 +11,38 @@ where $M$ is a \emph{symmetric} $n\times n$ matrix with $\det(M) \neq 0$, and $u
 \[ u = \inv{M}f. \]
 To be honest, this is not a solution at all! This expression literally stating $Mu=f$ in an equivalent way. It is basically saying the vector $u$ can be calculated by the act of the inverse mapping $\inv{M}$ on the input function $f$. Now we can seek different ways to find this inverse mapping, which we are not discussing here. 
 
-Instead, we are going to discuss another very simple approach, that turns out the be generalization to infinite dimensional spaces as well! The strategy is basically utilizing the fact that every non-singular symmetric function defines a natural set of orthogonal basis vector (which are actually the eigenvectors of the matrix )for the space. Let 
+Instead, we are going to discuss another very simple approach, that turns out the be generalization to infinite dimensional spaces as well! The strategy is basically utilizing the fact that every non-singular symmetric function defines a natural set of orthogonal basis vectors (which are actually the eigenvectors of the matrix )for the space. Let 
 \[ \mathbb{B} = \set{v_i}_{i=1}^{n} \]
-be the set of all eigenvectors of $M$, which corresponding eigenvalues $\set{\lambda_1, \lambda_2, \cdots, \lambda_i}$ (note that these eigenvalues need not to be all distinct). All these things wants to say that we have a unique factorization of every vector in the space in terms of these eigenvectors. So we can write
+be the set of all \emph{normalized }eigenvectors of $M$, which corresponding eigenvalues $\set{\lambda_1, \lambda_2, \cdots, \lambda_i}$ (note that these eigenvalues need not to be all distinct). All these things wants to say that we have a unique factorization of every vector in the space in terms of these eigenvectors. So we can write
 \[ \vec{u} = \sum_{i=1}^{n} \hat{u}_i \vec{v}_i, \qquad \vec{f} = \sum_{i=1}^{n} \hat{f}_i \vec{v}_i.   \]
 Now, simply by substituting the terms in $Mu = f$, and matching the terms we will get
 \[  \hat{u}_i = \frac{\hat{f}_i}{\lambda_i}.  \] 
 Voila! we solved the system of equations, and the solution basically is
-\[ u = \sum_{i=1}^{n} \frac{\hat{f}_i}{\lambda_i} v_i. \]
-At this stage, you might finish you job and head towards the home being proud of yourself in solving this problem. But, we can do just a little bit modification to the expression above and view things from a different angle, which turns out the be very useful when considering certain problems in infinite dimensions (like ODEs and PDEs).
+\[ \vec{u} = \sum_{i=1}^{n} \frac{\hat{f}_i}{\lambda_i} v_i. \]
+At this stage, you might finish you job and head towards the home being proud of yourself in solving this problem. But, we can do just a little bit modification to the expression above and view things from a different angle, which turns out the be very useful when considering certain problems in infinite dimensions (like ODEs and PDEs). We know that the coefficients $\hat{f}_i$ are basically the projection of the vector $f$ on the basis vector $v_i$. I.e. $\hat{f}_i = \dotProd{v_i}{f} = \sum_{k=1}^{n}(v_i)_k f_k$. Let's insert this in the equation above
+\[ \vec{u} = \sum_{i=1}^{n} \frac{1}{\lambda_i} (\sum_{k=1}^{n} (v_i)_k f_k) v_i.  \]
+or
+\[ \vec{u} = \sum_{i=1}^{n}  \sum_{k=1}^{n} \frac{(v_i)_k v_i}{\lambda_i} f_k \implies \boxed{\vec{u}= \sum_{i=1}^{n}  \sum_{k=1}^{n} G_{i,k} f_k}. \]
+Where I call matrix $G$ the Green's matrix! By staring at the equation above, you will find out that that matrix $G$ has a very simple structure. 
 
+\[
+G = 
+\begin{pmatrix}
+	&  &  &  & \\
+	| & | & | &  & |\\
+	\frac{v_{1}}{\lambda _{1}} & \frac{v_{2}}{\lambda _{2}} & \frac{v_{3}}{\lambda _{3}} & \cdots  & \frac{v_{n}}{\lambda _{n}}\\
+	| & | & | &  & |\\
+	&  &  &  & 
+\end{pmatrix}
+\begin{pmatrix}
+	& - & v_{1} & - & \\
+	& - & v_{2} & - & \\
+	& - & v_{3} & - & \\
+	&  & \vdots  &  & \\
+	& - & v_{n} & - & 
+\end{pmatrix}
+\]
+\emph{Note} that the eigenvectors are assumed to be normalized.
 
 
 
