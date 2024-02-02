@@ -1,0 +1,22 @@
+\begin{question}
+	The Fibonacci sequence is the sequence $(F_n)_{n\geq0}$ defined by $F_0 = 0, F_1=1$ and 
+	\[ F_{n+2} = F_{n+1} + F_n \quad \text{for } n\geq 0.  \]
+	Find a general formula for $F_n$
+\end{question}
+\begin{ans}
+	First, we construct the characteristic polynomial of the sequence. From the recursive formula we can write
+	\[ X^2 = X + 1 \implies \boxed{X^2 - X - 1 = 0}. \]
+	The roots of the equation is 
+	\[ r_1, r_2 = \frac{1 \pm \sqrt{5}}{2}. \]
+	Now the general formula will be
+	\[ F_n = Ar_1^n + Br_2^n. \] 
+	To find the coefficients, we utilize the first two terms 
+	\[ 0 = A + B, \qquad 1 = \frac{1}{2}(A+B) + \frac{\sqrt{5}}{2}(A-B). \]
+	This system of equations implies that
+	\[ A = \frac{1}{\sqrt{5}}, \qquad B=\frac{-1}{\sqrt{5}}.  \]
+	Thus the general formula will be
+	\[ \boxed{F_n = \frac{1}{\sqrt{5}}((\frac{1+\sqrt{5}}{2})^n - \frac{1-\sqrt{5}}{2})^n)}. \]
+	
+	\qed
+	
+\end{ans}
