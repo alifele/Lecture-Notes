@@ -1,0 +1,40 @@
+\chapter{Ordinary Differential Equations}
+
+Let's start by studying the following first order differential equation for $u$
+\[ u' + mu = f, \tag{(1)}\]
+where $m\in \R$ and $f:\R\to\R$ is a continuous function. In fact, we are trying to find a function that its derivative plus some constant times the function itself produces the function $f$. One way to tackle this problem is to multiply both sides by $e^{mx}$. Then, we will get
+\[ e^{mx}u' + mue^{mx} = f e^{mx},\quad x\in \R. \]
+Now the trick is to do a similar thing as completing the square in algebra, with only difference that we are aiming at completing the derivative. In other words
+\[ (e^{mx} u(x))' = f(x)e^{mx}, \quad x\in\R. \]
+Now by integrating both sides (or, equivalently, using the fundamental theorem of calculus) we will get
+\[ e^{mx}u(x) - u(0) = \int_{0}^{x}f(s)e^{ms} ds. \]
+By a little rearrangement of the terms we will get
+\[ u(x) = ce^{-mx} + \int_{0}^{1}f(s)e^{m(s-x)}ds, \quad c \in \R \]
+Now we can see that on only there is one function that satisfies that particular relation imposed by the differential equation, there is in fact a continuum of functions satisfying the differential equations that are parameterized by $c\in \R$. It turns out that the set of all such functions, as a set, has some very interesting properties. Let's call this set $\mathcal{A}$. As we discussed above, the elements of this set is parameterized by $c\in\R$. We can also specify this set as
+\begin{equation*}
+	\mathcal{A} = \set{u\ |\ u(x)=ce^{-mx} + \int_{0}^{1}f(s)e^{m(s-x)}ds\ \forall c\in \R}
+\end{equation*}
+\[ \]
+Studying this set more closely, reveals the fact that this set is actually a linear space, or, a vector space. This is true since
+\begin{enumerate}
+	\setlength\itemsep{0em}
+	\item [(A1)] $u,v\in \mathcal{A} \implies u+v = v+u \in \mathcal{A}$.
+	\item [(A2)] $\forall u,v,r \in \mathcal{A} \wh u+(v+r) = v+(u+r).$
+	\item [(A3)] $\mathcal{O} \in \mathcal{A}$ such that $v+\mathcal{O} = \mathcal{O} + v = v$ for all $v\in \mathcal{A}$.
+	\item [(A4)] $\forall v\in \mathcal{A},\ \exists u \in \mathcal{A} \st v + u = u + v = \mathcal{O}.$	
+	\item []
+	\item [(M1)] $\forall v \in \mathcal{A} \wh \mathcal{I}\cdot v = v\cdot \mathcal{I} = v$.
+	\item [(M2)] $\forall v \in \mathcal{A} \wh \mathcal{O}\cdot v = v\cdot \mathcal{O} = \mathcal{O}$
+	\item [(M3)] $\forall v\in \mathcal{A},\ a,b \in \R \wh a(bv) = (ab)v$ 
+	\item []
+	\item [(D1)] $\forall u,v\in \mathcal{A},\ a\in \R \wh a(u+v) = au + av.$
+	\item [(D2)] $\forall u \in \mathcal{A},\ a,b\in \R \wh (a+b)u = au + bu. $
+\end{enumerate}
+\begin{proof}
+	All of the properties of this set follows immediately from the fact that $\R$ is a vector space. To see this, see the following proof for (A1).
+	Let $u,v \in \mathcal{A}$. Then $\exists c_1, c_2 \in \R$ such that 
+	\[ u(x) = c_1e^{-mx} + \int_{0}^{1}f(s)e^{m(s-x)}ds, \quad v(x) = c_2e^{-mx} + \int_{0}^{1}f(s)e^{m(s-x)}ds. \]
+	Thus 
+	\[ (u+v)(x) = (c_1+c_2)e^{-mx} + \int_{0}^{1}f(s)e^{m(s-x)}ds. \]
+	Since $c_1 + c_2 \in \R$, then $u+v \in \mathcal{A}$.
+\end{proof}

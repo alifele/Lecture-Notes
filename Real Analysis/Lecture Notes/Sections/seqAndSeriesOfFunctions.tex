@@ -1,0 +1,46 @@
+\chapter{Sequences and Series of Functions}
+
+In this chapter we will study the sequence and series of functions. We will study different notions of convergence, namely point-wise convergence, uniform convergence, etc. Note that in this chapter, we will try to be as concrete as possible, avoiding unnecessary abstraction.
+
+\begin{definition}[Point-wise convergence]
+	Let $\seq{f}$ be a sequence of functions $f: [0,1] \to \R$. Then we say that this sequence converges \emph{point-wise} to the function $f[0,1]\to\R$, and show it as $f_n(x)\to f$ if
+	\[ \forall \epsilon>0, x\in [0,1],\ \exists N>0 \st \forall n>N \wh \abs{f_n(x) - f(x)} < \epsilon.  \]
+	We write this as $\lim_{n\to\infty}f_n(x) = f(x)$.
+\end{definition}
+\begin{remark}
+	Note the order of the quantifiers in the definition above. What we are basically saying is that for any choice of $\epsilon$ and for any $x$, we can find $N$ (that depends on $\epsilon$ and $x$) such that for all $n>N$ we have $\abs{f_n(x)-f(x)}<\epsilon$. There is \textbf{NO} guarantee that by using this $N$, for any other point $x'$ we have $\abs{f_n(x') - f(x)} < \epsilon$.
+\end{remark}
+
+Thinking more carefully, we can see that this is nothing other than a collection of sequences in $\R$ that are indexed by index the set $[0,1]$. For instance, for $x=0.5$, $\set{f_n(0.5)}_n$ is a sequence in $\R$ like any other value of $x\in [0,1]$. That is why a sequence of functions can be thought of as an indexed sequence. And the point-wise notion of convergence to $f(x)$ is nothing other than indexing the converged value by $x$. Back to the previous example, for $x=0.5$, if we know that $\set{f_n(0.5)}_n$ convergence, the symbol $f(0.5)$ is the most appropriate symbol to represent the limit. Then for $x=0.6$, if $\seq{f_n(x)}$ converges, we can say it converges to $f(0.6)$. So the point-wise convergence is simply saying that all of the indexed sequences converge to a set whose values are indexed by the same index as the index of the corresponding sequence. 
+
+Because of our discussion above, it is not surprising if we say that there is no guarantee that some good properties of $f_n$ carries over to $f$ (like continuity, differentiability, integrability, etc). That is because the point-wise notion of convergence is only expressing the convergence of a bunch of sequences (indexed with real numbers in [0,1]) in a neat way.
+
+As we will discover through this chapter, it turns out that the question about if the properties of the function $f_n$ carries over the properties of the $f$ through the point-wise convergence, is essentially the same type of question that if in a multivariate limit, exchange of limit order is allowed. 
+
+
+\begin{definition}[Uniform convergence]
+	let $\set{f_n}$ be a sequence of functions $f:[0,1] \to \R$. Then we say that the sequence converges to $f: [0,1] \to \R$ if 
+	\[ \forall \epsilon>0,\ \exists N>0 \st \forall n>N \wh \qquad \abs{f_n(x)-f(x)} < \epsilon \quad \forall x\in [0,1]. \]
+	We show this by $f_n \to f$.
+\end{definition}
+\begin{remark}
+	Note the order of the quantifiers and compare that closely with the definition of the point-wise convergence. In the uniform convergence, for any choice of $\epsilon$, we can find $N$ that for all $n>N$ we have $\abs{f_n(x)- f(x)} <\epsilon$ that holds true for any $x\in [0,1]$. Thus in some sense, the function $f_n$ converges to $f$ as a whole, and not in a point by point sense. This is also evident in the notation that we use to demonstrate the uniform convergence $f_n \to f$, that gives the feeling that the functions $f_n$ converges to $f$ as a whole object.
+\end{remark}
+
+\begin{theorem}[Cauchy criteria of convergence]
+	Let $\set{f_n}_n$ be a sequence of functions $f_n: E \to \R$. This sequence converges to $f$ uniformally, if and only if $\forall \epsilon>0,\ \exists N>0 \st \forall n,m>N \wh \abs{f_n(x) - f_m(x)} < \epsilon \ \forall x\in E$.
+\end{theorem}
+\begin{proof}
+	$\boxed{\implies}$ For this direction, we need to show that uniform convergence imply the sequence to be Cauchy. Let $\epsilon>0$ given. Then since $f_n \to f$, then we can find integer $N$ such that for all $n,m>N$ and $x\in E$
+	\[ \abs{f_n(x)-f(x)}<\epsilon/2, \qquad \abs{f_m(x)-f(x)}<\epsilon/2 \]
+	Thus we can write
+	\[ \abs{f_n(x) - f_m(x)} \leq \abs{f_n(x)-f(x)} + \abs{f_m(x)+f(x)} < \epsilon \]
+	
+	\noindent $\boxed{\Longleftarrow}$ For this direction, we need to prove that the Cauchy criteria satisfied implies the uniform convergence. First, observe that for any fixed $x$, the sequence $\set{f_n(x)}$ is Cauchy in $\R$. Thus it converges to some real number $f(x)$. Given $\epsilon>0$ choose $N$ large enough that $\forall n,m > N$ we get
+	\[ \abs{f_n(x) - f_m(x)}  < \epsilon/2 \qquad \forall x\in E.\]
+	Then, for all $x\in E$ we can write
+	\[ \abs{f_n(x) - f(x)} \leq \abs{f_n(x) - f_m(x)} + \abs{f_m(x) - f(x)}. \]
+	The first term in the right hand side is less than $\epsilon/2$. And since $f_m(x) \to f(x)$, we can choose $m$ large enough that $\abs{f_m(x) - f(x)} < \epsilon/2$. Thus we will get
+	\[ \abs{f_n(x) - f(x)} < \epsilon. \]
+	This completes our proof. 
+\end{proof}
