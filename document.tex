@@ -1,0 +1,184 @@
+\chapter{Probability Theory}
+
+%\section[Fundamental Concepts]{\hyperlink{toc}{Fundamental Concepts}}
+\section{Foundamentals}
+
+The main concept in the field of statistics and probability is the set theory. Basically all we deal with the sets. The whole theroy of statistics can be built on that. Let's discuss some foundamental concepts in statistics and then build the theory.
+
+\subsection{Random Experiment}
+To understand the meaning of random experiment, do not over think! The first thing that comes into our minds when we hear the word "random experiment" is its definition! In a nutshell, random experiment is an experiment that its outcome is unkown to us. Like:
+
+\begin{itemize}
+	\item Tossing two coin
+	\item Rolling a dice
+	\item Measuring the number of possible ReadWrite operations on a piece of EEPROM chip
+\end{itemize}
+
+Do not overthink about that. Yes we can go further and discuss stuff like "we can compute the exact movement of dice or coin so it is not random but determenistic" and etc. Here I will not touch the philosophical topics that are very deep and do not necessarily converge the a unified point of view!
+
+The random experiments can be modeled and despite the fact that a random experiment is random, we can deduce many useful information from modeling that. To model a random experiment, we use three important concepts: sample space, events, probability. In the following section, we will discuss each of them in detail.
+
+
+\subsection{Sample Space}
+
+\begin{defbox}{Sample Space}
+	
+	Sample space $\Omega$ is simply a set that contains \emph{all possible outcomes} of a random experiment/
+	
+\end{defbox}
+
+For each of random experiments described above, we can define a sample space. For example:
+
+\begin{itemize}
+	\item $\Omega$ of Tossing Tow Coins: $$\Omega = \{ HH,HT,TH,TT \}$$
+	\item $\Omega$ of Rolling a Dice: $$\Omega = \{ 1,2,3,4,5,6 \}$$
+	\item $\Omega$ of Rolling Two Dices: $$\Omega = \{ (1,1),(1,2), \ldots, (1,6), \ldots ,(6,6)  \}$$
+	\item $\Omega$ of Number of possible ReadWrite operations on a EEPROM chip: $$\Omega = \mathbb{N}$$
+\end{itemize}
+
+
+
+\subsection{Events}
+\begin{defbox}{Events}
+	Event $E$ is a set of outcomes of a random experiment and is the subset of sample space $\Omega$. 
+	$$E \in \Omega$$
+\end{defbox}
+
+
+For example for any of the sample spaces specified above, we can define so many possible events. In fact any set that is a subset of the sample space is a valid event of that sample space. For example:
+
+\begin{itemize}
+	
+	\item Tossing Three Coins
+	\begin{itemize}
+		\item There are at least on Heads: $$E = \{ HHH,HHT,HTH,THH,HTT,THT,TTH \}$$
+		\item There are only two Tails: $$E = \{ TTH,THT,HTT \}$$
+	\end{itemize}
+	
+	\item Rolling Two Dices
+	\begin{itemize}
+		\item The sum of two dices is 4: $$E = \{ (1,3),(2,2),(3,1) \}$$
+		\item there are at least one prime number in the outcome:
+		$$E = \{ (1,2),(1,3),(1,5),(2,1),(3,1),(5,1),(2,2),(2,3),(2,5), \ldots ,(5,5)\}$$
+	\end{itemize}
+	
+\end{itemize}
+
+Since we have define everything on the basics of set theory, then now we can correspond the everyday concepts to specific operations in the set theory.
+
+\begin{example}{The Mapping Between Everyday Language and Sets in the Theory of Probability}
+	
+	\begin{itemize}
+		\item At least one of two events $A,B \in \Omega$ happens: $E = A \cup B$.
+		\item Tow events $A,B \in \Omega$ occures at the same time: $E = A \cap B$.
+		\item Event $A \in \Omega$ does not happen: $E = \overline{A} = \Omega - A$.
+		\item The event $A$ happens but $B$ does not happen: $E = A - B$.
+		
+	\end{itemize}
+	
+\end{example}
+
+
+
+In probability and statistics, we are dealing with three important concepts: sample space $\Omega$, event $E$, and probability $P$.
+
+
+\begin{defbox}{Disjoint events}
+	
+	If two events has no common elements (i.e. $A \cap B = \varnothing$) then we say that two events are \emph{disjoint}. Basically, if two sets in the venn diagram has nothing is common they are considerent to be disjoint sets.
+	
+	
+	For example for the random experiment of tossing two coins, the events 1) both coins are heads: $A = \{HH\}$ and 2) both coins are tails: $B = \{TT\}$. Two events $A,B$  are two disjoint events. \textbf{Two events being  disjoing is NOT the same as being independent}. We will talk about independet events in future.
+	
+\end{defbox}
+
+Note that since the events are basically sets, we can use theorems of set theory to solve the problems. 
+
+\begin{thmbox}{De Morgan's Laws}
+	
+	If $A,B$ are two sets then:
+	
+	$$\overline{A \cap B} = \overline{A} \cup \overline{B}$$
+	
+	$$\overline{A \cup B} = \overline{A} \cap \overline{B}$$
+	
+\end{thmbox}
+
+\begin{proof}
+	the proof is left as an excerise!
+\end{proof}
+
+
+\subsection{Probability}
+
+The last foundamental ingeridient in modeling a random experiment, is to define a probability for each event. The probability should intuitively reflect how likely an event is probable to happen. This probability should satisfy some foundamental properties which are explained as follows.
+
+\begin{axiombox}{Axioms of probability (Kolmogorov axioms)}
+	
+	Suppose that $A, B \in \Omega$ is an event and $\mathbb{P}$ is a probability function. Then $\prob$ should satisfy the following properites:
+	
+	\begin{enumerate}
+		
+		\item $ 0 \leq \prob(A) \leq 1$
+		\item $\prob(\Omega) = 1$
+		\item For the events $E_1, E_2, ..., E_n \in \Omega$ that are mutually exclusive (i.e. disjoint events): $$\prob(\bigcup_{i} E_i) = \sum_i \prob(E_i)$$
+	\end{enumerate}
+	
+	
+\end{axiombox}
+
+
+
+These axioms are called the foundamental axioms of probability and also the Kolmogorov axioms. We are free to define any kind of probabilty function that we want but it is important that 1) It should align with our common sense, 2) It should satisfy the Kolmogorov axioms. 
+
+Using the axioms above, we can observe and prove several interesting properties of the probability function. In the following box we have expressed some of them.
+
+\begin{thmbox}{Basic Properties of the Probability Function}
+	
+	Suppose that $\prob$ is a probability function and $A,B \in \Omega$ are events of the sample space $\Omega$. We can show that the probability function has the following properties:
+	
+	\begin{enumerate}
+		
+		\item $\prob(\varnothing) = 0$
+		
+		\item If $A \subset B$ then $\prob(A) \leq \prob(B)$.
+		
+		\item $\prob(\overline{A}) = 1 - \prob(A)$.
+		
+		\item $\prob(A \cup B) = \prob(A) + \prob(B) - \prob(A \cap B)$.
+		
+	\end{enumerate}
+	
+\end{thmbox}
+
+
+\begin{proof}
+	The properties can be proved using the basic set theory theorems.
+	
+	\begin{enumerate}
+		
+		\item Since $\emptyset$ is the complement of $\Omega$, so these two sets are disjoint (i.e. $\emptyset \cap \Omega = \emptyset$). On the other hand from the set theory we know that $\emptyset \cup \Omega = \Omega$. So $\prob(\emptyset \cup \Omega) = \prob(\Omega)$. On the other hand, using the third axiom we can write: $\prob(\emptyset \cup \Omega) = \prob(\emptyset) + \prob(\Omega)$. Comparing the two recent equations we can conclude that $\prob(\emptyset) = 0$.
+		
+		
+		
+	\end{enumerate}
+	
+	
+	
+	The proofs for 2,3,4 are left as a exercise. However, the solutions can be found in the book "Statistical Modeling and Computation by Kroese" chapter 1. 
+	
+	
+\end{proof}
+
+
+
+\begin{example}{Defining a simple probability function}
+	
+	Let's define a probability function for the rolling n dice experiment that is both aligned with our common sense and also satisfy the Kolmogorov equations. Suppose that the $\Omega$ is the sample space and $E \in \Omega$ is an event. Then let's define:
+	
+	$$\prob(E) = \frac{\lvert E \rvert}{\lvert \Omega \rvert}$$
+	
+	in which the $\lvert E \rvert$ means the cardinality (number of elements) of the set $E$.
+	
+\end{example}
+
