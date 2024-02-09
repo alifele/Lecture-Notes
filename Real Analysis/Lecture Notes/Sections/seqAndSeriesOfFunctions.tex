@@ -1,5 +1,7 @@
 \chapter{Sequences and Series of Functions}
 
+\section{Basic Notions and Definitions}
+
 In this chapter we will study the sequence and series of functions. We will study different notions of convergence, namely point-wise convergence, uniform convergence, etc. Note that in this chapter, we will try to be as concrete as possible, avoiding unnecessary abstraction.
 
 \begin{definition}[Point-wise convergence]
@@ -44,3 +46,98 @@ As we will discover through this chapter, it turns out that the question about i
 	\[ \abs{f_n(x) - f(x)} < \epsilon. \]
 	This completes our proof. 
 \end{proof}
+
+The following criterion often comes very handy and useful.
+\begin{proposition}
+	Let $\set{f_n}$ be a sequence of functions defined on $E$. Define 
+	\[ M_n = \sup_{x\in E}\abs{f_n(x) - f(x)}. \]
+	Then $f_n \to f$ if and only if $M_n \to 0$.
+\end{proposition}.
+\begin{proof}
+	\noindent $\boxed{\Longleftarrow}$ For this direction, as assume $M_n \to 0$ and we prove that $f_n \to f$. For given $\epsilon>0$ we can find $N>0$ such that for all $n>N$ we have
+	\[ M_n < \epsilon. \]
+	By the properties of the suprimum, we know that $\forall x\in E$ we have $\abs{f_n(x) - f(x)} < M_n$. This implies 
+	\[ \abs{f_n(x) - f(x)}  < \epsilon \qquad \forall x\in E.\]
+	Thus we conclude $f_n \to f$.
+	
+	\noindent $\boxed{\Longrightarrow}$ For this direction we assume $f_n \to f$ and we prove that $M_n \to 0$. For a given $\epsilon>0$ we can find $N>0$ such that for all $n>N$ we have
+	\[ \abs{f_n(x) - f(x)} < \epsilon \qquad \forall x\in E. \]
+	Then it follows from the definition of suprimum that 
+	\[ M_n = \sup_{x\in E} \abs{f_n(x) - f(x)}  \leq \epsilon. \]
+	This implies that $M_n \to 0$ as $n\to \infty$.
+ \end{proof}
+
+
+\section{Uniform Convergence and Continuity}
+It is very easy to show that by point-wise convergence, the continuity of the functions does not carry over to the limiting function. Consider the following example.
+\begin{example}
+	Let $\set{f_n}$ be a sequence of functions $f:[0,1]\to \R$ where $f_n(x) = x^n$. Then it is immediate that $f_n(x) \to 0$ for all $x \in [0,1)$ and $f_n(1) \to 1$. Thus $f_n(x) \to f(x)$ where
+	\[ f(x) = \begin{cases}
+		0 \quad x \in [0,1), \\
+		1 \quad x \in 1.
+	\end{cases} \]
+	It is clear that all of $f_n$ are continuous but the limiting function $f$ is not. 
+\end{example}
+
+The example above is a very simple and good example where the continuity of a sequence of functions does not carry over to the limiting function. The following remark also shows the fact that asking about the continuity of the limiting function is in fact a question about the possibility of the exchange of the orders of the limit.
+
+\begin{remark}
+	Let $\set{f_n}$ be a set of functions defined on $E$. Assume that all of these functions are continuous on $E$, i.e. $\forall x\in E$ we have
+	\[ \lim_{t\to x}f_n(t) = f_n(x), \]
+	and by using the fact that $f_n(x) \to f$ we can write
+	\[ \lim_{n\to \infty} \lim_{x\to t} f_n(t) = \lim_{n\to\infty}f_n(x)  = f(x). \]
+	However, if $f(x)$ is continuous, then we can write
+	\[ \lim_{t\to x} f(t) =f(x). \]
+	but since $f_n(t) \to f(t)$, then we can re-write the expression above as
+	\[ \lim_{t\to x} \lim_{n\to\infty} f_n(t)= f(x). \]
+	Combining this with the result above we can get
+	\[  \boxed{\lim_{n\to \infty} \lim_{x\to t} f_n(t) \stackrel{?}{=} \lim_{x\to t} \lim_{n\to \infty} f_n(t) }. \]
+\end{remark}
+
+The following theorem shows the relation between uniform convergence and continuity.
+
+\begin{proposition}
+	Let $\set{f_n}$ be a sequence of functions defined on $E$ a subset of a metric space $(M,d)$. Assume $f_n \to f$ uniformally where $f$ is also defined on $E$. Let $x$ be a limit point of $E$ and suppose that 
+	\[ \lim_{t\to x}f_n(t) = A_n \qquad  (n=1,2,3,\cdots). \]
+	Then $\set{A_n}$ converges and 
+	\[ \lim_{n\to \infty} A_n = \lim_{t\to x} f(t), \]
+	which is equivalent to 
+	\[ \lim_{n\to \infty} \lim_{t\to x} f_n(t) = \lim_{t\to x} \lim_{n\to \infty} f_n(t). \]
+\end{proposition}
+\begin{proof}
+	First, we need to prove that the sequence $\set{A_n}$ converges. We will show $\set{A_n}$ is Cauchy by using the fact that $f_n \to f$ uniformally. We can do this in two way, where the first one is much more high level (in the sense that it is close to everyday conversation) and the second way is much more verbose revealing the underlying gears. I have seen that Rudin sometimes uses the first way of reasoning in his proofs which is very fast and easy to follow. \\
+	Let $\epsilon>0$ given. Then $\exists N>0$ such that $\forall n,m>N$ we have
+	\[ \abs{f_n(t) - f_m(t)} < \epsilon \qquad \forall t\in E. \]
+	Now taking limit $t\to x$ we will get
+	\[ \abs{A_n - A_m} < \epsilon. \]
+	This shows that $\set{A_n}$ is Cauchy, this converges. \\
+	To reveal what is happening behind the scene of the reasoning above (when we simply say taking limit $t\to x$), we provide the following reasoning. Given $\epsilon>0$, choose $N_1$ large enough that $\forall n,m>N_1$ we have 
+	\[ \abs{f_n(t) - f_m(t)} < \epsilon/3 \qquad \forall t\in E. \]
+	We can always find such $N_1$ because $f_n \to f$ by hypothesis. Now choose $t$ close enough to $x$ to get
+	\[ \abs{f_n(t) - A_n} < \epsilon/3,  \qquad \abs{f_m(t) - A_m} < \epsilon/3. \]
+	Then we can write
+	\[ \abs{A_n - A_m} = \abs{A_n - A_m \pm f_n(t) \pm f_m(t)} \leq  \abs{f_n(t) - A_n} + \abs{f_m(t) - A_m} + \abs{f_n(t) - f_m(t)}. \]
+	
+	TO BE CONTINUED
+	
+	
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\newpage
