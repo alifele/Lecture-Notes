@@ -182,3 +182,92 @@ Using the axioms above, we can observe and prove several interesting properties 
 	
 \end{example}
 
+
+\section{Random Variables}
+Often, we are interested in the some measurements of the outcome of a random experiment rather than knowing the outcome it self. For instance, if the experiment of tossing two dice, we might be interested in asking the question if the sum of two dice is 6, and not concerned over whether the actual outcome was (3,3) or (2,4), etc. These quantities of interest are called random variables. The following definition put this into a more formal definition.
+
+\begin{definition}
+	Let $(\Omega, E, \prob)$ be a probability space. Then a random variable $X$ is a function $X: \Omega \to S$, where $S$ called the state space.
+\end{definition}
+
+\begin{remark}
+	The state space $S$ must have some properties, i.e. being measurable, etc. You can read more about this on the Wikipedia of random variables. Also, the state space $S$ if often $\R$, or in the case of a discrete time Markov chain, $S$ is a finite set (that can be the edge set of a graph).
+\end{remark}
+
+Since the value of a random variable is determined by the outcomes of the random experiment, we can assign probabilities to the possible values of the random variable. We use the following notation for this purpose.
+
+\begin{definition}[Notation for probability of random variables]
+	Let $X$ be a random variable. Then we define event 
+	\[ E = \set{X = a} = \set{\omega \in \Omega: X(\omega) = a}. \]
+	Then the following notations are usually used interchangeably:
+	\[ \prob(X=a) = \prob(\set{X=a})  \]
+	both of which is simply $\prob(E)$.
+\end{definition}
+
+\begin{example}
+	Let $X$ be a random variable defined to be the sum of two fair dice. Then 
+	\begin{align*}
+		&\prob(\set{X =2}) = \prob(\set{(1,1)}) = \frac{1}{36},\\
+		&\prob(\set{X=3}) = \prob(\set{(1,2),(2,1)}) = \frac{2}{36},\\
+		&\prob(\set{X=13}) = \prob(\emptyset) = 0.
+	\end{align*}
+\end{example}
+
+\begin{example}
+	Suppose that we toss a coin having probability $p$ of coming up heads. We continue tossing the coin until we see a heads. Let the random variable $N$ be the number of times we toss the coin. Describe this random variable.
+	
+	\begin{solution}
+		Although, we can always solve this kind of questions in an ad hoc way by just simply following our intuition, but it is always a best practice to try to fine tune our abstract thinking with our intuitive understandings in these kind of example. Then we can use of abstract thinking capability to solve problems that are almost impossible to address by solely depending on the intuition. So, it is a good idea to try to see how does the set $\Omega$ look like. The set $\Omega$ will be the set of all finite string of all $T$ letters terminated with $H$. In other words
+		\[ \Omega = \set{H,TH, TTH, TTTH, TTTTH, \cdots}. \]
+		Then the random variable $N: \Omega \to \Z$ is basically the length of the string. For instance, if $\omega = TTH \in \Omega$, then $N(\omega) = 3$. Let's calculate
+		\[ \prob(N = 3) = \prob(\set{\omega \in \Omega: N(\omega) = 3}). \]
+		To solve this, we need to define appropriate events and then condition our probability on those events. Define $F_n$ be the event where the $n$ first outcomes are tails. For instance
+		\[ F_1 = \set{TH, TTH, TTTH,\cdots},\ F_2 = \set{TTH, TTTH, TTTTH, \cdots},\ \cdots.\]
+		And let $E = \set{N=3} = \set{TTH}$. Then we can condition $\prob(E)$ on $F_2$ 
+		\[ \prob(E) = \prob(E|F_2) \prob(F_2) + \prob(E|F_2^c) \prob(F_2^c). \]
+		Note that $F_2^c = \set{H, TH}$, this $\prob(E|F_2^c) = \prob(E \cap F_2^c)/\prob(F_2^c) = 0$. Now we need to determine $\prob(F_2)$. Again, we can condition this event on $F_1$. Then we can write
+		\[ \prob(F_2) = \prob(F_2|F_1)\prob(F_1) + \prob(F_2|F_1^c) \prob(F_1^c). \]
+		with the same argument as above $\prob(F_2|F_1^c) = 0$. Combining these equations we will get
+		\[ \prob(E) = \prob(E|F_2) \prob(F_2|F_1) \prob(F_1). \]
+		Now these probabilities are easy to calculate which leads to the final answer
+		\[ \prob(E) = (1-p)(1-p) p.  \]
+		And by induction we can conclude
+		\[ \prob(\set{N = n}) = (1-p)^n p.  \]
+	\end{solution}
+\end{example}
+
+
+\begin{example}
+	Suppose that independent trials, each of which results in $m$ possible outcomes with respective probabilities $p_1, p_2, \hdots,p_m$ such that $\sum_{i=1}^{m}p_i = 1$. Are continually performed. Let $X$ be the number of trials needed until each outcome has occurred at least once. Describe the properties of this random variable.
+	\begin{solution}
+		It is sometime a good idea to try to imagine what does the sample space look like. Let $\Sigma=\set{s_1, s_2, s_3, \hdots, s_m}$ be a set of $m$ distinct symbols. Then each time we are continually performing the experiment, we are getting each of these symbols with corresponding probability $p_m$. Thus the sample space will be the set of all infinite sequences of these symbols. In other words
+		\[ \Omega = \set{\text{all infinite sequence of symbols from $\Sigma$}}. \]
+		Then the random number $X(\omega)$ for $\omega \in \Omega$ is basically the length of the prefix string of $\omega$ in which any of the symbols in $\Sigma$ has been occurred at least once. 
+	\end{solution}
+\end{example}
+
+\subsection{Cumulative Distribution of Random Variable}
+The notion of the cumulative distribution of a random variable comes handy in most of the future calculations. Also, this distribution can be used to derive other notions of distributions what are extremely important in applications. 
+
+\begin{definition}[Cumulative distribution]
+	Let $X$ be a random variable $X:\Omega \to \R$. Then the cumulative distrubition $F: \R \to \R$ is defined as
+	\[ F(x) = \prob(\set{X \leq x}).  \]
+\end{definition}
+
+\begin{proposition}
+	The cumulative distribution of a random variable has the following properties.
+	\begin{enumerate}[(i),itemsep=0pt, topsep=5pt]
+		\item $\prob(a<X\leq b) = F(b) - F(a).$
+		\item $F(x)$ is a non-decreasing function of $x$.
+	\end{enumerate}
+\end{proposition}
+\begin{proof}
+	\begin{enumerate}[(i)]
+		\item 
+		\[ \prob(\set{a<X\leq b}) = \prob(\set{X\leq b} \cap \set{X\leq a}^c) = -\prob(\Omega) + \prob(\set{X\leq b}) + \underbrace{\prob(\set{X\leq a}^c)}_{1-\prob(\set{X\leq a})} = F(b) - F(a).  \]
+		\item Let $b_1, b_2 \in \R$ and $b_1 \leq b_2$. Then $\set{X\leq b_1} \subseteq \set{X\leq b_2}$. This implies $$\prob(\set{X\leq b_1}) \leq \prob(\set{X\leq b_2}) \implies F(b_1) \leq F(b_2).$$
+		This implies that $F(x)$ is a non-decreasing function. 
+	\end{enumerate}
+\end{proof}
+
+

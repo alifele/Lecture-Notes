@@ -6,6 +6,27 @@
 \end{notation}
 
 
+\begin{example}[Turning non-Markov processes to Markov-chain]
+	Suppose that whether or not it rains today depends on previous weather conditions through the last two days. Specifically, suppose that if it has rained for the past two days, then it will rain tomorrow with probability 0.7; if it rained today but not yesterday, then it will rain tomorrow with probability 0.5; if it rained yesterday but not today, then it will rain tomorrow with probability 0.4; if it has not rained in the past two days, then it will rain tomorrow with probability 0.2. [This question is from Ross.]
+	\begin{solution}
+		This random process is not a Markov chain, the value of the random variable at the next state, depends on two previous states. However, we can turn this into a Markov chain. Define the following states
+		\begin{quote}
+			$RR$: Rained yesterday and today.\\
+			$R\overline{R}$: Rained yesterday, but not today.\\
+			$\overline{R}R$: Not rained yesterday, but rained today.\\
+			$\overline{R}\overline{R}$: Not rained yesterday and today.
+		\end{quote}
+		Suppose that we are at state $RR$. Suppose that it rained yesterday and also today. Thus we are at state $RR$. If it rains tomorrow, then we will be still at state $RR$. That is because, That is because the yesterday of tomorrow is today! So if it rains tomorrow, since today (yesterday of tomorrow) was also rainy, thus if it rains tomorrow then we will stay at state $RR$. If it does not rain tomorrow, then we will get to state $\overline{R}R$. The following matrix is the transition matrix for this Markov chain
+		\[M = \begin{pmatrix}
+			0,7 & 0.3 & 0 & 0 \\
+			0 & 0 & 0.4 & 0.6 \\
+			0.5 & 0.5 & 0 & 0 \\
+			0 & 0 & 0.2 & 0.8
+		\end{pmatrix}\]
+	\end{solution}
+\end{example}
+
+
 \begin{example}
 	It is a good practice to derive the value of the transition probability of a simple Markov chain using the first principles. Consider the Markov chain representing a lamp that turns on with probability $1/2$ and turns off with probability $1/2$, and stays at the old state with probability $1/2$. Thus we will have the following diagram for this Markov chain.
 	\input{Images/explicitDerivationMarkovChainExample.tex}\\
@@ -191,6 +212,9 @@
 	Note that $\prob_8(B) = \prob_7(B)$ by a first stem analysis when starting at the state $8$. Putting all of these terms back to the original identity we derived the first, we can conclude that 
 	\[ p_0 = \prob_0(B) = \frac{2}{5}. \]
 \end{solution}
+
+
+
 
 
 

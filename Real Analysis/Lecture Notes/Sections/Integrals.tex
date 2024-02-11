@@ -1,0 +1,103 @@
+\chapter{Integration}
+
+Integrals, are one of the very central notions in the world of analysis that has numerous rules both in developing new foundational theories as well as lots of uses in the word of applications. Integrals act as a very useful norm in different spaces of functions, they help us in generalizing the notion of derivative (weak derivative), they act like linear operators between function spaces, they appear in some of the most important formulations of the natural sciences (like calculus of variations), and many many more applications. Here in this chapter we will cover the basics of the notion of integration of \emph{real} functions, and later we will see other variations of the integrals. To avoid unnecessary abstraction, we will mainly deal with functions from reals to reals, but it will be very straight forward to generalize these concepts to the complex valued functions, or function defined on $\R^n$ to $\R^m$. We start with the notion of Riemann integrable functions.
+
+\section{Riemann Integrable Functions}
+\begin{definition}[Riemann Integrable Functions]
+	Let $f$ be a bounded real function define on $[a,b] \subset \R$. Let partition $P$ be the set of points $\set{x_i \in [a,b]\ :\ a=x_0 \leq x_1\leq x_2\leq x_3\leq \cdots \leq x_n=b}$ for some $n\in \N$. define $\Delta x_i = x_{i} - x_{i-1}$, and
+	\[ M_i = \sup_{x\in[x_{i-1},x_{i}]}f(x), \qquad m_i = \inf_{x\in[x_{i-1},x_{i}]}f(x). \]
+	Then define the following sums
+	\[ U(P,f) = \sum_{i=1}^{n} M_i \Delta x_i, \qquad L(P,f) = \sum_{i=1}^{n}  m_i \Delta x_i.\]
+	We define the upper and lower Riemann sums as
+	\[ \overline{\int_a^b} f\ dx = \inf U(P,f), \qquad \underline{\int_a^b} f\ dx = \sup L(P,f),
+	 \]
+	which are called upper and lower Riemann integrals respectively. Note that the suprimum and the infimum are take on all possible partitions. \\
+	We say that the function $f$ is Riemann integrable and write it as $R \in\mathcal{R}$ if 
+	\[ \overline{\int_a^b} f\ dx = \underline{\int_a^b} f\ dx . \]
+	And we denote this common value as
+	\[ \int_a^b f\ dx. \]
+\end{definition}
+At this point, this definition might seem useless as we are talking about things like the suprimum or infimum on all possible partitions. The set of all partitions of $[a,b]$ seems to be a set that is hard to characterize. However, as we will see, this ``hard to use'' definition will take us to somewhere that is very interesting. However, at this stage, the following example is aimed to emphasis the subtleties of the definition above.
+\begin{example}[Attempting to integrate $f(x)=x$]
+	Let $f: [0,1] \to \R$ where $f(x)=x$. We want to use the definition above to calculate the integral of $f(x)$ in $[0,1]$. To start with something, first, we want to consider a equidistant partition of the interval $[0,1]$ to $n$ intervals that all has the same length. Then the partition will be $P = \set{\frac{0}{n},\frac{1}{n},\cdots,\frac{n-1}{n},\frac{n}{n}}$. Then we will have
+	\[ M_i = \sup_{x\in I_n} f(x) = \frac{i}{n}, \qquad m_i = \inf_{x\in I_n} f(x) = \frac{i-1}{n}, \qquad \Delta x_i = \frac{1}{n}. \]
+	So the upper and lower Riemann sums will be
+	\begin{align*}
+		U(P,f) &= \sum_{i=1}^{n} M_i \Delta x_i = \frac{1}{n^2} \sum_{i=1}^{n}i = \frac{n(n+1)}{2n^2} = \frac{1}{2} + \frac{1}{2n^2}, \\
+		L(P,f) &= \sum_{i=1}^{n} m_i \Delta x_i = \frac{1}{n^2} \sum_{i=1}^{n}(i-1) = \frac{n(n-1)}{2n^2} = \frac{1}{2} - \frac{1}{2n^2}
+	\end{align*}
+	Now, it is quite clear that out of all possible equidistence partitions, the infimum of $U(P,f)$ will be $1/2$, and the suprimum of $L(P,f)$ will be $1/2$ as well. \textbf{But}, I need to emphasis that this does not imply anything about the upper and lower Riemann integrals. That is because, the upper (lower) Riemann sum is the infimum (suprimum) considered on all partitions. However, here, we have only considered the partitions with equal distance intervals. However, one might come up with an elegantly designed partition that can change the game. This at this stage, we can not even integrate the function $f(x) = x$. We will make our original definition of Riemann integrablity by a very useful generalization to the Riemann-Stieltjes integrals.
+\end{example}
+
+\begin{proposition}[Properties of the Riemann sums]
+	Let $f: [a,b] \to \R$ bounded, and let $P$ be any partition. Then we have
+	\begin{enumerate}[(a)]
+		\item $L(P,f) \leq U(P,f).$
+		\item $\exists m,M \in \R$ such that $m(b-a) \leq L(P,f) \leq U(P,f) \leq M(b-a)$.
+	\end{enumerate}
+
+\end{proposition}
+\begin{proof}
+	\begin{enumerate}[(a)]
+		\item This follows immediately from the properties of suprimum and infimum.
+		\item Since $f$ is bounded, then $\exists m,M \in \R$ such that $m \leq f(x) \leq M\ \forall x \in [a,b]$. Then
+		\begin{align*}
+			U(P,f) &= \sum_{i=1}^{n} M_i \Delta x_i \leq \sum_{i=1}^{n} M \Delta x_i = M \sum_{i=1}^{n} \Delta x_i  = M(b-a),\\
+			L(P,f) &= \sum_{i=1}^{n} m_i \Delta x_i \geq \sum_{i=1}^{n} m \Delta x_i = m \sum_{i=1}^{n} \Delta x_i  = m(b-a).
+		\end{align*}
+		Note that we use the telescoping property of the sums above. Combining the results from above with the result of part (a) we can write
+		\[ m(b-a) \leq L(P,f) \leq U(P,f) \leq M(b-a). \] 
+	\end{enumerate}
+\end{proof}
+
+
+\begin{definition}[Riemann-Stieltjes Integrals]
+	TO BE ADDED
+\end{definition}
+
+The following definition of the refinement of a partition, will help up to prove some statements that will help us in making useful tools out of the definitions above.
+\begin{definition}[Refinement of a partition]
+	We say that the partition $P^*$ is a refinement of the partition $P$ if $P \subseteq P^*$. Given two partitions $P_1, P_2$, their \textbf{common refinement} is the partition $P = P_1 \cup P_2$.
+\end{definition}
+The following theorem will show the significance of the notion of the refinements.
+\begin{lemma}
+	If $P^*$ is a refinement of $P$, then we have
+	\begin{enumerate}[(i)]
+		\item $L(P,f,\alpha) \leq L(P^*,f,\alpha)$
+		\item $U(P^*,f,\alpha) \leq L(P, f, \alpha)$
+	\end{enumerate}
+\end{lemma}
+\begin{proof}
+	We will prove the first statement, and the proof for the second statement will be analogous. First, assume that the refinement $P^*$ has only one extra point, say $x^*$ that falls in the $i$-th interval i.e. $I_i = [x_{i-1}, x_i]$. Thus this interval will turn into two intervals $I_i^{(1)} = [ x_{i-1}, x^* ]$ and $I_i^{(2)} = [x^*, x_i]$. Let 
+	\[ M_i = \sup_{x\in I_i f(x)}f(x),\qquad w_1 = \sup_{x\in I_i^{(1)}}f(x),\qquad w_2 = \sup_{x\in I_i^{(2)}}f(x). \]
+	Then, from the properties of suprimum it follows that $w_2 \leq M_i$ and also $w_1 \leq M_i$. Then 
+	\[ U(P,f,\alpha) - U(P^*,f,\alpha) = M_i(\alpha_{i} - \alpha_{i-1}) - \left( w_1(\alpha(x^*) - \alpha_{i-1}) + w_2(\alpha_i - \alpha(x^*)) \right) \]
+	Since $w_1 \leq M_i$, and $w_2 \leq M_i$, and $\alpha$ is non-decreasing, then
+	\[ w_1 (\alpha(x^*) - \alpha_{i-1}) \leq M_i(\alpha(x^*) - \alpha_{i-1}),\quad w_2 (\alpha(x^*) - \alpha_{i-1}) \leq M_i(\alpha(x^*) - \alpha_{i-1}) \]
+	Then we can write
+	\[ U(P,f,\alpha) - U(P^*,f,\alpha) \geq M_i(\alpha_i - \alpha_{i-1}) - M_i(\alpha_i - \alpha_{i-1}) = 0. \]
+	then it immediately follows that
+	\[ U(P^*,f,\alpha) \leq U(P,f,\alpha) \]
+\end{proof}
+
+The following important proposition will take advantage of the lemma above.
+
+\begin{proposition}
+	Let $f:[a,b] \to \R$, and $\alpha:[a,b] \to \R$ non-decreasing.
+	Then 
+	\[ \underline{\int_a^b} f\ d\alpha \leq \overline{\int_a^b} f\ d\alpha. \]
+\end{proposition}
+\begin{proof}
+	We will not be very concise in the steps of this proof, as we want to also demonstrate the line of thought in processing such theorems. Let $\tilde{P}$ be the set of all partitions of $[a,b]$. Then
+	\[ \tilde{U} = \set{U(P,f,\alpha)\ :\ P \in \tilde{P}}, \qquad \tilde{L} = \set{L(P,f,\alpha)\ :\ P \in \tilde{P}}. \]
+	$\tilde{U}$ and $\tilde{L}$ are subsets of real numbers. Then it is clear that 
+	\[  \underline{\int_a^b} f\ d\alpha = \sup \tilde{L}, \qquad \overline{\int_a^b} f\ d\alpha = \inf \tilde{U}. \]
+	Let $A = \sup \tilde{L}$, and $B = \sup\tilde{U}$. With the new terminology, we need to prove $A \leq B$.\\
+	We will proceed with the proof by contradiction. Assume $B < A$. Since $A$ is the suprimum of $\tilde{L}$, then $B<A$ implies there exists a partition $P_1 \in \tilde{P}$ such that 
+	\[ B < L(P_1, f, \alpha) \leq A. \]
+	Similarly, we can find $P_2 \in \tilde{P}$ such that 
+	\[ B \leq U(P_2, f, \alpha) < A. \]
+	
+\end{proof}
+
+
