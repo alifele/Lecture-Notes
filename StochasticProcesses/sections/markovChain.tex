@@ -1,13 +1,60 @@
 \chapter{Markov Chain}
+NOTE TO MYSELF: I prefer to develop whole theory of discrete Markov chains by defining the state space to be the set of symbols $\Sigma$ (at most countable). This is beneficial, because then the sample space of any Markov chain will be the set of all infinite sequences (strings) from the symbols from $\Sigma$. At some point in the future, I might rewrite this chapter, working consistently with $\Sigma$ as the state space.
 
+We start with the definition of a Markov Chain.
 \begin{notation}
 	Let $(X_n)_{n\geq0}$ be a Markov chain on the state space $S$, $x\in S$, and let $E$ be an event. Then
 	\[  \prob_x(E) = \prob(E|X_0=x) . \]
 \end{notation}
+The following proposition will be one of our main tools throughout the chapter.
+\begin{proposition}[Conditional expansion]
+	Let $(\Omega, \mathcal{F}, \prob)$ be a probability space. Let $\mathfrak{F}$ be a finite collection of events $\mathfrak{F} = \set{F_1,F_2,\cdots, F_n}$ that partitions $\Omega$. I.e.
+	\begin{enumerate}[(i)]
+		\item $F_i \cap F_j = \emptyset \qquad i\neq j$,
+		\item $\bigcap_{i} F_i = \Omega$.
+	\end{enumerate}
+	Let $E \in \mathcal{F}$ be any nonempty event. Then we can write
+	\[  \prob(E) = \sum_{i} \prob(E|F_i)\prob(F_i). \]
+\end{proposition}
+\begin{proof}
+	Since $\mathfrak{F}$ partitions $\Omega$ and $E \neq \emptyset$, then $\set{E\cap F_i}_i$ is a partition of $E$. Thus
+	\[ \prob(E) = \prob(\bigcup_i (E \cap F_i)) = \sum_i \prob(E \cap F_i) = \sum_i \prob(E|F_i)\prob(F_i). \]
+	This completes the proof.
+\end{proof}
 
+
+
+\begin{proposition}[First step argument]
+	Let $(X_n)_{n\geq 0}$ be a Markov chain on the state space $S$. Let $x\in S$, and $W,Z \subset S$. Let $B$ be any event. Then
+	\[ \prob_x(B) = \sum_{y:x\sim y} \prob_y(B)P(x,y). \]
+	\label{prop:FirstTimeStepArgument}
+\end{proposition}
+\begin{proof}
+	To prove the proposition above, we Let $E_i = \{ X_0=x, X_1=y_i \}$ where $y_i \sim x$. So, in words, we say that the event $E_i$ has occurred if $X_1 = y_i$. It is clear that $E_i \cap E_j = \emptyset$ where $i\neq j$. Thus $\bigcup_{i}(B\cap E_i) = B$. Thus 
+	\[ \prob_x(B) = \sum_{i} \prob_x(B \cap E_i) = \sum_{i}\prob_x(B|E_i)\prob_x(E_i). \]
+	In which $\prob_x(E_i) = \prob(E_i|X_0=x) = \prob(X_1=y_i|X_0=x) = P(x,y_i)  $. Also \[\prob_x(B|E_i) = \prob(B|X_1=y_i, X_0=x) = \prob(B|X_1=y_i) = \prob_{y_i}(B),\].
+	in which we have used the Markov property. Thus we can write
+	\[ P_x(B) = \sum_i \prob_{y_i}(B)P(x,y_i). \]
+\end{proof}
+
+
+
+
+
+\section{Solved Problems}
+
+
+\begin{example}
+	An urn always contains 2 balls. Ball colors are red and blue. At each stage a ball is randomly chosen and then replaced by a new ball, which with probability 0.8 is the same color, and with probability 0.2 is the opposite color, as the ball it replaces. If initially both balls are red, find the probability that the fifth ball selected is red. [This question is from Ross]
+	\begin{solution}
+		First, we need to translate this problem to a suitable Markov chain. There are many ways we can do so, each with its own pros and cons. The difference between all of these formulations come down to our choice for the state space (i.e. the co-domain of the random variable). For instance, we can assume that the state space is $S = \set{RR, RB, BB}$ that is the content of the Urn, or we can simply say that the state space is $S = \set{0,1,2}$ that is the number of red ball inside the Urn. Since these two sets are isomorphic (as there is a bijection between these two sets), but the actual choice depends on personal preference. Let's proceed with $S = \set{0,1,2}$. Then, we need to determine the transition matrix. We can do so by doing the first step argument. We start with $P(0,0)$. 
+		\[ P(0,0) = \prob(X_1 = 0|X_0 =0) = \prob(X_1=0|X_0=0,E_R)\prob(E_R|X_0=0) + \prob(X_1=0|X_0=0,E_B)\prob(E_B|X_0=0), \]
+		where $E_R$ is the event at which a red balls is drawn from the Urn, while $E_B$ is the event where a blue ball is drawn.
+	\end{solution}
+\end{example}
 
 \begin{example}[Turning non-Markov processes to Markov-chain]
-	Suppose that whether or not it rains today depends on previous weather conditions through the last two days. Specifically, suppose that if it has rained for the past two days, then it will rain tomorrow with probability 0.7; if it rained today but not yesterday, then it will rain tomorrow with probability 0.5; if it rained yesterday but not today, then it will rain tomorrow with probability 0.4; if it has not rained in the past two days, then it will rain tomorrow with probability 0.2. [This question is from Ross.]
+	Suppose that whether or not it rains today depends on previous weather conditions through the last two days. Specifically, suppose that if it has rained for the past two days, then it will rain tomorrow with probability 0.7; if it rained today but not yesterday, then it will rain tomorrow with probability 0.5; if it rained yesterday but not today, then it will rain tomorrow with probability 0.4; if it has not rained in the past two days, then it will rain tomorrow with probability 0.2. [This question is from Ross]. Given that it rained on Monday and Tuesday, what is the probability that it will rain on Thursday?
 	\begin{solution}
 		This random process is not a Markov chain, the value of the random variable at the next state, depends on two previous states. However, we can turn this into a Markov chain. Define the following states
 		\begin{quote}
@@ -23,7 +70,19 @@
 			0.5 & 0.5 & 0 & 0 \\
 			0 & 0 & 0.2 & 0.8
 		\end{pmatrix}\]
+		Now, to calculate the probability of raining on Thursday, given it rained on Monday and Tuesday, we first need to calculate the two step transition probability.
+		\[
+		M^2 = \begin{pmatrix}
+			\boxed{0.49} & 0.21 & \boxed{0.12} & 0.18 \\
+			0.2  & 0.2  & 0.12 & 0.48 \\
+			0.35 & 0.15 & 0.2  & 0.3  \\
+			0.1  & 0.1  & 0.16 & 0.64
+		\end{pmatrix}
+		\]
+		The probability to rain on Thursday is the sum of the boxed elements in the matrix above. So the desired probability is 
+		\[ p = 0.61. \]
 	\end{solution}
+	
 \end{example}
 
 
@@ -87,21 +146,6 @@
 		which is the same recursive formula we got in the previous example. So the possibility of the draw, will not change the behaviour of the system.
 	\end{solution}
 \end{example}
-
-
-\begin{proposition}[First step argument]
-	Let $(X_n)_{n\geq 0}$ be a Markov chain on the state space $S$. Let $x\in S$, and $W,Z \subset S$. Let $B$ be any event. Then
-	\[ \prob_x(B) = \sum_{y:x\sim y} \prob_y(B)P(x,y). \]
-	\label{prop:FirstTimeStepArgument}
-\end{proposition}
-\begin{proof}
-	To prove the proposition above, we Let $E_i = \{ X_0=x, X_1=y_i \}$ where $y_i \sim x$. So, in words, we say that the event $E_i$ has occurred if $X_1 = y_i$. It is clear that $E_i \cap E_j = \emptyset$ where $i\neq j$. Thus $\bigcup_{i}(B\cap E_i) = B$. Thus 
-	\[ \prob_x(B) = \sum_{i} \prob_x(B \cap E_i) = \sum_{i}\prob_x(B|E_i)\prob_x(E_i). \]
-	In which $\prob_x(E_i) = \prob(E_i|X_0=x) = \prob(X_1=y_i|X_0=x) = P(x,y_i)  $. Also \[\prob_x(B|E_i) = \prob(B|X_1=y_i, X_0=x) = \prob(B|X_1=y_i) = \prob_{y_i}(B),\].
-	in which we have used the Markov property. Thus we can write
-	\[ P_x(B) = \sum_i \prob_{y_i}(B)P(x,y_i). \]
-\end{proof}
-
 
 \begin{example}
 	Consider the a simple random walker on the following graph. Let $B = \{ T_{\tilde{x}} < T_{\set{\tilde{z},\tilde{y}}} \}$. Compute the probability $\prob_0(B)$.
