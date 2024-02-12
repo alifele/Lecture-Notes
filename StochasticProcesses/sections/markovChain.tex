@@ -48,9 +48,51 @@ The following proposition will be one of our main tools throughout the chapter.
 	An urn always contains 2 balls. Ball colors are red and blue. At each stage a ball is randomly chosen and then replaced by a new ball, which with probability 0.8 is the same color, and with probability 0.2 is the opposite color, as the ball it replaces. If initially both balls are red, find the probability that the fifth ball selected is red. [This question is from Ross]
 	\begin{solution}
 		First, we need to translate this problem to a suitable Markov chain. There are many ways we can do so, each with its own pros and cons. The difference between all of these formulations come down to our choice for the state space (i.e. the co-domain of the random variable). For instance, we can assume that the state space is $S = \set{RR, RB, BB}$ that is the content of the Urn, or we can simply say that the state space is $S = \set{0,1,2}$ that is the number of red ball inside the Urn. Since these two sets are isomorphic (as there is a bijection between these two sets), but the actual choice depends on personal preference. Let's proceed with $S = \set{0,1,2}$. Then, we need to determine the transition matrix. We can do so by doing the first step argument. We start with $P(0,0)$. 
-		\[ P(0,0) = \prob(X_1 = 0|X_0 =0) = \prob(X_1=0|X_0=0,E_R)\prob(E_R|X_0=0) + \prob(X_1=0|X_0=0,E_B)\prob(E_B|X_0=0), \]
-		where $E_R$ is the event at which a red balls is drawn from the Urn, while $E_B$ is the event where a blue ball is drawn.
-	\end{solution}
+		\[ P(0,0) = \prob(X_1 = 0|X_0 =0) = \prob(X_1=0|X_0=0,E_R)\underbrace{\prob(E_R|X_0=0)}_{0} + \underbrace{\prob(X_1=0|X_0=0,E_B)}_{0.8}\underbrace{\prob(E_B|X_0=0)}_{1}, \]
+		where $E_R$ is the event at which a red balls is drawn from the Urn, while $E_B$ is the event where a blue ball is drawn. The reason behind the values for the term above are very straight forward. For instance $\prob(E_R|X_0=0)=0$ because given the fact that number of red balls in the Urn is zero $(X_0 = 0)$, then the probability that we draw a red ball is zero (as there is not red balls in the Urn). For the term $\prob(X_1=0|X_0=0,E_B) = 0.8$, because given there is no red balls inside the urn, and also given the fact that the drawn ball is blue, the probability of ending up at the state $X_1=0$ (i.e. still no red balls) is that probability is that we replaced the drawn ball with a blue ball (same color) which has the probability $0.8$. Similarly, we can calculate the first step transition probabilities. 
+		\begin{align*}
+			&P(0,1) = \prob(X_1=1|X_0=0) = \prob_0(X_1=1) = \prob_0(X_1=1|E_R)\underbrace{\prob_0(E_R)}_{0} + \underbrace{\prob_0(X_1=1|E_B)}_{0.2}\underbrace{\prob_0(E_B)}_{1} = 0.2,\\
+			&P(0,2) = \prob(X_1=2|X_0=0) = \prob_0(X_1=2) = \prob_0(X_1=2|E_R)\underbrace{\prob_0(E_R)}_{0} + \underbrace{\prob_0(X_1=2|E_B)}_{0}\underbrace{\prob_0(E_B)}_{1} = 0,\\
+			&P(1,0) = \prob(X_1=0|X_0=1) = \prob_1(X_1=0) = \underbrace{\prob_1(X_1=0|E_R)}_{0.2}\underbrace{\prob_1(E_R)}_{0.5} + \underbrace{\prob_1(X_1=0|E_B)}_{0}\underbrace{\prob_1(E_B)}_{0.5} = 0.1.\\
+			&P(1,1) = \prob(X_1=1|X_0=1) = \prob_1(X_1=1) = \underbrace{\prob_1(X_1=1|E_R)}_{0.8}\underbrace{\prob_1(E_R)}_{0.5} + \underbrace{\prob_1(X_1=1|E_B)}_{0.8}\underbrace{\prob_1(E_B)}_{0.5} = 0.8.
+		\end{align*}
+		and so on. Then we will have the following transition matrix for this problem.
+		\[	M = \begin{pmatrix}
+				0.8 & 0.2 & 0 \\
+				0.1 & 0.8 & 0.1 \\
+				0 & 0.2 & 0.8
+			\end{pmatrix}\]
+		with the following graph
+		\begin{center}
+			\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=1.5cm,
+				semithick,scale=0.4]
+				\tikzstyle{every state}=[circle, draw, fill=orange!50,
+				inner sep=0pt, minimum size=15pt]
+				
+				\node[state] (A)              {$0$};
+				\node[state] (B) [right of=A] {$1$};
+				\node[state] (C) [right of=B] {$2$};
+				
+				\path 
+				(A) edge [loop left] node {$0.8$} (A)
+				(A) edge [bend left] node {$0.2$} (B)
+				(B) edge [loop above] node {$0.8$} (B)
+				(B) edge [bend left] node {$0.1$} (A)
+				(B) edge [bend left] node {$0.1$} (C)
+				(C) edge [bend left] node {$0.2$} (B)
+				(C) edge [loop right] node {$0.86$} (C);
+			\end{tikzpicture}
+		\end{center}
+		Now, we need to compute the probability that the fifth ball drawn is red. This means that we have already drawn four balls, and now we want to draw the fifth one. So, we need to consider the 4 step transition matrix, i.e. $M^4$. Then
+		\[ M^4 = \begin{pmatrix}
+			0.4872 & 0.4352 & 0.0776 \\
+			0.2176 & 0.5648 & 0.2176 \\
+			0.0776 & 0.4352 & 0.4872 \\
+		\end{pmatrix} \]
+		Given that we have started with 2 red balls, then the probability of finding the Urn with 0 red balls is $0.0776$, with 1 red ball is $0.4352$, and with 2 red balls is $0.4872$. So the probability that the next drawn balls is red is
+		\[ \prob(E_R) = \underbrace{\prob(E_R|X_4=0)}_{0}\underbrace{\prob(X_4=0)}_{0.0776} + \underbrace{\prob(E_R|X_4=1)}_{0.5}\underbrace{\prob(X_4=1)}_{0.4352} + \underbrace{\prob(E_R|X_4=2)}_{1}\underbrace{\prob(X_4=2)}_{0.4872} = 0.7048.  \]
+	\end{solution} 
+	
 \end{example}
 
 \begin{example}[Turning non-Markov processes to Markov-chain]
