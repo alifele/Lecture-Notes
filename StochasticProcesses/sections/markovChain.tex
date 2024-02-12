@@ -283,7 +283,21 @@ The following proposition will be one of our main tools throughout the chapter.
 				
 			\end{tikzpicture}
 		\end{center}
-		
+	The transition probabilities are simply computed by the first step argument. For instance, for $P(0,1)$ we have
+	\[ \prob_0(X_1 = 1) = \underbrace{\prob_0(X_1 = 1|H)}_{1}\underbrace{\prob_0(H)}_{1/2} + \underbrace{\prob_0(X_1 = 1|T)}_{0}\underbrace{\prob_0(T)}_{1/2}, \]
+	where $H$ is the event that the flipped coin is heads and $H^c = T$. The transition matrix for this Markov chain will be
+	\[
+	M = \begin{pmatrix}
+		0.5 & 0.5 & 0 & 0 \\
+		0.5 & 0 & 0.5 & 0 \\
+		0.5 & 0 & 0 & 0.5 \\
+		0 & 0 & 0 & 1 \\
+	\end{pmatrix}
+	\]
+	Since the state $3$ is an absorbing state, then if we get there we will be there for the rest of our life! Thus the probability that the random walker has got there for $N\leq 8$ is simply $(M^8)_{(0,3)}$. Then
+	\[ \prob(N\leq 8) = 0.4180. \]
+	Now for part (b), the probability that the random walker has arrived at the state 3 right at the step 8, is
+	\[ \prob(N = 8) = \prob(N\leq 8) - \prob(N\leq 7) = 0.0508. \]
 	\end{solution}
 \end{example}
 
