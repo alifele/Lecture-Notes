@@ -128,6 +128,105 @@ The following proposition will be one of our main tools throughout the chapter.
 \end{example}
 
 
+
+\begin{example}
+	Suppose that balls are successively distributed among 8 urns, with each ball being equally likely to be put in any of these urns. What is the probability that there will be exactly 3 nonempty urns after 9 balls have been distributed? [Question from Ross]
+	\begin{solution}
+		Let the random variable $X_n$ be the number of filled (non-empty) urns at step n. So the state space will be $S = \set{0,1,2,3,4,5,6,7,8}$, which is represented in the following graph.
+		\begin{center}
+			\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=1.2cm,
+				semithick,scale=0.4]
+				\tikzstyle{every state}=[circle, draw, fill=orange!50,
+				inner sep=0pt, minimum size=15pt]
+				
+				\node[state] (A0)               {$0$};
+				\node[state] (A1) [right of=A0] {$1$};
+				\node[state] (A2) [right of=A1] {$2$};
+				\node[state] (A3) [right of=A2] {$3$};
+				\node[state] (A4) [right of=A3] {$4$};
+				\node[state] (A5) [right of=A4] {$5$};
+				\node[state] (A6) [right of=A5] {$6$};
+				\node[state] (A7) [right of=A6] {$7$};
+				\node[state] (A8) [right of=A7] {$8$};
+%				\path 
+%				(A) edge [loop left] node {$\frac{1}{2}$} (A)
+%				(A) edge [bend left] node {$\frac{1}{2}$} (B)
+%				(B) edge [loop right] node {$\frac{1}{2}$} (B)
+%				(B) edge [bend left] node {$\frac{1}{2}$} (A);
+				
+			\end{tikzpicture}
+		\end{center}
+		This picture is not yet complete and we need to include the transition probabilities. We will do so by the first step argument. First, observe that $P(0,0) = 0$, because if we start with all of the urns empty, then after one step, we have put a ball somewhere, thus it is impossible to end up with zero filled urn. Similarly, $P(8,8) = 1$, that is because if all of the urns are filled, then adding any new ball somewhere to any of the urns will keep the number of filled urns at 8. Then for $X_0 =n$, i.e. starting with $n$ filled urns, we have
+		\[ \prob_n(X_1=n-1) = 0. \]
+		That is because starting with $n$ filled urns, after doing one step, it is not possible to have less urns filled. I.e. after each step, we can either end up with more filled urns or the same number of filled urns. For $P(n,n)$, define the event $E$ be the event of putting the ball in any of the filled urns. Thus $E^c$ will be the probability of putting the ball at one of the empty urns. 
+		\[ \prob_n(X_1 = n) = \underbrace{\prob_n(X_1=n|E)}_{1}\underbrace{\prob_n(E)}_{n/8} + \underbrace{\prob_n(X_1=n|E^c)}_{0}\underbrace{\prob_n(E^c)}_{(8-n)/8} = \frac{n}{8}. \]
+		Now for $\prob(n,n+1)$ we can write
+		\[ \prob_n(X_1 = n+1) = \underbrace{\prob_n(X_1=n+1|E)}_{0}\underbrace{\prob_n(E)}_{n/8} + \underbrace{\prob_n(X_1=n+1|E^c)}_{1}\underbrace{\prob_n(E^c)}_{(8-n)/8} = 1-\frac{n}{8}. \]
+		Thus the completed graph will be
+		\begin{center}
+			\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=1.2cm,
+				semithick,scale=0.4]
+				\tikzstyle{every state}=[circle, draw, fill=orange!50,
+				inner sep=0pt, minimum size=15pt]
+				
+				\node[state] (A0)               {$0$};
+				\node[state] (A1) [right of=A0] {$1$};
+				\node[state] (A2) [right of=A1] {$2$};
+				\node[state] (A3) [right of=A2] {$3$};
+				\node[state] (A4) [right of=A3] {$4$};
+				\node[state] (A5) [right of=A4] {$5$};
+				\node[state] (A6) [right of=A5] {$6$};
+				\node[state] (A7) [right of=A6] {$7$};
+				\node[state] (A8) [right of=A7] {$8$};
+				
+				\path 
+				(A0) edge [bend left] node {$1$} (A1)
+				(A1) edge [bend left] node {$7/8$} (A2)
+				(A2) edge [bend left] node {$6/8$} (A3)
+				(A3) edge [bend left] node {$5/8$} (A4)
+				(A4) edge [bend left] node {$4/8$} (A5)
+				(A5) edge [bend left] node {$3/8$} (A6)
+				(A6) edge [bend left] node {$2/8$} (A7)
+				(A7) edge [bend left] node {$1/8$} (A8)
+				
+				(A1) edge [loop below] node {$1/8$} (A1)
+				(A2) edge [loop below] node {$2/8$} (A2)
+				(A3) edge [loop below] node {$3/8$} (A3)
+				(A4) edge [loop below] node {$4/8$} (A4)
+				(A5) edge [loop below] node {$5/8$} (A5)
+				(A6) edge [loop below] node {$6/8$} (A6)
+				(A7) edge [loop below] node {$7/8$} (A7)
+				(A8) edge [loop right] node {$1$} (A8)
+				
+				
+				;
+				%				\path 
+				%				(A) edge [loop left] node {$\frac{1}{2}$} (A)
+				%				(A) edge [bend left] node {$\frac{1}{2}$} (B)
+				%				(B) edge [loop right] node {$\frac{1}{2}$} (B)
+				%				(B) edge [bend left] node {$\frac{1}{2}$} (A);
+				
+			\end{tikzpicture}
+		\end{center}
+		The corresponding transition matrix will be
+		\[
+		M = \begin{pmatrix}
+			0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+			0 & 1/8 & 7/8 & 0 & 0 & 0 & 0 & 0 & 0 \\
+			0 & 0 & 1/8 & 6/8 & 0 & 0 & 0 & 0 & 0 \\
+			0 & 0 & 0 & 3/8 & 5/8 & 0 & 0 & 0 & 0 \\
+			0 & 0 & 0 & 0 & 4/8 & 4/8 & 0 & 0 & 0 \\
+			0 & 0 & 0 & 0 & 0 & 5/8 & 3/8 & 0 & 0 \\
+			0 & 0 & 0 & 0 & 0 & 0 & 6/8 & 2/8 & 0 \\
+			0 & 0 & 0 & 0 & 0 & 0 & 0 & 7/8 & 1/8 \\
+			0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 \\
+		\end{pmatrix}
+		\]
+		The probability that after 9 steps, there are exactly three empty urns is $(M^9)_{(0,3)}$, which is
+		\[ p = (M^9)_{(0,3)} \approx 0.007572. \]
+	\end{solution}
+\end{example}
+
 \begin{example}
 	It is a good practice to derive the value of the transition probability of a simple Markov chain using the first principles. Consider the Markov chain representing a lamp that turns on with probability $1/2$ and turns off with probability $1/2$, and stays at the old state with probability $1/2$. Thus we will have the following diagram for this Markov chain.
 	\input{Images/explicitDerivationMarkovChainExample.tex}\\
@@ -145,6 +244,49 @@ The following proposition will be one of our main tools throughout the chapter.
 	\[ \prob(X_{n+1} = 1 | X_n = 0)  = \prob(E|F) = \frac{\prob(E\cap F)}{\prob(F)} =\frac{\prob(E\cap F)}{\prob(F\cap E) + \prob(F\cap E^c)} = \frac{\frac{1}{\abs{\Omega}}}{\frac{1}{\abs{\Omega}} + \frac{1}{\abs{\Omega}}} = \frac{1}{2}. \]
 	Note that $\prob(E\cap F) = \frac{1}{\abs{\Omega}}$, since out of many combinations of the sequence of zeros and ones, there is one one sequence whose $n$-th place is 0 and $n+1$-th place is 1. Furthermore, $\prob(F\cap E^c) = \frac{1}{\abs{\Omega}}$ as there is only one string where its $n$-th and $(n+1)$-th string are both zero. 
 \end{example}
+
+\begin{example}
+	In a sequence of independent flips of a fair coin, let N denote the number of flips until there is a run of three consecutive heads. Find
+	\begin{enumerate}[(a)]
+		\item $\prob(N\leq 8)$,
+		\item $\prob(N = 8)$.
+	\end{enumerate}
+	\begin{solution}
+		Let $X_n$ denote the number of consecutive heads at step $n$. For instance for the outcome $\omega \in \Omega$ where $\omega = HTTHTTHHHTTHT\hdots$, $X_2(\omega) = 0$ since the second symbol is $T$ thus there is no consecutive heads. But $X_4(\omega) = 1$, as there is one consecutive heads at step 4. Lastly $X_9(\omega) = 3$, since there is three consecutive heads at step 9. This Markov chain will have the following transition diagram.
+		
+		\begin{center}
+			\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.1cm,
+				semithick,scale=0.7]
+				\tikzstyle{every state}=[circle, draw, fill=orange!50,
+				inner sep=0pt, minimum size=15pt]
+				
+				\node[state] (A1)              {$1$};
+				\node[state] (A2) [right of = A1] {$2$};
+				\node[state] (A0) [above=of $(A1)!0.5!(A2)$,yshift=-1cm]   {$0$};
+				\node[state] (A3) [right of = A2] {$3$};
+
+				\path 
+				(A0) edge [loop above] node {$0.5$} (A0)
+				(A0) edge [bend left] node [sloped,below] {$0.5$} (A1)
+				(A1) edge [bend left] node [sloped] {$0.5$} (A0)
+				(A2) edge node [above, sloped] {$0.5$} (A0)
+				(A1) edge node [below] {$0.5$} (A2)
+				(A2) edge node {$0.5$} (A3)
+				(A3) edge [loop right] node {$1$} (A3)
+				;
+				
+%				\path 
+%				(A) edge [loop left] node {$\frac{1}{2}$} (A)
+%				(A) edge [bend left] node {$\frac{1}{2}$} (B)
+%				(B) edge [loop right] node {$\frac{1}{2}$} (B)
+%				(B) edge [bend left] node {$\frac{1}{2}$} (A);
+				
+			\end{tikzpicture}
+		\end{center}
+		
+	\end{solution}
+\end{example}
+
 
 \begin{example}[Gambler's Ruin]
 	Suppose Alice and Bob have in total of $N$ coins. Alice and Bob play a game with a fair coin. When Alice wins, gets a coin from Bop, and vise versa. What is the probability that Alice wins if she starts with $0\leq a \leq N$ coins.
