@@ -298,6 +298,52 @@ The following proposition will be one of our main tools throughout the chapter.
 	\[ \prob(N\leq 8) = 0.4180. \]
 	Now for part (b), the probability that the random walker has arrived at the state 3 right at the step 8, is
 	\[ \prob(N = 8) = \prob(N\leq 8) - \prob(N\leq 7) = 0.0508. \]
+	
+	There is yet another approach that we can compute the probability $\prob(N=8)$. To do this, we need to consider 4 states $S = \set{0,1,2,3,4}$ where the state 4 is of when 3 consecutive heads has occurred at the past. So when the random walker enters the state 3 at some time, it moves to the state $4$ at the next time and remains there forever. The state diagram will be
+	
+	\begin{center}
+		\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2cm,
+			semithick,scale=0.7]
+			\tikzstyle{every state}=[circle, draw, fill=orange!50,
+			inner sep=0pt, minimum size=15pt]
+			
+			\node[state] (A1)              {$1$};
+			\node[state] (A2) [right of = A1] {$2$};
+			\node[state] (A0) [above=of $(A1)!0.5!(A2)$,yshift=-1cm]   {$0$};
+			\node[state] (A3) [right of = A2] {$3$};
+			\node[state] (A4) [right of = A3] {$4$};
+			
+			
+			\path 
+			(A0) edge [loop above] node {$0.5$} (A0)
+			(A0) edge [bend left] node [sloped,below] {$0.5$} (A1)
+			(A1) edge [bend left] node [sloped] {$0.5$} (A0)
+			(A2) edge node [above, sloped] {$0.5$} (A0)
+			(A1) edge node [below] {$0.5$} (A2)
+			(A2) edge node {$0.5$} (A3)
+			(A3) edge node {$1$} (A4)
+			(A4) edge [loop right] node {$1$} (A4)
+			;
+			
+			%				\path 
+			%				(A) edge [loop left] node {$\frac{1}{2}$} (A)
+			%				(A) edge [bend left] node {$\frac{1}{2}$} (B)
+			%				(B) edge [loop right] node {$\frac{1}{2}$} (B)
+			%				(B) edge [bend left] node {$\frac{1}{2}$} (A);
+			
+		\end{tikzpicture}
+	\end{center}
+	Then the transition matrix will be
+	\[
+	M = \begin{pmatrix}
+		0.5 & 0.5 & 0 & 0 & 0 \\
+		0.5 & 0 & 0.5 & 0 & 0 \\
+		0.5 & 0 & 0 & 0.5 & 0 \\
+		0 & 0 & 0 & 0 & 1 \\
+		0 & 0 & 0 & 0 & 1
+	\end{pmatrix}
+	\]
+	Then the probability $\prob(N=8) = (M^8)_{(0,3)} = 0.05080.$
 	\end{solution}
 \end{example}
 

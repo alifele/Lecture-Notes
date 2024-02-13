@@ -88,16 +88,19 @@ The following important proposition will take advantage of the lemma above.
 	\[ \underline{\int_a^b} f\ d\alpha \leq \overline{\int_a^b} f\ d\alpha. \]
 \end{proposition}
 \begin{proof}
-	We will not be very concise in the steps of this proof, as we want to also demonstrate the line of thought in processing such theorems. Let $\tilde{P}$ be the set of all partitions of $[a,b]$. Then
-	\[ \tilde{U} = \set{U(P,f,\alpha)\ :\ P \in \tilde{P}}, \qquad \tilde{L} = \set{L(P,f,\alpha)\ :\ P \in \tilde{P}}. \]
-	$\tilde{U}$ and $\tilde{L}$ are subsets of real numbers. Then it is clear that 
-	\[  \underline{\int_a^b} f\ d\alpha = \sup \tilde{L}, \qquad \overline{\int_a^b} f\ d\alpha = \inf \tilde{U}. \]
-	Let $A = \sup \tilde{L}$, and $B = \sup\tilde{U}$. With the new terminology, we need to prove $A \leq B$.\\
-	We will proceed with the proof by contradiction. Assume $B < A$. Since $A$ is the suprimum of $\tilde{L}$, then $B<A$ implies there exists a partition $P_1 \in \tilde{P}$ such that 
-	\[ B < L(P_1, f, \alpha) \leq A. \]
-	Similarly, we can find $P_2 \in \tilde{P}$ such that 
-	\[ B \leq U(P_2, f, \alpha) < A. \]
+%	We will not be very concise in the steps of this proof, as we want to also demonstrate the line of thought in processing such theorems. Let $\tilde{P}$ be the set of all partitions of $[a,b]$. Then
+%	\[ \tilde{U} = \set{U(P,f,\alpha)\ :\ P \in \tilde{P}}, \qquad \tilde{L} = \set{L(P,f,\alpha)\ :\ P \in \tilde{P}}. \]
+%	$\tilde{U}$ and $\tilde{L}$ are subsets of real numbers. Then it is clear that 
+%	\[  \underline{\int_a^b} f\ d\alpha = \sup \tilde{L}, \qquad \overline{\int_a^b} f\ d\alpha = \inf \tilde{U}. \]
+%	Let $A = \sup \tilde{L}$, and $B = \sup\tilde{U}$. With the new terminology, we need to prove $A \leq B$.\\
+%	We will proceed with the proof by contradiction. Assume $B < A$. Since $A$ is the suprimum of $\tilde{L}$, then $B<A$ implies there exists a partition $P_1 \in \tilde{P}$ such that 
+%	\[ B < L(P_1, f, \alpha) \leq A. \]
+%	Similarly, we can find $P_2 \in \tilde{P}$ such that 
+%	\[ B \leq U(P_2, f, \alpha) < A. \]
 	
+	Let set $\mathbb{P}$ denote the set of all partitions on the interval $[a,b]$. Then for $P_1, P_2 \in \mathbb{P}$, let their common refinement be $P^* = P_1 \cup P_2$. Then from the properties of the common refinement we can write
+	\[  L(P_1,f,\alpha) \leq L(P^*,f, \alpha), \qquad U(P^*, f,\alpha) \leq U(P_1, f, \alpha). \]
+	\[  \]
 \end{proof}
 
 
