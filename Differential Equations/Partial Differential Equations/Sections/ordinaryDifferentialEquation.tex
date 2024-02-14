@@ -1,7 +1,7 @@
 \chapter{Ordinary Differential Equations}
 
 Let's start by studying the following first order differential equation for $u$
-\[ u' + mu = f, \tag{(1)}\]
+\[ u' + mu = f, \tag{1}\]
 where $m\in \R$ and $f:\R\to\R$ is a continuous function. In fact, we are trying to find a function that its derivative plus some constant times the function itself produces the function $f$. One way to tackle this problem is to multiply both sides by $e^{mx}$. Then, we will get
 \[ e^{mx}u' + mue^{mx} = f e^{mx},\quad x\in \R. \]
 Now the trick is to do a similar thing as completing the square in algebra, with only difference that we are aiming at completing the derivative. In other words
@@ -12,7 +12,7 @@ By a little rearrangement of the terms we will get
 \[ u(x) = ce^{-mx} + \int_{0}^{1}f(s)e^{m(s-x)}ds, \quad c \in \R \]
 Now we can see that on only there is one function that satisfies that particular relation imposed by the differential equation, there is in fact a continuum of functions satisfying the differential equations that are parameterized by $c\in \R$. It turns out that the set of all such functions, as a set, has some very interesting properties. Let's call this set $\mathcal{A}$. As we discussed above, the elements of this set is parameterized by $c\in\R$. We can also specify this set as
 \begin{equation*}
-	\mathcal{A} = \set{u\ |\ u(x)=ce^{-mx} + \int_{0}^{1}f(s)e^{m(s-x)}ds\ \forall c\in \R}
+	\mathcal{A} = \set{u\ |\ u(x)=ce^{-mx} + \int_{0}^{x}f(s)e^{m(s-x)}ds\ \forall c\in \R}
 \end{equation*}
 
 \textbf{Note that we will assume that the function $f$ is Lipschitz continuous. Then we will be sure that all of the possible solutions of the ODE above are in set $\mathcal{A}$}. Studying this set more closely, reveals the fact that this set is actually a linear space, or, a vector space. This is true since
@@ -33,9 +33,9 @@ Now we can see that on only there is one function that satisfies that particular
 \begin{proof}
 	All of the properties of this set follows immediately from the fact that $\R$ is a vector space. To see this, see the following proof for (A1).
 	Let $u,v \in \mathcal{A}$. Then $\exists c_1, c_2 \in \R$ such that 
-	\[ u(x) = c_1e^{-mx} + \int_{0}^{1}f(s)e^{m(s-x)}ds, \quad v(x) = c_2e^{-mx} + \int_{0}^{1}f(s)e^{m(s-x)}ds. \]
+	\[ u(x) = c_1e^{-mx} + \int_{0}^{x}f(s)e^{m(s-x)}ds, \quad v(x) = c_2e^{-mx} + \int_{0}^{x}f(s)e^{m(s-x)}ds. \]
 	Thus 
-	\[ (u+v)(x) = (c_1+c_2)e^{-mx} + \int_{0}^{1}f(s)e^{m(s-x)}ds. \]
+	\[ (u+v)(x) = (c_1+c_2)e^{-mx} + \int_{0}^{x}f(s)e^{m(s-x)}ds. \]
 	Since $c_1 + c_2 \in \R$, then $u+v \in \mathcal{A}$.
 \end{proof}
 
@@ -55,3 +55,41 @@ So far, we have fined a set of functions $\mathcal{A}$ that solves the different
 
 However, in the case of specifying boundary conditions (boundary condition problems), like demanding $u(0)=u(1)$ the situation is not as clear as the initial value problem. Given that the RHS function is Lipschitz continuous and all of the solutions of the ODE lives in the set $\mathcal{A}$, then our task is basically look for functions in $\mathcal{A}$ (which is basically isomorphic to $\R$) to see which of them satisfy the boundary condition. Then we might find no solutions, or a unique solution, or more than one solution (note the similarity with finding the solutions of a linear system $AX=B$ that based on the characterizations of the matrix $A$ we might have different scenarios for the solutions.)
 
+Back to our example above, we find that the solutions of 
+\[ u' + mu = f\] 
+are all in the set
+\begin{equation*}
+	\mathcal{A} = \set{u\ |\ u(x)=ce^{-mx} + \int_{0}^{x}f(s)e^{m(s-x)}ds\ \forall c\in \R}
+\end{equation*}
+So we can determine which functions in $\mathcal{A}$ satisfies our boundary condition. This leads to the following equation
+\[ c  = ce^{-m} + \int_{0}^{1}f(s)e^{m(s-1)}\ ds, \]
+which implies
+\[ \boxed{c = \frac{1}{1-e^{-m}}\int_{0}^{1}e^{m(s-1)}f(s)\ ds, \qquad m\neq 0}. \]
+Thus when $m\neq 0$, we have a unique function in $\mathcal{A}$ that satisfies the boundary condition. However, when $m=0$, then the above equation does not make sense. Then the function $u\in \mathcal{A}$ where
+\[ u(x) = c+  \int_{0}^{x}f(s)\ ds. \]
+To satisfy the boundary condition, we need to have
+\[ u(0) = u(1) \implies c = c+\int_{0}^{1}f(s) ds \implies \boxed{\int_{0}^{1}f(s)\ ds = 0}. \]
+So in the case where $m=0$, if $\int_{0}^{1}f(s)ds=0$, then we have infinitely many solutions for the boundary value problem. But if $\int_{0}^{1}f(s)ds \neq 0$, then there is no solutions for the boundary value problem.
+
+\begin{summary}
+	Consider the following ODE
+	\[ u' + mu = f. \]
+	where $f$ is Lipschitz continuous. Then the set of all solutions to this ODE is 
+	\[ 	\mathcal{A} = \left\{u\ |\ u(x)=ce^{-mx} + \int_{0}^{x}f(s)e^{m(s-x)}ds\ \forall c\in \R \right\}.\]
+	Then for any initial value $u(0) = u_0$, we can find a unique $u\in\mathcal{A}$ that satisfies the initial value problem ($c=u_0$). However, for the boundary value problem $u(0)=u(1)$ we will have the following cases
+	\begin{itemize}
+		\item $m\neq 0$. Then there is a unique $u\in\mathcal{A}$ where
+		\[ c = \frac{1}{1-e^{-m}}\int_{0}^{1}e^{m(s-1)}f(s)\ ds \]
+		\item $m =0$. Then there are two cases
+		\begin{itemize}
+			\item $\int_{0}^{1}f(s)ds = 0$. We will have infinite number of solutions $\forall c\in R$ for the BVP.
+			\item $\int_{0}^{1}f(s)ds \neq 0$. We will have no solutions for BVP.
+		\end{itemize}
+	\end{itemize}
+\end{summary}
+
+We can think about the boundary value problem in a more systematic way. First note that all the functions $u:[0,1]\to\R$ that satisfies the boundary condition $u(0) = u(1)$ for a vector space (easy to check). Thus we can think about our boundary value condition in the following way
+\begin{quote}
+	Let $\mathcal{B} = {u:\mathcal{C}^1([0,1],\R): u(0) = u(1) }$ be a Banach space. This is a linear space equipped with the norm $\norm{u} = \max\set{\norm{u}_\infty, \norm{u'}_\infty}$ (thus $\mathcal{B}$ is a Hilbert space). Let $Y = \mathcal{C}([0,1],\R)$ equipped with the suprimum norm. Consider for any $m\in \R$, the linear operator $L_m:X\to Y$ define as $L_mu =u'+mu$. Given any $f \in Y$ find those $u \in \mathcal{B}$ such that $L_m u = f.$
+\end{quote}
+If we have a unique solution, then we can write $u = \inv{L_m}f$ where $\inv{L_m}$ is the inverse operator of $L_m$. So the uniqueness of the solution is the question invertibility of the operator $L_m$. This operator is the inverse of a differential operator, thus it is an integral operator. For the specific example that we solved above, we can easily calculate this integral operator. 
