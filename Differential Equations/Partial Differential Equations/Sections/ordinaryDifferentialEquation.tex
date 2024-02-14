@@ -14,8 +14,8 @@ Now we can see that on only there is one function that satisfies that particular
 \begin{equation*}
 	\mathcal{A} = \set{u\ |\ u(x)=ce^{-mx} + \int_{0}^{1}f(s)e^{m(s-x)}ds\ \forall c\in \R}
 \end{equation*}
-\[ \]
-Studying this set more closely, reveals the fact that this set is actually a linear space, or, a vector space. This is true since
+
+\textbf{Note that we will assume that the function $f$ is Lipschitz continuous. Then we will be sure that all of the possible solutions of the ODE above are in set $\mathcal{A}$}. Studying this set more closely, reveals the fact that this set is actually a linear space, or, a vector space. This is true since
 \begin{enumerate}
 	\setlength\itemsep{0em}
 	\item [(A1)] $u,v\in \mathcal{A} \implies u+v = v+u \in \mathcal{A}$.
@@ -38,3 +38,20 @@ Studying this set more closely, reveals the fact that this set is actually a lin
 	\[ (u+v)(x) = (c_1+c_2)e^{-mx} + \int_{0}^{1}f(s)e^{m(s-x)}ds. \]
 	Since $c_1 + c_2 \in \R$, then $u+v \in \mathcal{A}$.
 \end{proof}
+
+So far, we have fined a set of functions $\mathcal{A}$ that solves the differential equation. However, now, we can ask for more requirement. For instance, we can ask for functions that satisfy certain initial conditions, i.e. $u(0) = u_0$. Or we can ask for functions that are defined on some interval, say $[0,1]$ that satisfy certain boundary conditions like $u(0) + u'(1) = 3$, or $u(0) = u(1)$, etc. For the case of specifying an initial condition, say $x(0) = x_0$, we can find a unique $x\in \mathcal{A}$ that solves the ODE and satisfies this initial value problem (choose $x\in \mathcal{A}$ that has $c= x_0$).
+
+
+\begin{beCareful}
+	Consider the following initial value problem
+	\[ \dot{x} = x^{2/3}, \qquad x(0) = 0. \]
+	Then at any open interval that the function $x(t)$ does not take the value 0, we can write the ODE as
+	\[ \frac{\dot{x}}{x^{2/3}} = 1.  \]
+	Now by integration we get the set of all solutions of the ODE 
+	\[ \mathcal{A} = \set{x:[a,b]\to \R\ :\ x(t)=(\frac{x+c}{3})^3,\ x(t)\neq 0\ \forall t\in [a,b]}. \]
+	Clearly, the constant solution $x(t)\equiv 0$ doe not belong to the set $\mathcal{A}$. However, we can easily verify that $x(t)\equiv 0$ is a solution to the initial value problem. So when the function $f$ is not descent enough (not Lipschitz continues in this case), then the set $\mathcal{A}$ does not contain all of the solutions for the initial value problem. So in conclusion, the initial value problem has two solutions $x(t) = t^3/3$ that belongs to $\mathcal{A}$ and $x(t) \equiv 0$ which is not in $\mathcal{A}$.\\
+	However, if the function  $f$ (RHS of the initial value problem) is Lipschitz continuous, then by the Picard iteration argument we can show that there is always a unique solution that can be achieved by the integration\footnote{see the chapter 1 of the book "Ordinary Differential Equations: Qualitative Theory" by Barreira.}. 
+\end{beCareful}
+
+However, in the case of specifying boundary conditions (boundary condition problems), like demanding $u(0)=u(1)$ the situation is not as clear as the initial value problem. Given that the RHS function is Lipschitz continuous and all of the solutions of the ODE lives in the set $\mathcal{A}$, then our task is basically look for functions in $\mathcal{A}$ (which is basically isomorphic to $\R$) to see which of them satisfy the boundary condition. Then we might find no solutions, or a unique solution, or more than one solution (note the similarity with finding the solutions of a linear system $AX=B$ that based on the characterizations of the matrix $A$ we might have different scenarios for the solutions.)
+

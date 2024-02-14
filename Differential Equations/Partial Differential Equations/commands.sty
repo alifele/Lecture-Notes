@@ -41,7 +41,7 @@
 \usetikzlibrary{patterns}
 \usetikzlibrary{shadows.blur}
 \usetikzlibrary{shapes}
-
+\usepackage{fontawesome5}
 
 
 \usepackage{physics}
@@ -375,7 +375,8 @@ newparttoc, % Required for writing the part toc entry number in a standard way (
 \newtheorem{lemmaT}{Lemma}[chapter]
 \newtheorem{summaryT}{Summary}[chapter]
 \newtheorem{trickT}{Trick}[chapter]
-
+\newtheorem*{thinkMoreT}{I Need to Think More}
+\newtheorem*{beCarefulT}{Be Careful Here \faHiking\faMountain}
 
 \theoremstyle{blacknumNOTboxExample}
 \newtheorem{exampleT}{Example}[chapter]
@@ -441,6 +442,24 @@ innerbottommargin=5pt, % Inside bottom margin height
 leftmargin=0cm, % Outside left margin width
 rightmargin=0cm % Outside right margin width
 ]{summaryBox}
+
+\newmdenv[
+skipabove=7pt, % Whitespace above box
+skipbelow=7pt, % Whitespace below box
+rightline=true, % Right line visible
+leftline=true, % Left line visible
+topline=true, % Top line visible
+bottomline=true, % Bottom line visible
+backgroundcolor=HighLight!5, % BackgroundColor
+linecolor=LowLight, % Border color
+linewidth=2pt, % Border width
+innerleftmargin=5pt, % Inside left margin width
+innerrightmargin=5pt, % Inside right margin width
+innertopmargin=0pt, % Inside top margin height
+innerbottommargin=5pt, % Inside bottom margin height
+leftmargin=0cm, % Outside left margin width
+rightmargin=0cm % Outside right margin width
+]{thinkMoreBox}
 
 %% Theorem box
 \newmdenv[
@@ -510,7 +529,9 @@ rightmargin=0cm % Outside right margin width
 
 \newenvironment{trick}{\begin{summaryBox}\begin{trickT}}{\end{trickT}\end{summaryBox}}
 
+\newenvironment{thinkMore}{\begin{thinkMoreBox}\begin{thinkMoreT}}{\end{thinkMoreT}\end{thinkMoreBox}}
 
+\newenvironment{beCareful}{\begin{thinkMoreBox}\begin{beCarefulT}}{\end{beCarefulT}\end{thinkMoreBox}}
 
 \newenvironment{corollary}{\begin{lemmaCorBox}\begin{corollaryT}}{\end{corollaryT}\end{lemmaCorBox}}
 \newenvironment{example}{\begin{exampleT}}{\hfill{\tiny\ensuremath{\blacksquare}}\end{exampleT}}
