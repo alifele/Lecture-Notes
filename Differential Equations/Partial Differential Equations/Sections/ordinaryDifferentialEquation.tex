@@ -1,5 +1,7 @@
 \chapter{Ordinary Differential Equations}
 
+\section{Introduction}
+
 Let's start by studying the following first order differential equation for $u$
 \[ u' + mu = f, \tag{1}\]
 where $m\in \R$ and $f:\R\to\R$ is a continuous function. In fact, we are trying to find a function that its derivative plus some constant times the function itself produces the function $f$. One way to tackle this problem is to multiply both sides by $e^{mx}$. Then, we will get
@@ -92,4 +94,31 @@ We can think about the boundary value problem in a more systematic way. First no
 \begin{quote}
 	Let $\mathcal{B} = {u:\mathcal{C}^1([0,1],\R): u(0) = u(1) }$ be a Banach space. This is a linear space equipped with the norm $\norm{u} = \max\set{\norm{u}_\infty, \norm{u'}_\infty}$ (thus $\mathcal{B}$ is a Hilbert space). Let $Y = \mathcal{C}([0,1],\R)$ equipped with the suprimum norm. Consider for any $m\in \R$, the linear operator $L_m:X\to Y$ define as $L_mu =u'+mu$. Given any $f \in Y$ find those $u \in \mathcal{B}$ such that $L_m u = f.$
 \end{quote}
-If we have a unique solution, then we can write $u = \inv{L_m}f$ where $\inv{L_m}$ is the inverse operator of $L_m$. So the uniqueness of the solution is the question invertibility of the operator $L_m$. This operator is the inverse of a differential operator, thus it is an integral operator. For the specific example that we solved above, we can easily calculate this integral operator. 
+If we have a unique solution, then we can write $u = \inv{L_m}f$ where $\inv{L_m}$ is the inverse operator of $L_m$. So the uniqueness of the solution is the question invertibility of the operator $L_m$. This operator is the inverse of a differential operator, thus it is an integral operator. For the specific example that we solved above, we can easily calculate this integral operator. This inverse operator exists if we have a unique solution. So we will consider the boundary value problem we solved above when $m \neq 0$. Then we know that 
+\[ u(x) = ce^{-mx} + \int_{0}^{x} e^{m(s-x)}f(s)\ ds, \qquad c = \frac{1}{1-e^{-m}}\int_{0}^{1}e^{m(s-1)}f(s)ds.  \]
+By substituting the value of $c$ we can write
+\[  u(x) = \frac{e^{-mx}}{1-e^{-m}}\int_{0}^{1}e^{m(s-1)}f(s)\ ds  + \int_{0}^{x} e^{m(s-x)}f(s)\ ds \]
+To merge the integrals into a single integral, we write 
+\[  u(x) = \frac{e^{-mx}}{1-e^{-m}}\int_{0}^{1}e^{m(s-1)}f(s)\ ds  + \int_{0}^{1} H(s,x)e^{m(s-x)}f(s)\ ds \]
+where $H(s,x)$ is step function with $H(s,x) = 1$ when $s< x$ and $H(s,x) = 0$ when $x<s$. Then we can write the integral above as
+\[ u(x) = \int_{0}^{1}G(s,x)f(s)\ ds = \inv{L_m}f(t),\qquad
+G(s,x) = \frac{1}{1-e^{-m}}\begin{cases}
+	e^{m(s-x)} \quad 0<s< x<1, \\
+	e^{m(s-x-1)} \quad 0<x<s<1.
+\end{cases}
+ \]
+thus for this specific boundary value problem we have
+\[ \boxed{\inv{L_m}f(t) = \int_{0}^{1} G(s,x) f(s)\ ds}. \] 
+The function $G$ is called the Green's function. The Green's function can give us the exact solution of certain boundary value problems, but the most important thing about the Green's function is that it contains lots of analytic and quantitative information about the solution that we can utilize even before solving the integral\footnote{To see some of these quantitative information from the Green's function see page 4 of "Greens function in the theory of ordinary differential equations" by  Alberto Cabada.}.
+
+
+\section{Construction of Green's function}
+Consider the following $n$ dimensional boundary value problem
+\[ x(t)' = A(t) x(t) + f(t), \]
+with the boundary condition
+\[ Bx(a) + Cx(b) = h, \]
+where $n \in \N$, $a,b \in \R$ that $a<b$, $A \in \mathscr{L}^1(J,\mathscr{M}_{n\times n})$, $f \in \mathscr{L}^1(J,\R^n)$, $B,C \in \mathscr{M_{n\times n}}$, $h \in \R^n$, and $x \in \mathscr{AC}(J,\R^n)$. As usual, we denote by  $\mathscr{L}^1$ the set of all Lebesgue integrable function on $J$ and by $\mathscr{AC}(J,\R^n)$ the set of absolutely continuous functions on $J$.
+
+\section{Sturm-Liouville theory}
+
+
