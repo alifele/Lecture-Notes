@@ -17,6 +17,10 @@ Integrals, are one of the very central notions in the world of analysis that has
 	And we denote this common value as
 	\[ \int_a^b f\ dx. \]
 \end{definition}
+
+\begin{remark}
+	Note that the upper and lower Riemann integrals exists, as in the definition we assumed that the function $f$ is bounded. If $f$ is not bounded, then $M_i$ or $m_i$ might not exist for some interval $[x_{i-1}, x_i]$, leading that the upper or lower Riemann sum might not exist. 
+\end{remark}
 At this point, this definition might seem useless as we are talking about things like the suprimum or infimum on all possible partitions. The set of all partitions of $[a,b]$ seems to be a set that is hard to characterize. However, as we will see, this ``hard to use'' definition will take us to somewhere that is very interesting. However, at this stage, the following example is aimed to emphasis the subtleties of the definition above.
 \begin{example}[Attempting to integrate $f(x)=x$]
 	Let $f: [0,1] \to \R$ where $f(x)=x$. We want to use the definition above to calculate the integral of $f(x)$ in $[0,1]$. To start with something, first, we want to consider a equidistant partition of the interval $[0,1]$ to $n$ intervals that all has the same length. Then the partition will be $P = \set{\frac{0}{n},\frac{1}{n},\cdots,\frac{n-1}{n},\frac{n}{n}}$. Then we will have
@@ -50,6 +54,8 @@ At this point, this definition might seem useless as we are talking about things
 	\end{enumerate}
 \end{proof}
 
+\section{Riemann-Stieltjes Integrals}
+At this point we will generalize the notion of Riemann integration to Riemann-Stieltjes integration. The idea behind this generalization will be more clear later. 
 
 \begin{definition}[Riemann-Stieltjes Integrals]
 	TO BE ADDED
@@ -83,9 +89,10 @@ The following theorem will show the significance of the notion of the refinement
 The following important proposition will take advantage of the lemma above.
 
 \begin{proposition}
-	Let $f:[a,b] \to \R$, and $\alpha:[a,b] \to \R$ non-decreasing.
+	Let $f:[a,b] \to \R$ bounded, and $\alpha:[a,b] \to \R$ non-decreasing.
 	Then 
 	\[ \underline{\int_a^b} f\ d\alpha \leq \overline{\int_a^b} f\ d\alpha. \]
+		\label{thm:LowerIntLessThanUpperIng_RS}
 \end{proposition}
 \begin{proof}
 %	We will not be very concise in the steps of this proof, as we want to also demonstrate the line of thought in processing such theorems. Let $\tilde{P}$ be the set of all partitions of $[a,b]$. Then
@@ -100,7 +107,88 @@ The following important proposition will take advantage of the lemma above.
 	
 	Let set $\mathbb{P}$ denote the set of all partitions on the interval $[a,b]$. Then for $P_1, P_2 \in \mathbb{P}$, let their common refinement be $P^* = P_1 \cup P_2$. Then from the properties of the common refinement we can write
 	\[  L(P_1,f,\alpha) \leq L(P^*,f, \alpha), \qquad U(P^*, f,\alpha) \leq U(P_1, f, \alpha). \]
-	\[  \]
+	However, it follows from the properties of the upper and lower Riemann sums for partition $P^*$ that
+	\[ L(P^*,f,\alpha) \leq U(P^*,f,\alpha). \]
+	Combining these two results will lead to 
+	\[ L(P_1,f,\alpha) \leq L(P^*,f,\alpha)\leq U(P^*,f,\alpha) \leq U(P_2,f,\alpha) \qquad \forall P_1,P_2 \in \mathcal{P} \]
+	If $P_2$ is fixed, then taking $\sup$ on all $P_1 \in \mathcal{P}$ we will have
+	\[ \underline{\int_{a}^{b}}f\ d\alpha \leq U(P_2,f,\alpha).\]
+	Now by taking $\inf$ on all $P_2 \in \mathcal{P}$ we will have
+	\[ \underline{\int_{a}^{b}}f\ d\alpha \leq \overline{\int_{a}^{b}}f\ d\alpha. \]
+\end{proof}
+The following theorem comes very handy in the applications.
+\begin{theorem}
+	$f \in \mathcal{R}_\alpha[a,b]$ if and only if $\forall \epsilon>0$ there exists a partition such that 
+	\[ U(P,f,f\alpha) - L(P,f,\alpha) < \epsilon. \]
+\end{theorem}
+\begin{proof}$\ $ \\
+	\noindent $\boxed{\Longrightarrow}$ We assume $f\in \mathcal{R}_\alpha[a,b]$. Then 
+	\[ \underline{\int_{a}^{b}}f\ d\alpha = \overline{\int_{a}^{b}}f\ d\alpha = I \]
+	Since $I = \inf_{p\in\mathcal{P}}U(P,f,\alpha)$, then there exists $P_1 \in\mathcal{P}$ such that 
+	\[ U(P_1,f,\alpha) < I + \epsilon/2. \]
+	Similarly, $\exists P_2 \in \mathcal{P_2}$ such that
+	\[ L(P_2,f,\alpha) > I - \epsilon/2. \]
+	Let $P^*$ be the common refinement of $P_1, P_2$. I.e. $P^* = P_1\cup P_2$. Then 
+	\[ I-\epsilon/2 < L(P_2,f,\alpha)\leq L(P^*,f,\alpha)\leq U(P^*,f,\alpha) \leq U(P_1,f,\alpha) < I + \epsilon/2. \]
+	Then the maximum difference between $U(P^*,f,\alpha)$ and $L(P^*,f,\alpha)$ can be $\epsilon$. I.e.
+	\[ U(P^*,f,\alpha) - L(P^*,f,\alpha) < \epsilon. \]
+	\noindent $\boxed{\Longleftarrow}$ We can do this in two different ways. For the first method, I will use the proof by contradiction. But to do this, first observe that $\inf_{P \in \mathbb{P}} U(P,f,\alpha)$ and $\sup_{P\in \mathbb{P}}L(U,f,\alpha)$ exists. That is because if $\inf_{P \in \mathbb{P}}U(P,f,\alpha) = -\infty$, then $\sup_{P\in \mathbb{P}}L(P,f,\alpha) = -\infty$ as well. Similarly, if $\sup_{P\in \mathbb{P}}L(P,f,\alpha)=\infty$, then $\inf_{P \in \mathbb{P}}L(P,f,\alpha) = \infty$ as well. In either case, the hypothesis fails to be true. Thus $\exists \gamma_1, \gamma_2 \in \R$ such that $\gamma_1 = \inf_{P \in \mathbb{P}}U(P,f,\alpha)$ and $\gamma_2 = \sup_{P\in \mathbb{P}}L(P,f,\alpha)$. From \autoref{thm:LowerIntLessThanUpperIng_RS} it follows that $\gamma_2 \leq \gamma_1$. We claim that $\gamma_2 = \gamma_1$. Because other wise, we let $\epsilon = \gamma_1 - \gamma_2$. Then by hypothesis we can find $P \in \mathbb{P}$ such that 
+	\[ U(P,f,\alpha) - L(P,f,\alpha) < \epsilon. \] On the other hand, from the properties of sup and inf we know that
+	\[ U(P,f,\alpha) \geq \gamma_1, \qquad L(P,f,\alpha) \leq \gamma_2\]
+	Thus it follows 
+	\[ U(P,f,\alpha) - L(P,f,\alpha) \geq \epsilon,\]
+	which is a contradiction.\\
+	There is also a much more higher level proof that utilizes the previous results. Let $\epsilon>0$ given. Then $\exists P \in \mathbb{P}$ such that
+	\[ U(P,f,\alpha) - L(P,f,\alpha) < \epsilon. \]
+	We know that for all $P \in \mathbb{P}$ we have
+	\[ L(P,f,\alpha) \leq \underline{\int}f\ d\alpha \leq \overline{\int}f\ d\alpha  \leq U(P,f,\alpha). \]
+	Thus
+	\[ 0 \leq \overline{\int}f\ d\alpha - \underline{\int}f\ d\alpha  < \epsilon. \]
+	However, since this is true for any $\epsilon>0$, then we can conclude that the upper and lower integrals are equal, thus $f \in \mathcal{R}_\alpha[a,b]$.
+\end{proof}
+\begin{corollary}
+	Let $f:[a,b]\to\R$ be bounded. Assume for some $\epsilon>0$ and some partition $P \in \mathcal{P}$ we have
+	\[ U(P,f,\alpha) - L(P,f,\alpha) < \epsilon. \]
+	Then this holds for every refinement of $P$ (With the same $\epsilon$).
+\end{corollary}
+\begin{proof}
+	Let $P^*$ be any refinement of $P$. Then 
+	\[ L(P,f,\alpha) \leq L(P^*,f,\alpha),\qquad U(P^*,f,\alpha)\leq U(P,f,\alpha).  \]
+	We can rearrange this as
+	\[ L(P,f,\alpha) \leq L(P^*,f,\alpha) \leq U(P^*,f,\alpha) \leq U(P,f,\alpha). \]
+	The it immediately follows that
+	\[ U(P^*,f,\alpha) - L(P^*,f,\alpha) < \epsilon. \]
 \end{proof}
 
+The following theorem is one of our major results so far. Thus theorem highlights the fact that how we can arrive at useful results from abstract definitions. 
 
+\begin{theorem}[Continuous functions are Riemann-Stieltjes integrable.]
+	Let $f:[a,b] \to \R$ be a continuous function. Then it is Riemann-Stieltjes integrable.
+\end{theorem}
+\begin{proof}
+	Choose $\eta$ small enough such that 
+	$$(\alpha(b) - \alpha(a))\eta < \epsilon.$$
+	Then since the function $f$ is continuous on a compact set $[a,b]$, it is uniformally continuous. So for $\eta$ chosen as above, we can find $\delta>0$ such that for every $t,s \in [a,b]$ we have
+	\[ \abs{t-s} < \delta \implies \abs{f(t) - f(s)} < \eta. \]
+	Then if $P$ is a partition that $\Delta x_i < \delta$ for all $i$, then we have
+	\[ M_i - m_i < \eta. \]
+	Now consider the following difference between the upper and lower Riemann sums 
+	\[ U(P,f,\alpha) - L(P,f,\alpha) = \sum_{i=1}^{n} (M_i-m_i) \Delta \alpha_i \leq \sum_{i=1}^{n}\eta \Delta\alpha_i = \eta (\alpha(b) - \alpha(a)) < \epsilon.  \]
+	So the function $f$ is Riemann-Stieltjes integrable.
+\end{proof}
+
+The following theorem is also useful as it relaxes some of the requirements on the function $f$ to be Riemann-Stieltjes integrable, and puts more constraints on the integrator $\alpha$. The proof will be very similar to the proof above.
+
+\begin{theorem}
+	Let $f:[a,b] \to \R$ monotone function, and $\alpha$ continuous on $[a,b]$. Then $f \in \mathcal{R}_\alpha[a,b]$ (note that we still require $\alpha$ to be monotone). 
+\end{theorem}
+\begin{proof}
+	Assume that the function $f$ is non-decreasing (the proof for the other case will be analogous). For a given $\epsilon>0$, choose $\eta>0$ small enough that
+	\[ (f(b) - f(a))\eta < \epsilon. \]
+	Since $\alpha$ is continuous on the compact set $[a,b]$, then it is uniformally continuous. Thus for chosen $\eta$ as above, we can find $\delta>0$ such that for all $t,s \in [a,b]$ we have
+	\[ \abs{t-s} < \delta \implies \abs{\alpha(t) - \alpha(s)} < \eta. \]
+	Let $P$ be any partition that $\Delta x_i < \delta$ for all $i$. Then $\Delta \alpha_i < \eta$ for all $i$. So we can write
+	\[ \sum_{i=1}^{n} (M_i - m_i)\Delta\alpha_i < \eta \sum_{i=1}^{n} (M_i - m_i). \]
+	Since $f$ is non-decreasing, then for all $i$ we have $M_i = f(x_i)$ and $m_i = f(x_{i-1})$. Then the sum above telescopes and we will have
+	\[ U(P,f,\alpha) - L(P,f,\alpha) < \eta (f(b) - f(a)) < \epsilon. \]
+\end{proof}
