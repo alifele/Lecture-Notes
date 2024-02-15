@@ -381,6 +381,7 @@ newparttoc, % Required for writing the part toc entry number in a standard way (
 \newtheorem{corollaryT}{Corollary}[chapter]
 \newtheorem{lemmaT}{Lemma}[chapter]
 \newtheorem{summaryT}{Summary}[chapter]
+\newtheorem{obsBoxT}{Observation}[section]
 \newtheorem{trickT}{Trick}[chapter]
 \newtheorem*{thinkMoreT}{I Need to Think More}
 \newtheorem*{beCarefulT}{Be Careful Here \faHiking\faMountain}
@@ -468,6 +469,24 @@ leftmargin=0cm, % Outside left margin width
 rightmargin=0cm % Outside right margin width
 ]{thinkMoreBox}
 
+\newmdenv[
+skipabove=7pt, % Whitespace above box
+skipbelow=7pt, % Whitespace below box
+rightline=true, % Right line visible
+leftline=true, % Left line visible
+topline=false, % Top line visible
+bottomline=false, % Bottom line visible
+backgroundcolor=green!4, % BackgroundColor
+linecolor=green!60!black, % Border color
+linewidth=4pt, % Border width
+innerleftmargin=5pt, % Inside left margin width
+innerrightmargin=5pt, % Inside right margin width
+innertopmargin=0pt, % Inside top margin height
+innerbottommargin=5pt, % Inside bottom margin height
+leftmargin=0cm, % Outside left margin width
+rightmargin=0cm % Outside right margin width
+]{obsBox}
+
 %% Theorem box
 \newmdenv[
 skipabove=7pt, % Whitespace above box
@@ -536,6 +555,7 @@ rightmargin=0cm % Outside right margin width
 
 \newenvironment{trick}{\begin{summaryBox}\begin{trickT}}{\end{trickT}\end{summaryBox}}
 
+\newenvironment{observation}{\begin{obsBox}\begin{obsBoxT}}{\end{obsBoxT}\end{obsBox}}
 \newenvironment{thinkMore}{\begin{thinkMoreBox}\begin{thinkMoreT}}{\end{thinkMoreT}\end{thinkMoreBox}}
 
 \newenvironment{beCareful}{\begin{thinkMoreBox}\begin{beCarefulT}}{\end{beCarefulT}\end{thinkMoreBox}}

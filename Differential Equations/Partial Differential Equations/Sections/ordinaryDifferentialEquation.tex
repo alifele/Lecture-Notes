@@ -200,4 +200,40 @@ We call a matrix \textbf{self-adjoint} or \textbf{Hermitian} if
 Another way to put this is we call a matrix self-adjoint if it satisfies
 \[ \dotProd{\vec{a}}{\mat{M}\vec{b}} = \dotProd{\mat{M}\vec{a}}{\vec{b}} \qquad \forall \vec{a},\vec{b} \in V. \]
 This definition, although seems a little bit too abstract to be useful, will help us when working with differential operators. Because, we only need to have a notion of inner product on a space to work with this definition.
+\begin{proposition}
+	Let $\mat{M}$ be a self-adjoint matrix. Then
+	\begin{enumerate}[(i)]
+		\item All of the eigenvalue of this matrix are real
+		\item All of the eigenvectors of this matrix are orthogonal to each other.
+	\end{enumerate}
+\end{proposition}
+\begin{proof}$\ $\\
+	\begin{enumerate}[(i)]
+		\item Let $\vec{v}_i$ be an eigenvector of $\mat{M}$. Then
+		\[ \lambda\dotProd{\vec{v}_i}{\vec{v}_i} = \dotProd{\vec{v}_i}{\lambda\vec{v}_i} = \dotProd{\vec{v}_i}{\mat{M}\vec{v}_i} = \dotProd{\mat{M}\vec{v}_i}{\vec{v}_i} = \conj{\lambda}\dotProd{\vec{v}_i}{\vec{v}_i}. \]
+		Since $\dotProd{\vec{v}_i}{\vec{v}_i} \neq 0$ (from the properties of dot product given that the eigenvectors are not zero vectors), then we can conclude 
+		\[ \lambda = \conj{\lambda} \implies \lambda \in \R. \]
+		\item Let $\vec{v}_i$ and $\vec{v}_j$ be two eigenvectors with different eigenvalues, i.e. $\lambda_i \neq \lambda_j$. The we can write
+		\[ \lambda_j\dotProd{\vec{v}_i}{\vec{v}_j}=\dotProd{\vec{v}_i}{\lambda_j\vec{v}_j}=\dotProd{\vec{v}_i}{\mat{M}\vec{v}_j} = \dotProd{\mat{M}\vec{v}_i}{\vec{v}_j} = \conj{\lambda_i}\dotProd{\vec{v}_i}{\vec{v}_j}. \]
+		Then $\lambda_i \neq \lambda_j$ implies $\dotProd{\vec{v}_i}{\vec{v}_j} = 0$.
+	\end{enumerate}
+\end{proof}
+The proposition above is basically saying that any self-adjoint matrix defines a natural set of basis vectors for the linear space we are working with.
+\begin{observation}
+	Every self-adjoint operator defines a natural set of orthogonal basis vectors which is the set of all of its eigenvectors.
+\end{observation}
+This set of natural basis for the space helps us to solve the system of linear equations in a very convenient way, which will be very easy to generalize to more general type of operators acting on more general kind of linear spaces. 
+\begin{observation}
+	Let $\mat{M}\vec{u} = \vec{f}$ be a linear system of equations, where $M$ is a self-adjoint matrix that is not singular, i.e. $\det(\mat{M}) \neq 0$. Let $\set{v_i}$ be the set of all eigenvectors of the operator, which also is a basis for the space. Then we can write
+	\[ \vec{u} = \sum_{i=1}^{n} u_i \vec{v}_i, \qquad \vec{f} =\sum_{i=1}^{n} f_i \vec{v}_i. \]
+	Thus the linear system will be
+	\[ \sum_{i=1}^{n}u_i \underbrace{\mat{M}\vec{v}_i}_{\lambda_i\vec{v}_i} =\sum_{i=1}^{n} f_i \vec{v}_i  \]
+	Thus we will have
+	\[ u_i = \frac{f_i}{\lambda_i}. \]
+	If $M$ is singular, then either there is no solutions, or there is a non-unique solution, that depends on the choice of $f$.
+\end{observation}
+
+\subsection{Second-order Linear Differential Operator}
+Consider the following differential operator
+\[  \mathcal{L} y = \frac{d}{dx}(p(x)\frac{dy}{dx}) - q(x)y. \]
 
