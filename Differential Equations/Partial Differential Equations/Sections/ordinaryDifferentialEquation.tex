@@ -113,12 +113,77 @@ The function $G$ is called the Green's function. The Green's function can give u
 
 
 \section{Construction of Green's function}
-Consider the following $n$ dimensional boundary value problem
-\[ x(t)' = A(t) x(t) + f(t), \]
+Consider the following $n$ dimensional linear boundary value problem
+\[ x'(t) = A(t) x(t) + f(t), \qquad t \in J = [a,b] \tag{2.1} \]
 with the boundary condition
 \[ Bx(a) + Cx(b) = h, \]
-where $n \in \N$, $a,b \in \R$ that $a<b$, $A \in \mathscr{L}^1(J,\mathscr{M}_{n\times n})$, $f \in \mathscr{L}^1(J,\R^n)$, $B,C \in \mathscr{M_{n\times n}}$, $h \in \R^n$, and $x \in \mathscr{AC}(J,\R^n)$. As usual, we denote by  $\mathscr{L}^1$ the set of all Lebesgue integrable function on $J$ and by $\mathscr{AC}(J,\R^n)$ the set of absolutely continuous functions on $J$.
+where $n \in \N$, $a,b \in \R$ that $a<b$, $A \in \mathscr{L}^1(J,\mathscr{M}_{n\times n})$, $f \in \mathscr{L}^1(J,\R^n)$, $B,C \in \mathscr{M_{n\times n}}$, $h \in \R^n$, and $x \in \mathscr{AC}(J,\R^n)$. As usual, we denote by  $\mathscr{L}^1$ the set of all Lebesgue integrable function on $J$ and by $\mathscr{AC}(J,\R^n)$ the set of absolutely continuous functions on $J$. Note that $n,a,b,f,A,B,C$ and $h$ are known data of the problem.
+
+
+\begin{beCareful}
+	Note that we are not dealing with initial value problem, but the problem that we are looking at is boundary value problem. That is why our approach and the set of tools that we use might be different (although with some similarity). It is the nature of the problem that determines which tools we need to use. For example, for the boundary value problems, exploiting the vector space property of the set of solutions is very beneficial, whereas for the initial value problems, we exploit some other algebraic structures (the notion of flow that has a group structure) to tackle the problems. So, these two theories for boundary value and initial value problems is a very good example how to be aware of the useful structures in a problem and exploit them.
+\end{beCareful}
+
+First, we study the structure of the set of solutions of the homogeneous problem, i.e. $f\equiv 0, h\equiv 0$. Let $\mathscr{H}$ be the set of all $\mathscr{C}^1([a,b],\R^n)$ functions that satisfy the boundary condition. 
+\[  \mathscr{H} = \set{f \in \mathscr{C}^1([a,b],\R^n)\ :\ Bf(a) + Cf(b) = 0}.  \]
+Let $L:\mathscr{H} \to \mathscr{C}^1([a,b],\R^n)$ be an operator (differential operator) that for $u \in \mathscr{H}$ we have
+\[ Lu = u' - Au. \]
+Thus the set of all solutions to the homogeneous problem will be the kernel of the linear operator $L$, i.e. $u\in \mathscr{H}$ s.t. $Lu = 0$.
+
+The following example demonstrates our discussion above on a more concrete example.
+
+\begin{example}
+	Consider the following boundary value problem
+	\[ \vectt{x'(t)}{y'(t)}=\underbrace{ \matt{0}{1}{-\lambda}{0}}_{A} \vectt{x(t)}{y(t)},\qquad t\in [0,2\pi]\]
+	with boundary conditions given as
+	\[ \underbrace{\matt{0}{1}{0}{0}}_{B}\vectt{x(0)}{y(0)} + \underbrace{\matt{0}{0}{0}{1}}_{C} \vectt{x(2\pi)}{y(2\pi)} = \vectt{0}{0}. \]
+	We can write this in a much more compact vector form
+	\[ \Phi'(t) = A\Phi(t), \qquad B\Phi(0) + C\Phi(2\pi) = 0. \tag{E.2.1}\]
+	where $\Phi:[0,2\pi]\to \R^2$. Observe that the solutions of this system of ODEs is the same as the solutions for the second order ODE $x'' = -\lambda x$. Denote the set of all differentiable functions that satisfy the boundary condition as $\mathscr{H}$.
+	\[ \mathscr{H} = \set{\Phi \in \mathscr{C}^1([0,1],\R^2)\ :\ B\Phi(0) + C\Phi(2\pi) = \mathscr{O} }. \]
+	where $\mathscr{O}$ is a $\mathscr{C}^1$ function that is identically zero $\mathscr{O}(t)\equiv0$. Define the differential operator $L: \mathscr{H} \to \mathscr{C}^1([0,2\pi],\R^2)$ to be
+	\[ L \Phi = \Phi' - A \Phi, \qquad \Phi \in \mathscr{H}. \]
+	
+	 Now Depending on the value of $\lambda$, the boundary value problem will have different answers. 
+	\begin{enumerate}[(i)]
+		\item $\lambda<0$. For this case the solution of the second order ODE $x'' = -\lambda x$ will be
+		\[ x(t) = C_1 e^{kt} + C_2e^{-kt}, \qquad k = \sqrt{-\lambda}. \]
+		So the set of all solutions to the ODE problem will be
+		\[ \mathscr{S} = \left\{\Phi\in\mathscr{C}^1([0,2\pi],\R^2): \Phi(t)=\vectt{C_1 e^{kt} + C_2e^{-kt}}{kC_1 e^{kt} - kC_2e^{-kt}}\quad \forall C_1,C_2 \in \R\right\}.  \]
+		This set is a linear space with $\R$ as the underlying field and is spanned by two function $e^{kt}$ and $e^{-kt}$ with real coefficients, thus it is a two dimensional vector space. However, we need to determine which functions from the set $\mathscr{H}$ are the solutions for the boundary value problem. We can find this by applying the boundary conditions on the functions in $\mathscr{S}$ to see which one of them satisfies the boundary conditions. Thus we will have
+		\[ C_1 - C_2 = 0, \qquad C_1e^{2\pi k} - C_2e^{-kt} = 0 \]
+		which implies $C_1 = 0$, and $C_2= 0$. Thus the kernel of the linear operator will be
+		\[ \ker\left[ L \right] = \left\{ \Phi \in \mathscr{H}\ :\ \Phi\equiv 0 \right\}. \]
+		
+		\item $\lambda = 0$. For this case, the solution to the second order ODE will be
+		\[ x(t) = C_1 + C_2 t, \qquad C_1, C_2 \in \R \]
+		So the set of all solutions for the original ODE will be
+		\[ \mathscr{S} = \Set{\Phi \in \mathscr{C}^1([0,2\pi],\R^2)\ :\ \Phi(t) = \vectt{C_1 + C_2 t}{C_2} \quad C_1, C_2 \in \R}.  \]
+		Which is again a two dimensional linear space. To find the solutions for the boundary value problem, we need to check to see which one of functions in $\mathscr{S}$ solves the boundary value problem. By applying the boundary conditions, we will get
+		\[ C_2 = 0, \quad C_1 \in \R. \]
+		Thus the kernel of the operator $L$ will be
+		\[ \ker[L] = \Set{\Phi \in \mathscr{H}\ :\ \Phi(t) = \vectt{C_1}{0} \quad C_1 \in \R}. \]
+		which is a one dimensional space spanned by the vector $\vectt{1}{0}$.
+		
+		\item $\lambda > 0 $. For this case we will have
+		\[ x(t) = C_1 \cos(kt) + C_2 \sin(kt), \qquad k = \sqrt{\lambda}. \]
+		Then the set of all solutions to the original system of ODEs will be
+		\[ \mathscr{S} = \Set{\Phi \in \mathscr{C}^1([0,2\pi],\R^2)\ :\ \Phi(t) = \vectt{C_1 \cos(kt) + C_2 \sin(kt)}{-C_1 k  \sin(kt) + C_2k \cos(kt)} \quad C_1, C_2 \in \R}.  \] 
+		Now we can impose the boundary condition, that will result in 
+		\[ C_2= 0, \qquad 
+		\begin{cases}
+			& C_1 \in \R \qquad k = n/2,\\
+			& C_1 = 0 \qquad k \neq n/2.
+		\end{cases}
+		\]
+		 Thus when $k\neq n/2$ the kernel of the operator will be
+		 \[ \ker\left[ L \right] = \left\{ \Phi \in \mathscr{H}\ :\ \Phi\equiv 0 \right\}. \]
+		 While, when $k = n/2$, the kernel of the operator will be
+		 \[ \ker[L] = \Set{\Phi \in \mathscr{H}\ :\ \Phi(t) = C_1\vectt{\cos(\frac{n}{2}t)}{-\frac{n}{2} \sin(\frac{n}{2}t)}}. \]
+		
+	\end{enumerate}
+\end{example}
 
 \section{Sturm-Liouville theory}
-
+In this section, we will again utilize the algebraic properties of some set of functions (those that satisfy specific boundary condition) to solve the boundary value problems. We will use the ideas and notions from the finite dimensional linear algebra, tailored to our purpose. 
 
