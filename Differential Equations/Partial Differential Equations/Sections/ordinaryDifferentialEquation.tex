@@ -234,6 +234,61 @@ This set of natural basis for the space helps us to solve the system of linear e
 \end{observation}
 
 \subsection{Second-order Linear Differential Operator}
-Consider the following differential operator
-\[  \mathcal{L} y = \frac{d}{dx}(p(x)\frac{dy}{dx}) - q(x)y. \]
+Let $\mathscr{H}$ be the set of all continues function that has two derivatives and satisfy certain boundary condition given as below
+\[ \mathscr{H} = \Set{f,g \in \mathscr{C}^2([a,b],\R)\ :\ \left[ p(x)(\conj{f}'g - \conj{f}g') \right]_a^b = 0}, \tag{2.3.2.1} \]
+where $p(x)$ is any \emph{real} and once differential function in $\mathscr{C}^1([a,b],\R)$. Example of such functions are provided as below.
+\begin{example}
+	For any $p \in \mathscr{C}^1([a,b],\R)$ and given $b_1, b_2, c_1, c_2 \in \R$, all the functions $f\in \mathscr{C}^2([a,b],\R)$ that satisfy
+	\[ b_1f'(a) + b_2f(a)=0,\qquad c_1f'(b) + c_2f'(a) =0. \]
+	will form a set with the same structure as $\mathscr{H}$.
+\end{example}
+ 
+ \begin{example}
+ 	For a given $p(x)$ that satisfies $p(a) = p(b)$, All of the functions that are periodic, i.e. $f(a)=f(b)$ and $f'(a) = f'(b)$, will form a set with the same structure as $\mathscr{H}$.
+ \end{example}
+ 
+\noindent Consider the following differential operator
+\[  \mathcal{L} f = \frac{d}{dx}(p(x)\frac{df}{dx}) - q(x)f, \tag{2.3.2.2}\]
+where $p(x)$ the same as in the definition of the set $\mathscr{H}$ given at $(2.3.2.1)$, and $q(x)$ is a real continouse function on $[a,b]$. 
 
+\begin{proposition}
+	The operator defined as $(2.3.2.2)$ is a \emph{self-adjoint operator} on $\mathscr{H}$ define by $2.3.2.1$ with the following inner product
+	\[ \dotProd{f}{g} = \int_{a}^{b} \conj{f}g dx. \]
+\end{proposition}
+
+\begin{proof}
+	Let $f,g \in \mathscr{H}$. Then we will use the integration by parts twice.
+	\begin{align*}
+		\dotProd{f}{\mathcal{L}g} &= \int_{a}^{b} (\conj{f}(pg')' + qg)dx = \left[ \conj{f}pg' \right]_a^b - \int_{a}^{b}p\conj{f}'g'dx + \int_{a}^{b}qgdx \\
+		&= \left[ \conj{f}pg' \right]_a^b - \left[ p\conj{f}'g \right]_a^b + \int_{a}^{b}g(p\conj{f}')' dx + \int_{a}^{b}qgdx\\
+		&=\underbrace{ \left[ \conj{f}pg' - p\conj{f}'g \right]_a^b}_{0} + \int_{a}^{b}g(p\conj{f}')' + qg\ dx \\
+		&= \dotProd{\mathcal{L}f}{g}.
+	\end{align*}
+\end{proof}
+\begin{remark}
+	Following the proof above reveals the reason we required that strange boundary condition for the function in $\mathscr{H}$!
+\end{remark}
+
+
+
+
+\begin{remark}
+	At first glance, the form of the second order differential operator for above might seem to be specific case of a general second order differential equation. But this is not since given the following general form of a linear second order differential operator
+	\[ P(x)\frac{d^2}{dx^2} + R(x)\frac{d}{dx} - Q(x), \]
+	by assuming that $P(x) \neq 0$, we can divide through by $P(x)$ to obtain
+	\[ \frac{d^2}{dx^2} + \frac{R(x)}{P(x)}\frac{d}{dx} - \frac{Q(x)}{P(x)} = e^{-\int_{0}^{x}R(t)/P(t)dt}\frac{d}{dx}(e^{\int_{0}^{x}R(t)/P(t)dt}\frac{d}{dx})-\frac{Q(x)}{P(x)}. \]
+	Thus we can see that we can obtain the differential operator in the case of Strum-Liouville theorem from a general second order linear differential operator.
+\end{remark}
+
+\subsection{Eigenfunctions and Weight Functions}
+
+
+
+
+\subsection{Some Examples}
+\begin{example}[Simple Laplace Equation]
+	content
+\end{example}
+\begin{example}[Hermit's Equation]
+	content
+\end{example}
