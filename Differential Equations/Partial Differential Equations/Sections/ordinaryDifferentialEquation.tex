@@ -187,3 +187,17 @@ The following example demonstrates our discussion above on a more concrete examp
 \section{Sturm-Liouville theory}
 In this section, we will again utilize the algebraic properties of some set of functions (those that satisfy specific boundary condition) to solve the boundary value problems. We will use the ideas and notions from the finite dimensional linear algebra, tailored to our purpose. 
 
+First, we will have a quick review of self-adjoint matrices.
+\subsection{Self-adjoint Matrices}
+Let $V$ and $W$ be two finite dimensional vector spaces where $\dim W =m$ and $\dim V = n$. Let $\mathcal{B}_v=\set{\vec{v}_i}_{i=1}^{n}$ and $\mathcal{B}_w = \set{\vec{w}_i}_{i=1}^{m}$ be basis for these linear spaces. Let $M$ be a linear operator between these to spaces, i.e. $M: V \to W$. By linearity we know that
+\[ \forall \vec{u}_1, \vec{u}_2 \in V \qquad M(a\vec{u}_1 + b\vec{u}_2) = aM(\vec{u}_1) + bM(\vec{u}_2). \]
+Thus we know the effect of operator $M$ on all vectors on $V$ by just knowing the effect on the basis vectors of $V$. We can record these information in columns of a matrix as follows
+\[  \textbf{M}_{j,i} = \dotProd{\vec{w}_j}{M \vec{v}_i}.  \]
+Given a complex $n\times n$ matrix, the Hermitian conjugate of the adjoint of a matrix is defined to by the complex conjugate of the transpose of a matrix. I.e.
+\[ \mat{M}^* = \conj{\mat{M}^T}. \]
+We call a matrix \textbf{self-adjoint} or \textbf{Hermitian} if 
+\[ M^* = M. \]
+Another way to put this is we call a matrix self-adjoint if it satisfies
+\[ \dotProd{\vec{a}}{\mat{M}\vec{b}} = \dotProd{\mat{M}\vec{a}}{\vec{b}} \qquad \forall \vec{a},\vec{b} \in V. \]
+This definition, although seems a little bit too abstract to be useful, will help us when working with differential operators. Because, we only need to have a notion of inner product on a space to work with this definition.
+

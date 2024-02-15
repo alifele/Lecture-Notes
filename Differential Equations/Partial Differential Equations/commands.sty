@@ -66,6 +66,8 @@
 
 
 %% MATH Commands
+\renewcommand{\vec}[1]{\textbf{#1}}
+\newcommand{\mat}[1]{\textbf{#1}}
 \newcommand{\dotProd}[2]{\langle #1, #2 \rangle}
 \renewcommand{\div}[1]{\nabla\cdot#1}
 \newcommand{\ball}[2]{\mathcal{B}_{#1}(#2)}
@@ -115,7 +117,6 @@
 		0 & 0 & #3 & 0 \\
 		0 & 0 & 0 & #4 \\
 \end{pmatrix}}
-
 \newcommand{\eigvect}[2]{v_#1^{[#2]}}
 \newcommand{\vspan}[1]{\operatorname{Span}\{#1\}}
 \newcommand{\vectt}[2]{\begin{pmatrix}
