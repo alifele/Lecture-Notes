@@ -233,7 +233,7 @@ This set of natural basis for the space helps us to solve the system of linear e
 	If $M$ is singular, then either there is no solutions, or there is a non-unique solution, that depends on the choice of $f$.
 \end{observation}
 
-\subsection{Second-order Linear Differential Operator}
+\subsection{Self-adjoint Differential Operators}
 Let $\mathscr{H}$ be the set of all continues function that has two derivatives and satisfy certain boundary condition given as below
 \[ \mathscr{H} = \Set{f,g \in \mathscr{C}^2([a,b],\R)\ :\ \left[ p(x)(\conj{f}'g - \conj{f}g') \right]_a^b = 0}, \tag{2.3.2.1} \]
 where $p(x)$ is any \emph{real} and once differential function in $\mathscr{C}^1([a,b],\R)$. Example of such functions are provided as below.
@@ -279,6 +279,39 @@ where $p(x)$ the same as in the definition of the set $\mathscr{H}$ given at $(2
 	\[ \frac{d^2}{dx^2} + \frac{R(x)}{P(x)}\frac{d}{dx} - \frac{Q(x)}{P(x)} = e^{-\int_{0}^{x}R(t)/P(t)dt}\frac{d}{dx}(e^{\int_{0}^{x}R(t)/P(t)dt}\frac{d}{dx})-\frac{Q(x)}{P(x)}. \]
 	Thus we can see that we can obtain the differential operator in the case of Strum-Liouville theorem from a general second order linear differential operator.
 \end{remark}
+
+Now we are at a position of defining eigenvalue and eigenfunctions for differential operators.
+
+\begin{definition}[Eigenfunction of differential operator ]
+	$f \in \mathscr{H}$ is called an eigenfunction of $\mathcal{L}$ with eigenvalue $\lambda$ and weight $w(x)$ if 
+	\[ \mathcal{L}f = \lambda w(x) f \]
+\end{definition}
+\begin{remark}
+	Note that the wight function is a non-negative function that has at most finitely many zeros on the domain $[a,b]$. Although it can be absorbed to the definition of $\mathcal{L}$, but it is always a good idea (and also convenient)to keep it explicit. 
+\end{remark}
+\begin{definition}[Inner product]
+	We define an inner product with weight $w(x)$ on set $\mathscr{H}$ as 
+	\[ \dotProd{f}{g}_w = \int_{a}^{b}w(x)\conj{f}(x)g(x)\ dx. \]
+\end{definition}
+The following result is one of the most important results that our theory gives so far.
+\begin{proposition}
+	The eigenvalues of the Sturm-Liouville operator are \emph{real}, and the eigenfunction with different eigenvalues are \emph{orthogonal}. Thus given a self-adjoint operator, we can form an orthonoraml set $\set{Y_1(x),Y_2(x),\cdots}$ of it eigenfunctions by setting
+	\[ Y_n = \frac{y_n}{\sqrt{\int_{a}^{b}\abs{y_n}^2w\ dx}}, \]
+	where $y_n$ are the un-normalized eigenfunction of $\mathcal{L}$.
+\end{proposition}
+\begin{proof}
+	The proof follows immediately from the proof for the finite dimensional vectors space, as in those proves we only utilized the properties of inner products.
+\end{proof}
+The following theorem is the ultimate goal behind all of the theory developed above.
+\begin{theorem}
+	Given a set of function $\mathcal{H}$, that satisfy a particular form of boundary condition as below
+	\[ \mathscr{H} = \Set{f,g \in \mathscr{C}^2([a,b],\R)\ :\ \left[ p(x)(\conj{f}'g - \conj{f}g') \right]_a^b = 0}. \]
+	Then the operator $\mathcal{L}: \mathscr{H} \to \mathscr{C}([a,b],\R)$ given as
+	\[  \mathcal{L} f = \frac{d}{dx}(p(x)\frac{df}{dx}) - q(x)f, \]
+	is a self-adjoin operator, whose eigenvalues form a countably infinite sequence $\lambda_1, \lambda_2, \dots$, with $\abs{\lambda_n} \to \infty$, and that the corresponding eigenfunctions form a complete basis for $\mathcal{H}$. That is $\forall f \in \mathscr{H}$ we can write
+	\[ f(x) = \sum_{n=1}^{\infty}f_n Y_n(x), \quad \text{where} \quad f_n = \dotProd{Y_n}{f}_w. \]
+	In fact, $\mathscr{H}$ is a complete linear metric space equipped with inner product, i.e. a Hilbert space. 
+\end{theorem}
 
 \subsection{Eigenfunctions and Weight Functions}
 
