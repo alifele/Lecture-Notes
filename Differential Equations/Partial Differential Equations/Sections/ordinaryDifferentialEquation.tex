@@ -313,14 +313,26 @@ The following theorem is the ultimate goal behind all of the theory developed ab
 	In fact, $\mathscr{H}$ is a complete linear metric space equipped with inner product, i.e. a Hilbert space. 
 \end{theorem}
 
-\subsection{Eigenfunctions and Weight Functions}
+\begin{beCareful}
+	In the theorem above, we have claimed that the set $\mathscr{H}$ is a Hilbert space. It is immediate to show that this set is a linear space (vector space), but we have \emph{not} yet proved that this set is complete. Also, we claimed that the set of eigenfunction of the Strum-Liouville operator form a complete basis which is not proved yet.
+\end{beCareful}
 
-
-
-
-\subsection{Some Examples}
 \begin{example}[Simple Laplace Equation]
-	content
+	We want to find the solutions of the following boundary value problem
+	\[ \frac{d^2}{dx^2} f(x) = 0, \ x\in [-L,L], \quad \text{B.C.:}\quad f(-L) = f(L), \quad f'(-L) = f'(L).  \]
+	Let the set $\mathscr{H}$ denote the set of all such functions
+	\[ \mathscr{H} = \Set{f \in \mathscr{C}^2([-L,L],\R)\ :\ f(-L)=f(L),\ f'(-L) = f'(L)}. \]
+	The by the discussion above, the operator $\mathcal{L} = d^2/dx^2$ is a Sturm-Liouville self-adjoint operator where $p(x) \equiv 1$ and $q(x) \equiv 0$. Then we know that the set of all normalized eigenfunction of this operator forms a natural orthonormal basis for the space $\mathscr{H}$.
+	We let the weight function $w(x)$ be identically zero, and we look for the eigenfunctions
+	\[ \frac{d^2 f}{dx^2} = \lambda f. \]
+	Depending on the sign of $\lambda$, we will have different cases. 
+	\begin{enumerate}[(i)]
+		\item $\lambda>0$. Then the solution of the ODE above will be
+		\[ f(x) = C_1 e^{k(x-L)} + C_2 e^{k(x+L)}, \]
+		where $k  = \sqrt{\lambda}$, and the reason for the $x-L$ and $x+L$ term at the exponents are for convenience in checking the boundary conditions. By demanding boundary condition, it turns out that the only solutions that lies in $\mathscr{H}$ is the trivial solution. Thus we can not find a non-trivial eigenfunction for the case where $\lambda>0$. 
+		\item $\lambda < 0$. TO BE  COMPLETED
+		 
+	\end{enumerate}
 \end{example}
 \begin{example}[Hermit's Equation]
 	content
