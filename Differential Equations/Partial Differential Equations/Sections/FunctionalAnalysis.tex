@@ -7,4 +7,64 @@ Here in this chapter we will cover some of the basics of the functional analysis
 
 
 \section{Introduction}
-Differential equations are the centeral part of the applied mathematics. Ordinary differential equations (ODEs) and partial differential equations (PDEs) are two major types of the differential equations. The nice thing about ODEs is that they can be formulated as a finite dimensional system, and different methods and mathematical tools ce be used to analyse these systems (like the notion of flow that is discussed in the dynamical systems course, Sturm-Lioiville theorem, Green's functions, etc). However, PDEs required their own language. The state space of a PDE is a Banach space, and the PDE itself can be seen as a combination of operators between Banach spaces, and the solutions oftern arise as weak or $ \text{weak}^* $ limits in those Banach spaces.  
+Differential equations are the centeral part of the applied mathematics. Ordinary differential equations (ODEs) and partial differential equations (PDEs) are two major types of the differential equations. The nice thing about ODEs is that they can be formulated as a finite dimensional system, and different methods and mathematical tools ce be used to analyse these systems (like the notion of flow that is discussed in the dynamical systems course, Sturm-Lioiville theorem, Green's functions, etc). However, PDEs required their own language. The state space of a PDE is a Banach space, and the PDE itself can be seen as a combination of operators between Banach spaces, and the solutions oftern arise as weak or $ \text{weak}^* $ limits in those Banach spaces. 
+
+\begin{definition}[Banach Space]
+  A Banach space $ (X, \norm{\cdot}_X) $ is a \emph{complete} \emph{normed} space.
+\end{definition}
+
+\begin{remark}
+  By definition, a Banach space is a vector space. That is because norm is defined for vector spaces.
+\end{remark}
+
+\begin{remark}
+  Vector spaces has the spacial element zero with its special properties. In an intuitive level, then norm of an element in a Banach space is basically how far it is located from the zero element (which we call it the origin). This intuitive description is based on the fact that every norm induces a metric.
+\end{remark}
+
+\begin{example}
+  On of the very important Banach spaces is $ \R^n $ where $ n\in\N $. Let $ x = (x_{1}, x_{2}, \cdots, x_{n}) \in \R^n $. Then the followings are some norms that we can define on this space.
+\end{example}
+
+\begin{align*}
+  \norm{x}_{1} &= \sum_{i=1}^{n}\abs{x_i},\\
+  \norm{x}_{2} &= \sqrt{\sum_{i=1}^{n}\abs{x_i}^2},\\
+  \norm{x}_{p} &= \left( \sum_{i=1}^{n}\abs{x_i}^p\right)^{1/p}. 
+\end{align*}
+
+
+The following definitions will be very useful.
+
+\begin{definition}
+  Let $ X $ be a banach space. Then a subset $ Y \subset X $ is dense of $ \closure{Y} = X $. A Banach space that contains a dense and countable subset is called \emph{separable}. For instance, $ \R^n $ is separable, since $ \Q^n $ is a dense subset that is countable. 
+\end{definition}
+
+\subsection{Continuous and Differentiable Functions}
+We start with the following definition.
+
+\begin{definition}
+  Let $ \Omega \subset \R^n $ be a given set. If $ \Omega $ is bounded, we introduce the domain boundary $ \partial \Omega $ and its closure $ \closure{\Omega} $. Then we define the following set of continuous functions.
+  \begin{align*}
+    \mathscr{C}^0(\Omega) &= \Set{ f: \Omega \to \R: \text{continuous}  },\\
+    \mathscr{C}^0(\closure{\Omega}) &= \Set{ f: \closure{\Omega} \to \R: \text{continuous} },\\
+    \mathscr{C}^0_b(\Omega) &= \Set{ f \in \mathscr{C}^0(\Omega): \text{bounded} }.
+  \end{align*}
+\end{definition}
+
+\begin{remark}
+  If $ \Omega $ is \textit{bounded}, then $ \mathscr{C}^{0}(\Omega) = \mathscr{C}^{0}_b(\Omega) $.
+\end{remark}
+
+
+
+
+
+\section{Wokring Area}
+
+
+\begin{observation}
+I have a feeling that the set of all continuous functions $ f: \Omega \to \R $ has a dense subset that is the set of all smooth functions $ f: \closure{\Omega} \to \R  $. In other words $ \mathscr{C}^{\infty}(\closure{\Omega}) $ is a dense subset of $ \mathscr{C}^{0}(\Omega) $. We can basically approximate every continuous function by a sequence of smooth functions. These smooth functions are constructed by mollifing the original continuous function by bump functions (smooth functions with compact support) with width $ \epsilon $.
+\end{observation}
+
+
+
+\newpage
