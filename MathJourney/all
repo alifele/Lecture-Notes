@@ -1,0 +1,13 @@
+\chapter{Open Questions}
+
+In this chapter I am collecting my open questions and problems.
+
+\begin{Question}[Finite elements, weak derivartives]
+  Let $ L_2(\Omega) $ be the space of square integrable functions defined on $ \Omega \subset \R^n $ open, where we identify $ u,v \in L_2(\Omega) $ if they are different on a set of measure zero. Then we define the weak derivative as the following.\\
+  Let $ u \in L_2(\Omega) $. We say that $ u $ posses the weak derivative in $ L_2(\Omega) $ if  there exists $ v \in L_2(\Omega) $ such that 
+  \[ \int_\Omega \phi v\ dx = \int_\Omega \phi' u\ dx, \qquad \forall \phi \in \mathscr{C}^{\infty}_{0}(\Omega)  \] 
+  where $ \mathscr{C}^{\infty}_0(\Omega) $ is the set of all smooth functions defined on $ \Omega $ that has compact support.\\
+
+  Now, my question is that why $ \phi $ needs to have compact support? Why $ \phi(\partial \Omega) =0 $ is not enoug
+  
+\end{Question}
