@@ -78,3 +78,56 @@ The following is the definition of the stationary distribution for a Markov chai
 \begin{observation}
 	A stationary distribution is a left eigenvector for the transition matrix with eigenvalue 1. 
 \end{observation}
+
+\begin{proposition}
+	Let $ \Gamma = (E,V) $ be a connected graph with at least two vertices. Then the stationary distribution for a simple random walk on the graph is given as
+	\[ \pi(x) = \frac{\deg(x)}{2\abs{E}} \]
+	where $ \abs{E} $ is the number of edges of the graph.
+\end{proposition}
+\begin{remark}
+	We can show that this is true by two simple checks of the stationary distributions. First, we need to check this is indeed distribution, i.e. sums up to 1.
+	\[ \sum_{x\in S} \pi(x) = \frac{1}{2\abs{E}} \sum_{x\in S}\deg(x) = \frac{2\abs{E}}{2\abs{E}} = 1. \]
+	Now, we need to check if it is a stationary distribution, i.e. $ \forall x \in S $ we have
+	\[ \sum_{y\in S}\pi(y)P(y,x) = \sum_{x\sim y} \frac{\pi(y)}{\deg(y)} = \sum_{x\sim y} \frac{\deg(y)}{2\abs{E}}\frac{1}{\deg(y)} = \frac{\deg(x)}{2\abs{E}}. \]
+\end{remark}
+
+\begin{observation}[Intuition behind the distribution]
+	Intuitively speaking, the notion of distribution for a Markov chain on a graph, is intuitively speaking similar to the idea of considering the vertices as containers that has some sort of liquid in it, and the transition probability as the rate at which a flow moves between these vertices. Thus at each step, the liquid moves around and the stationary distribution is a distribution where the input and output flow of each vertex is just balanced, that we see no change in the liquid content of each vertex through time. 
+\end{observation} 
+
+
+\subsection{Uniqueness of the stationary distribution on the irreducible and finite Markov Chains }
+
+For this section, we will need the notion of a harmonic function on a graph, as defined below.
+\begin{definition}
+	Let $ \set{X_n} $ be a Markov chain defined on the \emph{finite} state space $ S $. Then a function $ h: S \to \R $ is harmonic if it satisfies
+	\[ h(x) = \sum_{y\sim x} P(x,y)h(y) \qquad \forall x\in S \]
+\end{definition}
+The notion of a harmonic function on a graph has more intuitive characterization, as follows.
+
+\begin{observation}
+	Let $ \Gamma = (V,E) $ be a connected graph. Then a harmonic function defined on $ \Gamma $ is $ h: V \to \R $ where $ \forall x \in V $ we have
+	\[ h(x) = \sum_{y \sim x} P(x,y)h(y) = \frac{1}{\deg(x)} \sum_{y\sim x}h(y). \]
+	Thus we can see that a function defined on a graph is harmonic if its value at a particular vertex $ x $ is the average of its values at the neighborhood vertices.  
+\end{observation}
+
+\begin{lemma}
+	Let $ \set{X_n} $ be a Markov chain defined on a finite state space $ S $, and denote the transition  matrix of this Markov chain as $ P $. Then $ h $ is a harmonic function on $ S $ if it satisfies
+	\[ Ph = h, \]
+	i.e. $ h $ is the right eigenvector of $ P $ with eigenvalue 1. 
+\end{lemma}
+
+The following proposition shows a deep connection between the harmonic functions and the first step analysis. 
+
+\begin{proposition}
+	Let $ \set{X_n} $ be a Markov chain defined on a finite state space $ S $. Let $ W,Z \subset S $ disjoint. Then the following function
+	\[ h(x) = \prob_x(T_W < T_Z) \]
+	is harmonic on $ S \backslash (W \cup Z) $.
+\end{proposition}
+\begin{proof}
+	This immediately follows from the first step argument. Define the event $ E = T_W < T_Z $. Then by the first step analysis we have
+	\[ \prob_x(E) = \sum_{y\in S} P(x,y) \prob_y(E). \]
+	Thus we can see that the function $ h $ satisfies
+	\[ h(x) = \sum_{y \in S} P(x,y)h(y) \qquad \forall x\in S. \]
+	Thus we conclude that the function $ h $ is harmonic. 
+\end{proof}
