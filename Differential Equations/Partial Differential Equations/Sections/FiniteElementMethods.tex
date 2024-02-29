@@ -29,6 +29,8 @@ Now we can have a very compact notation for the partial derivatives of a functio
 	This example shows how we can simply avoid writing 10 terms using a appropriately designed notation.
 \end{example}
 
+\subsection{Space of Continuously Differentiable Functions}
+
 Now we review some basic definitions about the function spaces.
 \begin{definition}[Space of continuous functions]
 	Let $ \Omega \subset \R^n $, an open region. The space of all continuous functions defined on this region is denoted by $ \mathscr{C}^0(\Omega) $ and defined as follows
@@ -91,3 +93,23 @@ The following example demonstrates all of these definitions in a more concrete e
 	And the corresponding suitable norm for this space is
 	\[ \norm{f}_{\mathscr{C}^k} = \norm{f}_\infty  + \norm{\frac{\partial f}{\partial x}}_\infty + \norm{\frac{\partial f}{\partial y}}_\infty. \]
 \end{example}
+
+\subsection{Space of Lebesgue Integrable Functions}
+Here, we define some spaces of functions that are basically characterizing the growth and decay rate of functions. The following definition makes this more clear. 
+\begin{definition}
+	Let $ \Omega \subset \R^n $, and let $ p\geq 1 $ be a real number. Then we define
+	\[ \tilde{L}_p(\Omega) = \Set{f:\Omega\to\R\ :\ \big(\int_\Omega \abs{f(x)}^p dx \big)^{1/p} < \infty} \]
+\end{definition}
+
+The following proposition is very crucial for our up coming discussions.
+\begin{proposition}
+	Let $ \Omega \subset \R^n $, and $ p\geq 1 $. Then $ (\tilde{L}_p(\Omega)/\!\!\sim, \norm{\cdot}_{L_p}) $ is a normed vector space, where $ \sim $ is a equivalence relation defined on the set $ L_p(\Omega) $ identifying the functions that are equal almost everywhere. Further more the norm is defined as
+	\[ \norm{f}_{L_p} = \big(\int_\Omega \abs{f(x)}^p dx\big)^{1/p}.\]
+	We denote 
+	\[  L_p(\Omega) :=  \tilde{L}_p(\Omega)/\!\!\sim \]
+\end{proposition}
+\begin{remark}
+	There are some notes to emphasis here. \\
+	1. We defined the $ L_p(\Omega) $ to be the quotient set $ \tilde{L}_p(\Omega)/\!\!\sim  $. The reason for that is because the $ \norm{\cdot}_{L^p} $, when defined on $\tilde{L}_p$ is no longer a norm, as it is not positive definite. I.e., the norm of a function in $ \tilde{L_p} $ can be zero, while the function is not identically zero, but is zero almost everywhere, i.e. on a set of measure zero. That is why we need to identify the functions that are equal almost everywhere. \\
+	2. To check to see see if the norm defined as above satisfies the properties of norm, we can use the Minkowski inequality to show that it satisfies the triangle inequality. However, for the spacial case $ p=2 $ we can show this by using the Cauchy-Schwartz inequality. Yes! we can define inner product when $ p=2 $ and utilize the properties of Cauchy Schwartz inequality.
+\end{remark}
