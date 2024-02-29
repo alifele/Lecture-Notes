@@ -1,0 +1,93 @@
+\chapter{Finite Element Methods}
+
+In this chapter, we will cover the basics of the theory of finite element methods. 
+
+\section{Basics and Notations}
+For convenience in notation for partial derivatives, we introduce the following notation using the multi-index.
+
+\begin{definition}[Definition of multi-index]
+	Let $ n \in \N $. Then the following $m$-tuple
+	\[ \alpha = (\alpha_1,\alpha_2,\cdots,\alpha_n) \in \R^n \]
+	is called a multi-index, with its length defined as
+	\[ \abs{\alpha} = \alpha_1 + \alpha_2 + \cdots + \alpha_n \]
+\end{definition}
+
+Now we can have a very compact notation for the partial derivatives of a function using the notion of multi-index.
+
+\begin{definition}[Partial derivatives with multi-index]
+	Let $ \Omega \subset \R^n $, and $ f:\Omega \to \R $ be $ m $-times continuously differentiable. Then we have
+	\[ D^\alpha f = \big( \frac{\partial}{\partial x_1} \big)^{\alpha_1} \big( \frac{\partial}{\partial x_2} \big)^{\alpha_2}  \cdots \big( \frac{\partial}{\partial x_n} \big)^{\alpha_n}f = \frac{\partial^{\abs{\alpha}}}{\partial x_1^{\alpha_1}\ \partial x_2^{\alpha_2}\ \cdots \partial x_n^{\alpha_n}} f. \]
+	Note that since the function is $ m $-times differentiable, then the above definition is defined for $ \abs{\alpha} < m $.
+\end{definition}
+
+\begin{example}
+	Suppose that $ n=3 $, and $ \Omega \subset \R^3 $. Define $ f: \Omega \to \R $. Then we have
+	\begin{align*}
+		\sum_{\abs{\alpha}=3} D^{\alpha} f &=  (\frac{\partial^3}{\partial x_1^{3}} + \frac{\partial^3}{\partial x_2^{3}} + \frac{\partial^3}{\partial x_3^{3}} + \frac{\partial^3}{\partial x_1^{2}\partial x_2^{1}} + \frac{\partial^3}{\partial x_1^{1}\partial x_2^{2}} + \frac{\partial^3}{\partial x_2^{1}\partial x_3^{2}} + \frac{\partial^3}{\partial x_2^{2}\partial x_3^{1}} \\
+		&+ \frac{\partial^3}{\partial x_1^{1}\partial x_3^{2}} + \frac{\partial^3}{\partial x_1^{2}\partial x_3^{1}} + \frac{\partial^3}{\partial x_1^{1}\partial x_2^{1}\partial x_3^{1}})f.
+	\end{align*}
+	This example shows how we can simply avoid writing 10 terms using a appropriately designed notation.
+\end{example}
+
+Now we review some basic definitions about the function spaces.
+\begin{definition}[Space of continuous functions]
+	Let $ \Omega \subset \R^n $, an open region. The space of all continuous functions defined on this region is denoted by $ \mathscr{C}^0(\Omega) $ and defined as follows
+	\[ \mathscr{C}^0(\Omega) = \Set{f:\Omega\to \R \ :\ f \text{ is continuous}}. \]
+	Also, let $ \mathscr{C}^0(\closure{\Omega})$ denote the set of all functions $ f\in \mathscr{C}^0(\closure{\Omega}) $ that can be extended from $ \Omega $ to a continuous function defined on $ \closure{\Omega} $.\\
+\end{definition}
+\begin{remark}
+	Note that since $ \closure{\Omega} $ compact, then all of the functions in $ \mathscr{C}^0(\closure{\Omega}) $ are bounded. That is true because all the continuous functions defined on a compact set are uniformally continuous, thus bounded.
+\end{remark}
+
+\begin{example}
+	Let $ \Omega = (0,1) $. Then $ f: \Omega \to \R $, where $ f(x) = 1/x $ is in $ \mathscr{C}^0(\Omega) $ but not in $ \mathscr{C}^0(\closure{\Omega}) $. I.e.
+	\[ f \in \mathscr{C}^0(\Omega), \qquad f\notin \mathscr{C}^0(\closure{\Omega}). \]
+\end{example}
+
+
+\begin{proposition}[Vector space structure of the space of continuous functions]
+	Let $ \Omega \subset \R^n $. The space $ \mathscr{C}^0(\Omega) $ is a vector space. A suitable norm for this space is defined as follows
+	\[ \norm{f} = \norm{f}_\infty = \sup_{x\in \Omega}\abs{f(X)},\]
+	where $ f \in \mathscr{C}^0(\Omega) $.
+\end{proposition}
+
+\begin{lemma}
+	Let $ f \in \mathscr{C}^0(\closure{\Omega}) $. Then
+	\[ \norm{f}_\infty = \sup_{x\in \Omega}\abs{f(x)} = \max_{x\in \Omega}\abs{f(x)}. \]
+\end{lemma}
+\begin{proof}
+	A continuous function defined on a compact set attains its maximum and minimum in the set. 
+\end{proof}
+Now we can define the space of $ k $-times continuously differentiable functions. 
+
+\begin{definition}[The space of k-times continuously differentiable functions]
+	Let $ \Omega \subset \R^n $. Then we define the space of $ k $-times continuously differentiable functions defined on $ \Omega $ as 
+	\[ \mathscr{C}^k(\Omega) = \Set{f \in \mathscr{C}^0(\Omega)\ :\ D^\alpha f \in \mathscr{C}^0(\Omega) \quad \text{for}\ \abs{\alpha} \leq k   }. \]
+\end{definition}
+
+Similar to the space of all continuous functions, the space of all $ k $-times continuously differentiable functions also has a vector space structure as reflected by the following lemma.
+
+\begin{lemma}
+	Let $ \Omega \subset \R^n $. Then $ \mathscr{C}^k(\Omega) $ is a vector space. The following norm is a useful norm for this space. 
+	\[  \norm{f}_{\mathscr{C}^k} = \sum_{\abs{\alpha} \leq k} \norm{D^\alpha f}_\infty. \]
+\end{lemma}
+\begin{remark}
+	We can of course come up with many other norms, some of them as good as the norm defined above. 
+	\[ \norm{f}_{\mathscr{C}^k} = \big(\sum_{\abs{\alpha} \leq k} \norm{D^\alpha f}^p_\infty \big)^{1/p}. \]
+	And if we let $ p \to \infty $ then 
+	\[ \norm{f}_{\mathscr{C}^k} = \sup_{\abs{\alpha}\leq k} \norm{D^\alpha f}_\infty = \max_{\abs{\alpha}\leq k} \norm{D^\alpha f}_\infty. \]
+	Note that we say these norms are good in a sense that it makes the space of interest a complete normed vector space, i.e. a Banach space. 
+\end{remark}
+
+\begin{observation}
+	Considering the remark above, $ \mathscr{C}^k(\Omega) $ kind of resembles the Euclidean space $ \R^n $ in the sense of extending a norm from $ \R $ to $ \R^k $.
+\end{observation}
+
+The following example demonstrates all of these definitions in a more concrete example.
+
+\begin{example}
+	Let $ \Omega \subset \R^2 $, open and bounded. The the space of all one time continuously differentiable functions is
+	\[ \mathscr{C}^1(\Omega) = \Set{f\in \mathscr{C}^0(\Omega)\ :\ \partial_{x}f \in \mathscr{C}^0(\Omega)\ \text{and}\ \partial_y f \in \mathscr{C}^0(\Omega)}. \]
+	And the corresponding suitable norm for this space is
+	\[ \norm{f}_{\mathscr{C}^k} = \norm{f}_\infty  + \norm{\frac{\partial f}{\partial x}}_\infty + \norm{\frac{\partial f}{\partial y}}_\infty. \]
+\end{example}
