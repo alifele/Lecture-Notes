@@ -113,3 +113,50 @@ The following proposition is very crucial for our up coming discussions.
 	1. We defined the $ L_p(\Omega) $ to be the quotient set $ \tilde{L}_p(\Omega)/\!\!\sim  $. The reason for that is because the $ \norm{\cdot}_{L^p} $, when defined on $\tilde{L}_p$ is no longer a norm, as it is not positive definite. I.e., the norm of a function in $ \tilde{L_p} $ can be zero, while the function is not identically zero, but is zero almost everywhere, i.e. on a set of measure zero. That is why we need to identify the functions that are equal almost everywhere. \\
 	2. To check to see see if the norm defined as above satisfies the properties of norm, we can use the Minkowski inequality to show that it satisfies the triangle inequality. However, for the spacial case $ p=2 $ we can show this by using the Cauchy-Schwartz inequality. Yes! we can define inner product when $ p=2 $ and utilize the properties of Cauchy Schwartz inequality.
 \end{remark}
+
+\begin{proposition}[H\"{o}lder's inequality]
+	Let $ u\in L_p(\Omega) $ and $ v \in L_q(\Omega) $ where $ 1/p + 1/q = 1. $
+	Then we have
+	\[ \norm{uv}_{L^1} = \norm{u}_{L^p} \norm{v}_{L^q} \]
+\end{proposition}
+
+The following theorem is among the central theorems for this chapter. 
+
+\begin{theorem}[$ L_p $ space is a Banach space]
+	Let $ \Omega\subset \R$. Then the space $ L_p(\Omega) $ (where $ p \geq 1 $) is a complete normed vector space, i.e. Banach space. 
+\end{theorem}
+
+When we let $ p\to \infty $, we will get the space $ L_\infty(\Omega) $, another interesting $ L_p  $ space that has characterizations quite similar to $ \mathscr{C}^0 $. 
+
+\begin{proposition}[$ L_\infty $ space.]
+	Consider the space $ L_p(\Omega) $. If we let $ p\to \infty $, we will get the space $ L_\infty(\Omega) $ that is defined as
+	\[ L_\infty(p) = \Set{f: \Omega\to \R\ :\ \text{$ f $ is finite bounded almost everywhere}}, \]
+	and the corresponding norm for this space is
+	\[ \norm{f}_{L_\infty} = \operatorname{ess.sup}_{x\in \Omega} \abs{f(x)}. \]
+	This space is also a Banach space. 
+\end{proposition}
+
+
+For $ L_p(\Omega) $ when $ p=2 $ then something interesting happens, and the space $ L_2(\Omega) $ has so many useful features that is the horse power of the modern PDE analysis, among many other applications. 
+
+\begin{proposition}[$ L^2 $ is a Hilbert space]
+	$ L_2(\Omega) $ is a Hilbert space (a Banach space equipped with an inner product) with the following inner product
+	\[ (u,v) = \int_\Omega \abs{u(x)v(x)} dx. \]
+	Clearly
+	\[ \norm{u}_{L_2} = \sqrt{(u,u)}. \]
+\end{proposition}
+Since the inner product defined on $ L_2(\Omega) $ an actual inner product (look at this tautology!), then it satisfies the Cauchy-Schwartz inequality.
+
+\begin{proposition}
+	Consider the Hilbert space $ L_2(\Omega) $. Then for all $ u,v \in L_2(\Omega) $ we have
+	\[ \abs{(u,v)} \leq \norm{u}_{L^2} \norm{v}_{L^2} \]
+\end{proposition} 
+
+\begin{remark}
+	Among many other applications, we can use the Cauchy-Schwartz inequality to show that the $ L_2 $ norm satisfies the triangle inequality. To show this, we begin with
+	\[  \norm{u+v}_{L_2}^2 = (u+v,u+v) = \norm{u}^2_{L_2} + \norm{v}^2_{L_2} + 2(u,v) \leq (\norm{u}^2_{L_2} + \norm{v}^2_{L_2})^2 . \]
+	Then this implies
+	\[ \norm{u+v}_{L_2} \leq \norm{u}_{L_2} + \norm{v}_{L_2}. \]
+\end{remark}
+
+\subsection{Sobolev Spaces}
