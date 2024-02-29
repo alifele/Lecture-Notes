@@ -379,7 +379,7 @@ newparttoc, % Required for writing the part toc entry number in a standard way (
 \newtheorem{corollaryT}{Corollary}[chapter]
 \newtheorem{lemmaT}{Lemma}[chapter]
 \newtheorem{summaryT}{Summary}[chapter]
-
+\newtheorem{obsBoxT}{Observation}[section]
 
 \theoremstyle{blacknumNOTboxExample}
 \newtheorem{exampleT}{Example}[chapter]
@@ -435,8 +435,8 @@ rightline=true, % Right line visible
 leftline=true, % Left line visible
 topline=false, % Top line visible
 bottomline=false, % Bottom line visible
-backgroundcolor=HighLight!5, % BackgroundColor
-linecolor=LowLight, % Border color
+backgroundcolor=green!4, % BackgroundColor
+linecolor=green!60!black, % Border color
 linewidth=4pt, % Border width
 innerleftmargin=5pt, % Inside left margin width
 innerrightmargin=5pt, % Inside right margin width
@@ -517,6 +517,9 @@ rightmargin=0cm % Outside right margin width
 \newenvironment{example}{\begin{exampleT}}{\hfill{\tiny\ensuremath{\blacksquare}}\end{exampleT}}
 
 \renewenvironment{problem}{\begin{problemT}}{\end{problemT}}
+
+\newenvironment{strangeObs}{\begin{defBox}\begin{strangeObsT}}{\end{strangeObsT}\end{defBox}}
+\newenvironment{observation}{\begin{summaryBox}\begin{obsBoxT}}{\end{obsBoxT}\end{summaryBox}}
 
 \newcommand{\definitionTautorefname}{Definition}
 \newcommand{\theoremTautorefname}{Theorem}

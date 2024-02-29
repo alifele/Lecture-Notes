@@ -1,1 +1,80 @@
 \chapter{Stationary Distributions of Markov Chains}
+
+\section{Time Evolution of Distributions}
+
+Let $ \set{X_n}_n $ be a discrete Markov with finite state space $ S = \set{1,2,\cdots,N} $. Then, we know that starting at a state $ X_0 = 1 $, then the probability to be at state $ j $ after one step is the $ (1,j) $ element of the transition matrix. To be more concrete, let's assume that the Markov chain is defined on $ \set{1,2,3} $, and assume $ X_0 = 1 $. Then $ P(1,3)=\prob_1(X_1=3) $ is the element $ (1,3) $ of the transition matrix. Don't forget that $ \set{X_n} $ are all random variables. Thus while we can talk about the cases that what will happen if, for example $ X_0 $, be $ X_0=1 $ and etc. We can also talk about the probability that the random variable has specific values, which is the idea of distribution. Let $ \mu_{X_0}(i) $ for $ i \in \set{1,2,3} $ be the distribution of $ X_0 $. In other words, we have
+\[   \mu_{X_0}(i) = \prob(X_0 = i) \qquad \text{for $ i \in \set{1,2,3}$}.  \]
+We can also introduce the vector notation for the distribution. Note that we can drop the subscript $ X_0 $ as shown in the following notation.
+\[  \mu_0=\mu_{X_0} = (\mu_{X_0}(1),\mu_{X_0}(2),\mu_{X_0}(3)). \]
+Now, suppose we want to find the distribution of $X_1$ given the distribution of $X_0$, i.e. we want to calculate the time evolution of the distribution after one step. Let's calculate what happens for $  \mu_0 $ after one step:
+\[  \mu_1 = \mu_{X_1} = (\mu_1(1),\mu_1(2),\mu_1(3)).  \]
+To calculate $ \mu_1(1) $ we can write
+\[ \mu_1(1) = \prob(X_1 = 1) = \underbrace{\prob_1(X_1 = 1)}_{P(1,1)}\underbrace{\prob(X_0=1)}_{\mu_0(1)} + \underbrace{\prob_2(X_1 = 1)}_{P(2,1)}\underbrace{\prob(X_0=2)}_{\mu_0(2)} +  \underbrace{\prob_3(X_1 = 1)}_{P(3,1)}\underbrace{\prob(X_0=3)}_{\mu_0(3)}. \]
+In summary
+\[ \mu_1(1) = P(1,1)\mu_0(1) + P(2,1)\mu_0(2) + P(3,1)\mu_0(3). \]
+By a similar argument, we can quickly see that
+\[  \mu_1 = \mu_0 M  \]
+where $ M $ is the transition matrix.
+\begin{proposition}
+	Let $ X_0 \sim \mu_0 $. Then $ X_n \sim \mu_n $ where
+	\[ \mu_n = \mu_0 M^n \]
+	where $ M $ is the transition matrix. 
+\end{proposition}
+
+Now we can state the following important observation.
+\begin{observation}
+	For a given discrete Markov chain $ \set{X_n} $ defined on a \emph{finite} state space $ S = \set{1,2,\cdots, N} $, the sequence of distributions of the random variables at each time step
+	\[ \mu_{X_n} = \mu_n = (\mu_n(1),\mu_n(2),\cdots,\mu_n(N)), \]
+	defines a discrete time Markov chain with continuous state space $ \R^{N-1} $. The transition matrix for $ \set{\mu_n}_n $ will be the same as the original Markov chain. The state space will in fact be an affine hyperplane at $ \R^N $, that intersects each axis at 1. That is because we require the distributions to sum up to 1. Thus we will have a discrete map 
+	\[  \mu_{n+1} = \mu_n M.  \]
+\end{observation}
+
+\begin{observation}[Be careful here!]
+	You need to be careful here and pay special attention to the notations and conventions here. We said that any Markov chain defines another Markov chain $ \set{\mu_n} $ which is the distribution of the Markov chain random variable at each step. And also we said that this Markov chain has the same Transition matrix as the original Markov chain. However, you need to note that $ \mu $ is defined to be a \emph{row} vector 
+	\[  \mu_n = (\mu_n(1) \quad \mu_n(2) \quad \cdots \quad \mu_n(N)).  \]
+	Thus value of $ \mu_{n+1} $ will be $ \mu{n} $ multiplied by the transition matrix from \emph{left}. We can develop the whole theory using the notion of transpose, but here we will keep this convention as it is more straight forward. 
+\end{observation}
+
+
+\begin{example}
+	Consider the Markov chain $ \set{X_n}_n $ defined on the state space $ S = \set{1,2,3} $, with the following transition probability
+	\[ 
+	M = \begin{bmatrix}
+		0.43 & 0.30 & 0.27 \\
+		0.10 & 0.77 & 0.12 \\
+		0.22 & 0.20 & 0.58 \\
+	\end{bmatrix}
+	 \]
+	 Now assume that the distribution of $ X_0 $ is $ \mu_0 = (0.2, 0.5, 0.3) $. The $ \set{\mu_n} $ is a Markov chain defined on $ \R^3 $. To be more precise, since all of the distributions should be normalized, the state space if $ \set{\mu_n} $ is in fact the 2D plane that cuts through each axis at 1, as shown in the figure below. 
+	 \begin{figure}[h!]
+	 	\centering
+	 	\includegraphics[width=0.3\linewidth]{Images/hyperPlanein3D}
+	 	\label{fig:hyperplanein3d}
+	 \end{figure}
+	 This is basically a two dimensional manifold that is embedded in 3 dimensional Euclidean space. We can consider the projection of $ \mu_n $ on the $ x-y $ plane as the 2d atlas (this projection is the diffeomorphism). The following is the time evolution of the distribution with $ \mu_0 = (0.2,0.5,0.3) $.
+	 \begin{figure}[h!]
+	 	\centering
+	 	\includegraphics[width=0.7\linewidth]{Images/timeEvolutionOfDistribution}
+	 	\label{fig:timeevolutionofdistribution}
+	 \end{figure}
+	 This example demonstrates that the time evolution of the distribution of a Markov chain is a Markov chain with the same transition matrix.
+\end{example}
+\FloatBarrier
+
+The following is the definition of the stationary distribution for a Markov chain.
+
+\begin{definition}
+	Let $ \set{X_n} $ be a Markov chain defined on the state space $ S $. The distribution vector $ \pi $ is a stationary distribution if we have
+	\[ \pi = \pi P. \]
+\end{definition}
+
+\begin{remark}
+	Given a distribution, we can do the following test to check if it is a stationary distribution. First, it needs to be a distribution, i.e.
+	\[ \sum_{x\in S} \pi(x) = 1, \]
+	And secondly, it needs to satisfy the definition for a stationary distribution, i.e. for all $ x\in S$ we have
+	\[ \pi(x) = \sum_{y\in S} \pi(y)P(y,x). \]
+\end{remark}
+
+\begin{observation}
+	A stationary distribution is a left eigenvector for the transition matrix with eigenvalue 1. 
+\end{observation}
