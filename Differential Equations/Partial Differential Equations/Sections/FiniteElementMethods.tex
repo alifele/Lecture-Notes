@@ -141,7 +141,7 @@ For $ L_p(\Omega) $ when $ p=2 $ then something interesting happens, and the spa
 
 \begin{proposition}[$ L^2 $ is a Hilbert space]
 	$ L_2(\Omega) $ is a Hilbert space (a Banach space equipped with an inner product) with the following inner product
-	\[ (u,v) = \int_\Omega \abs{u(x)v(x)} dx. \]
+	\[ (u,v) = \int_\Omega {u(x)v(x)} dx. \]
 	Clearly
 	\[ \norm{u}_{L_2} = \sqrt{(u,u)}. \]
 \end{proposition}
@@ -180,8 +180,8 @@ Note that the boundary above is zero since the function $ u $ has compact suppor
 	\[ u_\alpha = v \quad  \Longleftrightarrow \quad (u,D^\alpha f) = (v,f). \]
 	So we can use the following equivalent definition for the Sobolev spaces.
 	\[ W^{k,p} = \Set{u \in L_p(\Omega)\ :\ \exists v \in L_p(\Omega) \st (u,D^\alpha f) = (v,f) \quad \forall f \in \mathscr{C}^\infty_c(\Omega)}. \]
+	Note that we sometimes, when there is not ambiguity, we denote the weak derivative of $ u $ with $ u_\alpha $ and $ D^\alpha u $ interchangeably.
 \end{definition}
-
 
 \begin{beCareful}
 	Consider the following definition of $ W^{k,p} $
@@ -189,3 +189,110 @@ Note that the boundary above is zero since the function $ u $ has compact suppor
 	A careful reader might raise the question that how does one know that the integral $ (u, D^\alpha f) $ exists given $ u \in L_p(\Omega) $ and $ D^\alpha f \in \mathscr{C}^\infty_c(\Omega) $? To show this we utilize the H\"{o}lder's inequality. First, observe that $ \mathscr{C}^\infty_c(\Omega) \subset L_p(\Omega)$ for all $ p\geq 1 $, and in particular $ \mathscr{C}^\infty_c(\Omega) \subset L_q(\Omega) $ where $ 1/q = 1-1/p $. Thus using the H\"{o}lder's inequality we can write
 	\[ (u, D^\alpha f) = \int_\Omega \abs{u\ D^\alpha f}\ dx \leq \norm{u}_{L_p} \norm{D^\alpha f}_{L_q} < \infty. \]
 \end{beCareful}
+
+
+The following proposition shows that the Sobolev spaces are actually normed vector spaces.
+
+\begin{theorem}[Sobolev spaces are normed vector spaces]
+	Let $ \Omega \subset \R^n $. Then $ (W^{k,p}(\Omega), \norm{\cdot}_{W^{k,p}(\Omega)}) $ is a normed vector space. For $ u \in W^{k,p}(\Omega) $ we have
+	\[  \norm{u}_{W^{k,p}(\Omega)} = \big(\sum_{\abs{\alpha}\leq k}\norm{D^\alpha u}^p_{L_p(\Omega)}\big)^{1/p}.  \]
+	Also we define the semi-norm (this is semi-norm since it is not positive definite) as
+	\[ \abs{u}_{W^{k,p}(\Omega)} = \big(\sum_{\abs{\alpha} =  k}\norm{D^\alpha u}^p_{L_p(\Omega)}\big)^{1/p}.\]
+	Thus the norm can be written as 
+	\[ \norm{u}_{W^{k,p}(\Omega)} = \big( \sum_{i=1}^{k}\abs{u}^p_{W^{i,p}(\Omega)} \big)^{1/p}. \]
+\end{theorem}
+For the special case where $ p=2 $, the Sobolev space $ W^{k,2}(\Omega) $ will have more interesting features as summarized bellow.
+
+\begin{proposition}[$ W^{k,2}(\Omega) $ is a Hilbert space]
+	Let $ \Omega \subset \R^n $. Then $ W^{k,2}(\Omega) $ is a Hilbert space with the following inner product
+	\[ (u,v)_{W^{k,2}(\Omega)} = \sum_{\abs{\alpha}\leq k}(D^\alpha u, D^\alpha v). \]
+	We usually denote this space as
+	\[  H^k := W^{k,2}(\Omega). \]
+\end{proposition}
+
+The definitions and notations above are for the general setting. However, throughout this notes we will mostly be working with $ H_1(\Omega) $ and $ H^2(\Omega) $. So in the following example we will go through the definitions for these special cases to train our eye for those notations.
+
+\begin{example}[Special cases of Sobolev spaces]
+	Let $ \Omega \subset \R^n $. Then $ H^1(\Omega) $ and $ H^2(\Omega) $ are the set of all square integrable functions that posses first and second weak derivatives respectively.\\
+	We start with $ H^1(\Omega) $ which is defined to be
+	\[ H^1(\Omega) = \Set{f\in L_2(\Omega)\ :\ \big(\frac{\partial f}{\partial x_i}\big) \in L_2(\Omega),\ i=1,2,\cdots,n },\]
+	\[ \norm{u}_{H^1(\Omega)} = \big(\norm{f}^2_{L_2(\Omega)} + \sum_{i=1}^{n}\norm{\frac{\partial f}{\partial x_i}}_{L_2(\Omega)}^2\big)^{1/2}, \] 
+	\[ \abs{u}_{H^1(\Omega)} = \big(\sum_{i=1}^{n}\norm{\frac{\partial f}{\partial x_i}}_{L_2(\Omega)}^2\big)^{1/2} \]
+	
+	Similarly, for $ H^2(\Omega) $ we can write
+	\begin{align*}
+		H^2(\Omega) = &\{ f:\Omega \to \mathbb{R}\ : (\frac{\partial f}{\partial x_i}) \in L_2(\Omega),\ i=1,2,\ldots,n, \nonumber \\
+		&\phantom{{}= \{ f:\Omega \to \mathbb{R}\ :} (\frac{\partial^2 f}{\partial x_i \partial x_j}) \in L_2(\Omega),\ i,j=1,2,\ldots,n \}.
+	\end{align*}
+	\[ \norm{u}_{H^2(\Omega)} = \big( \norm{u}^2_{L_2(\Omega)} + \sum_{i=1}^{n} \norm{\frac{\partial f}{\partial x_i}}^2_{L_2(\Omega)}  + \sum_{i,j=1}^{n} \norm{\frac{\partial^2 f}{\partial x_i \partial x_j}}_{L_2(\Omega)}\big)^{1/2}, \]
+	and for the semi-norm we have
+	\[ \abs{u}_{H^2(\Omega)} = \big(\sum_{i,j=1}^{n} \norm{\frac{\partial^2 f}{\partial x_i \partial x_j}}_{L_2(\Omega)}\big)^{1/2}. \]
+\end{example}
+
+The following definition introduces an important special Sobolev space.
+
+\begin{definition}[Definition of $ H_0^1(\Omega) $]
+	The Sobolev space $ H_0^1(\Omega) $ is defined to be the closure of $ \mathscr{C}^\infty_c(\Omega) $ under $ \norm{\cdot}_{H^1(\Omega)} $ norm. I.e. for any sequence $ \set{u_n} $ in $ \mathscr{C}^\infty_c(\Omega) $ that converges to $ u^* $ under $ \norm{\cdot}_{H^1(\Omega)} $, then $ u^* \in H_0^1 $.
+\end{definition}
+\begin{remark}
+	For instance, Let $ \Omega = [-1,1] $. Then the following function is in $ H^1_0(\Omega) $.
+	\[ 
+	f(x) = \begin{cases}
+		1-\abs{x} \qquad &x\in[-1/2,1/2],\\
+		0 \qquad &\text{else}.
+	\end{cases}
+	 \]
+\end{remark}
+
+The following proposition gives us some intuitive characterization of $ H^1_0(\Omega) $.
+
+\begin{proposition}
+	Let $ \Omega \subset\R^n $ an open set with a sufficiently smooth boundary. Then 
+	\[ H_0^1(\Omega) = \Set{f \in H^1(\Omega)\ :\ f(\partial \Omega) = 0}.   \]
+\end{proposition}
+
+We conclude this section with the important inequality of Poincar\'{e}-Friedrichs inequality.
+
+\begin{theorem}[Poincar\'{e}-Friedrichs inequality]
+	Let $ \Omega \subset \R^n $. Then $ \exists C_{\star} \in \R $ that depends on the geometry of the domain $ \Omega $ and for all $ u \in H_0^1(\Omega) $ we have
+	\[ \int_\Omega \abs{u(x)}^2\ dx \leq  C_{\star} \sum_{i=1}^{n} \int_\Omega \Abs{\frac{\partial u}{\partial x_i}}^2\ dx, \qquad \forall u \in H_0^1. \]
+	Or equivalently we can write this in a more compact notation as follows
+	\[ \norm{u}_{L_2(\Omega)} \leq \tilde{C_{\star}} \abs{u}_{H^1}. \]
+\end{theorem}
+\begin{proof}
+	To demonstrate the simplicity of the proof for such an un-intuitive result, we start with assuming $ \Omega = [a,b] \subset \R $. Let $ u \in H^1_0(\Omega) $. Then we can write
+	\[ u(x) = u(a) + \int_{a}^{x}u'(\xi)\ d\xi = \int_{a}^{x}u'(\xi)\ d\xi, \qquad a\leq x\leq b \]
+	Note that since $ u \in H_0^1(\Omega) $, then $ u $ is zero at the boundary. Now we can write
+	\[ \int_{a}^{b} \abs{u(x)}^2 dx = \int_{a}^{b}\abs{\int_{a}^{x}u'(\xi)\ d\xi}^2 d\xi. \]
+	We can simplify the inner integral using the Cauchy-Schwartz inequality
+	\[ \int_{a}^{x} u'(\xi)\ d\xi \leq (x-a)^{1/2}(\int_{a}^{x}\abs{u'(\xi)}^2\ d\xi)^{1/2} \]
+	Also, note that we can write
+	\[ \int_{a}^{x} \abs{u'(\xi)}^2\ d\xi \leq \int_{a}^{b}\abs{u'(\xi)}^2\ d\xi.  \]
+	This is true since the integrand is always positive. Putting the pieces together we can not write
+	\[ \int_{a}^{b} \abs{u(x)}^2 dx = \int_{a}^{b}\abs{\int_{a}^{x}u'(\xi)\ d\xi}^2 d\xi \leq \frac{(b-a)^2}{2} \int_{a}^{b}\abs{u'(\xi)}^2\ d\xi. \]
+	
+	For another simple case $ \Omega = [a,b]\times [c,d] \subset \R^2 $, the proof will be pretty much analogous to the proof above, with a difference that we will need to find an upper bound for $\int_{a}^{b}\int_{c}^{d}\abs{u(x,y)}^2dydx$ twice (one with respect to the $ u_x $ and the other one with respect to $ u_y $). Also, note that we will need to use the identity that for every $ a,b >0 $, $ ab/(a+b) $ is an upper bound for both $ a $ and $ b $. Eventually we can show that 
+	\[ \int_{\Omega} \abs{u(x,y)}^2\ dxdy \leq \underbrace{(\frac{2}{(d-c)^2} + \frac{2}{(b-a)^2})^{-1}}_{C_\star}\int_\Omega (\abs{u_x}^2 + \abs{u_y}^2) dxdy \]
+\end{proof}
+
+\begin{example}
+	Let $ \Omega = [0,1]\times [0,1] \subset \R^2$. Then we have
+	\[ \int_\Omega\abs{u(x,y)}^2 dxdy \leq \frac{1}{4} \int_\Omega (\abs{u_x(x,y)}^2 + \abs{u_y(x,y)}^2)\ dxdy \qquad \forall u \in H_0^1(\Omega) \]
+\end{example}
+
+\begin{example}
+	Let $ \Omega = [0,1] \subset \R $. Then we have
+	\[ \int_\Omega\abs{u(x,y)}^2 dx \leq \frac{1}{2} \int_\Omega \abs{u_x(x,y)}^2 \ dx \qquad \forall u \in H_0^1(\Omega) \]
+\end{example}
+
+
+
+
+
+
+
+
+
+
+\section{Working Area}
+Things to add: Example for weak derivative, completing the diagram for the geometry of the function spaces. 
