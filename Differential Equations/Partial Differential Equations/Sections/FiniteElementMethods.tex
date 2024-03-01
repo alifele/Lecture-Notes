@@ -160,3 +160,32 @@ Since the inner product defined on $ L_2(\Omega) $ an actual inner product (look
 \end{remark}
 
 \subsection{Sobolev Spaces}
+So far, given a domain $ \Omega \subset \R^n $, we have introduced the notion of the space of functions defined on the domain to group them in different categories based on the similar properties that they posses. For instance, we group all the functions (defined on $ \Omega $) that are continuous into the set $ \mathscr{C}^0(\Omega) $ and grouped all the functions that are square integrable into $ L_2(\Omega) $ and etc. If I want to visualize these space and highlight the relation between them, I would suggest the following diagram (assume $ \Omega $ is bounded).
+\input{Images/WorldOfFunctions1.tex}
+\FloatBarrier
+\noindent Then the notion of the weak derivatives, and the Sobolev spaces come into play. We can define the notion of weak derivative for the functions that do not posses derivative in the classical sense, like the the function corresponding to the mapping $ x\mapsto \abs{x} $. 
+
+For simplicity, we focus on the first derivative and try to generalize that notion. To do this, we need to focus on the set of functions that are continuously differentiable, i.e. $ \mathscr{C}^0(\Omega) $. Let $ f\in \mathscr{C}^0(\Omega) $. Then this function satisfies the following integration by parts identity
+\[  \boxed{\int_\Omega f\ u'\ dx =  -\int_\Omega f'\ u\ dx, \qquad \forall u \in \mathscr{C}^\infty_c(\Omega).} \]
+Where $ \mathscr{C}^\infty_c(\Omega) $ is the set of all smooth functions with compact support. The identity above holds because
+\[  \int_\Omega f\ u'\ dx  = \underbrace{\big[f\ u\big]_{\partial \Omega}}_{0}-\int_\Omega f'\ u\ dx . \]
+Note that the boundary above is zero since the function $ u $ has compact support, thus it is zero at the boundary. Now using this identity, we can extend the notion of derivatives to the functions that do not posses derivatives in the classic sense. This is the intuitive idea behind the notion of Sobolev spaces. 
+
+\begin{definition}[Sobolev Spaces]
+	Let $ \Omega\subset \R^n $. Then we define $ W^{k,p} $ to be the space of functions in $ L_p(\Omega) $ that posses $ k $ weak derivatives that belong to $ L_p(\Omega) $. In other words, for $ k $ a non-negative integer, we have
+	\[ W^{k,p} = \Set{u\in L_p(\Omega)\ :\  u_\alpha \in L_p(\Omega),\ \abs{\alpha} \leq k }, \]
+	Where $ u_\alpha $ defined to be
+	\[  u_\alpha = v \quad \Longleftrightarrow \quad \int_\Omega u\ D^\alpha f\ dx = (-1)^{\abs{\alpha}} \int_\Omega v f \ dx, \quad \forall f \in \mathscr{C}^\infty_c(\Omega). \]
+	Or in a more compact notation we can write
+	\[ u_\alpha = v \quad  \Longleftrightarrow \quad (u,D^\alpha f) = (v,f). \]
+	So we can use the following equivalent definition for the Sobolev spaces.
+	\[ W^{k,p} = \Set{u \in L_p(\Omega)\ :\ \exists v \in L_p(\Omega) \st (u,D^\alpha f) = (v,f) \quad \forall f \in \mathscr{C}^\infty_c(\Omega)}. \]
+\end{definition}
+
+
+\begin{beCareful}
+	Consider the following definition of $ W^{k,p} $
+	\[ W^{k,p} = \Set{u \in L_p(\Omega)\ :\ \exists v \in L_p(\Omega) \st (u,D^\alpha f) = (v,f) \quad \forall f \in \mathscr{C}^\infty_c(\Omega)}. \]
+	A careful reader might raise the question that how does one know that the integral $ (u, D^\alpha f) $ exists given $ u \in L_p(\Omega) $ and $ D^\alpha f \in \mathscr{C}^\infty_c(\Omega) $? To show this we utilize the H\"{o}lder's inequality. First, observe that $ \mathscr{C}^\infty_c(\Omega) \subset L_p(\Omega)$ for all $ p\geq 1 $, and in particular $ \mathscr{C}^\infty_c(\Omega) \subset L_q(\Omega) $ where $ 1/q = 1-1/p $. Thus using the H\"{o}lder's inequality we can write
+	\[ (u, D^\alpha f) = \int_\Omega \abs{u\ D^\alpha f}\ dx \leq \norm{u}_{L_p} \norm{D^\alpha f}_{L_q} < \infty. \]
+\end{beCareful}
