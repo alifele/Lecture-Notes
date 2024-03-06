@@ -291,7 +291,143 @@ We conclude this section with the important inequality of Poincar\'{e}-Friedrich
 
 \section{PDEs and the Weak Solutions}
 
+\subsection{Introduction and Motivation}
+Let $ \Omega \subset \R^2 $ and consider a boundary value problem where we want to find $ u: \Omega \to \R $ that satisfies
+\[ -\Delta u = f, \qquad u = 0 \quad \text{on $ \partial \Omega $}. \]
+Given $ f \in \mathscr{C}^0(\closure{\Omega})$ is continuous, then the classical theory of PDEs guarantees that there exists $ u \in \mathscr{C}^2(\Omega) \cap \mathscr{C}^0(\closure{\Omega}) $ that satisfies the PDF above, as well as the boundary condition (this solution is called a \textbf{classical solution}). For instance, the solution for $ f=1 $ is shown as below.
 
+
+\begin{figure}[h!]
+	\centering
+	\begin{minipage}{0.45\linewidth}
+		\includegraphics[width=\linewidth]{Images/LaplaceSolution}
+
+	\end{minipage}
+	\hfill % Optional: adds horizontal space between the figures
+	\begin{minipage}{0.45\linewidth}
+		\includegraphics[width=\linewidth]{Images/PoissonEquationWithContours.png}
+
+	\end{minipage}
+\end{figure}
+\FloatBarrier
+But what if the function $ f $ is not continuous? Does that imply that a solution does not exists? However, we can observe solutions for such problems in experimental setting. Thus we need to weaken the requirements in order to study this problem in a more general setting. For instance, if the function $ f $ is given as
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.25\linewidth]{Images/discontFunction}
+\end{figure}
+
+\FloatBarrier
+
+where 
+\[ f(x,y) = \operatorname{sign}(\frac{1}{2} - \sqrt{x^2 + y^2}). \]
+By numerical solution, we find that the solution $ u $ is as demonstrated in the following figure.
+\begin{figure}[h!]
+	\centering
+	\begin{minipage}{0.45\linewidth}
+		\includegraphics[width=\linewidth]{Images/weakSolutionPoissonEquation.png}
+		
+	\end{minipage}
+	\hfill % Optional: adds horizontal space between the figures
+	\begin{minipage}{0.45\linewidth}
+		\includegraphics[width=\linewidth]{Images/weakSolutionPoissonEquationContour.png}
+		
+	\end{minipage}
+\end{figure}
+\FloatBarrier
+In this section of the notes, we will develop a theory to study such ``weak'' solutions.
+
+
+\subsection{Weak Solutions to Elliptic Problems}
+
+\subsubsection*{General formulation of elliptic problem}
+Here, we consider the following general case of the elliptic problems. Let $ \Omega \subset \R^n $. Then an elliptic problem is a partial differential equation, and a boundary condition, where the differential equation is
+\begin{align*}
+	 -\sum_{i,j=1}^{n}\frac{\partial}{\partial x_j}(a_{ij}(x) \frac{\partial u}{\partial x_i}) + \sum_{i=1}^{n}b_i(x) \frac{\partial u}{\partial x_i} + c(x) u = f, \qquad x \in \Omega \tag{5.2.1}
+\end{align*}
+or in a much more compact vector notation, we can write
+\[  -\div{(A^T \grad{u})} + B \cdot \grad{u} + c u = f,  \]
+where
+\begin{align*}
+	b_i \in \mathscr{C}^0(\closure{\Omega}), \qquad c \in \mathscr{C}^0(\closure{\Omega}),\\
+	f \in \mathscr{C}^0(\closure{\Omega}), \qquad a_{ij} \in \mathscr{C}^1(\closure{\Omega}) \tag{5.2.1.C}
+\end{align*}
+Also, we require that there must exist a positive constant $ c \in \R $ such that
+\[ \sum_{i,j=1}^{n} a_{ij}(x) \xi_i \xi_j \geq \sum_{i=1}^{n}\xi_i^2 \quad \forall \xi \in \R^n,\ x \in \Omega. \]
+The condition above is called the uniform ellipticity condition and the equation $ (5.2.1) $ is called an elliptic PDE. Now we can impose different boundary conditions on the PDE to formulate our boundary value problem. The choices are
+\begin{enumerate}[(i)]	
+	\item $ u = g $ on $ \partial \Omega $. This is known as a Dirichlet boundary condition.
+	\item $ D_v u = \grad{u}\cdot v = g $ on $ \partial \Omega $, where $ D_v $ is the directional derivative of $ u $ in the direction $ v $ which is the unit outward normal vector to $ \partial \Omega $. This is known as a Neumann boundary condition. 
+	\item $ D_v u + u = g $. This is called a Robin boundary condition.
+\end{enumerate}
+
+\subsubsection{Formulating the Weak Form For Homogeneous Dirichlet Boundary Value Problem }
+Here, we focus on solving the homogeneous Dirichlet boundary value problem which is
+\begin{align*}
+	-\sum_{i,j=1}^{n}\frac{\partial}{\partial x_j}(a_{ij}(x) \frac{\partial u}{\partial x_i}) + \sum_{i=1}^{n}b_i(x) \frac{\partial u}{\partial x_i} + c(x) u &= f, \qquad x \in \Omega \\
+	u &= 0 \qquad \text{on}\ \partial \Omega \tag{5.2.$\clubsuit$}
+\end{align*}
+where $ a_{ij}, b_i, c, f $ are as in (5.2.1.C). A function $ u \in \mathscr{C}^2(\Omega) \cap \mathscr{C}^0(\closure{\Omega}) $ is called a \textbf{classic solution} to the Dirichlet boundary value problem ($ u \in \mathscr{C}^2(\Omega)\cap \mathscr{C}^1(\closure{\Omega}) $). However, we want to weaken this requirement and find a more general class of solutions. To do this, we first need to find some property, or some identity that holds for the classic solution and extend that for more general solutions (similar to what we did for extending the notion of derivatives and making the notion of weak derivative). 
+
+Let $ v \in \mathscr{C}^1_c(\Omega) $ (the set of continuously differentiable functions defined on $ \Omega $ that has compact support). Multiplying both sides of the PDE by $ v $  and then using integration by parts for the first term, and also observing that $ v $ is zero in the boundary (since it has a compact support) then we can write
+\[ \sum_{i,j=1}^{n}\int_\Omega a_{ij}\frac{\partial u}{\partial x_i} \frac{\partial v}{\partial x_j}\dx +\sum_{i=1}^{n} \int_\Omega b_i(x)\frac{\partial u}{\partial x_i} v\dx + \int_\Omega c(x) u v\dx = \int_\Omega fv\dx \qquad \forall v \in \mathscr{C}^1_c(\Omega) \]
+The equation above is the satisfied by a classical solution, and we have only the first derivative of the solution in the identity above. Thus this is a good place to extend the notion of the solution. In order for the identity above to make sense, we need to make sure the integrals exists, which is true when considering the classic solution. That is because all of the integrands are continuous functions, thus they exists. However, we can use Cauchy-Schwartz inequality to obtain
+\[\Abs{ \int_\Omega a_{ij}\frac{\partial u}{\partial x_i} \frac{\partial v}{\partial x_j}\dx }^2 \leq \Par{\int_\Omega \abs{a_{ij}\frac{\partial u}{\partial x_i}}^2\dx}\Par{\int_\Omega \abs{\frac{\partial v}{\partial x_j}}^2\dx}\]
+\[ \Abs{\int_\Omega b_i(x)\frac{\partial u}{\partial x_i} v \dx}^2 \leq \Par{\int_\Omega \abs{v}^2\dx}\Par{\int_\Omega \abs{b_i(x)\frac{\partial u}{\partial x_i}}^2 \dx} \]
+Thus the identity satisfied by the classic solution also makes sense if we have much more relaxed requirement on $ u $ and $ v $, namely just requiring
+\[ u \in H^1_0 (\Omega), \qquad v \in H^1_0, \qquad f \in L_2(\Omega) \]
+Also, since that since no derivative is performed on $ a_{ij} $, then we can relax the condition on $ a_{ij} $ to be $ a_{ij} \in L_2(\Omega) $, as well as the smoothness conditions on $ b_i $ and $ c $ that can be relaxed to $ b_i, c \in L_\infty(\Omega) $. Note that $ a_{ij},b_i,c $ should still be essentially bounded in order for $ b_i \partial u/\partial x_i $, $ a_{ij}\partial u/\partial x_i $, and $ c u $ be square integrable.
+
+Now we can formulate the weak problem as follows.
+\begin{quote}
+	Find $ u \in H_0^1 $ such that it satisfies
+	\begin{align*}
+		\sum_{i,j=1}^{n}\int_\Omega a_{ij}\frac{\partial u}{\partial x_i} \frac{\partial v}{\partial x_j}\dx +\sum_{i=1}^{n} \int_\Omega b_i(x) \frac{\partial u}{\partial x_i} v\dx + \int_\Omega c(x) u v\dx = \int_\Omega fv\dx \quad x\in \Omega,\ \forall v \in H_0^1(\Omega) 
+	\end{align*}
+	where $ a_{ij}, b_i, c \in L_\infty(\Omega) $, and $ f \in L_2(\Omega) $.
+\end{quote}
+
+This motivates the following definition.
+
+\begin{definition}[Weak Solution of Elliptic Dirichlet Boundary Value Problem]
+	\label{def:ellipticDirichletBVPWeak}
+	Let $ a_{ij}, b_i, c_i \in L_\infty(\Omega) $, and $ f \in L_2(\Omega) $. Then a function $ u \in H_0^1(\Omega) $ that $ \forall v \in H_0^1(\Omega) $ satisfies
+	\[ \sum_{i,j=1}^{n}\int_\Omega a_{ij}\frac{\partial u}{\partial x_i} \frac{\partial v}{\partial x_j}\dx +\sum_{i=1}^{n} \int_\Omega b_i(x) \frac{\partial u}{\partial x_i} v\dx + \int_\Omega c(x) u v\dx = \int_\Omega fv\dx \quad x\in \Omega  \]
+	is called a weak solution to $ (5.2.2.\clubsuit) $. Note that all of the derivatives should be considered in the weak sense. 
+\end{definition}
+\begin{remark}
+	Clearly, if $ u $ is a classic solution, then it is also a weak solution, but because of the relaxed conditions on the weak formulation, a weak solution is not necessarily a classic solution.
+\end{remark}
+Now it remains to show the existence uniqueness of the solution to the weak formulation and the corresponding requirements. 
+
+\subsubsection{Existence and Uniqueness of The Weak Solutions}
+In order to use the theoretical machinery of functional analysis, first we need to express our problem in a more useful way. Let $ a: H_0^1 \times H_0^1 \to \R$ be a bi-linear form define as
+\[ a(u,v) =  \sum_{i,j=1}^{n}\int_\Omega a_{ij}\frac{\partial u}{\partial x_i} \frac{\partial v}{\partial x_j}\dx +\sum_{i=1}^{n} \int_\Omega b_i(x) \frac{\partial u}{\partial x_i} v\dx + \int_\Omega c(x) u v\dx, \]
+and $ l: H_0^1 \to \R $ a linear functional given as
+\[ l(v) = \int_\Omega fv\dx. \]
+Then we can re-write our Dirichlet boundary condition as the following alternative notation.
+\begin{definition}[Alternative Notation For The Weak Solution of Elliptic Dirichlet Boundary Value Problem]
+	An alternative notation for \autoref{def:ellipticDirichletBVPWeak} is given as: Find $ u \in H_0^1(\Omega) $ such that 
+	\[ a(u,v) = l(v) \qquad \forall v \in H_0^1(\Omega) \]
+\end{definition}
+
+The notation above is very useful, as we can now use Lax-Milgram theorem to discuss the existence and uniqueness of the boundary value problem under study. First, we need to state the Lax-Milgram theorem.
+
+\begin{theorem}[Lax-Milgram Theorem]
+	Let $ V $ be a Hilbert space, $ a:V\times V \to \R $ a bi-linear form, $ l: V \to \R $ a linear functional that satisfies the following properties.
+	\begin{enumerate}[(i)]
+		\item Coercivity: $ \exists c_0>0$ such that 
+		\[  \abs{a(v,v)} \geq c_0 \norm{v}_V^2 \quad \forall v \in V \]
+		\item Continuity: $ \exists c_1>0 $ such that
+		\[ \abs{a(w,v)} < c_1 \norm{w}_V\norm{v}_V \quad \forall w,v \in V \]
+		\item $ \exists c_2 > 0 $ st.
+		\[ \abs{l(v)} < c_2 \norm{v}_V \quad \forall v \in V \]
+	\end{enumerate}
+	Then there exists a unique $ u \in V $ that satisfies
+	\[ a(u,v) = l(v) \quad \forall v \in V. \]
+\end{theorem}
+
+Very are now just one step from showing the existence and uniqueness of the solution the weak formulation derived above. We just need to show that by letting $ V = H_0^1(\Omega) $, the bi-linear form $ a $ and the functional $ l $ have the required properties by the Lax-Milgram theorem. 
 
 \section{Working Area}
 Things to add: Example for weak derivative, completing the diagram for the geometry of the function spaces. 

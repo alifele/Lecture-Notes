@@ -66,6 +66,9 @@
 
 
 %% MATH Commands
+\newcommand{\Par}[1]{\left(#1\right)}
+\newcommand{\dx}{\, \operatorname{d}\!x}
+\renewcommand{\grad}[1]{\nabla}
 \renewcommand{\vec}[1]{\textbf{#1}}
 \newcommand{\mat}[1]{\textbf{#1}}
 \newcommand{\dotProd}[2]{\langle #1, #2 \rangle}
@@ -283,14 +286,15 @@ newparttoc, % Required for writing the part toc entry number in a standard way (
 [] % Code after the label
 
 
-\titleformat
-{\subsubsection} % Section type being modified
-[block] % Shape type, can be: hang, block, display, runin, leftmargin, rightmargin, drop, wrap, frame
-{\bfseries\sffamily} % Format of the whole section
-{\llap{{\thesubsubsection}\hspace{1em}}#1} % Format of the section label
-{0cm} % Space between the title and label
-{} % Code before the label
-[] % Code after the label
+%\titleformat
+%{\subsubsection} % Section type being modified
+%[block] % Shape type, can be: hang, block, display, runin, leftmargin, rightmargin, drop, wrap, frame
+%{\bfseries\sffamily} % Format of the whole section
+%{\llap{{\thesubsubsection}\hspace{1em}}#1} % Format of the section label
+%{0cm} % Space between the title and label
+%{} % Code before the label
+%[] % Code after the label
+%
 
 
 
