@@ -341,7 +341,7 @@ In this section of the notes, we will develop a theory to study such ``weak'' so
 \subsection{Weak Solutions to Elliptic Problems}
 
 \subsubsection*{General formulation of elliptic problem}
-Here, we consider the following general case of the elliptic problems. Let $ \Omega \subset \R^n $. Then an elliptic problem is a partial differential equation, and a boundary condition, where the differential equation is
+Here, we consider the following general case of the elliptic problems. Let $ \Omega \subset \R^n $ with sufficiently smooth boundary. Then an elliptic problem is a partial differential equation, and a boundary condition, where the differential equation is
 \begin{align*}
 	 -\sum_{i,j=1}^{n}\frac{\partial}{\partial x_j}(a_{ij}(x) \frac{\partial u}{\partial x_i}) + \sum_{i=1}^{n}b_i(x) \frac{\partial u}{\partial x_i} + c(x) u = f, \qquad x \in \Omega \tag{5.2.1}
 \end{align*}
@@ -367,7 +367,7 @@ Here, we focus on solving the homogeneous Dirichlet boundary value problem which
 	-\sum_{i,j=1}^{n}\frac{\partial}{\partial x_j}(a_{ij}(x) \frac{\partial u}{\partial x_i}) + \sum_{i=1}^{n}b_i(x) \frac{\partial u}{\partial x_i} + c(x) u &= f, \qquad x \in \Omega \\
 	u &= 0 \qquad \text{on}\ \partial \Omega \tag{5.2.$\clubsuit$}
 \end{align*}
-where $ a_{ij}, b_i, c, f $ are as in (5.2.1.C). A function $ u \in \mathscr{C}^2(\Omega) \cap \mathscr{C}^0(\closure{\Omega}) $ is called a \textbf{classic solution} to the Dirichlet boundary value problem ($ u \in \mathscr{C}^2(\Omega)\cap \mathscr{C}^1(\closure{\Omega}) $). However, we want to weaken this requirement and find a more general class of solutions. To do this, we first need to find some property, or some identity that holds for the classic solution and extend that for more general solutions (similar to what we did for extending the notion of derivatives and making the notion of weak derivative). 
+where $ a_{ij}, b_i, c, f $ are as in (5.2.1.C). A function $ u \in \mathscr{C}^2(\Omega) \cap \mathscr{C}^0(\closure{\Omega}) $ is called a \textbf{classic solution} to the Dirichlet boundary value problem ($ u \in \mathscr{C}^2(\Omega)\cap \mathscr{C}^1(\closure{\Omega}) $ in the case of Neumann problem which will be discussed later). Note that the boundary of the domain $ \Omega $ should be smooth enough in order for the classical solution to exist. However, we want to weaken this requirement and find a more general class of solutions. To do this, we first need to find some property, or some identity that holds for the classic solution and extend that for more general solutions (similar to what we did for extending the notion of derivatives and making the notion of weak derivative). 
 
 Let $ v \in \mathscr{C}^1_c(\Omega) $ (the set of continuously differentiable functions defined on $ \Omega $ that has compact support). Multiplying both sides of the PDE by $ v $  and then using integration by parts for the first term, and also observing that $ v $ is zero in the boundary (since it has a compact support) then we can write
 \[ \sum_{i,j=1}^{n}\int_\Omega a_{ij}\frac{\partial u}{\partial x_i} \frac{\partial v}{\partial x_j}\dx +\sum_{i=1}^{n} \int_\Omega b_i(x)\frac{\partial u}{\partial x_i} v\dx + \int_\Omega c(x) u v\dx = \int_\Omega fv\dx \qquad \forall v \in \mathscr{C}^1_c(\Omega) \]
@@ -378,9 +378,9 @@ Thus the identity satisfied by the classic solution also makes sense if we have 
 \[ u \in H^1_0 (\Omega), \qquad v \in H^1_0, \qquad f \in L_2(\Omega) \]
 Also, since that since no derivative is performed on $ a_{ij} $, then we can relax the condition on $ a_{ij} $ to be $ a_{ij} \in L_2(\Omega) $, as well as the smoothness conditions on $ b_i $ and $ c $ that can be relaxed to $ b_i, c \in L_\infty(\Omega) $. Note that $ a_{ij},b_i,c $ should still be essentially bounded in order for $ b_i \partial u/\partial x_i $, $ a_{ij}\partial u/\partial x_i $, and $ c u $ be square integrable.
 
-Now we can formulate the weak problem as follows.
+\noindent Now we can formulate the weak problem as follows.
 \begin{quote}
-	Find $ u \in H_0^1 $ such that it satisfies
+	Find $ u \in H_0^1 $ such that $ \forall v \in H_0^1 $ it satisfies
 	\begin{align*}
 		\sum_{i,j=1}^{n}\int_\Omega a_{ij}\frac{\partial u}{\partial x_i} \frac{\partial v}{\partial x_j}\dx +\sum_{i=1}^{n} \int_\Omega b_i(x) \frac{\partial u}{\partial x_i} v\dx + \int_\Omega c(x) u v\dx = \int_\Omega fv\dx \quad x\in \Omega,\ \forall v \in H_0^1(\Omega) 
 	\end{align*}
@@ -389,7 +389,7 @@ Now we can formulate the weak problem as follows.
 
 This motivates the following definition.
 
-\begin{definition}[Weak Solution of Elliptic Dirichlet Boundary Value Problem]
+\begin{definition}[Weak Solution of Elliptic Dirichlet Homogeneous Boundary Value Problem]
 	\label{def:ellipticDirichletBVPWeak}
 	Let $ a_{ij}, b_i, c_i \in L_\infty(\Omega) $, and $ f \in L_2(\Omega) $. Then a function $ u \in H_0^1(\Omega) $ that $ \forall v \in H_0^1(\Omega) $ satisfies
 	\[ \sum_{i,j=1}^{n}\int_\Omega a_{ij}\frac{\partial u}{\partial x_i} \frac{\partial v}{\partial x_j}\dx +\sum_{i=1}^{n} \int_\Omega b_i(x) \frac{\partial u}{\partial x_i} v\dx + \int_\Omega c(x) u v\dx = \int_\Omega fv\dx \quad x\in \Omega  \]
@@ -428,6 +428,52 @@ The notation above is very useful, as we can now use Lax-Milgram theorem to disc
 \end{theorem}
 
 Very are now just one step from showing the existence and uniqueness of the solution the weak formulation derived above. We just need to show that by letting $ V = H_0^1(\Omega) $, the bi-linear form $ a $ and the functional $ l $ have the required properties by the Lax-Milgram theorem. 
+
+
+
+\begin{theorem}
+	The elliptic problem with Homogeneous Dirichlet boundary values in \autoref{def:ellipticDirichletBVPWeak} has a unique weak solution. I.e. $ \exists u \in H_0^1(\Omega)  $ such that $ \forall v \in H_0^1(\Omega) $ we have
+	\[ a(u,v) = l(v). \] 
+\end{theorem}
+\begin{proof}
+	For the proof, we will use the Lax-Milgram theorem with $ V = H_0^1 $ and $ \norm{\cdot}_V = \norm{\cdot}_{H^1} $. We need to show that the bi-linear form $ a(u,v) $ and the linear form $ l(v) $ satisfies the required properties. 
+	\begin{enumerate}[(i)]
+		\item Showing that $ a $ is continuous, i.e. we need to find $ c_1 $ such that $ \abs{a(u,v) } \leq \norm{u}_{H_1} \norm{v}_{H_1}  $. To establish this, we will use the following inequalities. 
+		\[ \Abs{\int_\Omega f \dx } \leq \int_\Omega \abs{f} \dx\]
+		\[ \Abs{\int_\Omega f\ g\dx} \leq \max_{x\in\Omega}{\abs{f}}\Abs{\int_\Omega g\dx} \]
+		\[  (f,g)_{L^2} = \Abs{\int_\Omega f\ g \dx} \leq \Par{\int_\Omega f\dx}^{1/2} \Par{\int_\Omega g\dx}^{1/2} = \norm{f}_{L^2} \norm{g}_{L^2}. \]
+		The last inequality is simply the Cauchy-Schwartz inequality. Note that, it is always a good idea to encapsulate the details of objects in smaller notations and use higher level of abstractions to proceed! Let 
+		\[ \hat{c} = \max\set{\max_{x\in \Omega}\max_{ij} a_{ij},\ \max_{x\in \Omega}\max_{i} b_i,\  \max_{x\in \Omega} c} \]
+		Then we can write
+		\begin{align*}
+			\abs{a(u,v)} &= \Abs{\sum_{i,j=1}^{n}\int_\Omega a_{ij}\frac{\partial u}{\partial x_i} \frac{\partial v}{\partial x_j}\dx +\sum_{i=1}^{n} \int_\Omega b_i(x) \frac{\partial u}{\partial x_i} v\dx + \int_\Omega c(x) u v\dx}\\
+			&\leq \hat{c} \Par{
+			\sum_{i,j=1}^{n}\int_\Omega \Abs{\frac{\partial u}{\partial x_i} \frac{\partial v}{\partial x_j}}\dx
+			+ \sum_{i=1}^{n} \int_\Omega  \Abs{\frac{\partial u}{\partial x_i} v}\dx 
+			+ \int_\Omega  \Abs{u v}\dx
+			}\\
+			&\leq \hat{c}\Par{
+			\sum_{i,j=1}^{n}\norm{\partial_i u}_{L_2}\norm{\partial_j v}_{L_2}
+			+ \sum_{i=1}^{n} \norm{\partial_i u}_{L_2} \norm{v}_{L_2}
+			+ \norm{u}_{L_2}\norm{v}_{L_2}
+			}\\
+			&\leq \hat{c}\Par{
+				\sum_{i,j=1}^{n}\norm{\partial_i u}_{L_2}\norm{\partial_j v}_{L_2}
+				+ \sum_{i=1}^{n} \norm{\partial_i u}_{L_2} \norm{v}_{L_2}
+				+ \sum_{j=1}^{n} \norm{\partial_j v}_{L_2} \norm{u}_{L_2}
+				+ \norm{u}_{L_2}\norm{v}_{L_2} 
+			}\\
+			&\leq \hat{c}\Par{\norm{v}_{L_2} + \sum_{j=1}^{n}\norm{\partial_j v}_{L_2}}
+			\Par{\norm{u}_{L_2} + \sum_{i=1}^{n}\norm{\partial_i u}_{L_2}}\\
+			&{\color{red} \boxed{\leq}}\ 2n\hat{c}\Par{\norm{v}_{L_2}^2 + \sum_{j=1}^{n}\norm{\partial_j v}_{L_2}^2}^{1/2}
+			\Par{\norm{u}_{L_2}^2 + \sum_{i=1}^{n}\norm{\partial_i u}_{L_2}^2}^{1/2}\\
+			&\leq c \norm{v}_{H_1} \norm{u}_{H_1}.
+		\end{align*}
+		Note that in the argument above, I have highlighted the last inequality as red. That is because I don't know how this step works. This proof is provided at \hyperlink{https://people.maths.ox.ac.uk/suli/fem.pdf}{FEM lecture notes}, and is called a ``further majorization''.
+		
+		\item To show the coercivity of $ a $, we can write
+	\end{enumerate}
+\end{proof}
 
 \section{Working Area}
 Things to add: Example for weak derivative, completing the diagram for the geometry of the function spaces. 
