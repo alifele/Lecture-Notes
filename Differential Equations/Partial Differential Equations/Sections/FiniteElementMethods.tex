@@ -254,6 +254,7 @@ The following proposition gives us some intuitive characterization of $ H^1_0(\O
 We conclude this section with the important inequality of Poincar\'{e}-Friedrichs inequality.
 
 \begin{theorem}[Poincar\'{e}-Friedrichs inequality]
+	\label{thm:PoincareInequality}
 	Let $ \Omega \subset \R^n $. Then $ \exists C_{\star} \in \R $ that depends on the geometry of the domain $ \Omega $ and for all $ u \in H_0^1(\Omega) $ we have
 	\[ \int_\Omega \abs{u(x)}^2\ dx \leq  C_{\star} \sum_{i=1}^{n} \int_\Omega \Abs{\frac{\partial u}{\partial x_i}}^2\ dx, \qquad \forall u \in H_0^1. \]
 	Or equivalently we can write this in a more compact notation as follows
@@ -353,7 +354,11 @@ where
 	f \in \mathscr{C}^0(\closure{\Omega}), \qquad a_{ij} \in \mathscr{C}^1(\closure{\Omega}) \tag{5.2.1.C}
 \end{align*}
 Also, we require that there must exist a positive constant $ c \in \R $ such that
-\[ \sum_{i,j=1}^{n} a_{ij}(x) \xi_i \xi_j \geq \sum_{i=1}^{n}\xi_i^2 \quad \forall \xi \in \R^n,\ x \in \Omega. \]
+ \begin{equation}
+	\sum_{i,j=1}^{n} a_{ij}(x) \xi_i \xi_j \geq \tilde{c} \sum_{i=1}^{n}\xi_i^2 \quad \forall \xi \in \R^n,\ x \in \Omega. 
+\label{equ:ellipticityCondition}
+\end{equation}
+
 The condition above is called the uniform ellipticity condition and the equation $ (5.2.1) $ is called an elliptic PDE. Now we can impose different boundary conditions on the PDE to formulate our boundary value problem. The choices are
 \begin{enumerate}[(i)]	
 	\item $ u = g $ on $ \partial \Omega $. This is known as a Dirichlet boundary condition.
@@ -417,7 +422,7 @@ The notation above is very useful, as we can now use Lax-Milgram theorem to disc
 	Let $ V $ be a Hilbert space, $ a:V\times V \to \R $ a bi-linear form, $ l: V \to \R $ a linear functional that satisfies the following properties.
 	\begin{enumerate}[(i)]
 		\item Coercivity: $ \exists c_0>0$ such that 
-		\[  \abs{a(v,v)} \geq c_0 \norm{v}_V^2 \quad \forall v \in V \]
+		\[  {a(v,v)} \geq c_0 \norm{v}_V^2 \quad \forall v \in V \]
 		\item Continuity: $ \exists c_1>0 $ such that
 		\[ \abs{a(w,v)} < c_1 \norm{w}_V\norm{v}_V \quad \forall w,v \in V \]
 		\item $ \exists c_2 > 0 $ st.
@@ -426,6 +431,7 @@ The notation above is very useful, as we can now use Lax-Milgram theorem to disc
 	Then there exists a unique $ u \in V $ that satisfies
 	\[ a(u,v) = l(v) \quad \forall v \in V. \]
 \end{theorem}
+
 
 Very are now just one step from showing the existence and uniqueness of the solution the weak formulation derived above. We just need to show that by letting $ V = H_0^1(\Omega) $, the bi-linear form $ a $ and the functional $ l $ have the required properties by the Lax-Milgram theorem. 
 
@@ -471,9 +477,36 @@ Very are now just one step from showing the existence and uniqueness of the solu
 		\end{align*}
 		Note that in the argument above, I have highlighted the last inequality as red. That is because I don't know how this step works. This proof is provided at \hyperlink{https://people.maths.ox.ac.uk/suli/fem.pdf}{FEM lecture notes}, and is called a ``further majorization''.
 		
-		\item To show the coercivity of $ a $, we can write
+		\item To show the coercivity of $ a $, we will use the weird looking ellipticity condition \autoref{equ:ellipticityCondition} to simplify the first term in $ a(u,u) $. Also we need to relax the smoothness condition on $ b_i $ for the moment as we will see in the proof. To start the proof we can write
+		\begin{align*}
+			a(u,u) &= \underbrace{\sum_{i,j=1}^{n}\int_\Omega a_{ij}\frac{\partial u}{\partial x_i} \frac{\partial u}{\partial x_j}\dx}_{\geq \tilde{c}\sum_{i=1}^{n}\int_\Omega (\partial_i u)^2} 
+			+\sum_{i=1}^{n} \int_\Omega b_i(x) \overbrace{\frac{\partial u}{\partial x_i} u}^{1/2(\partial_i u^2)} \dx + \int_\Omega c(x) {u}^2 \dx\\
+			&\geq \tilde{c}\sum_{i=1}^{n}\int_\Omega (\partial_i u)^2 \dx + \sum_{i=1}^{n}(\underbrace{\int_{\partial \Omega} 1/2 b_i u^2 \dx}_{0} 
+				- \int_\Omega 1/2u^2(\partial_i b_i )\dx) 
+			+ \int_\Omega c(x) {u}^2 \dx \\
+			&= \tilde{c}\sum_{i=1}^{n}\int_\Omega (\partial_i u)^2 \dx 
+			+ \int_\Omega u^2 (c-\sum_{i=1}^{n}\partial_i b_i/2) \dx
+		\end{align*}
+		Thus if we have
+		\[ \sum_{i=1}^{n}\partial_i b_i/2) \geq 0, \]
+		then we can establish
+		\[ a(u,u) \geq \tilde{c}\sum_{i=1}^{n}\int_\Omega (\partial_i u)^2 \dx   \]
+		And by applying the Poincar\'{e} inequality \autoref{thm:PoincareInequality}, we can get
+		\[ a(u,u) \geq \frac{\tilde{c}}{\tilde{C_\star}} \norm{u}_{L^2}^2 = \hat{c} \norm{u}_{L^2}^2 \]
+		and as we had before
+		\[ a(u,u) \geq \tilde{c}\norm{\nabla u }_{L^2}^2 \]
+		Thus by choosing $ c_0 = \frac{1}{\hat{c} + \tilde{c}} $ we can write 
+		\[a(u,u) \geq c_0 (\norm{u}^2_{L_2} + \norm{\grad{u}}^2_{L_2}) = c_0 \norm{u}_{H_1}^2 \]
+		This proves the coercivity of the bi-linear form.
+		
+		Now, what remains to show is the linearity and continuity of the linear form $ l(u) $. To show this we use the Cauchy-Schwartz inequality as follows
+		\[ \Abs{l(v)} = \Abs{\int_\Omega u v \dx} \leq \norm{u}_{L_2} \norm{v}_{L_2} \leq \norm{u}_{L_2}\norm{v}_{H_1} = c_2 \norm{v}_{H_1}. \]
+		The linearity of $ l(v) $ follows immediately from the linear property of integrals. Thus by using the Lax-Milgram theorem, we can establish the existence and uniqueness of the solution.
 	\end{enumerate}
 \end{proof}
+
+
+\section{Approximation of Elliptic Problems}
 
 \section{Working Area}
 Things to add: Example for weak derivative, completing the diagram for the geometry of the function spaces. 
