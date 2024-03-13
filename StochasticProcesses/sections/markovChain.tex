@@ -38,6 +38,7 @@ The following proposition will be one of our main tools throughout the chapter.
 \end{proof}
 
 
+\subsection{Dissecting an Experiment}
 
 
 
@@ -132,6 +133,10 @@ The following proposition will be one of our main tools throughout the chapter.
 \begin{example}
 	Suppose that balls are successively distributed among 8 urns, with each ball being equally likely to be put in any of these urns. What is the probability that there will be exactly 3 nonempty urns after 9 balls have been distributed? [Question from Ross]
 	\begin{solution}
+		Before going through the solution, it might be more informative to explicitly write down what is the sample space $ \Omega $. At each time step, we basically throwing a 8 sided dice, and then put a ball at the urn number $ i $ if the output of the dice is $ i $. So, each time we repeat the experiment, we will get a sequence of number each of which is one of $ 1,2,\cdots,8 $. So the sample space will be the set of all sequences consisting of number $ 1,\cdots,8 $.
+		\[ \Omega = \set{21342\hdots, 44513\hdots, 11234\hdots, 88432\hdots, \cdots}. \]
+		So, the outputs of the throwing dice at different steps are independent and identically distributed random variables. I.e. for a fixed $ \omega \in \Omega $, The $ t$-th element of the sequence is a random variable $ Y_t $ and all of the random variables $ \set{Y_t}_t $ are independent and identically distributed. Note that the sample space associated with these random variables is $ \set{1,2,3,4,5,6,7,8} $ (i.e. the sample space of a 8 sided dice experiment).w
+		
 		Let the random variable $X_n$ be the number of filled (non-empty) urns at step n. So the state space will be $S = \set{0,1,2,3,4,5,6,7,8}$, which is represented in the following graph.
 		\begin{center}
 			\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=1.2cm,
