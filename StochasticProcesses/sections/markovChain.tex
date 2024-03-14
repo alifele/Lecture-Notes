@@ -38,15 +38,27 @@ The following proposition will be one of our main tools throughout the chapter.
 \end{proof}
 
 
-\subsection{Dissecting an Experiment}
+\section{Dissecting an Experiment}
+The idea of the Markov chain, random variables, probability spaces, etc. might be quite confusing when the setting of a particular random experiment becomes large. Here in this section, we are going to explain the details of a random experiment explicitly. The random experiment is the following
+\begin{quote}
+	Assume we have 6 urns, and we put ball at each urn successively. What is the probability that there will be exactly 3 non-empty urns after 9 balls have been distributed?
+\end{quote}
 
+\subsubsection{Sample Space}
+First, note that there are two things happening, that we can call experiments. First is that we are successively doing something, throwing dice and putting a ball inside the urn, and the second thing is that we can consider the whole thing to be a giant experiment by its own. Our convention, from now on, will be that we will call the whole thing as experiment, and we will consider each sub-experiment as sub-steps of the process. Intuitively, an experiment is something that we can repeat to observe different outcomes. It is true that the whole experiment is actually successive repetition of throwing dice, but we actually consider the largest meaningful setup to be our experiment and call the sub-experiment as the steps of the process. It is kind of confusing at first glance, but becomes more natural after a while. By the definition, the sample space of a random experiment, is the set of all possible outcomes. But what are the possible outcomes in our experiment? If we perform an experiment, then we can get an outcome like 
+\[ 13423452113345666534243125555321453214512345312456341231456665435\hdots. \]
+This outcome basically is saying that the outcome of the first dice throw was 1, the second dice throw was 3, the third was 4, and etc. If we repeat the experiment, we will get other outcomes. So the sample space is the set of all sequence of numbers consisting of $ \set{1,2,3,4,5,6,7,8} $. Thus, we can write
+\[ \Omega = \set{13424\hdots, 54321\hdots, 65432\hdots, 12345\hdots, \cdots}. \]
+So, each outcome, consists of sequence of random variables $ \set{Y_t} $, that is defined on the sample space $ \Omega_{\text{dice}} = [1,2,3,4,5,6] $. That is $ Y_{10} $ means the random variable associated with the dice throwing experiment at the time $ t $ of our main experiment. These random variables are all independent and identically distributed (i.e. they are iid).
 
+\subsubsection{Markov Chain}
+Let $ X_t $ be a random variable defined on $ \Omega $ that represents the number of full urns at time $ t $. Let $ \omega = 231234562342132453423\hdots $ and $ t = 10 $. Then $ X_10(\Omega) = 6 $, since by the time $ t $, we have put at least one ball at each urn and all of the urns are full. Since this is a Markov chain with state space $ S = \set{0,1,2,3,4,5,6} $, we can draw a transition diagram, and analyze the question more carefully. This is what we have done in \autoref{exm:MarkovChain-EmptyFullUrns}.
 
 \section{Solved Problems}
 
 
 \begin{example}
-	An urn always contains 2 balls. Ball colors are red and blue. At each stage a ball is randomly chosen and then replaced by a new ball, which with probability 0.8 is the same color, and with probability 0.2 is the opposite color, as the ball it replaces. If initially both balls are red, find the probability that the fifth ball selected is red. [This question is from Ross]
+	An urn always contains 2 balls. Ball colors are red and blue. At each stage a ball  is randomly chosen and then replaced by a new ball, which with probability 0.8 is the same color, and with probability 0.2 is the opposite color, as the ball it replaces. If initially both balls are red, find the probability that the fifth ball selected is red. [This question is from Ross]
 	\begin{solution}
 		First, we need to translate this problem to a suitable Markov chain. There are many ways we can do so, each with its own pros and cons. The difference between all of these formulations come down to our choice for the state space (i.e. the co-domain of the random variable). For instance, we can assume that the state space is $S = \set{RR, RB, BB}$ that is the content of the Urn, or we can simply say that the state space is $S = \set{0,1,2}$ that is the number of red ball inside the Urn. Since these two sets are isomorphic (as there is a bijection between these two sets), but the actual choice depends on personal preference. Let's proceed with $S = \set{0,1,2}$. Then, we need to determine the transition matrix. We can do so by doing the first step argument. We start with $P(0,0)$. 
 		\[ P(0,0) = \prob(X_1 = 0|X_0 =0) = \prob(X_1=0|X_0=0,E_R)\underbrace{\prob(E_R|X_0=0)}_{0} + \underbrace{\prob(X_1=0|X_0=0,E_B)}_{0.8}\underbrace{\prob(E_B|X_0=0)}_{1}, \]
@@ -131,6 +143,7 @@ The following proposition will be one of our main tools throughout the chapter.
 
 
 \begin{example}
+	\label{exm:MarkovChain-EmptyFullUrns}
 	Suppose that balls are successively distributed among 8 urns, with each ball being equally likely to be put in any of these urns. What is the probability that there will be exactly 3 nonempty urns after 9 balls have been distributed? [Question from Ross]
 	\begin{solution}
 		Before going through the solution, it might be more informative to explicitly write down what is the sample space $ \Omega $. At each time step, we basically throwing a 8 sided dice, and then put a ball at the urn number $ i $ if the output of the dice is $ i $. So, each time we repeat the experiment, we will get a sequence of number each of which is one of $ 1,2,\cdots,8 $. So the sample space will be the set of all sequences consisting of number $ 1,\cdots,8 $.

@@ -5,7 +5,7 @@
 In this chapter we will study the sequence and series of functions. We will study different notions of convergence, namely point-wise convergence, uniform convergence, etc. Note that in this chapter, we will try to be as concrete as possible, avoiding unnecessary abstraction.
 
 \begin{definition}[Point-wise convergence]
-	Let $\seq{f}$ be a sequence of functions $f: [0,1] \to \R$. Then we say that this sequence converges \emph{point-wise} to the function $f[0,1]\to\R$, and show it as $f_n(x)\to f$ if
+	Let $\seq{f}$ be a sequence of functions $f: [0,1] \to \R$. Then we say that this sequence converges \emph{point-wise} to the function $f:[0,1]\to\R$, and show it as $f_n(x)\to f(x)$ if
 	\[ \forall \epsilon>0, x\in [0,1],\ \exists N>0 \st \forall n>N \wh \abs{f_n(x) - f(x)} < \epsilon.  \]
 	We write this as $\lim_{n\to\infty}f_n(x) = f(x)$.
 \end{definition}
@@ -18,6 +18,44 @@ Thinking more carefully, we can see that this is nothing other than a collection
 Because of our discussion above, it is not surprising if we say that there is no guarantee that some good properties of $f_n$ carries over to $f$ (like continuity, differentiability, integrability, etc). That is because the point-wise notion of convergence is only expressing the convergence of a bunch of sequences (indexed with real numbers in [0,1]) in a neat way.
 
 As we will discover through this chapter, it turns out that the question about if the properties of the function $f_n$ carries over the properties of the $f$ through the point-wise convergence, is essentially the same type of question that if in a multivariate limit, exchange of limit order is allowed. 
+
+
+\begin{example}[Point-wise convergence does not guarantee differentiability]
+	Let $ f:\R \to \R $ where
+	\[ f(x) = \frac1n \sin(2^n x). \]
+	For this function we have
+	\[ \lim_{n\to\infty} f_n(x) = 0, \quad \forall x \in \R. \]
+	However, by calculating the derivative, we will have
+	\[ f'(x) = \frac{2^n}{n}\cos(2^nx),  \]
+	that does not converge point wise.
+\end{example}
+
+\begin{example}[Point-wise convergence does not guarantee continuity]
+	\label{exmp:PointwiseLimCont}
+	Let $\set{f_n}$ be a sequence of functions $f:[0,1]\to \R$ where $f_n(x) = x^n$. Then it is immediate that $f_n(x) \to 0$ for all $x \in [0,1)$ and $f_n(1) \to 1$. Thus $f_n(x) \to f(x)$ where
+	\[ f(x) = \begin{cases}
+		0 \quad x \in [0,1), \\
+		1 \quad x \in 1.
+	\end{cases} \]
+	It is clear that all of $f_n$ are continuous but the limiting function $f$ is not. 
+\end{example}
+
+\begin{example}[Point-wise convergence does not guarantee integrablity]
+	\label{exmp:PointWiseContNotPreserveInt}
+	Let $ f:(0,1] \to \R $ defined as 
+	\[ f_n(x) = \begin{cases}
+		n \qquad 0<x<\frac1n,\\
+		0 \qquad \frac1n \leq x \leq 1
+	\end{cases} \]
+	This function converges to $ f(x) \equiv 0 $ point wise on $ (0,1] $. However, 
+	\[ \lim_{n\to\infty}\int_{0}^{1}f_n(x) = 1 \]
+	whereas
+	\[ \int_{0}^{1}f(x) = 0. \]
+	Thus the limiting function (point-wise) do not have the same integral as the limit of the integrals of the functions in the sequence. z1
+\end{example}
+
+
+
 
 
 \begin{definition}[Uniform convergence]
@@ -49,7 +87,8 @@ As we will discover through this chapter, it turns out that the question about i
 
 The following criterion often comes very handy and useful.
 \begin{proposition}
-	Let $\set{f_n}$ be a sequence of functions defined on $E$. Define 
+	\label{prop:uniformConvSup}
+	Let $\set{f_n}$ be a sequence of functions defined on $E$ that converges point-wise to $ f(x) $. Define 
 	\[ M_n = \sup_{x\in E}\abs{f_n(x) - f(x)}. \]
 	Then $f_n \to f$ if and only if $M_n \to 0$.
 \end{proposition}.
@@ -69,17 +108,7 @@ The following criterion often comes very handy and useful.
 
 
 \section{Uniform Convergence and Continuity}
-It is very easy to show that by point-wise convergence, the continuity of the functions does not carry over to the limiting function. Consider the following example.
-\begin{example}
-	Let $\set{f_n}$ be a sequence of functions $f:[0,1]\to \R$ where $f_n(x) = x^n$. Then it is immediate that $f_n(x) \to 0$ for all $x \in [0,1)$ and $f_n(1) \to 1$. Thus $f_n(x) \to f(x)$ where
-	\[ f(x) = \begin{cases}
-		0 \quad x \in [0,1), \\
-		1 \quad x \in 1.
-	\end{cases} \]
-	It is clear that all of $f_n$ are continuous but the limiting function $f$ is not. 
-\end{example}
-
-The example above is a very simple and good example where the continuity of a sequence of functions does not carry over to the limiting function. The following remark also shows the fact that asking about the continuity of the limiting function is in fact a question about the possibility of the exchange of the orders of the limit.
+As we say in \autoref{exmp:PointwiseLimCont} it is very easy to show that by point-wise convergence, the continuity of the functions does not carry over to the limiting function. This example is a very simple and good example where the continuity of a sequence of functions does not carry over to the limiting function. The following remark also shows the fact that asking about the continuity of the limiting function is in fact a question about the possibility of the exchange of the orders of the limit.
 
 \begin{remark}
 	Let $\set{f_n}$ be a set of functions defined on $E$. Assume that all of these functions are continuous on $E$, i.e. $\forall x\in E$ we have
@@ -96,15 +125,17 @@ The example above is a very simple and good example where the continuity of a se
 
 The following theorem shows the relation between uniform convergence and continuity.
 
-\begin{proposition}
+\begin{theorem}[Uniform convergence allows the exchange of the order of the limits]
+	\label{thm:uniformContExchangeLimit}
 	Let $\set{f_n}$ be a sequence of functions defined on $E$ a subset of a metric space $(M,d)$. Assume $f_n \to f$ uniformally where $f$ is also defined on $E$. Let $x$ be a limit point of $E$ and suppose that 
 	\[ \lim_{t\to x}f_n(t) = A_n \qquad  (n=1,2,3,\cdots). \]
 	Then $\set{A_n}$ converges and 
 	\[ \lim_{n\to \infty} A_n = \lim_{t\to x} f(t), \]
 	which is equivalent to 
 	\[ \lim_{n\to \infty} \lim_{t\to x} f_n(t) = \lim_{t\to x} \lim_{n\to \infty} f_n(t). \]
-\end{proposition}
+\end{theorem}
 \begin{proof}
+	{\color{orange} First part: }\\
 	First, we need to prove that the sequence $\set{A_n}$ converges. We will show $\set{A_n}$ is Cauchy by using the fact that $f_n \to f$ uniformally. We can do this in two way, where the first one is much more high level (in the sense that it is close to everyday conversation) and the second way is much more verbose revealing the underlying gears. I have seen that Rudin sometimes uses the first way of reasoning in his proofs which is very fast and easy to follow. \\
 	Let $\epsilon>0$ given. Then $\exists N>0$ such that $\forall n,m>N$ we have
 	\[ \abs{f_n(t) - f_m(t)} < \epsilon \qquad \forall t\in E. \]
@@ -113,18 +144,45 @@ The following theorem shows the relation between uniform convergence and continu
 	This shows that $\set{A_n}$ is Cauchy, this converges. \\
 	To reveal what is happening behind the scene of the reasoning above (when we simply say taking limit $t\to x$), we provide the following reasoning. Given $\epsilon>0$, choose $N_1$ large enough that $\forall n,m>N_1$ we have 
 	\[ \abs{f_n(t) - f_m(t)} < \epsilon/3 \qquad \forall t\in E. \]
-	We can always find such $N_1$ because $f_n \to f$ by hypothesis. Now choose $t$ close enough to $x$ to get
+	We can always find such $N_1$ because $f_n \to f$ by hypothesis. \\
+	Now, let $ x $ be a limit point of $ E $. Then by choosing $ t $ close enough to $  x $ we will get
 	\[ \abs{f_n(t) - A_n} < \epsilon/3,  \qquad \abs{f_m(t) - A_m} < \epsilon/3. \]
-	Then we can write
+	For all $ t \in E $ we can write
 	\[ \abs{A_n - A_m} = \abs{A_n - A_m \pm f_n(t) \pm f_m(t)} \leq  \abs{f_n(t) - A_n} + \abs{f_m(t) - A_m} + \abs{f_n(t) - f_m(t)}. \]
-	
-	TO BE CONTINUED
-
-
+	Now by choosing $ n,m $ large enough, and $ t $ close enough to $ x $ we will get
+	\[ \abs{A_n - A_m} < \epsilon. \]
+	This shows that the sequence $ \set{A_n} $ is a real Cauchy sequence, thus converges. \\
+	{\color{orange} Second part: }\\
+	\noindent Now, we want to show that $ \lim_{t\to x}f(t) \to A $ as $ n\to \infty $, where $ x $ is a limit point of $ E $, and $ A $ is the limit of $ A_n $ as $ n\to \infty $. I.e. $ \lim_{n\to\iunfty}A_n= A $. For given $\epsilon>0$ and all $ t \in E $, we can write
+	\[ \abs{f(t) - A} \leq \underbrace{\abs{A - f_n(t)}}_{\leq \abs{A_n - A}+\abs{A_n-f_n(t)}} + \abs{f(t) - f_n(t)} \leq \abs{A_n - A}+\abs{A_n-f_n(t)} + \abs{f(t) - f_n(t)}. \]
+	We are in a good shape now, since each of the terms above can be controlled. To be more specific, since $ f_n \to f $ uniformally, and $ \lim_{n\to\infty} A_n = A $, then we can choose $ n $ large enough such that 
+	\[ \abs{f(t) - f_n(t)} < \frac\epsilon3, \quad \abs{A_n - A} < \frac\epsilon3  , \qquad \forall t\in E. \]
+	And for this choice of $ n $, since $ \lim_{t \to x}f_n(t)=A_n$, we can choose $ t $ close enough to $ x $ such that 
+	\[ \abs{A_n - f_n(t)} < \frac\epsilon3. \]
+	Putting all the pieces together, we shown that for given $ \epsilon>0 $, we can choose $ t $ close enough to $ x $ such that 
+	\[ \abs{f(t) -  A} < \epsilon.  \]
+	Thus $ f(t) \to A $ as $ t \to x $. Thus in a nutshell
+	\[ \lim_{n\to\infty}\lim_{t\to x}f_n(t) = \lim_{t\to x}\lim_{n\to\infty}f_n(t). \]
 \end{proof}
 
+The theorem that we proved above is a very important theorem, as many important conclusions will follow as a kind of immediate corollary from that. The following important result is one of those.
 
+\begin{corollary}
+	Let $ \set{f_n} $ be a sequence of continuous functions that converges uniformally to $ f $ on $ E $. Then $ f $ is continuous.
+\end{corollary}
+\begin{proof}
+	This is an immediate corollary of the \autoref{thm:uniformContExchangeLimit}. To be more explicit, since $ f_n \to f $ uniformally on $ E $, then we can do the following exchange of limits.
+	\[ \lim_{n\to\infty}\underbrace{\lim_{t\to x}f_n(t)}_{f_n(x)} = \lim_{t\to x}\underbrace{\lim_{n\to\infty}f_n(t)}_{f(t)}. \]
+	where we have used the fact that $ f_n $ are all continuous. Thus we have 
+	\[ \lim_{t\to x} f(t) = f(x). \]
+	This implies the continuoity of $ f $ and completes the proof.
+\end{proof}
 
+\begin{remark}
+	Note that the converse of the corollary above is not true. I.e. we can have a set of continuous functions $ \set{f_n} $ that converges point-wise to a continuous function $ f  $, but the converges fails to be uniform. The case we studied in \autoref{exmp:PointWiseContNotPreserveInt} is of this type. You can easily see this fails to be a uniform convergence by applying \autoref{prop:uniformConvSup}.
+\end{remark}
+
+In the remark above we say that the converse of the corollary above is not always true. However, the following proposition provides the necessary conditions under which the converse of the corollary above is also true. 
 
 
 

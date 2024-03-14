@@ -65,11 +65,12 @@
 %% MATH Commands
 
 \newcommand{\prob}{\mathbb{P}}
+\newcommand{\E}[1]{\mathbb{E}[#1]}
 
 
 \newcommand{\ball}[2]{\mathcal{B}_{#1}(#2)}
 \newcommand{\ballCO}[2]{\mathbb{B}[#1,#2)}  	%% ball closed-open  B[x,r)
-\newcommand{\ballCC}[2]{\mathbb{B}[#1,#2]}		%% ball closed-closed B[x,r]
+\newcommand{\ballCC}[2]{{B}[#1,#2]}		%% ball closed-closed B[x,r]
 \newcommand{\bicon}{\Leftrightarrow}
 \newcommand{\imply}{\Rightarrow}
 \newcommand{\Arg}[1]{\mathrm{Arg}\left({#1}\right)}
@@ -279,14 +280,14 @@ newparttoc, % Required for writing the part toc entry number in a standard way (
 [] % Code after the label
 
 
-\titleformat
-{\subsubsection} % Section type being modified
-[block] % Shape type, can be: hang, block, display, runin, leftmargin, rightmargin, drop, wrap, frame
-{\bfseries\sffamily} % Format of the whole section
-{\llap{{\thesubsubsection}\hspace{1em}}#1} % Format of the section label
-{0cm} % Space between the title and label
-{} % Code before the label
-[] % Code after the label
+%\titleformat
+%{\subsubsection} % Section type being modified
+%[block] % Shape type, can be: hang, block, display, runin, leftmargin, rightmargin, drop, wrap, frame
+%{\bfseries\sffamily} % Format of the whole section
+%{\llap{{\thesubsubsection}\hspace{1em}}\textcolor{HighDark!80!black}{#1}} % Format of the section label
+%{0cm} % Space between the title and label
+%{} % Code before the label
+%[] % Code after the label
 
 
 

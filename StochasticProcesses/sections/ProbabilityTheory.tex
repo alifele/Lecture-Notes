@@ -273,3 +273,51 @@ The notion of the cumulative distribution of a random variable comes handy in mo
 \end{proof}
 
 
+\section{Probability Generating Function}
+In this section we will go through the details of the probability generating function. We start with the following definition.
+
+\begin{definition}[Probability Generating Function]
+	Let $ X $ be a random variable with state space $ S = \Z_+ $. Then the probability generating function for this random variable is a function define as
+	\[  G_X(s) = \E{s^X} = \sum_{x \in S}s^x \prob(X=x).  \]
+\end{definition}
+
+In different areas of mathematics, we often can define something algebraic that is very easy to handle (like differentiation, etc) and carries the important information of the object under study. One of these algebraic symbolic objects is the Tutte polynomial, Chromatic polynomial, matching polynomial, etc. These polynomials are kind of modeling the object under study with tools that are easy to handle. The probability generating function is one of those symbolic objects. Because of the way that is crafted, it carries most of the information about the random variable, while the actual object as a function might have poor properties. This will be more clear in the following proposition. In a nutshell, the probability generating function is more of a symbolic thing rather than actual function with meaning full properties. That is why we generally evaluate this function (and its derivatives) at point 0 or 1. 
+
+
+\begin{proposition}[Properties of the probability generating function]
+	Let $ X $ be a random variable, and $ G_X(s) $ its probability generating function. Then we have
+	\begin{enumerate}[(i)]
+		\item $ G_X(1) = 1 $.
+		\item $ \E{X} = G_X'(1)  $.
+		\item $ \var{X} = G_X''(1) - G_X'(1)^2 + G_X'(1) $
+		\item Let $X, Y$ be independent random variables. Then we have
+		\[  G_{X+Y}(s) = G_X(s) G_Y(s). \]
+		\item Let $ X_1, X_2, \cdots $ be iid random variables, and $ N $ be a random variable taking values in $ \Z_+ $. Define $ T = X_1 + X_2 + \cdots + X_N $. Then we have
+		\[ G_T(s) = (G_N \circ G_{X_1})(s). \]
+	\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+	The proof for part i,ii, iii, and iv basically follows immediately from the definition. So we will only provide the proof for part iv.\\
+	$ T $ is the sum of $ N $ iid random variables where $ N $ is itself a random variable. We can make it a normal variable by using the law of total probabilities.
+	\[ G_T(s) = G_{\sum_i^N X_i}(s) = \sum_{n=0}^{\infty}  G_{\sum_i^n X_i}(s) \prob(N = n)  = \sum_{n=0}^{\infty}(G_{X_1})^n\prob(N=n) = G_N(G_{X_1})(s) \]
+	and this completes the proof.
+\end{proof}
+
+The item (iv) in the proposition above is very important, as it makes the hard calculations easy to do. See the following example for more details.
+
+\begin{example}
+	We select a number $ N $ from $ \set{1,2,3,\cdots,100} $ randomly and then generate $ N $ random numbers $ X_1, X_2, \cdots X_N $ from the distribution $ \operatorname{Unif}[0,1]$. Then we compute $ T = X_1 + X_2 + \cdots +X_N $. What is the average of $ T $? 
+	
+	\begin{solution}
+		We know that 
+		\[ \E{T} = G'_T(1). \]
+		Thus we need to calculate the probability generating function $ G_T(s) $. From part (iv) of the proposition above we know that $ G_T = G_N \circ G_{X_1} $. Thus we will have
+		\[ G'_T = G_{X_1}' G_N'\circ G_{X_1}.  \]
+		Thus evaluating at $ s=1 $ we will have
+		\[ G'_T(1) = G_{X_1}'(1) G_N'(\underbrace{G_{X_1}(1)}_{1}) = \E{X_1} \E{N}. \]
+		On the other hand we have $ \E{N} = 50 $ and $ \E{X_1} = 1/2 $. Then 
+		\[ \E{T} = 25. \]
+ 	\end{solution}
+\end{example}
+
