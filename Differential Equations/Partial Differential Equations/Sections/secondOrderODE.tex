@@ -94,3 +94,20 @@ As we will see in the following theorem, when the Wronskian of two solutions is 
 	\[ y'' + py' + qy = 0, \qquad t \in (\alpha,\beta). \]
 	If $ W[y_1,y_2](t_0) = 0 $ for some $ t_0 \in (\alpha,\beta) $. Then one of the solutions is a constant multiple of the other. 
 \end{proposition}
+\begin{proof}
+	Since $ y_1 $ and $ y_2 $ are solutions of the ODE provided in the proposition, then $ W(t_0)= 0 $ implies $ W(t)=0 $ for all $ t \in (\alpha,\beta) $. Then we will have
+	\[ y_1y_2' = y_1' y_2. \]
+	Assuming $ y_1y_2 \neq 0 $ for all $ t \in (\alpha,\beta) $, dividing both sides by $ y_1y_2 $ we will get
+	\[ y'_2/y_2 = y_1'/y_1 \implies \frac{d}{dt} (\ln(y_2(t))) = \frac{d}{dt} (\ln(y_1(t)))\]
+	Integrating both sides we will have
+	\[ \int_{t_0}^{t}\frac{d}{dt} (\ln(y_2(\tau)))\ d\tau = \int_{t_0}^{t} \frac{d}{dt} (\ln(y_1(\tau)))\ d\tau. \]
+	We will get
+	\[ \ln(y_2(t)) - \ln(y_2(t_0)) = \ln(y_1(t)) - \ln(y_1(t_0))  \]
+	By rearranging the terms we will get
+	\[ \ln(y_2(t)/y_1(t))  = \ln(y_2(t_0)/y_1(t_0)) = c. \]
+	Then this implies 
+	\[ y_2(t) = e^c y_1(t). \]
+	However, for the case where $ y_1(t^*)y_2(t^*) = 0 $ for some $ t^* \in (\alpha,\beta)$, WLOG we can assume $ y_1(t^*) = 0 $ (otherwise, we can relabel the solutions). Since $ W(t^*) = 0 $, then we will get
+	\[ y_1'(t^*) y_2(t^*) = 0. \implies y_1'(t^*) = 0 \vee y_2(t^*) = 0.\]
+	In the first case, we will have $ y_1'(t^*) = 0 $ and $ y_1(t^*) = 0 $ which from existence-uniqueness theorem we can conclude that $ y_1(t) \equiv 0 $ (thus $ y_1 $ is a trivially constant multiple of $ y_2 $). However, for the case where we assume $ y_2(t^*) = 0 $ I have not figure out yet how to prove. This is as a question in Braun, edition 4, section 2.1 problem 19. We somehow need to show that in this case we will have $ y_2(t) = (y_2'(t^*)/y_1'(t^*)) y_1.‍ $
+\end{proof}
