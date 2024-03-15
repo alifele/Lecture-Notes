@@ -1,0 +1,96 @@
+\chapter{Second Order Linear Differential Equations}
+
+
+We start with the definition of second order linear differential equation.
+
+\begin{definition}[General form of second order linear differential equation]
+	The second order differential equation for function $ y:(\alpha,\beta)\to\R $ is of the form
+	 \[y'' + p(x)y' + q(x)y = f,\] 
+	for some known functions $ p, q, f $. If we consider the right-hand side be identically zero function, 
+	\[ y'' + p(x)y' + q(x)y = 0, \]
+	is called a homogeneous differential equation.
+\end{definition}
+
+If we impose additional initiation conditions for the differential equation, then we will have an initial value problem.
+
+\begin{definition}[Initial value problem]
+	The differential equation
+	\[y'' + p(x)y' + q(x)y = f, \qquad x \in (\alpha, \beta)\] 
+	where $ p,q,f $ are known functions of $ x $, along with the initial conditions
+	\[ y(t_0) = y_0, \qquad y'(t_0) = y'_0, \]
+	where $ t_0 \in (\alpha,\beta) $, us called an initial value problem.
+\end{definition}
+\newpage
+
+\begin{theorem}[Wronskian Condition]
+	Let $ y_1 $ and $ y_2 $ be two solutions of the homogeneous differential equation 
+	\[ y'' + py' + qy = 0. \]
+	The 
+	\[ y = c_1 y_1 + c_2 y_2, \]
+	is the general solution of the differential equation (i.e. every solution can be written in this form) if we have
+	\[ (y_1 y_2' - y_1'y_2)(t) \neq 0 \qquad  \forall t\in (\alpha, \beta).  \]
+\end{theorem}
+
+\begin{proof}
+	Let $ y_1 $ and $ y_2 $ be two solutions of the differential equation and let $ \phi = c_1y_1 + c_2y_2 $ be the general solution. Let $ y $ be any solution. Then at some time $ t_0 \in (\alpha, \beta) $, it has the values $ y(t_0) = y_0 $ and $ y'(0) = y_0' $. Then for the general solution we need to have
+	\[ \phi(t_0) = c_1y_1(t_0) + c_2y_2(t_0) = y_0, \qquad \phi'(t_0) = c_1y'_1(t_0)+ c_2y'_2(t_0) = y'_0  \]
+	which forms the following system of equations
+	\[ \matt{y_1(t_0)}{y_2(t_0)}{y_1'(t_0)}{y_2'(t_0)}\vectt{c_1}{c_2} = \vectt{y_0}{y'_0}. \]
+	The only way that we can find the coefficients $ c_1 $ and $ c_2 $ (that can depend on time $ t_0 $) for every $ t_0 \in (\alpha, \beta) $ is when the matrix has non-zero determinant. This translates to
+	\[ y_1(t_0)y_2'(t_0) - y_1'(t_0)y_2(t_0) \neq 0 \qquad \forall t_0 \in (\alpha,\beta) \]
+\end{proof}
+
+The theorem above is basically saying that if we can find two solutions for the linear second order ODE that has non-zero Wronskian, then every other solution of the differential equation will be a linear combination of these two solutions. This, in some sense, is the same as the linear independence.
+
+\begin{definition}[Wronskian of two functions]
+	The Wronskian of two function $ y_1 $ and $ y_2 $ defined as a function 
+	\[ W[y_1,y_2] = y_1y_2' - y'_1y_2. \]
+\end{definition}
+
+The following Lemma shows the relation between the original linear second order homogeneous differential equation and the Wronskian.
+
+\begin{lemma}
+	Let $ y_1 $ and $ y_2 $ be two solutions of 
+	\[ y'' + py' + qy = 0. \]
+	Then their Wronskian $ W(t) := W[y_1,y_2](t) $ satisfies the following ODE.
+	\[ W' + p(t)W = 0. \]
+\end{lemma}
+\begin{proof}
+	The Wronskian is defined to be
+	\[ W = W[y_1,y_2]= y_1y_2' - y_1'y_2. \]
+	Then calculating the first derivative will yield
+	\[ W' = y_1y_2'' - y_1''y_2. \]
+	Since $ y_1 $ and $ y_2 $ satisfies the homogeneous ODE, then $ y_1'' = -py_1' - y_1 $ and $ y_2'' = -py_2' - y_2 $. Substituting in the equation above, we will get
+	\[ W' = -p(y_1y_2' - y_1'y_2) = -pW.  \]
+	Thus we have shown that the Wronskian of two solutions satisfies $ W' + pW = 0 $.
+\end{proof}
+
+Now, based on the Lemma above, we can state and prove the following important proposition.
+\begin{proposition}[The Wronskian of two solutions is either always zero or non-zero]
+	Let $ y_1 $ and $ y_2 $ be two solutions of 
+	\[ y'' + py' + qy = 0, \qquad t\in (\alpha,\beta)\]
+	Then the Wronskian of solutions is either identically zero in the interval $ (\alpha,\beta) $ or non-zero for all $ t \in (\alpha, \beta) $.
+\end{proposition}
+\begin{proof}
+	From the Lemma above, we know that the Wronskian $ W(t) = W[y_1,y_2](t) $ satisfies 
+	\[ W' + p W = 0, \qquad t\in (\alpha,\beta). \]
+	Let $ t_0 \in (\alpha,\beta) $. First, observe that the zero function, i.e. $ O(t) \equiv 0 $ for all $ t\in(\alpha,\beta) $ is also a solution to the differential equation. If $ W(t_0)= 0 $, then by the existence-uniqueness theorem for the ODE that $ W $ satisfies, we conclude that $ W $ should also be identically zero in $ (\alpha,\beta) $. Let $ W(t) $ be non-zero for all $ t\in(\alpha,\beta) $. Then we can write
+	\begin{align*}
+		&W' + pW = 0. \\
+		&W'/W = -p.\\
+		&\frac{d}{dt} (\ln(W)) = -p.\\
+		&\int_{t_0}^{t} (\ln(W(\tau)))'\ d\tau = -\int_{t_0}^{t} p(\tau)\ d\tau.\\
+		& \ln(W(t)) - \ln(W(t_0)) = - \int_{t_0}^{t}p(\tau)\ d\tau. \\
+		& W(t) = W(t_0)\exp(-\int_{t_0}^{t}p(\tau)\ d\tau).
+	\end{align*}
+	Observe that $ \exp(-\int_{t_0}^{t}p(\tau)\ d\tau) $ is never zero. And since $ W(t_0) $ is also non-zero $ \forall t_0 \in (\alpha,\beta) $, then we can infer that $ W(t) $ is either identically zero in $ (\alpha,\beta) $ or always non-zero.
+\end{proof}
+
+
+As we will see in the following theorem, when the Wronskian of two solutions is zero, then we can infer some useful information about those solutions.
+
+\begin{proposition}
+	Let $ y_1 $ and $ y_2 $ be two solutions of the following homogeneous linear second order ODE.
+	\[ y'' + py' + qy = 0, \qquad t \in (\alpha,\beta). \]
+	If $ W[y_1,y_2](t_0) = 0 $ for some $ t_0 \in (\alpha,\beta) $. Then one of the solutions is a constant multiple of the other. 
+\end{proposition}
