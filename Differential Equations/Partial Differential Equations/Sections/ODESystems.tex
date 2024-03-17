@@ -1,1 +1,35 @@
-‍	‍\chapter{Systems of Ordinary Differential Equations}
+\chapter{Systems of Ordinary Differential Equations}
+
+In this chapter we are going to study the solutions of $ n $ simultaneous first order differential equation in the form of 
+\begin{align*}
+	\dot{X} = F(t,X)
+\end{align*}
+where $ X: \R \to \R^n $, and $ F $ is a family of vector fields $ F: \R \times\R^n \to \R^n $. In an expanded form, we can re-write this system of differential equations in the form
+\begin{align*}
+	\dot{x}_1 &= f_1(t,x_1,x_2,\cdots,x_n),\\
+	\dot{x}_2 &= f_2(t,x_1,x_2,\cdots,x_n),\\
+	&\vdots\\
+	\dot{x}_n &= f_n(t,x_1,x_2,\cdots,x_n).
+	\tag{1}
+\end{align*} 
+A solution of $ (1) $ is a parameterized curve in $ \R^n $, or in other words, $ n $ functions $ x_1, x_2, \cdots, x_n $ that satisfies the simultaneous system of ODEs as above. We also often impose initial condition 
+\[x_1(t_0)=x_1^0,\quad x_2(t_0)=x_2^0, \quad \cdots \quad ,x_n(t_0) = x_n^0. \]
+ We call system (1) along with the initial conditions as an initial value problem.
+ 
+ The following Lemma, reflects the importance of studying the system of first order differential equations.
+ \begin{lemma}
+ 	Every $ n $-th order differential equation on a single variable $ y $ 
+ 	\[ y^{(n)} + p_{n-1}y^{(n-1)} + \cdots + p_2 y'' + p_1y' + p_0 y = g, \]
+ 	can be converted to a system of first order differential equations with the following change of variables
+ 	\[ x_1 = y,\ x_2 = y',\ x_3 = y'',\ \cdots,\ x_{n} = y^{(n-1)} \]
+ 	which yields
+ 	\begin{align*}
+ 		&\dot{x}_1 = x_2,\\
+ 		&\dot{x}_2 = x_3,\\
+ 		&\vdots \\
+ 		&\dot{x}_{n-1} = x_n, \\
+ 		&\dot{x}_n = g - (p_{n-1}x_n + \cdots + p_2 x_3 + p_1x_2 + p_0 x_1)
+ 	\end{align*}
+ \end{lemma}
+
+T

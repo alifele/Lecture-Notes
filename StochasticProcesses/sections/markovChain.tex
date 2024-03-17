@@ -32,7 +32,7 @@ The following proposition will be one of our main tools throughout the chapter.
 \begin{proof}
 	To prove the proposition above, we Let $E_i = \{ X_0=x, X_1=y_i \}$ where $y_i \sim x$. So, in words, we say that the event $E_i$ has occurred if $X_1 = y_i$. It is clear that $E_i \cap E_j = \emptyset$ where $i\neq j$. Thus $\bigcup_{i}(B\cap E_i) = B$. Thus 
 	\[ \prob_x(B) = \sum_{i} \prob_x(B \cap E_i) = \sum_{i}\prob_x(B|E_i)\prob_x(E_i). \]
-	In which $\prob_x(E_i) = \prob(E_i|X_0=x) = \prob(X_1=y_i|X_0=x) = P(x,y_i)  $. Also \[\prob_x(B|E_i) = \prob(B|X_1=y_i, X_0=x) = \prob(B|X_1=y_i) = \prob_{y_i}(B),\].
+	In which $\prob_x(E_i) = \prob(E_i|X_0=x) = \prob(X_1=y_i|X_0=x) = P(x,y_i)  $. Also \[\prob_x(B|E_i) = \prob(B|X_1=y_i, X_0=x) = \prob(B|X_1=y_i) = \prob_{y_i}(B),\]
 	in which we have used the Markov property. Thus we can write
 	\[ P_x(B) = \sum_i \prob_{y_i}(B)P(x,y_i). \]
 \end{proof}
