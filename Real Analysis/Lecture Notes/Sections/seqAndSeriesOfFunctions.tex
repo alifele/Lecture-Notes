@@ -187,7 +187,7 @@ In the remark above we say that the converse of the corollary above is not alway
 
 \begin{proposition}
 	Let $ K $ be a \textbf{compact} set, and 
-	\begin{enumerate}[(a),noitemsep]
+	\begin{enumerate}[(i),noitemsep]
 		\item $ \set{f_n} $ is a sequence of \textbf{continuous} functions.
 		\item $ f_n(x) $ converges to $ f(x) $ \textbf{point-wise} on $ K $, where $ f $ is also \textbf{continuous}.
 		\item $ f_n(x) \geq f_{n+1}(x) $ for all $ x\in K $ and $ n=1,2,\hdots. $
@@ -195,7 +195,18 @@ In the remark above we say that the converse of the corollary above is not alway
 	Then $ f_n $ is converging uniformally to $ f $ on $  K $.
 \end{proposition}
 
-
+\begin{proof}
+	Define an auxiliary function $ g_n(x) = f_n(x)-f$. Because $ f_n(x) \geq f_{n+1}(x) $ for all $ x \in K $, and since $ f_n(x)\to f(x) $ for all $ x\in K $ then we conclude that $ g_n(x) \geq g_{n+1}(x) $. Also, observe that because $ f_n $ and $ f $ are both continuous on $ K $, then $ g_n $ is also continuous on $ K $ for all $ n \in \N $. To prove the theorem, it is equivalent to prove that $ g_n \to 0$ uniformally. 
+	
+	\noindent Let $\epsilon>0$ given. Define 
+	\[ K_n = \set{x\in K:\ g_n(x) \geq \epsilon}. \]
+	Since $ g_n $ is continuous, then $ K_n $ is closed. To show this, consider $ K_n^c $, which is the set of point $ x \in K $ such that $ g_n(x)<\epsilon $. Since $ g_n $ is continouse, we can make small enough perturbation to $  x $ and still the value of function $ g_n $ less than $ \epsilon $. Thus $ K_n^c $ is open, implying the set $ K_n $ is closed. Since $ K_n \subseteq K $ and $ K_n  $ is closed, thus $ K_n $ is also compact. On the other hand, since $ g_n(x) \geq g_{n+1}(x)  $, then we have 
+	$ K_n \supset K_{n+1} $.  
+	
+	\noindent Since $ g_n(x) \to 0 $ point wise, then for any $ x \in K $,  we have $ x \notin K_n $ if $ n $ is large enough. Thus $ x \notin \bigcap K_n $. This implies $ \bigcap K_n = \emptyset $. From the nested intervals theorem for real intervals, then we conclude that $ K_N = \emptyset$ for all $ N $ large enough (otherwise, their infinite intersection will contain at least one element). This proves that for all $ n $ large enough, we have
+	\[ 0 \leq g_n(x) < \epsilon. \]
+	This implies the uniform convergence. 
+\end{proof}
 
 
 
