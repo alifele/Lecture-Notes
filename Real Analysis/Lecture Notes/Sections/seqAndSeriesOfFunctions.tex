@@ -68,6 +68,7 @@ As we will discover through this chapter, it turns out that the question about i
 \end{remark}
 
 \begin{theorem}[Cauchy criteria of convergence]
+	\label{thm:cauchyConv}
 	Let $\set{f_n}_n$ be a sequence of functions $f_n: E \to \R$. This sequence converges to $f$ uniformally, if and only if $\forall \epsilon>0,\ \exists N>0 \st \forall n,m>N \wh \abs{f_n(x) - f_m(x)} < \epsilon \ \forall x\in E$.
 \end{theorem}
 \begin{proof}
@@ -168,6 +169,7 @@ The following theorem shows the relation between uniform convergence and continu
 The theorem that we proved above is a very important theorem, as many important conclusions will follow as a kind of immediate corollary from that. The following important result is one of those.
 
 \begin{corollary}
+	\label{cor:UniformConvImpCont}
 	Let $ \set{f_n} $ be a sequence of continuous functions that converges uniformally to $ f $ on $ E $. Then $ f $ is continuous.
 \end{corollary}
 \begin{proof}
@@ -189,7 +191,7 @@ In the remark above we say that the converse of the corollary above is not alway
 	Let $ K $ be a \textbf{compact} set, and 
 	\begin{enumerate}[(i),noitemsep]
 		\item $ \set{f_n} $ is a sequence of \textbf{continuous} functions.
-		\item $ f_n(x) $ converges to $ f(x) $ \textbf{point-wise} on $ K $, where $ f $ is also \textbf{continuous}.
+		\item $ f_n(x) $ converges to $ f(x) $ \textbf{ point-wise} on $ K $, where $ f $ is also \textbf{continuous}.
 		\item $ f_n(x) \geq f_{n+1}(x) $ for all $ x\in K $ and $ n=1,2,\hdots. $
 	\end{enumerate}
 	Then $ f_n $ is converging uniformally to $ f $ on $  K $.
@@ -209,12 +211,70 @@ In the remark above we say that the converse of the corollary above is not alway
 \end{proof}
 
 
+The following example emphasizes that fact that the compactness is really needed for the proposition above.
 
+\begin{example}
+	The function $ f_n(x)= \frac{1}{nx + 1}$ converges point wise and monotonically to $ 0 $ on (0,1), but the convergence fails to be uniform.
+\end{example}
 
+\subsection{Exploiting some of the algebraic structures}
+At this stage, we can exploit some of the algebraic structures of the objects we are working with. To do this, we first start with the following definition.
 
+\begin{definition}
+	Let $ X $ be a metric space. We denote with $ C(X) $ the following set of functions.
+	\[ C(X) = \set{f: X\to \C:\ f \text{ is \textbf{continuous} and \textbf{bounded}}}. \]
+\end{definition}
+\begin{remark}
+	Note that if $ X $ is compact, then boundedness of $ f $ is for free.
+\end{remark}
 
+The following proposition reveals the underlying algebraic structure of this set. 
 
+\begin{proposition}
+	The set $ C(X) $ is a vector space for which we can define the following norm
+	\[ \norm{f} = \sup_{x\in X}\abs{f(x)}. \]
+\end{proposition}
+\begin{proof}
+	{\color{orange} Part 1: Showing $ C(X) $ is a vector space.  }
+	It is very straight forward to show this, and we just need to check the properties of the vector spaces to see if they are satisfied. Here, I will point out the important properties. First, note that we have a zero element, which is the zero function. Also, note that if a function $ f $ is continouse and bounded, then the function $ -f $ defined as $ -f(x) =  -1 * f(x) $. The rest is very easy to verify.
+	
+	\noindent {\color{orange} Showing $ \norm{f} $ satisfies the norm properties. }
+	First, we need to show that the norm defined as above is positive definite, i.e. $ \norm{f}=0 $ if and only if $ f\equiv 0 $. $ f\equiv0 $ implying $ \norm{f} = 0 $ is trivial, and $ \norm{f} = 0 $ implying $ f\equiv0 $ follows from the definition of the suprimum. Also, from definition of suprimum is follows that $ \norm{kf} = \abs{k}\norm{f} $ for $ k \in \C $. Lastly, we need to show the triangle inequality, which follows from the fact that for $ h(x) = f(x) + g(x) $ we have $ \abs{h(x)}  \leq \abs{f(x)} + \abs{g(x)}$. Then it follows from the properties of the suprimum that $ \norm{h} \leq \norm{f} + \norm{g} $.
+\end{proof}
 
+Thus we saw that $ C(X) $ is a normed linear space. The following Lemma shows that we can easily define $ C(X) $ to be also a metric space. 
+
+\begin{lemma}
+	Let $ V $ be a vector space with a norm $ \norm{\cdot} $. Then
+	\[ d(x,y) = \norm{x-y}, \]
+	satisfies the properties of a metric.
+\end{lemma}
+\begin{proof}
+	To be added later.
+\end{proof}
+
+With the Lemma above in hand, we can have the following definitions. 
+
+\begin{definition}
+	Let $ C(X) $ be the set of all complex valued, bounded, and continuous functions defined on a metric space $ X $. $ C(X) $ is a metric space with a metric
+	\[ d(f,g) = \sup_{x \in X}\abs{f(x)-g(x)}. \]
+\end{definition}
+
+With the definition above in hand, we can put \autoref{prop:uniformConvSup} in a different way
+
+\begin{quote}
+	A sequence $ \set{f} $ converges to $ f $ with respect to the metric of $ C(X) $ if and only if $ f_n \to f $ uniformally on $ X $.
+\end{quote}
+The following theorem is very central.
+\begin{theorem}
+	The metric space $  C(X) $ with metric
+	\[ d(f,g) = \norm{f-g} \]
+	where $ \norm{\cdot} $ is the sup-metric, is \textbf{complete}.
+\end{theorem}
+\begin{proof}
+	The proof of this theorem is nothing more than gluing together the pieces of theorems and propositions that we have had before. Let $ \set{f_n} $ be a Cauchy sequence in $ C(X) $. Thus by \autoref{thm:cauchyConv}, we can conclude that converges uniformally to some $ f $. We now need to show that $  f\in C(X) $. First, since $ f_n $ is continuous for all $ n = 1,2,3,\cdots $, by \autoref{cor:UniformConvImpCont} we conclude that $ f $ is also continuous. Secondly, since $ f_n \to f $ uniformally, then for all $ n $ large enough we have
+	$ \abs{f_n(x) - f(x)} < 1 $ for all $  x\in X $. Thus $ f $ is bounded, i.e. $ \sup_{x\in X}\abs{f(x)} < M $. This implies $ d(f,0) < M $ which implies $ f $ is also bounded (i.e. there exists some open ball with finite radius that contains $ f $). This shows that the limiting object $ f $ is both bounded and continuous. This $ f \in C(X) $. This implies that the metric space $ C(X) $ is complete. 
+\end{proof}
 
 
 
