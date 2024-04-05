@@ -187,7 +187,7 @@ The theorem that we proved above is a very important theorem, as many important 
 In the remark above we say that the converse of the corollary above is not always true. However, the following proposition provides the necessary conditions under which the converse of the corollary above is also true. 
 
 
-\begin{proposition}
+\begin{proposition}[Dini's Theorem]
 	Let $ K $ be a \textbf{compact} set, and 
 	\begin{enumerate}[(i),noitemsep]
 		\item $ \set{f_n} $ is a sequence of \textbf{continuous} functions.
@@ -210,11 +210,28 @@ In the remark above we say that the converse of the corollary above is not alway
 	This implies the uniform convergence. 
 \end{proof}
 
+\begin{remark}
+	Note that the third condition in the Dini's theorem can be also $ f_n(x)\leq f_{n+1}(x) $. The proof will be similar to the prove provided above.
+\end{remark}
+
 
 The following example emphasizes that fact that the compactness is really needed for the proposition above.
 
 \begin{example}
 	The function $ f_n(x)= \frac{1}{nx + 1}$ converges point wise and monotonically to $ 0 $ on (0,1), but the convergence fails to be uniform.
+\end{example}
+
+\begin{example}[Non-example for monotonicity (the third condition)]
+	Consider the following function
+	\[ 
+	f_n(x) = \begin{cases}
+		0 \qquad & x\in [0,\frac{1}{2n}),\\
+		4nx - 2 \qquad & x\in [\frac{1}{2n},\frac{3}{4n}),\\
+		4-4nx \qquad & x\in [\frac{3}{4n},\frac{1}{n}),\\
+		0 \qquad & x\in [\frac{1}{n},1].
+	\end{cases}
+	 \]
+	 This sequence if functions converge point wise to the zero function ($ f \equiv 0 $) on $ [0,1] $ which is a compact set. Note that $ f_n $ and $ f $ are both continuous. But the convergence fails to be uniform since $ \sup_{x\in[0,1]}\abs{f_n(x)-f(x)} =1 $ for all $ n\in \N $, which implies the convergence is not uniform\footnote{This example is taken from \href{https://www.mathcounterexamples.net/counterexamples-around-dini-s-theorem/}{Math CounterExample}.}.
 \end{example}
 
 \subsection{Exploiting some of the algebraic structures}
