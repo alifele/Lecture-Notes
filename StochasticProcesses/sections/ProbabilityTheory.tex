@@ -182,6 +182,33 @@ Using the axioms above, we can observe and prove several interesting properties 
 	
 \end{example}
 
+Utilizing the properties of the probability function, we can derive some very important notions, one of which is reflected in the following proposition.
+
+\begin{proposition}[Conditional expansion - Law of total probabilities]
+	Let $(\Omega, \mathcal{F}, \prob)$ be a probability space. Let $\mathfrak{F}$ be a finite collection of events $\mathfrak{F} = \set{F_1,F_2,\cdots, F_n}$ that partitions $\Omega$. I.e.
+	\begin{enumerate}[(i)]
+		\item $F_i \cap F_j = \emptyset \qquad i\neq j$,
+		\item $\bigcap_{i} F_i = \Omega$.
+	\end{enumerate}
+	Let $E \in \mathcal{F}$ be any nonempty event. Then we can write
+	\[  \prob(E) = \sum_{i} \prob(E|F_i)\prob(F_i). \]
+\end{proposition}
+\begin{proof}
+	Since $\mathfrak{F}$ partitions $\Omega$ and $E \neq \emptyset$, then $\set{E\cap F_i}_i$ is a partition of $E$. Thus
+	\[ \prob(E) = \prob(\bigcup_i (E \cap F_i)) = \sum_i \prob(E \cap F_i) = \sum_i \prob(E|F_i)\prob(F_i). \]
+	This completes the proof.
+\end{proof}
+
+
+In dealing with random variables, either continuous or discrete, using the notion of the law of total probabilities helps us to simplify some of the calculations significantly. The following examples are some places that we use this idea to simplify calculations by a lot. 
+
+\begin{example}
+	Let 
+\end{example}
+
+
+
+
 \subsection{Isomorphism between random experiments}
 Often, there is this intuition that certain random experiments are really the same, although they might look very different from each other. For instance, consider two random experiments. In one, we are playing a dice successively and asking what is the probability that after 5 plays, 1 is not appeared. The second experiment is that we have 6 Urns and we place balls in them successively, i.e. at each step one ball is placed in one of the urns and the chance of a ball to end up in any of the urns in equal. These two experiment, although very different, but looks very similar. There is one way that we can formalize this wage intuition, and that is the notion of isomorphism between sets. We say two sets are isomorphic if there is a bijection between them. And the reason that the previously mentioned experiments feel the same is that the sample space $\Omega$ of these two experiments are in fact isomorphic. 
 
@@ -247,6 +274,8 @@ Since the value of a random variable is determined by the outcomes of the random
 		Then the random number $X(\omega)$ for $\omega \in \Omega$ is basically the length of the prefix string of $\omega$ in which any of the symbols in $\Sigma$ has been occurred at least once. 
 	\end{solution}
 \end{example}
+
+
 
 \subsection{Cumulative Distribution of Random Variable}
 The notion of the cumulative distribution of a random variable comes handy in most of the future calculations. Also, this distribution can be used to derive other notions of distributions what are extremely important in applications. 
@@ -327,4 +356,90 @@ The item (iv) in the proposition above is very important, as it makes the hard c
  	\end{solution}
  	
 \end{example}
+
+
+
+
+
+\section{Solved Problems}
+\begin{problem}[From Ross]
+	Ben can talk a course in compute science or chemistry. If she takes the computer science course, then she will get A grade with probability $\frac{1}{2}$. If she takes the chemistry course, then she will get A grade with probability $\frac{1}{3}$. She decides to base her decision on the flip of a fair coin. What is the probability that she gets an A in chemistry?
+\end{problem}
+\begin{solution}
+	We define the following events
+	\begin{quote}
+		$A$: she will get an A grade.\\
+		$CO$: she will take the computer science course.\\
+		$CH$: she will take the chemistry course.
+	\end{quote}
+	Then the question is basically asking for $\prob(A \cap CH)$. We can compute it by
+	\[ \prob(A \cap CH) = \prob(A|CH)\prob(CH) = \frac{1}{3}\cdot\frac{1}{2} = \frac{1}{6}. \]
+\end{solution}
+
+\begin{problem}
+	And urn contains seven black balls and five white balls. We draw two times from the urn. Given that the each ball has the same probability to be drawn, what is the probability that both balls drawn are black?
+\end{problem}
+\begin{solution}
+	This question nicely demonstrates the fact that there are many ways to define the event spaces, and not all of them are very useful in computing the desired probability. Define
+	\begin{quote}
+		$E$: two drawn balls are black.
+	\end{quote}
+	The question is in fact asking $\prob(E)$. But this even is not very useful in any progress with the solution. Thus we need to define some finer events
+	\begin{quote}
+		$E_1$: The first drawn ball is black.\\
+		$E_2$: The second drawn ball is black.
+	\end{quote}
+	It is clear that $E = E_1 \cap E_2$. These two finer events allows us to compute the probability of interest given the data we have in our hand.
+	\[ \prob(E_1 \cap E_2) = \prob(E_2 | E_1) \prob(E_1) = \frac{6}{11} \cdot \frac{7}{12} \]
+\end{solution}
+
+\begin{problem}[From Ross]
+	Three men at a party through their hats into the center of the room, and then, after mixing the hats, each pick a hat randomly. What is the probability if non of them get their own hat back.
+\end{problem}
+\begin{solution}
+	There are a million ways to tack a probability problem. We can construct a suitable sample space and then compute the probabilities explicitly, or we can use the properties of the probability function to computer the desired probability without any need to construct the sample space. Here, we will demonstrate two ways.
+	
+	\textbf{Solving the problem by utilizing the properties of the probability function.} First we need to define some suitable events. There are again many ways to define event sets and each have their own pros and cons. We proceed with the following definition.
+	\begin{quote}
+		$E_i$: The person $i$ ``selects'' his own hat.  
+	\end{quote}
+	Also, with this particular construction of the event sets, it is much more easier to compute the complementary probability of the desired probability first and then compute the desired one by simply subtracting it from 1. The complement of the event ``no men gets his own hat back'' is ``at least one man gets his hat back'' which is $\prob(E_1\cup E_2 \cup E_3)$. To compute the terms of this we first need to calculate $\prob(E_i)$, $\prob(E_i \cap E_j)$ where $i\neq j$ and also $\prob(E_1 \cap E_2 \cap E_3)$. We know that $\prob(E_i) = 1/3$ for $i=1,2,3$. That is because it is equally likely he selects any of the hats at the center. For $\prob(E_i\cap E_j)$ we can write
+	\[ \prob(E_i\cap E_j) = \prob(E_i|E_j)\prob(E_j) = \frac{1}{2}\cdot \frac{1}{3} =  \frac{1}{6}.   \]
+	In which we used the fact that $\prob(E_i|E_j)$ is $\frac{1}{2}$ for distinct $i,j$. That is because given person $j$ selects his hat correctly, then there are two possibilities for $E_i$ to select his hat (he can pick the correct one or the wrong one). Lastly for $\prob(E_1\cap E_2\cap E_3)$ we write
+	\[ \prob(E_1\cap E_2\cap E_3) = \prob(E_1|E_2\cap E_3)\prob(E_2\cap E_3) = \prob(E_1|E_2\cap E_3) \prob(E_2 | E_3) \prob(E_3) = 1 \cdot \frac{1}{2} \cdot \frac{1}{3} = \frac{1}{6}.  \]
+	Thus 
+	\[ \prob(E_1 \cup E_2 \cup E_3) = (1) - (1/2) + (1/6) = \frac{4}{6}. \]
+	Then the probability of interest will be
+	\[ \prob(E) = 1-\frac{4}{6} = \frac{1}{3}. \]
+	
+	\textbf{Solving by constructing a sample space.} A suitable sample space for this problem can be the set of all permutations on three letters. This set is
+	\[ \Omega = 
+	\set{\begin{pmatrix}
+			a & b & c \\
+			\boxed{a} & \boxed{b} & \boxed{c}
+		\end{pmatrix},
+		\begin{pmatrix}
+			a & b & c \\
+			\boxed{a} & c & b
+		\end{pmatrix},
+		\begin{pmatrix}
+			a & b & c \\
+			b & a & \boxed{c}
+		\end{pmatrix},
+		\begin{pmatrix}
+			a & b & c \\
+			b & c & a
+		\end{pmatrix},
+		\begin{pmatrix}
+			a & b & c \\
+			c & a & b
+		\end{pmatrix},
+		\begin{pmatrix}
+			a & b & c \\
+			c & \boxed{b} & a
+	\end{pmatrix}}.
+	\]
+	Note that the elements in the box represents the fixed point of the permutation. The probability of interest is basically the number of permutations that has no fixed point. As it is clear from the set $\Omega$, the probability is
+	\[ \prob(E) = \frac{2}{6} = \frac{1}{3}. \]
+\end{solution}
 
