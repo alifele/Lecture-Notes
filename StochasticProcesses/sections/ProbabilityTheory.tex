@@ -203,8 +203,40 @@ Utilizing the properties of the probability function, we can derive some very im
 In dealing with random variables, either continuous or discrete, using the notion of the law of total probabilities helps us to simplify some of the calculations significantly. The following examples are some places that we use this idea to simplify calculations by a lot. 
 
 \begin{example}
-	Let 
+	Let $ X_1, X_2, X_3, \cdots $ be i.i.d. real-valued random variable. Let $ T $ be a positive integer valued random variable. Define the the real-valued random variable $ N $ as 
+	\[ N = \sum_{i=1}^{T} X_i. \]
+	What is the probability generating function for $ N $.
+	
+	\begin{solution}
+		For the generating probability function we have
+		\[ G_N(s) = \E{s^N} = \E{s^{X_1+X_2+\cdots+X_T}}. \]
+		The problem in evaluating the expression above is that the number of random variables $ X_i $ to be summed up is also a random variable. So the first step is to make this a non-random variable buy conditional expansion.
+		\[ G_N(s) = \E{s^N} = \sum_{i\in\N}\E{s^{X_1+\cdots+X_T}\big|T=i}\prob(T=i) = \sum_{i\in\N}\E{s^{X_1+\cdots+X_i}}\prob(T=i) \]
+		Since $ X_i $ are all i.i.d., then we can write
+		\[ G_N(s) = \sum_{i\in\N}(\E{s^{X_1}})^n\prob(T=i) = G_T(G_{X_1}(s)). \]
+	\end{solution}
 \end{example}
+
+\begin{example}
+	Let $ X,Y $ be two independent random variables. Define $ Z = X+Y $. Find the PDF of $ Z $. 
+	\begin{solution}
+		First, We need to find $ F_Z(z) = \prob(Z<z) $. For this we can write
+		\[ F_Z(z) = \prob(X+Y < z) \]
+		Again, we can use conditional expansion to write
+		\[ F_Z(z) = \int_{\R} \prob(X+Y<z\big| Y = y)f_Y(y)\ dy = \int_{\R} \prob(X<z-y)f_Y(y)\ dy  = \int_{\R} F_X(z-y)f_Y(y)\ dy. \]
+		Then differentiating $ F_z $ with respect to $ z $ we will get the PDF 
+		\[ f_Z(z) = \frac{d }{dz}F_Z(z) =  \int_{\R} f_X(z-y)f_Y(y)\ dy = (f_X * f_Y)(z).\]
+	\end{solution}
+\end{example}
+
+\begin{example}
+	Let $ X,Y $ be two real valued random variable, not necessarily independent. Calculate $ \prob(X<Y) $.
+	\begin{solution}
+		To calculate this we can again use the law of total probabilities. In particular
+		\[ \prob(X<Y) = \int_{\R}\prob(X<y)f_Y(y)\ dy = \int_{\R}F_{X|Y}(y)f_Y(y)\ dy. \]
+	\end{solution}
+\end{example}
+
 
 
 
