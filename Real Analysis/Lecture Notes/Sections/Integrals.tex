@@ -192,3 +192,30 @@ The following theorem is also useful as it relaxes some of the requirements on t
 	Since $f$ is non-decreasing, then for all $i$ we have $M_i = f(x_i)$ and $m_i = f(x_{i-1})$. Then the sum above telescopes and we will have
 	\[ U(P,f,\alpha) - L(P,f,\alpha) < \eta (f(b) - f(a)) < \epsilon. \]
 \end{proof}
+
+
+\section{The relation between integration and differentiation}
+
+
+\begin{proposition}[Continuoity of integration operation]
+	Let $ f:[a,b] \to \R $ be Riemann integrable. Define
+	\[ g(x) = \int_{a}^{x} f(x) \ dt. \]
+	Then $ g $ is uniformally continuous on $ [a,b] $. Furthermore, if $ f $ is continuous at $ x_0 \in [a,b] $, then $ g $ is differentiable at $ x_0 $, and we have $ g'(x_0) = f(x_0) $.
+\end{proposition}
+\begin{proof}
+	Since $ f $ define on a compact set, then it is bounded (the case of non-compact domain is covered in the remark below). Thus $ \exists M > 0 $ such that $ f(x) < M $ for all $  x\in [a,b]$. For a given $ \epsilon >0 $, let $ \delta = \frac{\epsilon}{M} $. Then $ \forall t,s \in [a,b] $ such that $ \abs{t-s}<\delta $ we will have
+	\[ \abs{g(t) - g(s)} = \Abs{\int_{t}^{s} f(t)\ dt} \leq M \abs{t-s} = \epsilon. \]
+	
+	For the case where $ f $ is continuous at $ x_0 $, for a given $ \epsilon $, select $ \delta $ such that $ \abs{x-x_0} < \delta  $ implies $ \abs{f(x) - f(x_0)} < \epsilon$. Note that since $ f $ is continuous at $ x_0 $ for any given $ \epsilon $ we can choose such $ \delta $. Choose $ t,s $ in $ x_0 - \delta \leq t \leq x_0 \leq s \leq x_0 + \delta $. Then we have
+	\[ \Abs{\frac{g(t) - g(s)}{t-s} - f(x_0)} = \Abs{\frac{\int_{t}^{s} f(\tau) \ d\tau }{t-s} - \frac{\int_{t}^{s} f(x_0) \ d\tau}{t-s}} = \Abs{\frac{\int_{t}^{s} f(\tau) - f(x_0) \ d\tau}{t-s}} \leq \frac{\epsilon \abs{t-s}}{\abs{t-s}} = \epsilon. \]
+\end{proof}
+
+\begin{remark}
+	Note that in the proof we used the fact that the function $ f(x) $ is bounded, since it is defined on a compact set. However, the compactness of the domain is not necessary at all. What we need is $ f $ to be Riemann integrable on its domain. Let $ f:(0,b]\to\R $ that is Riemann integrable. The function $ f $ might be unbounded, but the rate at which it goes to infinity at $ a $ is slow enough that the function is still Riemann integrable. In other words we have
+	\[ \lim_{a \to 0} \int_{a}^{x_0}f(\tau)\ d\tau < \infty \qquad \forall x_0 \in (0,b]. \]
+	The expression above (which is due to being Riemann integrable) is now our tool that we can use to proceed with proving the function $ g(x) = \lim_{a\to0}\int_{a}^{x} f(\tau) \ d\tau. $ is continouse. Let $  t,s \in (0,b] $ and $ x_0 = \min\set{t,s} $. Then 
+	\[ \abs{g(t) - g(s)} = \Abs{\left[\lim_{a\to 0}(\int_{a}^{x_0} f(\tau) \ d\tau + \int_{x_0}^{t} f(\tau)\ d\tau)\right] - \left[\lim_{a\to 0}(\int_{a}^{x_0} f(\tau) \ d\tau + \int_{x_0}^{s} f(\tau)\ d\tau)\right]} \]
+	Since all of the integrals in the limit exists, then we can use the limit properties to separate the terms which will lead to 
+	\[ \abs{g(t) - g(s)} = \Abs{\int_{t}^{s} f(\tau)\ d\tau} \]
+	Then we can follow the idea of our proof presented above.
+\end{remark}
