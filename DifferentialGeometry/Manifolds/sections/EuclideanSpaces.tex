@@ -1,0 +1,52 @@
+\chapter{Euclidean Spaces}
+
+\section{Basic Notions and Definitions}
+
+Here in this chapter I will be covering the details of some notions that was challenging for me do digest in the first read.
+
+
+\begin{definition}[Axioms of Group]
+	Group is a set $ A $ along with a binary operation $ *: A\times A \to A $ that satisfies the following properties. Let $ a,b,c \in A $, then
+	\begin{itemize}
+		\item \textbf{Associativity}: $ a*(b*c) = (a*b)*c $.
+		\item \textbf{Identity element}: $ \exists 1 \in A $ such that 
+		\[ 1*a = a*1 = a. \]
+		\item \textbf{Inverse element}: $ \forall a \in A\ \exists\hat{a}\in A $ such that 
+		\[ a*\hat{a} = \hat{a}*a = 1. \]
+	\end{itemize}
+\end{definition}
+\begin{remark}
+	A set along with a binary operation that does not satisfy any properties is called a \textbf{magma}. If the binary operation is only associative, then we are dealing with \textbf{semi-group}. If the binary operation has an identity element as well, then we call this algebraic structure as \textbf{monoid}.
+\end{remark}
+
+\begin{definition}[Axioms of Ring]
+	A ring is a set $ R $ along with two operations $ +: R\times R \to R $ and $ *: R\times R \to R $, where
+	\begin{itemize}
+		\item $ (R,+) $ is an Abelian group.
+		\item $ (R,*) $ is a monoid.
+		\item The operator $ (*) $ has distributive (left and right) law over $ (+) $ i.e.
+  			\[a*(b+c) = (a*b)+(a*c), \qquad (b+c)*a = (b*a) + (c*a).\].
+	\end{itemize}
+\end{definition}
+
+\begin{remark}
+	\textbf{Field} is a ring where every non-zero element (i.e. inverse element in the $ (R,+) $ group in the ring) has a multiplicative inverse.
+\end{remark}
+
+\begin{definition}[Axioms of Module]
+	A \textbf{module} is a group $ M $ along with a ring $ R $ where the monoid of the ring acts on $ M $ (through scalar multiplication) (i.e. it satisfies the idenity and compatibility properties) and satisfies the distributive property. I.e.
+	\begin{itemize}
+		\item \textbf{Compatibility of the monoid action}: $ a,b \in R,\ u \in M $ then 
+		\[ a(bu) = (ab)u. \]
+		\item \textbf{Identity of the monoid action}: Let $ 1 $ be the identity element of the ring $ R $. Then $ \forall u \in M $
+		\[1u = u1 = u. \]
+		\item \textbf{Distribution law}: $ a,b \in R $ and $ u,v \in M $ then
+		\begin{itemize}
+			\item $ (a+b)u = au + bu $.
+			\item $ a(u+v) = au + av $.
+		\end{itemize}
+	\end{itemize}
+\end{definition}
+\begin{remark}
+	A module $ (M,R) $ is called a \textbf{vector space}, if the \textbf{ring} $ R $ is a \textbf{field}.
+\end{remark}

@@ -209,7 +209,7 @@ newparttoc, % Required for writing the part toc entry number in a standard way (
 
 
 
-\chapterimage{Images/math4LargeEdited.jpg} % Chapter heading image
+\chapterimage{Images/chapterImage.jpg} % Chapter heading image
 \chapterspaceabove{6.10cm} % Whitespace from the top of the page to the chapter title on chapter pages
 \chapterspacebelow{6.25cm}
 
@@ -224,7 +224,7 @@ newparttoc, % Required for writing the part toc entry number in a standard way (
 			\node[
 			anchor=north west, % Anchor point on the image
 			inner sep=0pt, % Inner padding
-			] at (current page.north west) {\includegraphics[angle=-0,width=\paperwidth]{\thechapterimage}};
+			] at (current page.north west) {\includegraphics[angle=-90,width=\paperwidth]{\thechapterimage}};
 		}
 		% Box with the chapter title
 		\draw[anchor=west] (current page.north west) node [
@@ -304,10 +304,10 @@ newparttoc, % Required for writing the part toc entry number in a standard way (
 
 
 \newcommand{\heading}[1]{
-  \begin{tcolorbox}
+  \begin{tcolorbox}[width=0.6\textwidth, center]
     \begin{center}
     \begin{Large}
-      \textbf{Lecture Notes For:\ #1} \\
+      \textbf{#1} \\
       \vspace{5pt}
     \end{Large}
     \begin{large}
