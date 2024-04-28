@@ -50,3 +50,20 @@ Here in this chapter I will be covering the details of some notions that was cha
 \begin{remark}
 	A module $ (M,R) $ is called a \textbf{vector space}, if the \textbf{ring} $ R $ is a \textbf{field}.
 \end{remark}
+
+\begin{definition}[Axioms of Algebra]
+	\label{def:algebra}
+	An Algebra over field $ F $ is a ring $ A $ that $ F $ acts on it (thus $ A $ has vector space structure as well), where the monoid operation of $ F $ (i.e. multiplication) satisfies the homogeneity property. I.e. for $ r \in F $ and $ u,v \in A $ we have
+	\[ r(uv) = (ru)v = u (rv). \]
+\end{definition}
+
+There are some important observations when combining different algebraic structures with each other to get a new one. The first is that when we combine two structures with different operators, then the operators need to satisfy the distributive laws. Also, note that when an algebraic structure (like group or monoid) acts on another algebraic structure, we need to have the identity and and compatibility conditions satisfied.
+
+The following diagram shows how different algebraic structures are combined with each other to produce another structure.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.5]{Images/algebraicStructures.pdf}
+\end{figure}
+\FloatBarrier
+Note that in the figure above, I have used some non-standard notations to make the figure concise. For instance, the expression ``\textbf{$ R_{\text{mon}} @ M \ \text{with $\cdot$}$}'' means that the monoid structure in the field $ R $ acts on the group $ M $ with the ($ \cdot $) symbol. Or the expression ``\textbf{$ \times $ in $ M_{\text{mon}} $ satisfies homogen cond.}'' means the multiplication operation of the monoid structure inside the ring $ M $ satisfies the homogeneity condition (see the definition of the algebra in \autoref{def:algebra} ). Finally, $ M_{g} $ means the group structure inside the ring $ M $.
