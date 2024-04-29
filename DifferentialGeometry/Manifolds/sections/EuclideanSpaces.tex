@@ -67,3 +67,46 @@ The following diagram shows how different algebraic structures are combined with
 \end{figure}
 \FloatBarrier
 Note that in the figure above, I have used some non-standard notations to make the figure concise. For instance, the expression ``\textbf{$ R_{\text{mon}} @ M \ \text{with $\cdot$}$}'' means that the monoid structure in the field $ R $ acts on the group $ M $ with the ($ \cdot $) symbol. Or the expression ``\textbf{$ \times $ in $ M_{\text{mon}} $ satisfies homogen cond.}'' means the multiplication operation of the monoid structure inside the ring $ M $ satisfies the homogeneity condition (see the definition of the algebra in \autoref{def:algebra} ). Finally, $ M_{g} $ means the group structure inside the ring $ M $.
+
+
+
+
+\section{Solved Problems}
+\begin{problem}[Algebra structure on $ C_p^{\infty} $]
+	Define carefully addition, multiplication, and scalar multiplication in $ C_p^\infty $. Prove that addition in $ C_p^\infty $ is commutative.
+\end{problem}
+\begin{solution}
+	First, note that the elements of $ C_p^\infty $ are actually the equivalence classes, where two functions are equivalent if they both define the same germ.
+	\begin{itemize}
+		\item For the definition of the addition, we can use the point-wise addition of the functions. However, we need to check to see if this definition is well-defined (i.e. the result of the addition of two functions does not depend on the choice of representative of the equivalence class). Let $ f_1, f_2, g_1, g_2 \in C_p^\infty$ where $ f_1 $ and $ f_2 $ define the same germ, and similarly for $ g_1 $ and $ g_2 $. Then, we claim that $ f_1+g_1 $ define the same germ as $ f_2 + g_2 $. That is because for $ f_1, f_2 $ there is an open set $ U_1 $ containing $ p $ where $ f_1(x) = f_2(x) \ \forall x \in U $. Similarly, there is an open set $ U_2 $ that contains $ p $ and for all $ x \in U_2 $ we have $ g_1(x) = g_2(x) $. Let $ W = U_1 \cap U_2 $. Then on for all $ x \in W $ we have $ f_1(x) + f_2(x) = g_1(x) + g_2(x) $. Hence $ f_1+g_1 $ defines the same germ as $ f_2 + g_2 $.
+		\item For the scalar multiplication, we can use the notion of scalar multiplication in functions, and following an idea similar to the reasoning above, we can show that this definition is well-defined.
+		\item For the multiplication on $ C_p^\infty $ we can use of the point-wise multiplication of functions as the definition, and with a similar reasoning to the one in item 1, we can show that this definition is well-defined.
+	\end{itemize}
+	For the commutativity of the addition on $ C_p^\infty $, we need to emphasis that it follows immediately from the commutativity of the point-wise addition of functions.
+	
+\end{solution}
+
+
+\begin{problem}[Vector space structure on derivations at a point]
+	Prove that the set of all point derivatives is closed under addition and scalar multiplication.
+\end{problem}
+\begin{solution}
+	Let $ D $ and $ D' $ be derivations at $ p\in\R^n $, and define $ \hat{D} = D + D' $. Let $ f,g \in C_p^\infty $. Then we can write
+	\begin{align*}
+		\hat{D} (fg) = (D + D')(fg)
+	\end{align*}
+	On the other hand we have
+	\[ D(fg) = D(f)g + fD(g), \qquad D'(fg) = D'(f)g + fD'(g). \]
+	Adding two equations we will get
+	\[ D(fg) + D'(fg) = (D(f) + D'(f))g + f(D(g)+D'(g)) \]
+	Defining $ \hat{D} = (D+D')(f) = D(f)+D'(f) $ we will get
+	\[ \hat{D}(fg) = \hat{D}(f) g + f \hat{D}(g).  \]
+	which shows that $ \hat{D} $ is also a point derivation at $ p $.
+	For the scalar multiplication, let $ r \in \R $ and define $ \tilde{D} = rD $. By defining $ (rD)(f) = rD(f) $, we can write
+	\[ (rD)(fg) = rD(fg) = rD(f)g + rfD(g) = rD(f)g + frD(g),  \]
+	which shows that $ rD $ also satisfies the Leibniz property, this it is a point derivation.
+\end{solution}
+
+\begin{problem}
+	Let $ A $ be an algebra over a field $ K $. If $ D_1 $ and $ D_2 $ are derivations of $ A $, show that $ D_1\circ D_2 $ is not necessarily a derivation (it is if $ D_1 $ or $ D_2 = 0 $), but $ D_1\circ D_2 - D_2 \circ D_1 $ is always a derivation of $ A $.	
+\end{problem}
