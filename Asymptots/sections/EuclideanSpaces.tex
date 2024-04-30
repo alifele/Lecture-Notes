@@ -1,0 +1,112 @@
+\chapter{Euclidean Spaces}
+
+\section{Basic Notions and Definitions}
+
+Here in this chapter I will be covering the details of some notions that was challenging for me do digest in the first read.
+
+
+\begin{definition}[Axioms of Group]
+	Group is a set $ A $ along with a binary operation $ *: A\times A \to A $ that satisfies the following properties. Let $ a,b,c \in A $, then
+	\begin{itemize}
+		\item \textbf{Associativity}: $ a*(b*c) = (a*b)*c $.
+		\item \textbf{Identity element}: $ \exists 1 \in A $ such that 
+		\[ 1*a = a*1 = a. \]
+		\item \textbf{Inverse element}: $ \forall a \in A\ \exists\hat{a}\in A $ such that 
+		\[ a*\hat{a} = \hat{a}*a = 1. \]
+	\end{itemize}
+\end{definition}
+\begin{remark}
+	A set along with a binary operation that does not satisfy any properties is called a \textbf{magma}. If the binary operation is only associative, then we are dealing with \textbf{semi-group}. If the binary operation has an identity element as well, then we call this algebraic structure as \textbf{monoid}.
+\end{remark}
+
+\begin{definition}[Axioms of Ring]
+	A ring is a set $ R $ along with two operations $ +: R\times R \to R $ and $ *: R\times R \to R $, where
+	\begin{itemize}
+		\item $ (R,+) $ is an Abelian group.
+		\item $ (R,*) $ is a monoid.
+		\item The operator $ (*) $ has distributive (left and right) law over $ (+) $ i.e.
+  			\[a*(b+c) = (a*b)+(a*c), \qquad (b+c)*a = (b*a) + (c*a).\].
+	\end{itemize}
+\end{definition}
+
+\begin{remark}
+	\textbf{Field} is a ring where every non-zero element (i.e. inverse element in the $ (R,+) $ group in the ring) has a multiplicative inverse.
+\end{remark}
+
+\begin{definition}[Axioms of Module]
+	A \textbf{module} is a group $ M $ along with a ring $ R $ where the monoid of the ring acts on $ M $ (through scalar multiplication) (i.e. it satisfies the idenity and compatibility properties) and satisfies the distributive property. I.e.
+	\begin{itemize}
+		\item \textbf{Compatibility of the monoid action}: $ a,b \in R,\ u \in M $ then 
+		\[ a(bu) = (ab)u. \]
+		\item \textbf{Identity of the monoid action}: Let $ 1 $ be the identity element of the ring $ R $. Then $ \forall u \in M $
+		\[1u = u1 = u. \]
+		\item \textbf{Distribution law}: $ a,b \in R $ and $ u,v \in M $ then
+		\begin{itemize}
+			\item $ (a+b)u = au + bu $.
+			\item $ a(u+v) = au + av $.
+		\end{itemize}
+	\end{itemize}
+\end{definition}
+\begin{remark}
+	A module $ (M,R) $ is called a \textbf{vector space}, if the \textbf{ring} $ R $ is a \textbf{field}.
+\end{remark}
+
+\begin{definition}[Axioms of Algebra]
+	\label{def:algebra}
+	An Algebra over field $ F $ is a ring $ A $ that $ F $ acts on it (thus $ A $ has vector space structure as well), where the monoid operation of $ F $ (i.e. multiplication) satisfies the homogeneity property. I.e. for $ r \in F $ and $ u,v \in A $ we have
+	\[ r(uv) = (ru)v = u (rv). \]
+\end{definition}
+
+There are some important observations when combining different algebraic structures with each other to get a new one. The first is that when we combine two structures with different operators, then the operators need to satisfy the distributive laws. Also, note that when an algebraic structure (like group or monoid) acts on another algebraic structure, we need to have the identity and and compatibility conditions satisfied.
+
+The following diagram shows how different algebraic structures are combined with each other to produce another structure.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.5]{Images/algebraicStructures.pdf}
+\end{figure}
+\FloatBarrier
+Note that in the figure above, I have used some non-standard notations to make the figure concise. For instance, the expression ``\textbf{$ R_{\text{mon}} @ M \ \text{with $\cdot$}$}'' means that the monoid structure in the field $ R $ acts on the group $ M $ with the ($ \cdot $) symbol. Or the expression ``\textbf{$ \times $ in $ M_{\text{mon}} $ satisfies homogen cond.}'' means the multiplication operation of the monoid structure inside the ring $ M $ satisfies the homogeneity condition (see the definition of the algebra in \autoref{def:algebra} ). Finally, $ M_{g} $ means the group structure inside the ring $ M $.
+
+
+
+
+\section{Solved Problems}
+\begin{problem}[Algebra structure on $ C_p^{\infty} $]
+	Define carefully addition, multiplication, and scalar multiplication in $ C_p^\infty $. Prove that addition in $ C_p^\infty $ is commutative.
+\end{problem}
+\begin{solution}
+	First, note that the elements of $ C_p^\infty $ are actually the equivalence classes, where two functions are equivalent if they both define the same germ.
+	\begin{itemize}
+		\item For the definition of the addition, we can use the point-wise addition of the functions. However, we need to check to see if this definition is well-defined (i.e. the result of the addition of two functions does not depend on the choice of representative of the equivalence class). Let $ f_1, f_2, g_1, g_2 \in C_p^\infty$ where $ f_1 $ and $ f_2 $ define the same germ, and similarly for $ g_1 $ and $ g_2 $. Then, we claim that $ f_1+g_1 $ define the same germ as $ f_2 + g_2 $. That is because for $ f_1, f_2 $ there is an open set $ U_1 $ containing $ p $ where $ f_1(x) = f_2(x) \ \forall x \in U $. Similarly, there is an open set $ U_2 $ that contains $ p $ and for all $ x \in U_2 $ we have $ g_1(x) = g_2(x) $. Let $ W = U_1 \cap U_2 $. Then on for all $ x \in W $ we have $ f_1(x) + f_2(x) = g_1(x) + g_2(x) $. Hence $ f_1+g_1 $ defines the same germ as $ f_2 + g_2 $.
+		\item For the scalar multiplication, we can use the notion of scalar multiplication in functions, and following an idea similar to the reasoning above, we can show that this definition is well-defined.
+		\item For the multiplication on $ C_p^\infty $ we can use of the point-wise multiplication of functions as the definition, and with a similar reasoning to the one in item 1, we can show that this definition is well-defined.
+	\end{itemize}
+	For the commutativity of the addition on $ C_p^\infty $, we need to emphasis that it follows immediately from the commutativity of the point-wise addition of functions.
+	
+\end{solution}
+
+
+\begin{problem}[Vector space structure on derivations at a point]
+	Prove that the set of all point derivatives is closed under addition and scalar multiplication.
+\end{problem}
+\begin{solution}
+	Let $ D $ and $ D' $ be derivations at $ p\in\R^n $, and define $ \hat{D} = D + D' $. Let $ f,g \in C_p^\infty $. Then we can write
+	\begin{align*}
+		\hat{D} (fg) = (D + D')(fg)
+	\end{align*}
+	On the other hand we have
+	\[ D(fg) = D(f)g + fD(g), \qquad D'(fg) = D'(f)g + fD'(g). \]
+	Adding two equations we will get
+	\[ D(fg) + D'(fg) = (D(f) + D'(f))g + f(D(g)+D'(g)) \]
+	Defining $ \hat{D} = (D+D')(f) = D(f)+D'(f) $ we will get
+	\[ \hat{D}(fg) = \hat{D}(f) g + f \hat{D}(g).  \]
+	which shows that $ \hat{D} $ is also a point derivation at $ p $.
+	For the scalar multiplication, let $ r \in \R $ and define $ \tilde{D} = rD $. By defining $ (rD)(f) = rD(f) $, we can write
+	\[ (rD)(fg) = rD(fg) = rD(f)g + rfD(g) = rD(f)g + frD(g),  \]
+	which shows that $ rD $ also satisfies the Leibniz property, this it is a point derivation.
+\end{solution}
+
+\begin{problem}
+	Let $ A $ be an algebra over a field $ K $. If $ D_1 $ and $ D_2 $ are derivations of $ A $, show that $ D_1\circ D_2 $ is not necessarily a derivation (it is if $ D_1 $ or $ D_2 = 0 $), but $ D_1\circ D_2 - D_2 \circ D_1 $ is always a derivation of $ A $.	
+\end{problem}
