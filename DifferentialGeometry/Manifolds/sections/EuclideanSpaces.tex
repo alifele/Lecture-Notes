@@ -2,6 +2,8 @@
 
 \section{Basic Notions and Definitions}
 
+\subsection{A Review on the algebraic structures}
+
 Here in this chapter I will be covering the details of some notions that was challenging for me do digest in the first read.
 
 
@@ -61,6 +63,7 @@ There are some important observations when combining different algebraic structu
 
 The following diagram shows how different algebraic structures are combined with each other to produce another structure.
 
+
 \begin{figure}[h!]
 	\centering
 	\includegraphics[scale=0.5]{Images/algebraicStructures.pdf}
@@ -69,7 +72,76 @@ The following diagram shows how different algebraic structures are combined with
 Note that in the figure above, I have used some non-standard notations to make the figure concise. For instance, the expression ``\textbf{$ R_{\text{mon}} @ M \ \text{with $\cdot$}$}'' means that the monoid structure in the field $ R $ acts on the group $ M $ with the ($ \cdot $) symbol. Or the expression ``\textbf{$ \times $ in $ M_{\text{mon}} $ satisfies homogen cond.}'' means the multiplication operation of the monoid structure inside the ring $ M $ satisfies the homogeneity condition (see the definition of the algebra in \autoref{def:algebra} ). Finally, $ M_{g} $ means the group structure inside the ring $ M $.
 
 
+\subsection{Directional Derivative}
+The notion of directional derivative is very central in generalization of the multi-variable calculus manifolds. 
 
+\begin{definition}[Directional derivative]
+	\label{def:directionalDerivative}
+	Let $ f:U \to \R $ where $ U \subset \R^n $ and $ f \in C^\infty(U) $. Then we define a directional derivative at $ p\in U $ and in the direction $ v \in T_p(\R^n) $ as 
+	\[ D_v f \big|_p = \lim_{t\to 0 } \frac{f(p + tv) - f(p)}{t} = \frac{d}{dt}\big|_{t=0} f(p+vt). \]
+	We denote the set of all directional derivatives at $ p $ by $ \mathcal{D}(C_p^\infty(U)) $.
+\end{definition}
+\begin{remark}
+	By the chain rule we have
+	\[ D_v f \big|_p = \sum_{i=1}^{n} v^i \frac{\partial f}{\partial x^i}(p). \]
+\end{remark}
+
+
+\begin{proposition}[Directional derivative is $ R-$linear map satisfying the Leibniz rule]
+	A directional derivative $ D_v $ at point $ p $ is a $ \R-$linear operator that maps  \[f\in C_p^\infty \mapsto D_vf \in \R\] such that satisfies the Leibniz rule,
+	\[ D_v(fg) = D_v(f)g + fD_v(g). \]
+\end{proposition}
+\begin{proof}
+	Let $ D_v \in \mathcal{D}(C_p^\infty(U)) $. Then by the remark above we can write it as  
+	\[ D_v f \big|_p = \sum_{i=1}^{n} v^i \frac{\partial f}{\partial x^i}(p). \]
+	Since each of the partial derivatives above are $ \R-$linear and satisfy the Leibniz rule, then $ D_v $ inherits those properties as well.
+\end{proof}
+
+\section{Tangent Spaces and Derivations}
+
+\begin{definition}[Informal definition of tangent space]
+	Let $ p \in \R^n $. A tangent space at $ p $ denoted by $ T_p(\R^n) $ is a linear space containing all of vectors emerging from $ p $.
+\end{definition}
+\begin{remark}
+	Note that the definition above is an informal definition of the tangent space. For a more formal and technical definition, we can use the notion of curves, or the notion of manifolds. We wont' touch this level of technicality in the early chapters.
+\end{remark}
+
+To distinguish between points in $ \R^n $ and vectors in $ T_p(\R^n) $ we denote a point $ p\in\R^n $ by 
+\[ p = (p^1, p^2, \cdots, p^n), \]
+while for a vector $ v \in T_p(\R^n) $ we write
+\[ v = \<  v_1,v_2,\cdots,v_n \>. \]
+
+As we observed in \autoref{def:directionalDerivative}, we have a natural one-to-one correspondence between each $  v\in T_p(\R^n) $ and a $ D_v \in \mathcal{D}(C_p^\infty(U)) $, i.e. these linear spaces are isomorphic.
+
+\begin{proposition}
+	Let $ p \in\R^n $. The set of all directional derivatives at $ p $, i.e. $ \mathcal{D}(C_p^\infty(U)) $ is isomorphic to the tangent space at $ p $ i.e. $ T_p(\R^n) $.
+\end{proposition}
+\begin{proof}
+	Proof follows immediately from the following natural association in the definition of the directional derivative.
+	
+	\[ D_v f \big|_p \longleftrightarrow \sum_{i=1}^{n} v^i \frac{\partial f}{\partial x^i}(p) \]
+\end{proof}
+
+
+
+\begin{definition}[Point derivations at a point]
+	Let $ p \in \R^n $, and $ U $ an open set containing $ p $. A \textbf{derivation at $ p $} or a \textbf{point-derivation of $ C_p^\infty(U) $} is a \emph{linear} operator
+	\[ D: C_p^\infty(U) \to \R \]
+	such that satisfies the Leibniz property, i.e. for $ f,g \in C_p^\infty(U) $ we have
+	\[ D(fg) = D(f)g - fD(g). \]
+	We denote the set of all such maps as $ \mathbb{D}(C_p^\infty(U)) $.
+\end{definition}
+
+\begin{remark}
+	We know that a directional derivative at $ p $ satisfies the Leibniz rule. Thus $ \mathcal{D}(C_p^\infty(U)) \subset \mathbb{D}(C_p^\infty(U))$. On the other hand, we know that both $ \mathcal{D} $ and $ \mathbb{D} $ are linear spaces. So $ \mathcal{D}(C_p^\infty(U)) $ is in fact a \emph{linear subspace} of $\mathbb{D}(C_p^\infty(U))$. Thus the zero of these two linear spaces match.
+\end{remark}
+
+
+The following theorem is very important as it states that all of the point derivations are in fact the directional derivatives and vise-versa. This is a very interesting result, since we are in fact stating that an operator is a point derivative if and only if it satisfies an algebraic property. This means that we can abstract away all of the detailed limit processes in the definition of derivative, and replace that with an axiomatic requirement which is a purely algebraic property. We can see these kind of ideas, i.e. axiomatic generalization all over the mathematics. For instance, in the PDE theory, at some point we need to relax the definition of derivative and talk about the weak derivatives. To do so, we get an identity that derivatives satisfy and carefully use that identity to define the notion of weak derivatives. 
+
+\begin{theorem}[The set of all point-derivations is isomorphic to the set of all directional derivatives]
+	Let $ p \in U \subset \R^n $. Then $ \mathbb{D}(C_p^\infty(U)) $ is isomorphic to $ \mathcal{D}(C_p^\infty(U)) $.
+\end{theorem}
 
 \section{Solved Problems}
 \begin{problem}[Algebra structure on $ C_p^{\infty} $]
