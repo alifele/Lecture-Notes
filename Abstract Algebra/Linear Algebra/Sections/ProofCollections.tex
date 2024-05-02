@@ -1,0 +1,15 @@
+\chapter{Proof Collections}
+
+
+Here in this section I will collect some of the relevant proofs for the linear algebra.
+
+
+\begin{thmbox}{}
+	Let $ U,V $ be linear spaces and let $ A:U\to V $ be a linear operator. Then $ A $ is injective if and only if its kernel is a singleton (i.e. a set with just one element).
+\end{thmbox}
+
+\begin{proof}
+	For the first direction, we assume the map is injective and we prove that the kernel is singleton. First, observe that $ 0 \in U $ is in the kernel (from the linearity). I.e. $ A(0) = 0 $. Thus $ \ker(A) $ has at least one element. We proceed by contradiction. Let $ x\in U $ such that $  x\in \ker(A) $ that is not equal to $ 0 $, i.e. $ x\neq 0 $. Since $ x\in \ker(A) $ then $ A(x) = 0 = A(0)$. From linearity $ A(x-0) = 0 = A(0) $. Since $ A $ is injective, then $ x-0 = 0 $ which implies $ x=0 $ that contradicts our assumption that $  x\neq 0 $. Thus $ \ker(A) = \set{0} $.
+	
+	\noindent For the converse, we want to prove $ \ker(A) $ being a singleton implies $ A $ is injective. We proceed with proving the contrapositive. If $ A $ is not injective, then $ \exists x,y \in U, x\neq y $ such that $ f(x) = f(y) $. From linearity $ f(x-y) = 0 $. Thus $ x-y \neq 0 $ is in the kernel. Thus $ \ker(A) $ contains at least two elements, i.e. $ 0, x-y $. 
+\end{proof}

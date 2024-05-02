@@ -1,0 +1,181 @@
+\chapter{Basics of Asymptotic Analysis}
+
+\section{Basic Notions and Definitions}
+
+One of the central theorems of the asymptotic analysis is the Taylor's theorem which is stated as below.
+
+\begin{theorem}[Taylor's approximation theorem with reminder]
+	Let $ f:(a,b) \to \R $ be $ n+1 $ times differentiable. fix $ x_0 \in (a,b) $. Then for $ x\in (a,b) $ we have
+	\[ f(x) = f(x_0) + f'(x_0)(x-x_0) + \frac{f''(x_0)}{2!}(x-x_0)^2 + \cdots + \frac{f^{(n)}(x_0)}{n!}(x-x_0)^n + \frac{f^{(n+1)}(\xi)}{(n+1)!}(x-x_0)^{n+1} \]
+	for some $ \xi $ between $ x $ and $ x_0 $. This form of reminder is called the Lagrange form.
+\end{theorem}
+\begin{remark}
+	There are also other possible forms of the reminder such as the Peano form, Cauchy form,  Schlömilch form, and etc. For more details consult the Wikipedia page of the Taylor's approximation theorem.
+\end{remark}
+
+\begin{example}
+	Let $ f(x) = \sin(x) $. Then from the Taylor's theorem with remainder we can write
+	\[ \sin(x) = x - \frac{\sin(\xi)}{2}x^2 \]
+	where $ \xi \in (0,x). $ Note that in the expression above, the right hand side is not an approximate of $ \sin(x) $, but it is actually $ \sin(x) $. Note that in the reminder, we have $ \xi $ that belongs to $ (0,x) $, and for different values of $ x $ we might find a different $ \xi $ that works. \textbf{So don't confuse the theorem above with the Taylor's series which is in fact an infinite sum} where for $  \sin(x) $ we have
+	\[ \sin(x) = x - x^3/3! + x^5/5! - x^7/7! + \O(x^9) \]
+\end{example}
+
+
+
+\begin{definition}[Big-O notation]
+	Let $ f $ and $ g $ be functions from $ \R $ to $ \R $ ``\textbf{where $ f(x), g(x)\to 0 $, or $ f(x),g(x) \to \infty $ as $ x \to x_0 $}''\footnote{see the Be Careful Here section below}. We write
+	\[ f = \O(g) \qquad \text{as}\ x \to x_0 \]
+	and read ``\emph{f is big-Oh of g}, if $ \exists k,\delta >0 $ such that
+	\[ \abs{x - x_0} < \delta \implies \abs{f(x)} < k \abs{g(x)} \]
+\end{definition}
+
+\begin{beCareful}
+	I searched all over the internet, and the definition above without the expression inside the quotation mark happens to be the standard one. But I think there is a problem with this definition, as it leads to some contradictions. For instance, define the following functions
+	\[ f(x) = 100x^2 + 1, \qquad g(x) = \frac{x}{100} + 1.\]
+	Then, following the definition above, I can both show that $ f = \O(g) $ and $ g = \O(f) $, while we know that the function $ f $ goes to 1 faster than $ g $. To show $ f = \O(g) $, let $ \delta = 5 $. Then $ \abs{f(x)} < 10^4 \abs{g(x)} $ for all $ \abs{x} < 5 $. And to show $ g = \O(f) $, let $ \delta = 5 $. Then we will have $ \abs{g(x)} < 2 \abs{f(x)} $ for all $ \abs{x} < 5 $. This issue will be fixed, and the definition will make the correct sense, if we assume $ f(x) \to 0$ and $ g(x)\to 0 $ as $ x \to x_0 $.
+\end{beCareful}
+
+\begin{definition}[Little-o definition]
+	Let $ f $ and $ g $ be functions from $ \R $ to $ \R $ ``\textbf{where $ f(x), g(x)\to 0 $, or $ f(x),g(x) \to \infty $ as $ x \to x_0 $}''\footnote{see the Be Careful Here section above}. We write
+	\[ f = \o(g) \qquad \text{as}\ x \to x_0 \]
+	and read ``\emph{f is little-Oh of g}, if $ \forall \delta > 0 $, $ \exists k >0 $ such that
+	\[ 0< \abs{x - x_0} < \delta \implies \abs{f(x)} < k \abs{g(x)}. \] 
+\end{definition}
+
+
+\begin{observation}[Intuitive meaning of the big-O and little-o notation]
+	First, note that we use the big-O notation to compare two functions of the same kind of behaviour, i.e. both goes to 0 or both goes to $ \infty $. Then, when we write $ f = \O(g)\ \text{as}\ x\to x_0$, then it means that the function $ f $ will eventually be smaller than an scaled version of $ g $ as we get closer to $ x_0 $. However, if $ f = \o(g) $, then $ f(x) $ will get smaller than any scaled version of $ g(x) $ as $ x \to x_0 $.
+\end{observation}
+
+Using the notion of limit superior we can define the the order notation in an alternative way.
+
+\begin{definition}
+	Let $ f,g: (a,b)\to\R $ and $ x_0\in(a,b) $, where $ f(x),g(x)\to\infty $ or $ f(x),g(x)\to 0 $ as $ x\to x_0 $. Then we write $ f = \O(g) $ if
+	\[ \limsup_{x\to x_0} \abs{\frac{f(x)}{g(x)}} = L < \infty, \]
+	and $ f = \o(g) $
+	if 
+	\[ \limsup_{x\to x_0} \abs{\frac{f(x)}{g(x)}} =0 \]
+	Note that in both cases we assume $ g(x) $ is not zero on an open neighborhood of $ x_0 $.
+\end{definition}
+\begin{proof}
+	Here, we prove that these two definitions are equivalent. For the first part we want to show that $ \limsup_{x\to x_0} \abs{\frac{f(x)}{g(x)}} = L < \infty $ is equivalent to $ f = \O(g) \ \text{as}\ x\to x_0$. To show this, assume $ \limsup_{x\to x_0} \abs{\frac{f(x)}{g(x)}} = L < \infty $. Then from the definition of $ \limsup $, we know that $ \forall \epsilon > 0 $ there exists $ \delta > 0 $ such that $ \abs{x - x_0 } < \delta $ then $ \abs{\frac{f(x)}{g(x)}} < L + \epsilon $. Let $ \epsilon = 1 $, and define $ \hat{L} = L + 1 $. Then we know $ \exists \delta > 0 $ such that for all $ \abs{x - x_0}<\delta $ we have $ \abs{\frac{f(x)}{g(x)}} < \hat{L} $. This implies $ \abs{f(x)} < \hat{L} \abs{g(x)} $. To show the converse, assume $ f = \O(g) \ \text{as}\ x\to x_0 $. Then there exists $ k,\delta > 0 $ such that $ \abs{x - x_0} < \delta $ implies $ \abs{f(x)} < k \abs{g(x)}$. Then we have $ \abs{\frac{f(x)}{g(x)}} < k $ for all $ \abs{x - x_0}< \delta $. From the definition of the limsup we can conclude that $ \limsup_{x\to x_0} \abs{\frac{f(x)}{g(x)}} < L $.
+	
+	\noindent For the second case, we want to show $ \limsup_{x\to x_0} \abs{\frac{f(x)}{g(x)}} = 0 $ if and only if $ f = \o(g)\ \text{as}\ x\to x_0 $. For the forward direction, assume $ \limsup_{x\to x_0} \abs{\frac{f(x)}{g(x)}} = 0 $. Then $ \forall \epsilon>0 $ there exists $ \delta > 0 $ such that $ \abs{x - x_0} < \delta  $ implies $ \abs{\frac{f(x)}{g(x)}} < \epsilon $. This is exactly the definition of the little-O, thus we can conclude $ f = \o(g) $. For the converse, assume $ f= \o(g)\ \text{as}\ x\to x_0 $. Then $ \forall k >0 $ there exists $ \delta > 0 $ such that $ \abs{x - x_0}<\delta $ implies $ \abs{f(x)} < k \abs{g(x)}$. Since in the definition we have assumed that $  g(x) \neq 0 $ in a neighborhood of $ x_0 $, then we can write $ \abs{\frac{f(x)}{g(x)}} < k $. Since for every $ k > 0 $ we can find a $ \delta $ that holds the inequality, then from the definition of suprimum we can write
+	\[ \limsup_{x\to x_0}\abs{\frac{f(x)}{g(x)}} = 0, \]
+	which completes the proof.
+\end{proof}
+
+\begin{corollary}
+	Let $ f,g: (a,b) \to \R $, and fix $ x_0 \in (a,b) $. Assume $ g(x) \neq 0 $ in an open neighborhood of $ x_0 $. Also, assume $ f(x),g(x) \to 0 $ or $ f(x),g(x)\to\infty $ as $ x \to x_0 $. Then we have
+	\begin{align*}
+		 \lim_{x\to x_0}\abs{\frac{f(x)}{g(x)}} = L < \infty \qquad &\implies \qquad f=\O(g)\ \text{as}\ x\to x_0,\\
+		 \lim_{x\to x_0}\abs{\frac{f(x)}{g(x)}} =0  \qquad &\implies \qquad f=\o(g)\ \text{as}\ x\to x_0. 
+	\end{align*}
+\end{corollary}
+\begin{proof}
+	The proof follows immediately from that fact that for any function $ f(x) $, $ \lim_{x\to x_0}f(x) = L $ implies $ \limsup_{x\to x_0}f(x) = L  $. 
+\end{proof}
+\begin{corollary}
+	Let $ f,g: (a,b)\to \R $ and fix $ x_0 \in (a,b) $. Then
+	\[ f = \o(g) \implies f = \O(g). \]
+\end{corollary}
+\begin{proof}
+	We know $ f = \o(g) $, Let $ k = 1 $. Then $ \exists \delta > 0 $ such that $ \abs{x - x_0 } < \delta $ implies $ \abs{f(x)} < k \abs{g(x)} $. Since we have found the pair $ (k,\delta) $, then we also have $ f = \O(g) $. This is also very clear from the alternative definition of the orders via limsups. 
+\end{proof}
+
+There are some important properties of the orders that comes in handy when dealing with different situations. These are summarized in the observation box below.
+
+\begin{observation}
+	The followings are some important properties of the order symbol that is very useful for quick calculations.
+	\begin{itemize}
+		\item $ f = O(1)\ \text{as}\ x \to x_0 $ implies $ f $ is \textbf{bounded} in an open neighborhood of $ x_0 $. \\
+		This is because, from the definition, we know that $ f $ will become eventually (i.e. if $ x $ is close enough to $ x_0 $) smaller than some scaled version of $ g(x) \equiv 1 $ function, thus implies $ f $ is bounded near $ x_0 $.
+		\item $ f = \o(1)\ \text{as}\ x \to x_0  $  implies $ f \to 0 $ as $ x \to x_0 $. \\
+		This is because $ f = \o(g) $ implies $ f $ will be smaller than any scaled version of $ g $ when $ x $ is close enough to $ x_0 $. Thus $ f = \o(1) \text{as}\ x \to x_0  $ literally translates to $ \forall \epsilon>0 $, there exists $ \delta > 0 $ such that $ \abs{x - x_0} < \delta $ implies $ \abs{f(x)} < \epsilon $, hence $ f(x) \to 0 $ as $ x \to x_0 $.
+	\end{itemize}
+\end{observation}
+
+The following definition box introduces two very important symbols that will be used extensively through out the text. 
+
+\begin{definition}[A tale of two symbols] 
+	The symbol $ \ll $ used for two functions, i.e. $ f(x) \ll g(x) $ as $ x\to x_0 $ means $ f = \o(g) $ as $ x\to x_0 $.  
+	
+	\noindent The symbol $ \approx $ dose not have a precise definition and it is used to designate an approximate numerical value. For instance $ \pi \approx 3.1415 $.
+\end{definition}
+
+
+
+\newpage
+\section{Solved Problems}
+\begin{problem}
+	What values of $ \alpha $, if any, yield $ f = O(x^\alpha) $ as $ x \to 0 $.
+	\begin{enumerate}[(a),noitemsep]
+		\item $ f(x) = \sqrt{1 + x^2}. $
+		\item $ f(x) = x \sin(x). $
+		\item $ f(x) = (1-e^x)^{-1}. $
+		\item $ f(x) = \ln(1+x) $.
+		\item $ f(x) = x\ln(x) $.
+		\item $ f(x) = \sin(1/x) $.
+		\item $ f(x) = \sqrt{x + a} $ where $ 0\leq a \leq 1 $.
+	\end{enumerate}
+\end{problem}
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item In order to have $ f = \O(x^\alpha) $ as $ x \to x_0 $, we need to have 
+		\[ \lim_{x\to 0} \frac{\sqrt{1+x^2}}{x^\alpha}. \]
+		Since the numerator goes to 1 as $ x \to 0 $, then we must have $ \alpha < 0 $. Then we will have 
+		\[ \lim_{x\to 0} \frac{\sqrt{1+x^2}}{x^\alpha} = 0 \qquad \text{for}\ \alpha < 0. \]
+		Thus for the negative values of $ \alpha $ we have $ f = o(g) $ as $ x\to x_0 $, which also implies $ f = \O(g) $ as $ x\to x_0 $ as $ x\to x_0 $.
+		
+		\item We need to have 
+		\[ \lim_{x\to 0} \frac{x\sin(x)}{x^\alpha} = L < \infty. \]
+		From the Taylor's theorem with remainder we have 
+		\[ \sin(x) = x - \cos(\xi)x^3/3! \qquad\text{for some } \xi \in (0,x). \]
+		Thus
+		\[ \lim_{x\to 0} \frac{x\sin(x)}{x^\alpha} = \lim_{x\to 0} \frac{x^2 - \cos(\xi)x^4/3!}{x^\alpha}. \]
+		This implies $ \alpha \leq 2 $ so that the limit above is finite. Since otherwise, by applying the l'Hopital's rule two times we can see that the limit diverges to $ \infty $. In a nutshell
+		\[ f = \O(g) \ \text{as } x\to 0, \qquad \text{when } \alpha \leq 2 \]
+		and also
+		\[ f = \o(g) \ \text{as } x\to 0, \qquad \text{when } \alpha < 2 \]
+		
+		\item First, we want to calculate the series expansion of $ f $ at $ 0 $ (which will be its Laurent expansion). To do so, we can write
+		\[ f(x) = \frac{1}{1-e^{-x}} = \frac{1}{1-(1-x+x^2/2 + \O(x^3))} = \frac{1}{x - x^2/2 + \O(x^3)} = \frac{1}{x}\cdot \frac{1}{1-x/2+ \O(x^2)} \]
+		Now we can simply the term above using the geometric series
+		\[ f(x) = \frac{1}{x} (1+x/2 + \O(x^2)) = \frac{1}{x} + \frac{1}{2} + \O(x) \quad \text{as } x\to 0. \]
+		In order to $ f = \O(x^\alpha) $, then $ x^\alpha $ should go to infinity faster than $ f $. Thus $ \alpha \leq 0 $. To write this mathematically, we want the following limit to be finite. Then
+		\[ \lim_{x\to 0} \frac{1/x + 1/2 + \O(x)}{x^\alpha} = \lim_{x\to 0} x^{-1-\alpha} + 1/2 x^{-\alpha} + \O(x^{1-\alpha}).  \]
+		Thus we need to have
+		\[ -1-\alpha \geq 0 \quad \wedge \quad -\alpha\geq0 \quad \wedge \quad  1-\alpha \geq 0 \]
+		The intersection of the solutions of the inequalities above is
+		\[ \alpha \leq -1. \] 
+		Thus in summary
+		\[ f = \O(x^\alpha) \quad \text{as } x\to 0 \qquad \text{when } \alpha \leq -1, \]
+		and
+		\[ f = \o(x^\alpha) \quad \text{as } x\to 0 \qquad \text{when } \alpha < -1. \]
+		
+		\item From the Taylor's theorem with remainder, we have 
+		\[ \ln(1+x) = x - x^2/2 + \frac{x^3}{3(1+\xi)^3}\quad \text{for some } \xi \in (0,x). \]
+		Then for $ \alpha \leq 1 $ we have $ f=\O(x^\alpha) $, and for $ \alpha < 1 $ we have $ f = \o(x^\alpha) $.
+		
+		\item Still thinking how to solve.
+		
+		\item The function given by $ f(x) = \sin(1/x) $ oscillates between -1 and 1 very rapidly as $ x\to 0 $. Thus for any positive value of $ \alpha $, i.e. $ \alpha > 0 $, for any $ \delta >0 $ there are infinity many points, denoted by $ Z_\delta $ such that $ \sin(x) = 1 $ for all $ x\in Z_\delta $. Thus $ f\neq \O(x^\alpha) $ for any positive value of $ \alpha $. However, for $ \alpha \leq 0 $, we have $ f = \O(x^\alpha) $. That is because, in the case $ \alpha = 0 $, then since $ \sin(1/x) $ is bounded, then it let $ k = 2, \delta =1 $. In the case where $ \alpha < 0 $ let $ \delta = 1 $ and $ k=1 $. Thus $ \sin(1/x)  = \O(x^\alpha) $ for all $ \alpha< 0 $. Note that for $ \alpha = 0 $, $ f \neq \o(x^\alpha) $.  However, for $ \alpha < 0 $ we also have $ f = \o(x^\alpha) $, i.e. in the case where $ \alpha < 0 $ the function given by $ \sin(1/x) $ will eventually be smaller than any scaled version of $ x^\alpha $ when $ x $ gets sufficiently close to 0. 
+	\end{enumerate}
+\end{solution}
+
+
+\begin{problem}
+	Define the function $ f:\R \to \R $ as follows
+	\[ f(x) = \begin{cases}
+		0 \qquad &x\leq 0,\\
+		e^{-1/x} \qquad &x > 0.
+	\end{cases} \]
+	Show that $ f = \o(x^n) $ for all $ n \in \N $.
+\end{problem}
+\begin{solution}
+	Since $ f(x) \to 0 $ as $ x \to 0 $, and $ g(x) = x^n \to 0$ as well (for all $ n \in \N $) we can use the limit criteria to determine the order. We compute
+	\[ \lim_{x\to 0}\frac{f(x)}{g(x)} = \lim_{x\to 0}\frac{e^{-1/x}}{x^n} = \lim_{y \to \infty} \frac{e^{-y}}{(1/y)^n} = \lim_{y\to \infty} \frac{y^n}{e^y}\]
+	Now we can apply the l'Hopital law for $ n $ times then we will get
+	\[ \lim_{x\to 0}\frac{f(x)}{g(x)} = 0. \]
+	This proves that $ f = \o(g) $.
+\end{solution}

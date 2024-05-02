@@ -24,6 +24,7 @@
 \usepackage{caption}
 \usepackage{placeins}
 
+\usepackage{fontawesome5}
 \usetikzlibrary{matrix}
 \usetikzlibrary{arrows,automata}
 
@@ -88,7 +89,7 @@
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\Q}{\mathbb{Q}}
 \newcommand{\Pset}[1]{\mathcal{P}(#1)}
-\renewcommand{\o}{\circ}
+\renewcommand{\o}{o}
 \newcommand{\oo}{one-to-one\xspace}
 \renewcommand{\abs}[1]{|#1|}
 \renewcommand{\Re}[1]{\operatorname{Re}(#1)}
@@ -165,7 +166,7 @@
 \renewcommand{\ket}[1]{\lvert #1 \rangle}
 \renewcommand{\bra}[1]{\langle #1 \rvert}
 \renewcommand{\braket}[2]{\langle #1 \lvert #2 \rangle}
-
+\renewcommand{\O}{\mathcal{O}}
 
 
 
@@ -380,7 +381,8 @@ newparttoc, % Required for writing the part toc entry number in a standard way (
 \newtheorem{corollaryT}{Corollary}[chapter]
 \newtheorem{lemmaT}{Lemma}[chapter]
 \newtheorem{summaryT}{Summary}[chapter]
-\newtheorem{obsBoxT}{Observation}[section]
+\newtheorem{obsBoxT}{Observation \faEye[regular]}[section]
+\newtheorem*{beCarefulT}{Be Careful Here \faHiking\faMountain}
 
 \theoremstyle{blacknumNOTboxExample}
 \newtheorem{exampleT}{Example}[chapter]
@@ -466,6 +468,25 @@ leftmargin=0cm, % Outside left margin width
 rightmargin=0cm % Outside right margin width
 ]{theoremBox}
 
+\newmdenv[
+skipabove=7pt, % Whitespace above box
+skipbelow=7pt, % Whitespace below box
+rightline=true, % Right line visible
+leftline=true, % Left line visible
+topline=true, % Top line visible
+bottomline=true, % Bottom line visible
+backgroundcolor=HighLight!5, % BackgroundColor
+linecolor=LowLight, % Border color
+linewidth=2pt, % Border width
+innerleftmargin=5pt, % Inside left margin width
+innerrightmargin=5pt, % Inside right margin width
+innertopmargin=0pt, % Inside top margin height
+innerbottommargin=5pt, % Inside bottom margin height
+leftmargin=0cm, % Outside left margin width
+rightmargin=0cm % Outside right margin width
+]{thinkMoreBox}
+
+
 %% Proposition box
 \newmdenv[
 skipabove=7pt, % Whitespace above box
@@ -516,6 +537,7 @@ rightmargin=0cm % Outside right margin width
 \newenvironment{summary}{\begin{summaryBox}\begin{summaryT}}{\end{summaryT}\end{summaryBox}}
 \newenvironment{corollary}{\begin{lemmaCorBox}\begin{corollaryT}}{\end{corollaryT}\end{lemmaCorBox}}
 \newenvironment{example}{\begin{exampleT}}{\hfill{\tiny\ensuremath{\blacksquare}}\end{exampleT}}
+\newenvironment{beCareful}{\begin{thinkMoreBox}\begin{beCarefulT}}{\end{beCarefulT}\end{thinkMoreBox}}
 
 \renewenvironment{problem}{\begin{problemT}}{\end{problemT}}
 
