@@ -125,6 +125,7 @@ As we observed in \autoref{def:directionalDerivative}, we have a natural one-to-
 
 
 \begin{definition}[Point derivations at a point]
+	\label{def:pointDerivation}
 	Let $ p \in \R^n $, and $ U $ an open set containing $ p $. A \textbf{derivation at $ p $} or a \textbf{point-derivation of $ C_p^\infty(U) $} is a \emph{linear} operator
 	\[ D: C_p^\infty(U) \to \R \]
 	such that satisfies the Leibniz property, i.e. for $ f,g \in C_p^\infty(U) $ we have
@@ -137,11 +138,49 @@ As we observed in \autoref{def:directionalDerivative}, we have a natural one-to-
 \end{remark}
 
 
+The following Lemma follows form the algebraic property of the point derivation.
+
+\begin{lemma}
+	\label{lem:PointDerivationOfConstantFunction}
+	Let $ D $ be a point derivation of $ C_p^\infty(U)$. Then $ D(c) = 0 $ for any constant function  $ c $. 
+\end{lemma}
+\begin{proof}
+	Let $ c $ be a constant function, i.e. a real number. Since $ D $ is $ R- $linear, then we can write $ D(c) = c D(1). $ On the other hand, from the Leibniz property we can write
+	\[ D(1) = D(1 \cdot 1) = D(1) + D(1) = 2D(1) \]
+	Thus $ D(1) = 0 $, which implies $ D(c) = 0 $.
+\end{proof}
+
 The following theorem is very important as it states that all of the point derivations are in fact the directional derivatives and vise-versa. This is a very interesting result, since we are in fact stating that an operator is a point derivative if and only if it satisfies an algebraic property. This means that we can abstract away all of the detailed limit processes in the definition of derivative, and replace that with an axiomatic requirement which is a purely algebraic property. We can see these kind of ideas, i.e. axiomatic generalization all over the mathematics. For instance, in the PDE theory, at some point we need to relax the definition of derivative and talk about the weak derivatives. To do so, we get an identity that derivatives satisfy and carefully use that identity to define the notion of weak derivatives. 
 
 \begin{theorem}[The set of all point-derivations is isomorphic to the set of all directional derivatives]
-	Let $ p \in U \subset \R^n $. Then $ \mathbb{D}(C_p^\infty(U)) $ is isomorphic to $ \mathcal{D}(C_p^\infty(U)) $.
+	Let $ p \in U \subset \R^n $. Then $ \mathbb{D}(C_p^\infty(U)) $ is isomorphic to $ T_p(\R^n) $.
 \end{theorem}
+
+\begin{proof}
+	Let $ \phi : T_p(\R^n) \to \mathbb{D}(C_p^\infty(U))  $ be a linear isomorphism between the linear spaces. We need to show that this map is surjective and bijective. To show the bijectivity, we use the fact that a linear map is bijective if and only if its kernel is a singleton. To find the kernel of the map, let need to find all points in $ T_p(\R^n) $ that maps to the zero of $ \mathbb{D} $. As we discussed in the remark of \autoref{def:pointDerivation}, the zero $ \mathbb{D} $ is the same as the zero directional derivative, i.e. $ D_v = 0 $. We need to prove that $ v $ is the zero vector, i.e. the zero of $ T_p(\R^n) $. To do this, we apply the $ D_v $ to the coordinate functions
+	\[ 0 = D_v(x^i) = \sum_{j=1}^n v^j \frac{\partial x^i}{\partial x^j} = v^j\]
+	Thus $ v = 0 \in T_p(\R^n) $, thus $ \phi $ is injective. In other words, the injectivity follows immediately from $ T_p(\R^n) $ being isomorphic to $  \mathcal{D} $, and $  \mathcal{D} $ being a linear subspace of $ \mathbb{D} $.
+	
+	To prove the surjectivity, let $ D $ be a point derivation at $ p $, and let $ (f,V) $ be a representative of a germ in $ C_p^\infty $. Marking $ V $ smaller if necessary, we may assume that $ V $ is an open ball, hence star shaped. By Taylor's approximation theorem we know there exists $ C^\infty $ functions $ g_i(x) $ such that
+	\[ f(x) = f(p) + \sum_{i=1}^{n} (x^i-p^i)g_i(x),\qquad g_i(p) = \frac{\partial f}{\partial x^i}(p). \]
+	From Lemma \autoref{lem:PointDerivationOfConstantFunction}, we know that $ D(f(p)) = 0$ as well as $ D(p^i) = 0 $. Thus we can write
+	\[ D(f(x)) = \sum_{i=1}^{n}(D(x^i)g_i(x) + (p^i - p^i)D(g_i(x))) =  \sum_{i=1}^{n}D(x^i)g_i(x) = \sum_{i=1}^{n}D(x^i)\frac{\partial f}{\partial x^i}(p). \]
+	This is in fact a directional derivative in the direction $ v = \< D(x^1), D(x^2), \cdots, D(x^n) \> $. So for every $ D $ in $ \mathbb{D} $ we can find a vector in $ T_p(\R^n) $. Thus $ \phi $ is surjective.
+\end{proof}
+
+\begin{observation}
+	Let $ D $ be a point derivation of $ C_p^\infty (U) $. This corresponds to the directional derivative at $ p $ corresponding to the vector 
+	\[ v = \< D(x^1), D(x^2), \cdots, D(x^n) \>. \]
+\end{observation}
+
+\begin{observation}
+	Let $ p \in U \subset \R^n $. Then 
+	\[ T_p(\R^n) \equiv \mathcal{D}(C_p^\infty(U)) \equiv \mathbb{D}(C_p^\infty(U)), \]
+	i.e. they are all isomorphic linear spaces.
+\end{observation}
+
+Because of the observation above, we identify the standard basis $ \set{e^1, e^2, \cdots, e^n} $ with the partial derivatives $ \set{\frac{\partial}{\partial x^1}, \frac{\partial}{\partial x^2}, \cdots,\frac{\partial}{\partial x^n}}. $ Thus we can write a vector $ v \in T_p(\R^n) $ as 
+\[ v = \sum_{i=1}^{n} v^i \frac{\partial}{\partial x^i}. \]
 
 \section{Solved Problems}
 \begin{problem}[Algebra structure on $ C_p^{\infty} $]

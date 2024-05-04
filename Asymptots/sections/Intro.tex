@@ -95,6 +95,19 @@ There are some important properties of the orders that comes in handy when deali
 	\end{itemize}
 \end{observation}
 
+\begin{lemma}
+	\label{lem:LittleOofLittleOsummed}
+	Let $ g: U \to \R $. Then we have
+	\[ \o(g + \o(g)) = \o (g) \qquad \text{as } x \to x_0. \]
+\end{lemma}
+\begin{proof}
+	Let $ f $ be a function such that $ f = \o(g + \o(g)) $ as $ x \to x_0 $. Fix $ k $. Then $ \exists \delta > 0 $ such that $ 0 < \abs{x - x_0} < \delta $ implies $ \abs{f(x)} < k/2\abs{g(x) + \o(g(x))}$. Then from the triangle inequality, we can write
+	\[   \abs{f(x)} < k/2\abs{g(x)} + k/2\abs{\o(g(x))}. \]
+	Also, we can find $ \delta_1 > 0 $ such that $ 0<\abs{x - x_0} < \delta_1 $ implies $ \abs{o(g(x))} < 1 \abs{g(x)} $. Let $ \hat{\delta} = \min\set{\delta, \delta_1} $. Then $ 0<\abs{x - x_0} < \hat{\delta} $ implies 
+	\[ \abs{f(x)} < k\abs{g(x)}.\] 
+	This completes the proof.
+\end{proof}
+
 The following definition box introduces two very important symbols that will be used extensively through out the text. 
 
 \begin{definition}[A tale of two symbols] 
@@ -102,6 +115,53 @@ The following definition box introduces two very important symbols that will be 
 	
 	\noindent The symbol $ \approx $ dose not have a precise definition and it is used to designate an approximate numerical value. For instance $ \pi \approx 3.1415 $.
 \end{definition}
+
+
+\subsection{Asymptotic Approximation}
+Here in this section we will go through more formal definitions of the idea of approximating a function. The following definition is a key.
+
+\begin{definition}[Asymptotic approximation]
+	Let $ f,\phi: U \to \R^n $, where $ U $ is an open subset of $ \R^n $. Let $ x_0 \in U $. We say $ \phi $ is \emph{asymptotic approximation} of the function $ f $, if we have
+	\[ f(x) = \phi(x) + \o(\phi) \qquad \text{as} \qquad x\to x_0.\]
+	We denote this as $ f \sim \phi $ as $ x \to x_0 $.
+\end{definition}
+
+\begin{proposition}[Asymptotic approximation defines an equivalence relation]
+	Let $ \sim $ be a relation on  the set $ C^\infty(U) $ where $ U \subset \R $, given by
+	\[ f \sim g   \qquad \text{then} \qquad f = g + \o(g) \quad \text{as} \quad x\to x_0. \]
+	i.e. $ g $ is an asymptotic approximation of $ f $ as $ x\to x_0 $. The relation $ \sim $ defines an equivalence relation.
+\end{proposition}
+
+\begin{proof}
+	\textbf{Reflexivity.} Since the constant function $ O(x) \equiv 0 $ is little-O of any function, then, for any $ C^\infty(U\ni x_0) $ function we can write
+	\[ f(x) = f(x) + \o(0) \qquad \text{as } x\to x_0. \]
+	Thus the reflexivity holds, i.e. $ f \sim f $ for all $ f \in C^\infty(U) $
+	
+	\noindent \textbf{Symmetry.} Let $ f,g \in C^\infty(U) $ such that $ f \sim g $. Then we can write $ f(x) = g(x) + \o(g(x)) $ as $ x\to x_0 $. This implies $ \o(f(x)) = \o(g(x) + \o(g(x))) $. For the right hand side, from \autoref{lem:LittleOofLittleOsummed} we have
+	\[ \o(g + \o(g)) = \o(g). \]
+	Thus we have $ \o(f)  = \o(g)$. Finally we can get
+	\[ \phi = f + \o(\phi) = f + \o(f). \]
+	This shows that the relation is symmetric, i.e. $ f \sim g $ implies $ g \sim f $.
+	
+	\noindent \textbf{Transitivity.} Let $ f\sim g $ and $ g \sim h $. Then 
+	\[ f = g + \o(g), \qquad g = h + \o(h). \]
+	By substituting the second expression in the first one we will get
+	\[ f = h + \o(h + \o(h)) = h + \o(h). \]
+	This $ f \sim h $. This completes the proof for $ \sim $ being an equivalence relation.
+\end{proof}
+
+\begin{proposition}
+	Let $ f,g: U \to \R $ where $ x_0 \in U \subset \R $, and assume $ g(x) \neq 0 $ for all $ x $ in an open neighborhood of $ x_0 $. Then 
+	\[ \lim_{x \to x_0} \frac{f(x)}{g(x)} = 1 \quad \implies \quad f\sim g \text{ as } x \to x_0. \]
+\end{proposition}
+\begin{proof}
+	We have $  \lim_{x \to x_0} \frac{f(x)}{g(x)} = 1 $. Then, from the definition of limit we know that $ \forall \epsilon>0 $ there exists $ \delta > 0 $ such that $ 0 < \abs{x - x_0} < \delta $ implies $ \abs{\frac{f(x)}{g(x)} - 1} < \epsilon. $ Then we can write
+	\[ \abs{f(x) - g(x)} < \epsilon \abs{g(x)}. \]
+	This is literally the definition of little-O. Thus we have
+	\[  f(x) - g(x) = \o(g(x)) \quad \text{as} \quad x\to x_0. \]
+	By re-arranging the terms we will have
+	\[ f(x) = g(x) + \o(g(x)) \quad \text{as} \quad x\to x_0. \]
+\end{proof}
 
 
 
