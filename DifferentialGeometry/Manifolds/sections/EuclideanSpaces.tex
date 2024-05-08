@@ -238,3 +238,26 @@ Because of the observation above, we identify the standard basis $ \set{e^1, e^2
 	\end{pmatrix}. \]
 	Thus the number of inversions can be written as $ (2,1),(3,1),(4,1)$, and $ (5,1) $.
 \end{solution}
+
+\begin{problem}
+	Let $ f:V^k \to \R $ be a k-linear function defined on vector space $ V $. Show that the following functions is alternating.
+	\[ Af = \sum_{\sigma \in S_k} \sign(\sigma)\ \sigma f. \]
+\end{problem}
+\begin{solution}
+	Let $ \tau \in S_k $. Then
+	\[ \tau (Af)  = \sum_{\sigma \in S_k} \sign(\sigma)\ (\tau \sigma)f = \sum_{\sigma \in S_k} \sign(\sigma)\sign(\tau)\sign(\tau)\ (\tau \sigma)f = \sign(\tau) \sum_{\sigma \in S_k} \sign(\tau\sigma)\ (\tau \sigma)f  \]
+	Note that since in the sum above $ \sigma $ runs through all permutations $ S_k $, so does $ \tau \sigma $. Thus we can write
+	\[ \tau (A f) = \sign(\tau) (Af). \]
+	This shows that $ Af $ is alternating.
+\end{solution}
+
+
+\begin{problem}
+	Let $ f: V^k \to \R $ be a k-linear function. Show that $ Sf $ given below is symmetric.
+	\[ Sf = \sum_{\sigma \in S_k} \sigma f. \]
+\end{problem}
+\begin{solution}
+	Let $ \tau \in S_k $. Then we
+	\[ \tau (Sf) = \sum_{\sigma \in S_k} \tau \sigma f = Sf. \]
+	Note that the last equality above holds, since $ \sigma $ rums through all permutations $ S_k $ and so does $ \tau \sigma. $
+\end{solution}
