@@ -216,7 +216,8 @@ Because of the observation above, we identify the standard basis $ \set{e^1, e^2
 \end{summary}
 
 \begin{summary}
-	Let $ V $ be a vector space with dimension $ n $, and $ A_k(V) $ be the set of all \textit{alternating} k-linear functions defined on $ V $. Then we have
+	Let $ V $ be a vector space with dimension $ n $, with $ \set{e_1,\cdots,e_n} $ as its basis and $ \set{\alpha^1, \alpha^2, \cdots, \alpha^n} $ as its dual basis. Let e$ A_k(V) $ be the set of all \textit{alternating} k-linear functions defined on $ V $. 
+	Then we have
 	\[ \dim A_k = \binom{n}{k}. \]
 	In particular, let $ V = \R^n $ with standard basis $ \set{e_1,e_2,e_3} $, and the corresponding dual basis $ \set{\alpha^1,\alpha^2,\alpha^3} $. Then we have
 	\begin{align*}
@@ -228,6 +229,33 @@ Because of the observation above, we identify the standard basis $ \set{e^1, e^2
 	It is clear from the basis sets above that the dimensions of $ A_0,A_1,A_2 $ and $ A_3 $ are $ 1,3,3,1 $ respectively.
 	
 	Also, observe that $ A_k = 0 $ for all $ k > n $. This follows from the fact that $ f\wedge f = 0 $ for $ f $ a 1-covector.
+\end{summary}
+
+\begin{summary}
+	Let $ V $ be $ n $ dimensional vector space with a basis $ \set{e_1,\cdots,e_n} $, and $ \set{\alpha^1,\cdots,\alpha^n} $ as its dual basis. Let $ L_k(V) $ be the set of all $ k $-linear functions defined on $ V $. Then a basis for $ L_k(V) $ is
+	\[ \mathcal{B} = \set{\alpha^{i_1} \otimes \cdots \otimes \alpha^{i_k}} \]
+	for all multi-indices $ (i_1,\cdots,i_k) $. This shows that 
+	\[ \dim L_k(V) = n^k. \]
+	For instance, Let $ V = \R^2 $. Then for $ L_1(V) $ we have
+	\[ \mathcal{B}(L_1(V)) = \set{\alpha^1,\alpha^2,\alpha^3}. \]
+	Similarly, for $ L_2(V) $ we have
+	\[ \mathcal{B}(L_2(V)) = \set{\alpha^1\otimes \alpha^2,\alpha^1\otimes \alpha^3,\alpha^2\otimes \alpha^3,\alpha^2\otimes \alpha^1,\alpha^3\otimes \alpha^1,\alpha^3\otimes \alpha^2,\alpha^1\otimes\alpha^1,\alpha^2\otimes\alpha^2,\alpha^3\otimes\alpha^3} \]
+	For a side by side comparison, compare it with the basis for $ A_2(V) $ that is 
+	\[ \mathcal{B}(A_2(V)) = \set{\alpha^1 \wedge \alpha^2, \alpha^2 \wedge \alpha^3, \alpha^1 \wedge \alpha^3}. \]
+
+	
+\end{summary}
+
+\begin{summary}
+		Looking at the dimension $ L_1(V), L_2(V), \cdots $, it reveals the fact that why most of the non-technical people are interested in interpreting tensors as multi-dimensional matrices! For instance, when $ V = \R^2 $ and $ K=3 $, then $ L_3(V) $ has dimension $ 2^3 = 8 $ with the basis
+	\[
+	\mathcal{B} (\mathbb{R}^2) = 
+	\begin{aligned}
+		\{&\alpha^1 \otimes \alpha^1 \otimes \alpha^1, \alpha^1 \otimes \alpha^1 \otimes \alpha^2, \alpha^1 \otimes \alpha^2 \otimes \alpha^1, \alpha^1 \otimes \alpha^2 \otimes \alpha^2, \\
+		&\alpha^2 \otimes \alpha^1 \otimes \alpha^1, \alpha^2 \otimes \alpha^1 \otimes \alpha^2, \alpha^2 \otimes \alpha^2 \otimes \alpha^1, \alpha^2 \otimes \alpha^2 \otimes \alpha^2 \}
+	\end{aligned}
+	\]
+	It is very tempting to think of elements of $ L_3(V) $ as $ 2\times 2\times 2 $ matrix like structures. In the case of $ L_2(V) $ we can identify $ L_2(V) $ with the set of all $ 2\times 2 $ matrices.
 \end{summary}
 
 \section{Solved Problems}
@@ -427,5 +455,39 @@ Because of the observation above, we identify the standard basis $ \set{e^1, e^2
 \end{problem}
 
 \begin{solution}
-	Rank-Nullity Theorem.
+	\begin{enumerate}[(a)]
+		\item 	We can use the Rank-Nullity theorem for the linear function $ f $. This theorem states that 
+		\[ \dim \rank f + \dim \ker f = \dim V. \]
+		We know that $ \dim\rank f = 1 $, and $ \dim V = n $. This implies $ \dim\ker f = n-1 $.
+		
+		\item Let $ f,g $ be two linear functionals on $ V $ that has the same kernel, which we call it the set $ K $. Since $ K $ is $ n-1 $ dimensional linear subspace of $ K $, then we can find a basis for it, call it $ \mathcal{B}_1 = \set{\hat{e}_1,\cdots , \hat{e}_{n-1}} $. Let $ \hat{e}_n $ be a vector normal to $ \mathcal{B}_1 $. We can do all of these since $ V $ is $ n $ dimensional and we have just modified the basis vectors as described above. Let $ z\in V $ where $ z = \sum_{i=1}^{n} z_i \hat{e}_i $. Thus we have
+		\[ f(z) = z_n f(\hat{e}_n), \qquad g(z) = z_n g(\hat{e}_n). \]
+		This is true because $ f(\hat{e}_i) = g(\hat{e}_i) = 0 $ for all $ \hat{e}_i \in \mathcal{B} $. Since $ f,g $ are non-zero functional, then we can write
+		\[ \frac{f(z)}{g(z)} = \frac{f(\hat{e}_n)}{g(\hat{e}_n)} = c \qquad \text{for some $ c\in \R $}\]
+		Thus we can write
+		\[ f = cg. \]
+		Note that $ c $ is determined by $ \hat{e}_n $. $ \hat{e}_n $ itself is determined by the kernel of $ f,g $, i.e. the hyperplane mentioned above.
+	\end{enumerate}
+\end{solution}
+
+\begin{observation}
+	I have this weird observation that I think it must be wrong, but I don't know how! Consider the set of all linear functionals defined on $ \R^2 $. From duality, we know that this set (denoted by $ L_1(\R^2) $) is isomorphic to $ \R^2 $. But here comes the strange argument that leads to the non-real observation. As we saw in the question above, every hyperplane (in this case every line that passes through the origin) determines a linear functional up to a constant multiplication. On the other hand, we know that the set of all liens passing through the origin is the real projective plane (which is in fact $ L_1(\R^2)/\sim $ where $ \sim $ identifies linear functionals that are constant multiple of each other), which definitely is not isomorphic to $ \R^2 $.
+\end{observation}
+
+\begin{problem}[A basis for $ k $-tensors (from W. Tu)]
+	Let $ V $ be a vector space of dimension $ n $ with basis $ e_1,\cdots,e_n $. Let $ \alpha^1,\cdots,\alpha^n $ be the dual basis for $ V^\vee $. Show that a basis for the space $ L_k(V) $ of k-linear functions on $ V $ is $ \set{\alpha^{i_1}\otimes \cdots \otimes \alpha^{i_k}} $ for all multi-indices $ (i_1,i_2,\cdots,i_k) $. In particular, this show that $\dim L_k(V) = n^k $.
+\end{problem}
+
+\begin{solution}
+	To show this, we need to show that the basis vectors are linearly independent, and spans all $ L_k(v) $. To show the linear independence, consider the following linear combination of all basis vectors, where the total sum is set to zero.
+	\[ \sum C_{i_1,\cdots,i_k} \alpha^{i_1}\otimes \cdots \otimes \alpha^{i_k}  = 0, \]
+	where the sum is done on all of the multi-indices $ (i_1,\cdots,i_k) $. This sum implies that all of the coefficients are zero. We can see this by applying $ (e_{j_1},\cdots,e_{j_k}) $ to both sides. We have
+	\[ (\alpha^{i_1}\otimes \cdots \otimes \alpha^{i_k})(e_{j_1},\cdots,e_{j_k}) = 0 \]
+	if there is any mismatch between the multi-indices $ I, J$. This implies $ C_{j_1,\cdots,j_k} = 0$ for all multi-indices. Thus we can conclude that the basis vectors are linearly independent.
+	
+	To show that the basis vectors span all the space $ L_k(V) $, let $ f \in L_k(V) $ be any k-tensor. Define
+	\[ g = \sum f(e_{i_1},\cdots,e_{i_k})\alpha^{i_1}\otimes \cdots \otimes \alpha^{i_k}. \]
+	We can see that 
+	\[ g(e_{j_1},\dots,e_{j_k}) = f( e_{j_1},\dots,e_{j_k} ) \qquad \text{for all multi-indices} \]
+	From linearity we can deduce that $ f=g $. Thus the basis vectors span the whole space.
 \end{solution}
