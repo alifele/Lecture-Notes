@@ -182,6 +182,25 @@ The following theorem is very important as it states that all of the point deriv
 Because of the observation above, we identify the standard basis $ \set{e^1, e^2, \cdots, e^n} $ with the partial derivatives $ \set{\frac{\partial}{\partial x^1}, \frac{\partial}{\partial x^2}, \cdots,\frac{\partial}{\partial x^n}}. $ Thus we can write a vector $ v \in T_p(\R^n) $ as 
 \[ v = \sum_{i=1}^{n} v^i \frac{\partial}{\partial x^i}. \]
 
+
+\section{Summary}
+
+\begin{summary}
+	Let $ f \in A_k(V) $ and $ g \in A_l(V) $. Then
+	\[ f\wedge g = (-1)^{kl}(g\wedge f). \]
+	In particular, if $ f $ is odd-linear function, then 
+	\[ f \wedge f = 0. \]
+\end{summary}
+
+\begin{summary}
+	Let $ V $ be a vector space, and $ \alpha^1,\cdots, \alpha^k $ be 1-linear functions (i.e. 1-covectors) defined on $ V $. Then we have
+	\[ (\alpha^1  \wedge \cdots \wedge \alpha^k)(v_1,\cdots,v_k) = \det\left[ \alpha^i(v_j) \right]. \] 
+	In particular, For two 1-covectors we have
+	\[ (\alpha^1 \wedge \alpha^2)(v_1,v_2) = 
+	\det \matt{\alpha^1(v_1)}{\alpha^1(v_2)}{\alpha^2(v_1)}{\alpha^2(v_2)}
+	 \]
+\end{summary}
+
 \section{Solved Problems}
 \begin{problem}[Algebra structure on $ C_p^{\infty} $]
 	Define carefully addition, multiplication, and scalar multiplication in $ C_p^\infty $. Prove that addition in $ C_p^\infty $ is commutative.
@@ -260,4 +279,99 @@ Because of the observation above, we identify the standard basis $ \set{e^1, e^2
 	Let $ \tau \in S_k $. Then we
 	\[ \tau (Sf) = \sum_{\sigma \in S_k} \tau \sigma f = Sf. \]
 	Note that the last equality above holds, since $ \sigma $ rums through all permutations $ S_k $ and so does $ \tau \sigma. $
+\end{solution}
+
+
+\begin{problem}
+	If $ f $ is a 3-linear function on a vector space $ V $ and $ v_1, v_2, v_3 \in V $, what is $ (Af)(v_1, v_2, v_3) $?
+\end{problem}
+\begin{solution}
+	\[ (Af)(v_1, v_2, v_3) = f(v_1,v_2,v_3)-f(v_2,v_1,v_3)+f(v_3,v_1,v_2)-f(v_1,v_3,v_2)+f(v_2,v_3,v_1)-f(v_3,v_2,v_1) \]
+\end{solution}
+
+\begin{problem}
+	Show that the tensor product of multi-linear functions is associative: If $ f,g $, and $ h $ are multi-linear functions on $ V $, then
+	\[ (f\otimes g)\otimes h = f \otimes (g\otimes h). \]
+\end{problem}
+\begin{solution}
+	We start with the left hand side. I.e. 
+
+	\begin{align*}
+		((f \otimes g) \otimes h)(v_1 \cdots, v_{k+l+m}) 
+		&= (f \otimes g)(v_1,\cdots,v_{k+l})h(k_{k+l+1},\cdots,k_{k+l+m}) \\ 
+		&= \big(f(v_1,\cdots,v_k)g(v_{k+1},\cdots,v_{k+l})\big)h(v_{k+l+1},\cdots,v_{k+l+m})\\
+		&= f(v_1,\cdots,v_k) \big(g(v_{k+1},\cdots,v_{k+l})h(v_{k+l+1},\cdots,v_{k+l+m})\big) \\
+		&= (f \otimes (g \otimes h))(v_{1},\cdots,v_{k+l+m}).
+	\end{align*}
+\end{solution}
+
+\begin{problem}
+	Consider following two ways that we can express the sum in the wedge product formula. Let $ f \in A_k(V) $ and $ g \in A_l(V) $. Then the wedge product $ f \wedge g $ can be written as
+	\[ (f \wedge g)(v_1,\cdots,v_{k+l}) = \frac{1}{k!l!}\sum_{\sigma \in S_k}\sign(\sigma)\ \sigma f(v_{\sigma(1)},\cdots,v_{\sigma(k)})g(v_{\sigma(k+1)},\cdots,v_{\sigma(k+l)}). \]
+	Or, alternatively, we can write it as $ (k,l)-$shuffle
+	\[ (f \wedge g)(v_1,\cdots,v_{k+l}) = \sum_{(k,l)- \text{shuffles} \ \sigma}\sign(\sigma)\ \sigma f(v_{\sigma(1)},\cdots,v_{\sigma(k)})g(v_{\sigma(k+1)},\cdots,v_{\sigma(k+l)}). \]
+	Now, as a concrete example, let $ f,g \in A_2(V) $. Write $ f\wedge g $ in these two forms.
+\end{problem}
+
+\begin{solution}
+	First, we want to use the sum on the all permutations. 
+	\begin{align*}
+		 4(f \wedge g)(v_1, v_2, v_3, v_4) = f(v_1,v_2)g(v_3,v_4) - f(v_2,v_1)g(v_3,v_4) + f(v_2,v_1)g(v_4,v_3) - f(v_1,v_2)g(v_4,v_3)  \\
+		 - f(v_1,v_3)g(v_2,v_4) + f(v_3,v_1)g(v_2,v_4) - f(v_3,v_1)g(v_4,v_2) + f(v_1,v_3)g(v_4,v_2)   \\
+		 + f(v_1,v_4)g(v_2,v_3) - f(v_4,v_1)g(v_2,v_3) + f(v_4,v_1)g(v_3,v_2) - f(v_1,v_4)g(v_3,v_2)  \\
+		 +f(v_2,v_3)g(v_1,v_4) - f(v_3,v_2)g(v_1,v_4) + f(v_3,v_2)g(v_4,v_1) - f(v_2,v_3)g(v_4,v_1)   \\
+		 - f(v_2,v_4)g(v_1,v_3) + f(v_4,v_2)g(v_1,v_3) - f(v_4,v_2)g(v_3,v_1) + f(v_2,v_4)g(v_3,v_1)  \\
+		 +f(v_3,v_4)g(v_1,v_2) - f(v_4,v_3)g(v_1,v_2) + f(v_4,v_3)g(v_2,v_1) - f(v_3,v_4)g(v_2,v_1).
+	\end{align*}
+	Note that in every row, the functions are equal to each at (because $ f,g $ are alternating). Thus we have the factor of 4 not to count the redundant terms. However, we can do this sum using the (2,2)-shuffles. This means that we only keep the very first column, as their argument permutation is the same as all (2,2)-shuffles on 4 symbols. Thus we can write
+	\begin{align*}
+		(f\wedge g)(v_1,v_2,v_3,v_4) = &f(v_1,v_2)g(v_3,v_4) - f(v_1,v_3)g(v_2,v_4) + f(v_1,v_4)g(v_2,v_3)\\
+		 + &f(v_2,v_3)g(v_1,v_4) - f(v_2,v_4)g(v_1,v_3)\\
+		 + &f(v_3,v_4)g(v_1,v_2).
+	\end{align*}
+\end{solution}
+\begin{observation}
+	How do we count the (2,2)-shuffles of $ \set{v_1,v_2,v_3,v_4} $? We start by a vertical line where in its left side we put $ v_1,v_2 $ and in its right side we write $ v_3,v_4 $. Like the following table. This is already a shuffle (identity). To write the next shuffle, we keep $ v_1 $ in the first position, and write the next symbol whose its subscript is larger than 2 (i.e. $ v_3 $), and write the remaining symbols in the right hand side of the vertical line in increasing order. Then we continue this process, until there are no possible shuffles for its first element be $ v_1 $. Then we put $ v_2 $ in the first place and right next to it we write the next symbol that its subscript is larger than 2 (i.e. $ v_3 $), and we continue.
+
+	\begin{center}
+		\begin{tabular}{c|c}
+			$ v_1,v_2 $ & $ v_3,v_4 $  \\
+			$ v_1,v_3 $ & $ v_2,v_4 $ \\
+			$ v_1,v_4 $ & $ v_2,v_3 $ \\
+			& \\
+			$ v_2,v_3 $ & $ v_1,v_4 $ \\
+			$ v_2,v_4 $ & $ v_1,v_3 $ \\
+			& \\
+			$ v_3,v_4 $ & $ v_1,v_2 $ \\
+		\end{tabular}
+	\end{center}
+	
+	In order to find the sign of the each of these permutations, it is enough to extract the independent cycles. For instance, consider the following shuffle, corresponding to last row above.
+	\[ \sigma = \begin{pmatrix}
+		1 & 2 & 3 & 4 \\
+		3 & 4 & 1 & 2
+	\end{pmatrix}  \]
+	This permutation is the same as the permutation given by the cycle $ \tau = (1\ 3)(2\ 4) $. To extract this we start with $ 1 $ and track where it goes, and we do this tracking until we get back to 1. Then we start this process with the remaining element until we get all of the cycles. This cycle decomposition of $ \tau $ clearly shows that $  \tau $ is an even permutation (can be written as 2 cycles). However, in the case of $ v_2,v_4,v_1,v_3 $, the corresponding permutation is 
+	\[ \tau = 
+	\begin{pmatrix}
+		1 & 2 & 3 & 4 \\
+		2 & 4 & 1 & 3
+	\end{pmatrix}.
+	 \]
+	 We can write this as $ \tau = (1\ 2\ 4\ 3) $. As with every cycle, we can decompose this into smaller cycles (not necessarily independent) as $ \tau = (1\ 3)(1\ 4)(1\ 2) $. This shows that this particular permutation is odd.
+	
+\end{observation}
+
+\begin{problem}
+	Verify 
+	\[ f \wedge g = (-1)^{k+l}(g\wedge f) \]
+	for $ f $ and $ g $ being $ k $ and $ l $ linear maps correspondingly. Do this verification by considering $ f\in A_2(V) $ and $ g \in A_1(V) $.
+\end{problem}
+
+\begin{solution}
+	For $ f\wedge g $ we can write (using $ (2,1) $-shuffles)
+	\[(f\wedge g)(v_1,v_2,v_3) = f(v_1,v_2)g(v_3) - f(v_1,v_3)g(v_2) + f(v_2,v_3)g(v_1).\]
+	However, for $ g\wedge f $, we can use $ (1,2) $-shuffles to show
+	\[ (g\wedge f)(v_1,v_2,v3) = g(v_1)f(v_2,v_3) - g(v_2)f(v_1,v_3) + g(v_3)f(v_1,v_2).  \]
+	Evaluating two expressions above reveals that $ f\wedge g = g \wedge f. $
 \end{solution}
