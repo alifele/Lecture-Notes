@@ -193,12 +193,41 @@ Because of the observation above, we identify the standard basis $ \set{e^1, e^2
 \end{summary}
 
 \begin{summary}
+	Consider the following $ n\times n $ matrix
+	\[ 
+	M = \begin{pmatrix}
+		a_{11} & a_{12} & \cdots & a_{1n} \\
+		a_{21} & a_{22} & \cdots & a_{2n} \\
+		\vdots & \vdots & \ddots & \vdots \\
+		a_{n1} & a_{n2} & \cdots & a_{nn}
+	\end{pmatrix}
+	 \]
+	The, determinant is defined to be
+	\[ \det(A) = \sum_{\sigma \in S_n} \sign(\sigma)\ a_{1\sigma(1)}a_{2\sigma(2)}\dots a_{n\sigma(n)} \]
+\end{summary}
+
+\begin{summary}
 	Let $ V $ be a vector space, and $ \alpha^1,\cdots, \alpha^k $ be 1-linear functions (i.e. 1-covectors) defined on $ V $. Then we have
 	\[ (\alpha^1  \wedge \cdots \wedge \alpha^k)(v_1,\cdots,v_k) = \det\left[ \alpha^i(v_j) \right]. \] 
 	In particular, For two 1-covectors we have
 	\[ (\alpha^1 \wedge \alpha^2)(v_1,v_2) = 
 	\det \matt{\alpha^1(v_1)}{\alpha^1(v_2)}{\alpha^2(v_1)}{\alpha^2(v_2)}
 	 \]
+\end{summary}
+
+\begin{summary}
+	Let $ V $ be a vector space with dimension $ n $, and $ A_k(V) $ be the set of all \textit{alternating} k-linear functions defined on $ V $. Then we have
+	\[ \dim A_k = \binom{n}{k}. \]
+	In particular, let $ V = \R^n $ with standard basis $ \set{e_1,e_2,e_3} $, and the corresponding dual basis $ \set{\alpha^1,\alpha^2,\alpha^3} $. Then we have
+	\begin{align*}
+		\mathbb{B}(A_0) &= \set{1 \in \R}\\
+		\mathbb{B}(A_1) &= \set{\alpha^1,\alpha^2,\alpha^3},\\
+		\mathbb{B}(A_2) &= \set{\alpha^1 \wedge \alpha^2, \alpha^1 \wedge \alpha^3, \alpha^2 \wedge \alpha^3},\\
+		\mathbb{B}(A_3) &= \set{\alpha^1 \wedge \alpha^2 \wedge \alpha^3}.
+	\end{align*}
+	It is clear from the basis sets above that the dimensions of $ A_0,A_1,A_2 $ and $ A_3 $ are $ 1,3,3,1 $ respectively.
+	
+	Also, observe that $ A_k = 0 $ for all $ k > n $. This follows from the fact that $ f\wedge f = 0 $ for $ f $ a 1-covector.
 \end{summary}
 
 \section{Solved Problems}
@@ -375,3 +404,24 @@ Because of the observation above, we identify the standard basis $ \set{e^1, e^2
 	\[ (g\wedge f)(v_1,v_2,v3) = g(v_1)f(v_2,v_3) - g(v_2)f(v_1,v_3) + g(v_3)f(v_1,v_2).  \]
 	Evaluating two expressions above reveals that $ f\wedge g = g \wedge f. $
 \end{solution}
+
+\begin{problem}[Tensor product of covectors (from W. Tu)]
+	Let $ e_1,e_2,\cdots,e_n $ be a basis for vector space $ V $ and let $ \alpha^1,\cdots,\alpha^n $ be its dual basis in $ V^\vee $. Suppose $ \left[g_{i,j}\right] \in \R^{n\times n} $ is an $ n\times n $ matrix. Define a bilinear function $ f: V\times V \to \R $ by
+	\[ f(v,w) = \sum_{1 \leq i,j \leq n} g_{i,j}v^i w^j \]
+	for $ v = \sum v^i e_i $ and $ w = \sum w^j e_j $ in $ V $. Describe $ f $ in terms of the tensor products of $ \alpha^i $ and $ \alpha^j $, $ 1 \leq i, j \leq n $.
+\end{problem}
+\begin{solution}
+	We know that $ v^i = \alpha^i (v) $, and similarly $ w^j = \alpha^j (w) $. So we can write
+	\[ v^i w^j = \alpha^i(v) \alpha^j (w) = (\alpha^i \otimes \alpha^j)(v,w). \]
+	Thus the bilinear function can be written as
+	\[ f = \sum_{1\leq i,j \leq n} g_{i,j} \alpha^i \otimes \alpha^j. \]
+	This bilinear function is very similar to the notion of weighted inner product.
+\end{solution}
+
+\begin{problem}[Hyperplanes(from W. Tu)]
+	\begin{enumerate}[(a)]
+		\item Let $ V $ be a vector space of dimension $ n $, and $ f:V \to \R$ a nonzero linear functional. Show that $ \dim \ker f  = n-1 $. A linear subspace of $ V $ of dimension $ n-1 $ is called a hyperplane in $ V $.
+		\item Show that a nonzero linear functional on a vector space $ V $ is determined up to multiplicative constant by its kernel, a hyperplane in $ V $. In other words, if $ f $ and $ g : V \to \R $ are nonzero linear functionals and $ \ker f = \ker g $, then $ g = cf $ for some constant $ c \in \R $.
+	\end{enumerate}
+	
+\end{problem}
