@@ -185,6 +185,29 @@ Because of the observation above, we identify the standard basis $ \set{e^1, e^2
 
 \section{Summary}
 
+\begin{summary}[Determining sign of permutation]
+	Let $ \sigma \in S_k $. There we can find the sign of the permutation by decomposing it into cycles, or counting its number of inversions. For instance, consider $ \sigma \in S_9 $ where
+
+	\[
+	\sigma = \begin{pmatrix}
+		1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 \\
+		2 & 4 & 9 & 3 & 7 & 8 & 5 & 6 & 1
+	\end{pmatrix}
+	\]
+	\begin{enumerate}[(i)]
+		\item \textbf{Determining sign by cycle decomposition}. For $ \sigma $ we can write it as
+		\[ \sigma = (1\ 2\ 4\ 3\ 9 )(5\ 7)(6\ 8) = (1\ 9)(1\ 3)(1\ 4)(1\ 2)(5\ 7)(6\ 8). \]
+		Since $ \sigma $ has 6 transpositions in it, then its sign is \textbf{even}.
+		\item \textbf{Determining sign by counting the number of inversions}. For $ \sigma $ the inversions are
+		\begin{align*}
+			(2,1),(3,1),(4,3),(4,1),(5,1),(6,1),(7,5),(7,6),(7,1),\\
+			(8,5),(8,6),(8,1),(9,1),(9,3),(9,5),(9,6),(9,7),(9,8).
+		\end{align*}
+		Since $ \sigma $ has 18 inversions, then it is sign is \textbf{even}.
+
+	\end{enumerate}
+\end{summary}
+
 \begin{summary}
 	Let $ f \in A_k(V) $ and $ g \in A_l(V) $. Then
 	\[ f\wedge g = (-1)^{kl}(g\wedge f). \]
@@ -490,4 +513,29 @@ Because of the observation above, we identify the standard basis $ \set{e^1, e^2
 	We can see that 
 	\[ g(e_{j_1},\dots,e_{j_k}) = f( e_{j_1},\dots,e_{j_k} ) \qquad \text{for all multi-indices} \]
 	From linearity we can deduce that $ f=g $. Thus the basis vectors span the whole space.
+\end{solution}
+
+\begin{problem}[A characterization of alternating $ k $-vectors]
+	Let $ f $ be a $ k $-tensor on a vector space $ V $. Prove that $ f $ is alternating if and only if $ f $ changes sign whenever two successive arguments are interchanged
+	\[ f(\cdots,v_{i+1},v_i,\cdots) = -f(\cdots, v_i, v_{i+1},\cdots). \]
+\end{problem}
+
+\begin{solution}
+	The first direction follows immediately from the definition. I.e. assume $ f $ is alternating. Then sign of the permutation corresponding interchanging two successive arguments is a single transposition which has sign -1. Thus from definition we have $ f(\cdots,v_{i+1},v_i,\cdots) = -f(\cdots, v_i, v_{i+1},\cdots) $.
+	
+	\noindent For the converse, first observe that we can decompose arbitrary permutation to cycles, and then decompose cycles into transpositions. Eventually, we can decompose every transposition to transposition of adjacent elements. See the Lemma below
+	\begin{lemma}[Decomposing arbitrary transposition to transposition of adjacent elements]
+		Let $ \tau = (k\ l) $ be an arbitrary transposition where $ k < l $.  Assume that $ k,l $ are $ m $ distance apart (i.e. $ l-k = m $). Then we can write
+		\[ (k\ l) = (k\ k+1)\cdot(k+1\ k+2)\cdots(l-1\ l)\cdot(l-2\ l-1)\cdots(k\ k+1). \]
+		Thus $ (k\ l) $ can be decomposed to $ 2m - 1 $ adjacent transpositions.
+	\end{lemma}
+	
+	Let $ \sigma \in S_k $ be an arbitrary permutation. We can decompose it to the following permutations
+	\[ \sigma = \tau_1 \tau_2 \cdots \tau_l, \]
+	where from the number of permutations we can see that $ \sign(\sigma) = (-1)^l $. Let $ \tau_i $ be one of the transpositions above that interchanges two elements $ m $ distance apart. Then
+	\[ \tau_i f = (-1)^{2m-1}f = - f. \]
+	This follows immediately from the Lemma above. Thus we can write
+	\[ \sigma f = (-1)^l f = \sign(\sigma) f. \]
+	This shows that $ f $ is an alternating k-tensor.
+	 
 \end{solution}
