@@ -281,6 +281,12 @@ Because of the observation above, we identify the standard basis $ \set{e^1, e^2
 	It is very tempting to think of elements of $ L_3(V) $ as $ 2\times 2\times 2 $ matrix like structures. In the case of $ L_2(V) $ we can identify $ L_2(V) $ with the set of all $ 2\times 2 $ matrices.
 \end{summary}
 
+\begin{summary}[Determinant of a matrix is zero if its column vectors are linearly dependent]
+	A $ k$-tensor $ f $ is alternating if and only if $ f(v_1,\cdots,v_k) = 0 $ whenever two of the vectors $ v_1,\cdots,v_k $ are equal. With a simple generalization, we can state a more general statement that $ f $ is alternating k-tensor if and only if $ f(v_1,\cdots,v_k) = 0 $ the vectors $ v_1,\cdots,v_k $ are linearly dependent.
+	
+	As an important (and simple!) Corollary for this statement, we can conclude that determinant of an $ n\times n $ matrix (which is an alternating n-tensor) is zero when its column vectors are linearly dependent.
+\end{summary}
+
 \section{Solved Problems}
 \begin{problem}[Algebra structure on $ C_p^{\infty} $]
 	Define carefully addition, multiplication, and scalar multiplication in $ C_p^\infty $. Prove that addition in $ C_p^\infty $ is commutative.
@@ -293,7 +299,6 @@ Because of the observation above, we identify the standard basis $ \set{e^1, e^2
 		\item For the multiplication on $ C_p^\infty $ we can use of the point-wise multiplication of functions as the definition, and with a similar reasoning to the one in item 1, we can show that this definition is well-defined.
 	\end{itemize}
 	For the commutativity of the addition on $ C_p^\infty $, we need to emphasis that it follows immediately from the commutativity of the point-wise addition of functions.
-	
 \end{solution}
 
 
@@ -515,7 +520,7 @@ Because of the observation above, we identify the standard basis $ \set{e^1, e^2
 	From linearity we can deduce that $ f=g $. Thus the basis vectors span the whole space.
 \end{solution}
 
-\begin{problem}[A characterization of alternating $ k $-vectors]
+\begin{problem}[A characterization of alternating $ k $-vectors (from W. Tu)]
 	Let $ f $ be a $ k $-tensor on a vector space $ V $. Prove that $ f $ is alternating if and only if $ f $ changes sign whenever two successive arguments are interchanged
 	\[ f(\cdots,v_{i+1},v_i,\cdots) = -f(\cdots, v_i, v_{i+1},\cdots). \]
 \end{problem}
@@ -537,5 +542,31 @@ Because of the observation above, we identify the standard basis $ \set{e^1, e^2
 	This follows immediately from the Lemma above. Thus we can write
 	\[ \sigma f = (-1)^l f = \sign(\sigma) f. \]
 	This shows that $ f $ is an alternating k-tensor.
-	 
+\end{solution}
+
+
+\begin{problem}[Another characterization of alternating k-tensors (from W. Tu)]
+	\label{problem:k-TensorCharacter}
+	Let $ f $ be a $ k $-tensor on a vector space $ V $. Prove that $ f $ is alternating if and only if 
+	\[ f(v_1,\cdots,v_k) = 0 \]
+	whenever two of the vectors $ v_1,\cdots,v_k $ are equal.
+\end{problem}
+
+\begin{solution}
+	We first start with the forward direction. Assume $ f $ is alternating. Thus for $ \sigma \in S_k $ we have $ \sigma f = \sign(\sigma) f $. Without loss of generality, we can assume $ i < j $ and let $ (v_1,\cdots,v_i,\cdots,v_j,\cdots,v_k) \in V^k$ where $ v_i = v_j $.Thus we can write
+	\[ f(v_1,\cdots,v_i,\cdots,v_j,\cdots,v_k) = f(v_1,\cdots,v_j,\cdots,v_i,\cdots,v_k). \]
+	Furthermore,  let $ \tau = (v_i, v_j) $, i.e. a transposition that interchanges $ v_i $ with $ v_j $. Hence
+	\begin{align*}
+		f(v_1,\cdots,v_i,\cdots,v_j,\cdots,v_k) &= \tau f(v_1,\cdots,v_j,\cdots,v_i,\cdots,v_k) \\
+		&=- f(v_1,\cdots,v_j,\cdots,v_i,\cdots,v_k).
+	\end{align*}
+	This implies 
+	\[ f(v_1,\cdots,v_i,\cdots,v_j,\cdots,v_k) = f(v_1,\cdots,v_j,\cdots,v_i,\cdots,v_k) = 0 \]
+	
+	To show the converse, let $ \sigma \in S_k $ be any permutation. We can decompose this permutation into transpositions, i.e. $ \sigma = \tau_1 \tau_2 \cdots \tau_r $. Let $ \tau $ be any of transpositions above that permutes $ (i\ j) $. Let $ (v_1,\cdots,v_i,\cdots,v_j,\cdots,v_k) \in V^k $. Since $ V^k $ is a vector space we can write
+	\[ (v_1,\cdots,v_i,\cdots,v_j,\cdots,v_k) - (v_1,\cdots,v_i,\cdots,v_i,\cdots,v_k) - (v_1,\cdots,v_j,\cdots,v_j,\cdots,v_k) = -(v_1,\cdots,v_j,\cdots,v_i,\cdots,v_k). \]
+	Applying $ f $ to both sides, and using the hypothesis and k-linearity of $ f $ we will get
+	\[ f(v_1,\cdots,v_i,\cdots,v_j,\cdots,v_k) = - f(v_1,\cdots,v_j,\cdots,v_i,\cdots,v_k) = - \tau f (v_1,\cdots,v_i,\cdots,v_j,\cdots,v_k). \]
+	Thus for each transposition in the decomposition $ \sigma = \tau_1 \tau_2 \cdots \tau_r $ we will get a factor of -1. Thus
+	\[ \sigma f = (-1)^r f = \sign(\sigma) f \]
 \end{solution}
