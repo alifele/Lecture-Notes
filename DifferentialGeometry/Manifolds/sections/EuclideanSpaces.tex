@@ -185,6 +185,21 @@ Because of the observation above, we identify the standard basis $ \set{e^1, e^2
 
 \section{Summary}
 
+
+\begin{summary}[Don't confuse the naming conventions]
+	Note the following different names that might be confusing in some cases!
+	\begin{itemize}
+		\item \textbf{k-linear function $ \equiv $ k-tensor $ \equiv $ multi-linear function}: All of these names are for functions $ f: V^k \to \R $. We denote the set of all k-tensors defined on vector space $ V $ as $ L_k(V) $. If $ \alpha^1 \cdots \alpha^n $ are the dual basis for $ V $, then a basis for $ L_k(V) $ is
+		\[ \mathcal{B}(L_k(V)) = \set{\alpha^{i_1} \otimes \cdots \otimes \alpha^{i_k}}_\text{for all multi-indices $ (i_1,\cdots,i_k) $} \]
+		Also we have
+		\[ \dim L_k(V) = n^k \]
+		\item \textbf{alternating k-tensors $ \equiv $ k-covectors $ \equiv $ multi-covectors of degree k}: All of these names are for function k-linear functions that are \textbf{alternating}. We denote the set of all k-covectors on $ V $ as $ A_k(B) $. A basis for this set is
+		\[ \mathcal{B}(A_k(V)) = \set{\alpha^{i_1}\wedge \cdots \wedge \alpha^{i_k}}_{\text{for all multi-indices $ (i_1,\cdots,i_k) $ in ascending order }} \]
+		Also we have
+		\[ \dim A_l(v) = \binom{n}{k}. \]
+	\end{itemize}
+\end{summary}
+
 \begin{summary}[Determining sign of permutation]
 	Let $ \sigma \in S_k $. There we can find the sign of the permutation by decomposing it into cycles, or counting its number of inversions. For instance, consider $ \sigma \in S_9 $ where
 
@@ -215,6 +230,24 @@ Because of the observation above, we identify the standard basis $ \set{e^1, e^2
 	\[ f \wedge f = 0. \]
 \end{summary}
 
+
+\begin{summary}[Some intuition about the alternating functions]
+	In this summary box, we will go through a concrete example to make some intuition about the alternating functions and their basis. Let $ V = \R^3 $, with standard basis $ \set{e_1,e_2,e_3} $ and the dual basis $ \set{\alpha^1,\alpha^2,\alpha^3} $. Let $ f \in A_2(V) $. Then we know that we can decompose $ f $ in term of its basis
+	\[ f = g_1 \alpha^1 \wedge \alpha^2 + g_2 \alpha^1 \wedge \alpha^3 + g_3 \alpha^2 \wedge \alpha^3. \]
+	The key step in making the intuition is to observe that for any $ l $ 1-covectors $ \omega^1,\cdots,\omega^l $ we have $ (\omega^1\wedge \cdots \wedge \omega^l)(v_1,\cdots,v_l)  = \det\left[ \omega^i(v_j) \right]$. Thus for the first term in the decomposition of $ f(u,v) $ for $ u,v \in \R^3 $ we have
+	\[ (\alpha^1 \wedge \alpha^2)(u,v) = 
+	\det \matt{\alpha^1(u)}{\alpha^1(v)}{\alpha^2(u)}{\alpha^2(v)}.
+	 \]
+	 This is the area covered by two vectors that we can get by projecting $ u,v $ onto the $ x-y $ plane. With a similar argument, $ \alpha^1\wedge\alpha^3 $ gives the area between the vectors when projected to the $ x-z $ plane, and etc. The following figure summarizes these in a neat way.
+	 \begin{center}
+	 		 \includegraphics[width=0.4\textwidth]{Images/intuitiveWedge.png}
+	 \end{center}
+	 \FloatBarrier
+	 In the figure above, we will get the red, green and orange volumes by applying $ \alpha^1 \wedge \alpha^2,\ \alpha^2\wedge \alpha^3,\ \alpha^1\wedge\alpha^3 $ on $ (u,v) $ respectively.
+
+
+\end{summary}
+
 \begin{summary}
 	Consider the following $ n\times n $ matrix
 	\[ 
@@ -236,6 +269,7 @@ Because of the observation above, we identify the standard basis $ \set{e^1, e^2
 	\[ (\alpha^1 \wedge \alpha^2)(v_1,v_2) = 
 	\det \matt{\alpha^1(v_1)}{\alpha^1(v_2)}{\alpha^2(v_1)}{\alpha^2(v_2)}
 	 \]
+	 See Problem \autoref{problem:1-covectorAndDeterminant} for the a detailed proof.
 \end{summary}
 
 \begin{summary}
@@ -447,6 +481,18 @@ Because of the observation above, we identify the standard basis $ \set{e^1, e^2
 	
 \end{observation}
 
+
+\begin{problem}[Wedge product of covectors and determinant]
+	\label{problem:1-covectorAndDeterminant}
+	Let $ V $ be a vector space and let $ \beta^1,\cdots \beta^l \in A_1(V) $. Prove that 
+	\[ (\beta^1 \wedge \cdots \wedge \beta^l)(v_1,\cdots,v_l) = \det\left[ \beta^i(v_j) \right]  \]
+\end{problem}
+\begin{solution}
+	This follows simply from the definition. From the definition of wedge product we have
+	\[ (\beta^1 \wedge \cdots \wedge \beta^l) = A \left[\beta^1(v_1)\cdots \beta^l(v_l)\right] = \sum_{\sigma \in S_l} \sign(\sigma) \beta^1(v_{\sigma(1)}) \cdots \beta^l(v_{\sigma(l)}) = \det\left[ \beta^i(v_j) \right] \]
+	where $ \left[ \beta^i(v_j) \right] $ is $ l\times l $ square matrix.
+\end{solution}
+
 \begin{problem}
 	Verify 
 	\[ f \wedge g = (-1)^{k+l}(g\wedge f) \]
@@ -570,3 +616,84 @@ Because of the observation above, we identify the standard basis $ \set{e^1, e^2
 	Thus for each transposition in the decomposition $ \sigma = \tau_1 \tau_2 \cdots \tau_r $ we will get a factor of -1. Thus
 	\[ \sigma f = (-1)^r f = \sign(\sigma) f \]
 \end{solution}
+
+\begin{problem}[Wedge product and scalars (from W. Tu)]
+	Let $ V $ be a vector space. For $ a,b\in \R $, $ f \in A_k(V) $, and $ g \in A_\ell(v) $, show that $ af\wedge bg = (ab) f\wedge g $.
+\end{problem}
+\begin{solution}
+	This follows immediately from the definition of wedge product.
+	\[ af \wedge bg = \frac{1}{k! \ell!} A\left( af \otimes bg \right) = \frac{ab}{k! \ell!} A(f\otimes g) = (ab) f\wedge g. \]
+\end{solution}
+
+\begin{problem}[Transformation rule for a wedge product of covectors (from W. Tu)]
+	Suppose two sets of covectors on  a vector space $ V $, $ \beta^ 1,\cdots,\beta^k $ and $ \gamma^1,\cdots, \gamma^k $ are related by
+	\[ \beta^i = \sum_{j=1}^{k} a_j^i \gamma ^j, \qquad i = 1,2,\cdots, k, \]
+	for a $ k\times k $ matrix $ A = \left[a_j^i\right] $. Show that 
+	\[ \beta^1 \wedge \cdots \wedge \beta^k = (\det A) \gamma^1 \wedge \cdots \wedge \gamma^k. \]
+\end{problem}
+\begin{solution}
+	It will be helpful if we write the relation between $ \beta^i $'s and $ \gamma^j $s as a matrix multiplication. To do so we can write
+	\[ 
+	\begin{pmatrix}
+		\beta^1 \\
+		\beta^2 \\
+		\vdots \\
+		\beta^k
+	\end{pmatrix} = 
+	\begin{pmatrix}
+		a^1_1 & a^1_2 & \cdots & a^1_k \\
+		a^2_1 & a^2_2 & \cdots & a^2_k \\
+		\vdots & \vdots & \ddots & \vdots \\
+		a^k_1 & a^k_2 & \cdots & a^k_k
+	\end{pmatrix}
+	\begin{pmatrix}
+		\gamma^1 \\
+		\gamma^2 \\
+		\vdots \\
+		\gamma^k
+	\end{pmatrix}
+	 \]
+	 On the other hand, we know
+	 \begin{align*}
+	 	(\beta^1\wedge\cdots \wedge \beta^k)(v_1,\cdots,v_k) 
+	 	&= \det 
+	 	\begin{pmatrix}
+	 		\beta^1(v_1) & \beta^1(v_2) & \cdots & \beta^1(v_k) \\
+	 		\beta^2(v_1) & \beta^2(v_2) & \cdots & \beta^2(v_k) \\
+	 		\vdots & \vdots & \ddots & \vdots \\
+	 		\beta^k(v_1) & \beta^k(v_2) & \cdots & \beta^k(v_k)
+	 	\end{pmatrix}
+	 	\\
+	 	&= \det \left[
+	 	\begin{pmatrix}
+	 		a^1_1 & a^1_2 & \cdots & a^1_k \\
+	 		a^2_1 & a^2_2 & \cdots & a^2_k \\
+	 		\vdots & \vdots & \ddots & \vdots \\
+	 		a^k_1 & a^k_2 & \cdots & a^k_k
+	 	\end{pmatrix}
+	 	\begin{pmatrix}
+	 		\gamma^1(v_1) & \gamma^1(v_2) & \cdots & \gamma^1(v_k) \\
+	 		\gamma^2(v_1) & \gamma^2(v_2) & \cdots & \gamma^2(v_k) \\
+	 		\vdots & \vdots & \ddots & \vdots \\
+	 		\gamma^k(v_1) & \gamma^k(v_2) & \cdots & \gamma^k(v_k)
+	 	\end{pmatrix}
+	 	\right] \\
+	 	&= \det(A) \det \begin{pmatrix}
+	 		\gamma^1(v_1) & \gamma^1(v_2) & \cdots & \gamma^1(v_k) \\
+	 		\gamma^2(v_1) & \gamma^2(v_2) & \cdots & \gamma^2(v_k) \\
+	 		\vdots & \vdots & \ddots & \vdots \\
+	 		\gamma^k(v_1) & \gamma^k(v_2) & \cdots & \gamma^k(v_k)
+	 	\end{pmatrix} \\
+	 \end{align*}
+	Thus we can write
+	\[  (\beta^1\wedge\cdots \wedge \beta^k)(v_1,\cdots,v_k) = \det(A) (\gamma^1 \wedge\cdots \wedge \gamma^k)(v_1,\cdots,v_k). \]
+\end{solution}
+
+\begin{problem}[Transformation rule for k-covectors (from W. Tu)]
+	Let $ f $ be a k-covector on a vector space $ V $. Suppose two sets of vectors $ u_1,\cdots,u_k $ and $ v_1,\cdots,v_k $ in $ V $ are related by
+	\[ u_j = \sum_{i=1}^{k} a_j^i v_i, \qquad j = 1,\cdots,k, \]
+	for a $ k\times k $ matrix $ A = \left[a_j^i\right] $. Show that
+	\[ f(u_1,\cdots, u_k) = (\det A) f(v_1,\cdots,v_k). \]
+\end{problem}
+
+
