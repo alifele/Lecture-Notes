@@ -690,10 +690,53 @@ Because of the observation above, we identify the standard basis $ \set{e^1, e^2
 \end{solution}
 
 \begin{problem}[Transformation rule for k-covectors (from W. Tu)]
-	Let $ f $ be a k-covector on a vector space $ V $. Suppose two sets of vectors $ u_1,\cdots,u_k $ and $ v_1,\cdots,v_k $ in $ V $ are related by
+	Let $ f $ be a k-covector on a vector space $ V $ (of say, dimension $ n $). Suppose two sets of vectors $ u_1,\cdots,u_k $ and $ v_1,\cdots,v_k $ in $ V $ are related by
 	\[ u_j = \sum_{i=1}^{k} a_j^i v_i, \qquad j = 1,\cdots,k, \]
 	for a $ k\times k $ matrix $ A = \left[a_j^i\right] $. Show that
 	\[ f(u_1,\cdots, u_k) = (\det A) f(v_1,\cdots,v_k). \]
 \end{problem}
+
+\begin{solution}
+	Since $ f $ is a $ k $-vector, then we can expand it in its basis
+	\[ f = \sum_{I \in AM} C_I \alpha^I, \]
+	where $ AM $ is the set of all ascending multi-indices $ I = (i_1,\cdots,i_k) $ for $ 1 \leq i_1 < i_2 < \cdots < i_k \leq n $. Thus
+	\[ f(u_1,\cdots,u_k) = \sum_{I \in AM} C_I \alpha^I (u_1,\cdots,u_k). \]
+	Let's focus on the term $ I = (i_1,\cdots,i_k) $. For this term we can write
+	\begin{align*}
+		(\alpha^{i_1} \wedge \cdots \wedge \alpha^{i_k})(u_1,\cdots,u_k) 
+		&= \det\begin{pmatrix}
+			\alpha^{i_1}(u_1) & \alpha^{i_1}(u_2) & \cdots & \alpha^{i_1}(u_k) \\
+			\alpha^{i_2}(u_1) & \alpha^{i_2}(u_2) & \cdots & \alpha^{i_2}(u_k) \\
+			\vdots & \vdots & \ddots & \vdots \\
+			\alpha^{i_k}(u_1) & \alpha^{i_k}(u_2) & \cdots & \alpha^{i_k}(u_k)
+		\end{pmatrix}\\
+		&= \det \left[
+		\begin{pmatrix}
+			\alpha^{i_1}(v_1) & \alpha^{i_1}(v_2) & \cdots & \alpha^{i_1}(v_k) \\
+			\alpha^{i_2}(v_1) & \alpha^{i_2}(v_2) & \cdots & \alpha^{i_2}(v_k) \\
+			\vdots & \vdots & \ddots & \vdots \\
+			\alpha^{i_k}(v_1) & \alpha^{i_k}(v_2) & \cdots & \alpha^{i_k}(v_k)
+		\end{pmatrix}
+		\begin{pmatrix}
+			a^1_1 & a^1_2 & \cdots & a^1_k \\
+			a^2_1 & a^2_2 & \cdots & a^2_k \\
+			\vdots & \vdots & \ddots & \vdots \\
+			a^k_1 & a^k_2 & \cdots & a^k_k
+			\end{pmatrix}
+		\right]\\
+		&= \det (A) \det \begin{pmatrix}
+			\alpha^{i_1}(v_1) & \alpha^{i_1}(v_2) & \cdots & \alpha^{i_1}(v_k) \\
+			\alpha^{i_2}(v_1) & \alpha^{i_2}(v_2) & \cdots & \alpha^{i_2}(v_k) \\
+			\vdots & \vdots & \ddots & \vdots \\
+			\alpha^{i_k}(v_1) & \alpha^{i_k}(v_2) & \cdots & \alpha^{i_k}(v_k)
+		\end{pmatrix}\\
+		&= \det(A) (\alpha^{i_1} \wedge \cdots \wedge \alpha^{i_k})(v_1,\cdots,v_k) 
+	\end{align*}
+	Thus we can write
+	\[f(u_1,\cdots,u_k) = \sum_{I \in AM} C_I \alpha^I (u_1,\cdots,u_k) =  \det(A) \sum_{I \in AM} C_I \alpha^I (v_1,\cdots,v_k) \]
+	or
+	\[ \boxed{f(u_1,\cdots,u_k) = \det(A) f(v_1,\cdots,v_k).} \]
+	\qed
+\end{solution}
 
 
