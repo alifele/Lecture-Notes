@@ -739,4 +739,36 @@ Because of the observation above, we identify the standard basis $ \set{e^1, e^2
 	\qed
 \end{solution}
 
+\begin{problem}[Vanishing of a covector of top degree (from W. Tu)]
+	Let $ V $ be a vector space of dimension $ n $. Prove that if an $ n $-covector $ \omega $ vanishes on a basis $ e_1,\cdots,e_n $ for $ V $, then $ \omega $ is the zero covector on $ V $.
+\end{problem}
+
+\begin{solution}
+	First, observe that for a vector space of dimension $ n $ we have
+	\[ \dim(A_n) = \binom{n}{n} = 1, \qquad \mathcal{B}= \set{\alpha^1 \wedge \cdots \wedge \alpha^k}. \]
+	Let $ f \in A_n(V) $. Thus we can write
+	\[ f = g \alpha^1\wedge \cdots \wedge \alpha^n  \qquad \text{for some}\ g \in \R.\] 
+	On the other hand, we know
+	\[ (\alpha^1\wedge \cdots\wedge \alpha^n)(e_1,\cdots,e_n) = \det \left[ \alpha^i(e_j) \right] = 1.\]
+	This $ f(e_1,\cdots, e_n) = 0 $ if and only if $ g = 0 $.
+\end{solution}
+
+\begin{problem}[Linear independence of covectors (from W. Tu)]
+	Let $ \alpha^1,\cdots,\alpha^k $ be 1-covectors on a vector space $ V $. Show that $ \alpha^1 \wedge \cdots \wedge \alpha^k \neq 0 $ if and only if $ \alpha^1, \cdots, \alpha^k $ are linearly independent in the dual space $ V^{\vee} $.
+\end{problem}
+\begin{solution}
+	For the forward direction, we want to show
+	\[ \alpha^1 \wedge \cdots \wedge \alpha^k \neq 0 \implies \alpha^1,\cdots,\alpha^k\ \text{are linearly independent.} \]
+	To show this we will prove the contrapositive. Assume $ \alpha^1,\cdots,\alpha^k $ are linearly dependent. Thus we can write one of them as a linear combination of others. With out loss of generality, assume 
+	\[ \alpha^1 = c_2 \alpha^2 + \cdots + c_n \alpha^n, \]
+	where $ c_i $s are not all zero. Consider
+	\[ \alpha^1\wedge \cdots\wedge \alpha^k  = c_2 \alpha^2 \wedge \cdots\wedge\alpha^k + \cdots +  c_k \alpha^k \wedge \cdots \wedge \alpha^{k} = 0. \]
+	The last equality is true since $ \alpha^I = 0 $ if the multi-indices $ I $ as at least two repetitive indices. 
+	
+	For the converse, we want to show
+	\[\alpha^1,\cdots,\alpha^k\ \text{are linearly independent.} \implies \alpha^1 \wedge \cdots \wedge \alpha^k \neq 0 \]
+	Assume $ \alpha^1,\cdots,\alpha^k $ are linearly independent. Then it can be extended as a basis for $ V^\vee $ as as $ \alpha^1,\cdots,\alpha^k,\cdots,\alpha^n $. Let $ v_1,v_2,\cdots,v_n $ be the dual basis for $ V $. Then
+	\[ (\alpha^1\wedge\cdots\wedge\alpha^k) (v_1,\cdots,v_k) = \det\left[ \alpha^i(v_j) \right] = 1 \neq 0.  \]
+	Thus $ \alpha^1\wedge\cdots\wedge\alpha^k $ can not be a zero k-covector.
+\end{solution}
 
