@@ -321,6 +321,14 @@ Because of the observation above, we identify the standard basis $ \set{e^1, e^2
 	As an important (and simple!) Corollary for this statement, we can conclude that determinant of an $ n\times n $ matrix (which is an alternating n-tensor) is zero when its column vectors are linearly dependent.
 \end{summary}
 
+\begin{summary}
+	Let $ U \subset \R^n $ open, and let $ \set{x_1,\cdots,x_n} $ be standard basis for $ \R^n $, and $ \set{x^1,\cdots,x^n} $ the standard dual basis. Let $ p \in U $. Then for $ T_p(\R^n) $ and $ T^*_p(\R^n) $ we have
+	\[ \mathcal{B}(T_p(\R^n)) = \set{\frac{\partial}{\partial x_1}\big|_{p},\cdots,\frac{\partial}{\partial x_n}\big|_{p}}, 
+	\qquad
+	\mathcal{B}(T_p^*(\R^n)) = \set{ dx^1\big|_{p},\cdots,dx^n\big|_{p} }.
+	 \]
+\end{summary}
+
 \section{Solved Problems}
 \begin{problem}[Algebra structure on $ C_p^{\infty} $]
 	Define carefully addition, multiplication, and scalar multiplication in $ C_p^\infty $. Prove that addition in $ C_p^\infty $ is commutative.
@@ -772,3 +780,35 @@ Because of the observation above, we identify the standard basis $ \set{e^1, e^2
 	Thus $ \alpha^1\wedge\cdots\wedge\alpha^k $ can not be a zero k-covector.
 \end{solution}
 
+\begin{problem}[Exterior multiplication (from W. Tu)]
+	Let $ \alpha $ be a non-zero 1-covector and $ \gamma $ a $ k $-covector on a finite dimensional vector space $ V $. Show that $ \alpha \wedge \gamma = 0 $ if and only if $ \gamma = \alpha \wedge \beta $ for some $ (k-1) $-covector $ \beta $ on V.
+\end{problem}
+\begin{solution}
+	First, we prove the first direction. Let $ \gamma \in A_k(V), \alpha \in A_1(V) $ such that $ \gamma = \alpha \wedge \beta  $ for some $ \beta \in A_{k-1}(V) $. Then
+	\[ \alpha \wedge \gamma = \alpha \wedge \alpha \wedge \beta = 0. \]
+	For the converse, let $ \alpha$ and $ \gamma $ as before and we want to prove
+	\[ \alpha \wedge \gamma = 0 \implies \gamma = \alpha \wedge \beta\ \text{for some $\beta \in A_{k-1}(V)$}. \]
+	We prove the contrapositive. Assume $ \forall \beta \in A_{k-1}(V) $ we have $ \gamma \neq \alpha \wedge \beta $. Then by wedge product of $ \alpha $ to both sides we will get
+	\[ \alpha \wedge \gamma \neq \alpha\wedge\alpha\wedge\beta = 0. \]
+	This completes the proof.\qed
+\end{solution}
+
+
+\begin{problem}[A basis for 3-covectors (from W. Tu)]
+	Let $ x^1,x^2,x^3,x^4 $ be the coordinates on $ \R^4 $ and $ p $ a point in $ \R^4 $. Write down a basis for the vector space $ A_3(T_p(\R^4)) $.
+\end{problem}
+\begin{solution}
+	First, observe that a basis for $ T_p(\R^4) $ is $ \set{\frac{\partial}{\partial x^1}|_p,\cdots,\frac{\partial}{\partial x_4}|_p} $, and for $ T_p^*(\R^n) $ a standard basis is $ \set{dx_1|_p,\cdots,dx_4 |_p} $. Thus a standard basis for $ A_3(T_p(\R^4)) $ would be
+	\[ \mathcal{B} = \set{dx^1\wedge dx^2\wedge dx^3|_p,\ dx^1\wedge dx^2\wedge dx^4|_p,\ dx^1\wedge dx^3\wedge dx^4|_p,\ dx^2\wedge dx^3 \wedge dx^4|_p }. \]
+\end{solution}
+
+\begin{problem}[Wedge product of a 2-form with a 1-form (from W. Tu)]
+	Let $ \Omega $ be a 2-form and $ \tau $ a 1-form on $ \R^3 $. If $ X,Y,Z $ are vector fields on $ M $ find an explicit formula for $ (\omega \wedge \tau)(X,Y,Z) $ in terms of the values of $ \omega $ and $ \tau $ on the vector fields $ X,Y,Z $.
+\end{problem}
+
+\begin{solution}
+	From the definition of wedge product, and using the notion of $ (2,1) $ shuffles, that are $ (1<2,3), (1<3,2), (2<3,1) $ with respective signs $ +,-,+ $ we can write
+	\[ (\omega \wedge \tau) (X,Y,Z) = (\omega\otimes\tau)(X,Y,Z) -   (\omega\otimes\tau)(X,Z,Y) +  (\omega\otimes\tau)(Y,Z,X),   \]
+	or alternatively
+	\[ (\omega \wedge \tau) (X,Y,Z) = \omega(X,Y)\tau(Z) - \omega(X,Z)\tau(Y) + \omega(Y,Z)\tau(X). \]
+\end{solution}
