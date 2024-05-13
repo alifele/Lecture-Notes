@@ -183,6 +183,11 @@ Because of the observation above, we identify the standard basis $ \set{e^1, e^2
 \[ v = \sum_{i=1}^{n} v^i \frac{\partial}{\partial x^i}. \]
 
 
+\begin{theorem}
+	newEnv
+\end{theorem}
+
+
 \section{Summary}
 
 
@@ -811,4 +816,20 @@ Because of the observation above, we identify the standard basis $ \set{e^1, e^2
 	\[ (\omega \wedge \tau) (X,Y,Z) = (\omega\otimes\tau)(X,Y,Z) -   (\omega\otimes\tau)(X,Z,Y) +  (\omega\otimes\tau)(Y,Z,X),   \]
 	or alternatively
 	\[ (\omega \wedge \tau) (X,Y,Z) = \omega(X,Y)\tau(Z) - \omega(X,Z)\tau(Y) + \omega(Y,Z)\tau(X). \]
+\end{solution}
+
+\begin{problem}[A closed 1-form on the punctured plane (from W. Tu)]
+	Define a 1-form $ \omega $ on $ \R^2 - \set{0} $ by
+	\[ \omega = \frac{1}{x^2+y^2}(-ydx + xdy). \]
+	Show that $ \omega $ is closed.
+\end{problem}
+\begin{solution}
+	define $ f,g: \R^2-\set{0} \to \R $ as 
+	\[ f(x,y) = \frac{-y}{x^2 + y^2}, \qquad g(x,y) = \frac{x}{x^2 + y^2}. \]
+	Thus we can write $ \omega $ as $ \omega = f dx + g dy $. The exterior derivative of $ \omega $ will be
+	\[ d\omega = (g_x - f_y) dx \wedge dy. \]
+	By a simple calculation we can observe
+	\[ f_x(x,y) = \frac{y^2 - x^2}{x^2 + y^2}, \qquad g_y(x,y) = \frac{y^2 - x^2 }{x^2 + y^2}. \]
+	Thus we will have
+	\[ d\omega = 0. \]
 \end{solution}
