@@ -917,3 +917,39 @@ Because of the observation above, we identify the standard basis $ \set{e^1, e^2
 	on $ V $, we associate the vector $ v_\gamma = \langle c_1,c_2,c_3 \rangle \in \R^3 $. Show that under this correspondence, the wedge product of 1-covectors corresponds to the cross product of vectors in $ \R^3 $: if $ \alpha = a_1 \alpha^1 + a_2\alpha^2 + a_3\alpha^3 $ and $ \beta = b_1\alpha^1 + b_2\alpha^2 + b_3\alpha^3 $, then we have
 	\[ v_{\alpha\wedge \beta} = v_\alpha \cross v_\beta. \]
 \end{problem}
+
+\begin{solution}
+	Let $ \alpha = a_1 \alpha^1 + a_2 \alpha^2 + a_3 \alpha^3 $, and $ \beta = b_1 \alpha^1 + b_2 \alpha^2 + b_3 \alpha^3 $. Then for the wedge product we have
+	\[ \alpha\wedge\beta = (a_1b_2 - a_2b_1)\alpha^1\wedge\alpha^3 + (a_1b_3 - a_3b_1)\alpha^1\wedge\alpha^3 + (a_2b_3 - a_3b_2)\alpha^3\wedge\alpha^2. \]
+	We can associate this with vector $ v_{\alpha\wedge\beta} = \langle a_1b_2 - a_2b_1, a_1b_3 - a_3b_1, a_2b_3 - a_3b_2 \rangle \in \R^3 $. On the other hand, we can write
+	$ v_\alpha\times v_\beta = \langle a_1,a_2,a_3 \rangle \times \langle b_1,b_2,b_3 \rangle = \langle a_1b_2 - a_2b_1, a_1b_3 - a_3b_1, a_2b_3 - a_3b_2 \rangle $. This shows that 
+	\[ v_{\alpha\wedge\beta} = v_\alpha\times v_\beta. \]
+\end{solution}
+
+\begin{problem}[Commutator of derivations and antiderivations (from W. Tu)]
+	Let $ A = \bigoplus_{k=-\infty}^{\infty} A^k $ be a graded algebra over a field $ K $ with $ A^k = 0 $ for $ k < 0 $. Let $ m $ be an integer. A superderivation of $ A $ of degree $ m $ is a $ K $-linear map $ D:A\to A $ such that for all $ k $, $ D(A^k) \in A^{k+m}$ and for all $ a\in A^k $ and $ b \in A^\ell $,
+	\[ D(ab) = (Da)b + (-1)^{k\ell} aD(b). \]
+	If $ D_1 $ and $ D_2 $ are two superderivations of $ A $ of respective degrees $ m_1 $ and $ m_2 $, define their commutator to be
+	\[ [D_1,D_2] = D_1\circ D_2 - (-1)^{m_1m_2}D_2\circ D_1. \]
+	Show that $ [D_1,D_2] $ is a superderivation of degree $ m_1+m_2 $. A superderivation is said to be even or odd depending on the parity of its degree. An even superderivation is a derivation; an odd superderivation is an antiderivation.
+\end{problem}
+
+\begin{solution}
+	To show that $ [D_1,D_2] $ is a superderivation of degree $ m_1+m_2 $ we need to show
+	\[ [D_1,D_2](ab) \stackrel{?}{=} [D_1,D_2](a)b + (-1)^{k(m_1+m_2)}a[D_1,D_2](b). \]
+	Using the definition of $ [D_1,D_2] $ we can expand this as
+	\[ [D_1,D_2](ab) \stackrel{?}{=}
+	 \left[ D_1(D_2(a)) - (-1)^{m_1m_2}D_2(D_1(a)) \right]b + (-1)^{k(m_1+m_2)}a\left[ D_1(D_2(b)) - (-1)^{m_1m_2}D_2(D_1(b)) \right]. \tag{Q.1} \]
+	 To show this, we simply start with $ [D_1,D_2] $ and apply it on $ a \in A_k, b \in A_\ell $ and use the definition of $ [D_1,D_2] $ to simplify it and turn it into the format of equation $ (Q.1) $.
+	 \begin{align*}
+	 	[D_1,D_2](ab) &= (D_1\circ D_2)(ab) - (-1)^{m_1m_2} (D_2\circ D_1)(ab) = D_1(D_2(ab)) - (-1)^{m_1m_2} D_2(D_1(ab)) \\
+	 	&= D_1(D_2(a))b + (-1)^{m_1(k+m_2)}D_2(a)D_1(b) + (-1)^{m_2k}\left[ D_1(a)D_2(b) + (-1)^{m_1k}aD_1(D_2(b)) \right] \\
+	 	&-(-1)^{m_1m_2}\big[  D_2(D_1(a))b + (-1)^{m_2(k+m_1)}D_1(a)D_2(b) + (-1)^{m_1k} \big[ D_2(a)D_1(b) + (-1)^{m_2k}a D_2(D_1(b)) \big]  \big]
+	 \end{align*}
+	 Now by matching the terms we can write
+	 \begin{align*}
+	 	[D_1,D_2](ab) &= \left[ D_1(D_2(a)) - (-1)^{m_1m_2}D_2(D_1(a)) \right]b + (-1)^{k(m_1+m_2)}a\left[ D_1(D_2(b)) - (-1)^{m_1m_2}D_2(D_1(b)) \right]\\
+	 	&+ \underbrace{D_1(a)D_2(b)\left[  (-1)^{m_2k} - (-1)^{m_2(k+2m_1)}  \right]}_{=0}.
+	 \end{align*}
+	 The last term is equal to zero since if $ m_2k $ is even, then $ m_2k + 2m_1m_2 $ is also even, which leads to $ (-1)^{m_2k} - (-1)^{m_2(k+2m_1)} = -1 + 1 = 0 $. As the other case, if $ m_2k $ is even, then $ m_2k + 2m_1m_2 $ is also even, where we will have $ (-1)^{m_2k} - (-1)^{m_2(k+2m_1)} = 1- 1 = 0 $. This proves that $ [D_1,D_2] $ is indeed an superderivative of order $ m_1+m_2 $.
+\end{solution}
