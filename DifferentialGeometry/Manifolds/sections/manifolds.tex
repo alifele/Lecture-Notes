@@ -1,5 +1,8 @@
 \chapter{Manifolds}
 
+
+\section{Topological manifolds and Smooth manifolds}
+
 We start with the definition of topological manifolds. We will later study the smooth manifolds that are of our main interest in this lecture. But first, we need to review some basic definition.
 
 \begin{definition}[Hausdorff topological space]
@@ -70,6 +73,39 @@ In the following section, we will review the notion of compatible charts which w
 \end{remark}
 
 
+\begin{definition}[Maximal atlas]
+	Let $ \mathcal{U} $ be an atlas for the manifold $ M $. Then $ \mathcal{U} $ is called maximal if it contains any other atlas of the manifold $ M $. Or equivalently, if $ \mathcal{M} $ is any other atlas containing $ \mathcal{U} $ then $ \mathcal{U} = \mathcal{M} $.
+\end{definition}
+
+We can use the notion of the maximal atlas to define a smooth manifold.
+
+\begin{definition}[Smooth manifold]
+	A topological manifold together with a maximal atlas is called a smooth manifold. The maximal atlas is also called a differentiable structure on $ M $.
+\end{definition}
+
+
+In practice, to show that a topological manifold is smooth, it is not necessary to exhibit a maximal atlas. Existence of any atlas will do so, as proposed by the following proposition.
+
+
+\begin{proposition}
+	Any atlas of a locally euclidean space is contained in a \emph{unique} maximal atlas.
+\end{proposition}
+
+\begin{proof}
+	Let $ \frak{U} = \set{(U_\alpha, \phi_\alpha)} $ be any atlas for the locally Euclidean space $ M $. Let $ S = \set{(V_i, \psi_i)} $ denote the set of all charts compatible with $ \frak{U} $. Construct the set $ \frak{M} = \frak{U} \cup S $. We claim that this set is a maximal atlas. Let $ (W,\psi) $ be a chart compatible with $ \frak{M} $. Then it should also be compatible with $ \frak{U} $, thus it is contained in the set $ S $, i.e. $ (W,\psi) \in S $, thus in $ \frak{M} $. This shows that the atlas $ \frak{M} $ is maximal.
+	
+	To show the uniqueness, let $ \frak{M}' $ be another maximal atlas. Since $ \frak{M}' $ is compatible with $ \frak{U} $, thus it is also compatible with $ \frak{M} $. But due to the construction it is contained in the new atlas, thus $ \frak{M}' \subset \frak{M} $. Thus the maximal atlas is unique.
+\end{proof}
+
+Considering the proposition above, we arrive at the following important observation.
+
+\begin{observation}[Showing a space is an smooth manifold]
+	To show that a space is an smooth manifold, we just need to show that the space is
+	\begin{itemize}
+		\item a Hausdorff topological space that is also second countable,
+		\item there exists any $ C^\infty $ atlas (not necessarily maximal).
+	\end{itemize}
+\end{observation}
 
 
 \section{Solved Problems}
@@ -179,16 +215,47 @@ In the following section, we will review the notion of compatible charts which w
 		U_5 = \set{(x,y,z) \in S^2\ |\ z > 0}, \qquad \phi_5(x,y,z) = (x,y), \\
 		U_6 = \set{(x,y,z) \in S^2\ |\ z < 0}, \qquad \phi_6(x,y,z) = (x,y).
 	\end{align*}
-	Note that although some of the functions above might look similar (like $ \phi_3 $ and $ \phi_4 $) but they are in fact different functions as they have different domains. Describe the domain $ \phi_4(U_1 \cap U_4) $ of $ \phi_1\circ \inv{\phi_4} $ and show that $ \phi_1\circ \inv{\phi_4} $ is $ C^\infty $ on $ \phi_4(U_1 \cap U_4) $. Do the dame for $ \phi_6 \circ \inv{\phi_1}$
+	Note that although some of the functions above might look similar (like $ \phi_3 $ and $ \phi_4 $) but they are in fact different functions as they have different domains. Show that $ \phi_1\circ \inv{\phi_4}, \phi_4 \circ \inv{\phi_1} $ is $ C^\infty $ on $ \phi_4(U_1 \cap U_4), \phi_1(U_1 \cap U_4) $ respectively. Do the same same analysis for $ \phi_6 \circ \inv{\phi_1}$.
 	\input{Images/localChartExample3.tex}
 \end{problem}
 \begin{solution}
 	For the set $ U_1 \cap U_4 $ we have
 	\[ U_1 \cap U_4 = \set{(x,y,z) \in S^2\ :\ x>0 \text{ and } y < 0 }. \]
 	Thus we will have
-	\[ \phi_4(U_1\cap U_4) = \set{(x,z)\in \R^2 \ :\ x^2 + z^2 \leq 1,\ x>0 \text{ and } z<0}. \]
+	\[ \phi_4(U_1\cap U_4) = \set{(x,z)\in \R^2 \ :\ x^2 + z^2 \leq 1,\ x>0}. \]
 	Thus we can write
 	\[ (\phi_1 \circ \inv{\phi_4})(\langle x,z \rangle ) = \phi_1(\langle x,-\sqrt{1-(x^2+y^2)},z \rangle) = \langle -\sqrt{1-(x^2+y^2)},z \rangle  \]
 	This is indeed a $ C^\infty $ vector valued function, since each component is a $ C^\infty $ function. Now to evaluate $ \phi_4 \circ \inv{\phi_1}: \phi_1(U_1 \cap U_4) \to \phi_4(U_1\cap U_4) $ we need to first evaluate the set $ \phi_1(U_1 \cap U_4) $. For this set we have
-	\[ \phi_1(U_1 \cap U_4) = \set{(z,y)\in\R^2\ :\ z^2 + y^2 < 0,\ z<0 \text{ and } y < 0}. \]
+	\[ \phi_1(U_1 \cap U_4) = \set{(z,y)\in\R^2\ :\ z^2 + y^2 \leq 1, y < 0}. \]
+	Then we can write
+	\[ (\phi_4 \circ \inv{\phi_1})(\langle y,z \rangle ) = \phi_4(\langle \sqrt{1-(y^2+z^2)}, y,z  \rangle) = \langle \sqrt{1-(y^2+z^2)} , z \rangle. \]
+	This is indeed a $ C^\infty $ vector valued function. 
+	
+	To evaluate the function $ \phi_6 \circ \inv{\phi}_1: \phi_1(U_1 \cap U_6) \to \phi_6(U_1 \cap U_6) $, we first need to determine the domain of this function. First observe that 
+	\[ U_1 \cap U_6 =  \set{(x,y,z) \in S^2\ :\ x>0 \text{ and } y<0}, \]
+	which is the same as $ U_1 \cap U_4 $. Then for the domain of the function of interest we can write
+	\[ \phi_1(U_1 \cap U_6) = \set{(y,z) \in \R^2 :\ z^2 + y^2 \leq 1 \text{ and } y<0}, \]
+	\[ (\phi_6 \circ \inv{\phi_1})(\langle y,z \rangle) = \phi_6(\langle \sqrt{1-(y^2+z^2)},y,z \rangle) = \langle \sqrt{1-(y^2+z^2)}, y \rangle. \]
+\end{solution}
+
+\begin{problem}[Existence of a coordinate neighborhood (from W. Tu)]
+	Let $ \set{(U_\alpha, \phi_\alpha)}_{\alpha \in I} $ be the maximal atlas on manifold $ M $. For any open set $ U $ in $ M $ and a point $ p \in U $, prove the existence of a coordinate open set $ U_\alpha $ such that $ p \in U_\alpha \subset U $.
+\end{problem}
+\begin{solution}
+	Since $ \set{(U_\alpha,\phi_\alpha)}_{\alpha \in I} $ is an atlas, then for $ p \in U $ given as above, we can find some $ \alpha_1 \in I $ such that $ p \in U_{\alpha_1} $. Consider the open set $ W = U_{\alpha_1} \cap U $. The chart $ (W, \phi_{\alpha_1}|_W) $ is in the atlas (since it is maximal), i.e. $ \exists \alpha \in I $ such that $ (U_\alpha, \phi_\alpha) = (W, \phi_{\alpha_1}|_W) $. This completes the proof.
+\end{solution}
+
+\begin{problem}[An atlas for a product manifold (from W. Tu)]
+	Prove the following proposition.
+	\begin{proposition}
+		If $ \set{(U_\alpha,\phi_\alpha)} $ and $ \set{(V_i,\psi_i)} $ are $ C^\infty $ atlases for the manifold $ M $ and $ N $ of dimensions $ m $ and $ n $, respectively, then the collection 
+		\[ \set{(U_\alpha \times V_i,\phi_\alpha \times \psi_i)} \] where
+		\[ \phi_\alpha \times \psi_i\ :\ U_\alpha \times V_i \to \R^m \times \R^n \]
+		of charts is a $ C^\infty $ atlas on $ M\times N $. Therefore, $ M\times N $ is a $ C^\infty $ manifold of dimension $ m+n $.
+	\end{proposition}
+\end{problem}
+\begin{solution}
+	In order to show that the collection $ \frak{U} = \set{(U_\alpha \times V_i, \phi_\alpha \times \psi_i)} $ is an atlas for $ M\times N $, we need to show that charts are pairwise compatible as well as the set covering the whole space. To show that the chart covers the whole space $ M\times N $, let $ (p_1,p_2) \in M\times N $. Then $ p_1 \in M $ and $ p_2 \in N $. Then there are two coordinate open sets such that $ p_1 \in U_{\alpha_1} $ and $ p_2 \in V_{i_1} $. Thus the coordinate open set $ U_{\alpha_1} \times V_{i_1} $ contains the point $ (p_1,p_2) $.
+	
+	To show that two any two charts in the collection $ \frak{U} $ are compatible, let $ (U_{\alpha_1} \times V_{i_1},\phi_{\alpha_1}\times \psi_{i_1}) $ and $  (U_{\alpha_2} \times V_{i_2},\phi_{\alpha_2}\times \psi_{i_2}) $ be two  charts. We claim that the corresponding coordinate maps are $ C^\infty $. This follows directly from the fact the each component of the map these coordinate maps are $ C^\infty $.
 \end{solution}
