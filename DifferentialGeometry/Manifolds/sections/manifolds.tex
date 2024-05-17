@@ -127,7 +127,7 @@ In this section, we will study the notion of smooth maps between manifolds. We w
 \end{remark}
 
 \begin{proposition}[Smoothness of real valued functions]
-	Let $ M $ be a manifold of dimension $ n $, and let $ f: M \to \R $ a real-valued function on $ M $. The following are equivalent:
+	Let $ M $ be a manifold of dimension $ n $ with atlas $ \frak{U} $, and let $ f: M \to \R $ a real-valued function on $ M $. The following are equivalent:
 	\begin{enumerate}[(i)]
 		\item The function $ f : M \to \R $ is $ C^\infty $.
 		\item The manifold $ M $ has an atlas such that for every chart $ (U,\phi) $ in the atlas, $ f\circ \inv{\phi}: \phi(U) \to \R$ is $ C^\infty $.
@@ -145,20 +145,65 @@ In this section, we will study the notion of smooth maps between manifolds. We w
 	\[ f\circ\inv{\psi} = (f\circ\inv{\phi_\alpha})\circ(\phi_\alpha \circ \inv{\psi}) \]
 	which shows that $ f\circ\inv{\psi}  $ is smooth (look at the remark below).
 	
-	\noindent $ (iii) \implies (i) $: This follows immediately from the definition.
+	\noindent $ (iii) \implies (ii) $: This follows immediately from the definition.
 \end{proof}
 
-\begin{quote}
-	{\color{orange} I am not sure about the remark below. I need to discuss this with Ata in one of our weekly meetings$\ \Downarrow\Downarrow\Downarrow\Downarrow$.}
-\end{quote}
+%\begin{quote}
+%	{\color{orange} I am not sure about the remark below. I need to discuss this with Ata in one of our weekly meetings$\ \Downarrow\Downarrow\Downarrow\Downarrow$.}
+%\end{quote}
+%\begin{remark}
+%	Note that when we are saying ``let $ M $ be a manifold of dimension $ n $'' (in the first part of the proposition), what we really means is that the set $ M $ along with the collection of compatible charts (i.e. atlas) $ \frak{U} $ forms a manifold. In the part (iii) of the proposition above, when we say ``for every chart $ (V,\phi) $'' on manifold $ M $, what we really mean is $ (V,\phi) $ is compatible with $ \frak{U} $.
+%\end{remark}
+
 \begin{remark}
-	Note that when we are saying ``let $ M $ be a manifold of dimension $ n $'' (in the first part of the proposition), what we really means is that the set $ M $ along with the collection of compatible charts (i.e. atlas) $ \frak{U} $ forms a manifold. In the part (iii) of the proposition above, when we say ``for every chart $ (V,\phi) $'' on manifold $ M $, what we really mean is $ (V,\phi) $ is compatible with $ \frak{U} $.
+	Considering the ``very important note'' at the beginning of this chapter, we need to emphasis again that in part $ (iii) $, when we say \emph{for every chart $ (V,\psi) $ on $ M $}, we mean a chart in the unique differentiable structure of the manifold that contains the atlas $ \frak{U} $.
 \end{remark}
 
 \begin{observation}[From W. Tu]
 	The smoothness conditions from the proposition above will be a recurrent motif through out the book. To prove the smoothness of an object, it is sufficient that a smoothness criterion hold on the charts of some atlas. Once the object is shown to be smooth, it then follows that the same smoothness criterion holds on every chart on the manifold.
 \end{observation}
 
+
+\begin{definition}[Pull back of a function]
+	Let $ F: N\to M $ be a a map between manifolds, and $ \phi: M \to \R $. Then the pullback of the function $ \phi $ by $ F $ is denoted by $ F*\phi $ is defined as 
+	\[ F^* \phi = \phi\circ F. \]
+\end{definition}
+
+\begin{remark}
+	In this terminology, a function $ f:M \to \R $ is smooth on a chart $ (U,\phi) $ if and only if the pullback $ (\inv{\phi})^* f$ is smooth on the subset $ \phi(U) $ of Euclidean space.
+\end{remark}
+
+\subsection{Smooth maps between manifolds}
+Here in this section we will discuss the smooth maps between manifolds. We will be able to recover the definition of the smooth functions on manifolds as a special case. 
+
+\begin{definition}[Smooth maps between manifolds]
+	Let $ M, N $ be manifolds with dimensions $ m,n $ respectively. A map $ F: M \to N $ is said to be smooth at point $ p \in M $, if there exists charts $ (U,\phi) $ and $ (V,\psi) $ such that $ p \in U $ and $ F(p) \in V $, and the function 
+	\[ \psi\circ F \circ \inv{\phi}: \R^m \supset \phi(\inv{F}(V) \cup U) \to \R^n  \]
+	is smooth at $ p $.
+\end{definition}
+\begin{remark}
+	The following figure helps to digest the definition above.
+	\input{Images/mapsBetweenManifolds.tex}
+\end{remark}
+
+\begin{remark}
+	Since the Euclidean space is indeed a smooth manifolds, then we can recover the definition of smooth functions on manifolds form the definition above. Let $ M $ be a manifold, and $ N = \R^n $ with the atlas $ \set{(\R^n, \mathds{1}: \R^n \to \R^n)} $, then we will have the notion of vector valued functions on manifold. By setting $ n=1 $ we will recover the definition of smooth function on manifold.
+\end{remark}
+
+In the following proposition we will be showing that the smoothness of the map is independent of the charts chosen, thus the smoothness of the map is well-defined.
+
+\begin{proposition}[Smoothness of maps between manifolds is well-defined]
+	Suppose $ F: N \to M $ is $ C^\infty $ at $ p \in N $. If $ (U,\phi) $ is any chart in $ N $ that contains $ p $ and $ (V,\psi) $ is any chart in $ M $ that contains $ F(p) $, then $ \psi \circ F \circ \inv{\phi} $ is smooth at $ \phi(p) $.
+\end{proposition}
+
+\begin{proof}
+	newEnv
+\end{proof}
+
+
+
+
+\newpage
 
 
 \section{Solved Problems}
