@@ -247,8 +247,62 @@ In the following proposition we will be showing that the smoothness of the map i
 
 \begin{proof}
 	We will demonstrate two proofs for this proposition to demonstrate what happens if we do not notice a possible level of abstraction. The first proof below is a very crude, hard-core, direct proof, that seems to be tough and easy to make mistakes, just because it is not encapsulating some of the details into another proposition. However, for the second proof, it will encapsulate some of the details into the results of the \autoref{prop:smoothnessInTermsOfCharts}, which will allows us to do a more high level thinking.
+	
+	\textbf{proof 1.} Let $ p \in M $. Since $ F $ is smooth, then $ \exists\ (U,\gamma) $ chart for $ M $ and $ \exists\ (V,\phi) $ chart for $ M $ such that $ p \in U $ and $ F(p) \in V $ and the map
+	\[ \phi\circ  F \circ \inv{\gamma}: \gamma(\inv{F}(V)\cap U) \to \phi(V)  \]
+	is smooth at $ \gamma(p) $. Also, since $ G $ is smooth, then at $ F(p) $, there exists the charts $ (W,\lambda) $ for $ M $ and $ (Y,\psi) $ for $ P $ such that $ F(p) \in W $ and $ G(F(p)) \in Y $ and the map
+	\[ \psi\circ G \circ \inv{\lambda}: \lambda(\inv{G}(Y)\cap W) \to \psi(Y)  \]
+	is smooth at $ \lambda(F(p)) $. Also note that since the charts $ (W,\lambda) $ and $ (V,\phi) $ for $ M $ are compatible (they both are chosen from the maxima atlas), then the maps
+	\[ \phi \circ \inv{\lambda}: \lambda(W\cap V) \to \phi(W\cap V) \quad \text{and}\ \quad \lambda\circ \inv{\phi}:\phi(W\cap V) \to \lambda(W\cap V) \]
+	are both smooth. Now it is time to glue all of these pieces together to infer the smoothness of the composite function $ G\circ F $. Based on these pieces, the function
+	\[ \psi \circ (G \circ F) \circ \inv{\gamma} = ( \psi\circ G \circ \inv{\lambda})\circ (\lambda \circ \inv{\phi}) \circ (\phi\circ  F \circ \inv{\gamma}) : \gamma(\inv{F}(\inv{G}(Y)\cap V\cap W)\cap U)\to \psi(G(F(p))) \]
+	is smooth at $ \gamma(p) $. Since the point $ p \in N $ was arbitrary, then the map $ G\circ F $ is smooth on $ M $.
+	
+	\textbf{proof 2.} In this proof, we will hide much of the details of the proof 1 in higher level of abstractions encapsulated in \autoref{prop:smoothnessInTermsOfCharts}.  Since $ F $ is smooth, then ($ (i)\implies (iii) $ of \autoref{prop:smoothnessInTermsOfCharts}) for every chart $ (U,\gamma) $  for $ M $ and $ (V,\phi) $  for $ M $ the map
+	\[ \phi\circ  F \circ \inv{\gamma}: \gamma(\inv{F}(V)\cap U) \to \phi(V)  \]
+	is smooth.. Also, since $ G $ is smooth, then for every chart  $(Y,\psi) $ for $ P $ the map
+	\[ \psi \circ G \circ \inv{\phi}: \phi(\inv{G}(Y)\cap V) \to \psi(Y)  \]
+	is smooth. Since the composition of smooth real vector valued functions is smooth, then 
+	\[ \psi\circ(G\circ F)\circ\inv{\gamma} = (\psi\circ G\circ \inv{\phi})\circ(\phi \circ F \circ \inv{\gamma}) \]
+	is smooth. Since for every chart $ (U,\gamma) $ and $ (Y,\phi) $ the function $ \psi\circ(G\circ F)\circ\inv{\gamma} $ is smooth, then by $ (iii)\implies (i) $ of \autoref{prop:smoothnessInTermsOfCharts} we proved that $G\circ F $ is smooth.
 \end{proof}
 
+
+\section{Diffeomorphisms}
+We start with the definition of diffeomorphism.
+
+\begin{proposition}[Diffeomorphism between manifolds]
+	A map $ F:M\to N $ between manifolds $ M $ and $ N $ is called a diffeomorphism if
+	\begin{itemize}[nosep]
+		\item $ F $ is a bijection,
+		\item $ F $ is $ C^\infty $, and
+		\item $ \inv{F} $ is also $ C^\infty $.
+	\end{itemize}
+\end{proposition}
+
+The following observation box summarizes the differences between homeomorphisms and diffeomorphisms.
+
+\begin{observation}[Difference between homeomorphisms and diffeomorphisms]
+	homeomorphisms are isomorphisms in the category of topological spaces. However, the diffeomorphisms are isomorphisms in the category of smooth manifolds, where the isomorphism preserves the differential structures. The following figure (original idea from\footnote{\href{https://www.math.unipd.it/~maraston/An2Byaounde/An2BCam_1213_1_mfds.pdf}{ mathematical analysis lecture notes.}}) demonstrates some of these ideas.
+\end{observation}
+	\input{Images/diffeoMorphVsHomeomorph.tex}
+	
+According to the two following propositions, in a \emph{smooth} manifold, the coordinate maps are diffeomorphisms, and conversely, any diffeomorphism from an open subset of the manifold to an open subset of a Euclidean space can serve as a coordinate map. 
+
+\begin{proposition}[Coordinate maps are diffeomorphisms]
+	If $ (U,\phi) $ is a chart on a manifold $ M $ of dimension $ n $, then the coordinate map $ \phi:U\to\phi(\phi) \in \R^n$ is a diffeomorphism.
+\end{proposition}
+\begin{proof}
+	For the proof, we will use the notion of smooth maps between manifolds in a smart way! First, observe that since $ \phi $ is a coordinate map, thus it is automatically a homeomorphism. Thus we just need to show that $ \phi $ and $ \inv{\phi} $ are smooth. Let $ U $ be a manifold with an atlas $ \set{(U,\phi)} $. Also, let $ \phi(U) \subset\R^n $ be a manifold (this is indeed a manifold as it is an open subset of a Euclidean space), with an atlas $ \set{(\phi(U),\mathds{1}_{\phi(U)})} $. In this point of view, the coordinate map $ \phi $ is in fact a map between manifolds. This is smooth, since 
+	\[ \mathds{1}_{\phi(U)}\circ \phi\circ \inv{\phi}: \underbrace{\phi(U \cap \inv{\phi}(\phi(U)))}_{\phi(U)} \to \phi(U) \]
+	is smooth, then by \autoref{prop:smoothnessInTermsOfCharts} $ (ii) \implies (i) $, the map $ \phi $ is smooth.
+	
+	To show the smoothness of the map $ \inv{\phi} $, we observe that this is a map from the manifold with atlas $ \set{(\phi(U),\inv{\phi})} $ to the manifold with atlas $ \set{(U,\phi)} $. Since the following map
+	\[ \phi \circ \inv{\phi} \circ \mathds{1}_{\phi(U)}: \phi(U) \to \phi(U) \]
+	is smooth (since it is just the identity map), then by \autoref{prop:smoothnessInTermsOfCharts} $ (ii) \implies (i) $ the map $ \inv{\phi} $ is smooth.
+	
+	Putting these two results together, we have shown that the coordinate map $ \phi $ is indeed a diffeomorphism from $ U $ to $ \R^n $.
+\end{proof}
 
 
 
