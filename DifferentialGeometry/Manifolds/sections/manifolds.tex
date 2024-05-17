@@ -179,7 +179,7 @@ Here in this section we will discuss the smooth maps between manifolds. We will 
 \begin{definition}[Smooth maps between manifolds]
 	Let $ M, N $ be manifolds with dimensions $ m,n $ respectively. A map $ F: M \to N $ is said to be smooth at point $ p \in M $, if there exists charts $ (U,\phi) $ and $ (V,\psi) $ such that $ p \in U $ and $ F(p) \in V $, and the function 
 	\[ \psi\circ F \circ \inv{\phi}: \R^m \supset \phi(\inv{F}(V) \cup U) \to \R^n  \]
-	is smooth at $ p $.
+	is smooth at $ p $. The map $ F $ is said to be smooth on manifold $ M $ if it is smooth at every point of the manifold.
 \end{definition}
 \begin{remark}
 	The following figure helps to digest the definition above.
@@ -193,11 +193,60 @@ Here in this section we will discuss the smooth maps between manifolds. We will 
 In the following proposition we will be showing that the smoothness of the map is independent of the charts chosen, thus the smoothness of the map is well-defined.
 
 \begin{proposition}[Smoothness of maps between manifolds is well-defined]
+	\label{prop:SmoothnessWellDefined}
 	Suppose $ F: N \to M $ is $ C^\infty $ at $ p \in N $. If $ (U,\phi) $ is any chart in $ N $ that contains $ p $ and $ (V,\psi) $ is any chart in $ M $ that contains $ F(p) $, then $ \psi \circ F \circ \inv{\phi} $ is smooth at $ \phi(p) $.
 \end{proposition}
 
 \begin{proof}
-	newEnv
+	Since $ F: N \to M $ is smooth at $ p \in N $, then there are charts $ (G,\gamma) $ and $ (L, \lambda) $ (from the corresponding maximal atlases) such that $ p \in G \subset N $ and $ F(p) \in L \subset M $ and the function 
+	\[ (\lambda \circ F \circ \inv{\gamma}): \gamma(\inv{F}(L) \cap G ) \to \lambda(F(G)) \]
+	is smooth at $ p $. Consider the charts $ (U,\phi) $ and $ (V,\psi) $ as above. Then the function
+	\[ \psi \circ F \circ \inv{\phi} = (\psi \circ \inv{\lambda})\circ(\lambda\circ F \circ \inv{\gamma})\circ(\gamma\circ \inv{\phi}). \]
+	Note that the equality sign above merely means the functions are equal on their common domain, as the function in RHS and the function in LHS have different domains. We know that the coordinate maps $ \psi, \lambda $, and $ \gamma, \phi$ are compatible respectively. Thus the function $ \psi \circ F \circ \inv{\phi} $ is smooth at $ \phi(p) $. See the remark below for mode details.
+\end{proof}
+
+\begin{remark}
+	In the proof above and in the equality 
+	\[ \psi \circ F \circ \inv{\phi} = (\psi \circ \inv{\lambda})\circ(\lambda\circ F \circ \inv{\gamma})\circ(\gamma\circ \inv{\phi}) \]
+	thus equality sign does not indicate that these function are equal, but it just indicates that these two functions are equal in their common domain. To be more clear, for the function in the LHS we have
+	\[ \psi \circ F \circ \inv{\phi} : \phi(\inv{F}(V)\cap U) \to \psi(F(U)). \]
+	But for the function in the LHS we have
+	\[ (\psi \circ \inv{\lambda})\circ(\lambda\circ F \circ \inv{\gamma})\circ(\gamma\circ \inv{\phi}):
+	\phi(\inv{F}(L\cap V) \cap (G\cap U)) \to \psi(F(L\cap V))
+	 \]
+\end{remark}
+
+\begin{proposition}[Smoothness of maps in terms of charts]
+	\label{prop:smoothnessInTermsOfCharts}
+	Let $ N $ and $ M $ be smooth manifolds, and $ F: N \to M $ a continuous map. The following are equivalent:
+	\begin{enumerate}[(i)]
+		\item The map $ F: N\to M $ is $ C^\infty $.
+		\item There are atlases $ \frak{U} $ for $ N $ and $ \frak{V} $  for $ M $ such that for every chart $ (U,\phi) $ in $ \frak{U} $ and $ (V,\psi) $ in $ \frak{V} $ the map
+		\[ \psi \circ F \circ \inv{\phi}: \phi(\inv{F}(V)\cap U) \to \R^m  \]
+		is $ C^\infty $.
+		\item For every chart $ (U,\phi) $ on $ N $ and $ (V,\psi) $ on $ M $, the map
+		\[ \psi \circ F \circ \inv{\phi}: \phi(U \cap \inv{F}(V)) \to \R^m \]
+		is $ C^\infty $.
+	\end{enumerate}
+\end{proposition}
+\begin{proof}
+	We will prove this by showing a cyclic chain of implications $ (ii)\implies (i)\implies (iii)\implies (ii) $.
+	\begin{itemize}
+		\item $ (ii)\implies (i) $. Let $ p \in N $. Then by hypothesis there are charts $ (U,\phi) $ and $ (V,\psi) $  such that $ p \in U $ and $ F(p) \in V $ and the map 
+		\[ \psi \circ F \circ \inv{\phi}: \phi(\inv{F}(V)\cap U) \to \R^m \]
+		is smooth at $ \phi(p) $, thus $ F $ is smooth at $ p $. Since $ p $ is arbitrary, then $ F $ is smooth on $ N $.
+		\item $ (i) \implies (iii) $. This follows immediately from \autoref{prop:SmoothnessWellDefined}.
+		\item $ (iii) \implies (ii) $. Since $ N, M $ are smooth manifolds, then they have maximal atlases. Let $ \frak{U} $ be the maximal atlas for $ N $ and $ \frak{V} $ be the maximal atlas for $ M $. This $ (ii) $ follows immediately form $ (iii) $.
+		
+	\end{itemize}
+\end{proof}
+
+\begin{proposition}[Composition of $ C^\infty $ maps]
+	If $ F:N\to M $ and $ G:M\to P $ are $ C^\infty $ maps of manifolds, then the composite $ G\circ F: N \to P $ is a smooth map.
+\end{proposition}
+
+\begin{proof}
+	We will demonstrate two proofs for this proposition to demonstrate what happens if we do not notice a possible level of abstraction. The first proof below is a very crude, hard-core, direct proof, that seems to be tough and easy to make mistakes, just because it is not encapsulating some of the details into another proposition. However, for the second proof, it will encapsulate some of the details into the results of the \autoref{prop:smoothnessInTermsOfCharts}, which will allows us to do a more high level thinking.
 \end{proof}
 
 
