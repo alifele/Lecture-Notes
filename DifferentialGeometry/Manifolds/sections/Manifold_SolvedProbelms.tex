@@ -217,3 +217,15 @@
 \begin{problem}[Jacobian matrix os a transition map (form W. Tu)]
 	Let $ (U,\phi) = (U,x^1,\cdots,x^n) $ and $ (V,\psi) = (V,y^1,\cdots,y^n) $ be overlapping charts on a manifold $ M $. The transition map $ \psi \circ\inv{\phi}: \phi(U\cap V) \to \psi(U\cap V) $ is a diffeomorphism of open subsets of $ \R^n $. Show that its Jacobian matrix $ J(\psi\circ\inv{\phi}) $ at $ \phi(p) $ is the matrix $ [\partial y^i/\partial x^j] $ of partial derivatives at $ p $.
 \end{problem}
+\begin{solution}
+	From the definition of the Jacobian matrix we can write
+	\[ J(\psi \circ \inv{\phi}) = \frac{\partial (\psi \circ \inv{\phi})^i}{\partial r^j} =  \frac{\partial (r^i \circ \psi \circ \inv{\phi})}{\partial r^j} = \frac{\partial (y^i \circ \inv{\phi})}{\partial r^j} = \frac{\partial y^i}{\partial x^j}. \]
+\end{solution}
+
+\begin{observation}[Some mnemonics for the Jacobian matrix]
+	Here I introduce a symbolic mnemonic of remembering the form of the Jacobian matrix of a smooth map between manifolds. Let $ F:N\to M $ a smooth map between manifolds. Since this function is from $ N $ to $ M $, then the Jacobian matrix will be of the form
+	\[ J(F) = [\partial F^i / \partial x^j] \] 
+	where $ x^j $ a local coordinate in $ N $ and $ F^i = y^i \circ F $ where $ y^i $ is a local coordinate in $ M $. What we mean by local coordinates here is that for a point $ p $ on the manifold for which we want to calculate the Jacobian matrix, there are charts $ (U,x^1\cdots,x^n) $ and $ (V,y^1,\cdots,y^n) $ on $ N $ and $ M $ respectively such that $ p \in U $ and $ F(U) \subset V $.
+	
+	As another example, in the question above, since the function $ \psi\circ\inv{\phi} $ is defined from $ \R^n \to \R^n $, then the Jacobian of this function starts with coordinates of $ \R^n $, i.e. $ r^i $.
+\end{observation}
