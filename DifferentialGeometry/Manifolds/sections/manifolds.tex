@@ -317,7 +317,64 @@ The following proposition is the converse of the proposition above.
 	By the proposition above, we know that since $ \phi $ is a coordinate chart of a smooth manifold, then $ \phi $ and $ \inv{\phi} $ are both smooth. Then the functions above are a composition of smooth functions, thus they are smooth as well. This proves that $ (U,F) $ is compatible with the chart $ (V,\psi) $. Since this chart was arbitrary, then it is compatible with the whole atlas, thus $ (U,F) $ is a chart. Also, by the maximality of the atlas, $  (U,F) $ is contained in the atlas.
 \end{proof}
 
+Now using the notion of smooth maps between manifolds, we can define a Lie group.
+\begin{definition}[Lie group]
+	A \emph{Lie group} is a $ C^\infty $ manifold $ G $ having a group structure such that the multiplication map
+	\[ \mu: G\times G \to G \]
+	and the inverse map
+	\[ \iota: G\to G, \qquad \iota(x) = \inv{x}, \]
+	are both $ C^\infty $.
+\end{definition}
 
+\begin{remark}
+	Similar to the definition above, a topological group is a topological space having a group structure such that the multiplication and the inverse maps are both continuous. Note that a topological group is required to be a topological space, but not a topological manifold.
+\end{remark}
+
+The followings are some examples of Lie groups. We can easily check the group operation and the inverse map are both smooth by using the definitions that we have had above.
+
+\begin{enumerate}[(i)]
+	\item The Euclidean space $ \R^n $ is a Lie group under addition.
+	\item The set $ \C^{\times} $ of nonzero complex numbers is a Lie group under multiplications.
+	\item Subsequently, the unit circle in $ \C^\times $ is a Lie group under multiplication.
+\end{enumerate}
+
+
+\section{Partial Derivatives}
+In this section we will define the notion of partial derivatives of the maps between manifolds. We will use the notion of coordinate charts for this definition. Let $ N $ be a manifold of dimension $ n $, and let $ (r^1,\cdots,r^n) $ be the standard coordinate function on $ \R^n $. For a chart $ (U,\phi) $ on the manifold, $ \phi $ is a vector valued function on manifold. We denote its coordinate functions as $ x^i $ where $ x^i = r^i \circ \phi $. This is just a fancy (but very useful) way of writing the $ i\text{-th}$ coordinate of the vector valued function $ \phi $. Now we can define the directional derivatives for the functions on manifolds.
+
+\begin{definition}[Directional derivative]
+	Let $ N $ be a manifold, and $ f:N \to \R $ an smooth function. Let $ p\in U $ and $ (U,\phi) $ any chart containing $ p $, where $ \phi = (x^1,\cdots,x^n) $. We define the direction derivative of $ f $ at $ p $ as 
+	\[ \frac{\partial f}{\partial x^i}(p) = \frac{\partial (f\circ \inv{\phi})}{\partial r^i}(\phi(p)) = \frac{\partial}{\partial r^i}\big|_{\phi(p)} (f\circ\inv{\phi}). \]
+\end{definition}
+
+\begin{remark}
+	In the definition above, we can re-write it as
+	\[ \frac{\partial f}{\partial x^i}(p) =\frac{\partial f}{\partial x^i}(\underbrace{\inv{\phi}(\phi(p))}_{p}) = \frac{\partial (f\circ \inv{\phi})}{\partial r^i}(\phi(p)). \]
+	We can now write
+	\[ \frac{\partial (f\circ \inv{\phi})}{\partial r^i} =\frac{\partial f}{\partial x^i} \circ \inv{\phi} = [\inv{\phi}]^* [\frac{\partial f}{\partial x^i}],  \]
+	where shows that $ \frac{\partial (f\circ \inv{\phi})}{\partial r^i} $ is the pull back of the function $ \frac{\partial f}{\partial x^i} $ when viewed as a function on the manifold. Since the pull back of $ \frac{\partial f}{\partial x^i} $ is smooth (as $ f\circ \inv{\phi} $ is smooth), then $ \frac{\partial f}{\partial x^i} $ is smooth when viewed as a real valued function on the manifold.
+\end{remark}
+
+\begin{proposition}
+	Suppose $ (U,x^1,\cdots,x^n) $ is a chart on a manifold. Then we have
+	\[ \frac{\partial x^i}{\partial x^j} = \delta^i_j. \]
+\end{proposition}
+\begin{proof}
+	We view $ x^i $ as a real valued function on the manifold. For a point $ p $ in the manifold, we can use the definition of partial derivative to write
+	\[ \frac{\partial x^i}{\partial x^j}(p) = \frac{\partial (x^i \circ \inv{\phi})}{\partial r^j} = \frac{\partial (r^i \circ \phi \circ \inv{\phi})}{\partial r^j} = \frac{\partial r^i}{\partial r^j} = \delta^i_j. \]
+	Note that we have used the fact that $ \phi = (x^1,\cdots,x^n) $.
+\end{proof}
+
+Using the notion of partial derivatives, we can define the notion of Jacobian matrix for the maps between manifolds.
+
+\begin{definition}[Jacobian matrix of maps between manifolds]
+	Let $ F:N \to M $ be a smooth map, and let $ (U,\phi) = (U,x^1,\cdots,x^n) $ and $ (V,\psi) = (V,y^1,\cdots,y^m) $ be charts on $ N $ and $ M $ respectively such that $ F(U) \subset V $. Denote by
+	\[ F^i = y^i \circ F = r^i \circ \psi \circ F : U \to \R \]
+	the $ i\text{-th} $ component of $ F $ in the chart $ (V,\psi) $. The following matrix
+	\[ J = \left[ \frac{\partial F^i}{\partial x^j} \right] \]
+	is called the Jacobian matrix of $ F $ relative to the charts given as above. In case $ M,N $ have the same dimension, the determinant of this matrix is called the Jacobian determinant of $ F $ relative to the two charts. The Jacobian determinant is also written as 
+	\[ \det(J) = \frac{\partial (F^1,\cdots,F^n)}{\partial(x^1,\cdots,x^n)}. \]
+\end{definition}
 
 \newpage
 

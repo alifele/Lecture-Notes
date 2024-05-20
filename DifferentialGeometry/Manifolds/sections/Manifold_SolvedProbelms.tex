@@ -33,6 +33,7 @@
 \end{observation}
 
 \begin{problem}{Another $ C^\infty $ atlas on a circle}
+	\label{problem:S^1Charts}
 	In the previous problem, we constructed an atlas for a unit circle siting in the complex plane. In this problem we are going to construct a different atlas for a unit circle siting in the $ x-y $ plane. The following diagram are the charts for this unit circle. Write these charts explicitly and check if they are pairwise compatible.
 	\input{Images/localChartExample2.tex}
 \end{problem}
@@ -159,4 +160,60 @@
 	Let $ p \in M $ and $ q \in N $, thus $ (p,q) \in M\times N $. Let $ \phi $ and $ \psi $ be two coordinate maps such that $ \phi(p) = x $ and $ \psi(q) = y $. Thus we can write $ (\phi, \psi)(p,q) = (x,y) $. Consider the function
 	\[ (\phi \circ \pi \circ (\phi\times \psi)^{-1})(x,y) = \phi(\pi(p,q)) = \phi(p) = x.  \]
 	The function above is a $ \C^\infty $ map from $ \R^{n+m} $ to $ \R^n $ (assuming $ M, N $ are $ m $ and $ n $ dimensional manifolds). This proves that the projection map $ \pi $ is smooth.
-\end{solution} 
+\end{solution}
+
+\begin{problem}[Smoothness of a map tp a Cartesian product (from W. Tu)]
+	Let $ M_1, M_2 $, and $ N $ be manifolds of dimensions $ m_1,m_2 $ and $ n $ respectively. Prove that a map $ (f_1,f_2): N \to M_1\times M_2 $ is smooth if and only if $ f_i:N\to M $ for $ i=1,2 $ are both smooth.
+\end{problem} 
+
+\begin{solution}
+	Consider the following picture.
+	\input{Images/componentwiseSmoothness.tex}
+	\FloatBarrier
+	
+	For the first direction, we will show that smoothness of $ (f_1,f_2): N \to M_1\times M_2 $ implies the smoothness of $ f_1:N\to M_1 $ and $ f_2: N \to M_2 $. As depicted in the picture above, let $ \phi $ be a coordinate map for $ N $ and $ \psi_1, \psi_2 $ be coordinate maps for $ M_1,M_2 $ respectively. Since $ (f_1,f_2) $ is smooth, then $ (\psi_1 \times \psi_2) \circ (f_1,f_2) $ is smooth. Let $ p \in N $, then
+	\[ ((\psi_1 \times \psi_2) \circ (f_1,f_2) \circ \inv{\phi})(\phi(p)) =
+	((\psi_1 \times \psi_2) \circ (f_1,f_2)) (p) = (\psi_1\times \psi_2)(f_1(p),f_2(p)) = (\psi_1(f_1(p)), \psi_2(f_2(p))).
+	 \]
+	This is a smooth map from $ \R^n $ to $ \R^{m_1+m_2} $. Thus the components of the function are also smooth.
+	
+	For the converse, we need to show that the smoothness of $ f_1 $ and $ f_2 $ implies the smoothness of $ (f_1,f_2) $. Similar to the argument above, the smoothness of $ (f_1,f_2) $ follows immediately from the smoothness of the components.
+\end{solution}
+
+\begin{problem}[Smooth functions on unit circle (W. Tu)]
+	We have studied before that the unit circle $ S^1 $ defined by $ x^2 + y^2 = 1 $ in $ \R^2 $ is a $ C^\infty $ manifold. Prove that a smooth function $ f: \R^2 \to \R $ defined on $ \R^2 $ restricts to a $ C^\infty $ function on $ S^1 $.
+\end{problem}
+
+\begin{solution}
+	Consider the following inclusion map
+	\[ i: S^1 \to \R^2 \]
+	defined as $ i(p) = (x(p),y(p)) $, where $ x,y $ are the standard coordinate functions. The restriction of $ f $ to manifold will be
+	\[ f|_{S^1} = f \circ i. \]
+	To show that $ f|_{S^1} $ is smooth, we just need to show that the inclusion map is smooth. To show this we need to show that the components of this vector valued function is smooth. We start by showing that $ x $ is smooth. We use the same charts as in \autoref{problem:S^1Charts}. Let $ p \in S^1 $. If $ p \in U_3 \cap U_4 $ then we have
+	\[ \mathds{1}_{(0,1)}\circ x \circ \inv{\phi_3} = \mathds{1}_{(0,1)}: (-1,1) \to \R^2, \qquad \mathds{1}_{(0,1)}\circ x \circ \inv{\phi_4} = \mathds{1}_{(0,1)}: (-1,1) \to \R^2,  \]
+	which are both identity maps, thus smooth. So $  x $ is smooth on $ U_3\cap U_4 $. For $ U_1 $ we have
+	\[ \mathds{1}_{(0,1)}\circ x \circ \inv{\phi_1}(x) = -\sqrt{1-x^2}, \qquad\text{for } x \in \phi_1(U_1) = (-1,1) \]
+	thus $ x $ is smooth on $ U_1 $ as well. For $ U_2 $ we have
+	\[ \mathds{1}_{(0,1)}\circ x \circ \inv{\phi_2}(x) = \sqrt{1-x^2}, \qquad\text{for } x \in \phi_2(U_2) = (-1,1) \]
+	thus $  x $ is smooth on $ U_2  $ as well. We can use a similar strategy to show that the coordinate function $ y $ is also smooth.
+\end{solution}
+
+
+
+\begin{problem}
+	The general linear group $ \operatorname{GL}(n,\R) $ is the set of all real valued matrices with non-zero determinant under matrix multiplication. In other words
+	\[ \operatorname{GL}(n,\R) = \set{A = \left[ a_{ij} \right] \in \R^{n\times n}\ |\ \det(A) \neq 0} . \]
+	We can see this as an open subset of $ \R^{n\times n} $, thus it is a manifold. Show that this forms a Lie group.
+\end{problem}
+
+\begin{solution}
+	Let $ A,B $ be two matrices in the manifold. Then the $ i,j $ element of $ AB $ is
+	\[ (AB)_{ij} = \sum_{k=1}^{n} A_{ik}B_{kj} \]
+	which is a polynomial in the coordinates of $ A $ and $ B $, thus it is smooth. To show that the inverse is also smooth, for any function $ A $ in the manifold we have
+	\[ \inv{A} = \frac{1}{\det(A)} \cdot (-1)^{i+j}((i,j)\text{- minor of $ A $}). \]
+	The $ (i,j)\text{-minor} $ of matrix $ A $ is the determinant of the sub matrix by deleting the $ i\text{-th} $ row and $ j\text{th} $ column, which is again a polynomial in the coordinates of $ A $ and $ B $, thus smooth (given that $ \det(A) \neq 0 $).
+\end{solution}
+
+\begin{problem}[Jacobian matrix os a transition map (form W. Tu)]
+	Let $ (U,\phi) = (U,x^1,\cdots,x^n) $ and $ (V,\psi) = (V,y^1,\cdots,y^n) $ be overlapping charts on a manifold $ M $. The transition map $ \psi \circ\inv{\phi}: \phi(U\cap V) \to \psi(U\cap V) $ is a diffeomorphism of open subsets of $ \R^n $. Show that its Jacobian matrix $ J(\psi\circ\inv{\phi}) $ at $ \phi(p) $ is the matrix $ [\partial y^i/\partial x^j] $ of partial derivatives at $ p $.
+\end{problem}
