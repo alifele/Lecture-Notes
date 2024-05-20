@@ -229,3 +229,17 @@
 	
 	As another example, in the question above, since the function $ \psi\circ\inv{\phi} $ is defined from $ \R^n \to \R^n $, then the Jacobian of this function starts with coordinates of $ \R^n $, i.e. $ r^i $.
 \end{observation}
+
+\begin{problem}[From W. Tu]
+	Find all points in $ \R^2 $ in a neighborhood of which the functions given by $ x^2 + y^2 -1  $ and $ y $ can serve as a local coordinate system.
+\end{problem}
+\begin{solution}
+	Define $ F^1(x,y) = x^2 + y^2 -1 $ and $ F^2(x,y) = y  $. Then the pair $ (F^1,F^2) $ is locally invertible, thus can serve as a local diffeomorphism to $ \R^2 $, thus a coordinate map if the Jacobian determinant $ [\partial F^i /\partial x^i] $ is not zero. I.e.
+	\[ \det\matt{2x}{2y}{0}{1} = 2x \neq 0 \implies x \neq 0. \]
+	Thus the function $ F = (F^1,F^2) $ can act as a local coordinate map everywhere except for on the points on the $ y $ axis. You can see why this happens in the plots below. As you can see, any path that is not crossing the $ y $ axis with zero vertical velocity is diffeormorphically mapped to an smooth curve. But when the curve passes through the $ y $ axis with a zero vertical velocity, then the curve folds on itself when mapped by $ F $, thus $ F $ fails be locally invertible and thus fails to be a coordinate map. Thus for any point that is not on the $ y $ axis, we can find an open set small enough that does not overlap with the $ y $ axis. But there is no such an open ball for the points on the $ y $ axis.	You can try the online plotting tool that I have configured to generate the following plots \href{https://www.desmos.com/calculator/pam0whmnbs}{here}.
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=0.8\linewidth]{Images/diffeomorphismExample}
+	\end{figure}
+	
+\end{solution}

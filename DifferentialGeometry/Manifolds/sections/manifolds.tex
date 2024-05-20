@@ -393,19 +393,39 @@ We will skip proving this theorem here and we will just use it to prove the gene
 	\[ F \text{ is locally invertible} \Longleftrightarrow \psi\circ F \circ \inv{\phi} \text{ is locally invertible.} \]
 	and also
 	\[ \det \left[ \frac{\partial (\psi\circ F \circ \inv{\phi})^i}{\partial r^j}  \right](\phi(p)) \neq 0 \Longleftrightarrow \det\left[ \frac{\partial F^i}{\partial x^j} \right](p) \neq 0. \]
+	
+	For the first bi-directional implication since $ \phi,\psi $ are coordinate maps, thus are invertible (they are bijective) and from the composition of functions it follows that the bi-directional implication is true.
+	
+	For the second bi-directional implication we start with the forward direction. We can write
+	\[ \frac{\partial (\psi\circ F \circ \inv{\phi})^i}{\partial r^j} = \frac{\partial (r^i \circ \psi \circ F \circ \inv{\phi})}{\partial r^j} = \frac{\partial(y^i\circ F\circ \inv{\phi})}{\partial r^j} = \frac{\partial( F^i \circ \inv{\phi})}{\partial r^j} =  \frac{\partial F^i}{\partial x^j}. \]
+	This proves the forward direction. We can do this starting from the last equation which proves the backward direction.
 \end{proof}
-
 
 \begin{observation}[Some hidden treasures!]
 	When proving the theorem above, we can figure out what should be the structure of the proof, even if we can not demonstrate the proof steps completely. For me, there is some sense of dimensional analysis if physics in what I am saying. By looking only at the ingredients of the problem/theorem/etc, we can figure out what is the possible way that we can combine those ingredients to achieve to a full proof. The following figure reveals this structure for the proof.
 \end{observation}
 	\input{Images/InverseFunctiontheoremProofIdea.tex}
+	
+\begin{corollary}
+	Let $ N $ be a manifold of dimension $ n $. A set of $ n $ smooth functions $ F^1,\dots,F^n $ defined on a coordinate neighborhood $ (U,x^1,\cdots,x^n) $ of a point $ p \in N $ forms a coordinate system about $ p $ if and only if the Jacobian determinant 
+	\[ \left[  \frac{\partial F^i}{\partial x^j}  \right](p) \neq 0. \]
+\end{corollary}
 
 \section{Summary}
 \begin{summary}[A useful thing!]
 	Let $ N $ be a manifold of dimension $ n $, and $ (U,\phi) $ a local coordinate system containing $ p \in N $. Then $ \phi $ can be viewed as a vector valued real function $ \phi:U \to \R^n $. Let $ r^i $ be the standard coordinate functions of $ \R^n $. Then the $ i\text{-th} $ of $ \phi $ can be written as.
 	\[ x^i = r^i \circ \phi . \]
 \end{summary}
+
+\begin{proof}
+	define the vector valued function as $ F = (F^1,\cdots,F^n) $. Then we have
+	\begin{itemize}
+		\item[$\,$] $ \det[\partial F^i/\partial x^j] \neq 0 $.
+		\item[$\Longleftrightarrow$] $ F $ is locally invertible.
+		\item[$\Longleftrightarrow$] There is a neighborhood $ W $ containing $ p $ such that $ F:W \to F(W) \subset \R^n $ is a diffeomorphism.
+		\item[$\Longleftrightarrow$] $ (W,F) $ is a coordinate system in the maximal atlas of $ N $.
+	\end{itemize}
+\end{proof}
 
 \newpage
 
