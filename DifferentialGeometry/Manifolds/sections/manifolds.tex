@@ -478,8 +478,33 @@ The quotient construction often does not preserve the second countablity and Hau
 
 \begin{remark}
 	In the proof above, we claimed that in a Hausdorff space, every singleton set is closed. To see this, let $ p \in S $ a Hausdorff space. Consider the singleton $ \set{p} $ and its complement, i.e. $ S - \set{p} $. We claim that set $ S - \set{p} $ is open. To show this, let $ U \in \mathcal{T} $ where $ p \in U $. Since $ S $ is Hausdorff, then there exists an open set $ V \in \mathcal{T} $ such that contains any point $ q \in S - \set{p} $ and do not overlap with $ U $. This $ q \in V \subset S - \set{p} $. Thus for every point $ S - \set{p} $ we can find an open set containing $ q $ that is contained in the set $ S - \set{p} $.
-
 \end{remark}
+
+\begin{definition}[Open equivalence relation]
+	Let $ \sim $ be an equivalence relation defined on a set. This equivalence relation is said to be open, if $ \pi(U) $ is open for some open set $ U $
+\end{definition}
+\begin{remark}
+	We can give a useful characterization of open equivalence relations. Let $ U $ be an open set. Then $ \pi(U) $ being open means that $ \inv{\pi}(\pi(U)) $ is also open. Thus an equivalence relation is open if and only if 
+	\[ \inv{\pi}(\pi(U)) = \bigcup_{x \in  U} [x] \]
+	is open.
+\end{remark}
+
+\begin{theorem}
+	Let $ S $ be a topological space, and $ \sim $ an open equivalence relation defined on $ S $. Then $ S/\sim $ is Hausdorff if and only if the graph $ R $ of the relation is closed in $ S\times S $.
+\end{theorem}
+\begin{proof}
+	First, consider the following chain of bidirectional implications.
+	
+	\begin{itemize}[noitemsep]
+		\item [] $ R $ is closed in $ S\times S $
+		\item [$ \biImp $] $ S\times S - R $ is closed in $ S\times S $
+		\item [$ \biImp $] For all $ (x,y) \in (S\times S) - R $, there exist an open cell $ U\times V \ni (x,y) $ such that $ U\times V \cap R = \emptyset $.
+		\item [$ \biImp $] For all pair $ x,y \in S $ where $ x\not\sim y $, there exists open sets $ U\ni x $ and $ V \ni y $ such that no element of $ U $ is equivalent to an element of $ V $. 
+		\item [$ \biImp $] For all two points in $ [x]\neq [y] \in S/\sim $ there exists open sets $ U\ni x,V \ni y $ open in $ S $ such that $ \pi(U) \cap \pi(V)  = \emptyset $. 
+	\end{itemize}
+		Now what remains to show is to show that the last statement (call it statement *) is equivalent to being Hausdorff. If $ * $ is true, then since $ \pi $ is open, then $ S/\sim $ being Hausdorff follows immediately. For the converse, if $ S/\sim $ Hausdorff, then for $ [x]\neq [y] \in S/\sim $ we can find open sets $ A,B $ containing $ [x],[y] $ respectively where $ A \cap B = \emptyset $. From the surjectivity of $ \pi $  we know that $ \pi(\inv{\pi}(A)) = A $. Thus let $ U = \inv{\pi}(A) $ and $ V = \inv{\pi}(B) $, thus the statement (*) follows.
+\end{proof}
+
 \newpage
 
 \input{sections/Manifold_SolvedProbelms.tex}
