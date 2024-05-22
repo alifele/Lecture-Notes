@@ -272,3 +272,119 @@
 \begin{problem}[The smoothness of an inclusion map (From L. Tu)]
 	Let $ M $ and $ N $ be manifolds and let $ q_0 $ be a point in $ N $. Prove that the inclusion map $ i_{q_0}: M \to M\times N $, $ i_{q_0}(p) = (p,q_0) $, is $ C^\infty $.
 \end{problem}
+\begin{solution}
+	Let $ p \in M $ and let $ (U,\psi) $, $ (V,\phi) $ coordinate charts for $ M $ and $  N $ respectively where $ x \in U $ and $ q_0 \in V $. Then the chart $ (U\times V, \psi\times\phi) $ will be a coordinate chart for $ M\times N $ where $ (p,q_0) \in U\times V $. To show the smoothness of $ i_{q_0} $ we need to show that the following 
+	\[ (\psi\times\phi) \circ i_{q_0} \circ \inv{\psi}: \psi(U) \to (\psi\times\phi)(i_{q_0}(U)).\]
+	Let $ \psi(p) = x $. Then 
+	\[ ((\psi\times\phi) \circ i_{q_0} \circ \inv{\psi})(x) = ((\psi\times\phi)\circ i_{q_0})(p) = (\psi\times\phi)(p,q_0) =  (x,\phi(q_0)).\]
+	Thus $ (\psi\times\phi) \circ i_{q_0} \circ \inv{\psi} $ maps $ x \mapsto (x,\phi(q_0)) $ where $ \phi(q_0) \in \R^n $ a constant. This is smooth since each components is smooth.
+\end{solution}
+
+
+\begin{problem}[Group of automorphisms of a vector space (from L. Tu)]
+	Let $ V $ be a finite-dimensional vector space over $ \R $, and  $ GL(V) $ the group of all linear automorphisms of $ V $. Relative to an ordered basis $ e = (e_1,\cdots,e_n) $ for $ V $, a linear automorphism $ L \in GL(V) $ is represented by a matrix $ \left[ a_j^i \right] $ defined by
+	\[ L(e_j) = \sum_{i}a^i_j e_i. \]
+	The map
+	\[ \phi_e : GL(V) \to GL(n,\R), \qquad L\mapsto \left[ a_j^i \right], \]
+	is a bijection with an open subset of $ \R^{n\times n} $ that makes $ GL(V) $ into a smooth manifolds, which we denote temporarily by $ GL(V)_e $. If $ GL(V)_u $ is the manifolds structure induces from another ordered basis $ u = (u_1,\cdots, u_n) $   for $ V $, show that $ GL(V)_e $ is the same as $ GL(V)_u $.
+\end{problem}
+
+\begin{solution}
+	To show that these manifolds are the same, we will show that the underlying set of these manifolds are the same. Thus we need to show $ L \in GL(V)_e \implies L\in GL(V)_u $ and $ L \in GL(V)_u  \implies L \in GL(V)_e $. We start with the first implication. Let $ L \in GL(V)_e $. Then we can write
+	\[ 
+	\begin{bmatrix}
+		L(e_1) \\
+		\vdots \\
+		L(e_n)
+	\end{bmatrix}
+	= A^T
+	\begin{bmatrix}
+		e_1 \\
+		\vdots \\
+		e_n
+	\end{bmatrix}
+	 \]
+	For some matrix $ A = [a^i_j] $. Thus $ \phi_e(L) = A \in GL(n,\R) $. Let $ u = (u_1,\cdots,u_n) $ be another basis for $ V $. By the change of basis matrix (which is non-singular and invertible) we can write
+	\[ 
+	\begin{bmatrix}
+	 	e_1 \\
+	 	\vdots \\
+	 	e_n
+	\end{bmatrix}
+	= B^T
+	\begin{bmatrix}
+	 	u_1 \\
+	 	\vdots \\
+	u_n
+	\end{bmatrix}
+	\]
+	for some invertible matrix $ B = [b^l_k] $. Since $ B $ is $ n\times n $ invertible, thus $ B \in GL(n,\R) $. From the linearity of $ L $ we have
+	\[ 
+	\begin{bmatrix}
+	  	L(e_1) \\
+	  	\vdots \\
+	  	L(e_n)
+	\end{bmatrix}
+	= B^T
+	\begin{bmatrix}
+	  	L(u_1) \\
+	  	\vdots \\
+	  	L(u_n)
+	\end{bmatrix}, \qquad
+	\begin{bmatrix}
+		L(u_1) \\
+		\vdots \\
+		L(u_n)
+	\end{bmatrix}
+	= \inv{(B^T)}
+	\begin{bmatrix}
+		L(e_1) \\
+		\vdots \\
+		L(e_n)
+	\end{bmatrix}.
+	\]
+	Thus we can write
+	\[ 
+	\begin{bmatrix}
+		L(u_1) \\
+		\vdots \\
+		L(u_n)
+	\end{bmatrix}=
+	\inv{(B^T)}A^T B^T
+	\begin{bmatrix}
+		u_1 \\
+		\vdots \\
+		u_n
+	\end{bmatrix}
+	\]
+	Thus we can write
+	\[ (L(u_1)\ \cdots\ L(u_n)) = BA\inv{B} (u_1\ \cdots\ u_n) \]
+	Thus we can write
+	\[ \phi_u(L) = BA\inv{B} = B\phi_e(L) \inv{B} \in GL(n,\R), \]
+	where the equality is true since $ B \in GL(n,\R) $ and $ \phi_e(L) \in GL(n,\R) $. Thus $ \phi_u(L) \in GL(n,\R) $. This implies $ L \in GL(V)_u $. To show the second implication, we can use the similar idea as above.
+	
+\end{solution}
+
+\begin{problem}[Local coordinate systems (from L. Tu)]
+	Find all points in $ \R^3 $ in a neighborhood of which the functions $ x, x^2 + y^2 + z^2 -1 $, and $ z $ can serve as a local coordinate system.
+\end{problem}
+\begin{solution}
+	Define 
+	\[ F^1 (x,y,z) = x, \qquad F^2(x,y,z) = x^2 + y^2 + z^2 -1, \qquad F^3(x,y,z) = z. \]
+	Then the function $ F = (F^1,F^2,F^3) $ can be a local coordinate map in a local coordinate system if its Jacobian determinant is nonzero. Thus we need to have
+	\[ \det
+	\begin{pmatrix}
+		\partial F^1/\partial x & \partial F^1/\partial y & \partial F^1/\partial z&  \\
+		\partial F^2/\partial x & \partial F^2/\partial y & \partial F^2/\partial z&  \\
+		\partial F^3/\partial x & \partial F^3/\partial y & \partial F^3/\partial z& 
+	\end{pmatrix}
+	= \det
+	\begin{pmatrix}
+		1 & 0 & 0 \\
+		2x & 2y & 2z \\
+		0 & 0 & 1
+	\end{pmatrix}
+	= 2y \neq 0.
+	 \]
+	Thus $ F = (F_1,F_2,F_3) $ is locally invertible, thus can be a local diffeomorphism to $ \R^3 $, thus it can be a coordinate char for all points on the manifold where $ y \neq 0 $.
+\end{solution}

@@ -427,6 +427,59 @@ We will skip proving this theorem here and we will just use it to prove the gene
 	\end{itemize}
 \end{proof}
 
+
+\section{Quotients}
+The quotient construction is a process of simplification. Starting with an equivalence relation on a set, we identify each equivalence class to a point. If the original set is a topological space, then it is always possible to give the quotient space a topology so that the natural projection map (i.e. $ \pi: S\to S/\sim\ ,\ x\mapsto [x] $) becomes continuous. However, if the original set is a manifold, then it is not always true that the quotient set is also manifold, as the conditions like being Hausdorff or second countable might break.
+
+\begin{definition}[Quotient topology]
+	Let $ (X,\mathcal{T}) $ be a topological space, and $ \sim $ an equivalence relation with $ \pi $ as the natural projection map. A set $ U \in X/\sim $ is open, if and only if $ \inv{\pi}(U) \in \mathcal{T} $, i.e. open. 
+\end{definition}
+\begin{remark}
+	In the definition above, clearly the empty set $ \emptyset $ and the whole quotient space $ X/\sim $ are open. That is because $ \inv{\pi}(\emptyset) = \emptyset \in \mathcal{T} $ (since the equivalence relation $ \sim $ partitions the set), and $ \inv{\pi}(X/\sim) = X \in \mathcal{T}  $. Also, for any map, in particular $ \pi $ we have
+	\[ \inv{\pi}(\bigcup_\alpha U_\alpha) = \bigcup_\alpha \inv{\pi}(U_\alpha), \qquad \inv{\pi}(\bigcap_i U_i) = \bigcap_i \inv{\pi}(U_i) \]
+	where $ \inv{\pi}(U) $ means the pre-image of the set $ U $ under the map $ \phi $. This shows that an arbitrary union of the open sets in the quotient space is open, and also a finite intersection of open sets of the quotient space is also open. Thus the space $ (X/\sim, \mathcal{T}') $ where $ U \in \mathcal{T}' $ if and only if $ \inv{\pi}(U) \in \mathcal{T} $ is a topological space.
+	\newline 
+	\noindent Also Note that since $ \inv{\pi} $ maps open sets of $ X/\!\sim $ to the open sets of $ X $, then $ \pi $ is automatically (i.e. by design) a continuous function.
+\end{remark}
+
+\subsection{Continuity of a map on a Quotient}
+
+Let $ S $ be a topological space and $ \sim $ and equivalence relation on this set. Give the quotient set $ S/\sim $ the quotient topology. Then a function $ f:S\to Y $ from $ S $ to another topological space, where it is constant for all elements in the same equivalence class. This map then induces a map on $ S/\sim $, i.e. $ \bar{f}: S/\sim \to Y $ where
+ \[ \bar{f}([p]) = f(p) \qquad \text{for $ p\in S $}. \] 
+ or in other words
+ \[ \bar{f}(\pi(p)) = f(p) \qquad \text{or equivalently} \qquad \bar{f}\circ\pi  = f. \]
+
+\begin{proposition}
+	The induced map $ \bar{f}:S/\sim \to Y $ is continuous if and only if the map $ f: S \to Y $ is continuous.
+\end{proposition}
+\begin{solution}
+	First, we will show that continuity of $ \bar{f} $ implies the continuoity of $ f $. Let $ U \in \mathcal{T}_Y $. Since $ \bar{f} $ is continuous, then $ \inv{\bar{f}}(U) \in \mathcal{T}_{S/\sim} $. Furthermore, since $ \pi $ is continuous then $ \inv{\pi}(\inv{\bar{f}}(U)) \in \mathcal{T}_{S} $, thus $ (\bar{f}\circ \pi) $ is continuous. Since $  f = \bar{f}\circ \pi $, then $ f $ is also continuous. As an alternative prove, we could start with the fact that $ f = \bar{f}\circ \pi $, and since $ \bar{f} $ and $ \pi $ are both continuous, then so is $ f $.
+	
+	For the converse, we want to show that the continuoity of $ f $ implies the continuoity of $ \inv{f} $. Let $ V \in \mathcal{T}_Y $. Since $ f $ is continuous, then $ \inv{f}(V) \in \mathcal{T}_S $. On the other hand, we have $ \inv{f}(V) =( \inv{\pi}\circ \inv{\bar{f}})(V) $. Since $ \inv{\pi} $ sends open sets to open sets, then $ \bar{f}(V) \in \mathcal{T}_{S/\sim} $. Thus $ \bar{f} $ is continuous.
+\end{solution}
+
+\begin{definition}[Identification of a subset to a point]
+	Let $ S $ be a topological space and $ A \subset S $. Let $ \sim $ be s relation on $ S $ where 
+	\[ x\sim x \qquad \forall x \in S, \]
+	and also
+	\[ x\sim y \qquad \forall x,y \in A. \]
+	This is an equivalence relation on $ S $. We call the quotient space $ S/\sim $ is obtained from $ S $ by identifying the set $ A $ to a point.
+\end{definition}
+
+\section{A Necessary Condition for a Hausdorff Space}
+The quotient construction often does not preserve the second countablity and Hausdorff property of a topological space. We start with the following proposition.
+
+\begin{proposition}
+	Let $ X $ be a topological space, and $ \sim $ an equivalence relation on $ X $. If $ X/\sim $ is Hausdorff then equivalent class $ [p] $ of any $ p \in X $ is closed in $ X $.
+\end{proposition}
+\begin{proof}
+	In a Hausdorff space, every singleton set is closed. let $ p \in X $. Then $ \set{\pi(p)} $ is closed in $ X/\sim $. Since $ \pi $ is continuous, then the pre image $ \inv{\pi}(\set{\pi(p)}) = [p] $ is closed in $ X $. This completes the proof.
+\end{proof}
+
+\begin{remark}
+	In the proof above, we claimed that in a Hausdorff space, every singleton set is closed. To see this, let $ p \in S $ a Hausdorff space. Consider the singleton $ \set{p} $ and its complement, i.e. $ S - \set{p} $. We claim that set $ S - \set{p} $ is open. To show this, let $ U \in \mathcal{T} $ where $ p \in U $. Since $ S $ is Hausdorff, then there exists an open set $ V \in \mathcal{T} $ such that contains any point $ q \in S - \set{p} $ and do not overlap with $ U $. This $ q \in V \subset S - \set{p} $. Thus for every point $ S - \set{p} $ we can find an open set containing $ q $ that is contained in the set $ S - \set{p} $.
+
+\end{remark}
 \newpage
 
 \input{sections/Manifold_SolvedProbelms.tex}
