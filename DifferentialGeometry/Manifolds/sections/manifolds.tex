@@ -505,6 +505,22 @@ The quotient construction often does not preserve the second countablity and Hau
 		Now what remains to show is to show that the last statement (call it statement *) is equivalent to being Hausdorff. If $ * $ is true, then since $ \pi $ is open, then $ S/\sim $ being Hausdorff follows immediately. For the converse, if $ S/\sim $ Hausdorff, then for $ [x]\neq [y] \in S/\sim $ we can find open sets $ A,B $ containing $ [x],[y] $ respectively where $ A \cap B = \emptyset $. From the surjectivity of $ \pi $  we know that $ \pi(\inv{\pi}(A)) = A $. Thus let $ U = \inv{\pi}(A) $ and $ V = \inv{\pi}(B) $, thus the statement (*) follows.
 \end{proof}
 
+A very simple use of the theorem above is that consider a case where the equivalence relation is simply the equality. Then we will have the following corollary.
+
+\begin{corollary}[Hausdorff characterization]
+	Let $ S $ be a topological space. This space is Hausdorff if the diagonal $ \Delta = \set{(x,x) \in S\times S} $ is closed in $ S\times S $.
+\end{corollary}
+
+
+
+\section{Summary}
+\begin{summary}
+	Let $ S $ be a manifold, and $ \sim $ an equivalence relation. Then $ S/\sim $ is 
+	\begin{itemize}
+		\item Second countable if the equivalence relation is open.6
+		\item Hausdorff if the graph of the equivalence relation is \emph{open} and its graph is closed in $ S\times S $.
+	\end{itemize}
+\end{summary}
 \newpage
 
 \input{sections/Manifold_SolvedProbelms.tex}
