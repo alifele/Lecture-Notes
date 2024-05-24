@@ -511,13 +511,51 @@ A very simple use of the theorem above is that consider a case where the equival
 	Let $ S $ be a topological space. This space is Hausdorff if the diagonal $ \Delta = \set{(x,x) \in S\times S} $ is closed in $ S\times S $.
 \end{corollary}
 
+\section{Real Projective Space}
+Here in this section we will review one of the very interesting manifolds that we can construct by quotient of another manifold. We start with the definition.
+
+\begin{definition}[Real Projective Space]
+	Consider the set $ \R^{n+1} - \set{0} $. Define the equivalence relation $ \sim $ as follows
+	\[ x \sim y \qquad \Longleftrightarrow\qquad x = ty \quad \text{for some $ t \in \R $} \]
+	where $ x,y \in \R^n - \set{0} $. The quotient set under this equivalence relation is called the real projective space or $ \R P^n $.
+\end{definition}
+
+\begin{remark}
+	When I was writing this, it came to me what do we need to generalize this notion of projective plane to any vector space. Because the only ingredients that we use in this definition is the vector space properties of the underlying set. 
+\end{remark}
+
+Geometrically, the real projective plane can be tough of the set of all point passing through the origin. On the other hand, we know that every line passing through the origin hits the unit sphere $ S^n $ in exactly two antipodal points. The following proposition reveals the connections between the some quotient structure of unit spheres and the real projective space. 
+
+\begin{proposition}
+	Define an equivalence relation on $ S^n $ by identifying the antipodal points. I.e. 
+	\[ x \sim y \quad \Longleftrightarrow \quad x = \pm y. \]
+	The quotient set $ S^n/\sim $ is homeomorphic to the real projective space.
+\end{proposition}
+\begin{proof}
+	To show this we need to find homeomorphisms between these two sets. Define $ f: \R^{n+1}-\set{0} \to S^n$ be
+	\[ f(x) = \frac{x}{\norm{x}} \]
+	where $ \norm{x} = (\sum_{i}x_i^2)^{1/2} $ is the modulus of the point $ x=(x_1,\cdots,x_n) $. This function is continuous since the denominator is never zero and both nominator and denominator are continuous functions (note that $ \norm{x} $ is a composition of smooth functions). Consider the following diagram. 
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=0.3\linewidth]{Images/conuttativeDiagranQuestion1.png}
+	\end{figure}
+	The function $ \bar{f}: \R P^n \to S^n/\sim $ is a function induced by $ f $ given by
+	\[ \bar{f}([x]) = \left[\frac{x}{\norm{x}}\right] \in S^n/\sim. \]
+	This function is well defined as it dose not depend on the representative of the equivalence class that we choose. Since for any other element in the equivalence class we will have
+	\[ \bar{f}([tx]) = \left[ \frac{tx}{\norm{tx}} \right]=\left[ \frac{tx}{\abs{t}\norm{x}} \right] = \left[ \pm \frac{x}{\norm{x}} \right] = \left[ \frac{tx}{\norm{tx}} \right]  = \bar{f}([x]).  \]
+	Since the function \[ \pi_2\circ f \] is continuous, then the function $ \bar{f} $ is also continuous. Next, define $ g: S^n \to R^{n+1} - \set{0} $ given by $ g(x) = x $. This map induces a map $ \bar{g}: S^n/\sim \to \R P^n $ given by $ g([x]) = [x] $. By the same argument as above, $ \bar{g} $ is continuous and well defined. It just remains to show that these two maps are inverses of each other. To show this we have
+	\[ (\bar{f}\circ\bar{g})([x]) = \bar{f}([x]) = \left[ \frac{x}{\norm{x}} \right]  = [x], \]
+	and also 
+	\[ (\bar{g}\circ\bar{f})([x]) = \bar{g}(\left[ \frac{x}{\norm{x}} \right]) = \left[ \frac{x}{\norm{x}} \right] = [x]. \]
+	Thus the spaces $ \R P^n $ and $ S^n/\sim $ are homeomorphic to each other.
+\end{proof}
 
 
 \section{Summary}
 \begin{summary}
 	Let $ S $ be a manifold, and $ \sim $ an equivalence relation. Then $ S/\sim $ is 
 	\begin{itemize}
-		\item Second countable if the equivalence relation is open.6
+		\item Second countable if the equivalence relation is open.
 		\item Hausdorff if the graph of the equivalence relation is \emph{open} and its graph is closed in $ S\times S $.
 	\end{itemize}
 \end{summary}
