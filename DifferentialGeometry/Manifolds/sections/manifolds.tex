@@ -428,6 +428,8 @@ We will skip proving this theorem here and we will just use it to prove the gene
 \end{proof}
 
 
+
+
 \section{Quotients}
 The quotient construction is a process of simplification. Starting with an equivalence relation on a set, we identify each equivalence class to a point. If the original set is a topological space, then it is always possible to give the quotient space a topology so that the natural projection map (i.e. $ \pi: S\to S/\sim\ ,\ x\mapsto [x] $) becomes continuous. However, if the original set is a manifold, then it is not always true that the quotient set is also manifold, as the conditions like being Hausdorff or second countable might break.
 
@@ -450,6 +452,7 @@ Let $ S $ be a topological space and $ \sim $ and equivalence relation on this s
  \[ \bar{f}(\pi(p)) = f(p) \qquad \text{or equivalently} \qquad \bar{f}\circ\pi  = f. \]
 
 \begin{proposition}
+	\label{prop:ContinousInducedmap}
 	The induced map $ \bar{f}:S/\sim \to Y $ is continuous if and only if the map $ f: S \to Y $ is continuous.
 \end{proposition}
 \begin{solution}
@@ -550,6 +553,21 @@ Geometrically, the real projective plane can be tough of the set of all point pa
 	Thus the spaces $ \R P^n $ and $ S^n/\sim $ are homeomorphic to each other.
 \end{proof}
 
+\section{Real Projective Plane}
+Here in this section we will focus on the real projective plane, which is the set of all lines passing through origin in $ \R^3 $. Although imagining an sphere with identified antipodal points are much easier than imagining the set of all line passing through the origin, but it is still hard to imagine the final geometrical and global properties of such a set. So we need more simplification.
+
+\begin{proposition}
+	Let $ S^2/\sim $ be a unit sphere that its antipodal points are identified. This set is homeomorphic to the closed upper hemisphere where its antipodal points on the equator are identified.
+\end{proposition}
+\begin{proof}
+	First, we need to write the proposition in terms of actual mathematical objects (sets, mappings, etc). Let
+	\[ H^2 = \set{(x,y,z) \in \R^3\ :\ x^2+y^2+z^2 = 1,\ z\geq 0}. \]
+	Define the equivalence relation 
+	\[ (x_1,y_1,0)\  \sim_{1}\  (x_2,y_2,0) \quad \Longleftrightarrow \quad (x_1,y_1,0)=\pm (x_2,y_2,0) \]
+	where $ (x_1,y_1,0), (x_2,y_2,0) \in H^2 $. Thus the proposition states that the two spaces $ H^2/\sim_1 $ is homeomorphic to $ S^2/\sim $.
+\end{proof}
+
+
 
 \section{Summary}
 \begin{summary}
@@ -559,6 +577,20 @@ Geometrically, the real projective plane can be tough of the set of all point pa
 		\item Hausdorff if the graph of the equivalence relation is \emph{open} and its graph is closed in $ S\times S $.
 	\end{itemize}
 \end{summary}
-\newpage
+
+\begin{summary}[Showing two quotient spaces are homeomorphic]
+	In general, in order to show that two spaces are homeomorphic, we need to find an homeomorphism between the spaces (a continuous bijection with continuous inverse). In particular, if two spaces are quotient spaces, it is often easier to work with the original spaces (that are not necessarily homeomorphic). For instance, Consider showing that the real projective space $ \R P^n $ is homeomorphic to $ S^n/\sim $ where the equivalence relation $ \sim $ identifies the antipodal points in the unit sphere. The followings are the steps that we take
+	\begin{itemize}
+		\item Find $ f: \R^n-\set{0} \to S^n $ that assumes a constant value for all of the points in the same equivalence relation. This induces a map $ \bar{f}: \R P^n \to S^n/\sim $. From \autoref{prop:ContinousInducedmap} it follows that $ \bar{f} $ is continuous iff $ \pi^2 \circ f $ is continuous (consider the following commutative diagram).
+		\begin{center}
+			\includegraphics[width=0.3\linewidth]{Images/conuttativeDiagranQuestion1.png}
+		\end{center}
+		\item We need to find $ g: S^n \to \R^n-\set{0}  $ that induces a map $ \bar{g}: S^n/\sim \to \R^n-\set{0}/\sim  $. Again, using \autoref{prop:ContinousInducedmap}, $ \bar{g} $ is continuous if and only if $ \pi_1\circ g $ is continuous. 
+		\item As the last step, we need to check if $ \bar{f} $ and $ \bar{g} $ are indeed inverses of each other, i.e. their composition leads to identity maps on the corresponding domains.
+
+	\end{itemize}
+	
+\end{summary}
+
 
 \input{sections/Manifold_SolvedProbelms.tex}
