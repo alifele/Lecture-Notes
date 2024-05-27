@@ -573,49 +573,67 @@ Here in this section we will focus on the real projective plane, which is the se
 	Let $ S^2/\sim $ be a unit sphere that its antipodal points are identified. This set is homeomorphic to the closed upper hemisphere where its antipodal points on the equator are identified.
 \end{proposition}
 \begin{proof}
-	First, we need to write the proposition in terms of actual mathematical objects (sets, mappings, etc). Let
-	\[ H^2 = \set{(x,y,z) \in \R^3\ :\ x^2+y^2+z^2 = 1,\ z\geq 0}. \]
-	Define the equivalence relation 
-	\[ (x_1,y_1,0)\  \sim_{1}\  (x_2,y_2,0) \quad \Longleftrightarrow \quad (x_1,y_1,0)=\pm (x_2,y_2,0) \]
-	where $ (x_1,y_1,0), (x_2,y_2,0) \in H^2 $. Thus the proposition states that the two spaces $ H^2/\sim_1 $ is homeomorphic to $ S^2/\sim $. To prove this we used the idea as in \autoref{summary:ShowingHomeoInQuotientSpaces}. Consider the inclusion map $ i: H^2 \to S^2 $. This map is continuous and $ \pi_2\circ i $ assumes a constant value for all of the points on its domain that are in the same equivalence class. Thus it induces a continuous map $ f: H^2/\sim_1 \to S^2/\sim $. The following commutative diagram summarizes this.
-%	\input{Images/diagraForQuestion1.tex}
-% https://q.uiver.app/#q=WzAsNCxbMCwwLCJIXjIiXSxbMiwwLCJTXjIiXSxbMCwyLCJIXjIvXFxzaW0iXSxbMiwyLCJTXjIvXFxzaW0iXSxbMCwxLCJpIl0sWzAsMiwiXFxwaV8xIiwyXSxbMSwzLCJcXHBpXzIiXSxbMiwzLCJmIiwyXSxbMCwzLCJcXHBpXzJcXGNpcmMgaSIsMV1d
-	\[\begin{tikzcd}
-		{H^2} && {S^2} \\
-		\\
-		{H^2/\sim} && {S^2/\sim}
-		\arrow["i", from=1-1, to=1-3]
-		\arrow["{\pi_1}"', from=1-1, to=3-1]
-		\arrow["{\pi_2\circ i}"{description}, from=1-1, to=3-3]
-		\arrow["{\pi_2}", from=1-3, to=3-3]
-		\arrow["f"', from=3-1, to=3-3]
-	\end{tikzcd}\]
-
-	\noindent To find the inverse map, consider the map $ g: S^2 \to H^2 $ given by
-	\[ k(x,y,z) = (x,y,\abs{z}). \]
-	This map is continuous (as all of its component functions are continuous) and $ \pi_1\circ k $ assumes a constant value for all of points in its domain that are in the same equivalence class. This induces a continuous map $ g: S^2/\sim \to H^2/\sim_1 $. Consider the following commutative diagram that summarizes these functions.
-%	\input{Images/diagraForQuestion2.tex}
-	% https://q.uiver.app/#q=WzAsNCxbMiwwLCJIXjIiXSxbMCwwLCJTXjIiXSxbMiwyLCJIXjIvXFxzaW0iXSxbMCwyLCJTXjIvXFxzaW0iXSxbMCwyLCJcXHBpXzEiXSxbMSwzLCJcXHBpXzIiLDJdLFsxLDAsImsiXSxbMSwyLCJcXHBpXzFcXGNpcmMgayIsMV0sWzMsMiwiZyJdXQ==
-	\[\begin{tikzcd}
-		{S^2} && {H^2} \\
-		\\
-		{S^2/\sim} && {H^2/\sim}
-		\arrow["k", from=1-1, to=1-3]
-		\arrow["{\pi_2}"', from=1-1, to=3-1]
-		\arrow["{\pi_1\circ k}"{description}, from=1-1, to=3-3]
-		\arrow["{\pi_1}", from=1-3, to=3-3]
-		\arrow["g", from=3-1, to=3-3]
-	\end{tikzcd}\]
-	
-	Now what remains to show is that $ f $ and $ g $ are inverse of each other. To show this consider
-	\[ f\circ g: S^2/\sim \to S^2/\sim. \]
-	Let $ [(x,y,z)] \in S^2/\sim $. Then we have
-	\[ f(g([x,y,z])) = f((\pi_1\circ k)(x,y,z)) = f([x,y,\abs{z}])\]
-	
-	
-	
-%	 where $ \pi_2\circ f $ assumes a constant value for all of the points in a single equivalence class on its domain. Consider the identity map $ \mathds{1}_{S^2}: S^2 \to H^2 $. This map is indeed continuous and the map $ \pi_2\circ \pi_1 $
+	The proof is given as the solution to \autoref{prob:H2HomoS^2Sim}.
 \end{proof}
+
+Now, we can go further and simplify this space more.
+
+\begin{proposition}
+	\label{prop:H^2HomoToD^2Sim}
+	Let $ H^2/\sim $ be the quotient space adopted from the closed upper hemisphere by identifying the antipodal points on its equator. Also, let $ D^2/\sim $ be the quotient space adopted from the closed unit disk $ D^2 $ by identifying the antipodal points on its boundary circle. Then $ H^2/\sim $ and $ D^2/\sim $ are homeomorphic.
+\end{proposition}
+
+\begin{proof}
+	We need to find a homeomorphism between $ H^2/\sim $ and $ D^2/\sim $. Consider the projection map
+	\[ f:H^2 \to D^2 \qquad (x,y,z) \mapsto (x,y).  \]
+	Consider the following commutative diagram.
+	% https://q.uiver.app/#q=WzAsNCxbMiwwLCJEXjIiXSxbMCwwLCJIXjIiXSxbMiwyLCJEXjIvXFxzaW0iXSxbMCwyLCJIXjIvXFxzaW0iXSxbMCwyLCJcXHBpXzIiXSxbMSwzLCJcXHBpXzEiLDJdLFszLDIsIlxcYmFye2Z9IiwyXSxbMSwwLCJmIl0sWzEsMiwiXFxwaV8yXFxjaXJjIGYiLDFdXQ==
+	\[\begin{tikzcd}
+		{H^2} && {D^2} \\
+		\\
+		{H^2/\sim} && {D^2/\sim}
+		\arrow["f", from=1-1, to=1-3]
+		\arrow["{\pi_1}"', from=1-1, to=3-1]
+		\arrow["{\pi_2\circ f}"{description}, from=1-1, to=3-3]
+		\arrow["{\pi_2}", from=1-3, to=3-3]
+		\arrow["{\bar{f}}"', from=3-1, to=3-3]
+	\end{tikzcd}\]
+	The map $ \pi_2 \circ f $ is continuous and assumes a constant value for all of points in its domain that are in a same equivalence class. Thus this induces a continuous map $ \bar{f}: H^2 /\sim \to D^2 /\sim $. To find the inverse for this function, consider 
+	\[ g: D^2 \to S^2 \qquad (x,y) \mapsto (x,y,\sqrt{1-(x^2+y^2)}). \]
+	Consider the following commutative diagram.
+	% https://q.uiver.app/#q=WzAsNCxbMCwwLCJEXjIiXSxbMiwwLCJIXjIiXSxbMCwyLCJEXjIvXFxzaW0iXSxbMiwyLCJIXjIvXFxzaW0iXSxbMCwyLCJcXHBpXzIiLDJdLFsxLDMsIlxccGlfMSJdLFswLDMsIlxccGlfMVxcY2lyYyBnIiwxXSxbMCwxLCJnIl0sWzIsMywiXFxiYXJ7Z30iLDJdXQ==
+	\[\begin{tikzcd}
+		{D^2} && {H^2} \\
+		\\
+		{D^2/\sim} && {H^2/\sim}
+		\arrow["g", from=1-1, to=1-3]
+		\arrow["{\pi_2}"', from=1-1, to=3-1]
+		\arrow["{\pi_1\circ g}"{description}, from=1-1, to=3-3]
+		\arrow["{\pi_1}", from=1-3, to=3-3]
+		\arrow["{\bar{g}}"', from=3-1, to=3-3]
+	\end{tikzcd}\]
+	The map $ \pi_1\circ g $ is continuous and assumes a constant value for all points in its domain that are in the same equivalence class. Thus it induces a map $ \bar{g} $ that is continuous.
+	
+	\noindent We now need to show that $ \bar{f} $ and $ \bar{g} $ are inverses of each other. To see this consider the map 
+	\[ \bar{f}\circ\bar{g}: H^2/\sim \to H^2/\sim. \]
+	We can write
+	\[\bar{f}(\bar{g}([x,y])) = \bar{f}([x,y,\sqrt{1-(x^2+y^2)}]) = [x,y]. \]
+	With a similar argument for $ \bar{g}\circ\bar{f} $ we can show that these two functions are inverses of each other, thus we could find the explicit homeomorphism.
+\end{proof}
+
+In summary, we have the following chain of homeomorphisms
+
+% https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXFIgUF4yIl0sWzEsMCwiU14yL1xcc2ltIl0sWzIsMCwiSF4yL1xcc2ltIl0sWzMsMCwiRF4yL1xcc2ltIl0sWzAsMSwiXFxzaW0iXSxbMiwzLCJcXHNpbSJdLFsxLDIsIlxcc2ltIl1d
+\[\begin{tikzcd}
+	{\R P^2} & {S^2/\sim} & {H^2/\sim} & {D^2/\sim}
+	\arrow["\sim", from=1-1, to=1-2]
+	\arrow["\sim", from=1-2, to=1-3]
+	\arrow["\sim", from=1-3, to=1-4]
+\end{tikzcd}\]
+
+
+
+\section{Standard $ C^\infty $ Atlas on a Real Projective Space}
 
 
 
@@ -652,11 +670,11 @@ Here in this section we will focus on the real projective plane, which is the se
 			\item We need to find $ g: S^n \to \R^n-\set{0}  $ that induces a map $ \bar{g}: S^n/\sim \to \R^n-\set{0}/\sim  $. Again, using \autoref{prop:ContinousInducedmap}, $ \bar{g} $ is continuous if and only if $ \pi_1\circ g $ is continuous. Similar to what we did for $ \bar{f} $ we need to show that $ \bar{g} $ is indeed well defined.
 			\item As the last step, we need to check if $ \bar{f} $ and $ \bar{g} $ are indeed inverses of each other, i.e. their composition leads to identity maps on the corresponding domains. 
 			
-			Also look at the proof of \autoref{prop:UnitSphereHomoToUpperHemisphere} for a similar argument.
-			
 		\end{itemize}
+					
+		Also look at the proof of \autoref{prop:H^2HomoToD^2Sim} for a similar argument.
 		
-		\item \textbf{Using compactness arguments}. Some times it is hard to find the homeomorphism directly. In this case we follow our approach as in the problem {\color{orange} (problem and problem here)}, as well as the following important proposition
+		\item \textbf{Using compactness arguments}. Some times it is hard to find the homeomorphism directly. In this case we follow our approach as in \autoref{prob:IntervalHomo2CircleSim} and \autoref{prob:H2HomoS^2Sim}, as well as the following important proposition
 		\begin{proposition}
 			A bijection from a compact space to a Hausdorff space is a homeomorphism.
 		\end{proposition}
