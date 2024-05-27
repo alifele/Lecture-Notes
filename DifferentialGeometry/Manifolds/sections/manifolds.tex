@@ -511,6 +511,7 @@ The quotient construction often does not preserve the second countablity and Hau
 A very simple use of the theorem above is that consider a case where the equivalence relation is simply the equality. Then we will have the following corollary.
 
 \begin{corollary}[Hausdorff characterization]
+	\label{coro:HuasdorffCarachterization}
 	Let $ S $ be a topological space. This space is Hausdorff if the diagonal $ \Delta = \set{(x,x) \in S\times S} $ is closed in $ S\times S $.
 \end{corollary}
 
@@ -538,10 +539,21 @@ Geometrically, the real projective plane can be tough of the set of all point pa
 	To show this we need to find homeomorphisms between these two sets. Define $ f: \R^{n+1}-\set{0} \to S^n$ be
 	\[ f(x) = \frac{x}{\norm{x}} \]
 	where $ \norm{x} = (\sum_{i}x_i^2)^{1/2} $ is the modulus of the point $ x=(x_1,\cdots,x_n) $. This function is continuous since the denominator is never zero and both nominator and denominator are continuous functions (note that $ \norm{x} $ is a composition of smooth functions). Consider the following diagram. 
-	\begin{figure}[h!]
-		\centering
-		\includegraphics[width=0.3\linewidth]{Images/conuttativeDiagranQuestion1.png}
-	\end{figure}
+%	\begin{figure}[h!]
+%		\centering
+%		\includegraphics[width=0.3\linewidth]{Images/conuttativeDiagranQuestion1.png}
+%	\end{figure}
+
+% https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXFJee24rMX0tXFx7MFxcfSJdLFsyLDAsIlNebiJdLFswLDIsIlxcUiBQIF5uIl0sWzIsMiwiU15uL1xcc2ltIl0sWzAsMSwiZiJdLFswLDIsIlxccGlfMSIsMl0sWzEsMywiXFxwaV8yIl0sWzIsMywiXFxiYXJ7Zn0iLDJdXQ==
+	\[\begin{tikzcd}
+		{\R^{n+1}-\{0\}} && {S^n} \\
+		\\
+		{\R P ^n} && {S^n/\sim}
+		\arrow["f", from=1-1, to=1-3]
+		\arrow["{\pi_1}"', from=1-1, to=3-1]
+		\arrow["{\pi_2}", from=1-3, to=3-3]
+		\arrow["{\bar{f}}"', from=3-1, to=3-3]
+	\end{tikzcd}\]
 	The function $ \bar{f}: \R P^n \to S^n/\sim $ is a function induced by $ f $ given by
 	\[ \bar{f}([x]) = \left[\frac{x}{\norm{x}}\right] \in S^n/\sim. \]
 	This function is well defined as it dose not depend on the representative of the equivalence class that we choose. Since for any other element in the equivalence class we will have
@@ -565,12 +577,44 @@ Here in this section we will focus on the real projective plane, which is the se
 	\[ H^2 = \set{(x,y,z) \in \R^3\ :\ x^2+y^2+z^2 = 1,\ z\geq 0}. \]
 	Define the equivalence relation 
 	\[ (x_1,y_1,0)\  \sim_{1}\  (x_2,y_2,0) \quad \Longleftrightarrow \quad (x_1,y_1,0)=\pm (x_2,y_2,0) \]
-	where $ (x_1,y_1,0), (x_2,y_2,0) \in H^2 $. Thus the proposition states that the two spaces $ H^2/\sim_1 $ is homeomorphic to $ S^2/\sim $. To prove this we used the idea as in \autoref{summary:ShowingHomeoInQuotientSpaces}. Thus we need to find a continuous map $ f: S^2 \to  H^2$ that induces a continuous map $ \bar{f}: S^2/\sim \to H^2/\sim_1 $. The map $ f $ is given by
-	\[ f(x,y,z) = \begin{cases}
-		\sign(z)(x,y,z) \qquad z\neq 0,\\
-		(x^2 - y^2, 2xy,0) \qquad z=0.
-	\end{cases} \]
-	This is indeed a continuous map on its domain. The continuoity is clear for the case $ z\neq 0 $. For 
+	where $ (x_1,y_1,0), (x_2,y_2,0) \in H^2 $. Thus the proposition states that the two spaces $ H^2/\sim_1 $ is homeomorphic to $ S^2/\sim $. To prove this we used the idea as in \autoref{summary:ShowingHomeoInQuotientSpaces}. Consider the inclusion map $ i: H^2 \to S^2 $. This map is continuous and $ \pi_2\circ i $ assumes a constant value for all of the points on its domain that are in the same equivalence class. Thus it induces a continuous map $ f: H^2/\sim_1 \to S^2/\sim $. The following commutative diagram summarizes this.
+%	\input{Images/diagraForQuestion1.tex}
+% https://q.uiver.app/#q=WzAsNCxbMCwwLCJIXjIiXSxbMiwwLCJTXjIiXSxbMCwyLCJIXjIvXFxzaW0iXSxbMiwyLCJTXjIvXFxzaW0iXSxbMCwxLCJpIl0sWzAsMiwiXFxwaV8xIiwyXSxbMSwzLCJcXHBpXzIiXSxbMiwzLCJmIiwyXSxbMCwzLCJcXHBpXzJcXGNpcmMgaSIsMV1d
+	\[\begin{tikzcd}
+		{H^2} && {S^2} \\
+		\\
+		{H^2/\sim} && {S^2/\sim}
+		\arrow["i", from=1-1, to=1-3]
+		\arrow["{\pi_1}"', from=1-1, to=3-1]
+		\arrow["{\pi_2\circ i}"{description}, from=1-1, to=3-3]
+		\arrow["{\pi_2}", from=1-3, to=3-3]
+		\arrow["f"', from=3-1, to=3-3]
+	\end{tikzcd}\]
+
+	\noindent To find the inverse map, consider the map $ g: S^2 \to H^2 $ given by
+	\[ k(x,y,z) = (x,y,\abs{z}). \]
+	This map is continuous (as all of its component functions are continuous) and $ \pi_1\circ k $ assumes a constant value for all of points in its domain that are in the same equivalence class. This induces a continuous map $ g: S^2/\sim \to H^2/\sim_1 $. Consider the following commutative diagram that summarizes these functions.
+%	\input{Images/diagraForQuestion2.tex}
+	% https://q.uiver.app/#q=WzAsNCxbMiwwLCJIXjIiXSxbMCwwLCJTXjIiXSxbMiwyLCJIXjIvXFxzaW0iXSxbMCwyLCJTXjIvXFxzaW0iXSxbMCwyLCJcXHBpXzEiXSxbMSwzLCJcXHBpXzIiLDJdLFsxLDAsImsiXSxbMSwyLCJcXHBpXzFcXGNpcmMgayIsMV0sWzMsMiwiZyJdXQ==
+	\[\begin{tikzcd}
+		{S^2} && {H^2} \\
+		\\
+		{S^2/\sim} && {H^2/\sim}
+		\arrow["k", from=1-1, to=1-3]
+		\arrow["{\pi_2}"', from=1-1, to=3-1]
+		\arrow["{\pi_1\circ k}"{description}, from=1-1, to=3-3]
+		\arrow["{\pi_1}", from=1-3, to=3-3]
+		\arrow["g", from=3-1, to=3-3]
+	\end{tikzcd}\]
+	
+	Now what remains to show is that $ f $ and $ g $ are inverse of each other. To show this consider
+	\[ f\circ g: S^2/\sim \to S^2/\sim. \]
+	Let $ [(x,y,z)] \in S^2/\sim $. Then we have
+	\[ f(g([x,y,z])) = f((\pi_1\circ k)(x,y,z)) = f([x,y,\abs{z}])\]
+	
+	
+	
+%	 where $ \pi_2\circ f $ assumes a constant value for all of the points in a single equivalence class on its domain. Consider the identity map $ \mathds{1}_{S^2}: S^2 \to H^2 $. This map is indeed continuous and the map $ \pi_2\circ \pi_1 $
 \end{proof}
 
 
@@ -584,21 +628,43 @@ Here in this section we will focus on the real projective plane, which is the se
 	\end{itemize}
 \end{summary}
 
-\begin{summary}[Showing two quotient spaces are homeomorphic]
+\begin{summary}[Two ways to show that two quotient spaces are homeomorphic]
 	\label{summary:ShowingHomeoInQuotientSpaces}
-	In general, in order to show that two spaces are homeomorphic, we need to find an homeomorphism between the spaces (a continuous bijection with continuous inverse). In particular, if two spaces are quotient spaces, it is often easier to work with the original spaces (that are not necessarily homeomorphic). For instance, Consider showing that the real projective space $ \R P^n $ is homeomorphic to $ S^n/\sim $ where the equivalence relation $ \sim $ identifies the antipodal points in the unit sphere. The followings are the steps that we take
-	\begin{itemize}
-		\item Find $ f: \R^n-\set{0} \to S^n $ where $ \pi_2 \circ f $ assumes a constant value for all of the points in the same equivalence relation defined on $ \R^{n+1}-\set{0} $. This induces a map $ \bar{f}: \R P^n \to S^n/\sim $. From \autoref{prop:ContinousInducedmap} it follows that $ \bar{f} $ is continuous iff $ \pi^2 \circ f $ is continuous (consider the following commutative diagram).
-		\begin{center}
-			\includegraphics[width=0.3\linewidth]{Images/conuttativeDiagranQuestion1.png}
-		\end{center}
-		\item We need to find $ g: S^n \to \R^n-\set{0}  $ that induces a map $ \bar{g}: S^n/\sim \to \R^n-\set{0}/\sim  $. Again, using \autoref{prop:ContinousInducedmap}, $ \bar{g} $ is continuous if and only if $ \pi_1\circ g $ is continuous. 
-		\item As the last step, we need to check if $ \bar{f} $ and $ \bar{g} $ are indeed inverses of each other, i.e. their composition leads to identity maps on the corresponding domains.
-		
-		Also look at the proof of \autoref{prop:UnitSphereHomoToUpperHemisphere} for a similar argument.
-
-	\end{itemize}
+	In general, in order to show that two spaces are homeomorphic, we need to find an homeomorphism between the spaces (a continuous bijection with continuous inverse). In particular, if two spaces are quotient spaces, it is often easier to work with the original spaces (that are not necessarily homeomorphic). In this summary box I will talk about two important ways that we can do this. 
 	
+	\begin{enumerate}
+		\item \textbf{Direct method}. In this method we directly find the homeomorphism. Consider showing that the real projective space $ \R P^n $ is homeomorphic to $ S^n/\sim $ where the equivalence relation $ \sim $ identifies the antipodal points in the unit sphere. The followings are the steps that we take
+		\begin{itemize}
+			\item Find $ f: \R^n-\set{0} \to S^n $ where $ \pi_2 \circ f $ assumes a constant value for all of the points in the same equivalence relation defined on $ \R^{n+1}-\set{0} $. This induces a map $ \bar{f}: \R P^n \to S^n/\sim $. From \autoref{prop:ContinousInducedmap} it follows that $ \bar{f} $ is continuous iff $ \pi^2 \circ f $ is continuous (consider the following commutative diagram).
+			
+			
+			% https://q.uiver.app/#q=WzAsNCxbMiwwLCJTXm4iXSxbMCwwLCJcXFJee24rMX0tXFxzZXR7MH0iXSxbMiwyLCJTXm4vXFxzaW0iXSxbMCwyLCJcXFIgUF5uIl0sWzAsMiwiXFxwaV8yIl0sWzEsMywiXFxwaV8xIiwyXSxbMSwwLCJmIl0sWzMsMiwiXFxiYXJ7Zn0iLDJdXQ==
+			\[\begin{tikzcd}
+				{\R^{n+1}-\set{0}} && {S^n} \\
+				\\
+				{\R P^n} && {S^n/\sim}
+				\arrow["f", from=1-1, to=1-3]
+				\arrow["{\pi_1}"', from=1-1, to=3-1]
+				\arrow["{\pi_2}", from=1-3, to=3-3]
+				\arrow["{\bar{f}}"', from=3-1, to=3-3]
+			\end{tikzcd}\]
+			\noindent Also note that since the domain of $ \bar{f} $ is equivalence classes, we need to make sure that the value of the function does not depend on the specific representative that we choose for a particular equivalence class. I.e. we need to show that the function is well defined. ({\color{orange} I think this is the same as the fact that this function assumes a constant value for all of the elements in the same equivalence class}).
+			\item We need to find $ g: S^n \to \R^n-\set{0}  $ that induces a map $ \bar{g}: S^n/\sim \to \R^n-\set{0}/\sim  $. Again, using \autoref{prop:ContinousInducedmap}, $ \bar{g} $ is continuous if and only if $ \pi_1\circ g $ is continuous. Similar to what we did for $ \bar{f} $ we need to show that $ \bar{g} $ is indeed well defined.
+			\item As the last step, we need to check if $ \bar{f} $ and $ \bar{g} $ are indeed inverses of each other, i.e. their composition leads to identity maps on the corresponding domains. 
+			
+			Also look at the proof of \autoref{prop:UnitSphereHomoToUpperHemisphere} for a similar argument.
+			
+		\end{itemize}
+		
+		\item \textbf{Using compactness arguments}. Some times it is hard to find the homeomorphism directly. In this case we follow our approach as in the problem {\color{orange} (problem and problem here)}, as well as the following important proposition
+		\begin{proposition}
+			A bijection from a compact space to a Hausdorff space is a homeomorphism.
+		\end{proposition}
+	\end{enumerate}
+\end{summary}
+
+\begin{summary}
+	There are some points in the proposition above that I will highlight by this summary box. First, note that the composition of two function, possibly one or both of them discontinuous, can be a continuous function (see \href{https://math.stackexchange.com/questions/3080559/composition-of-discontinuous-functions#:~:text=A%20simple%20example%20of%20the,functions%20giving%20a%20continuous%20one.&text=g(x)%3Dx(,x)%2B%E2%8C%8Ax%E2%8C%8B.&text=(g%E2%88%98f)(x,discontinuous%20maps%20may%20be%20continuous.}{this}). Thus in the summary box above, neither of $ f $ or $ g $ need to be continuous. The function that need to be continuous are $ \pi_2\circ f $ and $ \pi_1\circ g $.
 \end{summary}
 
 

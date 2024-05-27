@@ -390,3 +390,70 @@
 \end{solution}
 
 
+\begin{problem}
+	Let $ I $ be the unit closed interval $ I = [0,1] $ and $ I/\sim $ the quotient space obtained from $ I $ by identifying the two points $ \set{0,1} $ to a point. Denote by $ S^1 $ the unit circle in the complex plane. Show that $ I $ is homeomorphic to $ S^1 $.
+\end{problem}
+\begin{solution}
+	As we have discussed in the summary box \autoref{summary:ShowingHomeoInQuotientSpaces}, we will use the second method to show that an isomorphism exists between these two sets. Consider the function $ f: I \to \C $ given by $ f(t) = e^{2i\pi t} $. Thus function assumes the same value for the points $ \set{0,1} $ in its domain that are in the same equivalence class as well. Thus this induces a map $ \bar{f}: I/\sim \to S^1 $. Consider the following commutative diagram.
+	\[\begin{tikzcd}
+		I && {S^1} \\
+		\\
+		{I/\sim}
+		\arrow["f", from=1-1, to=1-3]
+		\arrow["\pi"', from=1-1, to=3-1]
+		\arrow["{\bar{f}}"', from=3-1, to=1-3]
+	\end{tikzcd}\]
+	Since $ f $ is continues, then by \autoref{prop:ContinousInducedmap} $ \bar{f} $ is also continuous. Because
+	\begin{itemize}[noitemsep]
+		\item $ \bar{f} $ is continuous (from our reasoning above).
+		\item $ \bar{f} $ is a bijection (note that $ f $ is not a bijection but $ \bar{f} $ is a bijection).
+		\item $ I/\sim $ is compact (since it is a continuous image of a compact set $ I $).
+		\item $ S^1 $ is Hausdorff.
+	\end{itemize} 
+	Then by the proposition embedded in \autoref{summary:ShowingHomeoInQuotientSpaces} we conclude that $ \bar{f} $ is indeed a homeomorphism.
+\end{solution}
+\begin{observation}
+	In the problem above, one might ask why we did not find the homeomorphism explicitly as we usually do in other problems. The answer is that we can still find the explicit homeomorphism but in doing so, we will face some difficulties (not in all of the problems though). For instance, lets try to find a continuous map $ \bar{g}: S^1 \to I/\sim $ that is the inverse of $ \bar{f} $. We might arrange the sets and maps in the following form to be able to use the theorems we have had in this chapter (like \autoref{prop:ContinousInducedmap}). Consider the following diagram.
+	% https://q.uiver.app/#q=WzAsNCxbMCwwLCJTXjEiXSxbMCwyLCJTXjEiXSxbMiwwLCJJIl0sWzIsMiwiSS9cXHNpbSJdLFswLDEsImlkIiwyXSxbMCwyLCJnIl0sWzIsMywiXFxwaSJdLFsxLDMsIlxcYmFye2d9IiwyXSxbMCwzLCJcXHBpXFxjaXJjIGciLDFdXQ==
+	\[\begin{tikzcd}
+		{S^1} && I \\
+		\\
+		{S^1} && {I/\sim}
+		\arrow["g", from=1-1, to=1-3]
+		\arrow["id"', from=1-1, to=3-1]
+		\arrow["{\pi\circ g}"{description}, from=1-1, to=3-3]
+		\arrow["\pi", from=1-3, to=3-3]
+		\arrow["{\bar{g}}"', from=3-1, to=3-3]
+	\end{tikzcd}\]
+	
+	The appropriate function to choose is $ g:S^1\to I $ which is the complex logarithm function with its branch cut on the positive real axis. But this function is clearly discontinuous on the positive real axis. Although this does not meant that the map $ \pi\circ g $ is not continuous, but to show that this map is continuous we need to use the basic definitions to prove it and we can not use any higher level theorems (at least I am not aware of any). Then when we prove that $ \pi\circ g $ is continuous, since it assumes a constant value on all of its points in the domain that are in the same equivalence class (the equivalence class here is the trivial equality relation, where each point has relation with only itself), then it induces a map $ \bar{g} $ where its continuoity follows immediately from the continuoity of $ \pi\circ g $.
+	
+	If you be sharp enough, you will understand that the last part of the reasoning is really redundant (i.e. concluding the continuoity of $ \bar{g} $ from $ \pi\circ g $). That is simply because $ \bar{g} $ is exactly the same as $ \pi\circ g $ (can you see this from the diagram?)
+\end{observation}
+
+\begin{problem}
+	Let $ S^2 $ be the unit sphere and $ S^2/\sim $ the quotient set obtained from $ S^2 $ by identifying the antipodal points to a point. Also, let $ H^2 $ be the closed upper hemisphere and $ H^2/\sim $ be the quotient space obtained from $ H^2 $ by identifying the \emph{antipodal points on its equator to a point}. Show that these two spaces are homeomorphisms.
+\end{problem}
+
+\begin{solution}
+	We will use the same approach as the question above. Let $ i: H^2 \to S^2 $ be the inclusion map. This map is continuous. Consider the commuting diagram below
+	% https://q.uiver.app/#q=WzAsNCxbMiwwLCJTXjIiXSxbMCwwLCJIXjIiXSxbMiwyLCJTXjIvXFxzaW0iXSxbMCwyLCJIXjIvXFxzaW0iXSxbMCwyLCJcXHBpXzIiXSxbMSwzLCJcXHBpXzEiLDJdLFszLDIsIlxcYmFye2l9IiwyXSxbMSwwLCJpIl0sWzEsMiwiXFxwaV8yXFxjaXJjIGkiLDFdXQ==
+	\[\begin{tikzcd}
+		{H^2} && {S^2} \\
+		\\
+		{H^2/\sim} && {S^2/\sim}
+		\arrow["i", from=1-1, to=1-3]
+		\arrow["{\pi_1}"', from=1-1, to=3-1]
+		\arrow["{\pi_2\circ i}"{description}, from=1-1, to=3-3]
+		\arrow["{\pi_2}", from=1-3, to=3-3]
+		\arrow["{\bar{i}}"', from=3-1, to=3-3]
+	\end{tikzcd}\]
+	Since $ \pi_2 $ and $ i $ are both continuous maps, then $ \pi_2\circ i $ is also continuous. Also, note that this map assumes a constant value for all of the points in its domain that are in the same equivalence class. Thus it induces a map $ \bar{i} $. Since $ \pi_2\circ i $ is continuous, then $ \bar{i} $ is also continuous. We can also easily show that $ \bar{i} $ is a bijection (although $ i $ was not a bijective map). Furthermore, since $ H^2/\sim $ is compact (since it is the continuous image of a compact set), and since $ S^2/\sim $ is Hausdorff (I will show below), then from the proposition in \autoref{summary:ShowingHomeoInQuotientSpaces} we prove that $ \bar{i} $ is indeed an homeomorphism.
+	
+	Now we need to show that $ S^2/\sim $ is Hausdorff. We know that this space is Hausdorff if and only if the graph of the equivalence relation is closed in $ S^2\times S^2 $. In other words
+	\begin{align*}
+		R &= \set{ (x,y)\in S^2\times S^2\ :\ x\sim y } = \set{ (x,y)\in S^2\times S^2\ :\ x= \pm y } \\
+		&= \set{ (x,\pm x): x \in S^2} = \set{ (x,x): x \in S^2}\cup \set{ (x,-x): x \in S^2}.
+	\end{align*}
+	On the other hand, from \autoref{coro:HuasdorffCarachterization} we know that since $ S^2 $ is Hausdorff, then $ \set{ (x,x): x \in S^2} $ is closed (as well as $ \set{ (x,-x): x \in S^2} $ ). Thus $ R $ is closed in $ S^2\times S^2 $.
+\end{solution}
