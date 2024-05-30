@@ -1,0 +1,40 @@
+\chapter{Tangent Spaces}
+ 
+In this chapter we will generalize the notions that we covered in chapter 1 to manifolds.
+
+
+
+\begin{definition}[Differential of a smooth map]
+	Let $ F:N\to M $ be a smooth map between manifolds. This map induces a \emph{linear} map  called the \emph{differential of $ F $}
+	\[ F_*: T_p N \to T_{F(p)}M \]
+	where for $ X_P \in T_p N $ we have
+	\[ (F_*(X_p))f = X_p(f\circ F) \]
+	where $ f $ is a germ at $ p $.
+\end{definition}
+
+\begin{proposition}
+	Let $ F:N\to M $. It differential $ F_* $ is a derivation at $ F(p) $ for $ p \in N $. 
+\end{proposition}
+\begin{proof}
+	See \autoref{prob:DifferentialOfAMapIsADerivation}
+\end{proof}
+
+
+
+
+
+\section{Solved Problems}
+\begin{problem}[The differential of a map]
+	\label{prob:DifferentialOfAMapIsADerivation}
+	Check that $ F_*(X_p) $ is a derivation at $ F(p) $ and that $ F_*: T_p N \to T_{F(p)}M  $ is a linear map.
+\end{problem}
+\begin{solution}
+	We start with showing that $ F_*(X_p) $ is a derivation at $ F(p) $. By definition we have
+	\begin{align*}
+		[(F_*(X_p))(f\cdot g)](F(p)) &=  [ X_p((f\cdot g)\circ F) ](p) = [ X_p((f\circ F) \cdot (g\circ F)) ](p)\\
+		&= [X_p(f\circ F)](p) \cdot g(F(p)) + f(F(p))\cdot [X_p(g\circ F)](p)\\
+		&= [(F_*(X_p))f](F(p)) \cdot g(F(p)) + f(F(p))\cdot [(F_*(X_p))g].
+ 	\end{align*}
+ 	This shows that $ F_*(p) $ is indeed a derivation at $ F(p) $. Furthermore, to prove the linearity, let $ X_p, Y_p \in T_p(N) $. Then
+ 	\[ (F_*(X_p + Y_p))f = (X_p + Y_p)(f\circ F) = X_p(f\circ F) + Y_p(f\circ F) = (F_*(X_p)) f + (F_*(Y_p)) f. \]
+\end{solution}
