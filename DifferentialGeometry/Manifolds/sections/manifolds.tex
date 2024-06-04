@@ -487,12 +487,14 @@ The quotient construction often does not preserve the second countablity and Hau
 	Let $ \sim $ be an equivalence relation defined on a set. This equivalence relation is said to be open, if $ \pi(U) $ is open for some open set $ U $
 \end{definition}
 \begin{remark}
+	\label{remark:OpenEquivReleation}
 	We can give a useful characterization of open equivalence relations. Let $ U $ be an open set. Then $ \pi(U) $ being open means that $ \inv{\pi}(\pi(U)) $ is also open. Thus an equivalence relation is open if and only if 
 	\[ \inv{\pi}(\pi(U)) = \bigcup_{x \in  U} [x] \]
 	is open.
 \end{remark}
 
 \begin{theorem}
+	\label{thm:QuotientIsHausdorff}
 	Let $ S $ be a topological space, and $ \sim $ an open equivalence relation defined on $ S $. Then $ S/\sim $ is Hausdorff if and only if the graph $ R $ of the relation is closed in $ S\times S $.
 \end{theorem}
 \begin{proof}
