@@ -486,3 +486,84 @@
 	Now as a simple corollary, if $ f $ is surjective, then $ f(X) = Y $, which implies 
 	\[ f(\inv{f}(B)) = B \cap Y = B. \]
 \end{solution}
+
+
+\begin{problem}[Closedness of the diagonal of a Hausdorff space (from W. Tu)]
+	\label{problem:CorollaryImpliedTheorem_HauadorffCharacter}
+	Deduce \autoref{thm:QuotientIsHausdorff} from \autoref{coro:HuasdorffCarachterization}. 
+	
+	\textbf{Note.}You might be quite confused as in the text we used the corollary mentioned above as an immediate result of the theorem above (which is the case in most of the cases). But in this case, the corollary has enough strength that can prove the original theorem.
+\end{problem}
+\begin{solution}
+	Let $ S $ be a topological space and $ \sim $ an open equivalence relation. We start with the forward direction. I.e. we want to show that $ S/\sim $ is Hausdorff implies that the graph of $ \sim $ is closed in $ S\times S $. Consider the diagonal of $ S/\sim $ where
+	\[ \Delta = \set{(x,x) \in S/\sim \times S/\sim}. \]
+	We know that $ \Delta $ is closed in $  S/\sim \times  S/\sim  $, as $ S/\sim $ is assumed to be Hausdorff and \autoref{coro:HuasdorffCarachterization} implies that $ \Delta $ is closed in $  S/\sim  S/\sim  $.
+	Also, consider the graph of the equivalence relation 
+	\[ R = \set{(x,y) \in S\times S\ |\ x\sim y} = \set{(x,y)\in S\times S\ |\ \pi(x) = \pi(y) }. \]
+	This suggest that $ \Delta $ is the image of $ R $ under the map $ \Pi: S\times S \to S/\sim \times S/\sim $ that maps $ (x,y) \in S\times S \mapsto (\pi(x),\pi(y)) $. So we can write 
+	\[ \Delta = \Pi(R). \]
+	Or equivalently, we can state that $ R $ is the pre-image of $ \Delta $ under that map $ \Pi $, i.e. $ R = \inv{\Pi}(\Delta) $. Since that components of the map $ \Pi $ are continuous, thus the pre-image of open sets are opens sets (or equivalently, the pre-image of closed sets are closed sets). Since $ \Delta $ is closed in $  S/\sim \times  S/\sim  $, then it implies that $ R $ is closed in $ S \times S $.
+	
+	To prove the converse, we need to show closedness of $ R $ in $ S\times S $ implies $ S/\sim $ is Hausdorff. First note that $ \Delta $ is the image of $ R $ under the map $ \Pi $, i.e. $ \Delta = \Pi(R) $. Since the equivalence relation is open, then $ \pi $ maps open sets in its domain to the open sets in its pre-domain (or equivalently, it maps closed sets to closed sets.). So does $  \Pi $. Since $ R $ is closed in $ S\times S $, then $ \Delta $ is closed in $ S/\sim \times S/\sim $. Then from \autoref{coro:HuasdorffCarachterization} it follows that $ S/\sim $ is Hausdorff.
+\end{solution}
+
+\begin{problem}[Quotient of a sphere with antipodal points identified (from W. Tu)]
+	Let $ S^n $ be the unit sphere centered at the origin in $ \R^{n+1} $. Define an equivalence relation $ \sim $ on $ S^n $ by identifying antipodal points:
+	\[ x\sim y \Longleftrightarrow x = \pm y, \qquad x,y \in S^n. \]
+	\begin{enumerate}[(a)]
+		\item Show that $ \sim $ is an open equivalence relation.
+		\item Apply \autoref{thm:QuotientIsHausdorff} and \autoref{coro:HuasdorffCarachterization} to prove that the quotient space $ S^n/\sim $ is Hausdorff, without making use of the homeomorphism $ \R P^n \simeq S^n/\sim $.
+	\end{enumerate}
+\end{problem}
+\begin{solution}
+	In some parts of our solution for \autoref{prob:H2HomoS^2Sim} we proved this for the case $ n=2 $. To prove it for any $ n \in  \N $ we will use a pretty much same approach.
+	\begin{enumerate}[(a)]
+		\item By \autoref{remark:OpenEquivReleation} we need to show that for every $ U \subset S^n $ the set $ \inv{\pi}(\pi(U)) $ is open in $ S^n $. Let $ U \subset S^n $ be an open set. Then 
+		\[ \inv{\pi}(\pi(U)) = U \cup \set{x \in \R^{n+1}\ |\ -x \in U}. \]
+		Since both sets in the RHS are open, then $ \inv{\pi}(\pi(U)) $ is open in $ S^n $. Thus the equivalence relation is open. 
+		
+		\item We need to show that $ S^n/\sim $ is Hausdorff. Since the equivalence relation is open (proved in part (a) above), then by \autoref{thm:QuotientIsHausdorff} we just need to show that the graph of equivalence relation is closed in $ S^n \times S^n $. For the graph of this equivalence relation we have
+		\[ R = \set{(x,y) \in S^n \times S^n\ |\ x \sim y} = \set{(x,y) \in S^n \times S^n\ |\ x = \pm y} = \set{(x,x) \ |\ x \in S^n} \cup \set{(x,-x) \ |\ x \in S^n}. \]
+		Since $ S^n $ is Hausdorff (under the subspace topology), then by \autoref{coro:HuasdorffCarachterization} the two sets in the RHS above are both closed, thus making $ R $ closed, hence $ S^n/\sim \times S^n/\sim $ is Hausdorff.
+	\end{enumerate}
+	\begin{carefull}
+		In my proof above, Since $ S^n $ is Hausdorff, then by \autoref{coro:HuasdorffCarachterization} it implies that $ \Delta $ is closed. In the proof above I also proved that $ \set{(x,-x)\ |\ x \in S^n} $ is closed, but I have not proved it.
+	\end{carefull}
+\end{solution}
+
+
+\begin{problem}[Orbit space of a continuous group action (from W. Tu)]
+	\label{prob:orbitSpace}
+	Suppose a right action of a topological group $ G $ on a topological space $ S $ is continuous; this simply means that the map $ \alpha : S\times G \to S $ describing the action is continuous. Define two points $ x,y $ of $ S $ to be equivalent if they are in the same orbit; i.e. there is an element $ g \in G $ such that $ y = xg $. Let $ S/G $ be the quotient space; it is called the orbit space of the action. Prove that the projection map $ \pi: S \to S/G $  is an open map.
+\end{problem}
+
+\begin{observation}
+	In the problem above, note and appreciate (!) that the group $ G $ is stated to be a topological group. If $ G $ was not a topological group, then we were not able to talk about the notion of continuoity of the right group action. The continuoity of the right group action implies that for any open set $ U \subset S $ we have $ \inv{\alpha}(U) \subset S\times G $ is open.
+\end{observation}
+
+\begin{solution}
+	First, we need to prove the following Lemma.
+	\begin{lemma}
+		Let $ S $ be a topological space and $ G $ be a topological group. Consider the right action of the group $ G $ on $ S $ via the map 
+		\[ \alpha : S \times G \to S, \qquad \alpha(s,g) = sg \]
+		If the right action if \emph{continuous} (i.e. the map $ \alpha $ is continuous) Then for $ g \in G $ the map
+		\[ \alpha_g: S \to S \]
+		is a \emph{homeomorphism}.
+	\end{lemma}
+	\begin{proof}
+		We need to do the following three steps
+		\begin{itemize}
+			\item We need to show that $ \alpha_g $ is a bijection that is continuous with a continuous inverse. $ \alpha_g $ is indeed inverse with the inverse given by $ \alpha_{\inv{g}} $, where $ \inv{g} \in G$ is the inverse element of $ g \in G $ (note that since $ G $ is group then the inverse exists). Observe that 
+			\[ \alpha_g(\alpha_{\inv{g}}(x)) = x\inv{g}g = x, \qquad \alpha_{\inv{g}}(\alpha_g(x)) = xg\inv{g} = x. \]
+			
+			\item We need to show that $ \alpha_g $ is continuous. Since the map  $ \alpha $ is continuous, and $ \alpha_g $ is just a restriction of the $ \alpha $ for a fixed $ g $, then $ \alpha_g $ is also continuous. 
+			
+			Alternatively, we can show the continuoity of $ \alpha_g $ by showing that the pre-image of any open set $ U \subset S $ is open under the subspace topology of $ S \times \set{g}$ (where its open sets will be of the form $ \mathcal{T}_S\times\set{g} $).
+			
+			\item We need to show that $ \alpha_\inv{g} $ is continuous. Similar to our reasoning above, since $ \alpha $ is continuous and $ \alpha_\inv{g} $ is a restriction of $ \alpha $ to the constant $ \inv{g} $, $ \alpha_\inv{g} $ is also continuous.
+		\end{itemize}	
+	\end{proof}
+	To show that $ \pi $ is an open map, by \autoref{remark:OpenEquivReleation} we need to show that for any open $ U \in S $ the set $ \inv{\pi}(\pi(U)) $ is open in $ S $. Let $ U \subset S $ be any open set. Then 
+	\[ \inv{\pi}(\pi(U)) = \bigcup_{g \in G} Ug. \]
+	From the Lemma we prove above, for any fixed $ g $, then map $ \alpha_g: S\to S $ is a homeomorphism. Thus $ \forall g\in G $ the set $ Ug $ is open in $ S $. It follows immediately that $ \inv{\pi}(\pi(U)) $ is open as well.
+ \end{solution}

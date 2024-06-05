@@ -514,8 +514,11 @@ A very simple use of the theorem above is that consider a case where the equival
 
 \begin{corollary}[Hausdorff characterization]
 	\label{coro:HuasdorffCarachterization}
-	Let $ S $ be a topological space. This space is Hausdorff if the diagonal $ \Delta = \set{(x,x) \in S\times S} $ is closed in $ S\times S $.
+	Let $ S $ be a topological space. This space is Hausdorff if and only if the diagonal $ \Delta = \set{(x,x) \in S\times S} $ is closed in $ S\times S $.
 \end{corollary}
+\begin{remark}
+	Surprisingly, we can prove \autoref{thm:QuotientIsHausdorff} using the corollary above. See \autoref{problem:CorollaryImpliedTheorem_HauadorffCharacter}.
+\end{remark}
 
 \section{Real Projective Space}
 Here in this section we will review one of the very interesting manifolds that we can construct by quotient of another manifold. We start with the definition.
@@ -685,6 +688,15 @@ In summary, we have the following chain of homeomorphisms
 
 \begin{summary}
 	There are some points in the proposition above that I will highlight by this summary box. First, note that the composition of two function, possibly one or both of them discontinuous, can be a continuous function (see \href{https://math.stackexchange.com/questions/3080559/composition-of-discontinuous-functions#:~:text=A%20simple%20example%20of%20the,functions%20giving%20a%20continuous%20one.&text=g(x)%3Dx(,x)%2B%E2%8C%8Ax%E2%8C%8B.&text=(g%E2%88%98f)(x,discontinuous%20maps%20may%20be%20continuous.}{this}). Thus in the summary box above, neither of $ f $ or $ g $ need to be continuous. The function that need to be continuous are $ \pi_2\circ f $ and $ \pi_1\circ g $.
+\end{summary}
+
+
+\begin{summary}
+	Let $ S $ be a topological space and $ G $ be a topological group. Consider the right action of the group $ G $ on $ S $ via the map 
+	\[ \alpha : S \times G \to S, \qquad \alpha(s,g) = sg \]
+	If the right action if \emph{continuous} (i.e. the map $ \alpha $ is continuous) Then for $ g \in G $ the map
+	\[ \alpha_g: S \to S \]
+	is a \emph{homeomorphism}. See \autoref{prob:orbitSpace} for the proof.
 \end{summary}
 
 
