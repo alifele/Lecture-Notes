@@ -411,11 +411,7 @@ We will skip proving this theorem here and we will just use it to prove the gene
 	\[ \left[  \frac{\partial F^i}{\partial x^j}  \right](p) \neq 0. \]
 \end{corollary}
 
-\section{Summary}
-\begin{summary}[A useful thing!]
-	Let $ N $ be a manifold of dimension $ n $, and $ (U,\phi) $ a local coordinate system containing $ p \in N $. Then $ \phi $ can be viewed as a vector valued real function $ \phi:U \to \R^n $. Let $ r^i $ be the standard coordinate functions of $ \R^n $. Then the $ i\text{-th} $ of $ \phi $ can be written as.
-	\[ x^i = r^i \circ \phi . \]
-\end{summary}
+
 
 \begin{proof}
 	define the vector valued function as $ F = (F^1,\cdots,F^n) $. Then we have
@@ -469,7 +465,7 @@ Let $ S $ be a topological space and $ \sim $ and equivalence relation on this s
 	This is an equivalence relation on $ S $. We call the quotient space $ S/\sim $ is obtained from $ S $ by identifying the set $ A $ to a point.
 \end{definition}
 
-\section{A Necessary Condition for a Hausdorff Space}
+\section{Hausdorff and Second Countablity Conditions}
 The quotient construction often does not preserve the second countablity and Hausdorff property of a topological space. We start with the following proposition.
 
 \begin{proposition}
@@ -519,6 +515,19 @@ A very simple use of the theorem above is that consider a case where the equival
 \begin{remark}
 	Surprisingly, we can prove \autoref{thm:QuotientIsHausdorff} using the corollary above. See \autoref{problem:CorollaryImpliedTheorem_HauadorffCharacter}.
 \end{remark}
+
+Similar to our procedure above, we can find some conditions under which a quotient space of a second countable space is still second countable. This criterion is given in the proposition below.
+\begin{proposition}[Second Countability of a Quotient Space ]
+	\label{prop:secondCountalbeQuotientSpace}
+	Let $ X $ be a second countable topological space, and let $ \sim $ be an equivalence relation. The quotient space $ X/\sim $ is second countable of $ \sim $ is an \emph{open equivalence relation}, i.e. $ \pi $ is an open map.
+\end{proposition}
+\begin{proof}
+	We need to show that $ X/\sim $ posses a countable basis for its open sets. We claim that if $ \mathcal{B} = \set{B_\alpha} $ is countable basis for $ X $, then $ \set{\pi(B_\alpha)} $ is a countable basis for $ X/\sim $. To show this let $ U \subset X/\sim $ be an open set. By continuoity of $ \inv{\pi} $ the set $ \inv{\pi}(U) $ is also open in $ X $. Thus we can write
+	\[ \inv{\pi}(U) \subset \bigcup_{\alpha \in I} B_\alpha. \] 
+	Then we can write
+	\[ U \subset \pi( \bigcup_{\alpha \in I} B_\alpha) = \bigcup_{\alpha\in I} \pi( B_\alpha). \]
+	Thus $ \set{\pi(B_\alpha)} $ is indeed a countable basis for $ X/\sim $. This completes the proof.
+\end{proof}
 
 \section{Real Projective Space}
 Here in this section we will review one of the very interesting manifolds that we can construct by quotient of another manifold. We start with the definition.
@@ -643,6 +652,12 @@ In summary, we have the following chain of homeomorphisms
 
 
 \section{Summary}
+
+
+\begin{summary}[A useful thing!]
+	Let $ N $ be a manifold of dimension $ n $, and $ (U,\phi) $ a local coordinate system containing $ p \in N $. Then $ \phi $ can be viewed as a vector valued real function $ \phi:U \to \R^n $. Let $ r^i $ be the standard coordinate functions of $ \R^n $. Then the $ i\text{-th} $ of $ \phi $ can be written as.
+	\[ x^i = r^i \circ \phi . \]
+\end{summary}
 \begin{summary}
 	Let $ S $ be a manifold, and $ \sim $ an equivalence relation. Then $ S/\sim $ is 
 	\begin{itemize}
@@ -699,5 +714,16 @@ In summary, we have the following chain of homeomorphisms
 	is a \emph{homeomorphism}. See \autoref{prob:orbitSpace} for the proof.
 \end{summary}
 
+
+\begin{summary}[Showing a space is an smooth manifold]
+	\label{summary:ShowingSpaceIsSmoothManifold}
+	To show that a space is an smooth manifold, we just need to show that the space is
+	\begin{itemize}
+		\item a Hausdorff topological space that is also second countable,
+		\item there exists any $ C^\infty $ atlas (not necessarily maximal).
+	\end{itemize}
+\end{summary}
+
+\newpage
 
 \input{sections/Manifold_SolvedProbelms.tex}

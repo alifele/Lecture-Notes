@@ -2,6 +2,7 @@
 
 
 \begin{problem}[A $ C^\infty $ atlas on a circle (From W. Tu)]
+	\label{problem:AtlasForCircleComplexPlane}
 	construct a $ C^\infty $ atlas for the unit circle $ S^1 $. 
 \end{problem}
 \begin{solution}
@@ -544,6 +545,7 @@
 \begin{solution}
 	First, we need to prove the following Lemma.
 	\begin{lemma}
+		\label{lemma:contGroupActionOpenProjection}
 		Let $ S $ be a topological space and $ G $ be a topological group. Consider the right action of the group $ G $ on $ S $ via the map 
 		\[ \alpha : S \times G \to S, \qquad \alpha(s,g) = sg \]
 		If the right action if \emph{continuous} (i.e. the map $ \alpha $ is continuous) Then for $ g \in G $ the map
@@ -567,3 +569,58 @@
 	\[ \inv{\pi}(\pi(U)) = \bigcup_{g \in G} Ug. \]
 	From the Lemma we prove above, for any fixed $ g $, then map $ \alpha_g: S\to S $ is a homeomorphism. Thus $ \forall g\in G $ the set $ Ug $ is open in $ S $. It follows immediately that $ \inv{\pi}(\pi(U)) $ is open as well.
  \end{solution}
+ 
+ 
+ \begin{problem}[Quotient of $ \R $ by $ 2\pi\Z $ (from L. Tu)]
+ 	Let the additive group $ 2\pi\Z $ act on $ \R $. on the right by $ x\cdot 2\pi n = x + 2\pi n $, where $ n $ is an integer. Show that the orbit space $ \R/2\pi\Z $ is a smooth manifold.
+ \end{problem}
+ \begin{solution}
+ 	To show that $ X = \R/2\pi\Z $ is a smooth manifold, we need to show that $ X $ is a \emph{Hausdorff} and \emph{second countable} \emph{topological space}. Furthermore, we need to exhibit a \emph{maximal atlas}.
+ 	
+ 	\textbf{Showing that $ \pi $ is an open map.} We first need to show that the projection map $ \pi: \R \to \R/2\pi\Z  $ or equivalently $ \pi: \R \to \R/\sim $ is an open map. Note that the equivalence relation $ \sim $ is defined as $ x,y\in \R $ are equivalent, i.e. $ x\sim y $ if $ y = x\cdot g $ for some $ g\in 2\pi\Z $ or equivalently, $ y = x + 2\pi n $ for some $ n \in \Z $. Since the group action map $ \alpha(x,n) = x + 2\pi n $ is continuous, then by \autoref{lemma:contGroupActionOpenProjection} we conclude that the projection map $ \pi $ is open.
+ 	
+ 	\noindent \textbf{Showing that $ \R/\sim$ is second countable.} Since $ \pi $ is an open map, then by \autoref{prop:secondCountalbeQuotientSpace} we can conclude that $ \R/\sim $ is second countable.
+ 	
+ 	\noindent \textbf{Showing that $ \R/\sim $ is Hausdorff.} Since $ \pi $ is an open map, to show that $ \R/\sim $ is Hausdorff, by \autoref{thm:QuotientIsHausdorff} we need to show that the graph of the equivalence relation $ R $ is closed in $ \R\times \R $. The graph of this equivalence relation is
+ 	\begin{align*}
+ 		R &= \set{(x,y) \in \R\times \R \ |\ x\sim y} = \set{(x,y) \in \R\times \R \ |\ y = x\cdot g \ \text{for some $ g \in 2\pi\Z $}}\\
+ 		 &= \set{(x,y) \in \R\times \R\ |\ y = x + 2\pi n \ \text{for some $ n \in \Z $}}.
+ 	\end{align*}
+	This $ R $ is the set of all lines in $ \R^2 $ with slop 1 with y-intercepts equal to $ 2\pi n $ for some $ n \in \Z $. This set is indeed closed in $ \R^2 $ as its complement is open in $ \R^2 $. We can prove the openness of $ R^c $ by first writing at as
+	\[ R^c = \bigcup_{n \in \Z} S_n \]
+	where $ S_n $ is the open set between two lines with slope 1 and intercepts $ 2\pi(n) $ and $ 2\pi(n+1) $. Since $ R^c $ is union of open sets, thus it is open.
+	
+	\noindent \textbf{Exhibiting a maximal atlas} See the box below.
+	
+	\begin{carefull}
+		For the last part of the question above, to show that $ \R/2\pi\Z $ is a smooth manifolds, I need to exhibit a maximal atlas (at least I think I need to do that!). To do this, I have a feeling that I need first to find any atlas, and then by using \autoref{summary:ShowingSpaceIsSmoothManifold} we can show that the manifold is smooth. But, instead of designing a smooth atlas, I {\color{red} think}\footnote{See the box below.} I can show that this manifold is smooth by showing that it is homeomorphic to $ S^1 $ which is indeed a smooth manifold. Calling this homeomorphism as $ f $, and considering the atlas $ \set{(U_\alpha, \phi_\alpha)} $ as an atlas for $ S^1 $, then the atlas for $ \R/2\pi\Z $ will be $ \set{(\inv{f}(U_\alpha)), \phi_\alpha\circ f} $.
+	\end{carefull}
+	
+	\begin{carefull}[Your thought in the box above is not actually true!]
+		In the BeCareFul box above, I said I think I can show that the manifold is smooth by showing that it is homeomorphic to another manifold. This is not exactly true! Note that in the category of topological spaces the isomorphisms are the homeomorphisms, but in the category of smooth manifolds, the isomorphisms are the diffeomorphisms, not homeomorphisms. Thus in the BeCareFul box above we actually need to show that the manifold of interest is \emph{diffeomorphic} to $ S^1 $, not homeomorphic. The good news is that my proof below does not break apart. Surprisingly it is the same procedure in one of the exercises of L. Tu, which I have solved in \autoref{problem:quotientOfRByZIsCircle}.
+	\end{carefull}
+	
+	\noindent \textbf{Showing that $ \R/2\pi\Z \simeq S^1 $}. For this we need to find a homeomorphism. Consider the map $ f $
+	% https://q.uiver.app/#q=WzAsMyxbMCwwLCJcXFIiXSxbMCwxLCJcXFIvMlxccGlcXFoiXSxbMSwwLCJTXjEiXSxbMCwyLCJmIl0sWzAsMSwiXFxwaSIsMl0sWzEsMiwiXFxiYXJ7Zn0iLDJdXQ==
+	\[\begin{tikzcd}
+		\R & {S^1}\subset \C \\
+		{\R/2\pi\Z}
+		\arrow["f", from=1-1, to=1-2]
+		\arrow["\pi"', from=1-1, to=2-1]
+		\arrow["{\bar{f}}"', from=2-1, to=1-2]
+	\end{tikzcd}\]
+	where $x \mapsto e^{2\pi i x}$. This map assumes a constant values for all of the elements in the same equivalence class. But it induces the map $ \bar{f} $, and the diagram above commutes. Continuoity of $ f $ implies the continuoity of $ \bar{f} $. Although $ f $ has no inverse (since it is not one to one), but we can find an inverse for $ \bar{f} $ that is given by
+	\begin{align*}
+		\inv{\bar{f}}&: S^1 \to \R \\
+		e^{i\theta} &\mapsto \theta \mod 2\pi .
+	\end{align*}
+	Thus $ \bar{f} $ is a bijection. Since $ \R/2\pi\Z $ is compact (continuous image of a compact set), and $ S^1 $ is Hausdorff (with the subspace topology of $ \C $), by \autoref{summary:ShowingHomeoInQuotientSpaces} we conclude that $ \R/2\pi\Z \simeq S^1 $.
+\end{solution}
+
+\begin{problem}[The circle as a quotient space]
+	$ \ $
+	\label{problem:quotientOfRByZIsCircle}
+	\begin{enumerate}[(a)]
+		\item Let $ \set{(U_\alpha,\phi_\alpha)}_{\alpha=1}^{2} $ be the atlas of the circle $ S^1 $ in \autoref{problem:AtlasForCircleComplexPlane}, and let $ \bar{\phi}_\alpha $ be the map $ \phi_\alpha $ followed by the projection $ \R \to \R/2\pi\Z $. On $ U_1\cap U_2  = A \sqcup B$, since $ \phi_1 $ and $ \phi_2 $ differ by an integer multiple of $ 2\pi $, $ \bar{\phi}_1 = \bar{\phi}_2 $. Therefore, $ \bar{\phi}_1 $ and $ \bar{\phi}_2 $ piece together to give a well-defined map $ \bar{\phi}:S^1 \to \R/2\pi\Z $. Prove that $ \bar{\phi} $ is $ C^\infty $.
+	\end{enumerate}
+\end{problem}
