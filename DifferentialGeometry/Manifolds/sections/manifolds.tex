@@ -290,6 +290,7 @@ The following observation box summarizes the differences between homeomorphisms 
 According to the two following propositions, in a \emph{smooth} manifold, the coordinate maps are diffeomorphisms, and conversely, any diffeomorphism from an open subset of the manifold to an open subset of a Euclidean space can serve as a coordinate map. 
 
 \begin{proposition}[Coordinate maps are diffeomorphisms]
+	\label{propositio:coordinateMapsAreSmooth}
 	If $ (U,\phi) $ is a chart on a manifold $ M $ of dimension $ n $, then the coordinate map $ \phi:U\to\phi(\phi) \in \R^n$ is a diffeomorphism.
 \end{proposition}
 \begin{proof}
@@ -722,6 +723,33 @@ In summary, we have the following chain of homeomorphisms
 		\item a Hausdorff topological space that is also second countable,
 		\item there exists any $ C^\infty $ atlas (not necessarily maximal).
 	\end{itemize}
+\end{summary}
+
+
+\begin{summary}[A confusing thing about the equivalence classes]
+	Define $ \sim $ on $ \R $ as
+	\[ x\sim y \qquad \text{iff} \qquad x-y = 2n\pi \quad\text{for some $ n \in \Z $}. \]
+	Then consider the following sets in $ \R/\sim $.
+	\[ V_1 = \set{[t]\ |\ t\in (-\pi,\pi) }, \qquad V_2 = \set{[t]\ |\ t\in(0,2\pi)}. \]
+	In words, what we really mean is that $ V_1 $ contains the equivalence classes whose representatives comes from the set $ (-\pi,\pi) $. Similarly for $ V_2 $, we say that it contains the equivalence classes whose representatives comes from the set $ (0,2\pi) $. We define the following coordinate maps
+	
+	\[
+	\begin{array}{cc}
+		\begin{aligned}
+			\phi_1 &: V_1 \to \mathbb{R} \\
+			[t] &\mapsto t 
+		\end{aligned}
+		&\qquad
+		\begin{aligned}
+			\phi_2 &: V_2 \to \mathbb{R} \\
+			[t] & \mapsto t 
+		\end{aligned}
+	\end{array}
+	\]
+	
+	Note that although the functions $ \phi_1 $ and $ \phi_2 $ look similar, but they are different functions as they have different domains. These two functions both return the representative of the equivalence classes in their argument. Note that we said \emph{the representative} and not \emph{a representative}) because of the design of their domain. For instance, let's parse the following operation 
+	\[ \phi_1 ([23.5\pi]) =  -0.5\pi. \]
+	Since the domain of $ \phi_1 $ is the equivalence classes whose representatives comes from the set $ (-\pi,\pi) $, then we need to find a representative for $ [23.5\pi] $ that lives in $ (-\pi,\pi) $. I.e. $ [23.5\pi] = [1.5\pi] = [-0.5\pi] $.
 \end{summary}
 
 \newpage

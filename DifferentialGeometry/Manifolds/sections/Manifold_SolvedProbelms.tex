@@ -600,7 +600,7 @@
 		In the BeCareFul box above, I said I think I can show that the manifold is smooth by showing that it is homeomorphic to another manifold. This is not exactly true! Note that in the category of topological spaces the isomorphisms are the homeomorphisms, but in the category of smooth manifolds, the isomorphisms are the diffeomorphisms, not homeomorphisms. Thus in the BeCareFul box above we actually need to show that the manifold of interest is \emph{diffeomorphic} to $ S^1 $, not homeomorphic. The good news is that my proof below does not break apart. Surprisingly it is the same procedure in one of the exercises of L. Tu, which I have solved in \autoref{problem:quotientOfRByZIsCircle}.
 	\end{carefull}
 	
-	\noindent \textbf{Showing that $ \R/2\pi\Z \simeq S^1 $}. For this we need to find a homeomorphism. Consider the map $ f $
+	\noindent \textbf{(The old and vague solution) Showing that $ \R/2\pi\Z \simeq S^1 $.} For this we need to find a homeomorphism. Consider the map $ f $
 	% https://q.uiver.app/#q=WzAsMyxbMCwwLCJcXFIiXSxbMCwxLCJcXFIvMlxccGlcXFoiXSxbMSwwLCJTXjEiXSxbMCwyLCJmIl0sWzAsMSwiXFxwaSIsMl0sWzEsMiwiXFxiYXJ7Zn0iLDJdXQ==
 	\[\begin{tikzcd}
 		\R & {S^1}\subset \C \\
@@ -615,6 +615,55 @@
 		e^{i\theta} &\mapsto \theta \mod 2\pi .
 	\end{align*}
 	Thus $ \bar{f} $ is a bijection. Since $ \R/2\pi\Z $ is compact (continuous image of a compact set), and $ S^1 $ is Hausdorff (with the subspace topology of $ \C $), by \autoref{summary:ShowingHomeoInQuotientSpaces} we conclude that $ \R/2\pi\Z \simeq S^1 $.
+	\vspace{5pt}
+	
+	\noindent \textbf{The new and correct solution.} For this, we present a $ C^\infty $ compatible chart for this manifold. First, consider the following open sets on the manifold
+	\[ V_1 = \set{[t]\ |\ t\in (-\pi,\pi) }, \qquad V_2 = \set{[t]\ |\ t\in(0,2\pi)}. \]
+	In words, what we really mean is that $ V_1 $ contains the equivalence classes whose representatives comes from the set $ (-\pi,\pi) $. Similarly for $ V_2 $, we say that it contains the equivalence classes whose representatives comes from the set $ (0,2\pi) $. We define the following coordinate maps
+
+	\[
+	\begin{array}{cc}
+		\begin{aligned}
+			\phi_1 &: V_1 \to \mathbb{R} \\
+			[t] &\mapsto t 
+		\end{aligned}
+		&\qquad
+		\begin{aligned}
+			\phi_2 &: V_2 \to \mathbb{R} \\
+			[t] & \mapsto t 
+		\end{aligned}
+	\end{array}
+	\]
+	
+	Note that although the functions $ \phi_1 $ and $ \phi_2 $ look similar, but they are different functions as they have different domains. These two functions both return the representative of the equivalence classes in their argument. Note that we said \emph{the representative} and not \emph{a representative}) because of the design of their domain. For instance, let's parse the following operation 
+	\[ \phi_1 ([23.5\pi]) =  -0.5\pi. \]
+	Since the domain of $ \phi_1 $ is the equivalence classes whose representatives comes from the set $ (-\pi,\pi) $, then we need to find a representative for $ [23.5\pi] $ that lives in $ (-\pi,\pi) $. I.e. $ [23.5\pi] = [1.5\pi] = [-0.5\pi] $. 
+	
+	\noindent We claim that the collection $ \set{(V_1,\phi_1), (V_2,\phi_2)} $ is a $ C^\infty $ compatible atlas. To show this we simply need to show that the coordinate charts are compatible. We start with
+	\[ \phi_1\circ\inv{\phi_2}: \phi_2(V_1\cap V_2) \to \phi_1(V_1\cap V_2). \]
+	Note that 
+	\[ V_1\cap V_2 = \set{[t]\ |\ t\in(0,\pi)\cup(\pi,2\pi)} \]
+	or equivalently
+	\[ V_1\cap V_2  = \set{[t]\ |\ t\in(-\pi,0) \cup (0,\pi) }. \]
+	Thus the function $ \phi_1\circ\inv{\phi_2} $ will be
+	\begin{align*}
+		\phi_1\circ\inv{\phi_2} &: (0,\pi)\cap(\pi,2\pi) \to \R.
+	\end{align*}
+	and is given by
+	\[ (\phi_1\circ\inv{\phi_2})(t) = \begin{cases}
+		t \qquad &t\in(0,\pi),\\
+		t-2\pi \qquad &t\in(\pi,2\pi).
+	\end{cases} \]
+	Similarly we can write
+	\[ \phi_2\circ\inv{\phi_1}: \underbrace{\phi_1(V_1\cap V_2)}_{(-\pi,0)\cap(0,\pi)} \to \phi_2(V_1\cap V_2), \]
+	is $ \phi_2\circ\inv{\phi_1} $ is given by
+	\[ (\phi_2\circ\inv{\phi_1})(t) = \begin{cases}
+		t + 2\pi \qquad & t\in(-\pi,0),\\
+		t \qquad & t\in (0,\pi).
+	\end{cases} \]
+	
+	Since both of these functions are $ C^\infty $ in their corresponding domain, then it follows that the exhibited collection of coordinate charts is indeed a $ C^\infty $ atlas.
+
 \end{solution}
 
 \begin{problem}[The circle as a quotient space]
@@ -624,3 +673,11 @@
 		\item Let $ \set{(U_\alpha,\phi_\alpha)}_{\alpha=1}^{2} $ be the atlas of the circle $ S^1 $ in \autoref{problem:AtlasForCircleComplexPlane}, and let $ \bar{\phi}_\alpha $ be the map $ \phi_\alpha $ followed by the projection $ \R \to \R/2\pi\Z $. On $ U_1\cap U_2  = A \sqcup B$, since $ \phi_1 $ and $ \phi_2 $ differ by an integer multiple of $ 2\pi $, $ \bar{\phi}_1 = \bar{\phi}_2 $. Therefore, $ \bar{\phi}_1 $ and $ \bar{\phi}_2 $ piece together to give a well-defined map $ \bar{\phi}:S^1 \to \R/2\pi\Z $. Prove that $ \bar{\phi} $ is $ C^\infty $.
 	\end{enumerate}
 \end{problem}
+\begin{solution}
+	$ \ $
+	\begin{enumerate}[(a)]
+		\item By \autoref{propositio:coordinateMapsAreSmooth}, if we can show that $ \bar{\phi} $ is a coordinate map, then its smoothness follows immediately. We will show that the map $ \bar{\phi} $ is compatible with the chart $ \set{(U_\alpha,\phi_\alpha)}_{\alpha=1}^2 $.
+	\end{enumerate}
+\end{solution}
+
+
