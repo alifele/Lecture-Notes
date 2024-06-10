@@ -572,6 +572,7 @@
  
  
  \begin{problem}[Quotient of $ \R $ by $ 2\pi\Z $ (from L. Tu)]
+ 	\label{problem:QuotientOfRBy2pi}
  	Let the additive group $ 2\pi\Z $ act on $ \R $. on the right by $ x\cdot 2\pi n = x + 2\pi n $, where $ n $ is an integer. Show that the orbit space $ \R/2\pi\Z $ is a smooth manifold.
  \end{problem}
  \begin{solution}
@@ -676,8 +677,20 @@
 \begin{solution}
 	$ \ $
 	\begin{enumerate}[(a)]
-		\item By \autoref{propositio:coordinateMapsAreSmooth}, if we can show that $ \bar{\phi} $ is a coordinate map, then its smoothness follows immediately. We will show that the map $ \bar{\phi} $ is compatible with the chart $ \set{(U_\alpha,\phi_\alpha)}_{\alpha=1}^2 $.
+		\item We define the map $ \bar{\phi}:S^2 \to \R/2\pi\Z $ as following
+		\[ \bar{\phi}(x) = \begin{cases}
+			(\pi\circ\phi_1)(x) \qquad & x \in U_1,\\
+			(\pi\circ\phi_2)(x) \qquad & x\in U_2.
+		\end{cases} \]
+		Considering the atlas $ \set{(V_\alpha,\psi_\alpha)}_{\alpha=1}^{2} $ for $ \R/2\pi\Z $ that we constructed in \autoref{problem:QuotientOfRBy2pi}, we can show that $ \bar{\phi} $ is $ C^\infty $ by simply showing that it is a smooth map between manifolds (i.e. using \autoref{def:SmoothMapsBetweenManifolds}). Thus we need to show that the following maps (in their corresponding domains)
+		\begin{align*}
+			 \psi_1\circ\bar{\phi}\circ\inv{\phi_1}: \phi_1(U_1\cap \inv{\bar{\phi}}(V_1))\to \psi_1(\bar{\phi}(U_1)),\\
+			 \psi_1\circ\bar{\phi}\circ\inv{\phi_2}: \phi_2(U_2\cap \inv{\bar{\phi}}(V_1))\to \psi_1(\bar{\phi}(U_2)),\\
+			 \psi_2\circ\bar{\phi}\circ\inv{\phi_1}: \phi_1(U_1\cap \inv{\bar{\phi}}(V_2))\to \psi_2(\bar{\phi}(U_1)),\\
+			 \psi_2\circ\bar{\phi}\circ\inv{\phi_2}: \phi_2(U_2\cap \inv{\bar{\phi}}(V_2))\to \psi_2(\bar{\phi}(U_2)).
+		\end{align*}
+		are smooth.
 	\end{enumerate}
 \end{solution}
 
-
+\newpage
