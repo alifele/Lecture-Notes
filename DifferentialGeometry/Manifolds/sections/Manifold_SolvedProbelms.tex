@@ -672,6 +672,9 @@
 	\label{problem:quotientOfRByZIsCircle}
 	\begin{enumerate}[(a)]
 		\item Let $ \set{(U_\alpha,\phi_\alpha)}_{\alpha=1}^{2} $ be the atlas of the circle $ S^1 $ in \autoref{problem:AtlasForCircleComplexPlane}, and let $ \bar{\phi}_\alpha $ be the map $ \phi_\alpha $ followed by the projection $ \R \to \R/2\pi\Z $. On $ U_1\cap U_2  = A \sqcup B$, since $ \phi_1 $ and $ \phi_2 $ differ by an integer multiple of $ 2\pi $, $ \bar{\phi}_1 = \bar{\phi}_2 $. Therefore, $ \bar{\phi}_1 $ and $ \bar{\phi}_2 $ piece together to give a well-defined map $ \bar{\phi}:S^1 \to \R/2\pi\Z $. Prove that $ \bar{\phi} $ is $ C^\infty $.
+		\item The complex exponential $ \R\to S^1, t\mapsto e^{it} $, is constant on each orbit of the action of $ 2\pi\Z $. Therefore, there is an induced map $ F:\R/2\pi\Z \to S^1, F([t]) = e^{it} $. Prive that $ F $ is $ C^\infty $.
+		
+		\item Prove that $ F: \R/2\pi\Z \to S^1 $ is a diffeomorphism.
 	\end{enumerate}
 \end{problem}
 \begin{solution}
@@ -689,7 +692,92 @@
 			 \psi_2\circ\bar{\phi}\circ\inv{\phi_1}: \phi_1(U_1\cap \inv{\bar{\phi}}(V_2))\to \psi_2(\bar{\phi}(U_1)),\\
 			 \psi_2\circ\bar{\phi}\circ\inv{\phi_2}: \phi_2(U_2\cap \inv{\bar{\phi}}(V_2))\to \psi_2(\bar{\phi}(U_2)).
 		\end{align*}
-		are smooth.
+		are smooth. To avoid multiple references to \autoref{problem:AtlasForCircleComplexPlane} we write the following definitions here. 
+	\[ U_1 = \set{e^{it}| t \in (-\pi,\pi)},\qquad U_2 = \set{e^{it}| t \in (0,2\pi)}. \]
+		Now we can analyze all of these maps one by one. First, observe that 
+		\[ \inv{\pi}(V_1) = \bigcup_{n\in\Z}(-\pi+2n\pi, \pi+2n\pi), \qquad \inv{\pi}(V_2) = \bigcup_{n\in\Z}(2n\pi, 2\pi+2n\pi). \]
+		which are demonstrated in the following diagrams.
+		\input{Images/inversePi.tex}
+		On the other hand we have
+		\begin{align*}
+			&U_1\cap \inv{\bar{\phi}}(V_1) = (\inv{\phi_1}\circ\inv{\pi})(V_1),  
+			\quad U_2\cap \inv{\bar{\phi}}(V_1) = (\inv{\phi_2}\circ\inv{\pi})(V_1),\\
+			\quad &U_1\cap \inv{\bar{\phi}}(V_2) = (\inv{\phi_1}\circ\inv{\pi})(V_2),
+			\quad U_2\cap \inv{\bar{\phi}}(V_2) = (\inv{\phi_2}\circ\inv{\pi})(V_2).
+		\end{align*}
+		The image of these maps are shown in the figure below
+		\input{Images/imageofSomeMaps1.tex}
+		\FloatBarrier
+		Thus we will have
+		\begin{align*}
+			&\phi_1(U_1\cap \inv{\bar{\phi}}(V_1)) = (-\pi,\pi),\\
+			&\phi_2(U_2\cap \inv{\bar{\phi}}(V_1)) = (0,\pi)\cup(\pi,2\pi),\\
+			&\phi_1(U_1\cap \inv{\bar{\phi}}(V_2)) = (-\pi,0) \cup (0,\pi),\\
+			&\phi_2(U_2\cap \inv{\bar{\phi}}(V_2)) = (0,2\pi).
+		\end{align*}
+		
+		Now we can re-write the maps of interest as
+		\begin{align*}
+			&\psi_1\circ\bar{\phi}\circ\inv{\phi_1}: (-\pi,\pi)\to \psi_1(\bar{\phi}(U_1)),\\
+			&\psi_1\circ\bar{\phi}\circ\inv{\phi_2}:(0,\pi)\cup(\pi,2\pi)\to \psi_1(\bar{\phi}(U_2)),\\
+			&\psi_2\circ\bar{\phi}\circ\inv{\phi_1}: (-\pi,0) \cup (0,\pi)\to \psi_2(\bar{\phi}(U_1)),\\
+			&\psi_2\circ\bar{\phi}\circ\inv{\phi_2}: (0,2\pi)\to \psi_2(\bar{\phi}(U_2)).
+		\end{align*}
+		which are given by
+		\begin{align*}
+			&(\psi_1\circ\bar{\phi}\circ\inv{\phi_1})(t) = (\psi_1\circ(\pi\circ\phi_1)\circ\inv{\phi_1})(t) = \psi_1(\pi(t)) = \psi_1([t]) = t, \qquad t \in (-\pi,\pi).\\
+			&(\psi_1\circ\bar{\phi}\circ\inv{\phi_2})(t) = (\psi_1\circ(\pi\circ\phi_2)\circ\inv{\phi_2})(t) = \psi_1(\pi(t)) = \phi_1([t]) = \begin{cases}
+				t \qquad & t\in (0,\pi),\\
+				t-2\pi \qquad & t\in (\pi,2\pi).
+			\end{cases}\\
+			&(\psi_2\circ\bar{\phi}\circ\inv{\phi_1})(t) = (\psi_2\circ(\pi\circ\phi)\circ\inv{\phi_1})(t) = \psi_2(\pi(t)) = \psi_2([t]) = \begin{cases}
+				t+2\pi \qquad & t \in (-\pi,0),\\
+				t \qquad & t\in (0,\pi).
+			\end{cases}\\
+			&(\psi_2\circ\bar{\phi}\circ\inv{\phi_2})(t) = (\psi_2\circ(\pi\circ\phi_2)\circ\inv{\phi_2})(t) = \psi_2(\pi(t)) = \psi_2(t) = t, \qquad t \in (0,2\pi).
+		\end{align*}
+		All of the maps above are $ C^\infty $. This shows that $ \bar{\psi} $ is indeed $ C^\infty $.
+		
+		\item With a similar approach as above, using \autoref{def:SmoothMapsBetweenManifolds} we need to show that the following maps are smooth.
+		\begin{align*}
+			&\phi_1\circ F\circ \inv{\psi_1}:\psi_1(V_1\cap \inv{F}(U_1)) \to \phi_1(F(U_1))\\
+			&\phi_1\circ F\circ \inv{\psi_2}:\psi_2(V_2\cap \inv{F}(U_1)) \to \phi_1(F(U_2)) \\
+			&\phi_2\circ F\circ \inv{\psi_1}:\psi_1(V_1\cap \inv{F}(U_2)) \to \phi_2(F(U_1))\\
+			&\phi_2\circ F\circ \inv{\psi_2}:\psi_2(V_2\cap \inv{F}(U_2)) \to \phi_2(F(U_2))
+		\end{align*}
+		First, observe that
+		\begin{align*}
+			&V_1 \cap \inv{F}(U_1) = \set{[t]\ |\ t\in (-\pi,\pi)} \implies \psi_1(V_1 \cap \inv{F}(U_1)) = (-\pi,\pi), 
+			\\
+			&V_2 \cap \inv{F}(U_1) = \set{[t]\ |\ t\in (0,\pi)\cup(\pi,2\pi)} \implies  \psi_2(V_2 \cap \inv{F}(U_1)) = (0,\pi)\cup(\pi,2\pi),
+			\\
+			&V_1\cap\inv{F}(U_2) = \set{[t]\ |\ t\in (-\pi,0)\cup(0,\pi)} \implies \psi_1(V_1\cap\inv{F}(U_2)) = (-\pi,0)\cup(0,\pi), 
+			\\
+			&V_2\cap\inv{F}(U_2) = \set{[t]\ |\ t\in (0,2\pi)} \implies \psi_2(V_2\cap\inv{F}(U_2)) = (0,2\pi).
+		\end{align*}
+		Thus we can re-write the map definitions
+		\begin{align*}
+			&\phi_1\circ F\circ \inv{\psi_1}:(-\pi,\pi) \to \phi_1(F(U_1))\\
+			&\phi_1\circ F\circ \inv{\psi_2}:(0,\pi)\cup(\pi,2\pi) \to \phi_1(F(U_2)) \\
+			&\phi_2\circ F\circ \inv{\psi_1}:(-\pi,0)\cup(0,\pi) \to \phi_2(F(U_1))\\
+			&\phi_2\circ F\circ \inv{\psi_2}:(0,2\pi) \to \phi_2(F(U_2))
+		\end{align*}
+		These maps are given by
+		\begin{align*}
+			&(\phi_1\circ F\circ \inv{\psi_1})(t) = \phi_1(e^{it}) = t, \qquad t\in(-\pi,\pi) .\\
+			&(\phi_1\circ F\circ \inv{\psi_2})(t) = \begin{cases}
+				t \qquad & t\in (0,\pi),\\
+				t -2\pi & t\in (\pi,2\pi).
+			\end{cases}\\
+			&(\phi_2\circ F\circ \inv{\psi_1})(t) = \begin{cases}
+				t + 2\pi \qquad & t\in (-\pi,0),\\
+				t \qquad & t\in (0,\pi).
+			\end{cases}\\
+			&(\phi_2\circ F\circ \inv{\psi_2})(t) = \phi_2(e^{it}) = t, \qquad t\in(-\pi,\pi).
+		\end{align*}
+		All of the functions above are $ C^\infty $. Thus $ F $ is $ C^\infty $.
+		
+		\item To show that $ F:\R/2\pi\Z \to S^1 $ is smooth it is enough to show that $ \bar{\phi} : S^1 \to \R/2\pi\Z $ is inverse of it.
 	\end{enumerate}
 \end{solution}
 
