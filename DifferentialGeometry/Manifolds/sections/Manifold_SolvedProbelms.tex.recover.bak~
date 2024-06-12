@@ -795,24 +795,7 @@
 \end{solution}
 
 \begin{problem}[The Grassmannian $ G(k,n) $]
-	The Grassmannian $ G(k,n) $ is the set of all $ k\text{-planes} $ through the origin in $ \R^n $. Such a $ k\text{-plane} $ is a linear subspace of dimension $ k $ of $ \R^n $ and has a basis consisting of $ k $ linearly independent vectors $ a_1,\cdots,a_k $ in $ \R^n $. IT is therefore completely specified by an $ n\times k $ matrix $ A = [a_1\ \cdots\ a_k] $ of rank $ k $, where the rank of a matrix $ A $, denoted by $ \rank A $ is defined to be the number of linearly independent columns of $ A $. This matrix is called a matrix representative of the $ k\text{-plane} $.
-	
-	Two bases $ a_1,\cdots,a_k $ and $ b_1,\cdots,b_k $ determine the same $ k\text{-planes} $ if there is a change of basis matrix $ g = [g_{ij}] \in GL(k,\R) $ such that 
-	\[ \vecttt{b_1}{\vdots}{b_k} = g^T \vecttt{a_1}{\vdots}{a_k}, \]
-	or equivalently
-	\[ b_j = \sum_{i}g_{ij}a_j, \]
-	or in matrix notation
-	\[ B = Ag \]
-	where $ B,A $ are matrices whose columns are the vectors $ a_1,\cdots,a_k $ and $ b_1,\cdots,b_k $ respectively.
-	
-	Let $ F(k,n) $ denote the set of all $ n\times k $ matrices of rank $ k $, topologized as a subspace of $ R^{n\times k} $. Thus $ F(k,n) $ is an open subset of $ R^{n\times k} $.
-	
-	Let the group $ GL(k,\R) $ act on $ F(k,n) $ on the right by $ A\cdot g = Ag $ where the right hand side is the usual matrix multiplication. Consider the orbit space $ F(k,n)/GL(k,\R) $. Equivalently, we can show this space as the quotient space $ F(k,n)/\sim $ where the equivalence relation $ \sim $ is given as
-	\[ A \equiv B \qquad \text{iff} \qquad A = Bg \quad \text{for some $ g \in GL(n,\R) $}. \]
-	There is a bijection between the Grassmannian $ G(k,n) $  and the orbit space $ f(k,n)/GL(k,\R) $. We given the Grassmannian $ G(k,n) $ the quotient topology on $ F(k,n)/GL $.
-	\begin{enumerate}[(a)]
-		\item Show that $ \sim $ is an open equivalence relation.
-	\end{enumerate}
+	The Grassmannian
 \end{problem}
 
 \newpage
