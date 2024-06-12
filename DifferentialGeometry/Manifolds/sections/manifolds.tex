@@ -753,6 +753,14 @@ In summary, we have the following chain of homeomorphisms
 	Since the domain of $ \phi_1 $ is the equivalence classes whose representatives comes from the set $ (-\pi,\pi) $, then we need to find a representative for $ [23.5\pi] $ that lives in $ (-\pi,\pi) $. I.e. $ [23.5\pi] = [1.5\pi] = [-0.5\pi] $.
 \end{summary}
 
+\begin{summary}[Strategy to show an equivalence relation is open]
+	Let $ S $ be a topological space and $ \sim $ be an equivalence relation on $ S $. This equivalence relation can also be given by a group action of $ G $ acting on $ S $. I.e. we can write
+	\[ x\sim y \qquad \text{iff}  \qquad x = yg \quad \text{for some $ g \in G $}. \] 
+	Then to show that the equivalence relation $ \sim $ is open, or equivalently, to show that the projection map $ \pi : S \to S/G $ is an open map, then we need to show for $ U \subset S $ open we have
+	\[ \inv{\pi}(\pi(U)) = \bigcup_{g\in G} Ug \]
+	is open. By \autoref{lemma:contGroupActionOpenProjection}, this set is open if and only if the group action is continuous. See \autoref{problem:Grassmannian} for a detailed example.
+\end{summary}
+
 \newpage
 
 \input{sections/Manifold_SolvedProbelms.tex}

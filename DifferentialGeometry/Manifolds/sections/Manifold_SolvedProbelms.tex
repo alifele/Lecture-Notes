@@ -795,6 +795,7 @@
 \end{solution}
 
 \begin{problem}[The Grassmannian $ G(k,n) $]
+	\label{problem:Grassmannian}
 	The Grassmannian $ G(k,n) $ is the set of all $ k\text{-planes} $ through the origin in $ \R^n $. Such a $ k\text{-plane} $ is a linear subspace of dimension $ k $ of $ \R^n $ and has a basis consisting of $ k $ linearly independent vectors $ a_1,\cdots,a_k $ in $ \R^n $. IT is therefore completely specified by an $ n\times k $ matrix $ A = [a_1\ \cdots\ a_k] $ of rank $ k $, where the rank of a matrix $ A $, denoted by $ \rank A $ is defined to be the number of linearly independent columns of $ A $. This matrix is called a matrix representative of the $ k\text{-plane} $.
 	
 	Two bases $ a_1,\cdots,a_k $ and $ b_1,\cdots,b_k $ determine the same $ k\text{-planes} $ if there is a change of basis matrix $ g = [g_{ij}] \in GL(k,\R) $ such that 
@@ -812,7 +813,87 @@
 	There is a bijection between the Grassmannian $ G(k,n) $  and the orbit space $ f(k,n)/GL(k,\R) $. We given the Grassmannian $ G(k,n) $ the quotient topology on $ F(k,n)/GL $.
 	\begin{enumerate}[(a)]
 		\item Show that $ \sim $ is an open equivalence relation.
+		\item Prove that the Grassmannian $ G(k,n) $ is second countable.
+		\item Let $ S = F(k,n) $. Prove that the graph $ R $ in $ S\times S $ of the equivalence relation $ \sim $ is closed. (\emph{Hint}: Two matrices $ A = [a_1\ \cdots\ a_k]$ and $ B = [b_1\ \cdots\ b_k] $ are equivalent $ \Leftrightarrow $ every column of $ B $ is a linear combination of the columns of $ A $ $ \Leftrightarrow $ $ \rank[A\ B] \leq k $ $ \Leftrightarrow $ all $ (k+1)\times(k+1) $ minors of $ [A\ B] $ are zero).
+		\item Prove that the Grassmannian $ G(n,k) $ is Hausdorff.
+		
+		Now we want to find a $ C^\infty $ atlas on the Grassmannian $ G(k,n) $. For simplicity, we specialize to $ G(2,4) $. For any $ 4\times 2 $ matrix $ A $, let $ A_{ij} $ be the $ 2\times 2 $ sub matrix consisting of its $ i\text{th} $ row and $ j\text{th} $ row. Define
+		\[ V_{ij} = \set{A \in F(2,4)\ |\ A_{ij} \text{ is nonsingular}}. \]
+		For any $ A \in V_{ij} $, since $ \det(A_{ij}) \neq 0 $ (i.e. it is nonsingular), then we can perturb it small enough and by continuoity of the determinant operator the nonsingularity of $ A_{ij} $ persists. This shows that $ V_{ij} $ is indeed an open subset of $ F(2,4) $. Alternatively, we can show this by arguing that since the complement of $ V_{ij} $ is defined by vanishing of $ \det(A_{ij}) $, we conclude that $ V_{ij} $ is an open subset of $ F(2,4) $.
+		
+		\item Prove that if $ A \in V_{ij} $, then $ Ag \in V_{ij} $ for any nonsingular matrix $ g \in GL(2,\R) $.
+		
+		Define $ U_{ij} = V_{ij}/\sim $. Since $ \sim $ is an open equivalence relation, $ U_{ij}$ is an open subset of $ G(2,4) $. For $ A \in V_{12} $
+		\[ A \sim A \inv{A}_{12} = 
+		\begin{bmatrix}
+			1 & 0 \\
+			0 & 1 \\
+			\ast & \ast \\
+			\ast & \ast 
+		\end{bmatrix} = 
+		\begin{bmatrix}
+			I \\
+			A_{34}\inv{A}_{12}
+		\end{bmatrix}.
+		 \]
+		 This shows that the matrix representative of a $ 2\text{-plane} $ in $ U_{12} $ have a canonical form $ B $ where $ B_{12} $ is the identity matrix.
+		 
+		 \item Show that the map $ \tilde{\phi}_{12}: V_{12} \to \R^{2\times 2} $,
+		 \[ \tilde{\phi}_{12} (A) = A_{34}\inv{A}_{12} \]
+		 induces a homeomorphism $ \phi_{12}: U_{12} \to \R{2\times 2} $.
+		
 	\end{enumerate}
+
+		
 \end{problem}
+
+\begin{solution}
+			$ \ $
+	\begin{enumerate}[(a)]
+		\item According to \autoref{lemma:contGroupActionOpenProjection} the projection map $ \pi : F(k,n) \to F(k,n)/GL $ is an open map if and only if the group action map $ \alpha:  F(k,n)\times G \to  F(k,n)  $ is continuous. Let $ A \in F(k,n) $ and $ g \in G $. Then $ B = \alpha(A,g) $. For the element $ b_{kl} $ of $ B $ we have 
+		\[ b_{kl} = \sum_{i} A_{ki}g_{il} \]
+		which is a polynomial. Thus $ \alpha $ is a continuous map. Now according to \autoref{lemma:contGroupActionOpenProjection} the equivalence relation $ \sim $ is open.
+		
+		\item From \autoref{prop:secondCountalbeQuotientSpace} it follows that since $ \sim $ is an open equivalence relation, then quotient space $ G(k,n) = F(k,n)/\sim $ is second countable.
+		
+		\item To show that $ R $ is closed by showing that it complement is open. Let $ x \in R^c $. Then $ x = [A\ B] $ for some matrices $ A,B \in S $ where the matrix $ [A\ B] $ has at least on $ (k+1)\times (k+1) $ that is not zero. Then by continuoity of determinant operation, for small enough $ \epsilon >0 $ we can find an open ball $ \mathbb{B}_\epsilon $ centered at $ [A\ B] \in \R^{n\times2k}$ such that for all $ y \in \mathbb{B}_\epsilon  $ the non-zero minor persists. This shows that $ R^c $ is open which implies the closedness of $ R $.
+		
+		\item Since $ \sim $ is an open equivalence relation and also the graph of the equivalence relation is closed in $ S\times S $, then by \autoref{thm:QuotientIsHausdorff} it follows that $ G(k,n) $ is Hausdorff.
+		
+		\item First, observe that 
+		\[ (Ag)_{ij} = A_{ij} g. \]
+		Let $ A \in V_{ij} $. Then from definition we know that $ \det(A_{ij}) \neq 0 $. Since $ (Ag)_{ij} = A_{ij}g $ and $ \det((Ag)_{ij}) = \det(A_{ij})\det(g) $, then from nonsingularity of $ g $ it follows that $ \det((Ag)_{ij}) \neq 0 $. Hence $ Ag \in V_{ij} $.
+		
+		\item Consider the following diagram.
+		% https://q.uiver.app/#q=WzAsMyxbMCwwLCJWX3sxMn0iXSxbMCwxLCJVX3sxMn0iXSxbMSwwLCJcXFJeezJcXHRpbWVzIDJ9Il0sWzAsMSwiXFxwaSIsMl0sWzAsMiwiXFx0aWxkZXtcXHBoaX1fezEyfSJdLFsxLDIsIlxccGhpX3sxMn0iLDJdXQ==
+		\[\begin{tikzcd}
+			{V_{12}} & {\R^{2\times 2}} \\
+			{U_{12}}
+			\arrow["{\tilde{\phi}_{12}}", from=1-1, to=1-2]
+			\arrow["\pi"', from=1-1, to=2-1]
+			\arrow["{\phi_{12}}"', from=2-1, to=1-2]
+		\end{tikzcd}\]
+		First observe that $ \tilde{\phi}_{12} $ assumes a constant value for all the points in its domain that are in the same equivalence class. That is because if for $ A,B \in V_{12} $ we have $ A\sim B $, then $ \exists g \in GL(2,\R) $ such that $ A = Bg $. Thus
+		\[ A_{34}\inv{A}_{12} = \tilde{\phi}_{12} (A) = \tilde{\phi}_{12}(Bg) = (Bg)_{34}\inv{(Bg)}_{12} = B_{34}g \inv{g}\inv{B}_{12} = B_{34}\inv{B}_{12}. \]
+		Also, since $ \tilde{\phi}_{12} $ is continuous, then it follows that the induced map $ \phi_{12} $ is also continuous.
+		
+		Now, we need to find an inverse for this map. Consider the map
+		\[ \psi_{12} : \R^{2\times 2} \to U_{12}, \ M \mapsto \vectt{I}{M}. \]
+		This inclusion map is indeed continuous. Now we need to show that $ \psi $ and $ \phi $ are inverse maps. Consider 
+		\[ \psi\circ{\phi} : U_{12} \to U_{12}. \]
+		Let $ A \in U_{12} $. Then we know that there exist a canonical representation of $ A $ as 
+		\[ A \ \sim \vectt{I}{A_{34}\inv{A}_{12}}. \]
+		Then 
+		\[ \psi(\phi( \vectt{I}{A_{34}\inv{A}_{12}})) = \psi(A_{34}\inv{A}_{12}) = \vectt{I}{A_{34}\inv{A}_{12}} \]
+		For the converse, consider the map
+		\[ \phi\circ{\psi}: R^{2\times 2}\to \R^{2\times 2}. \]
+		Let $ M \in \R^{2\times 2} $. Then 
+		\[ (\phi\circ{\psi})(M) = \phi(\vectt{I}{M}) = M.  \]
+		This shows that $ \psi $ and $ \phi $ are inverse maps and this completes the proof.
+		
+		
+	\end{enumerate}
+	
+\end{solution}
 
 \newpage
