@@ -761,6 +761,20 @@ In summary, we have the following chain of homeomorphisms
 	is open. By \autoref{lemma:contGroupActionOpenProjection}, this set is open if and only if the group action is continuous. See \autoref{problem:Grassmannian} for a detailed example.
 \end{summary}
 
+\begin{summary}[Grassmannian]
+	Grassmannian $ G(k,n) $ is a generalization of the real projective plane. $ G(k,n) $ defined to be the set all of $ k\text{-planes} $ passing through the origin as the linear subspaces of $ \R^n $.
+	
+	The Grassmannian $ G(k,n) $ is in one-to-one correspondence with $ F(k,n)/GL(k,\R) $, where $ F(k,n) $ is the set of all $ n\times k $ matrices with rank $ k $. 
+	
+	As a concrete example, consider $ G(2,4) $. The open coordinate sets are given as $ U_{ij} = V_{ij} / GL(2,\R) $, where
+	\[ V_{ij} = \set{A \in F(2,4) \ |\ A_{ij} \text{ is nonsingular}}. \]
+	The corresponding coordinate maps are induced by the maps
+	\[ \tilde{\phi}_{ij} : V_{ij} \to \R^{2\times 2}. \]
+	where for instance
+	$ \tilde{\phi}_{12}(A) = A_{34}\inv{A}_{12}. $
+	See \autoref{problem:Grassmannian} for a detailed discussion.
+\end{summary}
+
 \newpage
 
 \input{sections/Manifold_SolvedProbelms.tex}

@@ -841,7 +841,10 @@
 		 \item Show that the map $ \tilde{\phi}_{12}: V_{12} \to \R^{2\times 2} $,
 		 \[ \tilde{\phi}_{12} (A) = A_{34}\inv{A}_{12} \]
 		 induces a homeomorphism $ \phi_{12}: U_{12} \to \R{2\times 2} $.
-		
+		 
+		 \item Define similarly homeomorphism $ \phi_{ij}:U_{ij}\to \R^{2\time 2} $. Compute $ \phi_{12}\circ\inv{\phi}_{23} $, and show that it is $ C^\infty $.
+		 
+		 \item Show that $ \set{U_{ij}\ |\ 1\leq i \leq j \leq 4} $ is an open cover of $ G(2,4) $ and that $ G(2,4) $ is a smooth manifold.
 	\end{enumerate}
 
 		
@@ -888,10 +891,40 @@
 		For the converse, consider the map
 		\[ \phi\circ{\psi}: R^{2\times 2}\to \R^{2\times 2}. \]
 		Let $ M \in \R^{2\times 2} $. Then 
-		\[ (\phi\circ{\psi})(M) = \phi(\vectt{I}{M}) = M.  \]
+		\[ (\phi\circ{\psi})(M) = \phi_{23}(\vectt{I}{M}) = M.  \]
 		This shows that $ \psi $ and $ \phi $ are inverse maps and this completes the proof.
 		
+		\item For this map we have
+		\[ \phi_{12}\circ\inv{\phi}_{23}: \phi(U_{12} \cap U_{23}) \to \R^{2\times 2}. \]
+		Note that the set $ U_{12}\cap U_{23} $ is defined as the quotient space of $ V_{12}\cap V_{23} $ where
+		\[  V_{12}\cap V_{23} = \set{A \in F(2,4)\ |\ \det(A_{12}) \neq 0 \ \text{and}\ \det(A_{23}) \neq 0}. \]
+		For any matrix in $ A \in U_{12} $ it will have a canonical form
+		\[ A \sim \vectt{I}{A_{34}\inv{A}_{23}} \]
+		and similarly for $ B \in U_{23} $
+		\[ B \sim \begin{bmatrix}
+			a & b \\
+			1 & 0 \\
+			0 & 1 \\
+			c & d
+		\end{bmatrix} \]
+		where
+		\[ \matt{a}{b}{c}{d} = B_{14}\inv{B}_{23} \]
+		Let $ M \in \phi(U_{12}\cap U_{23}) $. Then 
+		\[ (\phi_{12}\circ\inv{\phi}_{23})(M) =  
+		\phi_1\begin{bmatrix}
+			M_{11} & M_{12} \\
+			1 & 0 \\
+			0 & 1 \\
+			M_{21} & M_{22}
+		\end{bmatrix}
+		= 
+		\matt{0}{1}{M_{21}}{M_{22}} \inv{\matt{M_{11}}{M_{21}}{1}{0}}.
+		\]
+		The result of the matrix multiplication above is a polynomial in terms of the components, thus it is $ C^\infty $.
 		
+		\item First observe that $ V_{ij} $ for $ 1\leq i\leq j\leq 4 $ are open subsets of $ F(2,4) $. For instance, if $ A \in V_{12} $, then $ A_{12} $ is nonsingular. From the continuity of the determinant operator, the nonsignularity persists under small enough perturbation. Also, since the projection map $ \pi $ is an open map (shown in part (a)), then $ U_{ij} $ are open subsets of $ G(2,4) $. Now we need to show that all $ U_{ij} $ covers the whole space. Since there is a bijection between $ G(2,4) $ and $ F(2,4)/GL(2,\R) $ (as we discussed in the statement of the problem), thus for any $ x \in G(2,4) $ there exists $ A \in U_{ij} $ for some $ 1 \leq i \leq  j \leq 4$. Thus the set $ \set{U_{ij}\ |\ 1\leq i \leq j \leq 4} $ is an open cover for $ G(2,4) $. Also from what we showed above, the atlas
+		\[ \set{(U_{ij},\phi_{ij})\ |\ 1 \leq i\leq j\leq 4} \]
+		is $ C^\infty $ compatible. Thus $ G(2,4) $ is a smooth manifold.
 	\end{enumerate}
 	
 \end{solution}
