@@ -1,31 +1,41 @@
-\documentclass[11pt,oneside]{book}
-%\usepackage[sc]{mathpazo}
+\documentclass[10pt]{book}
 \usepackage{commands}
-\hypersetup{colorlinks = true}
-\let\oldphi\phi 
-\let\phi\varphi 
-\let\varphi\oldphi
 
 
 \begin{document}
-	
 
 
 
-\heading{Numerical Methods for Scientific Computing}
+
+\begin{tikzpicture}[remember picture,overlay]
+	% If a chapter image has been specified
+	\expandafter\ifstrequal\expandafter{\thechapterimage}{}{}{
+		% Output the chapter image
+		\node[
+		anchor=north west, % Anchor point on the image
+		inner sep=0pt, % Inner padding
+		] at (current page.north west) {\includegraphics[angle=0,width=\paperwidth]{Images/backgroundImage_backup.png}};
+	}
+\end{tikzpicture}
+
+\vspace{15cm}
+
+\heading{Numerical Analysis}
 
 
-In this document, I have organized different numerical methods that are commonly used for scientific computing. 
+%\begin{figure}[h!]
+%	\centering
+%	\includegraphics[width=1\linewidth]{Images/realAnalysis}
+%	\caption*{$\mathbb{R}$eal Analysis, Created by DALL-E!}
+%	\label{fig:realanalysis}
+%	
+%\end{figure}
 
 
-\chapter{System of Linear Equations}
-
-\newpage
-\input{Sections/SysLinEq.tex}
 
 
-\chapter{Matrices}
-\input{Sections/Matrices.tex}
+\tableofcontents
 
+\input{sections/introAndBackground.tex}
 
 \end{document}
