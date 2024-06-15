@@ -1,1 +1,35 @@
 \chapter{Introduction and Background}
+
+
+\section{Summary}
+
+\begin{summary}[Continuous functions on $ \Omega $ and $ \closure{\Omega} $ ]
+	Let $ \Omega \subset \R^n $ be an open set. $ C(\Omega) $ denotes the set of all continuous functions defined on $ \Omega $. Similarly, $ C(\closure{\Omega}) $ denotes the set of all continuous functions defined on the closure of $ \Omega $.
+	
+	For any $ f \in C(\Omega) $ we have $ f \in C(\closure{\Omega}) $. However, for the converse, if $ g \in C(\closure{\Omega}) $, then if $ g $ is uniformally continuous and $ \Omega $ is bounded, then $ g $ can continuously be extended to $ \partial \Omega $. Note that $ C(\Omega) $ functions can behave badly near $ \partial \Omega $. For instance, consider the function $ f:(0,1) \to \R $ given by $ f(x) = \sin(1/x) $.
+\end{summary}
+
+\begin{summary}[The space of continuous $ 2\pi $ periodic functions]
+	Consider the space of continouse functions defined on $ \R $, i.e. $ C(\R) $. An important subset of this set is $ C_p(2\pi) $ which is the set of all continuous $ 2\pi $ periodic functions where for $ f \in C_p(2\pi) $ we have
+	\[ f(x+2\pi) = f(x), \qquad x\in \R. \]
+	This set, is in one-to-one correspondence with the set of all continuous function defined from the manifold $ S^1 $, or equivalently $ \R/2\pi\Z $ to $ \R $.
+\end{summary}
+
+\begin{summary}[Basis for the set of polynomials]
+	Let $ \mathbb{P}_n $ denote the set of all polynomials defined on $ \R $ with degree less than or equal to $ n $. Then a basis for this linear space is 
+	\[ \mathbb{B} = \set{1,x,\cdots, x^n}. \]
+	Thus the dimension of this space is $ n+1 $.
+	
+	Now, consider a \emph{linear subspace} of this space, the set of all polynomials that vanishes at $ 0 $ and $ 1 $ denoted by
+	\[ \mathbb{P}_{n,0} = \set{p \in \mathbb{P}_n\ |\ p(0)= p(1) = 0}. \]
+	A basis for this linear subspace can be given as
+	\[ \mathbb{B}_{n,0} = \set{x(1-x),x^2(1-x),\cdots,x^{n-1}(1-x)}. \]
+	Thus the dimension of this linear subspace is $ \dim(\mathbb{P}_n) - 2 $. The difference two in the dimension comes from the fact that polynomials in $ \mathbb{P}_{n,0} $ vanished at two points of their domain. Thus the set of all polynomials of degree $ n $ that vanish at $ n $ points of their domain is a 1 dimensional linear subspace of $ \mathbb{P}_n $.
+\end{summary}
+
+
+
+
+
+
+\input{sections/introAndBackgroundSolvedProblems.tex}

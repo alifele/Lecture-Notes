@@ -1,0 +1,58 @@
+\section{Solved Problems}
+
+\begin{problem}[The space of solutions of an ODE (from Atkinson)]
+	Show that the set of all continuous solutions of the differential equation $ u''(x) + u(x) = 0 $ is a finite-dimensional linear space. Is the set od all continuous solutions of $ u''(x)+u(x) = 1$ is a linear space?
+\end{problem}
+\begin{solution}
+	Denote the set of all solutions for the ODE $ u'' + u' = 0 $ as 
+	\[ S = \set{f \in C(\R)\ |\ f'' + f = 0}. \]
+	We claim that $ S $ is a linear space. Because
+	\begin{itemize}[noitemsep]
+		\item Closed under addition: Let $ f,g \in S $. Then $ f''+f = 0 $ and $ g'' + g = 0 $. From the linearity of derivative it follows that $ (f+g) '' + (f+g) = 0  $, hence $ f+g \in S $.
+		\item Existence of zero element: The function $ g \equiv 0 $ is in $ S $.
+		\item Existence of inverse element: Let $ f \in S $. Then $ f'' + f = 0 $. Multiplying both sides by $ -1 $ we will get $ (-f)'' + (-f) = 0 $. Thus $ -f \in S $.
+		\item Closed under scalar multiplication:  Let $ f \in S $. Then $ f'' + f = 0 $. Multiplying both sides by $ a \in \R $ we will get $ (af)'' + (af) = 0 $. Thus $ af \in S $.
+		\item Commutativity, associativity, distributivity, and  follows from the same properties for the addition of functions.
+	\end{itemize}
+	To show that the dimension of this linear space is finite, consider two solutions $ u_1, u_2 \in S $ such that their Wronskian is non-zero. I.e.
+	\[ W(t) = \det\matt{u_1(t)}{u_2(t)}{u'_1(t)}{u'_2(t)} \neq 0. \]
+	For the particular ODE given in this question, we can consider $ u_1(t) = \cos(t) $ and $ u_2(t) = \sin(t) $. Take any solution $ v \in S $. Assume $ v(0) = a $ and $ v'(0) = b $. Consider $ w(t) = p u_1(t) + qu_2(t)$ where $ p,q\in \R $ chosen such that $ v(0) = w(0) $ and $ v'(0) = w'(0) $. Since both $ w,v $ are solutions of the ODE, then from the existence-uniqueness theorem, it follows that $ v(t) = w(t) $. This shows that we can write every solution of the ODE in terms of $ u_1 $ and $ u_2 $. Thus $ S $ is a linear space of dimension 2. 
+	
+	The continuous solutions of the ODE $ u'' + u = 1 $ is not a linear space as it does not contain the zero element. However, we can show that this is an affine space.
+\end{solution}
+
+\begin{problem}[Linear space (from Atkinson)]
+	When is the set $ \set{v \in C[0,1]\ |\ v(0) = a} $ a linear space?
+\end{problem}
+\begin{solution}
+	This set is a linear space only when $ a = 0 $. Otherwise, this set can not contain the zero function (to be served as the zero element of the vector space). Also, if $ a \neq 0 $, then this set will not be closed under addition and scalar multiplication.
+\end{solution}
+
+\begin{problem}[Zero vector and linear independence (from Atkinson)]
+	Show that in any linear space $ V $, a set of vectors is always linearly dependent if one of the vectors is zero.
+\end{problem}
+\begin{solution}
+	Let $ \set{u_1,u_n,f} $ be a collection of vectors where $ f $ is the zero vector. Let $ \alpha_1 = \cdots  = \alpha_n =0 $ and $ \beta \neq 0 $ and consider the sum
+	\[ \alpha_1u_1 + \cdots + \alpha_n u_n + \beta f  = 0. \]
+	There is one non-zero coefficient $ \beta $, thus the collection of vectors are linearly dependent.
+\end{solution}
+
+\begin{problem}[Unique expansion in terms of basis vectors (from Atkinson)]
+	Let $ \set{v_1,\cdots,v_n} $ be a basis of an $ n\text{-dimensional}$ space $ V $. Show that for any $ v\in V $, there are scalars $ \alpha_1,\cdots, \alpha_n $ such that 
+	\[ v = \sum_{i=1}^{n} \alpha_i v_i, \]
+	and the scalars $ \alpha_1,\cdots,\alpha_n $ are uniquely determined by $ v $.
+\end{problem}
+\begin{solution}
+	Let $ \mathbb{B} = \set{v_1,\cdots,v_n} $ be a basis and let $ v \in V $ be any vectors. Since $ \mathbb{B} $ is a basis, then by definition the vectors $ v_1,\cdots,v_n $ are
+	\begin{enumerate}[(I),noitemsep]
+		\item linearly independent, and
+		\item spans the whole space.
+	\end{enumerate}
+	(II) implies the existence of the scalars $ \alpha_1\cdots\alpha_n $ such that 
+	\[ v = \sum_{i}^{n} \alpha_i v_i. \]
+	Furthermore, (I) implies the uniqueness of these scalars. To see this we will use the proof by contradiction. Consider the $ \beta_1, \cdots, \beta_n $ where we have $ \beta_i \neq \alpha_i $ at least for one $ 1\leq i\leq n $. Then 
+	\[ v = \sum_{i=1}^{n} \alpha_i v_i, \qquad v = \sum_{i=1}^{n} \beta_i v_i. \]
+	Subtracting these two expressions we will get
+	\[ 0 = \sum_{i=1}^{n} (\alpha_i - \beta_i) v_i. \]
+	Since $ \alpha_i \neq \beta_i $ for at least one index $ i $. From the definition of linear dependence, this implies that the collection of vectors in $ \mathbb{B} $ is linearly dependent that contradicts (I) which is a contradiction.
+\end{solution}
