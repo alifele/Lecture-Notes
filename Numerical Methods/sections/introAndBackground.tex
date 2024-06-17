@@ -28,7 +28,102 @@
 \end{summary}
 
 
+\begin{summary}[Normed space $ \R^d $]
+	Consider the linear space $ \R^d $. Then the followings are the common norms for this space.
+	\begin{align*}
+		&\norm{x}_p = \left( \sum_{i=1}^d \abs{x_i}^p \right)^{1/p}, \qquad \text{for $ 1\leq p < \infty $}.\\
+		&\norm{x}_\infty = \max_{1\leq i\leq d} \abs{x_i}.
+	\end{align*}
+	\begin{proposition}
+		In $ \R^d $ we have for all $ x\in \R^d  $
+		\[ \norm{x}_\infty \leq \norm{x}_p \leq d^{1/p}\norm{x}_\infty.  \]
+	\end{proposition}
+	\begin{remark}
+		As a simple corollary of the proposition above we can see
+		\[ \norm{x}_\infty = \lim_{p\to \infty} \norm{x}_p. \]
+	\end{remark}
+	\begin{proposition}[Equivalence of norms]
+		On a finite dimensional space all norms are equivalent.
+	\end{proposition}
+	\begin{remark}
+		The proposition above dose not hold true on infinite dimensional spaces. In those space, some norms has more stronger sense of convergence than others.
+	\end{remark}
+\end{summary}
 
+
+\begin{summary}[Normed space $ C(\Omega) $ ]
+	Let $ V = C[0,1] $ denote the linear space of all continuous function defined on $ [0,1] $. Define the following norms
+	\begin{align*}
+		& \norm{f}_p = \left(  \int_{0}^{1} \abs{f(x)}^p\ dx \right)^{1/p}, \qquad 1\leq p < \infty \\
+		& \norm{f}_\infty = \sup_{0\leq x\leq 1} \abs{f(x)}
+	\end{align*}
+	The norm $ \norm{x}_\infty $ is a natural norm for this space that is also called \emph{uniform norm}.
+	\begin{proposition}
+		For the norms given above we have
+		\[ \norm{v}_{p} \leq \norm{v}_\infty \qquad \forall v \in V. \]
+		This implies that the convergence under the uniform norm $ \norm{\cdot}_\infty $ implies the convergence under the norm $ \norm{\cdot}_p $. Note that the converse is not true.
+	\end{proposition}
+	\begin{remark}
+		A very good example to see the proposition above is $ f:[0,1]\to \R $ given by
+		\[ f(x) = \begin{cases}
+			1-nx, &\qquad 0\leq x\leq 1/n,\\
+			0, &\qquad 1/n < x \leq 1.
+		\end{cases} \]
+	\end{remark}
+	\begin{proposition}
+		Let $ \Omega \subset \R^d $ and let $ \closure{\Omega} $ denote its closure. Then the space $ C(\closure{\Omega}) $ with the norm $ \norm{\cdot}_\infty $ is a Banach space. However, this space is not a Banach space with $ \norm{\cdot}_p $ for $ 1\leq p < \infty $.
+	\end{proposition}
+	\begin{remark}
+		The proposition above is true since the continuoity of a sequence of functions persists under the uniform continuity. A good example for the second statement is the function $ f: [0,1] \to \R $
+		\[ 
+		f(x) = \begin{cases}
+			0, &\qquad 0\leq x\leq 1/2 - 1/(2n),\\
+			n(x-1/2+1/(2n)), &\qquad 1/2-1/(2n) \leq x \leq 1/2+1/(2n), \\
+			1, &\qquad 1/2 + 1/(2n) \leq x \leq 1.
+		\end{cases}
+		 \]
+	\end{remark}
+\end{summary}
+
+\begin{summary}[Normed space $ C^k(\Omega) $]
+	Let $ \Omega \subset \R $. The space $ C^k(\closure{\Omega}) $ is the set of all $ k $ times continuously differentiable functions. Define the following metric on this space
+	\begin{align*}
+		&\norm{f}_{k,p} = \left( \sum_{i=1}^{k} \norm{f^{(i)}}_p^p \right)^{1/p}, \qquad 1\leq p < \infty. \\
+		&\norm{f}_{k,\infty} = \max_{1\leq i \leq k} \norm{f^{(i)}}_p.
+	\end{align*}
+	The natural basis for this space is $ \norm{f}_{k,\infty} $.
+	\begin{proposition}[$ C^k $ is a Banach space]
+		The space $ C^k $ is complete under the norm $ \norm{\cdot}_{k,\infty} $.
+	\end{proposition}
+\end{summary}
+
+
+\begin{summary}[Completion of $ C(\closure{\Omega}) $]
+	The space $ C(\closure{\Omega}) $ is not complete under the norm $ \norm{\cdot}_{p} $ for $ 1\leq p < \infty $. Its completion is the space of \emph{Lebesgue integrable functions} $ L^p $.
+\end{summary}
+\begin{summary}[Completion of $ C^k(\closure{\Omega}) $]
+	The space $ C^k(\closure{\Omega}) $ is not complete under the norm $ \norm{\cdot}_{k,p} $ for $ 1\leq p < \infty $. Its completion is the \emph{Sobolev spaces}.
+\end{summary}
+
+\begin{summary}[Norm changing the topology in action!]
+	Consider the spaces $ V = C^1[0,1] \subset C[0,1] $, and $ W = C[0,1]$, and the linear operator 
+	\[ T = \frac{d}{dx}: V \to W. \]
+	Consider the same infinity norm $ \norm{\cdot}_{\infty} $ for both $ V $ and $ W $. Let $ \set{f_n} $ be a sequence of functions in $ V $ defined as
+	\[ f_n(x) = \frac{1}{n} \sin(2^n\pi x). \]
+	It is evident that $ \norm{f_n}_\infty \to 0 $ as $ n\to 0 $. However, $ \norm{f'_n}_\infty \to \infty $ as $ n\to \infty $. Geometrically, we can feel that the sequence $ \set{f_n} $ sort of moves towards the origin of the space $ (V,\norm{\cdot}_\infty) $ while $ \set{f'_n} $ shoots to infinity in the space $ (W, \norm{\cdot}_\infty) $. 
+	
+	However, if we change the norm of space $ V $ to the standard norm of $ C^1[0,1] $, i.e.
+	\[ \norm{f}_\infty^1 = \max\set{\norm{f}_\infty,\norm{f'}_\infty}, \]
+	then we can see that the sequence $ \set{f} $ is not moving towards the origin, but shoots of to the infinity of the space $ (V,\norm{\cdot}_\infty^1) $. From this example it is clear that how norm induces topology. A sequence that originally was moving towards the origin in one topology, shoots off to the infinity in another topology.
+\end{summary}
+
+\begin{summary}[Continuity of differentiation operator]
+	According to the summary box above, the differentiation operator 
+	\[ T_1 = \frac{d}{dx}: C^1[0,1]\subset (C[0,1],\norm{\cdot}_\infty) \to (C[0,1],\norm{\cdot}_\infty) \]
+	is not continuous, but the operator
+	\[ T_2 = \frac{d}{dx}: (C^1[0,1],\norm{\cdot}_\infty^1) \to (C[0,1],\norm{\cdot}_\infty) \]
+	is continuous.
+\end{summary}
 
 
 

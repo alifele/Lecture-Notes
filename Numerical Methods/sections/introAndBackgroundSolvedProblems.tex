@@ -56,3 +56,17 @@
 	\[ 0 = \sum_{i=1}^{n} (\alpha_i - \beta_i) v_i. \]
 	Since $ \alpha_i \neq \beta_i $ for at least one index $ i $. From the definition of linear dependence, this implies that the collection of vectors in $ \mathbb{B} $ is linearly dependent that contradicts (I) which is a contradiction.
 \end{solution}
+
+\begin{problem}[Cartesian product of linear spaces (from Atkinson)]
+	Assume $ U $ and $ V $ are finite dimensional linear spaces, and let $ \set{u_1,\cdots,u_n} $ and $ \set{v_1,\cdots,v_m} $ be bases for them, respectively. Using these bases, create a basis for $ W = U\times V $. Determine $ \dim W $.
+\end{problem}
+
+\begin{solution}
+	Consider the following basis for $ U $ and $ V $ 
+	\[ \mathbb{B}_U = \set{u_1,\cdots,u_n}, \qquad \mathbb{B}_V = \set{v_1,\cdots,v_m}. \]
+	Construct the sets
+	\[ \mathcal{B}_U = \set{(u_i, 0_V)\ |\ u_i \in\mathbb{B}_U,\ 0_V \in V}, \qquad \mathcal{B}_V = \set{(0_U, v_i)\ |\ v_i \in \mathbb{B}_V, u_0 \in U}. \]
+	Then the following collection will be a basis for $ U \times V $.
+	\[ \mathbb{B}_{U\times V} = \mathcal{B}_U \cup \mathcal{B}_V. \]
+	The linearindependentness of the vectors in $ \mathbb{B}_{U\times V}  $ follows immediately from the linearindependentness of $ \mathbb{B}_1 $ and $ \mathbb{B}_2 $. Similarly, it follows immediately from the spanning property of $ \mathbb{B}_U $ and $ \mathbb{V}_B $ that $ \mathbb{B}_{U\times V} $ spans the whole space $ U\times V $. This construction reveals that the space $ U\times V $ has dimension $ n+m $.
+\end{solution}
