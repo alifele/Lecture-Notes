@@ -1,0 +1,145 @@
+\documentclass[12pt]{article}
+\usepackage{commands}
+
+
+
+
+
+\begin{document}
+
+
+
+
+
+
+
+
+
+ \begin{tikzpicture}[remember picture,overlay]
+         % If a chapter image has been specified
+%         \expandafter\ifstrequal\expandafter{Images/vendingMachine.png}{}{}{
+	                 % Output the chapter image
+	                 \node[
+	                 anchor=north west, % Anchor point on the image
+	                 inner sep=0pt, % Inner padding
+	                 ] at (current page.north west) {\includegraphics[angle=0,width=\paperwidth]{Images/Hilbert.jpg}};
+%	         }
+ \end{tikzpicture} 
+ 
+  
+  \vspace{-1.8cm}
+\heading{Algebraic Properties of Hilbert Curve}
+
+
+\newpage
+
+\section*{Abstract}
+I have came up with some interesting algebraic properties of the Hilbert curve which ultimately allows for an easy algorithm to generate the Hilbert curve of different orders, as well as studying the properties of this curve in higher levels of abstraction.
+
+
+\section*{Methods}
+Consider following pictorial elements which are the only elements needed to be combined to generate a Hilbert curve of any order.
+\input{Images/pictorialElements.tex}
+For instance, in the following figure we can see how these elements combined to give ruse to the whole structure.
+\input{Images/order2HilbertCurve.tex}
+Although these elements are just pictorial elements, but thinking about them as permutations, we can then see their interactions with each other and if they interact nicely, we can construct the group structure out of these elements. 
+\input{Images/permutations.tex}
+
+\begin{theorem}
+	\label{thm:GIsGroup}
+	Consider the set $ G = \set{\tau, \sigma_1, \sigma_2, \sigma_3} $. Then $ (G,\circ) $ has a group structure where $ \circ $ is the composition of functions form a group.
+\end{theorem}
+\begin{proof}
+	This follows immediately by calculating the elements of the following product table
+	\begin{center}
+			\begin{tabular}{c|cccc}
+			& $\tau$ & $\sigma_1$ & $\sigma_2$ & $\sigma_3$ \\
+			\hline
+			$\tau$ & $\tau$ & $\sigma_1$ & $\sigma_2$ & $\sigma_3$ \\
+			$\sigma_1$ & $\sigma_1$ & $\tau$ & $\sigma_3$ & $\sigma_2$ \\
+			$\sigma_2$ & $\sigma_2$ & $\sigma_3$ & $\tau$ & $\sigma_1$ \\
+			$\sigma_3$ & $\sigma_3$ & $\sigma_2$ & $\sigma_1$ & $\tau$ \\
+		\end{tabular}
+	\end{center}
+	Since the product table above is symmetric, then it follows that this group is an Abelian group as well. This completes the proof.
+\end{proof}
+
+
+
+\begin{remark}
+	For a more clean notation, we write $ ab $ instead of $ a\circ b $ where $ a $ and $ b $ are the elements of group.
+\end{remark}
+
+\subsection*{First Algebraic Construction of the Hilbert Curve}
+In the product table calculated in \autoref{thm:GIsGroup} we know how the elements of the group interact with each other. However, for the first algebraic construction of the Hilbert curve we also need to define how the group $ G $ acts on matrices.
+\begin{definition}[Right action of group $ G $ on matrices]
+	\label{def:RightactionOFgroup}
+	Let $ M $ be a $2\times 2$ matrix whose elements are from the set $ G $ as in \autoref{thm:GIsGroup}. Then the right action of group $ G $ on $ M $ is defined to be
+	\begin{align*}
+		\tau \matt{a}{b}{c}{d} &= \matt{a}{b}{c}{d},\\
+		\sigma_1 \matt{a}{b}{c}{d} &= \matt{\sigma_1a}{\sigma_1b}{\sigma_1c}{\sigma_1d}^{[\sigma_1]} = \matt{\sigma_1 d}{\sigma_1 b}{\sigma_1 c}{\sigma_1 a},\\
+		\sigma_2 \matt{a}{b}{c}{d} &= \matt{\sigma_2a}{\sigma_2b}{\sigma_2c}{\sigma_2d}^{[\sigma_2]} = \matt{\sigma_2 a}{\sigma_2 c}{\sigma_2 b}{\sigma_2 d},\\
+		\sigma_3 \matt{a}{b}{c}{d} &= \matt{\sigma_3a}{\sigma_3b}{\sigma_3c}{\sigma_3d}^{[\sigma_3]} = \matt{\sigma_2 d}{\sigma_2 c}{\sigma_2 b}{\sigma_2 a}.\\
+	\end{align*}
+	Similarly, for $ \tilde{M} $ a $ 2^{d+1}\times 2^{d+1} $ matrix action of any $ \omega \in G $ on $ \tilde{M} $ is defined to be
+	\[ \omega \tilde{M} = \omega \matt{A}{B}{C}{D} = \matt{\omega A}{\omega B}{\omega C}{\omega D}^{[\omega ]}\]
+\end{definition}
+
+\begin{construction}(Iterative Construction of Hilbert Curve)
+	Define the map 
+	\[  F_n : G^{2^n}\times G^{2^n} \to G^{2^{n+1}}\times G^{2^{n+1}}  \]
+	give as 
+	\input{Images/iterativeMapConstruction.tex}
+	\FloatBarrier
+	Applying this map iteratively on $ 1\times 1 $ matrix $ \begin{bmatrix}  \tau  \end{bmatrix} $ for $ n $ times will generate the Hilbert curve of degree $ n $. 
+\end{construction}
+For instance, this construction predicts that the overall shape of the 4-th order Hilbert curve will be
+\[ 
+\boxed{\begin{array}{cccccccc}
+	\tau & \tau & \tau & \tau & \tau & \tau & \tau & \tau \\
+	\sigma_1 & \sigma_2 & \sigma_1 & \sigma_2 & \sigma_1 & \sigma_2 & \sigma_1 & \sigma_2 \\
+	\sigma_3 & \sigma_1 & \sigma_2 & \sigma_3 & \sigma_3 & \sigma_1 & \sigma_2 & \sigma_3 \\
+	\tau & \sigma_1 & \sigma_2 & \tau & \tau & \sigma_1 & \sigma_2 & \tau \\
+	\sigma_1 & \sigma_2 & \sigma_3 & \sigma_1 & \sigma_2 & \sigma_3 & \sigma_1 & \sigma_2 \\
+	\sigma_3 & \sigma_3 & \tau & \sigma_1 & \sigma_2 & \tau & \sigma_3 & \sigma_3 \\
+	\tau & \tau & \sigma_3 & \sigma_1 & \sigma_2 & \sigma_3 & \tau & \tau \\
+	\sigma_1 & \sigma_2 & \tau & \sigma_1 & \sigma_2 & \tau & \sigma_1 & \sigma_2
+\end{array}}
+\]
+
+
+\subsection*{Second Algebraic Construction of the Hilbert Curve}
+This method is easier to implement in a computer. Equivalent to \autoref{def:RightactionOFgroup} we can think of acting a permutation on a matrix of permutations as 
+\input{Images/alternativeActionOnMatrixMethod2.tex}
+Each block, for instance $ \tau $ is mapped to four blocks where we move in the patter of $ \tau $ on the smaller boxes and as we move we multiply $ \tau $ at $ \sigma_1, \tau, \tau, \sigma_2 $ in the same order. For another example, consider the box with $ \sigma_2 $. At the next step it will be mapped to 4 smaller blocks where we move on these boxes in the patter on $ \sigma_2 $ and at each step we multiply $ \sigma_2 $ by the ordered list $ [\sigma_1, \tau, \tau, \sigma_2] $.
+With this alternative point of view we will have the following construction
+\begin{construction}[Alternative Construction of Hilbert Group]
+	Choose $ d \in \N $ as the degree of the Hilbert curve that we want to construct, say $ d=3 $, and consider the vector $ G = [\sigma_1,\tau,\tau,\sigma_2] $. Start from the origin of the $ \R^2 $ plane, i.e. $ (0,0) $. Start enumerating the steps in base 4, thus the first step will be $ [0,0,0]_4 $. At step $ [i,j,k]_4 $, construct a tuple $ (\tau, G_j,G_i G_j) $. If $ k<3 $, then move in the direction of the $ k\text{-th} $ arrow in $ G_i G_j $. If $ k=3 $ and $ j<3 $ then move in the direction of the $ j\text{-th} $ vector in $ G_i $, If $ j=3$, then move in the $ i\text{-th} $ direction of $ \tau $. This construction will produce the Hilbert curve of degree $ d $.
+\end{construction}
+
+\noindent \textbf{Example.} We will construct the Hilbert curve of order 4 (see the figure below). For this, we start from origin and start enumerating in base 4. Thus for the first step we have $ [0,0,0,0]_4 $. Since for any step $ [i,j,k,l]_4 $ the guide tuple will be $ (\tau,G_i, G_i G_j, G_i G_j G_k ) $, then for step $ [0,0,0,0]_4 $ the guide tuple will be $ (\tau, \sigma_1, \tau, \sigma_1) $. Thus we need to move in the direction of the $ 0\text{-th} $ element (because $ l=0 $) of $ \sigma_1 $, which moves to right. For $ [0,0,0,1]_4 $ and $ [0,0,0,2]_4 $ we will move according to $ \sigma_1 $. However, for $ [0,0,0,3] $, we now need to move according to the $ 0\text{-th} $ element of $ \tau $ (remember that for this step the guide tuple is $ (\tau, \sigma_1,\tau,\sigma_2) $) which is an upward motion. For $ [0,0,1,0]_4 $ the guide tuple will be $ (\tau, \sigma_1, \tau, \tau) $. Thus we will move in the direction of the $ 0\text{-th} $ element of $ \tau $. Continuing with this we will finally get the whole patter.
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.5\linewidth]{Images/iterative}
+\end{figure}
+
+\subsection*{Interesting Observation}
+In the section above, we observed that the group $ G $ generates the patter on Hilbert curve. But what are the elements of $ G $ really. The elements of $ G $ are nothing more that all of the symmetries of a $ 2\times 2 $ matrix generated by the symmetries that has two fixed points. To be more specific, $ \sigma_1 $ and $ \sigma_2 $ can be thought of two permutations on a $ 2\times 2 $ matrix that both of them has two fixed points. $ \sigma_1 $ can be though of as swapping the elements of the main diagonal, and $ \sigma_2 $ of swapping the elements of the non-main diagonal. $ \sigma_3 $ is when we perform $ \sigma_1 $ and $ \sigma_2 $ at the same time, and $ \tau $ is the identity permutations. The following figure summarizes this.
+\input{Images/symmetriesOfMatrix.tex} 
+\begin{conjecture}
+	There are no other choices for $ \tau, \sigma_1,\sigma_2, \sigma_3 $ that generates a self similar pattern.
+\end{conjecture}
+\begin{remark}
+	My intuition about the truth of the conjecture above starts from the fact are no other two permutations except for swapping the elements on the main diagonal and non-main diagonal of a $ 2\times 2 $ matrix that has $ 2 $ fixed points. 
+\end{remark}
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.8\linewidth]{code/high_resolution_plot}
+\end{figure}
+\FloatBarrier
+\noindent End.
+
+
+
+
+\end{document}
