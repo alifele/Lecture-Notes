@@ -1,8 +1,38 @@
 \chapter{Tangent Spaces}
- 
-In this chapter we will generalize the notions that we covered in chapter 1 to manifolds.
+
+\section{Tangent Spaces}
+
+For several reasons, the notion of tangent space is more easily developed using algebraic view point rather than the geometric one. Then we can easily construct our geometric intuition from using the developed theory. We start with the notion of derivation.
 
 
+\begin{definition}[Derivation at a point]
+	Let $ M $ be a manifold and $ p $ a point of manifold. Let $ C_p^\infty(M) $ denote the germ of $ C^\infty $ functions at $ p $. Derivation at $ p $ is a linear map 
+	\[ D: C_p^\infty(M) \to \R \]
+	such that for $ f,g \in C_p^\infty(M) $ we have
+	\[ D(fg) = D(f)g + fD(g). \]
+\end{definition}
+The definition above is a purely algebraic one.
+\begin{remark}
+	The set of all point derivations at $ p $ forms a vector space.
+\end{remark}
+
+\begin{definition}[Tangent space]
+	Let $ M $ be a manifold and $ p \in M $. The tangent space at $ p $ denoted by $ T_p(M) $ is the vector space of all point derivations at $ p $.
+\end{definition}
+In the following proposition we will see a very familiar point derivation.
+\begin{proposition}[Partial derivative $ \partial/\partial x^i |_p $ is a tangent vector]
+	Let $ M $ be a manifold and $ p \in M $. Let $ (U,\phi) $ be a coordinate chart containing $ p $ and $ f:M \to \R $ a function defined at a neighborhood of $ p $. By definition we have
+	\[ \frac{\partial }{\partial x^i}\big|_p f = \frac{\partial}{\partial r^i}\big|_{\phi(p)} (f\circ\inv{\phi}) \]
+	where $ x^i = r^i \circ f $ with $ r^i $ as the standard coordinate function of $ \R^n $. The map $ \frac{\partial}{\partial x^i}\big|_{p} $ is a point derivation at $ p $, thus a tangent vector.
+\end{proposition}
+\begin{proof}
+	First observe that $ \partial/\partial x_i|_p $ is indeed a linear map from $ C_p^\infty(M) $ to $ \R $. Let $ f,g \in C_p^\infty(U) $ and $ (U,x^1,\cdots,x^n) $ a coordinate chart. Then we have
+	\begin{align*}
+		\frac{\partial}{\partial x^i}\big|_p (fg) &=  \frac{\partial}{\partial  r^i}\big|_{\phi(p)}((fg)\circ \inv{\phi} ) = \frac{\partial}{\partial  r^i}\big|_{\phi(p)}(f\circ\inv{\phi} \cdot g\circ\inv{\phi}) \\
+		&= \frac{\partial}{\partial  r^i}\big|_{\phi(p)}(f\circ\inv{\phi})\cdot g(p) + f(p)\cdot \frac{\partial}{\partial  r^i}\big|_{\phi(p)} (g\circ\inv{\phi})\\
+		&=(\frac{\partial}{\partial  x^i}\big|_{p}f ) g + f(\frac{\partial}{\partial  x^i}\big|_{p} g).
+	\end{align*}
+\end{proof}
 
 \begin{definition}[Differential of a smooth map]
 	Let $ F:N\to M $ be a smooth map between manifolds. This map induces a \emph{linear} map  called the \emph{differential of $ F $}
@@ -19,8 +49,76 @@ In this chapter we will generalize the notions that we covered in chapter 1 to m
 	See \autoref{prob:DifferentialOfAMapIsADerivation}
 \end{proof}
 
+\subsubsection{Differential of a map between Euclidean spaces}
+To see what kind of an object is the differential of a map, we calculate it explicitly on Euclidean spaces. Let $ F:\R^n \to \R^m $ be a map and let $ x^1,\cdots,x^n $ be the standard coordinate functions of $ \R^n $ while $ y^1,\cdots,y^m $ be the standard coordinate functions of $ \R^m $. Let $ p \in \R^n $. since $ F_* $ is a linear map between two vector spaces, then we can write it as a matrix once we fix the basis for the spaces. The basis for $ T_p(\R^n) $ is the set $ \set{\partial/\partial x^i|_p}_{i} $, while for $ T_p(\R^m) $ is $ \set{\partial/\partial y^j|_p}_j $. To get the matrix representation of $ F_* $ we need to find its effect on the basis vectors
+\[ F_*(\frac{\partial}{\partial  x^j}\big|_{p}) = \sum_{k} a^k_j\  \frac{\partial}{\partial  y^k}\big|_{F(p)}. \]
+By applying it on $ y_i $ we will get
+\[ a_j^i = F_*(\frac{\partial}{\partial  x^j}\big|_{p})y^i = \frac{\partial}{\partial  x^j}\big|_{p} (y^i \circ F) =  \frac{\partial}{\partial  x^j}\big|_{p}F^i. \]
+This is precisely the Jacobian matrix of $ F $ evaluated at $ p $.
 
+\subsubsection{The Chain Rule}
+A nice thing behind this algebraic point of view is that we can now write the notion of chain rule in a much simpler form. The following propositions captures this ides.
 
+\begin{proposition}[The chain rule]
+	\label{prop:ChainRule}
+	Let $ F: N \to M $ and $ G:M\to P $ be maps between manifolds, and $ p \in N $. Then the differential of $ F $ at $ p $ and $ G $ at $ F(p) $ are linear maps
+	\[ T_pN \xrightarrow{F_{*,p}} T_pM \xrightarrow{G_{*,F(p)}} T_pP. \]
+	Then we have
+	\[ (G\circ F)_{*,p} = G_{*,F(p)} F_{*,p}. \]
+\end{proposition}
+\begin{proof}
+	Let $ X_p \in T_p(N) $. From definition we have for some $ f: G \to \R $ we have
+	\[ ((G\circ F)_{*,p}X_p)f = X_p(f\circ G\circ F) = X_p ((f\circ G)\circ F) = (F_{*,p}X_p)(f\circ G).\]
+	Let $ Y_q = F_{*,p}X_p $ where $ q = F(p) $. Then 
+	\[ Y_q (f\circ G) = (G_{*,q}Y_q) f.  \]
+	This implies that 
+	\[ (G\circ F)_{*,p} = G_{*,q} F_{*,p} \]
+	and this completes the proof.
+\end{proof}
+
+\begin{example}
+	Let $ F:\R \to \R^3 $ and $ G:\R^3 \to \R $. Then the differential of the composite function $ G\circ F $ is the matrix multiplication of the differential of each map. I.e.
+	\[ (G \circ F)_* = G_* F_* = (G_x\ G_y\ G_z)\cdot 
+	\begin{pmatrix}
+		F_1' \\
+		F_2' \\
+		F_3'
+	\end{pmatrix}
+	= G_x F_1' + G_y F_2' + G_z F_3' 
+	= \frac{\partial G}{\partial x} \frac{d F_1}{dt} 
+	+\frac{\partial G}{\partial y} \frac{d F_2}{dt} 
+	+\frac{\partial G}{\partial z} \frac{d F_3}{dt},
+	 \]
+	 which is the same chain rule in calculus.
+\end{example}
+Writing the chain rule in this form not only is visually appealing, but also we can deduce two important Corollaries from it as follows.
+
+\begin{corollary}[Diffeomorphism of Manifolds vs. Isomorphism of Tangent Spaces]
+	Let $ F:N\to M $ be a diffeomorphism of manifolds and $ p \in N $. Its differential $ F_* $ is an isomorphism of tangent spaces $ T_pN $ and $ T_{F(p)}M $.
+\end{corollary}
+\begin{proof}
+	$ F $ being a diffeomorphism of manifolds, it implies that we have $ G: M \to N $ such that $ G\circ F = \mathbb{1}_N $ and $ F\circ G = \mathbb{1}_M $. Now using \autoref{prop:ChainRule} we can write
+	\begin{align*}
+		(G\circ F)_* = G_* \circ F_* = (\mathbb{1}_N)_* = \mathbb{1}_{T_pN}\\
+		(F\circ G)_* = F_* \circ G_* = (\mathbb{1}_M)_* = \mathbb{1}_{T_{F(p)}M}.
+	\end{align*}
+	This shows that $ F_* $ and $ G_* $ are the right and left inverses of each other, hence an isomorphism of vector spaces.
+\end{proof}
+\begin{corollary}[Invariance of Dimension]
+	Let $ U \subset \R^n $ and $ V \subset R^m $ be open subsets that are diffeomorphic. Then $ m = n $.
+\end{corollary}
+\begin{proof}
+	Let $ F: U \to V $ be a diffeomorphism and $ p \in U $. Then $ F_* $ is an isomorphism of tangent spaces $ T_pU $ and $ T_{F(p)}V $, thus of the same dimension. Since in a Euclidean space the tangent space has the same dimension as the space itself (by definition and the way that we construct a basis for tangent space using the standard coordinate vectors) then this implies that $ n = m $.
+\end{proof}
+
+\begin{corollary}[Tangent Space Has the Same Dimension as Manifold]
+	Let $ M $ be a manifold of dimension $ n $ and $ p \in M $. Then $ T_p(M) $ also has dimension $ n $.
+\end{corollary}
+\begin{proof}
+	Let $ (U,\phi) $ be a coordinate chart containing the point $ p $. Since $ M $ is assumed to be a smooth manifold, then the coordinate map $ \phi $ automatically upgrades to a diffeomorphism between $ U $ and $ \R^n $. Thus the tangent spaces $ T_p(U) $ and $ T_{\phi(p)}(\R^n) $ are isomorphic. This implies that $ T_p(U) $ is also of dimension $ n $.
+\end{proof}
+
+\section{Basis for the Tangent Space at a Point}
 
 
 \section{Solved Problems}
