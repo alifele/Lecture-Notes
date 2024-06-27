@@ -345,6 +345,7 @@ The followings are some examples of Lie groups. We can easily check the group op
 In this section we will define the notion of partial derivatives of the maps between manifolds. We will use the notion of coordinate charts for this definition. Let $ N $ be a manifold of dimension $ n $, and let $ (r^1,\cdots,r^n) $ be the standard coordinate function on $ \R^n $. For a chart $ (U,\phi) $ on the manifold, $ \phi $ is a vector valued function on manifold. We denote its coordinate functions as $ x^i $ where $ x^i = r^i \circ \phi $. This is just a fancy (but very useful) way of writing the $ i\text{-th}$ coordinate of the vector valued function $ \phi $. Now we can define the directional derivatives for the functions on manifolds.
 
 \begin{definition}[Directional derivative]
+	\label{def:DirectionalDerivativeOnManifold}
 	Let $ N $ be a manifold, and $ f:N \to \R $ an smooth function. Let $ p\in U $ and $ (U,\phi) $ any chart containing $ p $, where $ \phi = (x^1,\cdots,x^n) $. We define the direction derivative of $ f $ at $ p $ as 
 	\[ \frac{\partial f}{\partial x^i}(p) = \frac{\partial (f\circ \inv{\phi})}{\partial r^i}(\phi(p)) = \frac{\partial}{\partial r^i}\big|_{\phi(p)} (f\circ\inv{\phi}). \]
 \end{definition}

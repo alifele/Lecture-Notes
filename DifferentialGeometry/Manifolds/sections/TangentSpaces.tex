@@ -97,10 +97,10 @@ Writing the chain rule in this form not only is visually appealing, but also we 
 	Let $ F:N\to M $ be a diffeomorphism of manifolds and $ p \in N $. Its differential $ F_* $ is an isomorphism of tangent spaces $ T_pN $ and $ T_{F(p)}M $.
 \end{corollary}
 \begin{proof}
-	$ F $ being a diffeomorphism of manifolds, it implies that we have $ G: M \to N $ such that $ G\circ F = \mathbb{1}_N $ and $ F\circ G = \mathbb{1}_M $. Now using \autoref{prop:ChainRule} we can write
+	$ F $ being a diffeomorphism of manifolds, it implies that we have $ G: M \to N $ such that $ G\circ F = \mathbbm{1}_N $ and $ F\circ G = \mathbbm{1}_M $. Now using \autoref{prop:ChainRule} we can write
 	\begin{align*}
-		(G\circ F)_* = G_* \circ F_* = (\mathbb{1}_N)_* = \mathbb{1}_{T_pN}\\
-		(F\circ G)_* = F_* \circ G_* = (\mathbb{1}_M)_* = \mathbb{1}_{T_{F(p)}M}.
+		(G\circ F)_* = G_* \circ F_* = (\mathbbm{1}_N)_* = \mathbbm{1}_{T_pN}\\
+		(F\circ G)_* = F_* \circ G_* = (\mathbbm{1}_M)_* = \mathbbm{1}_{T_{F(p)}M}.
 	\end{align*}
 	This shows that $ F_* $ and $ G_* $ are the right and left inverses of each other, hence an isomorphism of vector spaces.
 \end{proof}
@@ -112,13 +112,77 @@ Writing the chain rule in this form not only is visually appealing, but also we 
 \end{proof}
 
 \begin{corollary}[Tangent Space Has the Same Dimension as Manifold]
-	Let $ M $ be a manifold of dimension $ n $ and $ p \in M $. Then $ T_p(M) $ also has dimension $ n $.
+	\label{cor:TangentSpaceIsoMorphismToRn}
+	Let $ M $ be a manifold of dimension $ n $ and $ p \in M $. Then $ T_p(M) $ is isomorphic to $ \R^n $ and has dimension $ n $.
 \end{corollary}
 \begin{proof}
 	Let $ (U,\phi) $ be a coordinate chart containing the point $ p $. Since $ M $ is assumed to be a smooth manifold, then the coordinate map $ \phi $ automatically upgrades to a diffeomorphism between $ U $ and $ \R^n $. Thus the tangent spaces $ T_p(U) $ and $ T_{\phi(p)}(\R^n) $ are isomorphic. This implies that $ T_p(U) $ is also of dimension $ n $.
 \end{proof}
 
 \section{Basis for the Tangent Space at a Point}
+\begin{proposition}[Differential of a Coordinate Map]
+	\label{prop:DifferentialOfACoordinateMap}
+	Let $ M $ be a manifold, $ p \in M $, and $ (U,x^1\cdots,x^n) $ a coordinate chart containing $ p $. Then
+	\[ \phi_* (\frac{\partial}{\partial  x^i}\big|_{p}) = \frac{\partial}{\partial  r^i}\big|_{\phi(p)} \]
+\end{proposition}
+\begin{proof}
+	This follows immediately from the definition. Namely for a function $ f $ defined on $ U $ we have
+	\begin{align*}
+		(\phi_*(\frac{\partial}{\partial  x^i}\big|_{p}))f = \frac{\partial}{\partial  x^i}\big|_{p}(f\circ \phi) = \frac{\partial}{\partial  r^i}\big|_{\phi(p)}(f\circ\phi\circ\inv{\phi}) = \frac{\partial}{\partial  r^i}\big|_{\phi(p)}f.
+	\end{align*}
+	This implies 
+	\[ \phi_*(\frac{\partial}{\partial  x^i}\big|_{p}) = \frac{\partial}{\partial  r^i}\big|_{\phi(p)}. \]
+\end{proof}
+\begin{remark}
+	Remember that in \autoref{def:DirectionalDerivativeOnManifold} we defined
+	\[ \frac{\partial}{\partial  x^i}\big|_{p} f = \frac{\partial}{\partial  r^i}\big|_{\phi(p)}(f\circ\inv{\phi}).\tag{\eighthnote} \]
+	where $ (U,\phi) $ is a coordinate chart containing $ p $ and $ x^i = r^i \circ \phi $. The proposition above justifies this definition. This proposition states that $ T_p(M) \simeq T_{\phi(p)}(R^n) $ with $ \phi_* $ as an isomorphism. This basically means that $ \partial/\partial x^i $ maps to $ \partial/\partial r^i $ with map $ \phi_* $, or equivalently,  $ \partial/\partial r^i $ maps to $ \partial/\partial x^i $ with the map $ \inv{\phi}_* $. I.e.
+	\[ \frac{\partial}{\partial  x^i}\big|_{p} \mapsto \frac{\partial}{\partial  r^i}\big|_{\phi(p)} \quad\text{via } \phi_* \]
+	and 
+	\[ \frac{\partial}{\partial  r^i}\big|_{p} \mapsto \frac{\partial}{\partial  x^i}\big|_{\phi(p)} \quad\text{via } \inv{\phi}_* \]
+	Thus starting with the LHS of $ (\eighthnote) $ we can write
+	\[ \frac{\partial}{\partial  x^i}\big|_{p}f = (\inv{\phi}_*(\frac{\partial}{\partial  r^i}\big|_{\phi(p)}))f = \frac{\partial}{\partial  r^i}\big|_{\phi(p)}(f\circ \inv{\phi}).  \]
+\end{remark}
+
+
+\begin{proposition}[Basis for Tangent Space]
+	Let $ M $ be a manifold of dimension $ n $ and $ p \in M $. Then the vectors $ \partial/\partial x^1|_p,\cdots, \partial/\partial x^n|_p $ is a basis for the tangent space $ T_p(M) $.
+\end{proposition}
+\begin{proof}
+	Let $ (U,\phi) $ be a coordinate chart containing $ p $. By \autoref{cor:TangentSpaceIsoMorphismToRn} we see that $ T_pM $ is isomorphic to $ \R^m $ with $ \phi_* $ as a possible isomorphism. Since an isomorphism of vector spaces carries basis to a basis, and by \autoref{prop:DifferentialOfACoordinateMap} $ \phi_* $ maps the standard basis $ \frac{\partial}{\partial  r^1}\big|_{\phi(p)},\cdots,\frac{\partial}{\partial  r^n}\big|_{\phi(p)} $ to $ \partial/\partial x^1|_p,\cdots, \partial/\partial x^n|_p $ respectively, then this forms a basis for $ T_p(M) $.
+\end{proof}
+
+\begin{remark}
+	For a point $ p \in M $, once we fix a coordinate chart containing $ p $ we have a basis for $ T_p(M) $
+\end{remark}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\newpage/
+
+
+
+
+\section{Summary}
+\begin{summary}[Coordinate Map and Its Differential]
+	Let $ M $ be a manifold and $ p \in M $. Let $ (U,\phi) $ be a coordinate chart containing $ p $. We saw in \autoref{propositio:coordinateMapsAreSmooth} that $ \phi $ is a diffeomorphism between $ U $ and $ \R^n $. In \autoref{cor:TangentSpaceIsoMorphismToRn} we also saw that $ T_p(U) $ is isomorphic to $ T_{\phi(p)}(\R^n) $. In a nutshell
+	\begin{quote}
+		Under a coordinate chart $ (U,\phi) $, $ U $ is diffeomorphic to $ \R^n $ and at a point $ p \in U $ the tangent space at $ p $, i.e. $ T_p(U) $, is isomorphic to the tangent space at $ \phi(p) $, i.e. $ T_\phi(p)_n $.
+	\end{quote}
+\end{summary}
+
+
+
 
 
 \section{Solved Problems}
