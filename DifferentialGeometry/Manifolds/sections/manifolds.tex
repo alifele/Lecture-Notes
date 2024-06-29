@@ -388,9 +388,10 @@ As we studied before, on a manifold $ N $ of dimension $ n $, a diffeomorphism $
 \end{definition}
 We will skip proving this theorem here and we will just use it to prove the generalized version of this theorem for smooth maps between manifolds.
 
-\begin{definition}[Inverse function theorem for manifolds]
+\begin{theorem}[Inverse function theorem for manifolds]
+	\label{thm:InverseFunctionTheoremForManifolds}
 	Let $ F: N \to M $ be a smooth map between two manifolds of the same dimension, and $ p \in N $. Suppose for some charts $ (U,\phi) = (U,x^1,\cdots,x^n) $ about $ p $ in $ N $ and $ (V,\psi) = (V,y^1,\cdots,y^n)$ about $ F(p) $ in $ M, F(U) \subset V $. Set $ F^i = y^i \circ F $. Then $ F $ is locally invertible at $ p $ if and only if its Jacobian determinant $ \det(\partial F^i/\partial x^j)(p) $ is nonzero.
-\end{definition}
+\end{theorem}
 \begin{proof}
 	First, observe the proof structure in the observation box below. We just need to show two following bi-directional implications.
 	\[ F \text{ is locally invertible} \Longleftrightarrow \psi\circ F \circ \inv{\phi} \text{ is locally invertible.} \]

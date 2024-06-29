@@ -134,6 +134,7 @@ Writing the chain rule in this form not only is visually appealing, but also we 
 	\[ \phi_*(\frac{\partial}{\partial  x^i}\big|_{p}) = \frac{\partial}{\partial  r^i}\big|_{\phi(p)}. \]
 \end{proof}
 \begin{remark}
+	\label{remark:differentialOfCoordinateMapActingOnBases}
 	Remember that in \autoref{def:DirectionalDerivativeOnManifold} we defined
 	\[ \frac{\partial}{\partial  x^i}\big|_{p} f = \frac{\partial}{\partial  r^i}\big|_{\phi(p)}(f\circ\inv{\phi}).\tag{\eighthnote} \]
 	where $ (U,\phi) $ is a coordinate chart containing $ p $ and $ x^i = r^i \circ \phi $. The proposition above justifies this definition. This proposition states that $ T_p(M) \simeq T_{\phi(p)}(R^n) $ with $ \phi_* $ as an isomorphism. This basically means that $ \partial/\partial x^i $ maps to $ \partial/\partial r^i $ with map $ \phi_* $, or equivalently,  $ \partial/\partial r^i $ maps to $ \partial/\partial x^i $ with the map $ \inv{\phi}_* $. I.e.
@@ -146,6 +147,7 @@ Writing the chain rule in this form not only is visually appealing, but also we 
 
 
 \begin{proposition}[Basis for Tangent Space]
+	\label{prop:BasisForTangetSpace}
 	Let $ M $ be a manifold of dimension $ n $ and $ p \in M $. Then the vectors $ \partial/\partial x^1|_p,\cdots, \partial/\partial x^n|_p $ is a basis for the tangent space $ T_p(M) $.
 \end{proposition}
 \begin{proof}
@@ -157,18 +159,155 @@ Writing the chain rule in this form not only is visually appealing, but also we 
 \end{remark}
 
 
+\begin{proposition}[Transition Matrix for Coordinate Vectors]
+	Let $ M $ be a manifold and $ p \in M $. Let $ (U,\phi=(x^1,\cdots,x^n)) $ and $ (V,\psi=(y^1,\cdots,y^n)) $ be two coordinate charts containing $ p $. By \autoref{prop:BasisForTangetSpace} the following two collection of tangent vectors form two possible bases for $ T_pM $
+	\[ \set{ \frac{\partial}{\partial  x^1}\big|_{p}, \cdots, \frac{\partial}{\partial  x^n}\big|_{p} }, \qquad \set{\frac{\partial}{\partial  y^1}\big|_{p},\cdots,\frac{\partial}{\partial  y^n}\big|_{p}}. \]
+	The transition rule between these two basis is given by
+	\[ \frac{\partial}{\partial  x^j} = \sum_{i} \frac{\partial y^i}{\partial x^j} \frac{\partial}{\partial y^i},  \]
+	on $ U \cap V $.
+\end{proposition}
+\begin{proof}
+	We can think of this as $ \psi $ is a map between manifolds, i.e. $ \psi: U\cap V \subset M \to \R^n $. Considering the chart $ (W,\mathbbm{1}_{\R^n}) $ for the target manifold of $ \psi $, what we are looking after is to see how does $ \psi_* $ maps the tangent vector $ \partial/\partial x^j $. For $ \psi_* $ it is a map from $ T_pN $ to $ T_{\psi(p)}\R^n $ where the basis for $ T_{\psi(p)}\R^n $ is the collection $ \set{\partial /\partial r^i}_i $. Thus we can write
+	\[ \psi_*(\partial/\partial x^j|_p) = \sum_k a_j^k \partial/\partial r^k|_{\psi(p)}. \]
+	Applying $ r^i $ to both sides will result in 
+	\[ a_j^i  =  \phi_*(\partial/\partial x^j|_p) r^i = \partial/\partial x^j|_p (r^i\circ\phi) = \partial/\partial x^j|_p y^i. \]
+	So far we have shown that 
+	\[ \psi_*(\frac{\partial }{\partial x^j}) = \sum_i \frac{\partial y^i}{\partial x^j}\frac{\partial}{\partial r^i} \]
+	Now by applying $ \inv{\psi_*} $ to both sides and using the observation in \autoref{remark:differentialOfCoordinateMapActingOnBases} we can write
+	\[ \frac{\partial}{\partial x^j} = \sum_i \frac{\partial y^i}{\partial x^j} \frac{\partial}{\partial y^i} \]
+	where we have used the fact that $ \inv{\psi}_* $ is linear.
+\end{proof}
+\begin{remark}
+	The relation above can be written symbolically as matrix multiplication
+		\[ 
+	\begin{bmatrix}
+		\partial/\partial x^1 \\
+		\partial/\partial x^2 \\
+		\vdots \\
+		\partial/\partial x^n
+	\end{bmatrix} = 
+	\begin{pmatrix}
+		\partial y^1/\partial x^1 & \partial y^1/\partial x^2 &  \cdots & \partial y^1/\partial x^n \\
+		\partial y^2/\partial x^1 & \partial y^2/\partial x^2 &  \cdots & \partial y^2/\partial x^n \\
+		\vdots & \vdots & \ddots & \vdots \\
+		\partial y^n/\partial x^1 & \partial y^n/\partial x^2 &  \cdots & \partial y^n/\partial x^n
+	\end{pmatrix}^T
+	\begin{bmatrix}
+		\partial/\partial y^1 \\
+		\partial/\partial y^2 \\
+		\vdots \\
+		\partial/\partial y^n
+	\end{bmatrix}
+	\]
+\end{remark}
+
+
+\subsubsection{A Local Expression for the Differential}
+We start with the following proposition.
+\begin{proposition}[Local Expression for the Differential]
+	Let $ F: N\to M $ be a map between manifolds, and $ p \in N $. Let $ (U,x^1\cdots,x^n) $ be a coordinate chart in $ N $ containing $ p $ and $ (V,y^1,\cdots,y^n) $ containing $ F(p) $ be a coordinate chart in $ M $. Relative to the bases $ \set{\partial /\partial x^j|_{p}} $ for $ T_pN $ and $ \set{\partial/\partial y^i|_{F(p)}} $ for $ T_pM $, the differential $ F_*: T_pN \to T_pM $ is represented by the matrix
+	\[ [\partial F^i/\partial x^j(p)], \]
+	where $ F^i = y^i \circ F $.
+\end{proposition}
+\begin{remark}
+	We can state the inverse function theorem for manifolds \autoref{thm:InverseFunctionTheoremForManifolds} in a coordinate free description: A $ C^\infty $ function $ F:N\to M $ is locally invertible at point $ p\in N $ if and only if $ F_*: T_pN \to T_pM $ is an isomorphism of vector spaces.
+\end{remark}
+
+
+\section{Curves in a Manifold}
+The notion of a curve in a manifold is a very important one as it will allow us to define the tangent space in an alternative way. We start by the definition of a curve in a manifold.
+
+\begin{definition}[Curves in a Manifold]
+	Let $ M $ be a manifolds and $ p \in M $. a \emph{curve} in manifold is a map
+	\[ c: (a,b) \to M. \]
+	Usually $ 0 \in (a,b) $ and we say $ c $ is a \emph{curve starting at $ p $} if $ c(0) = p $. The \emph{velocity vector} $ c'(t_0) $ of the curve at time $ t_0 \in (a,b) $ is defined to be
+	\[ c'(t_0) = c_*(\frac{d}{dt}\big|_{t_0}) \in T_{c(t_0)}M. \]
+\end{definition}
+
+\begin{remark}
+	Note that the velocity vector of the curve $ c $ at time $ t_0 $ denoted by $ c'(t_0) $ is a tangent vector at $ T_{c(p)}M $. This in particular can be a source of confusion when the target space of the curve is $ \R $. That is because in the calculus the notation $ c'(t) $ is the derivative of a real-valued function and is therefore a scalar. If it is necessary to distinguish between these two meanings of $ c'(t) $ when $ c $ maps into $ \R $, we will write $ \dot{c}(t) $ for the calculus derivative. For a clarification on this point visit \autoref{prob:VelocutyVecotrAndCalculusNotation}.
+\end{remark}
+\begin{remark}
+	Alternative notations for $ c'(t_0) $ are
+	\[ \frac{d}{dt}\big|_{t_0} c, \qquad \frac{dc}{dt}(t_0). \]
+	However, I prefer the notation introduced in the definition box above as it has more emphasis on the fact that $ c'(t) $ is a vector in $ T_pM $.
+\end{remark}
+
+\begin{example}{Velocity vector of a curve is consistent with the results in calculus}
+	\label{example:VelocityVectorWorkedExample}
+	In this example we will demonstrate that the notion of the velocity vector of a curve is consistent with the similar notion in calculus. Define $ c:\R \to \R^2 $. 
+	\[ c(t)  = (t^2, t^3). \]
+	The velocity vector $ c'(t) $ is in tangent space $ T_{c(t)}\R^2 $. Let $ (\R^2, \mathbbm{1}_{\R^2}) $ be the atlas for manifold $ \R^2 $. Then we can write $ c'(t)$ in terms of the basis for tangent space.
+	\[ c'(t) = a \frac{\partial}{\partial  x}\big|_{c(t)} + b \frac{\partial}{\partial  y}\big|_{c(t)}. \] 
+	To determine the coefficients we apply the standard coordinate function $ x,y $ to both sides and we will get
+	\[ c'(t)x = a, \qquad c'(t)y = b. \]
+	From definition we have
+	\[ c'(t) x = c_*(\frac{d}{dt}\big|_t) x = \frac{d}{dt}\big|_t (x\circ c) = \frac{d}{dt}\big|_t (t^2) = 2t.   \]
+	Similarly we can get $ c'(t) y = 3t^2$. Thus
+	\[ c'(t) = (2t) \frac{\partial}{\partial  x}\big|_{c(t)} + (3t^2) \frac{\partial}{\partial  y}\big|_{c(t)}. \]
+\end{example}
+
+The steps that we took in the example above motivates us for the following proposition.
+\begin{proposition}[Velocity Vector in a Local Coordinate]
+	Let $ c:(a,b)\to M $ be a smooth curve, and let $ (U,x^1,\cdots,x^n) $ be a coordinate chart about $ c(t) $. Write $ c^i = x^i\circ c $ for the i-th component of $ c $ in the chart. Then $ c'(t) \in T_{c(t)}M $ is given by
+	\[ c'(t) = \sum_i \dot{c}_i \frac{\partial}{\partial x^i}\big|_{c(t)}. \] 
+	Thus relative to the bases $ \set{\partial /\partial x^i|_p} $ for $ T_{c(t)}M $ the velocity vector $ c'(t) $ can be written as
+	\[ \begin{bmatrix}
+		\dot{c}_1(t) \\
+		\dot{c}_2(t) \\
+		\vdots \\
+		\dot{c}_n(t)
+	\end{bmatrix} \]
+\end{proposition}
+\begin{proof}
+	First, observe that by definition $ c'(t) \in T_{c(t)}M  $ thus can be written in the local coordinate  of $ T_{c(t)}M $ as
+	\[ c'(t) = \sum_i a^i \frac{\partial}{\partial x^i}\big|_{c(t)}. \]
+	Now we apply both sides to $ x_j $, and simply use the definition of the differential of a map and write
+	\[x^j = c_*(\frac{d}{dt}\big|_{t}) x^j  =  \frac{d}{dt}\big|_{t}(x^j\circ c) = \dot{c}^j(t). \]
+	This completes the proof.
+\end{proof}
+
+So far, we observed that every smooth curve $ c $ at $ p $ in a manifold $ M $ gives rise to a tangent vector in $ T_pM $. The following proposition states the converse of this, i.e. for every tangent vector in tangent space $ T_pM $ there exists a curve passing through $ p $.
+
+\begin{proposition}[Existence of a Curve with a Given Initial Vector]
+	For any point $ p $ in a manifold $ M $ and any tangent vector $ X_p \in T_pM $, there are $ \epsilon>0 $ and a smooth curve $ c:(-\epsilon,\epsilon) \to M $ such that $ c(0) = p $ and $ c'(0) = X_p $
+\end{proposition}
+\begin{proof}
+	Let $ p \in M $ and $ X_p \in T_pM $.  Let $ (U,\phi = (x^1,\cdots,x^n)) $ be a coordinate chart centered at $ p $. The differential of $ \phi $ given by $ \phi_* $ maps $ X_p $ to $ Y_{\mathbf{0}} \in T_\mathbf{0}\R^n $. For instance, assume 
+	\[ X_p = \sum_i a^i \frac{\partial}{\partial  x^i}\big|_{p}. \]
+	Applying $ \phi_* $ to both sides and using \autoref{prop:DifferentialOfACoordinateMap} we will get
+	\[ Y_\mathbf{0} =  \sum_i a^i \frac{\partial}{\partial  r^i}\big|_{\mathbf{0}}  \]
+	where $ r^i $ is the standard coordinate function of $ \R^n $. Define the smooth curve $ \gamma: (-\epsilon, \epsilon) \to \R^n $ given by
+	\[ \gamma(t) = (a^1t, \cdots, a^n t). \]
+	For small enough $ \epsilon $ this curve is in $ \phi(U) $. We claim that the curve $ c:(-\epsilon,\epsilon)\to M $ given by
+	\[ c = \inv{\phi} \circ \gamma \] 
+	has the desired property. First, observe by definition we will have $ c(0) = p $
+	\[ c(0) = \inv{\phi}(\gamma(0)) = p. \]
+	For $ c'(0) $ we use the definition
+	\[ c'(0) = c_*(d/dt|_{0}) = (\inv{\phi}\circ \gamma)_*(d/dt|_{0}) = (\inv{\phi}_*  \gamma_*)(d/dt|_{0})  \]
+	It now remains to calculate the $ (\inv{\phi}_* \gamma_*) $. To calculate this, first observe that $ \gamma_* $ maps $ d/dt|_0 $ to $ Y_\mathbf{0} $. And also observe that $ \inv{\phi}_* $ maps $ X_p $ to $ Y_\mathbf{0} $. I.e.
+	\[ Y_\mathbf{0} = \phi_* X_p, \qquad Y_\mathbf{0} = \gamma_* \frac{d}{dt}\big|_0. \]
+	Then we will get
+	\[ \phi_* X_p = \gamma_* \frac{d}{d  t}\big|_{0} \implies X_p = \inv{\phi}_* \gamma_* \frac{d}{dt}\big|_0. \]
+	Thus we have
+	\[ c'(0) =  \inv{\phi}_* \gamma_* \frac{d}{dt}\big|_0. = X_p\]
+	and this completes the proof.
+\end{proof}
+
+Now using the notion of curves, we can calculate the differential of a map between manifolds via curves. The following proposition discusses this statement.
+\begin{proposition}[Computing Differentials Using Curves]
+	Let $ F: N  \to M$ be a smooth map between manifolds, and $ p \in N $ and $ X_p \in T_pN $. Let $ c $ be a curve on $ N $ such that $ c(0) = p $, and $ c'(0) = X_p $. Then
+	\[ F_{*,p} X_p = (F\circ c)' (0). \]
+\end{proposition}
+\begin{proof}
+	We simply follow the definition
+	\[(F\circ c)'(0) = (F\circ c)_* (\frac{d}{dt}\big|_0) = F_* c_* (\frac{d}{dt}\big|_0) = F_* \left(  c_* (\frac{d}{dt}\big|_0) \right) = F_* X_p \]
+	and this completes the proof.
+\end{proof}
 
 
 
-
-
-
-
-
-
-
-
-\newpage/
+\newpage
 
 
 
@@ -181,22 +320,71 @@ Writing the chain rule in this form not only is visually appealing, but also we 
 	\end{quote}
 \end{summary}
 
+\begin{summary}[Differential of a Map Between Euclidean Spaces]
+	Let $ F: \R^n \to \R^m $. It differential at point $ p \in \R^n $ is its Jacobian matrix evaluated at point $ p $.
+	\[ F_* = 
+	\begin{pmatrix}
+		\frac{\partial F^1}{\partial x^1} & \cdots & \frac{\partial F^1}{\partial x^n} \\
+		\frac{\partial F^2}{\partial x^1} & \cdots & \frac{\partial F^2}{\partial x^n} \\
+		\vdots & \ddots & \vdots \\
+		\frac{\partial F^m}{\partial x^1} & \cdots & \frac{\partial F^m}{\partial x^n}
+	\end{pmatrix}(p)
+	 \]
+\end{summary}
+
+\begin{summary}{Differential of a coordinate map acting on a tangent vector}
+	Let $ M $ be a manifold and $ (U,\phi = (x^1,\cdots,x^n)) $ a coordinate chart containing $ p \in M $. Then we have
+	\[ \phi_*(\frac{\partial}{\partial  x^i}\big|_{p}) = \frac{\partial}{\partial  r^i}\big|_{\phi(p)} ,\]
+	or equivalently
+	\[ \inv{\phi_*}(\frac{\partial}{\partial  r^i}\big|_{\phi(p)}) = \frac{\partial}{\partial  x^i}\big|_{p}. \]
+	To show these equation we use the definition of directional derivatives on a manifold (\autoref{def:DirectionalDerivativeOnManifold}). However, we can see that how these equations can reproduce the definition of the directional derivative on a manifold. Let $ f:M \to \R $
+	\[ \frac{\partial}{\partial  x^i}\big|_{p} f = \inv{\phi_*}(\frac{\partial}{\partial  r^i}\big|_{\phi(p)})f = \frac{\partial}{\partial  r^i}\big|_{\phi(p)}(f\circ\inv{\phi}).  \]
+	where we have used the definition of the differential of a map.
+\end{summary}
+
+\begin{summary}[Bases for Tangent Space at a Point on a Manifold]
+	Let $ M $ be a manifold with $ p \in M $. $ T_pM $ is the the tangent space at point $ p $ that contains all of the point derivatives $ D: C_p^\infty \to \R$. For each coordinate chart containing $ p $ we can write a natural bases for $ T_pM $. For instance, let $ (U,\phi=(x^1,\cdots,x^n)) $ be a coordinate chart containing $ p $. Then the collection of tangent vectors
+	\[ \set{ \frac{\partial}{\partial  x^1}\big|_{p}, \cdots, \frac{\partial}{\partial  x^n}\big|_{p} } \]
+	is a basis for $ T_pM $. While choosing a different coordinate chart containing $ p $, e.x. $ (V,\psi=(y^1,\cdots,y^n)) $ we can write another natural basis for $ T_pM $
+	\[ \set{\frac{\partial}{\partial  y^1}\big|_{p},\cdots,\frac{\partial}{\partial  y^n}\big|_{p}}. \]
+	The change of basis matrix $ R $ maps these two basis to each other. This map is given by
+	\[ 
+	\begin{bmatrix}
+		\partial/\partial x^1 \\
+		\partial/\partial x^2 \\
+		\vdots \\
+		\partial/\partial x^n
+	\end{bmatrix} = 
+	\begin{pmatrix}
+		\partial y^1/\partial x^1 & \partial y^1/\partial x^2 &  \cdots & \partial y^1/\partial x^n \\
+		\partial y^2/\partial x^1 & \partial y^2/\partial x^2 &  \cdots & \partial y^2/\partial x^n \\
+		\vdots & \vdots & \ddots & \vdots \\
+		\partial y^n/\partial x^1 & \partial y^n/\partial x^2 &  \cdots & \partial y^n/\partial x^n
+	\end{pmatrix}^T
+	\begin{bmatrix}
+		\partial/\partial y^1 \\
+		\partial/\partial y^2 \\
+		\vdots \\
+		\partial/\partial y^n
+	\end{bmatrix}
+	 \]
+\end{summary}
+
+\begin{summary}[Velocity vector of a curve into $ \R^n $]K
+	Let $ c:(a,b) \to \R^n $. Then is velocity vector at $ t_0 \in (a,b) $ is given by
+	\[ 
+	c'(t) = 
+	\begin{bmatrix}
+		\dot{c}_1(t_0) \\
+		\dot{c}_2(t_0) \\
+		\vdots \\
+		\dot{c}_n(t_0)
+	\end{bmatrix}
+	 \]
+	where $ c_1,\cdots,c_n $ are the components of the curve $ c $. See \autoref{example:VelocityVectorWorkedExample} for a worked example.
+\end{summary}
 
 
 
 
-\section{Solved Problems}
-\begin{problem}[The differential of a map]
-	\label{prob:DifferentialOfAMapIsADerivation}
-	Check that $ F_*(X_p) $ is a derivation at $ F(p) $ and that $ F_*: T_p N \to T_{F(p)}M  $ is a linear map.
-\end{problem}
-\begin{solution}
-	We start with showing that $ F_*(X_p) $ is a derivation at $ F(p) $. By definition we have
-	\begin{align*}
-		[(F_*(X_p))(f\cdot g)](F(p)) &=  [ X_p((f\cdot g)\circ F) ](p) = [ X_p((f\circ F) \cdot (g\circ F)) ](p)\\
-		&= [X_p(f\circ F)](p) \cdot g(F(p)) + f(F(p))\cdot [X_p(g\circ F)](p)\\
-		&= [(F_*(X_p))f](F(p)) \cdot g(F(p)) + f(F(p))\cdot [(F_*(X_p))g].
- 	\end{align*}
- 	This shows that $ F_*(p) $ is indeed a derivation at $ F(p) $. Furthermore, to prove the linearity, let $ X_p, Y_p \in T_p(N) $. Then
- 	\[ (F_*(X_p + Y_p))f = (X_p + Y_p)(f\circ F) = X_p(f\circ F) + Y_p(f\circ F) = (F_*(X_p)) f + (F_*(Y_p)) f. \]
-\end{solution}
+\input{sections/TangentSpacesSolvedProblemes.tex}

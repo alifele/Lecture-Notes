@@ -1,0 +1,33 @@
+
+\section{Solved Problems}
+\begin{problem}[The differential of a map]
+	\label{prob:DifferentialOfAMapIsADerivation}
+	Check that $ F_*(X_p) $ is a derivation at $ F(p) $ and that $ F_*: T_p N \to T_{F(p)}M  $ is a linear map.
+\end{problem}
+\begin{solution}
+	We start with showing that $ F_*(X_p) $ is a derivation at $ F(p) $. By definition we have
+	\begin{align*}
+		[(F_*(X_p))(f\cdot g)](F(p)) &=  [ X_p((f\cdot g)\circ F) ](p) = [ X_p((f\circ F) \cdot (g\circ F)) ](p)\\
+		&= [X_p(f\circ F)](p) \cdot g(F(p)) + f(F(p))\cdot [X_p(g\circ F)](p)\\
+		&= [(F_*(X_p))f](F(p)) \cdot g(F(p)) + f(F(p))\cdot [(F_*(X_p))g].
+	\end{align*}
+	This shows that $ F_*(p) $ is indeed a derivation at $ F(p) $. Furthermore, to prove the linearity, let $ X_p, Y_p \in T_p(N) $. Then
+	\[ (F_*(X_p + Y_p))f = (X_p + Y_p)(f\circ F) = X_p(f\circ F) + Y_p(f\circ F) = (F_*(X_p)) f + (F_*(Y_p)) f. \]
+\end{solution}
+
+
+\begin{problem}[Velocity vector versus the calculus derivative (from L. Tu)]
+	\label{prob:VelocutyVecotrAndCalculusNotation}
+	Let $ c:(a,b) \to \R $ be a curve with target space $ \R $. Verify that $ c'(t) = \dot{c}(t) d/dx|_{c(t)} $.
+\end{problem}
+\begin{solution}
+	Let $ f: \R \to \R $. From definition 
+	\[ c'(t_0) f = c_*(\frac{d}{dt}\big|_{t_0})f = \frac{d}{dt}\big|_{t_0}(f\circ c) = \dot{c}(t_0) \frac{df}{dx}, \]
+	where we have used the chain rule. Thus
+	\[ c'(t_0) = \dot{c}(t) \frac{d}{dx}\big|_{c(t_0)}. \]
+\end{solution}
+
+\begin{problem}[Differential of left multiplication (from L. Tu)]
+	If $ g $ is a matrix in the general linear group $ GL(n,\R) $, let $ \ell_g: GL(n,\R) \to GL(n,\R) $ be left 
+	multiplication by $ g $. Thus $ \ell_g(B) = gB $ for any $ B \in GL(n,\R) $. Since $ GL(n,\R) $ is an open subset of the vector space $ \R^{n\times n} $, the tangent space $ T_g(GL(n,\R)) $ can be identified with $ \R^{n\times n} $. Show that with this identification the differential $ (\ell_g)_{*,I}: T_I(GL(n,\R)) \to T_g(GL(n,\R)) $ is also left multiplication by $ g $. 
+\end{problem}
