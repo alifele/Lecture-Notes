@@ -171,3 +171,47 @@ We can now see that the map $ (\pi_{1*},\pi_{2*}) $ maps these two bases to each
 \begin{problem}[Transforming vectors to coordinate vectors]
 	Let $ X_1,\cdots,X_n $ be $ n $ vector fields on an open subset $ U $ of a manifold of dimension $ n $. Suppose that at $ p \in U $, the vectors $ (X_1)_p,\cdots,(X_n)_p $ are linearly independent. Show that there is a chart $ (V,x^1,\cdots,x^n) $ about $ p $ such that $ (X_i)_p = (\partial/\partial x^i)_p $ for $ i = 1,\cdots,n $.
 \end{problem}
+\begin{solution}
+	Let $ (V,y^1,\cdots,y^n) $ be a coordinate chart containing $ p $. We expand the tangent vectors $ (X_1)_p,\cdots,(X_n)_p $ in terms of the bases $ \partial/\partial y^1|_{p},\cdots,\partial/\partial y^n|_{p} $ and arrange the coordinates as the columns of a matrix $ P $. Symbolically we can write
+	\[ \left[(X_1)_p\ (X_2)_p\ \cdots\ (X_n)_p\right] = \left[\partial/\partial y^1|_{p}\ \partial/\partial y^2|_{p}\ \cdots\ \partial/\partial y^n|_{p}\right] P.
+	 \]
+	Since $ (X_i)_p $ are linearly independent, so $ P $ is non singular and is invertible. Thus we can write
+	\[ \left[ \partial/\partial y^1|_{p}\ \partial/\partial y^2|_{p} \cdots\ \partial/\partial y^n|_{p} \right] = \left[ (X_1)_p\ (X_2)_p\ \cdots\ (X_n)_p \right] \inv{P}. \]
+	Define
+	\[ x^j = \sum_i\ [\inv{P}]_{ji}\ y^i. \]
+	Since $ \inv{P} $ is non singular and $ (y^1,\cdots,y^n) $ is a coordinate maps, this implies that $ (x^1,\cdots,x^n) $ is also a coordinate map, thus $ (V,(x^1,\cdots,x^n)) $ is also a chart. From the change of bases rule for the differential in charts we know that
+	\[ \partial/\partial y_i = \sum_j \frac{\partial x_j}{\partial y_i} \frac{\partial}{\partial x_j} \]
+	where from the definition $ x^j $
+	\[ \partial/\partial y^i = \sum_j \left[ \inv{P} \right]_{ji} \frac{\partial }{\partial x^j}. \]
+	Symbolically we can write this as
+	\[ [ \partial/\partial y^1\ \partial/\partial y^2\ \cdots\ \partial/\partial y^n ] = [\partial/\partial x^1\ \partial/\partial x^2\ \cdots\ \partial/\partial x^n] \inv{P}. \]
+	By multiplying both sides as $ P $ we will get
+	\[ [\partial/\partial x^1\ \partial/\partial x^2\ \cdots\ \partial/\partial x^n] =  [ \partial/\partial y^1\ \partial/\partial y^2\ \cdots\ \partial/\partial y^n ]P  \]
+	Thus we can conclude that 
+	\[ [\partial/\partial x^1\ \partial/\partial x^2\ \cdots\ \partial/\partial x^n] = \left[(X_1)_p\ (X_2)_p\ \cdots\ (X_n)_p\right]. \]
+\end{solution}
+
+
+\begin{problem}[Local Maxima (form L. Tu)]
+	A real valued function $ f:M\to \R $ on a manifold is said to have a local maximum at $ p \in M $ if there is a neighborhood $ U $ of $ p $ such that $ f(p) \geq f(q) $ for all $ q \in U $.
+	\begin{enumerate}[(a)]
+		\item Prove that if a differentiable function $ f:I\to \R $ defined on an open interval $ I $ has a local maximum at $ p \in I $ then $ f'(p) = 0 $.
+		\item Prove that a local maximum of a $ C^\infty $ function $ f:M\to \R $ is a critical point of $ f $.
+	\end{enumerate}
+\end{problem}
+\begin{solution}
+	$\ $
+	\begin{enumerate}[(a)]
+		\item Let $ f $ has a local maximum at $ p \in I $. Thus $ f(p) \leq f(x) $ for all $ x $ sufficiently close to $ p $ from left. Thus
+		\[ f'(p) = \lim_{x \to p^-} \frac{f(x) - f(p)}{x-p} \leq 0. \]
+		On the other hand for all $ x $ sufficiently close to $ p $ from left we have $ f(p) \geq f(x) $. This implies that 
+		\[ f'(p) = \lim_{x \to p^+} \frac{f(x) - f(p)}{x-p} \geq 0. \]
+		Combining the two inequalities above we will get
+		\[ f'(p) = 0. \]
+		\item Let $ p \in M $ be a local maximum of a function $ f $. Let $ X_p \in T_pM $ be any tangent vectors, and $ c $ be a smooth curve with velocity vector $ X_p $ that starts from $ p $. Then 
+		\[ X_p f = (f\circ c)'(0). \]
+		Note that $ f\circ c $ is a real function from $ \R\to \R $ that has a local maxima at $ t = 0 $, thus $ (f\circ c)'(0) = 0 $. Let $ (U,\phi = (x^1,\cdots,x^n)) $ be any coordinate chart. From the fact above we know that 
+		\[ \frac{\partial}{\partial  x^i}\big|_{p} f = 0 \qquad \text{for $ i = 1,2,\cdots,n $}. \]
+		So by \autoref{prop:CriticalPointOfARealMap} we conclude that $ p $ is a critical point.
+	\end{enumerate}
+\end{solution}
