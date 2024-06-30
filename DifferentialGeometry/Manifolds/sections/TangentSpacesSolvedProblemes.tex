@@ -122,5 +122,52 @@
 	This is indeed a diffeomorphism, and in fact $ (\pi_1,\pi_2) = \mathbbm{1}_{M\times N} $. This implies that $ (\pi_{1*},\pi_{2*}) $ is an isomorphism of vector spaces.
 \end{solution}
 \begin{carefull}
-	I am not sure if my question above is a correct one.
+	I am not sure if my question above is a correct one. However, I have provided a more direct proof below.
 \end{carefull}
+\textbf{Second solution:} We will show this by explicitly constructing a basis for $ T_{(p,q)}(M\times N) $ as well as $ T_pM \times T_qN $ and we will show that the map $ (\pi_{1*},\pi_{2*}) $ caries the bases to bases, hence is an isomorphism of vector spaces. 
+
+Let $ (U,\phi=(x^1,\cdots,x^n)) $ be a coordinate chart containing $ p \in M$ and $ (V,\psi=(y^1,\cdots,y^n)) $ be a coordinate chart containing $ q \in N $. Then a coordinate chart for $ M\times N $ that contains $ (p,q) $ would be $ (U\times V, (\phi\circ\pi_1, \psi\circ\pi_2) = (\bar{x}^1,\cdots,\bar{x}^n,\bar{y}^1,\cdots,\bar{y}^m)) $. Observe that 
+\[ \pi_{1*}(\frac{\partial}{\partial  \bar{x}^i}\big|_{(p,q)}) = a^1_i \frac{\partial}{\partial  x^1}\big|_{p} + \cdots + a^n_i \frac{\partial}{\partial  x^n}\big|_{p}.  \]
+By applying $ x^j $ to both sides we get
+\[ a^j_i = \pi_{1*}(\frac{\partial}{\partial  \bar{x}^i}\big|_{(p,q)}) x^j = \frac{\partial}{\partial  \bar{x}^i}\big|_{(p,q)}(x^i\circ \pi_1) = \delta_{ij}. \] 
+Thus we can write
+\[  \pi_{1*}(\frac{\partial}{\partial  \bar{x}^i}\big|_{(p,q)}) = \frac{\partial}{\partial  x^i}\big|_{p}, \]
+and by a similar calculation for $ \pi_{2*} $ we get
+\[  \pi_{1*}(\frac{\partial}{\partial  \bar{y}^i}\big|_{(p,q)}) = \frac{\partial}{\partial  y^i}\big|_{p}. \]
+On the other hand, observe that a basis for $ T_{(p,q)}(M\times N) $ is 
+\[ \set{\frac{\partial}{\partial  \bar{x}^1}\big|_{(p,q)},\cdots,\frac{\partial}{\partial  \bar{x}^n}\big|_{(p,q)},\frac{\partial}{\partial  \bar{y}^1}\big|_{(p,q)},\cdots,\frac{\partial}{\partial  \bar{y}^m}\big|_{(p,q)}} \]
+and a basis for $ T_p(M)\times T_q(N) $ is 
+\[ \set{(\frac{\partial}{\partial  x^1}\big|_{p},0),\cdots,(0,\frac{\partial}{\partial  x^n}\big|_{p},0),\frac{\partial}{\partial  y^1}\big|_{q}, (0,\frac{\partial}{\partial  y^m}\big|_{q})} \]
+We can now see that the map $ (\pi_{1*},\pi_{2*}) $ maps these two bases to each other, thus it is an isomorphism of vector spaces.
+
+\begin{problem}[Differentials of multiplication and inverse (from L. Tu)]
+	Let $ G $ be a Lie group with multiplication map $ \mu:G\times G \to G $, inverse map $ \iota: G \to G $, and identity element $ e $. 
+	\begin{enumerate}[(a)]
+		\item Show that the differential at the identity of the multiplication map $ \mu $ is addition:
+		\begin{align*}
+			\mu_{*,(e,e)}: T_eG \times T_eG \to T_e G, \qquad \mu_{*,(e,e)}(X_e,Y_e) = X_e + Y_e
+		\end{align*}
+		\item Show that the differential at the identity of $ \iota $ is the negative
+		\[ \iota_{*,e}: T_eG \to T_eG, \qquad \iota_{*,e}(X_e) = -X_e. \]
+	\end{enumerate}
+\end{problem}
+\begin{solution}
+	$ \ $\\
+	\begin{enumerate}[(a)]
+		\item We will use the idea of \autoref{prop:curvesToComputeDifferential} to compute the differential. Let $ c:(-\epsilon,\epsilon) \to G\times G $ for some $ \epsilon>0 $, where $ c(t) = (g_1(t),g(t)) $ such that we have $ x(0) = (e,e) $ and $ c'(0)=(X_e,Y_e)$. Then we can write
+		\[ \mu_{*,(e,e)} (X_e,Y_e) = (\mu \circ c)'(0) = (g_1g_2)'(0) = g_1'(0)g_2(0) + g_1(0)g_2'(0) = X_e + Y_e, \]
+		where we have used the fact that $ (\cdot)' $ is a derivation.
+		\item We again start with the idea of \autoref{prop:curvesToComputeDifferential}. Let $ c:(-\epsilon,\epsilon) \to G $ for some $ \epsilon>0 $ such that $ c(0) = e $ and $ c'(0) = X_e $. Thus we can write
+		\[ \iota_{*,e} X_e = (\iota \circ c)'(0). \]
+		Now we aim at finding $ (\iota \circ c)'(0) $ by using the identity
+		\[ \mu(c(t), (\iota \circ c)(t)) = e, \quad \text{for $ t\in (-\epsilon,\epsilon) $}. \]
+		Since the function above (which is from $ \R $ to $ G $) is constant, thus its derivation will be zero. I.e.
+		\[ (c \cdot (\iota\circ c))(0) = c'(0)\underbrace{\iota(c(0))}_{e} + \underbrace{c(0)}_e(\iota\circ c)'(0) = 0 \]
+		where we have used the fact that $ \iota(e) = e $ and $ (\cdot)' $ is a derivation. This implies that 
+		\[ (\iota \circ c)'(0) = -X_p. \]
+	\end{enumerate}
+\end{solution}
+
+\begin{problem}[Transforming vectors to coordinate vectors]
+	Let $ X_1,\cdots,X_n $ be $ n $ vector fields on an open subset $ U $ of a manifold of dimension $ n $. Suppose that at $ p \in U $, the vectors $ (X_1)_p,\cdots,(X_n)_p $ are linearly independent. Show that there is a chart $ (V,x^1,\cdots,x^n) $ about $ p $ such that $ (X_i)_p = (\partial/\partial x^i)_p $ for $ i = 1,\cdots,n $.
+\end{problem}
