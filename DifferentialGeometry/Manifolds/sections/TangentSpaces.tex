@@ -249,6 +249,7 @@ The notion of a curve in a manifold is a very important one as it will allow us 
 
 The steps that we took in the example above motivates us for the following proposition.
 \begin{proposition}[Velocity Vector in a Local Coordinate]
+	\label{prop:VelocityVectorInLocalCorodinate}
 	Let $ c:(a,b)\to M $ be a smooth curve, and let $ (U,x^1,\cdots,x^n) $ be a coordinate chart about $ c(t) $. Write $ c^i = x^i\circ c $ for the i-th component of $ c $ in the chart. Then $ c'(t) \in T_{c(t)}M $ is given by
 	\[ c'(t) = \sum_i \dot{c}_i \frac{\partial}{\partial x^i}\big|_{c(t)}. \] 
 	Thus relative to the bases $ \set{\partial /\partial x^i|_p} $ for $ T_{c(t)}M $ the velocity vector $ c'(t) $ can be written as
@@ -296,6 +297,7 @@ So far, we observed that every smooth curve $ c $ at $ p $ in a manifold $ M $ g
 
 Now using the notion of curves, we can calculate the differential of a map between manifolds via curves. The following proposition discusses this statement.
 \begin{proposition}[Computing Differentials Using Curves]
+	\label{prop:curvesToComputeDifferential}
 	Let $ F: N  \to M$ be a smooth map between manifolds, and $ p \in N $ and $ X_p \in T_pN $. Let $ c $ be a curve on $ N $ such that $ c(0) = p $, and $ c'(0) = X_p $. Then
 	\[ F_{*,p} X_p = (F\circ c)' (0). \]
 \end{proposition}
@@ -305,6 +307,39 @@ Now using the notion of curves, we can calculate the differential of a map betwe
 	and this completes the proof.
 \end{proof}
 
+
+\section{Immersion and Submersion}
+We start with the definitions of Immersion and Submersion.
+\begin{definition}[Immersion and Submersion]
+	Let $ F:N\to M $ be a smooth map, and let $ F_{*,p} $ denote its differential at a point $ p \in N $. Then 
+	\begin{itemize}[noitemsep]
+		\item $ F $ is an Immersion if and only if $ F_{*,p} $ is injective.
+		\item $ F $ is a Submersion if and only if $ F_{*,p} $ is surjective.
+	\end{itemize}
+\end{definition}
+
+Now we can define the notion of critical point and regular points of a mapping.
+\begin{definition}[Critical and Regular points of a smooth map between manifolds]
+	Let $ F:N \to M $ be a smooth map between manifolds. A point point $ p  \in N$ is
+	\begin{itemize}[noitemsep]
+		\item a \emph{critical point} if $ F_{*,p} $ fails to be surjective, and
+		\item a \emph{regular point} if $ F_{*,p} $ is surjective.
+	\end{itemize}
+	A point $ q \in M $ is critical value of the map $ F $ if it is the image of a critical point.
+\end{definition}
+
+The following proposition gives a more intuitive characterization of the critical points of function defined from a manifold to the real number line.
+
+\begin{proposition}[Critical points of a map to real number line]
+	Let $ f: N \to \R $ be a smooth map from manifold $ N $ to the real number line. A point $ p \in N $ is a critical point of the map $ f $ in and only if all of its partial derivatives relative to some chart $ (U,\phi=(x^1,\cdots,x^n)) $ are zero at $ p $, i.e.
+	\[ \frac{\partial }{\partial x^i}\big|_{p} f = 0 \qquad \text{for all } i = 1,\cdots, n. \]
+\end{proposition}
+\begin{proof}
+	The differential of $ f $ in the local coordinates can be written as the matrix
+	\[ f_{*,p} = [ \frac{\partial}{\partial  x^1}\big|_{p} f, \cdots, \frac{\partial}{\partial  x^n}\big|_{p} f ]. \]
+	The point $ p $ is a critical point if and only if $ f_{*,p} $ is not surjective. Since the image of $ f_{*,p} $ is $ \R $, then its column space is either one dimensional or zero dimensional. Thus $ f_{*,p} $ is not surjective if and only if all of its entries are zero, i.e.
+	\[ \frac{\partial }{\partial x^i}\big|_{p} f = 0 \qquad \text{for all } i = 1,\cdots, n. \]
+\end{proof}
 
 
 \newpage
@@ -343,6 +378,7 @@ Now using the notion of curves, we can calculate the differential of a map betwe
 \end{summary}
 
 \begin{summary}[Bases for Tangent Space at a Point on a Manifold]
+	\label{summary:BasesFor TangentSpace}
 	Let $ M $ be a manifold with $ p \in M $. $ T_pM $ is the the tangent space at point $ p $ that contains all of the point derivatives $ D: C_p^\infty \to \R$. For each coordinate chart containing $ p $ we can write a natural bases for $ T_pM $. For instance, let $ (U,\phi=(x^1,\cdots,x^n)) $ be a coordinate chart containing $ p $. Then the collection of tangent vectors
 	\[ \set{ \frac{\partial}{\partial  x^1}\big|_{p}, \cdots, \frac{\partial}{\partial  x^n}\big|_{p} } \]
 	is a basis for $ T_pM $. While choosing a different coordinate chart containing $ p $, e.x. $ (V,\psi=(y^1,\cdots,y^n)) $ we can write another natural basis for $ T_pM $
