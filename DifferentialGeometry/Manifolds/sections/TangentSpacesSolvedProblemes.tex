@@ -215,3 +215,32 @@ We can now see that the map $ (\pi_{1*},\pi_{2*}) $ maps these two bases to each
 		So by \autoref{prop:CriticalPointOfARealMap} we conclude that $ p $ is a critical point.
 	\end{enumerate}
 \end{solution}
+
+
+\begin{problem}[Maxima Integral Curve (from L. Tu)]
+	Let $ X = x^2 d/dx $ be a vector field on the real number line $ \R $. Fine maximal integral curve of $ X $ starting at $ x =2 $.
+\end{problem}
+\begin{solution}
+	Let $ c:(a,b) \to \R $ given as $ c(t) = x(t) $ such curve such that $ c(0) = 2 $. By \autoref{prop:curvesToComputeDifferential} we can write
+	\[ c'(t) = \dot{c}(t) \frac{d}{dt} = \dot{x} \frac{d}{dx}. \]
+	For $ c $ to an integral curve we need to have
+	\[ c'(t) = X|_{c(t)} \qquad \text{for } t\in (a,b).  \]
+	Thus we will have
+	\[ \dot{x} = x^2, \qquad x(0) = 2. \]
+	By solving this initial value problem with separation of variables method, we will get
+	\[ x(t) = \frac{-2}{2t+1}. \]
+	The maximal domain for this curve is $ t \in (-\infty, -1/2) $.
+\end{solution}
+
+
+\begin{problem}[Recovering vector field from a global flow (from L. Tu)]
+	Let $ F: \R\times \R^2 \to \R^2 $ be a global flow on $ \R^2 $ give by
+	\[ F\left( t, \vectt{x}{y} \right) = \matt{\cos t}{-\sin t}{\sin t}{\cos t} \vectt{x}{y}. \]
+	Recover the vector field that generates this global flow.
+\end{problem}
+\begin{solution}
+	Since $ F $ is a global flow, then for any given $ p = \vectt{x}{y} \in \R^2 $, $ F(t,p) $ will be an integral curve starting at $ p $. Thus its velocity vector at $ p $ will give the vector field at $ p $. The velocity vector of $ F $ at $ p $ is given by
+	\[ X_p = \frac{\partial F }{\partial t}\big|_{0}(0,p) = \matt{-\sin t}{-\cos t}{\cos t}{-\sin t}\big|_{0} \vectt{x}{y} = -y\frac{\partial }{\partial x} + x \frac{\partial }{\partial y}. \]
+	Thus the generating vector field is given as
+	\[ X = -y \frac{\partial }{\partial x } + x \frac{\partial }{\partial y}. \]
+\end{solution}

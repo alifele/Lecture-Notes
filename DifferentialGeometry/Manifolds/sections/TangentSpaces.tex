@@ -342,11 +342,124 @@ The following proposition gives a more intuitive characterization of the critica
 	\[ \frac{\partial }{\partial x^i}\big|_{p} f = 0 \qquad \text{for all } i = 1,\cdots, n. \]
 \end{proof}
 
+\section{Vector Fields on Manifolds}
+Intuitively speaking, vector fields assign to every point $ p $ in manifold $ M $ a tangent vector from $ T_pM $. Or, formally speaking, A vector filed on a manifold $ M $ is a sections of the tangent bundles $ TM $ of manifold $ M $.
+
+As we will see later, every smooth vector field can be seen locally as the velocity vector field of a fluid flow. The path traced out by a point under this flow is called an \emph{integral curve} of the vector field. In other words, integral curves are curves whose velocity vector field is the restriction of the given vector field to the curve. Finding the integral curve is equivalent to solving a system of first order differential equations.
+
+The set of all vector fields on a manifold, denoted by $ \mathfrak{X}(M) $ has a vector space structure. Introducing the notion of multiplication by Lie bracket $ [\cdot,\cdot] $ makes it into a Lie algebra. More details are covered throughout this section.
+
+\subsection{Smoothness of vector fields}
+The smoothness of the vector fields on a manifold, formally seen as sections of tangent bundle over a manifold, can be traced back to the smoothness of the section. However, to keep stuff simple, we will give some other characterization of smooth vector fields.
+
+\begin{proposition}[Smoothness of a Vector Field on a Chart]
+	Let $ M $ be a manifold with $ p \in M $. And let $ (U,x^1,\cdots,x^n) $ be a local chart on the manifold. A vector field given as
+	\[ X = \sum_i a^i \frac{\partial}{\partial  x^i}\big|_{p} \] 
+	is smooth on $ U $ if and only in the coefficient functions $ a^i $ are smooth on $ U $.
+\end{proposition}
+
+\begin{proposition}[Smoothness of a Vector Field in Terms of Functions]
+	A vector field $ X $ defined on manifold $ M $ is smooth, if and only if for any smooth function $ f $ defined on $ M $, the function $ Xf $ is also smooth.
+\end{proposition}
+
+\begin{observation}[Vector fields as derivations of algebra $ C^\infty(M) $]
+	By the characterization of smooth vector fields over a manifold given by the proposition above, we can see a vector field $ X $ on a manifold $ M $ as a linear map on the algebra of $ C^\infty $ functions on manifold.
+	\[ X : C^\infty (M) \to C^\infty (M). \]
+	It is also straight forward to show that $ X $ is a derivation of the algebra $ C^\infty (M) $, i.e. for $ f,g \in C^\infty (M) $ we have
+	\[ X(fg)  = X(f)g + fX(g). \]
+\end{observation}
+
+\section{Integral Curves}
+Intuitively speaking, an integral curve of a smooth vector field is the curve traced out by a point under the given vector field. The following is a formal definition of an integral curve of a vector field.
+
+\begin{definition}[Integral Curve of a Vector Field]
+	\label{def:integralCurveOfAVectorField}
+	Let $ X $ be a smooth vector field defined on a manifold $ M $. An integral curve of $ X $ is a curve $ c:(a,b) \to M $ such that 
+	\[ c'(t) = X|_{c(t)},  \]
+	where $ X|_{c(t)}  $ means restricting vector field $ X $ to the curve $ c(t) $. An integral curve is called \emph{maximal} if its domain can not be extended to a larger interval.
+\end{definition}
+
+\begin{remark}
+	We call point $ p \in M $ the initial point of the curve $ c $ and say $ c $ starts in $ p $ if $ c(0) = p $. Also we write $ c_t(p) $ instead of $ c(t) $. With this notation the flow structure of $ c $ will be more evident, namely 
+	$ c_s(c_t(p)) = c_{s+p}(t). $
+\end{remark}
+
+As we can observe in the following example, computing the integral curve passing through a point $ p \in M $ is the same as solving an initial value problem.
+
+\begin{example}
+	Consider the Euclidean space $ M = \R^2 $ as a manifold. Define the vector field $ X $ to be
+	\[ X = -y \frac{\partial}{\partial x} + x\frac{\partial }{\partial y}. \]
+	We want to find an integral curve passing $ p = (1,0) $. For $ c:(a,b) \to \R^2 $ given as $ c(t) = (x(t),y(t)) $ to be an integral curve, we need its differential be the same as $ X|_{c(t)}  $ for $ t \in (a,b) $. By \autoref{prop:VelocityVectorInLocalCorodinate} we can write
+	\[ c'(t) = \dot{x} \frac{\partial }{\partial x} + \dot{y} \frac{\partial }{\partial y}. \]
+	And for $ c'(t) $ to an integral curve we need to have
+	\[ 
+	\vectt{\dot{x}}{\dot{y}} = \vectt{-y}{x}, \qquad x(0) = 1, y(0) = 0.
+	 \]
+	Solving the initial value problem above we will get
+	\[ x(t) = \cos (t), \qquad y(t) = \sin(t). \]
+\end{example}
+
+
+Given a vector field $ X $ on manifold $ M $, finding the integral curve of $ X $ starting at a point $ p \in M $ reduces to solving an initial value problem as described below. By \autoref{def:integralCurveOfAVectorField} a curve $ c:(a,b) \to M $ is an integral curve starting at $ p $ if we have
+\[ X|_{c(t)} = c'(t) \quad \text{for } t\in (a,b),\qquad c(0) = p.   \]
+Choosing a local coordinate chart $ (U,x^1,\cdots,x^n) $ that contains $ p $, we can write the restricted vector field $ X|_{c(t)} $ as
+\[ X|_{c(t)} = \sum_i a^i(c(t)) \frac{\partial}{\partial x^i}\big|_{p}.  \]
+On the other hand, by \autoref{prop:VelocityVectorInLocalCorodinate} we can write $ c'(t) $ in the local coordinates as
+\[ c'(t) = \sum_i \dot{c}^i(t) \frac{\partial }{\partial x^i}\big|_{p},    \]
+where $ c^i = x^i \circ c $.
+Thus we will have
+\[ \dot{c}^i(t) = a^i(c(t)) \quad \text{for } i=1,\cdots,n,\ \text{and} \qquad c(0) = p.\]
+Since the coefficient functions $ a^i $ are all smooth, then by the existence and uniqueness theorem we conclude the existence of the desired integral curve. 
+
+\begin{theorem}[Existence-Uniqueness Theorem of ODE]
+	Let $ V \subset \R^n $ be an open set, and $ f: V\to \R^n $ be a \emph{smooth} vector field defined on $ V $. For any $ p \in V $,  the integral curve of $ f $ starting at $ p $, or equivalently, the solution of the ODE system given by
+	\[ \frac{d y }{dt}(t) = f(y(t)), \quad y(0) = p, \]
+	has a unique \emph{smooth} solution $ y:(a(p),b(p)) \to \R^n $ where $ (a(p),b(p)) $ is the maximal open interval containing $ 0 $ on which $ y $ is defined. 
+\end{theorem}
+
+A smooth vector field, gives us more than what we have stated above. The following theorem states such an statement.
+
+\begin{theorem}[Smooth dependence of starting point of an integral curve]
+	Let $ V\subset \R^n $ be an open set, and $ f:V\to \R^n $ be a smooth vector field defined on $ V $. The for every $ p \in \R^n $, there exist an open neighborhood $ W $ containing $ p $ and a number $ \epsilon>0 $, and a smooth map \emph{smooth map} $ y $
+	\[ y: (-\epsilon,\epsilon) \times W \to \R^n \]
+	such that for all $ q \in W $ the map $ y(t,q) $ as a function of $ t $ is an integral curve of $ f $ starting at $ q $. Or equivalently, it is the unique solution of the ODE system given as
+	\[ \frac{\partial y}{\partial t}(q,t) = f(y(q,t)), \quad y(0,q) = q.\]
+\end{theorem}
+
+We can use the theorems above to proof a similar statement for the case of manifold as given in the following proposition.
+
+\begin{proposition}[Existence of Local Smooth Flow]
+	Let $ M $ be a manifold and $ X $ be a \emph{smooth} vector field defined on a $ U $. Then for any point $ p \in U $, there are a neighborhood $ W $ containing $ p $, an $ \epsilon>0 $, and a \emph{smooth} map 
+	\[ F: (-\epsilon,\epsilon) \times W \to U \]
+	such that for all $ q \in U $ the map $ F(t,q) $ as a function of $ t $ is an integral curve of $ X $ starting at $ q $. The map $ F $ is called a\emph{local flow} generated by the vector field $ X $.
+\end{proposition}
+\begin{remark}
+	We write $ F_t(q) $ instead of $ F(t,q) $. Let $ t,s \in (-\epsilon,\epsilon) $ such that $ F_t(F_s(q)) $ and $ F_{t+s}(q) $ are both defined. These two maps as a function of $ t $ are integral curves of $ X $ starting at $ F_s(q) $ that corresponds to $ t = 0 $. By the existence and uniqueness theorem it follows that 
+	\[ F_t(F_s(q)) = F_{t+s}(q). \]
+\end{remark}
+\begin{remark}
+	The map $ F(t,q) $ is called a \emph{local flow}, and for each $ q \in W $ the map $ F(t,q) $ is an integral curve of $ X $ starting at $ q $ and is called a \emph{flow line}. Thus local flow is a map from $ (-\epsilon,\epsilon)\times W $ to $ U $ while a flow line is a particular integral curve.
+\end{remark}
+\begin{remark}
+	If the local flow $ F $ is defined on $ \R\times M $ it is called a \emph{global flow}. Thus for all $ t \in \R $ and $ q \in M $
+	\[ F_t(q) \circ F_{-t}(q) = F_{-t})(q) \circ F_{t}(q) = F_0(q) \mathbbm{1}_M. \]
+	This shows that $ F_t : M\to M $ is a diffeomorphism (is smooth while its inverse is also smooth). Thus we can summarize that a global flow gives rise to a \emph{one-parameter group of diffeomorphisms} of $ M $. 
+\end{remark}
+
+We can summarize the discussion above in the following definition.
+\begin{definition}[Local Flow on a Manifold]
+	Let $ M $ be a manifold and $ p \in M $, and $ U $ be a coordinate open set containing $ p $. A \emph{local flow} defined on $ U $ is a smooth map 
+	\[ F: (-\epsilon,\epsilon) \times W \to U \]
+	where $ \epsilon>0 $ and $ W $ is an open neighborhood of $ p $, writing $ F(t,q) = F_t(q) $, such that 
+	\begin{itemize}[noitemsep]
+		\item $ F_0(q) = q, $
+		\item $ F_t(F_s(q)) = F_{t+s}(q) $ whenever both sides are defined.
+	\end{itemize} 
+\end{definition}
+
+\section{The Lie Bracket}
 
 \newpage
-
-
-
 
 \section{Summary}
 \begin{summary}[Coordinate Map and Its Differential]
@@ -421,6 +534,19 @@ The following proposition gives a more intuitive characterization of the critica
 	where $ c_1,\cdots,c_n $ are the components of the curve $ c $. See \autoref{example:VelocityVectorWorkedExample} for a worked example.
 \end{summary}
 
+
+\begin{summary}[Finding Local Integral Curves]
+	Given a vector field $ X $ on manifold $ M $, finding the integral curve of $ X $ starting at a point $ p \in M $ reduces to solving an initial value problem as described below. By \autoref{def:integralCurveOfAVectorField} a curve $ c:(a,b) \to M $ is an integral curve starting at $ p $ if we have
+	\[ X|_{c(t)} = c'(t) \quad \text{for } t\in (a,b),\qquad c(0) = p.   \]
+	Choosing a local coordinate chart $ (U,x^1,\cdots,x^n) $ that contains $ p $, we can write the restricted vector field $ X|_{c(t)} $ as
+	\[ X|_{c(t)} = \sum_i a^i(c(t)) \frac{\partial}{\partial x^i}\big|_{p}.  \]
+	On the other hand, by \autoref{prop:VelocityVectorInLocalCorodinate} we can write $ c'(t) $ in the local coordinates as
+	\[ c'(t) = \sum_i \dot{c}^i(t) \frac{\partial }{\partial x^i}\big|_{p},    \]
+	where $ c^i = x^i \circ c $.
+	Thus we will have
+	\[ \dot{c}^i(t) = a^i(c(t)) \quad \text{for } i=1,\cdots,n,\ \text{and} \qquad c(0) = p.\]
+	Since the coefficient functions $ a^i $ are all smooth, then by the existence and uniqueness theorem we conclude the existence of the desired integral curve. 
+\end{summary}
 
 
 
