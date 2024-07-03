@@ -359,6 +359,7 @@ The smoothness of the vector fields on a manifold, formally seen as sections of 
 \end{proposition}
 
 \begin{proposition}[Smoothness of a Vector Field in Terms of Functions]
+	\label{prop:smoothnessOfVectorFieldInTermsOfFunctions}
 	A vector field $ X $ defined on manifold $ M $ is smooth, if and only if for any smooth function $ f $ defined on $ M $, the function $ Xf $ is also smooth.
 \end{proposition}
 
@@ -412,6 +413,7 @@ Thus we will have
 Since the coefficient functions $ a^i $ are all smooth, then by the existence and uniqueness theorem we conclude the existence of the desired integral curve. 
 
 \begin{theorem}[Existence-Uniqueness Theorem of ODE]
+	\label{thm:existenceUniqTheoremODE}
 	Let $ V \subset \R^n $ be an open set, and $ f: V\to \R^n $ be a \emph{smooth} vector field defined on $ V $. For any $ p \in V $,  the integral curve of $ f $ starting at $ p $, or equivalently, the solution of the ODE system given by
 	\[ \frac{d y }{dt}(t) = f(y(t)), \quad y(0) = p, \]
 	has a unique \emph{smooth} solution $ y:(a(p),b(p)) \to \R^n $ where $ (a(p),b(p)) $ is the maximal open interval containing $ 0 $ on which $ y $ is defined. 
@@ -458,6 +460,120 @@ We can summarize the discussion above in the following definition.
 \end{definition}
 
 \section{The Lie Bracket}
+As we say before, a vector field $ X $ on a manifold $ M $ is $ \R\text{-linear} $ map from the algebra $ C^\infty(M) $ to $ C^\infty(M) $ that satisfies the Leibniz rule, i.e. for $ f,g \in C^\infty(M) $ we have
+\[ X(fg) = X(f)g + fX(g). \]
+And we also saw that the set of all vector fields on $  M $ denoted by $ \mathfrak{X}(M) $ has a vector space structure. However, for $ Y \in \mathfrak{X}(M) $, the vector fields $ X\circ Y  = XY $ and $ YX $ are
+\begin{itemize}
+	\item $ \R\text{-linear} $, and
+	\item smooth (because by \autoref{prop:smoothnessOfVectorFieldInTermsOfFunctions} $ X(Y(f)) $ is smooth given $ Y(f) $ is smooth, and similarly for $ Y(X(f)) $).
+\end{itemize}
+However, $ XY $ fails to be a derivation of the algebra $ C^\infty(M) $. To see this, let $ f,g \in C^\infty (M) $. Then 
+\[ XY(fg) = X(Y(fg)) = X(Y(f)g + fY(g)) = XY(f)g + Y(f)X(g) + X(f)Y(g) + fXY(g). \]
+Because of the two middle terms, $ XY $ fails to be a derivation. However, the symmetries of the expression suggests that $ XY - YX $ will not have the two middle terms and thus will be a derivation. By explicit calculation as above we will have
+\[ (XY - YX)(fg) = (XY - YX)(f) g + f(XY - YX)(g).  \]
+Writing $ [X,Y] = XY - YX $ motivates us for the definition of a Lie bracket.
+
+\begin{definition}[Lie bracket of two vector fields]
+	Let $ X,Y $ be two vector fields defined on manifold $ M $. Their Lie Bracket $ [X,Y] $ is a vector field on $ M $ that at $ p $ has the value
+	\[ [X,Y]_p f = (X_p Y - Y_p X)f, \]
+	for any germ of a smooth function $ f $ at $ p $.
+\end{definition}
+\begin{remark}
+	The Lie bracket $ [X,Y]_p $ is a derivation of $ C^\infty_p(M) $, hence is a tangent vector.
+\end{remark}
+
+\begin{proposition}[Properties of Lie Bracket]
+	Let $ X,Y,Z $ be vector fields over a manifold $ M $. Then 
+	\begin{enumerate}[(i)]
+		\item \textbf{Bilinearity:} $ [aX+bY,Z] = a[X,Y] + b[Y,Z] $ and $ [Z,aX+bY] = a[Z,X] + b[Z,Y]. $
+		\item \textbf{Anticommutativity:} $ [X,Y] = - [Y,X] $,
+		\item \textbf{Jacobi identity:} $ \sum_\text{cyclic} [X,[Y,Z]] = 0 $.
+	\end{enumerate}
+\end{proposition}
+\begin{proof}
+	The property $ (i) $ follows immediately from the definition of Lie bracket. For $ (ii) $, first we expand the sum
+	\[ \sum_\text{cyclic}[X,[Y,Z]] = [X,[Y,Z]] + [Z,[X,Y]] + [Y,[Z,X]]. \]
+	Now we can expand each term from the definition of Lie bracket.
+	\begin{align*}
+		& [X,[Y,Z]] = X[Y,Z] - [Y,Z]X = XYZ - XZY - YZX + ZYX,\\
+		& [Z,[X,Y]] = Z[X,Y] - [X,Y]Z = ZXY - ZYX - XYZ + YXZ,\\
+		& [Y,[Z,X]] = Y[Z,X] - [Z,X]Y = YZX - YXZ - ZXY + XZY.
+	\end{align*}
+	Thus in the cyclic sum all of terms with opposite sigh cancel each other, hence the cyclic sum is zero.
+\end{proof}
+
+The following definition abstracts the notion of Lie bracket to be a product operation that satisfies some axioms.
+
+\begin{definition}[Lie Algebra]
+	\label{def:LieAlgebra}
+	A Lie algebra over a field $ K $ is a vector space $ V $ over $ K $ along with a product $ [\cdot,\cdot]: V\times V \to V $, called the \emph{bracket}, such that for $ X,Y,Z \in V $ and $ a,b \in K $ we have 
+	\begin{enumerate}[(i)]
+		\item \textbf{Bilinearity:} $ [aX+bY,Z] = a[X,Y] + b[Y,Z] $ and $ [Z,aX+bY] = a[Z,X] + b[Z,Y]. $
+		\item \textbf{Anticommutativity:} $ [X,Y] = - [Y,X] $,
+		\item \textbf{Jacobi identity:} $ \sum_\text{cyclic} [X,[Y,Z]] = 0 $.
+	\end{enumerate}
+\end{definition}
+\begin{example}
+	For any vector space $ V $ define $ [X,Y] = 0 $ for all $ X,Y \in V $. With this bracket, $ V $ becomes a Lie algebra called \emph{abelian Lie algebra}.
+\end{example}
+
+\begin{carefull}[Lie algebra might not even be an algebra]
+	From the definition of algebra, as an algebraic structure, the product operation has to be associative. In terms of bracket, for it to be associative we need to have 
+	\[ [X,[Y,Z]] = [[X,Y],Z] \quad \text{for all } X,Y,Z \in V. \]
+	An abelian algebra is automatically associative, thus it is algebra. However, a bracket in a Lie algebra, might not always be associative. Thus a Lie algebra might not even be an algebra. In Lie algebra, the product operation satisfies the Jacobi identity instead of associativity property. However, note the following important remark.
+\end{carefull}
+\begin{remark}
+	If $ A $ is any algebra over a field $ K $, then the product 
+	\[ [x,y] = xy - yx, \]
+	for $ x,y \in A $ turns $ A $ into a Lie algebra over $ K $.
+\end{remark}
+
+\begin{example}[Lie bracket as the bracket]
+	Let $ M $ be a manifold and $ \mathfrak{X}(M) $ be the set of all smooth vector fields defined on $ M $. Then $ \mathfrak{X}(M) $ is a Lie algebra with the Lie bracket as the bracket.
+\end{example}
+
+\begin{proposition}
+	Let $ V $ be a Lie algebra over a field $ K $. Define 
+	\[ \operatorname{ad}_X: V \to V, \qquad \operatorname{ad}_X(Y) = [X,Y]. \]
+	Prove that $ \operatorname{ad}_X $ is a derivation $ V $
+\end{proposition}
+\begin{proof}
+	From the Jacobi identity, for all $ X,Y,Z \in V $ we have
+	\[ [X,[Y,Z]] + [Z,[X,Y]] + [Y,[Z,X]] = 0. \]
+	By using bilinearity and anitcommutativity properties we can re-write this expression as
+	\[ [X,[Y,Z]] = [[X,Y],Z] + [Y,[X,Z]]. \]
+	We can re-write this as
+	\[ \operatorname{ad}_X([Y,Z]) = [\operatorname{ad}_X(Y),Z] + [Y,\operatorname{ad}_X(Z)].\]
+	This completes the proof.
+\end{proof}
+
+
+\section{Pushforward of a Vector Field}
+A smooth map $ F:N\to M $ between manifolds $ N $ and $ M $, pushes forward a tangent vector $ X_p \in T_p(N) $ where $ p \in N $ by its differential. I.e. $ F_*(X_p) $ is the pushforward of $ X_p $. However, this notion does not exist in general for vector fields. That is because if $ F $ is not injective and for $ p,q \in N $ two distinct points such that $ z = F(p) = F(q) $, then the pushforward of $ X_p $ and $ X_y $ by $ F_* $ are two tangent vectors at $ T_z(M) $, and there is no reason that $ F_*(X_p) $ should be equal to $ F_*(X_q) $.
+
+However, if $ F $ is a \emph{diffeomorphism}, then it makes sense to talk about the pushforward of a vector field by $ F $. That is because $ F $ is injective, then there is no ambiguity of the type discussed above, and also since $ F $ is surjective, the pushed forward vector field is defined everywhere on $ M $.
+
+\begin{definition}[$ F\text{-related} $ Vector Fields]
+	Let $ F: N \to M $ be a smooth map between manifolds and $ X $, $ \bar{X} $ be two vector fields defined in $ N $ and $ M $ respectively. Then we say $ X $ is $ F\text{-related} $ to $ \bar{X} $ if for all $ p \in N $ we have
+	\[ F_* X_p = \bar{X}_{F(p)}. \] 
+\end{definition}
+
+The following proposition gives a useful characterization of the $ F\text{-related} $ vector fields.
+
+\begin{proposition}[A characterization of related vector fields]
+	Let $ F: N\to M $ be a smooth map between manifolds, and $ X $ and $ \bar{X} $ be two vector fields defined on $ N $ and $ M $ respectively. Then $ X $ and $ \bar{X} $ are $ F\text{-related} $ if and only if for all $ g \in C^\infty(M) $ we have
+	\[ X(g\circ F) = (\bar{X} g) \circ F.  \]
+\end{proposition}
+\begin{proof}
+	{\color{red} \noindent TODO: To be added.}
+\end{proof}
+
+\begin{proposition}
+	Let $ F:N\to M $ be a smooth map between manifolds. Let $ X,Y $ be smooth vector fields on $ N $ that are $ F\text{-related} $ to the smooth vector fields $ \bar{X},\bar{Y} $ on $ M $ respectively. The the Lie bracket $ [X,Y] $ defined on $ N $ is $ F\text{-related} $ to Lie bracket $ [\bar{X},\bar{Y}]$ defined on $ N $.
+\end{proposition}
+\begin{proof}
+	{\color{red} \noindent TODO: To be added.}
+\end{proof}
 
 \newpage
 
@@ -546,6 +662,12 @@ We can summarize the discussion above in the following definition.
 	Thus we will have
 	\[ \dot{c}^i(t) = a^i(c(t)) \quad \text{for } i=1,\cdots,n,\ \text{and} \qquad c(0) = p.\]
 	Since the coefficient functions $ a^i $ are all smooth, then by the existence and uniqueness theorem we conclude the existence of the desired integral curve. 
+\end{summary}
+
+\begin{summary}[Lie bracket and the bracket]
+	\emph{Lie bracket} is defined as 
+	\[ [X,Y] = XY - YX, \]
+	for $ X,Y \in \mathfrak{X}(M) $ as vector fields defined on the manifold $ M $. However, \emph{the bracket}, is the product operator defined on Lie algebra that satisfies three properties in \autoref{def:LieAlgebra}. The set $ \mathfrak{X}(M) $ along with the Lie bracket as the bracket is a Lie algebra. 
 \end{summary}
 
 

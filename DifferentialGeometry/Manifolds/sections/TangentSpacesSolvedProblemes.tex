@@ -244,3 +244,164 @@ We can now see that the map $ (\pi_{1*},\pi_{2*}) $ maps these two bases to each
 	Thus the generating vector field is given as
 	\[ X = -y \frac{\partial }{\partial x } + x \frac{\partial }{\partial y}. \]
 \end{solution}
+
+\begin{problem}[Equality of vector fields (from L. Tu)]
+	Show that two $ C^\infty $ vector fields $ X $ and $ Y $ on a manifold $ M $ are equal if and only if for every $ C^\infty $ function $ f $ on $ M $ we have $ Xf = Yf $.
+\end{problem}
+
+\begin{solution}
+	$ \ $
+	\begin{itemize}
+		\item[$\boxed{\Longrightarrow}$] This direction is obvious.
+		\item[$\boxed{\Longleftarrow}$] For this direction we will use the proof by contrapositive. Let $ X, Y $ be two vector fields that do not match at some $ p \in M $, i.e. $ X_p \neq Y_p $. With reference to a local coordinate chart we can expand $ X_p, Y_p $ in terms of the local bases vectors. We will have
+		\[ X_p = \sum_i a^i \frac{\partial}{\partial  x^i}\big|_{p}, \qquad Y_p = \sum_i b^i\frac{\partial}{\partial  x^i}\big|_{p}. \]
+		Since $ X_p \neq Y_p $ then there exists at least one $ i $ such that $ a^i \neq b^i $. Define $ f:M \to \R $ to be $ f = x^i $. Then 
+		\[ X_pf = a^i, \qquad Y_pf = b^i. \]
+		Since $ a^i \neq b^i$, then we conclude that $ X_pf \neq Y_p $. This implies $ Xf \neq Yf $.
+	\end{itemize}
+\end{solution}
+
+\begin{problem}[Vector field on an odd sphere (from L. Tu)]
+	Let $ x^1,y^1,\cdots,x^n,y^n $ ve the standard coordinates on $ \R^{2n} $. The unit sphere $ S^{2n-1} $ in $ \R^{2n} $ is defined by the equation $ \sum_{i=1}^n (x^i)^2 + (y^i)^2  = 1$. Show that 
+	\[ X = \sum_{i}^{n} \underbrace{-y^i}_{a^i} \frac{\partial}{\partial  x^i} + \underbrace{x^i}_{b^i} \frac{\partial }{\partial y^i} \]
+	is a nowhere-vanishing smooth vector field on $ S^{2n-1} $. Since all spheres of the same dimension are diffeomorphic, this proves that on every odd-dimensional sphere there is a nowhere-vanishing smooth vector field. It is a classical theorem of differential and algebraic topology that on an even-dimensional sphere every continuous vector field must vanish somewhere.
+\end{problem}
+
+\begin{solution}
+	For this, we first use the following result that is proved elsewhere in the problems.
+	\begin{lemma}
+		The unit sphere $ S^n $ in $ R^{n+1} $ is defined by the equation $ \sum_{i=1}^{n+1} (x^i)^2 = 1 $. For $ p = (p^1,\cdots,p^{n+1}) \in S^n $, a necessary and sufficient condition for 
+		\[ X_p = \sum a^i \partial/\partial x^i|_{p} \in T_p(\R^{n+1})  \]
+		to be tangent to $ S^n $ at $ p $ is $ \sum a^i p^i = 0 $.
+	\end{lemma}
+	Let $ p = (p^1,q^1,\cdots,p^n,q^n) $ be a point on the unit sphere $ S^{2n-1} $. Thus from definition we have
+	\[ \sum_{i=1}^{n} (p^i)^2 + (q^i)^2 = 1. \]
+	At this point the vector field $ X $ is
+	\[ X_p = \sum_{i=1}^{n} - q^i \frac{\partial}{\partial x^i} + p^i \frac{\partial}{\partial y^i}. \]
+	Thus it follows immediately that 
+	\[ \sum_{i=1}^{n} a^i p^i + b^i q^i = \sum_{i=1}^{n} -q^i p^i + p^i q^i = 0.  \]
+	This shows that $ X_p $ is a tangent vector to $ p \in S^{2n-1} $. On the other hand, for the vector field $ X $ to vanish, all of its coefficient functions must vanish, which occurs only at the origin, where it is not located on the unit sphere $ S^{2n-1} $.
+	
+	We summarize the result of this problem in the theorem below.
+	\begin{theorem}[Hairy ball theorem]
+		On an even-dimensional unit sphere, every continuous tangent vector field should vanish somewhere.
+	\end{theorem}
+\end{solution}
+
+\begin{problem}[Maximal integral curve on a punctured line (from L. Tu)]
+	Let $ M $ be $ \R - \set{0} $ and let $ X $ be the vector field $ d/dx $ on $ M $. Find the maximal integral curve of $ X $ starting at $ x = 1 $.
+\end{problem}
+\begin{solution}
+	Let $ c:(a,b) \to \R $ be the integral curve of $ X = d/dx $ starting at $ p = 1 $. Since $ c'(t) = \dot{c}d/dx $, then we need to have
+	\[ \dot{c} = 1,\quad c(0) = 1. \]
+	Solving the initial value problem above we will get
+	\[ c(t) = t + 1. \]
+	The maximal domain for this curve is $ (0,\infty) $.
+\end{solution}
+
+\begin{problem}[Integral curves in the plane (from L. Tu)]
+	Find the integral curves of the vector field
+	\[ X_{(x,y)} = x\frac{\partial }{\partial x} - y\frac{\partial }{\partial y} = \vectt{x}{-y} \quad \text{on } \R^2. \]
+\end{problem}
+\begin{solution}
+	Let $ c:(a,b) \to \R^2 $ given by $ c(t) = (x(t),y(t)) $ to be an integral curve. Then we need to have
+	\[ \vectt{\dot{x}}{\dot{y}} = \vectt{x}{-y}. \]
+	Thus the integral curves are given as
+	\[ c(t) = (x(t),y(t)) = (Ae^{t},Be^{-t}), \]
+	where $ A $ and $ B $ are determined by the starting point of the curve. 
+\end{solution}
+
+\begin{problem}[Maximal integral curve in the plane (from L. Tu)]
+	Find the maximum integral curve $ c(t) $ starting at the point $ (a,b \in \R^2) $ of the vector field $ X_{(x,y)} = \partial/\partial x + x \partial/\partial y $ on $ \R^2 $.
+\end{problem}
+\begin{solution}
+	Let $ c:(\alpha,\beta) \to \R^2 $ be an integral curve given as $ c(t) = (x(t),y(t)) $ of $ X $ starting at $ (a,b) $. Since
+	\[ c'(t) = \dot{x}\frac{\partial }{\partial x} + \dot{y} \frac{\partial }{\partial y}. \]
+	Thus we need to have
+	\[ \vectt{\dot{x}}{\dot{y}} = \vectt{1}{x},\qquad \vectt{x(0)}{y(0)} = \vectt{a}{b}. \]
+	Solving the ODE system above we will get
+	\[ x(t) = t + A, \qquad y(t) = \frac12 t^2 + A t + B. \]
+	Applying the initial conditions we will get
+	\[ A = a,\qquad B = b. \]
+	So the integral curve is given as
+	\[ c(t) = (t+a, \frac12 t^2 + at + b). \]
+	The maximal domain for this integral curve is $ (-\infty,\infty) $.
+\end{solution}
+
+\begin{problem}[Integral curve starting at a zero of a vector field (from L. Tu)]
+	$ \ $
+	\begin{enumerate}[(a)]
+		\item Suppose the smooth vector field $ X $ on a manifold $ M $ vanishes at a point $ p \in M $. Show that the integral curve of $ X $ with initial point $ p $ is the constant curve $ c(t) \equiv p $.
+		\item Show that if $ X $ is the zero vector field on a manifold $ M $, and $ c_t(p) $ is the maximal integral curve of $ X $ starting at $ p $, then the one parameter group of diffeomorphisms $ c: \R \to \operatorname{Diff}(M) $ is the constant map $ c(t) \equiv \mathbbm{1}_M $.
+	\end{enumerate}
+\end{problem}
+\begin{solution}
+	$ \ $
+	\begin{enumerate}[(a)]
+		\item 	Let $ c: (a,b) \to M $ be the integral curve of $ X $ starting at $ p $. Thus we have the following initial value problem
+		\[ \dot{c}^i(t) = 0, \quad c^i(0) = p^i. \]
+		This implies that the integral curve is the constant curve $ c(t) \equiv p $.
+		\item For this we need to find the global flow generated by the vector field. Let the global flow be $ F: \R \times M \to M $. From part (a) above we can see that 
+		\[ F(t,p) \equiv p \qquad \forall t \in \R,\ p \in M. \]
+		Thus for a fixed $ p \in M $ the function $ F_t: M \to M $ is the identity map $ \mathbbm{1}_M $.
+	\end{enumerate}
+\end{solution}
+
+\begin{problem}[Maxima integral curve (from L. Tu)]
+	Let $ X $ be the vector field $ x d/dx $ on $ \R $. For each $ p \in \R $, find the maximal integral curve $ c(t) $ of $ X $ starting at $ p $.
+\end{problem}
+\begin{solution}
+	Let $ c: (a,b) \to \R$ given as $ c(t) = x(t) $ be the maximal integral curve of interest. Then we will have the following initial value problem.
+	\[ \dot{x} = x, \qquad x(0) = p.\]
+	The solution of the initial value problem above is given as
+	\[ x(t) = p e^t. \]
+	The maximal domain of this curve is given as $ (-\infty,\infty) $.
+\end{solution}
+
+\begin{problem}[Maximal integral curve (from L. Tu)]
+	Let $ X $ be the vector field $ x^2 d/dx $ on the real line $ \R $. For each $ p > 0 $ in $ \R $, find the maximal integral curve of $ X $ with initial point $ p $.
+\end{problem}
+\begin{solution}
+	Let $ c: (a,b) \to \R$ given as $ c(t) = x(t) $ be the maximal integral curve of interest. Then we will have the following initial value problem.
+	\[ \dot{x} = x^2, \qquad x(0) = p. \]
+	The solution of the initial value problem above is given as 
+	\[ x(t) = \frac{-1}{t - 1/p} = \frac{p}{1-pt}.  \]
+	If $ p > 0 $, the maximal domain for this curve is $ (-\infty, 1/p) $. However, if $ p < 0 $, then the maximal domain for this curve is given as $ (1/p,\infty) $.
+\end{solution}
+
+\begin{problem}[Reparameterization of an integral curve]
+	Suppose $ c: (a,b) \to M $ is an integral curve of the smooth vector field $ X $ on $ M $. Show that for any real number $ s $, the map
+	\[ c_s: (a+s,b+s) \to M, \qquad c_s(t) = c(t-s), \] 
+	is also an integral curve of $ X $.
+\end{problem}
+\begin{solution}
+	Without loss of generality, let $ 0 \in (a,b) $. Let $ c(0) = p $, and $ x'(0) = X_p $. Then $ s \in (a+s, b+s) $. So for $ c_s(s) $ we have
+	\[ c_s(s) = c(s-s) = c(0) = p. \]
+	Furthermore, since from the chain rule we have $ c'_s(t) = c'(t-s) $ then 
+	\[ c'_s(s) = c'(0) = X_p. \]
+	Thus $ c_s(t) $ is an integral curve of $ X $ that passes from the point $ p $ at $ t = s $.
+	\begin{observation}[Uniqueness of integral curve]
+		As we discussed in \autoref{thm:existenceUniqTheoremODE}, the solution of an initial value problem is unique. But based on the observation above, a more accurate term to state the statement above is to say that the solution to an initial value problem is unique up to a reparameterization.
+	\end{observation}
+\end{solution}
+
+\begin{problem}[Lie bracket of vector fields (from L. Tu)]
+	If $ f $ and $ g $ are $ C^\infty $ functions and $ X $ and $ Y $ are $ C^\infty $ vector fields on a manifold $ M $, show that 
+	\[ [fX, gY] = fg[X,Y] + f(Xg)Y - g(Yf)X. \]
+\end{problem}
+\begin{solution}
+	To see this, first note that $ X,Y $ are both derivations. Thus expanding the Lie bracket we will get
+	\[ [fX,gY] = (fX)(gY) - (gY)(fX) \]
+	For the first term in RHS we have
+	\[ (fX)(gY) = fX(gY) = f[X(g)Y + gXY] = fX(g)Y + fg XY, \]
+	while for the second term we have
+	\[ (gY)(fX) = gY(fX) = g[Y(f)X + fYX] = gY(f)X + gf YX. \]
+	Combining these two terms while noting that $ fg = gf $
+	\[ [fX,gY] = fg (XY - YX) + fX(g)Y - gY(f)X = fd[X,Y] + fX(g)Y - gY(f)X. \]
+\end{solution}
+
+\begin{problem}[Lie bracket of vector fields on $ \R^2 $ (from L. Tu)]
+	Compute the Lie bracket 
+	\[ [-y\partial/\partial x + x\partial/\partial y, \partial/\partial x] \]
+	on $ \R^2 $.
+\end{problem}
