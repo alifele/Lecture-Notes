@@ -1,0 +1,88 @@
+\chapter{Lie Groups and Lie Algebra}
+
+We start with the definition of a Lie group.
+
+\begin{definition}[Lie Group]
+	A Lie group $ G $ is a smooth manifold that also has a group structure, and the multiplication and the inverse map are both smooth. I.e. the two maps
+	\[ \mu: G\times G \to G, \qquad \iota: G\to G \]
+	are smooth maps. These maps are give as
+	\[ \mu(a,b) = ab, \qquad \iota(a) = \inv{a}, \]
+	for $ a.b \in G $.
+\end{definition}
+
+Similarly to the notion of a group acting on a set, a group can also act on itself which has its own terminology.
+
+\begin{definition}[Translation]
+	Let $ G $ be a group. Every $ a\in G $ induces two maps
+	\[ l_a : G\to G, \qquad r_a : G \to G, \]
+	given as
+	\[ l_a(g) = ag, \qquad r_a(g) = ga, \]
+	for $ g \in G $.
+	The maps $ l_a $ and $ r_a $ are called left / right multiplication by $ a $ or left/right translation by $ a $.
+\end{definition}
+
+\begin{proposition}
+	Let $ G $ be a Lie group and $ a \in G $. Then the left translation $ l_a: G\to G $ is a diffeomorphism.
+\end{proposition}
+\begin{proof}
+	First, we show that $ l_a $ has an inverse, hence is a bijection. We claim that $ l_{\inv{a}} $ where $ \inv{a} = \iota(a) $ is the inverse of $ l_a $. To see these we use the fact that $ l_a \circ l_b = l_{ab} $. Thus
+	\[ l_a \circ l_\inv{a} = l_{a\inv{a}} = l_e = \mathbbm{1}_G. \]
+	Similarly
+	\[ l_\inv{a} \circ l_a = l_{\inv{a} a} = l_e = \mathbbm{1}_G. \]
+	Now it remains to show that $ l_{a} $ and $ l_{\inv{a}} $ are both smooth. This follows immediately from the fact that $ l_{a} $ and $ l_\inv{a} $ are restrictions of $ \mu $ to $ \set{a}\times G $ and $ \set{\inv{a}}\times G $ respectively.
+\end{proof}
+
+Since Lie groups has extra structures (compared to a group), its homomorphisms should also preserve that structure. This is reflected in the definition below.
+
+\begin{definition}[Lie Group Homomorphism]
+	A map between two Lie groups $ F: H\to G $ is a Lie group homomorphism if it is a group homomorphism, and a $ C^\infty $ map.
+\end{definition}
+\begin{remark}
+	A group homomorphism is a map $ F:H\to G $ such that 
+	\[ F(ab) = F(a) F(b) \]
+	for $ a,b \in H $.
+	In a functional notation, this can be written as
+	\[ F\circ l_x = l_{F(x)} \circ F. \]
+\end{remark}
+\begin{remark}
+	Let $ a,b = e_H $ and denote the identity of $ G $ as $ e_G $. Since F is a homomorphism we have
+	\[ F(e_H e_H) = F(e_H) F(e_H) \implies F_(e_H) = F(e_H)F(e_H).  \]
+	This implies that we must have
+	\[ F(e_H) = e_G. \]
+	Thus the homomorphism maps the identity element to the identity element.
+\end{remark}
+
+Now we start by introducing a very important Lie group, called the general linear group $ GL(n,\R) $. 
+
+\begin{proposition}
+	The general linear group, denoted by $ GL(n,\R) $, topologized as a subset of $ \R^{n\times n}$ is a Lie group.
+\end{proposition}
+\begin{proof}
+	The general linear group with the given topology is an open subset of $ \R^{n\times n} $, thus it is a manifold. The group structure of this set is also obvious. Now what remains to show is to show that the multiplication and the inverse maps are both smooth. Let $ A, B \in GL(n,\R) $. Then from the definition of matrix multiplication we know
+	\[ [AB]_{i,j} = \sum_k A_{i,k} B_{k,j}. \]
+	So the $ (i,j) $ element of $ AB $ is a polynomial in terms of the coordinates of $ A $ and $ B $, this is a smooth function.
+	For the inverse, we know that 
+	\[ [\inv{A}]_{i,j} = \frac{1}{\det(A)} (-1)^{i+j}((j,i)\text{-minor }A). \]
+	Again, since $ (j,i)\text{-minor} $ of a matrix is a polynomial in terms of its elements, and since $ \det(A) \neq 0 $, we conclude that $ \iota $ is also continuous.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+\newpage
+\section{Summary}
+\begin{summary}[Some Vocabulary]
+	Don't confuse the following names!
+	\begin{itemize}
+		\item General Linear Group $ GL(n,\R) $: $ n\times n $ real matrices with a non-zero determinant.
+		\item Special Linear Group $ SL(n,\R) $: $ n\times n $ real matrices whose determinant is one.
+		\item Orthogonal Group $ O(n) $: All matrices on $ GL(n,\R) $ that are symmetric. I.e.
+		$ O(n) = \set{A \in GL(n,\R): A^T A = I}. $
+	\end{itemize}
+\end{summary}

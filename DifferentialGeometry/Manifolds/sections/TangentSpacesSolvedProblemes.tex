@@ -405,3 +405,31 @@ We can now see that the map $ (\pi_{1*},\pi_{2*}) $ maps these two bases to each
 	\[ [-y\partial/\partial x + x\partial/\partial y, \partial/\partial x] \]
 	on $ \R^2 $.
 \end{problem}
+\begin{solution}
+	Using the definition we can write
+	\begin{align*}
+		[-y\partial/\partial x + x\partial/\partial y, \partial/\partial x] &= (-y\partial/\partial x + x\partial/\partial y)( \partial/\partial x) -( \partial/\partial x)(-y\partial/\partial x + x\partial/\partial y) \\
+		&= -y \partial^2/\partial x^2 + x \partial^2/\partial y\partial x + y\partial^2/\partial x^2 - x\partial^2/\partial x \partial y \\
+		& = 0.
+	\end{align*}
+\end{solution}
+
+\begin{problem}[Lie bracket in local coordinates]
+	Consider two $ C^\infty $ vector field $ X, Y $ on $ \R^n $:
+	\[ X = \sum a^i \frac{\partial}{\partial x^i},\qquad Y = \sum b^j \frac{\partial}{\partial x^j}, \]
+	where $ a^i, b^j$ are $ C^\infty $ functions on $ \R^n $. Since $ [X,Y] $ is also a $ C^\infty $ vector field $ \R^n $,
+	\[ [X,Y] = \sum c^k \frac{\partial }{\partial x^k} \]
+	for some $ C^\infty $ function $ c^k $. Find the formula for $ c^k $ in terms of $ a^i $ and $ b^j $.
+\end{problem}
+\begin{solution}
+	By the bilinearity of the Lie bracket, we can write
+	\[ [X,Y] = \sum_i [a^i \frac{\partial}{\partial x^i}, \sum_j b^j \frac{\partial}{\partial x^j}] 
+	= \sum_{i,j}[a^i \frac{\partial }{\partial x^i}, b^j\frac{\partial }{\partial x^j}]
+	= \sum_{i,j}( a^i b^j [\frac{\partial }{\partial x^i},\frac{\partial }{\partial x^j}] + a^i \frac{\partial b^j}{\partial x^i}\frac{\partial }{\partial x^j} - b^j \frac{\partial a^i}{\partial x^j}\frac{\partial }{\partial x^i})
+	 \]
+	By using the fact that $ [\frac{\partial }{\partial x^i},\frac{\partial}{\partial x^j}] = 0 $ for all $ i,j $, and by re-arranging the similar terms we can get
+	\[ [X,Y] = \sum_k 
+	\det \matt{\sum_i a^i \frac{\partial }{\partial x^i}}{\sum_j b^j \frac{\partial}{\partial x^j}}{a^k}{b^k}\ \frac{\partial }{\partial x^k}.\]
+	Thus we have
+	\[ c^k = \det \matt{\sum_i a^i \frac{\partial }{\partial x^i}}{\sum_j b^j \frac{\partial}{\partial x^j}}{a^k}{b^k}. \]
+\end{solution}
