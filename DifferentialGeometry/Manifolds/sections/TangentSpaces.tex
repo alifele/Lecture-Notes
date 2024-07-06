@@ -577,12 +577,31 @@ The following proposition gives a useful characterization of the $ F\text{-relat
 
 
 \section{Submanifolds}
-So far, despite our thorough analysis of manifolds, we have little tools to see if a given topological space is a manifold. Of course, we use the definition of a smooth manifold and directly show that a given topological space is second countable and Hausdorff, and also exhibit a smooth atlas. While this is a possibility, but it is seldom done in mathematics. That is why we tend to develop more tools that helps us in identifying if a space is a manifold. For instance, the quotient space construction and the discussion of the criteria under which the quotient space is second countable and Hausdorff, was following this path. Here in this subsection we will develop much more powerful tools to show a particular space is manifold. These tools will be used extensively in the next chapter.
+So far, despite our thorough analysis of manifolds, we have little tools to see if a given topological space is a manifold. Of course, we can use the definition of a smooth manifold and directly show that a given topological space is second countable and Hausdorff, and also exhibit a smooth atlas, hence a manifold. While this is a possibility, but it is seldom done in mathematics. That is why we tend to develop more tools that helps us in identifying if a space is a manifold. For instance, the quotient space construction and the discussion of the criteria under which the quotient space is second countable and Hausdorff was an effort in this direction. Here in this subsection we will develop much more powerful tools to show a particular space is manifold. These tools will be used extensively in the next chapters.
 
 
 \subsection{Submanifolds}
 We will introduce the notion of submanifolds. As a very simple example, the $ xy $ plane in $ \R^3 $ is a \emph{regular submanifold} of the manifold $ \R^3 $ where it is defined as the set on which the $ z $ coordinate function vanishes. 
 
+\begin{definition}[Regular Submanifold]
+	Let $ M $ be a manifold of dimension $ n $. A subset $ S \subset M $ is called a \emph{regular sub-manifold} of dimension $ k $, if for any $ p \in S $, there exist a chart $ (U,\phi = x^1,\cdots,x^n) $ such that the set $ U\cap S $ is defined by vanishing $ n-k $ coordinate functions. I.e. we need to have
+	\[ U \cap S = \set{p \in U\ |\ x^{k+1}(p)=\cdots=x^n(p) = 0}, \]
+	 where we assumed that by renumbering the coordinate functions, we may assume that these vanishing coordinates are $ x^{k+1},\cdots,x^n $. We call such chart an \emph{adapted chart} of $ S $ relative to $ M $. Furthermore, we call $ n-k $ the \emph{co-dimension} of $ S $.
+\end{definition}
+\begin{remark}
+	In different wording, we could say that if $ (U,\phi) $ is an adapted chart of $ S  $ relative to $ M $, then it means that $ S\cap U $ is precisely the zero level set of $ n-k $ coordinate functions of $ \phi $. 
+\end{remark}
+\begin{remark}
+	As a topological space, the submanifold $ S $ is required to have the subspace topology.
+\end{remark}
+
+\begin{example}[A trivial submanifold]
+	Let $ S $ be an open subset of manifold $ M $. Then $ S $ is defined by vanishing of on coordinates of any chart overlapping by $ S $. Thus every open subset of a manifold, is trivially a regular submanifold.
+\end{example}
+
+\begin{example}[A submanifold of $ \R^2 $]
+	The set $ S = (-1,1) \times \set{0} $ (as a subset of $ x\text{-axis} $) is a regular submanifold of $ \R^2 $. That is because considering the chart $ \set{U=(-1,1)\times(-1,1),\phi= (x,y)} $ for any $ p \in S $ we have $ y = 0 $. Thus $ S $ is a regular submanifold of $ \R^2 $, and $ (U,\phi) $ is an adapted chart. However, note that the chart $ (V = \R^2, \psi=(x,y)) $ is not an adapted chart since $ V \cap S = (-1,1)\times \set{0} $ but the point on $ V $ where one of the coordinate functions vanish, say $ x $ or $ y $, is the set $ \R\times{0} $ or $ \set{0}\times \R $ none of which are equal to $ S $. For the same reason the chart $ (W = (-2,2), \omega=(x,y)) $ is also not an adapted chart.
+\end{example}
 
 \newpage
 
@@ -677,6 +696,10 @@ We will introduce the notion of submanifolds. As a very simple example, the $ xy
 	\emph{Lie bracket} is defined as 
 	\[ [X,Y] = XY - YX, \]
 	for $ X,Y \in \mathfrak{X}(M) $ as vector fields defined on the manifold $ M $. However, \emph{the bracket}, is the product operator defined on Lie algebra that satisfies three properties in \autoref{def:LieAlgebra}. The set $ \mathfrak{X}(M) $ along with the Lie bracket as the bracket is a Lie algebra. 
+\end{summary}
+
+\begin{summary}[Regular Submanifold Characterized by an Adapted Chart]
+	In different wording, we could say that if $ (U,\phi) $ is an adapted chart of $ S  $ relative to $ M $, then it means that $ S\cap U $ is precisely the zero level set of $ n-k $ coordinate functions of $ \phi $.
 \end{summary}
 
 
