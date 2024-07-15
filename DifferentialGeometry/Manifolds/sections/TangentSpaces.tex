@@ -596,12 +596,48 @@ We will introduce the notion of submanifolds. As a very simple example, the $ xy
 \end{remark}
 
 \begin{example}[A trivial submanifold]
-	Let $ S $ be an open subset of manifold $ M $. Then $ S $ is defined by vanishing of on coordinates of any chart overlapping by $ S $. Thus every open subset of a manifold, is trivially a regular submanifold.
+	Let $ S $ be an open subset of manifold $ M $. Then $ S $ is defined by vanishing of no coordinates of any chart overlapping by $ S $. Thus every open subset of a manifold, is trivially a regular submanifold.
 \end{example}
 
 \begin{example}[A submanifold of $ \R^2 $]
 	The set $ S = (-1,1) \times \set{0} $ (as a subset of $ x\text{-axis} $) is a regular submanifold of $ \R^2 $. That is because considering the chart $ \set{U=(-1,1)\times(-1,1),\phi= (x,y)} $ for any $ p \in S $ we have $ y = 0 $. Thus $ S $ is a regular submanifold of $ \R^2 $, and $ (U,\phi) $ is an adapted chart. However, note that the chart $ (V = \R^2, \psi=(x,y)) $ is not an adapted chart since $ V \cap S = (-1,1)\times \set{0} $ but the point on $ V $ where one of the coordinate functions vanish, say $ x $ or $ y $, is the set $ \R\times{0} $ or $ \set{0}\times \R $ none of which are equal to $ S $. For the same reason the chart $ (W = (-2,2), \omega=(x,y)) $ is also not an adapted chart.
 \end{example}
+
+
+The following important proposition states that the regular submanifold is also a manifold.
+
+\begin{proposition}[Regular Submanifold is a Manifold]
+	Let $ S $ be a regular submanifold of the manifold $ M $. Let $ \mathfrak{U} = 
+	\set{(U,\phi)} $ be a collection of \emph{compatible} and \emph{adopted} charts that \emph{covers} $ S $. Then the collection $ \set{(U\cap S), \phi_S)} $ is a compatible chart for $ S $, hence $ S $ is a manifold. Further more, if $ S $ is defined by the vanishing of $ n-k $ local coordinate maps, then $ S $ has coordinate $ k $.
+\end{proposition}
+
+\begin{proof}
+	To show that the collection $ \set{(U\cap S,\phi_S)} $ is an atlas, we first need to show that it covers the whole space $ S $. This follows immediately from the fact that the collection $ \mathfrak{U} $ covers the set $ S $. To show the compatibility of the charts in the collection $ \set{(U\cap S, \phi_S)} $, Let $ (U,\phi = (\phi^1,\cdots,\phi^n)) $ and $ (V,\psi=(\psi^1,\cdots,\psi^n)) $ be two coordinate charts where both of them contains the point $ p \in S $. By re-numbering the coordinate component function we assume that $ \phi^k, \cdots, \phi^n $ and $ \psi^k,\cdots, \psi^n $ vanish at $ p $. Since $ \phi\circ\inv{\psi}  $ and $ \psi\circ\inv{\phi} $ are both smooth, then it follows immediately that the corresponding restricted charts are also compatible.
+\end{proof}
+
+\begin{carefull}
+	What about the other properties of manifold? In the proposition above we only exhibited a compatible chart, but we did not checked for other properties of manifolds, like being Hausdorff or second countable. These two properties follows from the fact that $ S $ is a subset of $ M $ and has the subspace topology. Thus given that $ M $ is second countable and Hausdorff, then $ S $ is also second countable and Hausdorff.
+\end{carefull}
+
+\begin{definition}[Level Set of a Map]
+	Let $ F: N \to M $ be a map between manifolds. For $ c \in M $ the level set of $ F $ with level $ c $ is the set 
+	\[ \inv{F}(\set{c}) = \set{x \in N\ |\ F(x) = c}. \]
+\end{definition}
+\begin{remark}
+	In the case $ F : N \to \R^m $ the set $ \inv{F}(\set{\mathbf{0}}) $ is called the \textit{zero set} of the function $ F $.
+\end{remark}
+\begin{remark}
+	Recall that a point $ c \in M $ is a regular value of the map $ F $ if either it is not in the image of $ F $ (i.e. $ \inv{F}(\set{c}) = \emptyset $), or for all $ p \in \inv{F}(\set{c}) $ the differential $ F_{*,p} : T_p N \to T_pM $ is surjective. 
+\end{remark}
+
+\begin{definition}[Regular Level-Set]
+	The inverse image of a regular value of a map is called a regular level set. I.e. Let $ F: N \to M $ be a manifold, and $ c \in M $ be a \emph{regular value} of the map $ F $. Then level set $  \inv{F}(c) $ is a \emph{regular level set} of $ F $.  
+\end{definition}
+\begin{remark}
+	In different words, a level set of a map is a \emph{regular level set} if for every point on the level set, the differential of the map is \emph{surjective}.
+\end{remark}
+
+
 
 \newpage
 

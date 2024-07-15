@@ -475,3 +475,44 @@ The item (iv) in the proposition above is very important, as it makes the hard c
 	\[ \prob(E) = \frac{2}{6} = \frac{1}{3}. \]
 \end{solution}
 
+\begin{problem}[Conditional probability mass function (from Ross)]
+	Let $ X,Y $ be two random variables with the joint probability mass function given as 
+	\[ P(1,1) = 0.5 \qquad P(1,2)=0.1,\qquad P(2,1)=0.1, \qquad P(2,2)=0.3. \]
+	Calculate the conditional probability mass function of $ X $ given that $ Y = 1 $.
+\end{problem}
+\begin{solution}
+	We will use the following identity
+	\[ P_{X|Y}(x|y) = \prob(X=x|Y=y) = \frac{\prob(X=x,Y=y)}{\prob(Y=y)}. \]
+	Observe that 
+	\[ \prob(Y=y) = \sum_x \prob(Y=y,X=x) \]
+	thus $ \prob(Y=1) = 0.5 + 0.1 = 0.6. $
+	So we will have
+	\[ P_{X|Y}(1|1) = \frac{0.5}{0.6} = \frac{5}{6}, \qquad P_{X|Y}(2|1) = \frac{0.1}{0.6} = \frac{1}{6}. \]
+\end{solution}
+
+\begin{problem}[Conditional probability mass function for geometric random variables (from Ross)]
+	Let $ X_1,X_2 $ be two independent random variables with geometric distributions with parameters $ (n_1,p) $ and $ (n_2,p) $. Calculate the conditional probability mass function of $ X_1 $ given that $ X_1+X_2 = m $.
+\end{problem}
+\begin{solution}
+	First, observe that $ Y = X_1 + X_2 $ is a binomial distribution with parameter $ (n_1+n_2, p) $. Thus we can write
+	\[ P_{X_1|Y}(k|m) = \prob(X_1 = k | Y = m) = \frac{\prob(X_1 = k, X_1+X_2 = m)}{\prob(X_1+X_2 = m)} = \frac{\prob(X_1=k, X_2 = m-k)}{\prob(Y = m)} \]
+	Since the random variables $ X_1 $ and $ X_2 $ are independent, we can write
+	\[ P_{X_1|Y}(k|m) = \frac{\prob(X_1=k)\prob(X_2 = m-k)}{\prob(Y=m)} = \frac{\binom{n_1}{k}\binom{n_2}{m-k}}{\binom{n_1+n_2}{m}}. \]
+\end{solution}
+
+\begin{problem}[Conditional probability mass function for Poisson random variables (from Ross)]
+	Let $ X,Y $ be two independent Poisson random variables with parameters $ \lambda_1 $ and $ \lambda_2 $ respectively. Calculate the conditional probability mass function for $ X $ given that $ X_1 + X_2 = n $.
+\end{problem}
+\begin{solution}
+	First observe that $ Z = X + Y $ is a Poisson random variable with parameter $ \lambda_1 + \lambda_2 $. Thus we will have
+	\[ P_{X|X+Y}(m|n) = \frac{\prob(X=m|X+Y=n)}{\prob(X+Y = n)} = \frac{\prob(X=m,Y=n-m)}{\prob(X+Y = n)} \]
+	Given that $ X,Y $ are independent random variables then we can write
+	\[ P_{X|X+Y}(m,n) = \frac{\prob(X=m)\prob(Y=n-m)}{\prob(X+Y=n)} = \frac{\lambda_1^n \lambda_2^{n-m}n!}{m!(n-m)!(\lambda_1+\lambda_2)^n} = \binom{n}{m} (\frac{\lambda_1}{\lambda_1+\lambda_2})^m ( \frac{\lambda_2}{\lambda_1+\lambda_2})^{n-m} \]
+	Thus the conditional probability mass function of $ X $ given that $ X+Y = n $ will be a binomial random variable with parameter $ (n,\lambda_1/(\lambda_1+\lambda_2)) $. We can now easily compute the conditional expectation value as
+	\[ \E{X|X+Y = n} = \frac{n\lambda_1}{\lambda_1 + \lambda_2} \]
+\end{solution}
+
+\begin{problem}
+	Let $ X,Y $ be two random variables. Prove that 
+	\[ \E{\E{X|Y}} = \E{X}. \]
+\end{problem}
