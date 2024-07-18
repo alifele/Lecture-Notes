@@ -634,6 +634,7 @@ The following important proposition states that the regular submanifold is also 
 	The inverse image of a regular value of a map is called a regular level set. I.e. Let $ F: N \to M $ be a manifold, and $ c \in M $ be a \emph{regular value} of the map $ F $. Then level set $  \inv{F}(c) $ is a \emph{regular level set} of $ F $.  
 \end{definition}
 \begin{remark}
+	\label{remark:SurjectivityAndDimension}
 	In different words, a level set of a map is a \emph{regular level set} if for every point on the level set, the differential of the map is \emph{surjective}. This implies that $ \dim N \geq \dim M $. To see this observe that for the linear map $ F_*: T_pN \to T_{F(p)}M $, the maximum number of linearly independent rows or columns is $ \min\set{\dim N, \dim M} $. In order for $ F_* $ to be full rank, the rank of $ F_* $  should be equal to $ \dim M $. This means that we need to have
 	\[ \min\set{\dim N, \dim M} = \dim M \implies \boxed{\dim N \geq \dim M}. \]
 \end{remark}
@@ -694,7 +695,24 @@ The idea of the example above is very important, as we can use its strategy almo
 \end{proof}
 
 
+Now we can extend this theorem more generally form maps between manifolds. This theorem is often called the regular level set theorem, implicit function theorem, pre-image theorem, etc. We will use the name ``regular level set theorem''.
+
+
+\begin{theorem}[Regular Level Set Theorem]
+	Let $ F: N \to M $ be map between manifolds, and let $ c \in M $. The level set $ \inv{F}(\set{c}) $ is a submanifold if the level curve is regular. 
+\end{theorem}
+\begin{proof}
+	Assume $ \inv{F}(\set{c}) $ is non-empty (otherwise it is trivially a submanifold). Let $ (V,\psi = (y^1,\cdots,y^n)) $ be a local chart on $ M $ centered at $ c $, i.e. $ \psi(c) = 0 $. Then we will have $ \inv{F}(\set{c}) = \inv{F}(\inv{\psi}(\set{0}))  = (\psi \circ F)^{-1}(\set{0})$. If we call $ F^i = y^i \circ F $ then the level set $ S = \inv{F}(\set{c}) $ is the common zero set of the functions $ F^1,\cdots,F^m $. Fix $ p \in N $ and choose a local chart $ (U,\psi) $ that contains $ p $ and $ U \subset \inv{F}(V) $. Since $ S $ is a regular level set, then $ F_{*,p} $ is surjective which also implies that $ F_{*,p} $ has at least $ M $ linearly-independent vectors. Without loss of generality we can assume that the first $ M $ columns in $ F_{*,p} $ are linearly-independent, hence 
+	\[ \det\underbrace{\left[\frac{\partial F^i}{\partial x^j}\right]_{1\leq i,j \leq m}}_D \neq 0. \]
+	Replace first $ m $ coordinates of $ \phi $ with $ F^1,\cdots,F^n $. I.e. let $ \phi = (F^1,\cdots,F^m,x^{m+1},\cdots,x^n) $. The Jacobian matrix of this map is given by
+	\[ J[\phi] = \matt{D}{*}{0}{I}. \]
+	and its determinant is given by \[ \det J[\phi] = \det S \neq 0 .\]
+	Thus the map $ \phi $ is locally invertible in a neighborhood of $ p $ possibly smaller than $ U $, call it $ U_p $. We can also now see that $ S\cap U_p $ is defined by the common zero set of $ F^1\cdots,F^m $. Thus $ (U_p,\phi) $ is an adopted chart for $ S $, hence it is a submanifold.
+\end{proof}
+
+
 \newpage
+
 
 \section{Summary}
 \begin{summary}[Coordinate Map and Its Differential]
@@ -703,6 +721,11 @@ The idea of the example above is very important, as we can use its strategy almo
 		Under a coordinate chart $ (U,\phi) $, $ U $ is diffeomorphic to $ \R^n $ and at a point $ p \in U $ the tangent space at $ p $, i.e. $ T_p(U) $, is isomorphic to the tangent space at $ \phi(p) $, i.e. $ T_\phi(p)_n $.
 	\end{quote}
 \end{summary}
+
+\begin{summary}
+	Let $ F: V \to W $ be a linear map between vector spaces. If $ F $ is surjective then $ \dim V \geq \dim W $. See \autoref{remark:SurjectivityAndDimension} for more details and reasoning.
+\end{summary}
+
 
 \begin{summary}[Differential of a Map Between Euclidean Spaces]
 	Let $ F: \R^n \to \R^m $. It differential at point $ p \in \R^n $ is its Jacobian matrix evaluated at point $ p $.
