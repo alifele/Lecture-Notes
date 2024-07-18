@@ -648,19 +648,50 @@ The following important proposition states that the regular submanifold is also 
 	which is precisely $ S^2 $ as a subset of $ \R^3 $. We can equivalently express this as a zero set of $ f: \R^3 \to \R $  given as
 	\[ f(x,y,z) = x^2+y^2+z^2 - 1. \]
 	To see if this level set is a regular level set or not, we need to determine if the Jacobian matrix of $ f $ is full rank on $ S^2 $. The Jacobian matrix of this map is given by
-	\[ f_*: \vecttt{2x}{2y}{2z}. \]
-	The rank of this matrix is 1 except when $ x=y=z=0 $. Since $ (0,0,0) \notin S^2 $, then all of the points on the 2-sphere are regular level sets. 
-	
-	To create an adopted chart, we will use a trick which will be more formalized in the next sections. Consider the chart given by $ (U,\phi=(f(x,y,z),y,z)) $ where $ U $ is any open set containing $ S^2 $ that does not contain the origin, e.g. $ U = \R^3 - \set{0} $. The coordinate map $ \phi:U \to \R^3 $ is locally invertible, since it Jacobian matrix is non-singular on $ U $. That is because
+	\[ f_*(x,y,z) =  \begin{bmatrix}
+		2x & 2y & 2z
+	\end{bmatrix}. \]
+	The rank of this matrix is 1 except when $ x=y=z=0 $. Since $ (0,0,0) \notin S^2 $, then all of the points on the 2-sphere are regular level sets. To create an adopted chart, we will use a trick which will be more formalized in the next sections. Let $ p $ be a point on $ S^2 $. Since $f_*  $ is surjective at $ p $, then not all of its elements are zero. This translates to the fact that there is at least one coordinate of $ f_* $ that does not vanish. Without loss of generality we can assume at $ p $ we have $ x(p) \neq 0 $. Then consider the coordinate map given by $ \phi = (f,y,z) $. Its Jacobian matrix will be
 	\[ J[\phi] = \begin{bmatrix}
-		2x & 2y & 2z \\
-		0 & 1 & 0 \\ 
-		0 & 0 & 1
+				2x & 2y & 2z \\
+				0 & 1 & 0 \\ 
+				0 & 0 & 1
 	\end{bmatrix} \]
-	and $ \det(J[\phi]) = 2x $ that is non-zero on all of the points of $ U $. From \autoref{cor:MapsAsLocalCoordinateSystems} we can now see that the map $ \phi $ is smooth and locally invertible, hence $ (U,\phi) $ is a local coordinate system. We can also see that $ U \cap S^2 $ is defined by vanishing of the first coordinate, i.e. $ f(x,y,z) = 0 $, hence $ \set{(U,\phi)} $ is an adopted chart.
-	
+	and its determinant will be $ \det[J[\phi]] = 2x $. We can observe that at $ p $ the determinant is not zero. So by \autoref{cor:MapsAsLocalCoordinateSystems} we can see that there exists an open neighborhood containing $ p $, i.e. $ U_p $ on which $ \phi $ is locally invertible, thus it is a local coordinate chart. Thus for the point $ p $ the chart $ (U_p,\phi) $ is an adopted chart (since $ U_p\cap S^2 $ is defined by the vanishing of the first element of $ \phi $ ), hence $ (U_p\cap S^2, \phi_S = (y,z)) $ will be a local chart for $ S^2 $. This shows that $ S^2 $, as a regular level set of $ f $ is a submanifold.
 \end{example}
 
+The idea of the example above is very important, as we can use its strategy almost verbatim to prove the following proposition.
+
+\begin{proposition}[Regular Level Set of a Function is a Sub-Manifold]
+	Let $ f:N \to \R $ be a function defined on the manifold. Let $ c \in \R $. If $ c $ is a \emph{regular} value of the function $ f $, then its level curve $ \inv{f}(\set{c}) $ is a regular level curve, and is a sub-manifold.
+\end{proposition}
+\begin{proof}
+	To start, we need to following Lemma.
+	\begin{quote}
+		\begin{lemma}[Zero Level Curve]
+			Let $ f,g : N \to \R  $ be real-valued functions on a manifold $ N $. Let $ c \in \R $. Then the level set of $ f $ with level $ c $ is the same as the level set of $ g $ with level $ 0 $. Furthermore, $ \inv{f}(\set{c}) $ is a regular level curve if and only if $ \inv{g}(\set{0}) $ is a regular level set.
+		\end{lemma}
+		\begin{proof}[Proof of the lemma]
+			Let $ S, S' $ be defined as
+			\[ S = \set{p \in N\ |\ f(p) = c}, \qquad S' = \set{p'\in N\ |\ g(p) = 0}. \]
+			We will need to show $ S = S' $. We can see this by
+			\[ p \in S \biImp f(p) = c \biImp f(p)-c =0 \biImp g(p)=0 \biImp p \in S'. \]
+			To see proof for the second part, note that $ f_* = g_* $,  thus $ f_* $ will be surjective if and only if $ g_* $ is surjective, thus $ \inv{f}(\set{c}) $ will be a regular level set if and only if $ \inv{g}(\set{0}) $ is a regular level set.
+		\end{proof}
+	\end{quote}
+	By using the Lemma above, let $ g = f-c $. So the level set $ \inv{f}(\set{c}) $ will be the same as $ \inv{g}(\set{0}) $, and will be a regular level set if and only if $ \inv{g}(\set{0}) $ is a regular level set. So we will prove that the zero set of $ g $ is a submanifold. Let $ p \in S = \inv{g}(\set{0}) $, and let $ (U,\phi=(x^1,\cdots,x^n)) $ be a local chart containing $ p $. Then the differential of $ g $ at $ p $ will be given by
+	\[ g_{p,*} = \begin{bmatrix}
+		\frac{\partial}{\partial  x^1}\big|_{p} g & \cdots & \frac{\partial}{\partial  x^n}\big|_{p} g
+	\end{bmatrix} .\]
+	Since the level set $ \inv{g}(\set{0}) $ is a regular level set, $ g_{p,*} $ is surjective. This implies that not all of the components of $ g_{p,*} $ be zero at the same time (or alternatively, there exists at least one element in $ g_{p,*} $) that is not zero. In a nutshell, for any choice of $ p $, we can find at least one element of $ g_{p,*} $ that is not zero. Fix $ p \in \inv{g}(\set{0}) $ and without loss of generality assume that $ \partial g/\partial x^1 \neq 0 $. Then consider the map $ \phi(g,x^2,\cdots, x^n) $ from some open neighborhood of $ p $ to $ \R^n $. It Jacobian matrix is given by
+	\[ J[\phi] = \begin{bmatrix}
+		\frac{\partial}{\partial  x^1}\big|_{p}g & \frac{\partial}{\partial  x^2}\big|_{p} g & \cdots & \frac{\partial}{\partial  x^n}\big|_{p} \\
+		0 & 1 & \cdots & 0 \\
+		\vdots & \vdots & \ddots & \vdots \\
+		0 & 0 & \cdots & 1
+	\end{bmatrix} .\]
+	The determinant of the Jacobian matrix above is given by $ \det(J[\phi]) = \frac{\partial}{\partial  x^1}\big|_{p} g  \neq 0$. Thus by \autoref{cor:MapsAsLocalCoordinateSystems}, there exists an open neighborhood $ U_p $ containing $ p $ such that $ \phi $ is locally invertible, thus $ (U_p,\phi) $ is a local chart. Observe that $ S \cap U_p $ is given by vanishing the first component of $ \phi $, i.e. $ g=0 $. Thus $ (U_p,\phi) $ is an adopted chart. Since the point $ p $ was arbitrary, then we proved that for all $ p \in S $ there exist an adopted chart, hence $ S $ is a submanifold.
+\end{proof}
 
 
 \newpage
@@ -763,5 +794,7 @@ The following important proposition states that the regular submanifold is also 
 \end{summary}
 
 
+
+\newpage
 
 \input{sections/TangentSpacesSolvedProblemes.tex}
