@@ -635,8 +635,31 @@ The following important proposition states that the regular submanifold is also 
 \end{definition}
 \begin{remark}
 	In different words, a level set of a map is a \emph{regular level set} if for every point on the level set, the differential of the map is \emph{surjective}. This implies that $ \dim N \geq \dim M $. To see this observe that for the linear map $ F_*: T_pN \to T_{F(p)}M $, the maximum number of linearly independent rows or columns is $ \min\set{\dim N, \dim M} $. In order for $ F_* $ to be full rank, the rank of $ F_* $  should be equal to $ \dim M $. This means that we need to have
-	\[ \min\set{\dim N, \dim M} = \dim M \implies \dim N \geq \dim M. \]
+	\[ \min\set{\dim N, \dim M} = \dim M \implies \boxed{\dim N \geq \dim M}. \]
 \end{remark}
+
+\begin{example}[$ S^2 $ in $ \R^3 $]
+	We can express the manifold $ S^2 $ as a regular level set of a carefully designed map and we will make an adopted chart for it. To do this, consider the map
+	\[ g: \R^3 \to \R \] 
+	given by
+	\[ g(x,y,z) = x^2+y^2+z^2 . \]
+	It level set with level $ 1 $ is given as
+	\[ S^2 = \set{(x,y,z)\ |\ x^2+y^2+z^2 = 1}, \]
+	which is precisely $ S^2 $ as a subset of $ \R^3 $. We can equivalently express this as a zero set of $ f: \R^3 \to \R $  given as
+	\[ f(x,y,z) = x^2+y^2+z^2 - 1. \]
+	To see if this level set is a regular level set or not, we need to determine if the Jacobian matrix of $ f $ is full rank on $ S^2 $. The Jacobian matrix of this map is given by
+	\[ f_*: \vecttt{2x}{2y}{2z}. \]
+	The rank of this matrix is 1 except when $ x=y=z=0 $. Since $ (0,0,0) \notin S^2 $, then all of the points on the 2-sphere are regular level sets. 
+	
+	To create an adopted chart, we will use a trick which will be more formalized in the next sections. Consider the chart given by $ (U,\phi=(f(x,y,z),y,z)) $ where $ U $ is any open set containing $ S^2 $ that does not contain the origin, e.g. $ U = \R^3 - \set{0} $. The coordinate map $ \phi:U \to \R^3 $ is locally invertible, since it Jacobian matrix is non-singular on $ U $. That is because
+	\[ J[\phi] = \begin{bmatrix}
+		2x & 2y & 2z \\
+		0 & 1 & 0 \\ 
+		0 & 0 & 1
+	\end{bmatrix} \]
+	and $ \det(J[\phi]) = 2x $ that is non-zero on all of the points of $ U $. From \autoref{cor:MapsAsLocalCoordinateSystems} we can now see that the map $ \phi $ is smooth and locally invertible, hence $ (U,\phi) $ is a local coordinate system. We can also see that $ U \cap S^2 $ is defined by vanishing of the first coordinate, i.e. $ f(x,y,z) = 0 $, hence $ \set{(U,\phi)} $ is an adopted chart.
+	
+\end{example}
 
 
 
