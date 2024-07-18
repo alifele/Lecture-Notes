@@ -1,0 +1,78 @@
+\chapter{Fourier Analysis}
+
+\section{Introduction}
+Fourier analysis is an elegant use of linear algebra in the setting of analysis. In this chapter we will go through developing the subject from scratch and then demonstrate some of its important application like some results in equidistributions. We start our analysis with the notion of Fourier series.
+
+\section{Fourier Series}
+The Fourier series is developed on the notion of the periodic functions from $ \R $  to $ \R $. However, there are equivalent ways of stating a periodic function from $ \R $ to $ \R $. This is made clear in the remark below.
+
+\begin{remark}
+	We can convert the following three functions to each other.
+	\begin{enumerate}[(i)]
+		\item \textbf{Periodic functions with period $ 2\pi $}:
+		\[ f_1: \R \to \R, \quad \text{such that} \quad f(x+2\pi) = f(x). \]
+		\item \textbf{Functions defined on $ [-\pi,\pi] $}:
+		\[ f_2: [-\pi,\pi]\to \R. \]
+		\item \textbf{Functions defined on unit circle}:
+		\[ f_3: S^1 \to \R. \]
+	\end{enumerate}
+	Note that the functions above can be complex values as well and our analysis will still be the same.
+\end{remark}
+
+\begin{remark}[Some discussion on the functions defined on $ S^1 $]
+	Consider $ S^1 $ as a subset of $ \C $, and let $ F: S^1\to \C $ be a map. This map induces a map $ f: \R \to \C $ that is defined as the push back of $ F $ by the function $ e^{i\theta} $. I.e.
+	\[ f = \operatorname{Exp}_* F = F\circ \operatorname{Exp} \]
+	where $ \operatorname{Exp}:\R \to \C $ given by $ \operatorname{Exp}(\theta) = e^{i\theta} $. So the induced function $ f $ will be given by
+	\[ f(\theta) = F(e^{i\theta}). \]
+	It is easy to check that $ f $ is $ 2\pi\text{-periodic} $.
+\end{remark}
+
+We start with a precise definition of the Fourier series of a function.
+
+\begin{definition}[Fourier Series of a Function]
+	\label{def:FourierSeries}
+	Let $ F:[a,b] \to \R $. Its Fourier series is defined as the series
+	\[ \sum_{n=-\infty}^{+\infty} \hat{f}(n)e^{2\pi i n x / L} , \]
+	(that can converge or diverge) where the $ \text{n}^\text{th} $ Fourier coefficient $ \hat{f}(n) $ is given by
+	\[ \hat{f}(n) = \frac{1}{L} \int_{a}^{b} f(x) e^{-2\pi i n x/ L} dx.  \]
+\end{definition} 
+
+The Fourier series defined above is from a larger class of series, called \textbf{trigonometric series} as in the following definition.
+
+\begin{definition}[Trigonometric Series and Polynomials]
+	Series of the form
+	\[ \sum_{n=-\infty}^{\infty} c_n e^{2\pi i n x / L} \]
+	are called trigonometric series. If there are only finitely many terms in the series, i.e. $ c_n = 0 $ for all $ \abs{n} $ large enough, then it will be called trigonometric polynomial.
+\end{definition}
+
+\begin{definition}[Partial Sums of Fourier Series]
+	For a Fourier series defined in \autoref{def:FourierSeries} its $ n^\text{th} $ order partial sum is defined as 
+	\[ S_N(f)(x) = \sum_{N = -n}^{n} \hat{f}(n)e^{2\pi i n x/L}. \]
+	A partial series of a Fourier series is a particular example of the trigonometric polynomial.
+\end{definition}
+Now one of the fundamental questions to ask is `` In what sense does the sequence of partial sums $ S_N(f) $ converges to $ f $?''. See the following example.
+
+\begin{example}[Convergence of partial sums of Fourier series]
+	Let $ f: [0,2\pi] \to \R $ be a function given by $ f(\theta) = (\pi - \theta)^2/4 $. It is easy to get the Fourier coefficients of this function, where we will have
+	\[ f(\theta) \sim \frac{\pi^2}{12} + \sum_{n=1}^{\infty}\frac{\cos n\theta}{n^2}. \]
+	In this example, the sequence of partial sums is defined as 
+	\[ S_N(f)(\theta) = \frac{\pi^2}{12} + \sum_{n=1}^{N}\frac{\cos n\theta}{n^2}. \]
+	for convenience in notation we write $ S_N(f)(\theta) $ as $ S_N(\theta) $. It is easy to check that the sequence $ \set{S_N} $ converges to $ f $ in the uniform norm. However, it does not converge to $ f $ in the following norm.
+	\[ \norm{g}_{2,\infty} = \norm{g}_\infty + \norm{g'}_\infty \]
+	However, changing this norm a little bit, we will have a converging sequence
+	\[ \norm{g}_{2,L^2} = \norm{g}_{L^2} + \norm{g'}_{L^2}. \] 
+	But, we won't have a converging sequence if we consider higher derivatives in the norm
+	\[ \norm{g}_{k,L^2} = \sum_{i=1}^{k} \norm{g^{(i)}}_{L^2}. \]
+	The following figure makes this more understandable, where the solid light green and the black lines are showing $ f(\theta) $ and $ f'(\theta) $ respectively, and the dashed dark green and red lines are showing $ S_{10}(\theta) $ and $ S_{10}'(\theta) $ respectively.
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=0.3\linewidth]{Images/FourierConvergence}
+		\label{fig:fourierconvergence}
+	\end{figure}
+	\FloatBarrier
+
+	
+\end{example}
+
+
+

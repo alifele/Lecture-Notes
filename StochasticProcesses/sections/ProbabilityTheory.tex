@@ -513,6 +513,52 @@ The item (iv) in the proposition above is very important, as it makes the hard c
 \end{solution}
 
 \begin{problem}
-	Let $ X,Y $ be two random variables. Prove that 
+	Let $ X,Y $ be two discrete random variables. Prove that 
 	\[ \E{\E{X|Y}} = \E{X}. \]
 \end{problem}
+\begin{solution}
+	We start with the definition of the expectation of a discrete random variable.
+
+	\begin{align*}
+		\E{\E{X|Y}} &= \sum_y \E{X|Y=y} \prob(Y=y) = \sum_y \sum_x x\prob(X=x|Y=y)\prob(Y=y) \\
+		& = \sum_{x,y} x\prob(X=x,Y=y) = \sum_x x \sum_y \prob(X=x,Y=y) = \sum_x x\prob(X=x) = \E{X}
+	\end{align*}
+\end{solution}
+
+\begin{problem}[The expectation of a random number of random variables (from Ross)]
+	Let the expected number of injures in an industrial field be 4 per week. Also, assume that the number of workers injured at each incidence are independent random variables with average 2. Then what is the expected number of injuries in one week?
+\end{problem}
+\begin{solution}
+	Let $ X_1,X_2,\cdots $ be i.i.d random variables representing the number of workers injured at each incidence. We are interested in 
+	\[ \E{X_1+\cdots+X_N} \]
+	where $ N $ is a random variable representing the number of incidences occurred in a week. By the law of conditional expectation we can write
+	\[ \E{X_1 + \cdots + X_N} = \sum_n \E{X_1+\cdots+X_n}\prob(N=n) = \sum_n n\E{X} \prob(N=n) = \E{X} \E{N}.\]
+	Thus the average number of workers injured in a week will be 8. 
+\end{solution}
+
+\begin{problem}[An alternative way to compute the expectation of a geometric random variable]
+	Consider a coin with probability $ p $ to fall heads. What is the expectation value of the number of tosses required until we get the first head?
+\end{problem}
+\begin{solution}
+	Let $ X_1,X_2,\cdots $ be Bernoulli random variables with parameter $ p $. Let $ N $ be a random variable denoting the number of tosses required until we get the first heads. We can condition the expected value of $ E $ to the first outcome.
+	\[ \E{N} = \E{N|X_1 = H }\underbrace{\prob(X_1 = H)}_{=p} + \E{N|X_1=T}\underbrace{\prob(X_1=T}_{=1-p})  \]
+	Observe that 
+	\[ \E{N|X_1=H} =1 ,\qquad \E{N|X_1=T} = 1+\E{N}.\]
+	Thus we will have
+	\[ \E{N} = \frac{1}{p}. \]
+\end{solution}
+
+\begin{problem}[Trapped miner (from Ross)]
+	A miner is trapped in the mine and has three doors in front of him. He is equally likely to choose any of the three. The first door will take him to safety after 2 hours of walking, the second door will take him to the mine again after 3 hours of walking, and the third door will take him to the mine again after 5 hours of walking. What is the expected time that the miner will arrive to safety?
+\end{problem}
+\begin{solution}
+	Let $ X_1,X_2,\cdots $ be random variables denoting the doors that the miner choose at each time that he attempts to escape. Furthermore, let $ T $ be a random variable showing the the time it takes for the miner to escape. To calculate $ \E{T} $ we can condition it on the first door choice. I.e.
+	\[ \E{T} = \E{T|X_1 =1}\prob(X_1=1) + \E{T|X_1 =2}\prob(X_1=2)+\E{T|X_1 =3}\prob(X_1=3) \]
+	Observe that 
+	\[ \prob(X_1=1) = \prob(X_1=2) = \prob(X_1=3) = 1/3. \]
+	Also
+	\[  \E{T|X_1 =1} = 2,\qquad  \E{T|X_1 =2} = 3+\E{T}, \qquad \E{T|X_1 =3} = 3+\E{T}. \]
+	Thus we will have
+	\[ \E{T} = 10. \]
+	So on average it will take the miner to exit the mine in 10 hours. Note that this does not guarantee that the miner will eventually escape. It is possible that we will get in trap by repeatedly choosing the door number 3.
+\end{solution}

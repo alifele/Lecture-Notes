@@ -634,7 +634,8 @@ The following important proposition states that the regular submanifold is also 
 	The inverse image of a regular value of a map is called a regular level set. I.e. Let $ F: N \to M $ be a manifold, and $ c \in M $ be a \emph{regular value} of the map $ F $. Then level set $  \inv{F}(c) $ is a \emph{regular level set} of $ F $.  
 \end{definition}
 \begin{remark}
-	In different words, a level set of a map is a \emph{regular level set} if for every point on the level set, the differential of the map is \emph{surjective}.
+	In different words, a level set of a map is a \emph{regular level set} if for every point on the level set, the differential of the map is \emph{surjective}. This implies that $ \dim N \geq \dim M $. To see this observe that for the linear map $ F_*: T_pN \to T_{F(p)}M $, the maximum number of linearly independent rows or columns is $ \min\set{\dim N, \dim M} $. In order for $ F_* $ to be full rank, the rank of $ F_* $  should be equal to $ \dim M $. This means that we need to have
+	\[ \min\set{\dim N, \dim M} = \dim M \implies \dim N \geq \dim M. \]
 \end{remark}
 
 
