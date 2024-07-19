@@ -607,6 +607,7 @@ We will introduce the notion of submanifolds. As a very simple example, the $ xy
 The following important proposition states that the regular submanifold is also a manifold.
 
 \begin{proposition}[Regular Submanifold is a Manifold]
+	\label{prop:regularSubmanifoldIsAManifold}
 	Let $ S $ be a regular submanifold of the manifold $ M $. Let $ \mathfrak{U} = 
 	\set{(U,\phi)} $ be a collection of \emph{compatible} and \emph{adopted} charts that \emph{covers} $ S $. Then the collection $ \set{(U\cap S), \phi_S)} $ is a compatible chart for $ S $, hence $ S $ is a manifold. Further more, if $ S $ is defined by the vanishing of $ n-k $ local coordinate maps, then $ S $ has coordinate $ k $.
 \end{proposition}
@@ -699,7 +700,8 @@ Now we can extend this theorem more generally form maps between manifolds. This 
 
 
 \begin{theorem}[Regular Level Set Theorem]
-	Let $ F: N \to M $ be map between manifolds, and let $ c \in M $. The level set $ \inv{F}(\set{c}) $ is a submanifold if the level curve is regular. 
+	\label{thm:regularLevelSetTheorem}
+	Let $ F: N \to M $ be map between manifolds, and let $ c \in M $. The level set $ \inv{F}(\set{c}) $ is a submanifold of dimension $ n-m $ if the level set is regular. 
 \end{theorem}
 \begin{proof}
 	Assume $ \inv{F}(\set{c}) $ is non-empty (otherwise it is trivially a submanifold). Let $ (V,\psi = (y^1,\cdots,y^n)) $ be a local chart on $ M $ centered at $ c $, i.e. $ \psi(c) = 0 $. Then we will have $ \inv{F}(\set{c}) = \inv{F}(\inv{\psi}(\set{0}))  = (\psi \circ F)^{-1}(\set{0})$. If we call $ F^i = y^i \circ F $ then the level set $ S = \inv{F}(\set{c}) $ is the common zero set of the functions $ F^1,\cdots,F^m $. Fix $ p \in N $ and choose a local chart $ (U,\psi) $ that contains $ p $ and $ U \subset \inv{F}(V) $. Since $ S $ is a regular level set, then $ F_{*,p} $ is surjective which also implies that $ F_{*,p} $ has at least $ M $ linearly-independent vectors. Without loss of generality we can assume that the first $ M $ columns in $ F_{*,p} $ are linearly-independent, hence 
@@ -709,6 +711,42 @@ Now we can extend this theorem more generally form maps between manifolds. This 
 	and its determinant is given by \[ \det J[\phi] = \det S \neq 0 .\]
 	Thus the map $ \phi $ is locally invertible in a neighborhood of $ p $ possibly smaller than $ U $, call it $ U_p $. We can also now see that $ S\cap U_p $ is defined by the common zero set of $ F^1\cdots,F^m $. Thus $ (U_p,\phi) $ is an adopted chart for $ S $, hence it is a submanifold.
 \end{proof}
+
+
+Regular level set theorem, is very powerful tool to prove that some spaces are manifolds. For instance, the following proposition reflects an example of this elegant use.
+
+\begin{proposition}[Special Linear Group is a Manifold]
+	The special linear group $ SL(n,\R) $ is a subset of $ GL(n,\R) $ that contains matrices with determinant 1. $ SL(n,\R) $ is a manifold.
+\end{proposition}
+\begin{proof}
+	Let $ \det: GL(n,\R) \to \R $ be a function which is the determinant function we know from linear algebra. Then $ SL(n,\R) $ can be defined by the level set $ \inv{\det}(\set{1}) $. To show that this level set is regular, we need to show that the determinant function is surjective on the level set. To see this, we first need to calculate the differential of $ \det $ function. Let $ m_{i,j} $ denote the $ (i,j)\text{-minor} $ of a matrix. Given a matrix $ A \in GL(n,\R) $ we can expand the determinant function as
+	\[ \det(A) = \sum_j (-1)^{i+j} a_{ij} m_{ij}. \]
+	This implies that 
+	\[ \frac{\partial}{\partial  a^{ij}}\big|_{A} \det = (-1)^{i+j} m_{ij} \]
+	By \autoref{prop:CriticalPointOfARealMap} we have
+	\[ \det\text{ is not surjective} \implies \frac{\partial}{\partial  a^{ij}}\big|_{A} \det 0 \forall i,j \implies m_{ij}=0 \forall i,j \implies \det(A)=0. \]
+	So we can conclude 
+	\[ \det(A) \neq 0 \implies \det\text{ is surjective}. \]
+	Since $ SL(n,\R) $ is a subset of $ GL(n,\R) $, then it follows that the matrices in this set are not singular, hence $ \det $ is surjective which implies that the level set $ SL(n,\R) $  is a regular level set, hence, is a regular manifold.
+\end{proof}
+
+
+\subsection{The Rank of a Smooth Map}
+Recall that the rank of a smooth map between manifolds is defined by the rank of its differentials. Consider the following important observation.
+
+\begin{observation}
+	Let $ F: V \to W $ be a linear map between vector spaces. If $ F $ is surjective, then its rank is \emph{maximal}. However, the converse is not true. If $ F $ has full rank, then this does not implies that $ F $ is surjective. The converse is only true when we have $ \dim V \geq \dim W $.
+	
+	Also, as a general fact from linear algebra, recall that the rank of $ F $ is at most $ \min\set{\dim V, \dim W} $. I.e.  $ \rank F \leq \min\set{\dim V, \dim W} $.
+\end{observation}
+
+So for a smooth map between manifolds, say $ F: N\to M $, assuming that it has maximal rank at $ p \in N $, we will have the following three cases that are not mutually exclusive:
+\begin{enumerate}[(i)]
+	\item if $ \dim N = \dim M $, then since $ F_* $ has full rank, thus its determinant is not singular, hence it is locally invertible. So $ F $ is a local diffeomorphism at $ p $.
+	\item If $ \dim N \leq \dim M $, then by the observation box above, the maximal rank does not necessarily imply being surjective and $ f $ is an immersion.
+	\item If $ \dim N \geq \dim M $, then the map $ F $ is an submersion.
+\end{enumerate}
+
 
 
 \newpage

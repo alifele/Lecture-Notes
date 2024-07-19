@@ -214,6 +214,9 @@ We can now see that the map $ (\pi_{1*},\pi_{2*}) $ maps these two bases to each
 		\[ \frac{\partial}{\partial  x^i}\big|_{p} f = 0 \qquad \text{for $ i = 1,2,\cdots,n $}. \]
 		So by \autoref{prop:CriticalPointOfARealMap} we conclude that $ p $ is a critical point.
 	\end{enumerate}
+	\begin{carefull}[The converses is not true]
+		Note that the converse of the theorem above is not true. A critical point of a real-valued function is not necessarily an local maxima. It can be a so called saddle point. For instance, the function $ F:\R^2 \to \R$ given by $x^3 -6xy + y^2 $ has a saddle point at $ (0,0) $.
+	\end{carefull}
 \end{solution}
 
 
@@ -310,6 +313,56 @@ We can now see that the map $ (\pi_{1*},\pi_{2*}) $ maps these two bases to each
 	\[ c(t) = (x(t),y(t)) = (Ae^{t},Be^{-t}), \]
 	where $ A $ and $ B $ are determined by the starting point of the curve. 
 \end{solution}
+
+\begin{problem}[Hypersurface (from L. Tu)]
+	Show that the solution set of the equation $ x^3 + y^3 + z^3 = 1 $ in $ \R^3 $ is a manifold of dimension 2. 
+\end{problem}
+\begin{solution}
+	Define $ F: \R^3 \to \R $ as $ f(x,y,z) = x^3 + y^3 + z^3 $. The solution set of $ x^3 + y^3 + z^3 = 1 $ is the same as the level curve of $ f $ with level 1. Since $ f_* = \left[3x^2 \quad 3y^2 \quad 3z^2 \right] $ is not surjective only at $ (0,0,0) $, and this point is not on the level set, then $ f_* $ is surjective for all points of the level set, hence a regular level set. By \autoref{thm:regularLevelSetTheorem} the level set is a submanifold of dimension $ 3-1 =2 $, and by \autoref{prop:regularSubmanifoldIsAManifold} it is a manifold of dimension 2. 
+\end{solution}
+
+\begin{problem}[Regular values (from L. Tu)]
+	Define $ f:\R^2 \to \R $ by
+	\[ f(x,y) = x^3 - 6xy + y^2. \]
+	Find all values $ c \in \R $ for which the level set $ \inv{f}(c) $ is a regular submanifold of $ \R^2 $.
+\end{problem}
+\begin{solution}
+	A regular level set of a function is the pre-image of a regular value of that function. We need to find the critical points of the map. The differential of the map is given by
+	\[ F_* = \begin{bmatrix}
+		3x^2-6y & -6x + 2y
+	\end{bmatrix} \]
+	Thus $ F $ is not surjective at the points $ (0,0) $ and $ (6,18) $ in its domain. So for all $ c \in \R - \set{0,-108} $ the level curve $ \inv{f}(c) $ will be a regular level set. 
+\end{solution}
+
+\begin{problem}[Solution set of one equation (from L . Tu)]
+	Let $ x,y,z,w $ be the standard coordinates on $ \R^4 $. Is the solution set of $ x^5 + y^5 + z^5 + w^5 = 1 $ in $ \R^4 $ a smooth manifold? Explain why or why not. (Assume that the subset is given the subspace topology).
+\end{problem}
+\begin{solution}
+	newEnv
+\end{solution}
+
+
+\begin{problem}[Solution set of two polynomial equations (from L. Tu)]
+	Decide whether the subset $ S $ of $ \R^3 $ defined by the two equations
+	\[ x^3 + y^3 + z^3 = 1, \qquad x+y+z = 0, \]
+	is a regular submanifold of $ \R^3 $.
+\end{problem}
+\begin{solution}
+	Define $ F:\R^3 \to \R^2 $ as $ (f_1, f_2) = (x^3+y^3+z^3, x+y+z) $. The solution set of the two polynomial equations above is the same as the level set $ \inv{F}(0,1) $. The Jacobian of this map at $ p \in \R^3 $ is given by
+	\[ F_* = \begin{bmatrix}
+		3x^2 & 3y^2 & 3z^2 \\
+		1 & 1 & 1
+	\end{bmatrix} \]
+	For $ F_* $ not to be surjective on the level set, then all of its $ 2\times 2 $ minors should vanish. I.e. in order for $ F_* $ not to be surjective we need to have
+	\[ 3x^2 - 3y^2 = 0, \qquad 3x^2 - 3z^2 = 0, \qquad 3y^2 - 3z^2 = 0. \]
+	The solution set of these equations is $ A = A_1 \cup A_2 \cup A_3 \cup A_4 \cup A_5 $ where
+	\begin{align*}
+		&A_1 = \set{(t,t,t): t\in \R-\set{0}},\quad &&A_2 = \set{(-t,t,t): t\in \R-\set{0}},\\
+		&A_3 = \set{(t,-t,t): t\in \R-\set{0}},\quad &&A_4 = \set{(t,t,-t): t\in \R-\set{0}},\qquad A_5=\set{(0,0,0)}.
+	\end{align*}
+	Non of these solution sets satisfy the two polynomial equations (or equivalently are not on the level set of $ F $ with level $ (1,0) $). So the level set is a regular level set, hence a manifold of degree 3-2=1. 
+\end{solution}
+
 
 \begin{problem}[Maximal integral curve in the plane (from L. Tu)]
 	Find the maximum integral curve $ c(t) $ starting at the point $ (a,b \in \R^2) $ of the vector field $ X_{(x,y)} = \partial/\partial x + x \partial/\partial y $ on $ \R^2 $.
