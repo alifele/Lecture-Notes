@@ -716,6 +716,7 @@ Now we can extend this theorem more generally form maps between manifolds. This 
 Regular level set theorem, is very powerful tool to prove that some spaces are manifolds. For instance, the following proposition reflects an example of this elegant use.
 
 \begin{proposition}[Special Linear Group is a Manifold]
+	\label{prop:SpecialLonearGroupIsManifold}
 	The special linear group $ SL(n,\R) $ is a subset of $ GL(n,\R) $ that contains matrices with determinant 1. $ SL(n,\R) $ is a manifold.
 \end{proposition}
 \begin{proof}
@@ -734,7 +735,7 @@ Regular level set theorem, is very powerful tool to prove that some spaces are m
 \subsection{The Rank of a Smooth Map}
 Recall that the rank of a smooth map between manifolds is defined by the rank of its differentials. Consider the following important observation.
 
-\begin{observation}
+\begin{observation}[Surjectivity implies maximal rank, but the converse is not true!]
 	Let $ F: V \to W $ be a linear map between vector spaces. If $ F $ is surjective, then its rank is \emph{maximal}. However, the converse is not true. If $ F $ has full rank, then this does not implies that $ F $ is surjective. The converse is only true when we have $ \dim V \geq \dim W $.
 	
 	Also, as a general fact from linear algebra, recall that the rank of $ F $ is at most $ \min\set{\dim V, \dim W} $. I.e.  $ \rank F \leq \min\set{\dim V, \dim W} $.
@@ -743,9 +744,50 @@ Recall that the rank of a smooth map between manifolds is defined by the rank of
 So for a smooth map between manifolds, say $ F: N\to M $, assuming that it has maximal rank at $ p \in N $, we will have the following three cases that are not mutually exclusive:
 \begin{enumerate}[(i)]
 	\item if $ \dim N = \dim M $, then since $ F_* $ has full rank, thus its determinant is not singular, hence it is locally invertible. So $ F $ is a local diffeomorphism at $ p $.
-	\item If $ \dim N \leq \dim M $, then by the observation box above, the maximal rank does not necessarily imply being surjective and $ f $ is an immersion.
+	\item If $ \dim N \leq \dim M $, then by the observation box above, the maximal rank does not necessarily imply being surjective. However the maximality of the rank implies that $ \rank F = \dim N $, hence $ F_* $ is injective, thus an immersion.
 	\item If $ \dim N \geq \dim M $, then the map $ F $ is an submersion.
 \end{enumerate}
+
+In this section, we will basically apply the idea of the constant rank theorem for Euclidean spaces to the manifolds. To make sure we understand every step, we are giving a proof of the constant rank theorem in the case of Euclidean spaces. 
+
+\begin{theorem}[Constant Rank Theorem for Euclidean Spaces]
+	Let $ f: \R^n \supset U \to \R^m $ be a map between Euclidean spaces. Assume that $ f $ has a constant rank $ k $ in a neighborhood of $ p \in U $. Then there exists diffeomorphisms of $ G $ and $ F $ (as a local coordinate changes) such that 
+	\[ (F\circ f \circ\inv{G})(x^1,\cdots,x^n) = (x^1,\cdots,x^k,0,\cdots,0).  \]
+\end{theorem}
+\begin{proof}
+	We will do the proof for the case where $ n = m = 2 $ and $ k = 1 $ to better highlight the ideas behind the proof. Consider the Jacobian matrix of $ f $ at $ p $ given as
+	\[ Jf = \matt{\partial_x f^1}{\partial_y f^1}{\partial_x f^2}{\partial_y f^2}. \]
+\end{proof}
+Since $ f $ has constant rank $ 1 $, then we should be able to find a non-zero column vector in the Jacobian matrix. Without loss of generality we can assume that $ \partial_x f^1 \neq 0$. Let $ G(x,y) = (f^1(x,y),y) $. Its Jacobian matrix is given by
+\[ JG = \matt{\partial_x f^1}{\partial_y f^1}{0}{1} \]
+and its determinant is $ \partial_x f^1 $ which is non-zero from the assumption. Thus it is locally invertible, i.e. $ \exists V \ni f(p) $ and $ U_1 \ni p $ such that $ G: U_1\to V $ is a local diffeomorphism. We can make $ U_1 $ smaller such that $ U_1\subset U $. Thus on $ U_1 $ the function $ f $ has constant rank, and $ G $ is locally invertible. Observe that $ f^1 \inv{G} = u $ since
+$ (u,v) = (G\circ \inv{G})(u,v) = (f^1\circ \inv{G}, y\circ\inv{G})(u,v) $, 
+thus we can write
+\[ f\circ \inv{G} = (u, h(u,v)) \]
+where $ h = y \circ\inv{G} $. Note that since $ G $ is a local diffeomorphism, then $ f\circ\inv{G} $ has constant rank 1 on $ U_1 $ as well (similar to $ f $). Thus in its Jacobian matrix
+\[ J (f\circ\inv{G}) = \matt{1}{0}{\partial_x h}{\partial_y h}. \]
+In order for $ f\circ\inv{G} $ have the same rank as $ f $ on $ U_1 $ we need to have $ \partial_y h = 0$ everywhere on $ U_1 $. This means that $ h $ is only a function of $ u $. Define $ F(x,y) = (x,y-h(y)) $ which is a diffeomorphism. This implies 
+\[ (F\circ f\circ\inv{G})(u,v) = (u,0). \]
+
+\begin{example}[A useful characterization of constant rank for a map]
+	Let $ f: \R^n \supset U \to \R^m $ be a map that has a non-zero Jacobian at $ p \in U $. Then by continuity, it has non-zero Jacobian at a neighborhood of $ p $, hence it has a constant rank. Thus non-zero Jacobian for a map at a point, implies constant rank of map at a neighborhood of that point. 
+\end{example}
+
+
+This idea of the constant rank theorem can easily be extended to the manifolds with almost no cost. The following proposition captures this idea.
+
+\begin{proposition}[Constant Rank Theorem for Manifolds]
+	Let $ F: N\to M $ be a map between manifold that has constant rank $ k $ in a neighborhood of $ p \in N $. Then there exists charts $ (U,\phi) $ centered at $ p \in N $ and $ (V,\psi) $ centered at $ F(p) \in M $ such that 
+	\[ (\psi\circ F \circ \inv{\phi})(r^1,\dots,r^n) = (r^1,\dots,r^k,0,\dots,0). \]
+\end{proposition}
+\begin{proof}
+	Let $ (U,\bar{\phi}) $ and $ (V,\bar{\psi}) $ be two charts centered at $ p \in N $ and $ F(p) \in M $ respectively. Observe that since $ \bar{\phi} $ and $ \bar{\psi} $ are diffeomorphisms, then the map $ H = \bar{\psi}\circ F \circ \bar{\phi} $ has a constant rank $ k $ (another way to see this is the consider the differential $ H_* = \bar{\psi}_*\circ F_* \circ \bar{\phi}_* $, and since $ \bar{\psi}_* $ and $ \bar{\phi}_* $ are isomorphisms, then $ H_* $ has the same rank as $ F_* $). Now by the constant rank theorem for the vector spaces, there exists local diffeomorphisms $ G $ in a neighborhood of $ \phi(p) $ and $ F $ in a neighborhood of $ \psi(F(p)) $ such that 
+	\[ (F \circ H \circ \inv{G})(r^1,\dots,r^n) = (r^1,\dots,r^k,0,\cdots,0). \] 
+	Let $ \phi = G\circ\bar{\phi} $ and $ \psi = F\circ\bar{\psi}$. This completes the proof.
+\end{proof}
+
+
+By the regular level set theorem, we know that the pre-image of a regular value of map between manifolds is a regular submanifold. However, we can use constant rank theorem to show it suffices for the map to have a constant map in a neighborhood of the pre-image, and this guarantees that the level set is a regular submanifold.
 
 
 

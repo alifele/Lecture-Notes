@@ -338,7 +338,29 @@ We can now see that the map $ (\pi_{1*},\pi_{2*}) $ maps these two bases to each
 	Let $ x,y,z,w $ be the standard coordinates on $ \R^4 $. Is the solution set of $ x^5 + y^5 + z^5 + w^5 = 1 $ in $ \R^4 $ a smooth manifold? Explain why or why not. (Assume that the subset is given the subspace topology).
 \end{problem}
 \begin{solution}
-	newEnv
+	Define $ F: \R^4 \to \R $ as $ F(x,y,z,w) = x^5 + y^5 + z^5 + w^5 $. The solution  set of the equation above is the same as the level set $ \inv{F}(\set{1}) $. We need to show that this level set is a regular level set. To see this consider the differential of $ F $ give as
+	\[ F_* = \begin{bmatrix}
+		5x^4 & 5y^4 & 5z^4 & 5w^4
+	\end{bmatrix} \]
+	By \autoref{prop:CriticalPointOfARealMap} the only critical point of this map is the origin $ (0,0,0,0) $ which is not in the solution set, i.e. $ F(0,0,0,0) \neq 1 $. This implies that the level set is a regular level set, hence a regular submanifold, hence a smooth manifold of codimension $ 1 $, or equivalently of dimension $ 4-1=3 $.
+\end{solution}
+
+\begin{problem}[Solution set of two equations (from L. Tu)]
+	Is the solution set of the system of equations 
+	\[ x^3 + y^3 + z^3 = 1, \qquad z = xy, \]
+	in $ \R^3 $ a smooth manifold? Prove your answer. 
+\end{problem}
+\begin{solution}
+	Define the map $ F: \R^3 \to \R^2 $ as $ F = (f_1,f_2) = (x^3+y^3+z^3-1, xy-z) $. The solution set of the system of equations above is the same as the zero set of the function $ F $. In order for this zero set to be regular, we demand that the map $ F $ be surjective on this level set. The differential of the maps is given by 
+	\[ F_* = \begin{bmatrix}
+		3x^2 & 3y^2 & 3z^2 \\
+		y & x & -1
+	\end{bmatrix} \]
+	In order for $ F $ not to be surjective, all of $ (2\times 2)\text{-minors} $ of the $ F_* $ should vanish. I.e. we need to have
+	\[ x^3 = y^3, \qquad x^2+yz^2 = 0,\qquad y^2+xz^2 = 0. \]
+	The simultaneous solution of these equations is 
+	\[ \set{(0,0,z)\ |\ z \in \R} \cup \set{(x,x,\pm\sqrt{-x})\ |\  x<0}. \]
+	Non of these points is on the level set, (i.e. do not satisfy the set of two equations). So we conclude that the solution set is a regular level set, hence a regular submanifold, hence a manifold of codimension 2, or alternatively a manifold of dimension $ 3-2=1 $.
 \end{solution}
 
 
@@ -486,3 +508,61 @@ We can now see that the map $ (\pi_{1*},\pi_{2*}) $ maps these two bases to each
 	Thus we have
 	\[ c^k = \det \matt{\sum_i a^i \frac{\partial }{\partial x^i}}{\sum_j b^j \frac{\partial}{\partial x^j}}{a^k}{b^k}. \]
 \end{solution}
+
+\begin{problem}[Regular Submanifolds]
+	Suppose that a subset $ S $ of $ \R^2 $ has the property that locally on $ S $ one of the coordinates is a $ C^\infty $ function of the other coordinate. Show that $ S $ is a regular submanifold of $ \R^2 $.
+\end{problem}
+\begin{solution}
+	We can show this in two ways. First by finding an explicit adopted chart, and second, by showing that this graph if a regular level set of a smooth map. For the first method, let $ y = f(x) $, and $ p \in S $, thus $ y(p) = f(x(p)) $. Let $ U $ be any open set containing $ p $, then define the coordinate map $ \phi = (x,f(x)-y) $. Note that the Jacobian of this map is given by
+	\[ J[\phi] = \begin{pmatrix}
+		1 & 0 \\
+		f_x & -1
+	\end{pmatrix} \]
+	hence it is non-singular. Thus $ \phi $ is a local diffeomorphism, so it is a local coordinate map. With this choice of the local chart, the set $ S \cap U $ is defined by vanishing the second coordinate of $ \phi $. Thus $ (S\cap U, \phi) $ is an adopted chart, and since $ p \in S $ was chosen arbitrary, the set $ S $ is a regular submanifold, hence a manifold of dimension $ 1 $. For the second method, we need show that $ S $, as the graph of a smooth map $ y = f(x) $ is a regular zero set of the map $ F: \R^2 \to \R $ given as $ F(x,y) = f(x) - y $. The differential of this map is 
+	\[ F_* = \left[  f_x \qquad -1 \right] \]
+	and by \autoref{prop:CriticalPointOfARealMap} we conclude that $ F $ is always surjective, thus its zero level curve is regular, hence the set $ S $ is a regular submanifold.
+\end{solution}
+
+\begin{problem}[Graph of a smooth function]
+	Show that the graph $ \Gamma(f) $ of a smooth function $ f: \R^2 \to \R $,
+	\[ \Gamma(f) = \set{(x,y,f(x,y)) \in \R^3} \]
+	is a regular submanifold of $ \R^3 $.
+\end{problem}
+\begin{solution}
+	We need to show that the graph $ \Gamma(f) $ a regular level set of a smooth map. Define $ F: \R^3 \to \R $ as $ F(x,y,z) = z-f(x,y) $. Then the graph $ \Gamma(f) $ is the zero set of this map. The differential of this map is given by
+	\[ F_* = \begin{bmatrix}
+		-f_x, -f_y, 1
+	\end{bmatrix} \]
+	where by \autoref{prop:CriticalPointOfARealMap} is surjective. Thus the zero set is a regular level set, hence $ \Gamma(f) $ is a smooth manifold.
+\end{solution}
+
+\begin{problem}[Euler's Formula (from L. Tu)]
+	Let $ F $ be a homogeneous polynomial of degree $ k $. Thus for any $ t\in \R $ we will have
+	\[ F(tx_0,\cdots, tx_n) = t^k F(x_0,\cdots,x_n). \]
+	Show that 
+	\[ \sum_{i=0}^{n} x_i \frac{\partial F}{\partial x_i} = kF. \]
+\end{problem}
+\begin{solution}
+	To see the we differentiate the both sides of the identity $  F(tx_0,\cdots, tx_n) = t^k F(x_0,\cdots,x_n) $ with respect to $ t $ and utilize the chain rule to get
+	\[ \sum_i x_i \frac{\partial F}{\partial x_i}(tx_0,\cdots,tx_n) = kt^{k-1}F(x_0,\cdots,x_n). \]
+	Let $ t\to 0 $. Then we will get
+	\[ \sum_i x_i \frac{\partial F}{\partial x_i}(x_0,\cdots,x_n) = k F(x_0,\cdots,x_n). \]
+\end{solution}
+
+\begin{problem}[Product of regular submanifolds (from L. Tu)]
+	If $ S_i $ is a regular submanifold of the manifold $ M_i $ for $ i=1,2 $, prove that $ S_1\times S_2 $ is a regular submanifold of $ M_1\times M_2 $.
+\end{problem}
+\begin{solution}
+	Let $ M_1 $ and $ M_2 $ be manifolds of dimension $ m_1, m_2 $. Since $ S_1 $ is a regular submanifold of $ M_1 $, then for $ p \in S_1 $, there exists a local chart $ (U_p, \phi = (\phi^1,\cdots,\phi^{m_1})) $ such that $ S_1\cap U_p $ is the zero set of $ (\phi^1,\cdots,\phi^k) $ for some $ k \leq m_1 $. Similarly for $ S_2 $, for any $ q \in S_2 $, there exists a local chart $ (V_q, \psi=(\psi^1,\cdots,\psi^{m_2})) $ such that $ S_2\cap V_q $ is the zero set of $ (\psi^1,\cdots,\psi^l) $ for some $ l \leq m_2 $. Let $ (p,q) \in S_1\times S_2 $. Then $ (S_1\times S_2)\cap (M_1\times M_2) $ is defined as the zero set of $ (\phi^1,\cdots,\phi^k,\psi^1,\cdots,\psi^l) $, hence is a regular submanifold of codimension $ (m_1+m_2) - (k+l) $.
+\end{solution}
+\begin{problem}[Complex Special Linear Group (from L. Tu)]
+	The complex special linear group $ SL(n,\C) $ is the subgroup of $ GL(n,\C) $ consisting of $ n\times n$ complex matrices of determinant 1. Show that $ SL(n,\C) $ is a regular submanifold of $ GL(n,\C) $ and determine its dimension. (This problem requires a rudimentary knowledge of complex analysis).
+\end{problem}
+\begin{solution}
+	The proof is exactly the same as the proof of \autoref{prop:SpecialLonearGroupIsManifold} with the only difference that in order to show that the determinant function $ \det: GL(n,\C) \to \C $ is differentiable, we need to highlight that $ \det $ function is a holomorphic function as it is a polynomial of its components, hence it is differentiable everywhere on its domain.
+\end{solution}
+\begin{problem}[The Transversality Theorem]
+	newEnv
+\end{problem}
+
+

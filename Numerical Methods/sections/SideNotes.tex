@@ -1,7 +1,7 @@
 \chapter{Side Notes}
 
 \section{Errors in the book ``Finite Difference Computing with PDEs'' by Hans Petter}
-\begin{itemize}[noitemsep]
+\begin{enumerate}[noitemsep]
 	\item Equation (3.29): The forcing term is not present (maybe they have somehow assumes that this is zero but according to (3.40) this is unlikely).
 	\item Equation (3.31): The forcing terms has no $ \Delta t $ coefficient.
 	\item Equation (3.40): Comparing this with equation (3.31) reveals that the right hand side is not correct.
@@ -13,4 +13,9 @@
 	\item Part 4.1.6: In the third equation, in RHS, $ \partial u/\partial t $ should be $ \partial/\partial t $.
 	\item Part 4.3: Wrong traveling Gaussian in the second equation. Missing a power of 2.
 	\item Equation (4.15): The scheme is forward in time, thus we need to have $ D_t^+ $ instead of $ D_t $ 
-\end{itemize}
+	\item Page 378 right below the equation 5.53, when it says we have the Dirichlet boundary condition $ u_{N_x} = 0 $, is wrong. Based on the formulation of the problem in 5.50, the Dirichlet boundary condition is $ u_{N_x} = D $.
+	\item Section 5.4.2, the first equation for $ A_{i,i} $, there should be a $ + $ sign between $ 2\alpha(u_i) $ and $ \alpha(u_{i+1}) $.
+	\item The equation right below 5.60, the third line, $ u_1 $ should be before the parenthesis.
+	\item Page 381, first equation, second line, $ u_0 $ should be before the big parenthesis.
+	\item Section 5.5.1, the big equation in the middle of the page, the fourth row, the term $ u_{i-1,j-1}^n $ should be $ u_{i,j-1}^n $. 
+\end{enumerate}
