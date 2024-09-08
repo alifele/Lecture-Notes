@@ -789,6 +789,71 @@ This idea of the constant rank theorem can easily be extended to the manifolds w
 
 By the regular level set theorem, we know that the pre-image of a regular value of map between manifolds is a regular submanifold. However, we can use constant rank theorem to show it suffices for the map to have a constant map in a neighborhood of the pre-image, and this guarantees that the level set is a regular submanifold.
 
+\begin{proposition}[Constant Rank Level set Theorem]
+	Let $ F:N\to M $ be a map between manifolds, and $ c\in M $. If $ F $ has a constant rank in a neighborhood of $ \inv{F}(\set{c}) $, then the level set $ \inv{F}(\set{c}) $ is a regular submanifold.
+\end{proposition}
+\begin{proof}
+	Let $ p \in \inv{F}(c) $. In order for $ \inv{F}(c) $ to be a manifold, then we need to find a chart containing $ p $ such that the intersection of the local open coordinate neighborhood with $ \inv{F}(c) $ is defined by vanishing of $ k $ coordinate functions of $ \phi $. The key in finding such a local chart in the constant rank theorem for the manifolds. For $ p \in \inv{F}(c) $ chosen as above, by the constant rank theorem we can find local charts $ (U,\phi) $ containing $ p $, and $ (V,\psi) $ containing $ F(p) $ such that we can write
+	\[ (\psi\circ F \circ \inv{\phi}) (r^1,\dots,r^n) = (r^1,\dots,r^k,0,\dots,0). \]
+	Thus the level set $ \inv{(\psi\circ F \circ \inv{\phi})}(0) \subset \R^n $ is defined by vanishing of the coordinate vectors $ r^1,\cdots,r^k $. On the other hand, this zero set, is the image of $ \inv{F}(c) \cap U $ under the map $ \phi $. Because
+	\[ \phi(\inv{F}(c)) = \phi(\inv{F(\inv{\psi(0)})}) = (\phi\circ \inv{F} \circ \inv{\psi})(0) = \inv{(\psi\circ F \inv{\phi})}(0). \]
+	Thus $ \inv{F}(c)\cap U $ is defined by the vanishing of the coordinate functions $ r^1,\cdots,r^k $. Since the point $ p  $ was arbitrary, then this proves that $ \inv{F}(c) $ is a regular submanifold.
+\end{proof}
+ 
+The constant rank level set theorem is a very powerful theorem that helps us to show some very important level sets are in fact manifolds. The orthogonal group $ O(n) $ is an example.
+
+\begin{proposition}[The orthogonal group $ O(n) $ is a manifold.]
+	The orthogonal group $ O(n) $ as a subset of $ GL(n,\R) $ is the set of all matrices in $ GL(n,\R) $ such that $ A^T A = I $. $ O(n) $ is a regular submanifold of $ GL(n,\R) $, thus is a manifold.
+\end{proposition}
+\begin{proof}
+	Define the map $ f: GL(n,\R) \to GL(n,\R)  $ given as $ f(A^T A) = I $. So the orthogonal group defined above can also be seen as the level set $ \inv{f}(I) $. To show that $ O(n) $ is a regular submanifold, we will show $ f $ has a constant rank in a neighborhood of $ \inv{f}(I) $, and in fact on the entire $ GL(n,\R) $. To see this, first observe that for any $ A, B \in GL(n,\R) $ there exists $ C \in GL(n,\R) $ such that $ B = AC $, or $ B = r_C(A) $. Consider
+	\[ f(AC) = (AC)^T (AC) = C^T (A^T A) C = C^T f(A) C, \]
+	or in a more useful notation
+	\[ (f\circ r_C)(A) = (l_{C^T}\circ r_C \circ f)(A). \]
+	Since $ A $ was arbitrary, then $ f\circ r_C = l_{C^T}\circ r_C \circ F $. By the chain rule we have
+	\[ f_{*,AC} \circ (r_C)_{*,A} = (l_{C^T})_{*,\star}\circ(r_C)_{*,\star} \circ f_{*,A}. \]
+	Since the right and the left multiplication are diffeomorphisms, thus we have
+	\[ \rank f_{*,AC} = \rank f_{*,A}. \]
+	Thus $ f $ has constant rank on $ GL(n,\R) $. From the constant rank level set theorem, we conclude that $ O(n) $ is a regular submanifold of $ GL(n,\R) $.
+\end{proof}
+
+\subsubsection{Immersion and Submersion theorem}
+The constant rank level set theorem helps us to write a local canonical form for any submersion and immersion. The development of this idea is based on following two observations.
+
+\begin{observation}[Submersion and Immersion Implies Maximal Rank]
+	Let $ F: N\to M $ be a map between manifolds of dimension $ n $ and $ m $ respectively.
+	\begin{itemize}
+		\item $ F $ is an immersion $ \implies n \leq m,\ \rank F = n $.
+		\item $ F $ is an submersion $ \implies  n \geq m,\ \rank F = m $.
+	\end{itemize}
+	We can see that in both cases, the map being a submersion or immersion implies the maximality of its rank.
+\end{observation} 
+
+\begin{observation}[Rank Maximality is an open Condition]
+	Let $ F: N \to M $ be a map between manifolds were it has a maximal rank at $ p \in N $. Then the maximality of rank persists in an open neighborhood of $ p $. To see why this is true, observe that $ F_* $ has $ k $ (the maximal rank of $ F $ at $ p $) linearly independent columns. By rearranging the columns, assume that the first $ k $ columns are linearly independent. This implies that the determinant of the first $ k\times k $ block of $  F_* $ is non zero. Since determinant is continuous, then this non-zero determinant persists in an open neighborhood of $ p \in N $.
+\end{observation}
+
+In conclusion, we see that being an immersion or submersion at a point, implies the rank is constant on an open neighborhood of that point. Thus we can write the following normal forms for immersion and submersion.
+
+\begin{proposition}[Normal Forms for Immersion and Submersion]
+	Let $ F: N\to M$ be a map between manifolds, and let $ p \in N $. Then
+	\begin{itemize}[noitemsep]
+		\item If $ F $ is immersion at $ p $, then there are charts $ (U,\phi) $ containing $ p \in N $ and $ (V,\psi) $ containing $ F(p)\in M $ such that 
+		\[ (\psi \circ F \circ \inv{\phi})(r^1,\cdots,r^n) = (r^1,\cdots,r^n,0,\cdots,0). \]
+		\item If $ F $ is submersion at $ p $, then there are charts $ (U,\phi) $ containing $ p \in N $ and $ (V,\psi) $ containing $ F(p)\in M $ such that 
+		\[ (\psi \circ F \circ \inv{\phi})(r^1,\cdots,r^m,r^{m+1},\cdots,r^n) = (r^1,\cdots,r^m). \]
+	\end{itemize}
+\end{proposition}
+\begin{proof}
+	The proof of this proposition is based on the fact that being an immersion or submersion at a point implies the maximality of the rank, and also the fact that the maximality of the rank is an open condition, and finally applying the constant rank theorem level set theorem.
+\end{proof}
+
+\begin{observation}
+	The important observation of the proposition above is that every immersion locally looks like an inclusion map, and every submersion, locally looks like a projection map.
+\end{observation}
+
+
+
 
 
 \newpage

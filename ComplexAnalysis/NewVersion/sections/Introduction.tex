@@ -1,0 +1,31 @@
+\chapter{Introduction}
+
+
+\section{Solved Problems}
+
+\begin{problem}[Convergence of complex variables]
+	Let $ \set{z_n = a_n + i b_n}_{n\in\N} $ for some $ a_n \in \R, b_n \in \R $  be a sequence of complex numbers. Show that $ z_n $ converges to $ w = \alpha + i\beta $ if and only if $ a_n \to \alpha $ and $ b_n \to \beta $ as $ n\to \infty $.
+\end{problem}
+
+\begin{proof}
+	The proof is as follows
+	\begin{itemize}
+		\item[$\boxed{ \implies }$] Let otherwise. Without loss of generality, we can assume that $ a_n $ does not converge to $ \alpha $. Then $ \exists \epsilon>0 $ such that $ \forall N>0 $ we can find $ n>N $ for which $ \abs{a_n - \alpha} > \epsilon $. This implies that
+		\[ \abs{(a_n - \alpha) + i(b_n - \beta)}^2 = \abs{a_n-\alpha}^2 + \abs{b_n - \beta}^2  > \epsilon^2 \]
+		which implies
+		\[ \abs{z_n - \omega}=\abs{(a_n - \alpha) + i(b_n - \beta)} > \epsilon \]
+		for some $ \epsilon $ and for some $ n>N $ for any choice of $ N $. This is a contradiction, since implies $ z_n $ is not converging to $ w $.
+		\item[$ \boxed{\Longleftarrow} $] Assume $ \alpha_n \to a $ and $ \beta_n \to b $ as $ n\to \infty $. Fix $ \epsilon>0 $. Let $ N $ be large enough such that 
+		\[ \abs{a_n - \alpha}< \epsilon^2/2, \qquad \abs{b_n - \beta}< \epsilon^2/2. \]
+		Then we can write
+		\[ \abs{(a_n-\alpha) + i(b_n - \beta)}^2 = \abs{a_n-\alpha}^2 + \abs{b_n - \beta}^2 < \epsilon^2. \]
+		This implies that $ z_n $ converges to $ w $.
+	\end{itemize}
+\end{proof}
+
+\begin{problem}[Completeness of $ \C $]
+	Prove that the set of all complex numbers $ \C $ is complete.
+\end{problem}
+\begin{proof}
+	The convergence of a complex number is equivalent to the convergence of its real and imaginary parts. Since $ \R $ is complete, it follows that $ \C $ is also complete.
+\end{proof}
