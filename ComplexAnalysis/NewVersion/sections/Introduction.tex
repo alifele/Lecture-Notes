@@ -1,6 +1,109 @@
 \chapter{Introduction}
 
 
+
+\section{Holomorphic Functions}
+We start with a definition of the holomorphic functions.
+
+\begin{definition}[Holomorphic functions]
+	Let $ f: \Omega \to \C $ be a functions defined on the open set $ \Omega \subset \C $. Then $ f $ is holomorphic at $ z_0 \in \Omega $ if
+	\[ \lim_{h\to 0} \frac{f(z_0 + h) - f(z_0)}{h} = 0, \]
+	where $ h \in \C $.
+\end{definition}
+\begin{remark}
+	Although the definition above resembles the definition of derivative for the real functions, but it is much more stronger. Later, we will see that the holomorphic functions are infinitely times differentiable, which is not necessarily true for the real differentiable functions. Also, we will see that every holomorphic function admits a power series, which is not again necessarily true in the case of real functions. I.e. there are real functions that are infinitely many times differentiable, but can not be expressed as a convergent power series. More on these later.
+\end{remark}
+
+
+There are some very useful characterization of the holomorphic functions that comes in handy in making intuitions and proving some theorems in a more straight forward way. First, we will discuss the following observation.
+
+\begin{observation}[A bijection between complex numbers and $ 2\times 2 $ matrices]
+	Observer the following multiplication between two complex variables:
+	\[ (a+ib) (x+iy) = (ax - by) + (bx+ay). \]
+	This suggests that we can make the following one-to-one correspondence between the $ 2\times 2 $ matrices and complex numbers
+	\[ a+ib \longleftrightarrow \matt{a}{-b}{b}{a}. \]
+\end{observation}
+
+The observation above is key to make some intuition about different notions in the complex analysis. For instance, for every complex map, we can associate it with a real map from $ \R^2 $ to $ \R^2 $. I.e. let $ f = u + iv $. Then we can associate this with a real map $ F(x,y) = (u(x,y),v(x,y)) $. On the other hand, the differential of a map from $ \R^2 $ to $ \R^2 $ is a $ 2\times 2 $ matrix. However, in the case of complex  maps, the complex derivative of a map at a point is again a complex number. This suggests that for the map $ F(x,y) $ where its Jacobian is give by
+\[ JF = \matt{\partial u/\partial x}{\partial u/\partial y}{\partial v/\partial x}{\partial v/\partial y}, \]
+in order $ JF $ to represent a complex number, we need to have
+\[ \partial u/\partial x = \partial v/\partial y, \qquad \partial u/\partial y = - \partial v/\partial x. \]
+This is known as the Cauchy-Riemann equations. Note that this is not a correct way to derive the Cauchy-Riemann equations, but its is just an intuitive way to see that C-R equations makes everything work smoothly.
+
+\begin{theorem}[Cauchy-Riemann Equations]
+	Let $ f: \Omega \to \C $ be complex differentiable. If $ f = u+iv $ then
+	\[ \partial u/\partial x = \partial v/\partial y, \qquad \partial u/\partial y = - \partial v/\partial x. \]
+\end{theorem}
+\begin{proof}
+	Since $ f $ is complex differentiable, then 
+	\[ \lim_{h\to 0} \frac{f(z_0 + h) - f(z_0)}{h}. \]
+	In particular, it does so for $ h=h_1+ih_2 $ going to zero by $ h_1\to 0, h_2=0 $, as well as $ h_1=0, h_2\to 0 $. Then we will have
+	\[ \frac{\partial f}{\partial x} = \frac{1}{i}\frac{\partial f}{\partial y}. \]
+	This implies the Cauchy-Riemann equations.
+\end{proof}
+
+\begin{definition}
+	The following differentiation operations comes in handy for some applications.
+	\[ \frac{\partial}{\partial z} = (\frac{\partial }{\partial x} + \frac{1}{i} \frac{\partial }{\partial y}), \quad \frac{\partial}{\partial \bar{z}} = (\frac{\partial }{\partial x} - \frac{1}{i} \frac{\partial }{\partial y})\]
+\end{definition}
+
+The following characterization of the holomorphic functions is very useful.
+\begin{proposition}[A useful characterization of C-R equations (i.e. Holomorphic functions)]
+	Let $ f $ be a complex map. Then C-R is equivalent to $ \partial f/\partial \bar{z} = 0 $.
+\end{proposition}
+\begin{proof}
+	Observe that
+	\[ \frac{\partial f}{\partial \bar{z}} = (\frac{\partial }{\partial x} - \frac{1}{i} \frac{\partial }{\partial y}) f. \]
+	Let $ f = u + iv $. Then it is easy to check that $ \partial f/\partial \bar{z} = 0 $ if and only if we have
+	\[ \partial u/\partial x = \partial v/\partial y, \qquad \partial u/\partial y = -\partial v/\partial x. \]
+\end{proof}
+
+
+\begin{corollary}
+	A complex map $ f $ is holomorphic at $ z_0 $ in its domain if and only if we have
+	\[ f(z) = f(z_0) + L(z-z_0) +  \abs{z-z_0}\Psi(z-z_0),  \]
+	for some $ L \in \R $ and $ \Psi(z-z_0) \to 0 $ as $ z\to z_0 $.
+\end{corollary}
+\begin{proof}
+	In general, for any complex map $ f $ we can write
+	\[ f(z) = f(z_0) + \alpha (z-z_0) + \beta\overline{(z - z_0)} + \Psi(z-z_0) \abs{z-z_0}. \]
+	(To see this why, first observe that we can write every complex map as a map from $ \R^2$ to $ \R^2 $, and then do the change of variable $ x=(z+\bar{z})/2, y = (z-\bar{z})(2i)$). However, from the proposition above, we conclude that $ \beta =0  $ for all $ z_0 $ in the domain. This completes the proof.
+\end{proof}
+
+
+\begin{proposition}
+	Let $ f $ be a holomorphic function on an open set. Then
+	\[ f'(z_0) = \frac{\partial f}{\partial z}= 2 \frac{\partial u}{\partial z}. \]
+\end{proposition}
+Since $ f $ is holomorphic at $ z_0 $, then the limit
+\[ \lim_{h\to 0}\frac{f(z_0 + h) - f(z_0)}{h} \]
+converges for any path on which  $ h = h_1 + i h_2 $ approaches zero, in particular $ (h_1 \to 0, h_2 = 0) $ and $ (h_1=0, h_2 \to 0) $. Thus we conclude 
+\[ f'(z) = \frac12 (\frac{\partial f}{\partial x}(z_0) + \frac{1}{i}\frac{\partial f}{\partial y}(z_0)). \]
+(To see this modify the terms of the limit in the definition of the complex differentiation and use the paths above for appropriate limits and conclude the identity above). Thus we can write $ f = u + iv $ and using the C-R equations (since $ f $ is holomorphic) we conclude that
+\[ f'(z) = 2 \frac{\partial u}{\partial z}. \]
+
+The following theorem is an important converse-like statement for the Cauchy-Riemann theorem.
+
+\begin{theorem}
+	Let $ f: \Omega \to \C $ be a function. Assume $ f = u + iv $. If $ u,v $ are continuously differentiable on $ \Omega $, and satisfy the C-R equations, then $ f $ is holomorphic on $ \Omega $
+\end{theorem}
+\begin{proof}
+	Since $ u,v $ are continuously differentiable, then
+	\[ u(x+h_1,y+h_2) - u(x,y) = \frac{\partial u}{\partial x} h_1 + \frac{\partial u}{\partial y} h_2 + \abs{h}\Psi_1(h), \]
+	and similarly
+	\[ v(x+h_1, y+h_2) - v(x,y) = \frac{\partial v}{\partial x} h_1 + \frac{\partial v}{\partial y} h_2 + \abs{h}\Psi_2(h). \]
+	Since $ f = u + iv $ then
+	\[ f(z+h) - f(z) = \frac{\partial u}{\partial x} h_1 + \frac{\partial u}{\partial y}h_2 + i \frac{\partial v}{\partial x}h_1 + i\frac{\partial v}{\partial y}h_2 + \abs{h}\Psi(h)\].
+	Using C-R we can write
+	\[ f(z+h) - f(z) = (\frac{\partial u}{\partial x} + \frac{1}{i}\frac{\partial u}{\partial y})(h_1+ih_2) + \abs{h}\Psi(h). \]
+	Since 
+	\[ \frac{\partial u}{\partial x} + \frac{1}{i}\frac{\partial u}{\partial y} = 2 \frac{d}{dz} u = \frac{d}{dz}f, \]
+	then we conclude that $ f $ is holomorphic (follows from the characterization of holomorphic functions).
+\end{proof}
+
+
+\newpage
+
 \section{Solved Problems}
 
 \begin{problem}[Convergence of complex variables]
