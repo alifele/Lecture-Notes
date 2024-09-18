@@ -812,14 +812,78 @@ In the following propositions we will see more easy-to-check characterizations o
 \end{solution}
 
 \begin{problem}[From Rosenthal]
+	Prove the following statements. 
 	\begin{enumerate}[(a)]
-		\item In what step of the proof of proposition 1.2.6 in (Rosenthal) the expression (1.2.1) was used?
-		\item Give an example of a countably additive set function $ \prob $, defined on all subsets of $ [0,1] $, which satisfies $ (1.2.3) $ and $ (1.2.5) $, but not $ (1.2.1) $.
+		\item Prove that the Cantor set $ K $ and its complement $ K^c $ is in $ \mathcal{B} $, the Borel set of the subset of $ [0,1] $.
+		\item Prove that $ K,K^c \in \mathcal{M} $, where $ \mathcal{M} $ is the $ \sigma\text{-algebra} $ by the extension applied for the uniform distribution on $ [0,1] $ (see theorem 2.4.4 Rosenthal).
+		\item Prove that $ K^c \in \mathcal{B}_1 $ where $ \mathcal{B}_1 $ is defined by (2.2.6) Rosenthal (i.e. the set of all finite or countable unions of intervals $ \mathcal{I} $).
+		\item Prove that $ \mathcal{B}_1 $ is not a $ \sigma\text{-algebra} $.
+		
 	\end{enumerate}
 \end{problem}
 \begin{solution}
 	\begin{enumerate}[(a)]
-		\item We used $ (1.2.1) $ at the last step of drawing the contradiction by assigning the probability $ 1 $ to $ \prob((0,1]) $.
-		\item 
+		\item In the construction of the cantor set, at each step we remove the middle 1/3 of the intervals. So starting with $ I_0 = [0,1] $ at the first step we will get $ I_1 =  [0,1/3]\cup[2/3,1] $, etc. The Cantor set is $ I_0 \cap I_1 \cap I_2 \cap \cdots $. Since $ I_i \in \mathcal{B} $ for all $ i \in \N $, and $ \mathcal{B} $ is a $ \sigma\text{-algebra} $ and is closed under countable intersection, then $ K \in \mathcal{B} $ as well. It follows immediately that $ K^c \in \mathcal{B} $ as well, as $ \mathcal{B} $ is closed under complement.
+		\item Since $ \mathcal{M} \supset \mathcal{B}$, and as we showed above that $ K,K^c \in \mathcal{B} $, then $ K,K^c \in \mathcal{M} $ as well.
+		\item From the construction given in part (a), we have
+		\[ K = I_0 \cap I_1 \cap I_2 \cap \cdots. \]
+		From the De Morgan's law we will have
+		\[ K^c = I_0^c \cup I_1^c \cup I_2^c \cup \cdots. \]
+		Thus by definition of $ \mathcal{B}_1 $ we have $ K^c \in \mathcal{B}_1 $.
+		\item First, observe that (see Rosenthal page 17) that the Cantor set is uncountable. So there is no way to construct it by finite or countable union of singletons (which are in $ \mathcal{I} $). We can not construct it with the finite or countable union of any intervals as $ K $ is a nowhere dense set. I.e. for every interval $ (a,b) \in \mathcal{I} $ containing $ x \in K $ there exists, $ y\in \R $ such that $ y \notin K $. To put this precisely, let $ I_1,I_2,I_3,\cdots $ is collection of intervals such that $ I = \cup_n I_n $. Since $ K $ is nowhere dense, for any $ I_i $ in the collection that contains $ x \in K $ we can find some $ y \in \R $ that $ y \notin K $. This is a contradiction and we have $ I \subset \cup_n I_n $.
+		\item As we saw above, $ K^c \in \mathcal{B}_1 $ but $ K \notin \mathcal{B}_1 $. Thus $ \mathcal{B}_1 $ is not closed under complement, thus it is not a $ \sigma\text{-algebra} $.
 	\end{enumerate}
 \end{solution}
+
+\begin{problem}[An extension of the extension theorem (from Rosenthal)]
+	Let $ \mathcal{I} $ be a semialgebra of subsets of $ \Omega $. Let $ \prob:\mathcal{I}\to [0,1] $ with $ \prob(\emptyset) = 0 $ and $ \prob(\Omega) = 1 $, satisfying 
+	\[ \prob(\bigcup_n A_n) \geq \sum_n \prob(A_n)\ \qquad \text{for $ A_1,A_2,\cdots \in \mathcal{I} $ \emph{disjoint}, and $ \bigcup_n A_n \in \mathcal{I} $}, \]
+	as well as 
+	\[ \prob(A) \leq \prob(B), \qquad A \subseteq B, \]
+	and
+	\[ \prob(\bigcup_n B_n) \leq \sum_n \prob(B_n) \qquad \text{for $ B_1,B_2,\cdots \in \mathcal{I} $, and $ \bigcup_n B_n \in \mathcal{I} $}.\]
+	Then there exist a valid probability space $ (\Omega, \mathcal{M},\prob^*) $ such that $ \prob $ and $ \prob^* $ agree on the elements of $ \mathcal{I} $
+\end{problem}
+\begin{solution}
+	According to the extension theorem 2.3.1 we need to prove that these alternative statements implies $ 2.3.3 $. Let $ A, A_1,A_2,\cdots \in \mathcal{I} $ (note that the union of $ A_i $s do not belong to $ \mathcal{I} $ necessarily). Define
+	\[ B_n = A_n \cap A. \]
+	Then we will have $ A = \cup_n B_n $, thus $ \cup_n B_n \in \mathcal{I} $. So
+	\[ \prob(A) = \prob(\bigcup_n B_n) \leq \sum_n \prob(B_n) \leq \sum_n \prob(A_n). \]
+\end{solution}
+\begin{observation}
+	In the prove above, one might attempt 
+	\[ \prob(A) \leq \prob(\bigcup_i A_i) \leq \sum_i \prob(A_i) \]
+	where for the first inequality we use the monotnonicity (as $ A \subset \bigcup_i A_i $) and for the second inequality we use the countable sub additivity given in the statement of the theorem. However, this prove is \emph{wrong!}. Because we are not allowed to use the second inequality, as it does not satisfies the requirements for the sub-additivity statement to work. That is because $ \bigcup_n A_n $ may not be in $ \mathcal{I} $ necessarily.
+\end{observation}
+
+\begin{problem}[Uniqueness property of the extension theorem (from Rosenthal)]
+	Let $ \mathcal{I},\prob, \prob^* $ be the same as in Theorem 2.3.1 (Rosenthal). Let $ \mathcal{F} $ be any $ \sigma\text{-algebra} $ with $ \mathcal{I} \subseteq \mathcal{F} \subseteq \Omega $. Let $ \Q $ be any probability measure on $ \mathcal{F} $, such that $ \Q(A) = \prob(A) $ for all $ A \in \mathcal{I} $. Then prove that $ \Q(A) = \prob^*(A) $ for all $ A \in \mathcal{F} $.
+\end{problem}
+\begin{solution}
+	Let $ A \in \mathcal{F} $, and $ A_i \in \mathcal{I} $ for $ i=1,2,\dots $ such that $ A \subseteq \bigcup_i A_i $. Since $ \Q $ is a probability measure, then 
+	\[ \Q(A) \leq \Q(\bigcup_i A_i) \leq \sum_i \Q(A_i). \]
+	Then we can write
+	\begin{align*}
+		\prob^*(A) &= \inf_{\substack{A_1,A_2,\cdots \in \mathcal{I} \\ A \subseteq \bigcup_i A_i}}\sum_i \prob(A_i) \\
+		&= \inf_{\substack{A_1,A_2,\cdots \in \mathcal{I} \\ A \subseteq \bigcup_i A_i}}\sum_i \Q (A_i) \\
+		&\geq \inf_{\substack{A_1,A_2,\cdots \in \mathcal{I} \\ A \subseteq \bigcup_i A_i}}\Q(\bigcup_i A_i)\\
+		&\geq \inf_{\substack{A_1,A_2,\cdots \in \mathcal{I} \\ A \subseteq \bigcup_i A_i}}\Q(A)\\
+		& = \Q(A).
+	\end{align*}
+	However, we could do the same with $ A^c \in \mathcal{F} $, which would lead to
+	\[ \prob^*(A^c) \geq \Q(A^c). \]
+	Since $ \prob^*(A^c) = 1 - \prob^*(A) $ and $ \Q(A^c) = 1 - \Q(A) $, then this implies  $  \prob^*(A) \geq \Q(A)  $. Thus $ \prob^*(A) = \Q(A) $.
+\end{solution}
+
+%\begin{problem}[From Rosenthal]
+%	\begin{enumerate}[(a)]
+%		\item In what step of the proof of proposition 1.2.6 in (Rosenthal) the expression (1.2.1) was used?
+%		\item Give an example of a countably additive set function $ \prob $, defined on all subsets of $ [0,1] $, which satisfies $ (1.2.3) $ and $ (1.2.5) $, but not $ (1.2.1) $.
+%	\end{enumerate}
+%\end{problem}
+%\begin{solution}
+%	\begin{enumerate}[(a)]
+%		\item We used $ (1.2.1) $ at the last step of drawing the contradiction by assigning the probability $ 1 $ to $ \prob((0,1]) $.
+%		\item 
+%	\end{enumerate}
+%\end{solution}
