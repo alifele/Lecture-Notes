@@ -1,0 +1,287 @@
+\documentclass[10pt,a4paper,twocolumn]{article}
+\usepackage{commands}
+\usepackage{placeins}
+\usepackage{minted}
+
+\usepackage{natbib} 
+%\setcitestyle{authoryear, open={([},close={)]}}
+%\setcitestyle{numbers,square}
+
+
+\title{On the Shape Analysis of Vascular Network}
+\author{Ali Fele-Paranj}
+
+\begin{document}
+	\maketitle
+	\begin{abstract}
+		I have introduced some basic concepts of micro-circulation and the vascular networks and how they get created (angiogenesis) in health and disease. Then I discuss some angiogenesis models (Anderson-Chaplain as well as BARW) and use the tools of the geomstats to analyze the loopy structure in these networks. I explained the characteristics of the loopy structures in the networks in terms of the parameters of the model. Furthermore, I consider the time evolution of the graphs created by these networks and how the characterization of the loopy structures change through time in these networks. 
+	\end{abstract}
+	
+	\section{Introduction to Micro-circulation in Vascular Networks}
+	Vascular network in animals is a complex network of vessels to carry the nutrients to and wastes out from the tissue. Main parts of the blood circulation system is determined during the embryo development (like the location and characterization of the main veins and arteries). However, the exact positioning and hierarchy of the capillary networks is not predetermined genetically, but is an adaptive process. A tissue under hypoxia (experiencing low oxygen) will initiate biochemical signals to recruit new vessels. One of the main signaling molecules is the tumor angiogenic factor (TAF) and as the name suggests it is highly expressed by tumor under oxygen stress (hypoxia). The TAF molecules will diffuse in the interstitial space. Upon interaction with pre-existing vessels, they will digest through the basal membrane of the pre-existing vessels and will activate the endothelial cells (that are lining the inner part lumen of all vessels in the body). The endothelial cells activated by TAF will turn into tip cells which will move up in the gradient of TAF, and they will make branches of vessels which will grow as the tip cells are moving. See \autoref{fig:angiogenesis} for details.
+
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=1\linewidth]{images/Angiogenesis}
+		\caption{Steps of angiogenesis process. The endothelial cells are ``activated'' by the TAF molecules and turn into tip cells that move towards the source of TAF (up the gradient) and produce new blood vessel segments along their way. This is called tip-induced angiogenesis. This figure is taken from \cite{Atale2020}}.
+		\label{fig:angiogenesis}
+	\end{figure}
+	\FloatBarrier
+	
+	There are also other factors important in the process of tip cell movement among which is the concentration of fibronectin in the environment. Fibronectin is a protein that acts like a glue and attaches the cells to intracellular matrix, which mediates the cell movement. In the section related to the angiogenesis models we will discuss how this protein is considered in the models.
+	
+	{\color{red} \noindent TODO: Talk about the biological significance of the loops in networks: Can arise due to the fluctuating demand as a way to increase the robustness. Can cause spontaneous oscillatory behaviour in blood micro-circulation and possibly leading to hypoxia.}
+	
+	\section{Angiogenesis Models}
+	\subsection{Anderson-Chaplain model}
+	Anderson-Chaplain model of angiogenesis \cite{Anderson1998} describes the angiogenesis process considering the factors like TAF and fibronectin. This model contains three variables
+	\begin{itemize}[nosep]
+		\item $ n = n(X,t): \Omega \times \R \to \R $: the endothelial-cell density (per unit area).
+		\item $ c = c(X,t): \Omega \times \R \to \R $: the tumor angiogenic factor (TAF) concentration (nmol per unit area).
+		\item $ f = f(X,t): \Omega \times R \to \R $: the fibronectin concentration (nmol per unit area).
+	\end{itemize}
+	and the time evolution is governed by the following system of PDEs
+	\begin{align*}
+		&\frac{\partial n}{\partial t} =  D_n\nabla^2 n  - \nabla\cdot(\chi n\nabla c) - \nabla\cdot(\rho n \nabla f), \\
+		&\frac{\partial c}{\partial t} = -\lambda n c, \\
+		&\frac{\partial f}{\partial t} = \omega n - \mu n f,
+	\end{align*}
+	where $ D_n $ is a diffusion constant taking the random movement of tip cells into account, $ \chi, \rho $ reflects the strength of the chemotaxis of tip cells due to the gradient of TAF, and fibronectin respectively. Furthermore, $ \lambda, \mu $ is the rate at which tip cells consume the TAF and fibronectin respectively, and $ \omega $ denotes the production of fibronectin by the tip cells. Note that we assume at the start of the angiogenesis process, we have a steady state distribution of fibronectin and TAF and is not diffusing. This assumption is not entirely true and can be enhanced.
+	
+	Here in this report, we will be using the discrete and stochastic variation of this model. For more detail see \cite{Anderson1998}. \iffalse We will use the implementation of the model in \cite{Nardini2021} to generate the vascular networks. \fi See \autoref{fig:anderson} for some example outputs of the model.
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=1\linewidth]{images/Anderson}
+		\caption{Some example output of the Anderson-Chaplain model of angiogenesis \iffalse using the implementation of the model shared by \cite{Nardini2021}\fi. We have assumed the source of TAF molecules is located at the right edge of the domain, while the pre-existing parent vessels is located at the left edge of the domain. The strength of the chemotaxis and haptotactic (due to fibronectin) signaling is set to be $ \chi = 0.4 $, and $ \rho = 0.4 $.}
+		\label{fig:anderson}
+	\end{figure}
+	
+	\subsection{Branching Annihilating Random Walker}
+	The Anderson-Chaplain model of angiogenesis is not the only formulation of this phenomena. A popular alternative formulation is using the notion of branching annihilating random walkers for the to explain the branching morphogenesis of vascular networks. A very detailed discussion on this formulation can be found in \cite{Hannezo2017,Ucar2021}. This formulation has been also successful to models a vast variety of tip-driven morphogenesis in mammary-glands, prostate, kidney \cite{Hannezo2017}, lymphatic system \cite{Ucar2023}, neural branching \cite{Ucar2021}, and etc.
+	
+	The core idea behind this formulation is to assume that the tip cells undergo a branching-annihilating random walk, i.e. they move randomly in the space, turn into pairs randomly (branching), and as they move they produce new cells (stalk) behind their trails, and finally annihilate if they encounter any of the stalk cells. See \autoref{fig:BARW} for more details.
+	
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=1\linewidth]{images/BARW}
+		\caption{The network generated by branching-annihilating process, where the tip cells (orange circles) are doing random walk (not necessarily unbiased random walk) and each generate two random walkers at random times (branching). The tip cells make the stalk cells (the blue lines) along their way and the tip cells annihilate when encounter any of the stalk cells.}
+		\label{fig:BARW}
+	\end{figure}
+	
+	
+	\section{Data Pre-processing}
+	The data generated by the Anderson-Chaplain model or BARW model are typically matrices (i.e. images) (however, there are certain ways to construct a graph representing the final structure during the simulation). To be able to do any form of computation with the simulated data (like finding the loops, etc) it is convenient to turn the images into a graph.
+	
+	For the outputs of the Anderson-Chaplain model (see \autoref{fig:anderson}), since the vessels are more crowded at some regions, we first did a dilation followed by a erosion (using OpenCV) to enhance the images for further processing. We then applied a connectivity-8 kernel to the enhanced images to find the nodes, and finally used the processes information to turn the vascular network in the image into a graph in python (using NetworkX library). See \autoref{fig:andersonproc} for more details. We also applied the same processing pipeline on the data generated by the BARW model which is shown in \autoref{fig:andersonproc}
+	
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=1\linewidth]{images/AndersonProc}
+		\caption{The pre-processing pipeline the synthetic data by Anderson-Chaplain model.\textbf{ Top left}: The synthetic data generated by the model. \textbf{Top right}: A series of dilation and erosion applied on the image to enhance the images for network extraction. \textbf{Bottom left}: Applying a connectivity-8 kernel on the image to get the nodes of the graph and converting the processed information to NetworkX graph data structure. Then we apply the cycle finding algorithm in the NetworkX to detect the cycles. \textbf{Bottom right}: The overlay of the detected cycles on the original image.}
+		\label{fig:andersonproc}
+	\end{figure}
+	
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=1\linewidth]{images/BARWProc}
+		\caption{The loop detection processing pipeline performed on the data set generated by the BARW formulation of the branching morphogenesis. \textbf{Right:} the initial raw synthetic data, \textbf{Left}: detected loop through the loop detection pipeline.}
+		\label{fig:barwproc}
+	\end{figure}
+	
+	The new data structure that we store the synthetic data (i.e. as graphs in NetworkX) gives us a tremendous flexibility in working and analyzing the shape of each individual loops. See \autoref{fig:loops} for further details on this. This data structure will also come in handy when we study the time evolution of the graphs.
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=1\linewidth]{images/loops.png}
+		\caption{Converting the synthetic data from binary images to graph in NetworkX gives us a great flexibility in working and analyzing (or even evolving) individual loops. For instance, in the figures above, \textbf{Left} and \textbf{Right} sub-figures represent the individual scaled version of the loops of Anderson-Chaplain and BARW models respectively. Note that the shapes that looks more jagged correspond to the larger loops, whereas the loops with dull boundary correspond to the smaller loops.}
+		\label{fig:loops}
+	\end{figure}
+	\section{Data Analysis of Static Networks}
+	In this section we will use the notions of Kendall shape space to study the structure of the loops that appear under different parameters of the model. 
+	
+	
+	
+	\section{Time Evolution of the Networks}
+	Vascular networks are not static structure, but rather the evolve in time in response to the changing metabolic demand of the underlying tissue, as well as the metabolic cost of the network itself, and the overall energy required to pump the fluid through the network (See  \cite{Pries2010,Secomb2012,Pries2014,Ouarne2021} for more discussion). To put this in different words, the role of vascular networks is to deliver nutrients to the tissue and remove the wastes. To do this, it needs to have a space filling configuration with lots of branches. However, due to the Poiseuille law for the flow of fluids in a tube, the power needed to pump the fluid through the tube scales with $ r^{-4} $ where $ r $ is the radius of the tube. I.e. smaller vessel segments needs a huge power to pump the blood through them. Thus have a massively branched structure is not an optimal solution. On the other hand, the vascular network consists of cells which requires maintenance as well. Thus the optimized vascular network should have a low volume as well. Because of these dynamics in action, in the angiogenesis process first a mesh of new blood vessels form which later evolve to a more ordered and hierarchical structure in a self-organization process.
+	
+%	\begin{figure}
+%		\centering
+%		\includegraphics[width=1\linewidth]{images/remodeling1}
+%		\caption{}
+%		\label{fig:remodeling1}
+%	\end{figure}
+	
+	\begin{figure}
+		\centering
+		\includegraphics[width=\linewidth]{images/remodeling2}
+		\caption{Remodeling of vascular network of chick chorioallantoic membrane. Initially (sub-figure 1) a mesh of vascular networks form. Then (sub-figures 2,3,4), through the remodeling dynamics, a more ordered and hierarchical structure emerges. Images are taken from \cite{Richard2018}.}
+		\label{fig:remodeling1}
+	\end{figure}
+	
+	
+	To determine the time evolution of the vascular network we first need to formulate the problem in an appropriate way. First, we represent a given vascular network with a multi-weighted graph $ G=(V,E) $ where $ V $ is the set of vertices and $ E $ is the edge set. We define the pressure $ \mathbf{P} $ on the nodes, the flow $ \mathbf{Q} $ on the edges, and let $ C_{i,j}, L_{i,j} $ denote the conductivity of an edge, and $ L_{i,j} $ denote the length of the same edge. Given the source and sink terms on the nodes $ \mathbf{q} $, the flow in the edges can be determined by
+	\[ \mathcal{L} \mathbf{P} = \mathbf{q}, \]
+	where $ \mathcal{L} $ is the Laplacian matrix of the graph. For more details on this see \autoref{appndix}. Once we know the pressures on the nodes, we can easily calculate the flow through the edges by 
+	\[ \bf{Q} = \bf{C} L^{-1} \bf{\Delta} \bf{P}, \tag{2} \]
+	where $ C $ is a diagonal matrix of the conductance of the edges, $ L $ is the diagonal matrix of the ``length'' of each edge, $ \Delta $ is the transpose of the incidence matrix, and $ P $ is the pressure on the nodes. $ Q $ is the flow of the edges. Once we know the flow in the edges, we can design evolution law to describe the time evolution of the weights of the edges (which by Poiseuille's is a function of the radius of the vessel segment). The evolution law can be derived by defining an energy functional and moving down the gradient of the energy functional to minimize it, or we can take an ad-hoc method and write a mechanistic ODE for time evolution of the conductances. For the energy functional one can write
+	
+	
+	
+	
+	
+	 
+	
+	\appendix
+	\clearpage
+	\section{Appendix}
+	\label{appndix}
+	\addcontentsline{toc}{section}{Appendix}
+	% Add your appendix content here
+	
+	
+	For a graph, the Laplacian matrix contains the information on the in/out flow of stuff into the nodes.
+	\begin{figure}[h!]
+		\centering
+		\begin{tikzpicture}[scale=1.3, auto, every node/.style={circle, draw=black, fill=orange!30, thick, minimum size=5mm}]
+			% Nodes
+			\node (n1) at (0,0) {1};
+			\node (n2) at (1,0) {2};
+			\node (n3) at (0.5,1) {3};
+			\node (n4) at (1.5,1) {4};
+			\node (n5) at (2,0) {5};
+			
+			% Edges (randomly chosen but ensuring connectivity)
+			\draw[thick] (n1) -- (n3);
+			\draw[thick] (n1) -- (n2);
+			\draw[thick] (n3) -- (n2);
+			\draw[thick] (n4) -- (n2);
+			\draw[thick] (n4) -- (n5);
+			\draw[thick] (n2) -- (n5);
+		\end{tikzpicture}
+	\end{figure}
+	Then the Laplacian matrix is given by
+	\[ D = \begin{pmatrix}
+		2 & 0 & 0 & 0 & 0 \\
+		0 & 4 & 0 & 0 & 0 \\
+		0 & 0 & 2 & 0 & 0 \\
+		0 & 0 & 0 & 2 & 0 \\
+		0 & 0 & 0 & 0 & 2
+	\end{pmatrix}, \]
+	and the adjacency matrix  is given by
+	\[ A = \begin{pmatrix}
+		0 & 1 & 1 & 0 & 0 \\
+		1 & 0 & 1 & 1 & 1 \\
+		1 & 1 & 0 & 0 & 0 \\
+		0 & 1 & 0 & 0 & 1 \\
+		0 & 1 & 0 & 1 & 0
+	\end{pmatrix}, \]
+	and the Laplacian matrix is given by
+	\[ L = D -A = 
+	\begin{pmatrix}
+		2 & -1 & -1 & 0 & 0 \\
+		-1 & 4 & -1 & -1 & -1 \\
+		-1 & -1 & 2 & 0 & 0 \\
+		0 & -1 & 0 & 2 & -1 \\
+		0 & -1 & 0 & -1 & 2
+	\end{pmatrix}.
+	\]
+	It is straight forward to generalize the notion of Laplacian matrix to the weighed graphs, where the degree matrix $ D $, the diagonal entries will be the sum of all weights of the edges connected to that node, and for the adjacency matrix, instead of zeros and ones, we will have the weights of the connections..
+	
+	There is also another way of finding the Laplacian matrix by using the notion of incidence matrix. To do so, we first need to make our graph to be directed. Any combination of the direction on the edges will do the job and will yield in a correct answer. For instance, consider the following directed graph
+	
+	\begin{figure}[h!]
+		\centering
+		\begin{tikzpicture}[scale=1.3, auto, every node/.style={circle, draw=black, fill=orange!30, thick, minimum size=5mm}]
+			% Nodes
+			\node (n1) at (0,0) {1};
+			\node (n2) at (1,0) {2};
+			\node (n3) at (0.5,1) {3};
+			\node (n4) at (1.5,1) {4};
+			\node (n5) at (2,0) {5};
+			
+			% Edges (randomly chosen but ensuring connectivity)
+			\draw[->,thick] (n1) -- (n3);
+			\draw[<-,thick] (n1) -- (n2);
+			\draw[<-,thick] (n3) -- (n2);
+			\draw[->,thick] (n4) -- (n2);
+			\draw[<-,thick] (n4) -- (n5);
+			\draw[->,thick] (n2) -- (n5);
+		\end{tikzpicture}
+	\end{figure}
+	
+	Its incidence matrix will be
+	\[
+	M = \begin{pmatrix}
+		-1 & 1  & 0  & 0  & 0  & 0  \\
+		0  & -1 & 1  & -1 & 0  & -1 \\
+		1  & 0  & -1 & 0  & 0  & 0  \\
+		0  & 0  & 0  & 1  & 1  & 0  \\
+		0  & 0  & 0  & 0  & -1 & 1  \\
+	\end{pmatrix}
+	\]
+	The Laplacian matrix can be written as
+	\[ \mathcal{L} = M M^T. \]
+	Note that in the case of the weighed graphs, we will have
+	\[ \mathcal{L} = M W M^T \tag{1}\]
+	where $ W $ is a diagonal matrix containing the weights. These computations can be done easily on the NetworkX. 
+	
+	\begin{minted}[tabsize=2,breaklines,fontfamily=courier]{python}
+		g = nx.Graph()
+		for i in range(1,6):
+		g.add_node(i)
+		
+		g.add_edge(1,2,w=1)
+		g.add_edge(1,3,w=2)
+		g.add_edge(2,3,w=3)
+		g.add_edge(2,5,w=5)
+		g.add_edge(4,5,w=5)
+		
+		W = np.diag([data['w'] for u, v, data in g.edges(data=True)])
+		
+		% adj matrix
+		AD = nx.adjacency_matrix(g,weight="w")
+		
+		% Laplacian matrix
+		L = nx.laplacian_matrix(g,weight="w")
+		
+		% Incidence matrix
+		inc_matrix = nx.incidence_matrix(g,oriented=True)
+	\end{minted}
+	
+	
+	The incidence matrix is also very useful in calculating the pressure difference between nodes of a particular edge. Let $ \Delta = M^T $. Then given the vector $ P $ that contains the pressures on the vertices, then the pressure difference on the edges will be given by $ \Delta P $, where $ \Delta  $ is the transpose of the incidence matrix. This comes in handy when we want to calculate the flow of the edges which will be given by
+	\[ \bf{Q} = \bf{C} L^{-1} \bf{\Delta} \bf{P}, \tag{2} \]
+	where $ C $ is a diagonal matrix of the conductance of the edges, $ L $ is the diagonal matrix of the ``length'' of each edge, $ \Delta $ is the transpose of the incidence matrix, and $ P $ is the pressure on the nodes. $ Q $ is the flow of the edges. In this particular example we are assuming that the relation between flow and the pressure difference is $ Q_e = C_e (p_i - p_j)/L $. But we can have many other choices.
+	
+	Knowing the sources and sinks on the nodes, the pressure can be determined by the Kirchhoff law
+	\[ \mathcal{L} \bf{P} = \bf{q}, \]
+	where the vector $ q $ is the sources and the sinks values for each node. This is the same as solving the \textbf{Poisson equation}. This can also be written in terms of the flow, i.e.
+	\[ \Delta^T \bf{Q} = \bf{q}. \] 
+	By $ (2) $ we can write
+	\[ (\bf{\Delta}^T \bf{C}\bf{L}^{-1}\Delta) \bf{P} = \bf{q}. \]
+	Since $ \Delta = M^T $, the expression inside the parentheses is clearly Equation (1).
+	
+	Similar to the Poisson equation on the graph which is equivalent Kirchhoff's law, we can solve other types of heat and wave equations on the graph as well. The Laplacian matrix play a key role.
+	\[ \frac{\partial p}{\partial t} = - \mathcal{L} p + q,  \] 
+	for the heat equation, and
+	\[ \frac{\partial^2 p}{\partial t^2} = -\mathcal{L}p + q, \]
+	for the wave equation.
+	
+	\subsection{Laplacian Operator of Infinite Graphs}
+	In analogy with the Laplacian matrix for the graphs, we can develop a similar notion for the infinite graphs, in particular infinite Cayley graphs. In short, given a group $ G $ and a generating set $ S $ (where $ S $ is a subset of $ G $ not containing the identity and closed under taking inverses if the graph is to be undirected), the Cayley graph $ \Gamma(G,S) $ is defined as follows
+	\begin{itemize}
+		\item Vertices: Each element of $ G $ corresponds to a vertex.
+		\item Edges: There is an edge between $ g $ and $ gs $ fo every $ g\in G $ and $ s \in S $.
+	\end{itemize}
+	In the case of the infinite graphs, we can not define an infinite dimensional Laplacian matrix, but instead we can define an operator. For an infinite Cayley graph $ \Gamma(G,S) $, the \textbf{Laplacian} that acts on a function $ f: G \to C $ (note that the set of vertices is the group it self) can be defined as
+	\[ (\Delta f)(g) = \sum_{s\in S} (f(g) - f(gs)) = |S|f(g) - \sum_{s\in S} f(gs). \]
+	There is a close parallel between the definition above and the definition of the Laplacian matrix of a graph $ \mathcal{L} = D - A $. For instance, in the case of a Cayley graph of $ \Z^2 $ we have
+	\[ (\Delta f)(i,j) = 4 f(i,j) - f(i+1,j) - f(i-1,j) - f(i,j+1) - f(i,j-1). \]
+	This coincides with the notion of the discrete finite difference Laplacian operator.
+%	
+	\clearpage
+	\onecolumn
+	\bibliographystyle{dinat}
+	\bibliography{references}
+	\twocolumn
+	
+\end{document}
