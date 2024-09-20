@@ -96,9 +96,7 @@
 		\label{fig:loops}
 	\end{figure}
 	\section{Data Analysis of Static Networks}
-	In this section we will use the notions of Kendall shape space to study the structure of the loops that appear under different parameters of the model. 
-	
-	
+	In this section we will use the notions of Kendall shape space to study the structure of the loops that appear under different parameters of the model. {\color{red} \noindent TODO: TO BE ADDED AFTER DISCUSSION WITH KHAN.}
 	
 	\section{Time Evolution of the Networks}
 	Vascular networks are not static structure, but rather the evolve in time in response to the changing metabolic demand of the underlying tissue, as well as the metabolic cost of the network itself, and the overall energy required to pump the fluid through the network (See  \cite{Pries2010,Secomb2012,Pries2014,Ouarne2021} for more discussion). To put this in different words, the role of vascular networks is to deliver nutrients to the tissue and remove the wastes. To do this, it needs to have a space filling configuration with lots of branches. However, due to the Poiseuille law for the flow of fluids in a tube, the power needed to pump the fluid through the tube scales with $ r^{-4} $ where $ r $ is the radius of the tube. I.e. smaller vessel segments needs a huge power to pump the blood through them. Thus have a massively branched structure is not an optimal solution. On the other hand, the vascular network consists of cells which requires maintenance as well. Thus the optimized vascular network should have a low volume as well. Because of these dynamics in action, in the angiogenesis process first a mesh of new blood vessels form which later evolve to a more ordered and hierarchical structure in a self-organization process.
@@ -118,13 +116,26 @@
 	\end{figure}
 	
 	
-	To determine the time evolution of the vascular network we first need to formulate the problem in an appropriate way. First, we represent a given vascular network with a multi-weighted graph $ G=(V,E) $ where $ V $ is the set of vertices and $ E $ is the edge set. We define the pressure $ \mathbf{P} $ on the nodes, the flow $ \mathbf{Q} $ on the edges, and let $ C_{i,j}, L_{i,j} $ denote the conductivity of an edge, and $ L_{i,j} $ denote the length of the same edge. Given the source and sink terms on the nodes $ \mathbf{q} $, the flow in the edges can be determined by
+	To determine the time evolution of the vascular network we first need to formulate the problem in an appropriate way. First, we represent a given vascular network with a multi-weighted graph $ G=(\mathcal{V},\mathcal{E}) $ where $ V $ is the set of vertices and $ E $ is the edge set. We define the pressure $ \mathbf{P} $ on the nodes, the flow $ \mathbf{Q} $ on the edges, and let $ C_{i,j}, L_{i,j} $ denote the conductivity of an edge, and $ L_{i,j} $ denote the length of the same edge. Given the source and sink terms on the nodes $ \mathbf{q} $, the flow in the edges can be determined by
 	\[ \mathcal{L} \mathbf{P} = \mathbf{q}, \]
 	where $ \mathcal{L} $ is the Laplacian matrix of the graph. For more details on this see \autoref{appndix}. Once we know the pressures on the nodes, we can easily calculate the flow through the edges by 
 	\[ \bf{Q} = \bf{C} L^{-1} \bf{\Delta} \bf{P}, \tag{2} \]
 	where $ C $ is a diagonal matrix of the conductance of the edges, $ L $ is the diagonal matrix of the ``length'' of each edge, $ \Delta $ is the transpose of the incidence matrix, and $ P $ is the pressure on the nodes. $ Q $ is the flow of the edges. Once we know the flow in the edges, we can design evolution law to describe the time evolution of the weights of the edges (which by Poiseuille's is a function of the radius of the vessel segment). The evolution law can be derived by defining an energy functional and moving down the gradient of the energy functional to minimize it, or we can take an ad-hoc method and write a mechanistic ODE for time evolution of the conductances. For the energy functional one can write
+	\[ E(\mathbf{C}) = \frac{1}{2} \sum_{e\in \mathcal{E}}(\frac{Q_e^2}{C_e} + \nu C_e^\gamma), \]
+	where $ \mathcal{E} $ is the edge set of the graph, $ Q_e, C_e $ is the flow and conductance of the edge $ e $, and $ \nu,\gamma $ are parameters. The first term in the sum is of the form ``power=current$ \times $potential'' and reflects the power required to pump the flow, and the second term can be shown that reflects the volume of the total network. We can set
+	\[ \frac{d \mathbf{C}}{dt} = -\nabla E, \]
+	which determines the time evolution of the weights in a direction that reduces the total energy. The steady-state solution of this ODE system is precisely the Euler-Lagrange formulation of the least action principle. Alternatively, one can come up with carefully designed ODEs for the time evolution of the conductances that represents certain biological facts. In particular
+	\[ \frac{d C_e}{dt} = \alpha \abs{Q_e}^{2\sigma} - b C_e + g \]
+	proposed by \cite{Ronellenfitsch2016}, and 
+	\[ \frac{d}{dt} \sqrt{C_e} = F(Q_e) - c\sqrt{C_e}, \]
+	proposed by \cite{Almeida2022} has been popular choices. See \autoref{fig:GraphEvolution} for more details. It is important to note that in the simulations shown here, the initial network is a toy network. This can be improved by using any of the vascular network generated by any of the angiogenesis models discussed before.
 	
-	
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=1\linewidth]{images/evolution}
+		\caption{Time evolution of optimal transport network. A triangulation of a 2D domain is considered to be the graph over which we optimize the flow. The sink term is represented by green dot, while the sources are represented by yellow dots. Different sub-figures show the flow network at different time steps towards converging to the optimal configuration.}
+		\label{fig:GraphEvolution}
+	\end{figure}
 	
 	
 	
