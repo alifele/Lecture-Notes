@@ -450,6 +450,20 @@ In the following propositions we will see more easy-to-check characterizations o
 	\[ \sum_{n} A_n \prob^*(A_n) = \prob^*(\bigcup_n A_n). \]
 \end{summary}
 
+\begin{summary}[Quantifiers to Cup and Cap!]
+	Let $ \set{A_i}_{i\in I} $ be a collection of sets. Then $ x\in \bigcup_i A_i $ means that $ \exists n \in I $ such that $ x \i A_n $. Similarly, $ x\in \bigcap_i A_i $ means that $ \forall n \in I $ we have $ x \in A_n $. According to this, we can construct much more complicated statements. For instance, 
+	\[ x \in \bigcup_{n=1}^{\infty} \bigcap_{k>n}^{\infty} \bigcup_{m>k}^{\infty}{A_k} \]
+	in words meas that 
+	\[ \exists n \in \N \st \forall k > n \ \exists m >k \st x \in A_k. \]
+	This makes these statements more easier to follow. We have used this in Problem \autoref{prob:capcupcapcup}.
+\end{summary}
+
+\begin{summary}[Pre-image v.s. Image]
+	The pre-image preserves the union, intersection, and complement, i.e.
+	\[ \inv{f}(A\cup B) = \inv{f}(A) \cup \inv{f}(B), \quad \inv{f}(A\cap B) = \inv{f}(A)\cap \inv{f}(B), \quad \inv{f}(A^c) = (\inv{f}(A))^c.  \]
+	But the same is NOT true in the case of image. image preserves the union but not necessarily the intersection, or complement (for which we need extra properties like being injective or surjective).
+\end{summary}
+
 \section{Solved Problems}
 \begin{problem}[From Ross]
 	Ben can talk a course in compute science or chemistry. If she takes the computer science course, then she will get A grade with probability $\frac{1}{2}$. If she takes the chemistry course, then she will get A grade with probability $\frac{1}{3}$. She decides to base her decision on the flip of a fair coin. What is the probability that she gets an A in chemistry?
@@ -874,6 +888,100 @@ In the following propositions we will see more easy-to-check characterizations o
 	\[ \prob^*(A^c) \geq \Q(A^c). \]
 	Since $ \prob^*(A^c) = 1 - \prob^*(A) $ and $ \Q(A^c) = 1 - \Q(A) $, then this implies  $  \prob^*(A) \geq \Q(A)  $. Thus $ \prob^*(A) = \Q(A) $.
 \end{solution}
+
+
+\begin{problem}[Properties of Random Variables (from Rosenthal)]
+	\label{prob:capcupcapcup}
+	Prove the followings.
+	\begin{enumerate}[(i)]
+		\item If $ X,Y $ are random variables and $ c\in\R $, then $ X+c, cX, X^2, X+Y,  $ and $ XY $ are random variables. 
+		\item If $ Z_1,Z_2,\cdots $ are random variables such that $ \lim_{n\to \infty} Z_n(\omega) $ exists for all $ \omega\in \Omega $,, and $ Z(w) = \lim_{n\to \infty}Z_n(\Omega) $, then $ Z $ is also a random variable.
+	\end{enumerate}
+\end{problem}
+
+\begin{solution}
+	the proves are as follows.
+	\begin{enumerate}[(i)]
+		\item \begin{enumerate}[(a)]
+			\item $ \inv{(X+c)}((-\infty,x]) = \set{w\ :\ X(w)+c \leq x} = \set{w\ :\ X(w)\leq x-c} = \inv{X}((0\-\infty,x-c]) \in \mathcal{F} $.
+			\item Assume $ c\neq 0 $. Then $ \inv{(cX)}((-\infty, x]) = \set{w\ :\ cX(w) \leq x} = \set{w\ :\ X(w) \leq x/c}  = \inv{X}((-\infty,x/c]) \in \mathcal{F}. $ For the case were $ c=0 $, then $ cX \equiv 0 $ on all $ \Omega $, and this is a random variable as $ (\inv{cX})((0,x]) = \emptyset$ if $ x < 0 $ and $ (\inv{cX})((0,x]) = \Omega $ if $ x\geq 0 $.
+			\item $ X^2((-\infty,a]) = \set{w\ :\ X^2 \leq a} = \set{w\ :\ X \in [-\sqrt{a},\sqrt{a}]} \in \mathcal{F} $.
+			\item $ \inv{(X+Y)}((\infty,x]) = \set{w\ :\ X(w)+Y(w) < x} = \bigcup_{r\in \Q}(\set{X < r} \cap \set{Y<x-r}) $. Since this is a countable union, thus in $ \mathcal{F} $.
+			\item I have the following prove but I am not sure if it is a correct one or not. I feel that this is a correct proof as there seems to be nothing that can make it not to work.
+			\[ \inv{(XY)}((-\infty,x]) = \set{XY < x} = \bigcup_{n\in\N} (\set{X<n} \cap \set{Y<x/n}). \]
+			The following prove is the idea by Rosenthal. Once we know that $ X^2 $, $ X+Y $, and $ cX $ are random variables, then we can deduce $ XY $ is also a random variable as
+			\[ XY = \frac{1}{2}((X+Y)^2 - X^2 - Y^2)) \]
+		\end{enumerate}
+		\item In a nutshell this statements claims that the point-wise convergence of a sequence of random variables is a random variable. We need to show that the event $ \set{Z\leq r} \in \mathcal{F} $. To see this, let $ w \in \set{Z\leq r} $. This means that $ Z(w) \leq r $. Since $ Z_n(\omega) \to Z(\omega) $ as $ n\to \infty $, then this implies that $ \forall m \in \N $ there exists $ N \in \N $ such that $ \forall n > N $ we have $ Z_n(\omega) \leq r + \frac{1}{m} $. Thus we can write
+		\[ \set{Z(w) \leq r} = \bigcap_{m=1}^{\infty} \bigcup_{N=1}^{\infty} \bigcap_{n=N}^{\infty} \set{ Z_n(\omega) \leq r + \frac{1}{m}} \]
+	\end{enumerate}
+\end{solution}
+
+\begin{problem}
+	Let $ f:\R \to \R $ be continouse or piece-wise continuous function. Then $ f $ is a Borel function.
+\end{problem}
+\begin{solution}
+	We first prove the statement for a continuous function. To show that $ f $ is a Borel function we need to show $ \inv{f}(B) \in \mathcal{B} $ for $ B \in \mathcal{B}$. Since the pre-image preserves the union, intersection, and complements, and by definition for a continuous function the pre-image of an open set is an open set, and using the fact that we can write any Borel set as a countable intersection, union, or complements of open sets then we conclude that $ \inv{f}(B) \in \mathcal{B} $.
+	A second way to show this is observe that $ \inv{f}((x,\infty)) \in \mathcal{B} $ as $ (x,\infty) $ is open and $ f $ is continuous, thus its pre-image is also an open set thus a Borel set. Then its complement is also a Borel set, i.e.
+	\[ (\inv{f}((x,\infty)))^c = \inv{f}((-\infty,x]) \in \mathcal{B}. \]
+	Thus shows that $ f $ is a Borel function (since the pre-image of $ (0,x] $ is a Borel set.
+	
+	For the case where $ f $ is piece-wise continuous, by the definition of the piece-wise continuoity, $ f $ has at most countably many discontinuities. The we can write $ f $ as 
+	\[ f(x) = f_1(x)\mathds{1}_{I_1}(x) + f_2(x)\mathds{1}_{I_2}(x) + f_3(x)\mathds{1}_{I_3}(x)  + \cdots + f_n(x)\mathds{1}_{I_n}(x),  \]
+	where $ I_1,I_2,I_3\cdots,I_n  $ are disjoint intervals on which $ f_1,f_2,f_3,\cdots, f_n $ are continuous respectively. By the statement for the first part of the proof, we know that $ f_i $ is a Borel function (since it is continuous) as well as the indicator function $ \mathds{1}_{I_i} $. Their multiplication is also a Borel function and the sum of these Borel functions is a also a Borel function, thus $ f(x) $ is a Borel function.
+\end{solution}
+
+\begin{problem}
+	Prove that if $ A,B $ are two independent events, then $ (A^c, B) $, $ (A,B^c) $, and $ (A^c, B^c) $ are pairwise independent.
+\end{problem}
+\begin{solution}
+	Since $ A,B $ are independent, then $ \prob(A\cap B) = \prob(A) \prob(B)$. From the identity $ B = (B\cap A) \dot\cup (B\cap A^c) $. From the properties of the probability measure we have
+	\[ \prob(B) = \underbrace{\prob(A\cap B)}_{\prob(A)\prob(B)} + \prob(A^c \cap B). \]
+	Then we can write
+	\[ \prob(A^c\cap B) = \prob(B) - \prob(A\cap B) = \prob(B) (1-\prob(A)) = \prob(B)\prob(A^c). \]
+	Thus $ A^c,B $ are also independent events. We use a similar argument for $ A,B^c $. To show that the events $ A^c, B^c $ are also independent, we use the inclusion-exclusion principle. 
+	\[ \prob(A^c\cap B^c) = 1 - \prob(A\cup B) = 1 - (\prob(A)+\prob(B) - \prob(A)\prob(B)) = (1-\prob(A))(1-\prob(B))=\prob(A^c)\prob(B^c). \]
+	Another way of showing this without the inclusion-exclusion principle is to use the identity
+	\[ A^c = (A^c\cap B) \dot\cup (A^c\cap B^c). \]
+	Then 
+	\[ \prob(A^c) = \underbrace{\prob(A^c\cap B)}_{\prob(A^c)\prob(B)} + \prob(A^c\cap B^c). \]
+	We can write
+	\[ \prob(A^c \cap B^c) = \prob(A^c)(1-\prob(B)) = \prob(A^c) \prob(B^c).  \]
+\end{solution}
+\begin{problem}
+	Let $ X,Y $ be random variables, and $ f,g : \R \to \R $ be Borel functions. Then if $ X,Y $ are independent, $ f(X) $ and $ g(X) $ are also independent.
+\end{problem}
+\begin{solution}
+	Since $ X,Y $ are independent, thus for any $ S_1,S_2 \in \mathcal{B} $ we have
+	\[ \prob(\set{X \in S_1}\cap \set{Y\in S_2}) = \prob(\set{X\in S_1}) \prob(\set{Y \in S_2}). \]
+	Consider
+	\[ \prob(\set{f(X) \in S_1} \cap \set{g(Y) \in S_2})=\prob(\set{X \in \inv{f}(S_1)} \cap \set{Y \in \inv{g}(S_2)}) = \prob(\set{f(X) \in S_1}) \prob(\set{g(Y) \in S_2}). \]
+	The equality above hods because for any $ S_1, S_2 \in \mathcal{B} $ we have $ \inv{f}(S_1),\inv{g}(S_2) \in \mathcal{B} $, that is because $ f,g $ are Borel functions.
+\end{solution}
+
+\begin{problem}[Continuity of probabilities]
+	Prove that the probability measure function is continuous from bellow and above. I.e. for the continuity from below, let $ A, A_1, A_2,\cdots \in \mathcal{F} $ such that  $ \set{A_n}\nearrow A $, i.e. $ A_1 \subseteq A_2 \subseteq \cdots $ and $ A = \bigcup_n A_n $. Then $ \lim_{n\to \infty} \prob(A_n) = \prob(A) $. For the continuity from above, let $ A,A_1,A_2,\cdots \in \mathcal{F} $ such that $ \set{A_n}\searrow A $, i.e. $ A_1\subseteq A_2\supseteq \cdots $ and $ A = \bigcap_n A_n $, then $ \lim_{n\to \infty}\prob(A_n) = \prob(A) $.
+\end{problem}
+\begin{solution}
+	First, we prove the probability from below. In general, one can observe that if $ \set{A_n}\nearrow A $, then $ \set{\prob(A_n)} $ indeed converges as this is a bounded monotone sequence in $ \R $. However, to show that this sequence converges to $ \prob(A) $, we do as following. Consider the following sets
+	\[ B_1 = A_1, \qquad B_2 = A_2 \backslash A_1, \qquad B_3 = A_3 \backslash A_2, \cdots. \]
+	Then $ A = \dot\cup B_n $. Thus $ \prob(A) = \sum_{n=1}^{\infty}\prob(B_n) $. Thus the series on the rand hand side converges. This implies that the corresponding partial sums also converges. However, by the construction we have
+	\[ \prob(A_1) = \prob(B_1),\quad \prob(A_2) = \prob(B_1) + \prob(B_2)+ \cdots. \]
+	Thus the converges of the partial sums implies the convergence of $ \set{\prob(A_n)} $.
+	
+	For the proof for the continuity from above, first observe that if for a collection $ A,A_1,A_2,\cdots \in \mathcal{F} $ we have $ \set{A_n} \searrow A $, then this is equivalent to $ \set{A^c_n}\nearrow A^c $. This follows from the De Morgan's law as well as the change of the direction of the inclusion $ \subseteq $ under taking complements. By hypothesis we have $ \set{A_n}\searrow A $, which is equivalent to$ \set{A^c_n}\nearrow A^c $. From the first part of the proof, it follows that $ \lim_{n\to \infty}\prob(A^c_n) = \prob(A^c) $. Thus
+	\[ \lim_{n\to \infty}(1-\prob(A_n)) = 1 - \prob(A). \]
+	Note that $ \prob(A_n) $ converges to some real number as $ n\to \infty $, because it is a bounded decreasing sequence. Thus by the laws of the limit we can write
+	\[1 -  \lim_{n\to\infty} \prob(A_n) = 1 - \prob(A). \]
+	Then it follows that 
+	\[ \lim_{n\to \infty}\prob(A_n) = \prob(A). \]
+\end{solution}
+
+
+
+
+
+
 
 %\begin{problem}[From Rosenthal]
 %	\begin{enumerate}[(a)]
