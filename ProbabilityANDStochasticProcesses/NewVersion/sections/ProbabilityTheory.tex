@@ -960,7 +960,7 @@ In the following propositions we will see more easy-to-check characterizations o
 \end{solution}
 
 \begin{problem}[Continuity of probabilities]
-	Prove that the probability measure function is continuous from bellow and above. I.e. for the continuity from below, let $ A, A_1, A_2,\cdots \in \mathcal{F} $ such that  $ \set{A_n}\nearrow A $, i.e. $ A_1 \subseteq A_2 \subseteq \cdots $ and $ A = \bigcup_n A_n $. Then $ \lim_{n\to \infty} \prob(A_n) = \prob(A) $. For the continuity from above, let $ A,A_1,A_2,\cdots \in \mathcal{F} $ such that $ \set{A_n}\searrow A $, i.e. $ A_1\subseteq A_2\supseteq \cdots $ and $ A = \bigcap_n A_n $, then $ \lim_{n\to \infty}\prob(A_n) = \prob(A) $.
+	Prove that the probability measure function is continuous from bellow and above. I.e. for the continuity from below, let $ A, A_1, A_2,\cdots \in \mathcal{F} $ such that  $ \set{A_n}\nearrow A $, i.e. $ A_1 \subseteq A_2 \subseteq \cdots $ and $ A = \bigcup_n A_n $. Then $ \lim_{n\to \infty} \prob(A_n) = \prob(A) $. For the continuity from above, let $ A,A_1,A_2,\cdots \in \mathcal{F} $ such that $ \set{A_n}\searrow A $, i.e. $ A_1\subseteq A_2\subseteq \cdots $ and $ A = \bigcap_n A_n $, then $ \lim_{n\to \infty}\prob(A_n) = \prob(A) $.
 \end{problem}
 \begin{solution}
 	First, we prove the probability from below. In general, one can observe that if $ \set{A_n}\nearrow A $, then $ \set{\prob(A_n)} $ indeed converges as this is a bounded monotone sequence in $ \R $. However, to show that this sequence converges to $ \prob(A) $, we do as following. Consider the following sets
@@ -977,10 +977,159 @@ In the following propositions we will see more easy-to-check characterizations o
 	\[ \lim_{n\to \infty}\prob(A_n) = \prob(A). \]
 \end{solution}
 
+\begin{problem}[From Rosenthal]
+	Let $ A_1,A_2,\cdots,A_n \in \mathcal{F} $. Generalize the principle of inclusion-exclusion to:
+	\[ \prob(A_1\cup\cdots\cup A_n) = \sum_{i=1}^n A_i - \sum_{1\leq i < j \leq n} \prob(A_i \cap A_j) + \sum_{1\leq i < j < k \leq n} \prob(A_i \cap A_j \cap A_k) - \cdots \pm \prob(A_1\cap \cdots \cap A_n). \]
+	\emph{Hint: Expand $ 1 - \prod_{i=1}^n (1-\mathds{1}_{A_i}) $, and take expectation of both sides.}
+\end{problem}
+\begin{solution}
+	First, observe that $ \mathds{1}_{A^c} = 1 - \mathds{1}_A $. So
+	\[ 1 - \prod_{i=1}^n(1-\mathds{1}_{A_i}) = 1 - \prod_{i=1}^n \mathds{1}_{A_i^c} = 1 - \mathds{1}_{A_1^c\cap\cdots\cap A_n^c} = \mathds{1}_{A_1\cup\cdots\cup A_n}.  \]
+	On the other hand, 
+	\[ 1 - \prod_{i=1}^n (1-\mathds{1}_{A_i}) = \sum_{i=1}^{n}\mathds{1}_{A_i}  - \sum_{1 \leq i < j \leq n} \mathds{1}_{A_i \cap A_j} + \cdots \pm \mathds{1}_{A_1\cap\cdots\cap A_n}.  \]
+	So we have
+	\[ \mathds{1}_{A_1\cup\cdots\cup A_n} = \sum_{i=1}^{n}\mathds{1}_{A_i}  - \sum_{1 \leq i < j \leq n} \mathds{1}_{A_i \cap A_j} + \cdots \pm \mathds{1}_{A_1\cap\cdots\cap A_n}. \]
+	By applying the expectation to both sides we will get
+	\[ \prob(A_1\cup\cdots\cup A_n) = \sum_{i=1}^n A_i - \sum_{1\leq i < j \leq n} \prob(A_i \cap A_j) + \sum_{1\leq i < j < k \leq n} \prob(A_i \cap A_j \cap A_k) - \cdots \pm \prob(A_1\cap \cdots \cap A_n). \]
+\end{solution}
 
+\begin{problem}[From Rosenthal]
+	Let $ f(x) = ax^2 + bx + c $ be a second-degree polynomial function where $ a,b,c \in \R $.
+	\begin{enumerate}[(a)]
+		\item Find necessary and sufficient condition on $ a,b $ and $ c $ such that the equation $ \E{f(\alpha x)} = \alpha^2 \E{f(X)} $ holds for all $ \alpha \in \R $ and all random variable $ X $. 
+		\item Find necessary and sufficient condition on $ a,b $ and $ c $ such that the equation $ \E{f(x-\beta)} = \E{f(x)} $ holds of all $ \beta \in \R $ and all random variable $ X $.
+		\item Do parts $ (a) $ and $ (b) $ account for the properties of the variance function? Why or why not?
+	\end{enumerate}
+\end{problem}
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item For the LHS we have
+		\[ \E{\alpha^2 a x^2 + \alpha b x + c} = a\alpha^2 \E{x^2} + b\alpha \E{x} + c. \]
+		And for the RHS we have
+		\[ \alpha^2\E{f(x)} = a\alpha^2\E{x^2} + b\alpha^2 \E{x} + c\alpha^2. \] 
+		Thus the necessary and sufficient condition for the equality to hold for every $ \alpha \in \R $ is to have
+		\[ b = 0, \qquad c = 0. \]
+		\item For the LHS we have
+		\[ \E{f(x-\beta)} = a\E{x^2} + (b - 2a\beta)\E{x} + a\beta^2 - b\beta + c.  \]
+		For the RHS we have
+		\[ \E{f(x)} = a\E{x^2} + b\E{x} + c. \]
+		This implies that we need to have 
+		\[ a = 0, \qquad b = 0. \]
+		I.e. the polynomial should be a constant polynomial.
+		\item For the property $ \operatorname{Var}{(\alpha C)} = \alpha^2 \operatorname{Var}{(C)} $, it follows from the fact that in part (b) we found that for the polynomial we need to have $ b = 0 $ and $ c = 0 $. However, part (b) does not account for the property of variance that $ \operatorname{Var}(X+b) = \operatorname{Var}(X) $. Because in the case of $ \operatorname{Var} $ the constants of the polynomial depends on the random variable under consideration. I.e. we have
+		\[ b = - 2 \E{X}, \qquad c = \E{X}^2. \]
+	\end{enumerate}
+\end{solution}
 
+\begin{problem}[From Rosenthal]
+	Let $ X_1,X_2,\cdots $ be independent, each with mean $ \mu $ and variance $ \sigma^2 $, and let $ N $ be an integer-valued random variable with mean $ m $ and variance $ v $, with $ N $ independent of all the $ X_i $. Let $ S = X_1 + X_2 + \cdots + X_n = \sum_{i=1}^{\infty} X_i \mathds{1}_{N\geq i} $. Compute $ \operatorname{Var}(S) $ and $ \E{S} $.
+\end{problem}
+\begin{solution}[Using the conditional expectation]
+	For this problem we can either use the conditional expectation or use the first principles.
+	\[ \E{S} = \E{X_1+\cdots+X_N} = \sum_n \E{X_1+\cdots+X_n}\prob(N = n) = \mu \sum_n n \prob(N=n) = \mu m. \] 
+	Similarly we have
+	\begin{align*}
+		\E{S^2} &= \sum_n \E{S^2\ |\ N = n} \prob(N=n) \\
+		&= \sum_n \E{(X_1+\cdots+X_n)^2} \prob(N=n) \\
+		&= \sum_n \E{\sum_i X_i^2 + \sum_{i<j}X_iX_j} \prob(N=n) \\ 
+		&= \sum_n (\sum_i \E{X_i^2} + 2\sum_{i<j}\E{X_iX_j}) \prob(N=n) \\
+		&= \sum_n ((\sigma^2 + \mu^2)n + n(n-1)\mu^2) \prob(N=n)\\
+		&= (\sigma^2 + \mu^2)m + \mu^2(v+m^2 - m).
+	\end{align*}
+	Where we have used $ \E{X_i^2} = \operatorname{Var}(X_i) + \E{X_i}^2 = \mu^2 + \sigma^2 $, and also used the fact that the sum $ \sum_{i<j} $ has $ \binom{n}{2} $ terms.
+	Now we can compute the variance
+	\[ \operatorname{Var}(S) = \E{S^2} - \E{S}^2 = (\sigma^2 + \mu^2)m + \mu^2(v+m^2 - m) - \mu^2 m^2 = \sigma^2 m + \mu^2 v. \]
+\end{solution}
+\begin{problem}[from Rosenthal]
+	Let $ X,Z $ be independent random variables each with standard normal distribution. Let $ a,b\in \R $ (not both 0), and let $ Y = aX + bZ $.
+	\begin{enumerate}[(a)]
+		\item Compute $ \operatorname{Corr}(X,Y) $.
+		\item Show that $ \abs{\Corr(X,Y)} \leq 1 $.
+		\item Given necessary and sufficient conditions on the values of $ a $ and $ b $ such that $ \Corr(X,Y) = 1 $.
+		\item Given necessary and sufficient conditions on the values of $ a $ and $ b $ such that $ \Corr(X,Y) = -1 $.
+	\end{enumerate}
+\end{problem}
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item First, observe that 
+		\[ \E{X} = \E{Z} = 0, \quad \Var(X) = \Var(Y) = 1, \quad \E{Y} = a+b, \quad \Var(Y) = a^2 + b^2 \]
+		where we have used the properties of variance to compute $ \Var(Y) $. By the definition of correlation we have
+		\[ \Corr(X,Y) = \frac{\operatorname{Cov}(X,Y)}{\sqrt{\Var(X)\Var(Y)}} = \frac{\E{XY} - \E{X}\E{Y}}{\sqrt{a^2+b^2}} = \frac{a}{\sqrt{a^2+b^2}}. \]
+		
+		\item It follows immediately by
+		\[ \abs{\Corr(X,Y)} = \abs{\frac{1}{\sqrt{1+b^2/a^2}}} \leq 1. \]
+		
+		\item From our solution in part (a), the necessary and sufficient condition for $ \Corr(X,Y) = 1 $ is that $ b = 0 $ and $ a> 0 $.
+		
+		\item From the solution in part (a). the necessary and sufficient condition for $ \Corr(X,Y) = -1 $ is that $ b = 0 $ and $ a < 0 $.
+	\end{enumerate}
+	
+\end{solution}
 
+\begin{problem}[From Rosenthal]
+	Let $ X,Y $ be independent general non-negative random variables, and let $ X_n = \Psi_n(X) $, where $ \Psi_n(x) = \min(n,2^{-n}\floor{2^nx}) $.
+	\begin{enumerate}[(a)]
+		\item Give an example of a sequence of functions $ \Phi_n: [0,\infty) \to [0,\infty) $ other than $ \Phi_n = \Psi_n $, such that for all $ x $ we have $ 0 \leq \Phi_n(x) \leq x $ and $ \set{\Phi_n(x)}\nearrow x $ as $ n \to \infty $.
+		\item Suppose that $ Y_n = \Phi_n(Y) $ with $ \Phi_n $ as in part (a). Must $ X_n $ and $ Y_n $ be independent.
+		\item Suppose $ \set{Y_n} $ is an arbitrary collection of non-negative random variables such that $ \set{Y_n} \nearrow Y $. Must $ X_n $ and $ Y_n $ be independent?
+		
+		\item Under the assumption of part (c), determine which quantities in 4.2.7 are necessarily equal?
+	\end{enumerate}
+\end{problem}
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item Define
+		\[ f_n(x) = \min\set{n, \frac{1}{2^n}(\frac{1}{2}(2^n x + \floor{2^n x})) }. \] 
+		The graph of this function will be as follows.
+		\begin{figure}[h!]
+			\centering
+			\includegraphics[width=0.2\linewidth]{Images/PhiFunction}
+			\label{fig:phifunction}
+		\end{figure}
+		\FloatBarrier
+		
+		\item First observe that $ \Phi_n $ is a Borel measurable function as the pre-image of any open interval is a union of half open intervals or the empty set. Since $ X,Y $ are independent, then $ X_n, Y_n $ are also independent.
+		
+		\item No. We demonstrate a counterexample. Let 
+		\[ Y_n = \max\set{\Psi_n(Y) - \frac{1}{n^2}\Psi_n(X) , 0}. \]
+		
+		\item Since $ \set{X_n} \nearrow X $ and $ \set{Y_n } \nearrow Y $, then $ \set{X_n Y_n} \nearrow XY $. Thus by the monotone convergence theorem we have
+		\[ \E{XY} = \lim_n \E{X_n Y_n}. \]
+		Also since (by monotone convergence theorem) $ \E{X} = \lim_n \E{X_n} $ and $ \E{Y} = \lim_n \E{Y_n} $ then by the limit laws we have
+		\[ \lim_n \E{X_n} \E{Y_n} = \E{X} \E{Y}. \]
+		
+	\end{enumerate}
+\end{solution}
 
+\begin{problem}[From Rosenthal]
+	Give examples of a random variable $ X $ defined on Lebesgue measure on $ [0,1] $, such that 
+	\begin{enumerate}[(a)]
+		\item $ \E{X^+} = \infty $ and $ 0 < \E{X^-} < \infty $.
+		\item $ \E{X^-} = \infty $ and $ 0 < \E{X^+} < \infty $.
+		\item $ \E{X^+} = \E{X^-} = \infty $.
+		\item $ 0 < \E{X} < \infty $ but $ \E{X^2} = \infty $.
+	\end{enumerate}
+\end{problem}
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item Define 
+		\[ X^+ = 2\cdot \mathds{1}_{(1/2,3/4)} + \sum_{n=2}^\infty 2^n \cdot \mathds{1}_{(2^{-n}, 2^{-n+1})}, 
+		\qquad 
+		X^- = -2 \cdot \mathds{1}_{(3/4,1)}. \]
+		Then $ \E{X^+} = 1/2 + 1 + 1 + \cdots = \infty, \qquad \E{X^-} = 1/2 $.
+		
+		\item Similar to part (a) but exchange $ X^- $ and $ X^+ $.
+		
+		\item Define
+		\[ X^+ = \sum_{n\text{ even}} 2^n \cdot \mathds{1}_{(2^{-n}, 2^{-n+1})}, 
+		\qquad 
+		X^+ = \sum_{n\text{ odd}} 2^n \cdot \mathds{1}_{(2^{-n}, 2^{-n+1})}. \]
+		Clearly
+		\[ \E{X^+} = \E{X^-} = \infty. \]
+		
+		\item {\color{red} \noindent TODO: TO BE ADDED.}
+ 	\end{enumerate}
+\end{solution}
 
 
 %\begin{problem}[From Rosenthal]

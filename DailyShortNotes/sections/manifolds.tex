@@ -1,0 +1,103 @@
+\chapter{October}
+
+\section{Manifolds}
+
+For a quick review on the manifolds (on 8 October), I am reading through the Lee's text book.
+
+\begin{proposition}[Some properties of the Hausdorff spaces]
+	Let $ (X,\mathcal{T}) $ be a Hausdorff topological spaces. I.e. for any distinct points $ x,y \in X $ there exists $ U,V \in T $ such that $ x \in U, y \in V $ and $ U\cap V = \emptyset $. Then we have:
+	\begin{enumerate}[(a)]
+		\item Any convergent sequence in $ X $ has a unique limit point.
+		\item $ (X,\mathcal{T}) $ is Hausdorff if and only if the diagonal $ \Delta = \set{(x,x): x \in X} $ is closed under the product topology.
+		\item Every compact set in $ X $ is closed.
+	\end{enumerate}
+	
+\end{proposition}
+\begin{proof}
+	\begin{enumerate}[(a)]
+		\item Assume otherwise. I.e. the sequence $ \set{x_n} $ converges to two different distinct points $ p,q \in X $. Since $ X $ is Hausdorff, then there exists disjoint $ U,V \in \mathcal{T} $ such that $ U\cap V = \emptyset $ and $ x \in U, y\in V $. Since $ x_n \to p $ and $ x_n \to q $ as $ n\to \infty $ then there exists $ N_1,N_2 \in \N $ such that $ \forall n > N_1 $ we have $ x_n \in U $ and $ \forall n > N_2 $ we have $ x_n \in V $. This is a contradiction as we assume that $ U\cap V = \emptyset $.
+		
+		\item Forward direction $ \boxed{\implies} $ : We assume that $ X $ is Hausdorff. Let $ (x,y) \in (X\times X) \backslash \Delta $. Since $ X $  is Hausdorff, then there exists $ U,V \in \mathcal{T} $ such that $ x \in U $ and $ y \in V $ and $ U\cap V = \emptyset $. Thus the set $ U\times V $ is also open in $ X\times X $  with the subspace topology and does not contain $ (x,x) $ nor $ (y,y) $. Thus for any point that is not on the diagonal we can find a open set in $ X\times X $ that is disjoint with the diagonal. This proves that $ \Delta^c $ is open thus $ \Delta  $ is closed.
+		
+		\noindent Backward direction $ \boxed{\Longleftarrow} $ : We assume that $ \Delta  $ is closed in $ X\times X $. Then for any $ (x,y) \in (X\times X) \backslash \Delta  $ we can find and open set $ M $ such that $ M\cap \Delta = \emptyset $. We can find an open set $ U\times V \in M $ such that $ x \in U $ and $ y \in V $. Since $ M \cap \Delta = \emptyset $ then $ U \cap V = \emptyset $. Since the point $ (x,y) $ was arbitrary, then $ X $ is Hausdorff.
+		
+		\item Let $ K $ be a compact set in $ X $ and let $ x \in K^c $. Since the space is Hausdorff then for any $ q \in K $ we can find $ U_q, V_q $ such that $ x \in U_q $ and $ q \in V_q $. The collection $ \set{V_q}_{q\in K} $ covers $ K $. Since $ K $ is compact, then we have a finite sub-cover, call $ \set{V_{q_1},\cdots,V_{q_n}} $. Let $ U = U_{q_1} \cap \cdots\cap U_{q_n} $. $ U $ is open (finite intersection of open sets) and is disjoint with all of the sets in the finite sub-cover (i.e. $ U \cap V_{p_i} = \emptyset $ for $ i=1,\cdots,n $). Thus $ U \cap K^c = \emptyset $. This implies that $K$ is closed.
+	\end{enumerate}
+	
+\end{proof}
+
+
+The history behind the following proposition is funny! When I first had analysis course, then had this view that the uniqueness of the limit of a convergent sequence comes from the triangle inequality. Then today, in proposition above, I saw that it comes form the space being Hausdorff. The following proposition and its proof makes my intuition about the limits of the convergent sequences and triangle inequality more clear. 
+
+\begin{proposition}
+	Every metric space $ (X,d) $ is a Hausdorff space.
+\end{proposition}
+\begin{proof}
+	Let $ x,y \in X $ distinct. Then $ d(x,y) > 0  $. let $ d = d(x,y)/2 $ and define the open balls
+	\[ U = B_{d/2}(x), \qquad V = B_{d/2}(y). \]
+	We claim $ U\cap V = \emptyset $. To see the proof, assume otherwise. Then there exists $ z \in U \cap V $. By the triangle inequality we have
+	\[ d = d(x,y) \leq d(x,z) + d(z,y) < d/2 + d/2 = d, \]
+	which is a contradiction.
+\end{proof}
+
+\begin{proposition}[Properties of first countable space]
+	Let $ (X,\mathcal{T}) $ be first countable. I.e. for all $ x \in X $ there is a neighborhood basis at $ x $. Let $ A \subset X $ be any subset, and $ x \in X $.
+	\begin{enumerate}[(a)]
+		\item $ x \in A^\circ $ if and only if every sequence in $ X $ converging to $ x $ is eventually in $ A $.
+		\item $ x \in \closure{A} $ if and only if $ x $ is a limit of a sequence of points in $ A $.
+		\item Every metric space is first countable.
+	\end{enumerate}
+\end{proposition}
+\begin{proof}
+	\begin{enumerate}[(a)]
+		\item First, we prove the forward direction $ \boxed{\Longrightarrow} $. We prove this by contrapositive. Assume that there exists a sequence $ \set{a_n} $ in $ X $ converging to $ x $ such that for all $ N\in \N $ we can find $ n > N $ such that $ a_n \notin  A $. Since $ a_n \to x $ as $ n\to\infty $ then for all $ U \in \mathcal{N}(x) $ we have $ a_n \in U $ for all $ n $ large enough. However, we just observed that for $ n $ large enough we can find some $ a_n \notin A $. Thus for all neighborhood $ U $ of $ x $ there exists some $ a_n $ that $ a_n \notin A $, i.e. $ U \cap A^c \neq \emptyset $ for all $ U \in \mathcal{N}(x) $. Thus $ x \notin A^\circ $.
+		
+		\noindent For the converse direction $ \boxed{\Longleftarrow} $, again we use the prove by contrapositive. Let $ x \notin A^\circ $. Then for all neighborhoods $ U \in \mathcal{N}(x) $ we have $ A^c \cap U \neq \emptyset $. Since the space is first-countable, in particular for all $ \set{V_i}_{i\in\N}  \subset \mathcal{N}(x) $ we have $ A^c \cap V_i \neq \emptyset $. For each such $ V_i $ we choose $ a_i \in A^c\cap V_i $. Then the sequence $ \set{a_n} $ is converging to $ x $ that is not eventually in $ A $.
+		
+		\item First, we prove the forward direction $ \boxed{\Longrightarrow} $. Let $ x \in \closure{A} $. Then for all $ U \in \mathcal{N}(x) $ we have $ U \cap A \neq \emptyset $. In particular for the local base $ \set{V_i}_{i\in\N} =  B \subset \mathcal{N}(x) $ we have $ V_i \cap A \neq \emptyset $ for all $ i \in \N $. Let $ a_n \in V_n \cap A $. Then by definition $ a_n $ converges to $ x $ and this completes the proof.
+		
+		\noindent Then we prove the backward direction $ \boxed{\Longleftarrow} $. Let $ \set{a_n} $ be a sequence of points in $ A $ such that $ a_n \to x $ as $ n \to \infty $. Then by definition $ \forall U \in \mathcal{N}(x) $ we have $ a_n \in U $ for all $ n $ large enough. This implies that $ U \cap A \neq \emptyset $ for all $ U \in \mathcal{N}(x) $. This implies that $ x \in \closure{A} $.
+		
+		\item We provide a constructive prove. Let $ (X,d) $ be a metric space with $ x \in X $ be some point. Then a local countable basis for $ x $ is given by the collection of all open balls with rational radius and centered at $ x $.
+	\end{enumerate}
+\end{proof}
+
+
+\begin{proposition}[Properties of second-countable spaces]
+	\begin{enumerate}[(a)]
+		\item Every second-countable topological space is separable (i.e. admits a countable dense subset).
+		\item Every second-countable space is first-countable.
+	\end{enumerate}
+\end{proposition}
+\begin{proof}
+	\begin{enumerate}[(a)]
+		\item We demonstrate a constructive proof. Since the space $ X $ is second-countable, then there exists a countable basis for the topology, call it $ \set{U_n}_{n\in\N} $. From each $ U_n $ get $ x_n $ (assuming that $ U_n $ is non-empty, otherwise discard it) and call the collection of all such points $ D $. Let $ V $ be any open set. Then there exists $ U_n \subseteq V $ and due to construction $ x_n \in V $ thus $ D \cap V \neq 0 $. Since $ V $ was arbitrary, then $ D $ is dense.
+		
+		\item For a point $ x \in X $ let $ B(x) $ (the local base) be the set of all open sets in the countable topology base such that contains the point $ x $. 
+	\end{enumerate}
+\end{proof}
+
+
+\begin{remark}
+	Note that all metric spaces are first-countable, however, only separable metric spaces are second-countable.
+\end{remark}
+
+Reviewing the nice properties of the second-countable spaces and the Hausdorff spaces reveals the rationale behind our choice that why a topological manifold should be second-countable and Hausdorff. In fact, we want the space be well-behaved when with respect to the sequences (i.e. unique limit of converging sequences, some useful sequencial characterizations, etc).
+
+
+\begin{problem}[Exercise in Lee]
+	Show that equivalent definitions of topological manifolds are obtained if instead of allowing $ U $ to be homeomorphic to any open subset of $ \R^n $, we require it to be homeomorphic to an open ball in $ \R^n $ or to $ \R^n $ itself.
+\end{problem}
+\begin{proof}
+	$ \boxed{\Longrightarrow} $.
+\end{proof}
+
+
+
+
+
+
+
+
+
+

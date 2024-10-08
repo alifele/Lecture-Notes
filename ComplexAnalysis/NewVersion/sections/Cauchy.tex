@@ -1,0 +1,20 @@
+\chapter{Cauchy Theorem and Cauchy Integral Formula}
+
+We start this chapter by the Goursat's theorem which in nutshell states that for a holomorphic function on an open region, it contour integral on a triangle contained in the open region is zero. We will use this idea later on to prove the Cauchy theorem.
+
+
+\begin{theorem}[Goursat's theorem]
+	Let $ \Omega \subset \C $ be an open set and $ T \subset \Omega $ be a triangle that its interior is also contained in $ \Omega $. Then 
+	\[ \int_T f(z) dz = 0 \]
+	whenever $ f $ is a holomorphic function on $ \Omega $.
+\end{theorem}
+
+\begin{proof}
+	To see the proof, we will use the following argument. Consider the triangle below.
+	\input{Images/trianglesForGoursat.tex}
+	Starting with the triangle $ T^(0) $, we connect the mid-points of the edges and then we will get four \emph{congruent} triangles. By a simple geometrical argument we can see that the radius and the diameter of the triangles $ T^(1)_j $ for $ j=1,2,3,4 $ is half of the radius and perimeter of the original triangles. I.e. By doing the same process we will get smaller and smaller triangles at each step and at step $ n $ we have
+	\[ d^(n) = 2^{-n} d^{(0)}, \qquad p^{n} = 2^{-n}p^{(0)}. \]
+	
+	{\color{red} \noindent TODO: TO BE WRITTEN}
+	
+\end{proof}
