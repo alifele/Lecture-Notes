@@ -89,8 +89,16 @@ Reviewing the nice properties of the second-countable spaces and the Hausdorff s
 	Show that equivalent definitions of topological manifolds are obtained if instead of allowing $ U $ to be homeomorphic to any open subset of $ \R^n $, we require it to be homeomorphic to an open ball in $ \R^n $ or to $ \R^n $ itself.
 \end{problem}
 \begin{proof}
-	$ \boxed{\Longrightarrow} $.
+	We will have different parts for this proof.
+	\begin{itemize}
+		\item We want to show that the classic definition is equivalent to $ U $ being homeomorphic to an open ball in $ \R^n $. For the forward direction ($ \boxed{\Longrightarrow} $), we assume that $ U $ is homeomorphic to an open subset of $ \R^n $, call it $ A $. Let $ B \subset A $ be an open ball. Then under the homeomorphism map the pre-image of $ B $ is also open and is contained in $ U $. Thus there is an open neighborhood of the point on manifold that is homeomorphic to an open ball in $ \R^n $. The converse direction ($ \boxed{\Longleftarrow} $) follows immediately since an open ball in $ \R^n $ is itself open subset of $ \R^n $.
+		
+		\item We want to show that the classic definition is equivalent to $ U $ being homeomorphic to $ \R^n $. Using our result above, and noting the fact that an open ball in $ \R^n $ is homeomorphic to the whole space, then the proof is immediate. Note the remark below.
+	\end{itemize}
 \end{proof}
+\begin{remark}
+	Given an open ball in $ \R^n $ we can construct the homeomorphism explicitly using the tangent function. A $ \R^1 $ example is illustrative. Let $ (a,b) $ be an open ball in $ \R $. This is homeomorphic to sphere $ S^1 $ with the north pole removed (easy to give the explicit homeomorphism by relating the distance from the center of the interval to the angle of the corresponding point on the unit sphere). Then we can use the stereographic projection to project the unit sphere without the pole to the whole real line (using the tangent map).
+\end{remark}
 
 
 
