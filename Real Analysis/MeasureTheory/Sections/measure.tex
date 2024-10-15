@@ -1,0 +1,39 @@
+\chapter{Measure}
+
+\section{Outer measure and its properties}
+In this chapter, for pedagogical reasons, we are just following our nose in developing the new notions out of the old ones and the efficiency is not the goal (unlike Rosenthal's to-the-point approach). Thus this section is more of a story line than an efficient theory development. Because of this, we are keeping the problem sets of each section close to that section as we want to highlight that we can not use any tool we know and we are only restricted to use the tools developed in the previous subsections and sections.
+
+\begin{definition}{Length function}
+	Let $ \mathcal{I} = \mathfrak{I} \cup \set{(-\infty,a)\ :\ a \in \R} \cup \set{(b,\infty)\ :\ b \in \R}  $ where $ \mathfrak{I} $ is the set of all \textbf{open intervals} of $ \R $. We define the length function $ \ell: \mathcal{I} \to \R $ to be 
+	\[ \ell((a,b)) = b - a, \]
+	with the convention that $ \pm\infty \pm a = \pm \infty $ for all $ a\in \R $.
+\end{definition}
+This length function has all the good properties that we expect for a length function to have. Among which are monotonicity, countable sub-additivity, and countable-additivity for disjoint sets. One problem with the $ \ell $ function is that it is only defined on the open intervals and $ (a,\infty),(-\infty,b) $ type sets. The question is 
+\begin{quote}
+	\textbf{Can we extend the domain of the length function to be the whole power set of $ \R $? Will the extended function retain its properties?}\footnote{As we will see throughout this subsection, the answer to this question is a NO! The additivity property fails for some subsets of the real numbers that we can generate using the axiom of choice. However, we can fix this by restricting the domain of the definition of the $ \ell $ function.} 
+\end{quote}
+
+
+\begin{definition}[Outer measure for subsets of $ \R $]
+	Outer measure $ \abs{\cdot}: 2^\R \to \R $ is defined as
+	\[ \abs{A} = \inf\set{\sum_{k}\ell(I_k)\ :\ A \subset \bigcup_k I_k,\ I_k\text{ are open intervals}}. \]
+	where $ A \subset \R $ and $ \ell $ is the length function defined on the open intervals where $ \ell(a,b) = b-a $ for $ (a,b)\subset \R $.
+\end{definition}
+\begin{remark}
+	Note a very delicate point here. There are many equivalent ways to define a measure and derive its properties. Axler starts with this definition which is somehow extending the function $ \ell $ to all the subsets of $ \R $. However, in Rosenthal, he starts with a semialgebra (the set of all intervals of all kind) on which we have a well defined length function that satisfies some important properties. Then we can use the extension theorem to extend the domain of definition of this length function to a $ \sigma\text{-algebra} $ of sets (note that it is not the whole power set). One major difference is that extending the domain of definition of $ \ell $ to all subsets of $ \R $ will cause it to loose some of its properties and later we need to restrict its domain. However, the extension of the length function defined on the semialgebra (Rosenthal) has all the good properties that we need.
+\end{remark}
+ 
+\subsection{Solved Problems}
+
+
+\begin{problem}[From MIRA (Axler)]
+	Prove that if $ A $ and $ B $ are subsets of $ \R $ and $ \abs{B} = 0 $, then $ \abs{A \cap B} = 0 $.
+\end{problem}
+\begin{solution}
+	By countable sub-additivity we have
+	\[ \abs{A \cup B} \leq \abs{A} + \abs{B} = \abs{A}, \]
+	where we have used the fact that $ \abs{B} = 0 $. On the other hand, since $ A \subset A \cup B $ from monotnonicity we have
+	\[ \abs{A} \leq \abs{A \cup B}. \]
+	Thus 
+	\[ \abs{A \cup B} = \abs{A}. \]
+\end{solution}
