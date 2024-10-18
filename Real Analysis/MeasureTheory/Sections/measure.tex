@@ -15,6 +15,7 @@ This length function has all the good properties that we expect for a length fun
 
 
 \begin{definition}[Outer measure for subsets of $ \R $]
+	\label{def:extensionOfOuterMeasureToWholeR}
 	Outer measure $ \abs{\cdot}: 2^\R \to \R $ is defined as
 	\[ \abs{A} = \inf\set{\sum_{k}\ell(I_k)\ :\ A \subset \bigcup_k I_k,\ I_k\text{ are open intervals}}. \]
 	where $ A \subset \R $ and $ \ell $ is the length function defined on the open intervals where $ \ell(a,b) = b-a $ for $ (a,b)\subset \R $.
@@ -22,6 +23,37 @@ This length function has all the good properties that we expect for a length fun
 \begin{remark}
 	Note a very delicate point here. There are many equivalent ways to define a measure and derive its properties. Axler starts with this definition which is somehow extending the function $ \ell $ to all the subsets of $ \R $. However, in Rosenthal, he starts with a semialgebra (the set of all intervals of all kind) on which we have a well defined length function that satisfies some important properties. Then we can use the extension theorem to extend the domain of definition of this length function to a $ \sigma\text{-algebra} $ of sets (note that it is not the whole power set). One major difference is that extending the domain of definition of $ \ell $ to all subsets of $ \R $ will cause it to loose some of its properties and later we need to restrict its domain. However, the extension of the length function defined on the semialgebra (Rosenthal) has all the good properties that we need.
 \end{remark}
+
+
+The following proposition shows that the extended notion of the $ \ell $ function still enjoys some useful properties
+
+\begin{proposition}
+	The following properties hold for the outer measure.
+	\begin{enumerate}[(a)]
+		\item Let $ A,B \subset \R $ and $ A \subset B $. Then $ \abs{A} \leq \abs{B} $.
+		\item Let $ A_1,A_2,\cdots $ are all subsets of $ \R $. Then $ \abs{\bigcup_i A_i} \leq \sum_i \abs{A_i} $.
+	\end{enumerate}
+\end{proposition}
+\begin{proof}
+	We will prove each part separately.
+	\begin{enumerate}[(a)]
+		\item Let $ \set{I_k} $ be an open interval cover for $ B $. Then it is also a cover for $ A $. Thus 
+		$ \abs{A} \leq \sum_k \ell(I_k) $. 
+		Since the inequality above is correct for all open interval covers of $ B $, then it is true also for the infimum of such sums under different open covers (which is the definition of $ B $)
+		\[ \abs{A} \leq \abs{B}. \]
+		
+		\item For $ A_k $ let the collection $ \set{I_{kn}}_{n\in\N} $ be an open cover such that
+		\[  \sum_n \ell(I_{kn}) \leq \abs{A_k} + \epsilon/2^k. \]
+		Hence we can write
+		\[ \sum_{k,n} \ell(I_{kn}) \leq \sum_k \abs{A_k} + \epsilon. \]
+		On the other hand, $ \set{I_{kn}}_{k,n\in\N} $ is also a countable open cover for $ \bigcup_k A_k $. Thus
+		\[ \abs{\bigcup_k A_k} \leq \sum_{k,n} \ell(I_{kn}).   \]
+		Combining these results we will get
+		\[ \abs{\bigcup_k A_k} \leq \sum_{k}\abs{A_k} + \epsilon. \]
+		Since the inequality is true for every $ \epsilon>0 $ then we have
+		\[ \abs{\bigcup_k A_k} \leq \sum_{k}\abs{A_k}. \]
+	\end{enumerate}
+\end{proof}
  
 \subsection{Solved Problems}
 
@@ -37,3 +69,198 @@ This length function has all the good properties that we expect for a length fun
 	Thus 
 	\[ \abs{A \cup B} = \abs{A}. \]
 \end{solution}
+
+\begin{problem}[From MIRA (Axler)]
+	Suppose $ A \subset\R $ and $ t\in \R $. Let $ f(A) = \set{f(x):\ x \in A} $. Prove that 
+	\[ \abs{t A} = \abs{t} \abs{A}, \qquad \abs{t + A} = \abs{A}. \]
+\end{problem}
+\begin{solution}
+	We start by showing that $ \abs{t + A} = \abs{A} $. First, observe that if $ \set{I_k} $ is an open cover for $ A $ then $ \set{I_k + t} $ is an open cover for $ A + t $, and if $ \set{J_m}$ is an open cover for $ A+t $ then $ \set{J_m - t} $ is an open cover for $ A $. Also, note that from the properties of the $ \ell $ function on the intervals we have $ \ell(I_k) = \ell(I_k + t) $ and $ \ell(J_m-t) = \ell(J_m) $ for all $ k,m \in \Z $.
+	
+	Let $ \set{I_k} $ be an open cover for $ A $. Then $ \set{I_k + t} $ is an open cover for $ A + t $ thus we can write
+	\[ \abs{A+t} \leq \sum_k \ell(I_k + t) = \sum_k \ell(I_k). \]
+	Since the inequality above is true for all open covers of $ A $ then $ \abs{A_t} $ will also be less than the infimum of all such sums, i.e.
+	\[ \abs{A+t} \leq \abs{A}. \] 
+	To show the reverse inequality, let $ \set{J_m} $ be an open cover for $ A+t $. Then $ \set{J_m-t}$ is an open cover for $ A $. Thus
+	\[ \abs{A} \leq \sum_m \ell(J_m - t) = \sum_m \ell(J_m) \]
+	Similar to the reasoning before we have
+	\[ \abs{A} \leq \abs{A + t}. \]
+	Thus we conclude that 
+	\[ \abs{A} = \abs{A +t}. \]
+	
+	
+	The proof for $ \abs{t A} = \abs{t} \abs{A} $, first observe that the equality holds if $ t=0 $ since $ 0 \cdot A = \set{0} $. On the other hand, if $ \abs{A}\leq 0 $ then $ 0 \cdot\abs{A} = 0 $ (using the convention $ 0\cdot\infty=0 $). For the case $ t\neq 0 $, observe that if $ \set{I_k} $ is an open cover for $ A $, then $ \set{t I_k} $ is an open cover for $ t A $. Similarly, if $ J_m $ is an open cover for $ tA $ then $ \set{J_m/t} $ is an open cover for $ A $. The rest of the proof is similar to what we had for the first identity we proved above.
+\end{solution}
+
+\begin{problem}[from MIRA (Axler)]
+	Prove that if $ A,B \subset \R $ and $ \abs{A} < \infty $, then $ \abs{B \backslash A} \geq \abs{B} - \abs{A} $.
+\end{problem}
+\begin{solution}
+	First, observe that 
+	\[ B = (B\cap A) \cup (B\cap A^c). \]
+	By the countable sub-additivity of outer measure we have
+	\[ \abs{B} \leq \abs{B\backslash A} + \abs{B\cap A} \leq \abs{B\backslash A} + \abs{A}, \]
+	where for the last inequality we used the monotonicity of the outer measure. Thus
+	\[ \abs{B \backslash A} \geq \abs{B} - \abs{A}. \]
+\end{solution}
+
+\begin{problem}[from MIRA (Axler)]
+	Suppose $ F $ is a subset of $ \R $ with the property that every open cover of $ F $ has a finite sub-cover (i.e. $ F $ is compact). Prove that $ F $ is closed and bounded.
+\end{problem}
+\begin{solution}
+	In a Hausdorff space, a compact set is closed. Since $ \R $ is Hausdorff, then $ F $ is closed. To show the boundedness, we want to show that there is an open ball that contains the whole set. Cover the set $ F $ with open balls and the reduce this open cover to a finite sub-cover $ \set{\mathbb{B}_{r_i}(x_i): i=1,2,\cdots,n} $.
+	Let $ R = \max_{i=1,\cdots,n}\set{\abs{x_i}+r_i} $ where $ \abs{x_i} $ is the Euclidean norm of $ x_i $. Then the open ball $ \mathbb{B}_R(0) $ contains the whole set $ F $. Thus $ F $ is also bounded. 
+\end{solution}
+
+\begin{problem}[from MIRA (Axler)]
+	\label{problem:finiteDisjointAdditivity}
+	Suppose $ a,b,c,d $ are real numbers with $ a < b $ and $ c < d $. Prove that 
+	\[ \abs{(a,b)\cup (c,d)} = \abs{(a,b)} + \abs{(c,d)} \quad \text{if and only if} \quad (a,b) \cap (c,d) = \emptyset. \]
+\end{problem}
+\begin{solution}
+	First, we prove the $ \boxed{\Longleftarrow} $ direction. We assume that $ (a,b) \cap (c,d) = \emptyset $. WLOG we can assume $ b < c $. By the sub-additivity property we have
+	\[ \abs{(a,b)\cup (c,d)} \leq \abs{(a,b)} + \abs{(c,d)} \]
+	On the other hand, note that $ (a,b)\cup(c,d) = (a,d) \backslash [b,c] $. Thus
+	\[ \abs{(a,b)\cup (c,d)} \geq \abs{(a,d)} - \abs{(b,c)} = (d-a) - (c-b) = (b-a) + (c-d) = \abs{(a,b)} + \abs{(c,d)}. \]
+	Thus
+	\[ \abs{(a,b)\cup (c,d)} \leq \abs{(a,b)} + \abs{(c,d)} \quad \text{if} \quad (a,b)\cap (c,d) = \emptyset. \]
+	
+	For the converse $ \boxed{\Longrightarrow} $, WLOG we assume $ a<d $. From monotonicity we have
+	\[ \abs{(a,b)\cup (c,d)} \leq \abs{(a,d)}.  \]
+	On the other hand, by the hypothesis we have
+	\[ \abs{(a,b)\cup (c,d)} = \abs{(a,b)} + \abs{(c,d)} = (b-a) + (d-c) = (d-a) + (b-c), \]
+	and similarly
+	\[ \abs{(a,d)} = d-a. \]
+	Thus the inequality above reads
+	\[ (d-a) + (b-c) \leq d-a. \]
+	This implies $ b-c \leq 0 $, i.e. $ b \leq c $. Thus $ (a,b)\cap (c,d) = \emptyset $.
+\end{solution}
+\begin{proposition}
+	The extension of the $ \ell $ function as defined in \autoref{def:extensionOfOuterMeasureToWholeR} still preserves the countably additivity property of the $ \ell $ function for the disjoint intervals.
+\end{proposition}
+\begin{proof}
+	See the question above.
+\end{proof}
+
+
+\begin{problem}[from MIRA (Axler)]
+	Prove that if $ A\subset \R $ and $ t > 0 $, then
+	\[  \abs{A} = \abs{A\cap (-t,t)} + \abs{A \cap (-t,t)^c}  \]
+\end{problem}
+\begin{solution}
+	Since $ A =( A \cap (-t,t) ) \cup (A \cap (-t,t)^c) $, then from the countable sub-additivity property we have
+	\[ \abs{A} \leq \abs{A \cap (-t,t) } + \abs{A \cap (-t,t)^c}. \]
+	To show the reverse inequality, let $ \set{I_k} $ be an open cover for $ A $. Then $ \set{I'_k: I'_k =  I_k \cap (-t,t)} $ is an open cover for $ A \cap (-t,t) $, and $ \set{I''_k: I''_k = I_k \cap (-t,t)^c} $ is an open cover for $ A\cap (-t,t) $. Thus 
+	\[ \abs{A \cap (-t,t)} + \abs{A \cap (-t,t)^c} \leq \sum_k \ell(I'_k) + \sum_k \ell(I''_k) = \sum_k \ell(I'_k) + \ell(I''_k)  \]
+	where we used the fact that $ \ell $ is a non-zero function to merge the two infinite sums to one sum. On the other hand, since $ I'(k) , I''(k)$ are intervals, then $ \ell(I'_k) + \ell{I''_k} = \ell(I'_k \cup I''_k) $. Since $ I'_k \cup I''_k = I_k $
+	So
+	\[ \abs{A \cap (-t,t)} + \abs{A \cap (-t,t)^c} \leq \sum_k \ell(I_k). \]
+	Since the inequality above is true from all open interval cover $ \set{I_k} $ of $  A $, then we conclude that 
+	\[ \abs{A \cap (-t,t)} + \abs{A \cap (-t,t)^c} \leq \abs{A}. \]
+	Combining this with the inequality from the countable sub-additivity we will get
+	\[ \abs{A} = \abs{A\cap (-t,t)} + \abs{A \cap (-t,t)^c}. \]
+\end{solution}
+\begin{observation}
+	The result of the question above has a very close parallel with the equation (2.3.7) which states which sets are in the $ \sigma\text{-algebra} $ $ \mathcal{M} $.
+\end{observation}
+
+\begin{problem}[from MIRA (Axler)]
+	Prove that $ \abs{A} = \lim_{t\to \infty} \abs{A \cap (-t,t)}. $
+\end{problem}
+\begin{solution}
+	Let $ f(t) = \abs{A \cap (-t,t)} $ for $ t\in \R $. From monotonicity we have $ \abs{A \cap (-t,t)} \leq \abs{A} $, thus $ f(t) \leq \abs{A} $ for all $ t \in \R $. Further more, since for $ t \geq \tau $ we have  $ (-\tau,\tau) \subset (-t,t) $ then again by monotonicity we have $ f(t) \geq f(\tau) $. Thus $ f $ is a monotone increasing and bounded sequence. Thus $ \lim_{t\to\infty} f(t)$ exists and 
+	\[ \lim_{t\to\infty}f(t) \leq \abs{A}. \]
+	To show the reverse inequality let $ t_n = 1/n, A_0 = \emptyset, A_n = A \cap (-t_n, t_n) $. Furthermore, let $ B_n = A_n \backslash A_{n-1} $. Thus
+	\[ \abs{A_n} = \abs{A_n \cap (-t_{n-1},t_{n-1})} + \abs{A_n \cap (-t_{n-1},t_{n-1})^c} = \abs{A_{n-1}} + \abs{B_n}. \]
+	Repeating this for $ n $ times we will get
+	\[ \abs{A_n} = \abs{B_1} + \cdots + \abs{B_n}. \]
+	From monotonicity, since $ A = \bigcup_n B_n $
+	\[ \abs{A} \leq \sum_{n=1}^\infty \abs{B_n} = \lim_{n\to\infty}\abs{A_n} = \lim_{n\to\infty}f(t_n)  = \lim_{t\to\infty}f(t).\]
+	Thus
+	\[ \abs{A} = \lim_{t\to\infty}\abs{A_n \cap (-t_n, t_n)}. \]
+\end{solution}
+
+\begin{problem}[from MIRA (Axler)]
+	Prove that $ \abs{[0,1] \backslash \Q} = 1 $.
+\end{problem}
+\begin{solution}
+	First, observe that
+	\[ \abs{[0,1]\backslash\Q} = \abs{[0,1]} - \abs{\Q} = \abs{[0,1]} = 1, \]
+	where we have used the fact that $ \abs{\Q} = 0 $. Furthermore, since $ [0,1]\backslash \Q \subset [0,1] $. From the monotonicity property we have
+	\[ \abs{[0,1] \backslash \Q} \leq \abs{[0,1]}. \]
+	Combining these two inequalities we have
+	\[ \abs{[0,1]\backslash\Q} = 1 \]
+\end{solution}
+
+\begin{problem}[from MIRA (Axler)]
+	Prove that if $ I_1,I_2,\cdots $ is a disjoint sequence of open intervals, then 
+	\[ \Abs{\bigcup_{k=1}^\infty I_k} = \sum_{k=1}^{\infty} \ell(I_k). \]
+\end{problem}
+\begin{solution}
+	From \autoref{problem:finiteDisjointAdditivity} we can conclude that for a finite collection of open intervals $ I_1,\cdots,I_n $ we have
+	\[ \abs{\bigcup_{k=1}^n I_k} = \sum_{k=1}^{n} \ell(I_k). \]
+	Observe that from the countable sub-additivity we have
+	\[ \abs{\bigcup_{k=1}^\infty I_k} \leq \sum_{k=1}^{\infty} \ell(I_k). \]
+	On the other hand, since $ \bigcup_{k=1}^N I_k \subset \bigcup_{k=1}^{\infty} I_k $, then 
+	\[ \abs{\bigcup_{k=1}^\infty I_k} \geq \abs{\bigcup_{k=1}^N I_k}  = \sum_{k=1}^{N}\ell(I_j) \qquad \text{for all $ N \in \N $}.  \]
+	Since the inequality above is true for all $ N\in \N $, then $ \abs{\bigcup_{k=1}^\infty I_k} \geq \sum_{k=1}^{\infty} \ell(I_k) $. So we conclude 
+	\[ \abs{\bigcup_{k=1}^\infty I_k} = \sum_{k=1}^{\infty} \ell(I_k). \]
+\end{solution}
+
+
+\begin{problem}[from MIRA (Axler)]
+	Suppose $ r_1,r_2,\cdots $ is a sequence that contains every rational number. Let 
+	\[ F = \R \backslash \bigcup_{k=1}^{\infty}(r_k - 1/2^k, r_k + 1/2^k). \]
+	\begin{enumerate}[(a)]
+		\item Show that $ F $ is a closed subset of $ \R $.
+		\item Prove that if $ I $ is an interval contained in $ F $, then $ I $ contains at most one element.
+		\item Prove $ \abs{F} = \infty $.
+	\end{enumerate}
+\end{problem}
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item This follows from that fact that $ F^c $ is open as arbitrary union of open set is open.
+		\item Assume otherwise. Then $ a,b \in I $, hence $ [a,b]\subset I $. Since $ \Q $ is dense in $ \R $ we know that $ [a,b]\cap \Q \neq \emptyset $. However since $ [a,b]\subset I $ from the construction of $ F $ we have $ I \cap \Q = \emptyset $. This is a contradiction. Thus $ I $ contains at most one element.
+		\item Using the countable sub-additivity we have
+		\[ \abs{\bigcup_{k=1}^\infty (r_k - 1/2^k, r_k + 1/2^k)} \leq 2. \]
+		On the other hand
+		\[ \abs{F} \geq \abs{R} - \abs{\bigcup_{k=1}^\infty (r_k - 1/2^k, r_k + 1/2^k)}  \geq \abs{R} - 2 \geq \abs{\R} = \infty. \]
+		This implies that $ \abs{F} = \infty $.
+	\end{enumerate}
+\end{solution}
+
+\begin{problem}[from MIRA (Axler)]
+	Suppose $ \epsilon> 0 $. Prove that there exists a subset $ F $ of $ [0,1] $ such that $ F $ is closed, every element of $ F $ is an irrational number, and $ \abs{F} > 1-\epsilon $.
+\end{problem}
+\begin{solution}
+	Let $ \epsilon>0 $ be given, and let $ \set{r_k} $ be an enumeration of the rational numbers in $ [0,1] $. Let
+	$ A = \bigcup{k\in\N}(r_k - 0.5\epsilon/2^k, r_k + 0.5\epsilon/2/2^k) $. From countable sub-additivity we have $ \abs{A} \leq \epsilon $. Let $ F = [0,1] \abs A $. Then 
+	\[ \abs{F} = \abs{[0,1]} - \abs{A} = 1 - \epsilon. \]
+\end{solution}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Solved Problem for the Whole Chapter}
+
+\begin{problem}[from MIRA (Axler)]
+	Suppose $ X $ is a set and $ \mathcal{A} $ is the set of subsets of $ X $ that consists of only one element 
+	\[ \mathcal{A} = \set{\set{x}: x \in X}. \]
+	Prove that the smallest $ \sigma\text{-algebra} $ containing $ \mathcal{A} $ is the set of all subsets of $ X $ that is countable or has a countable complement.
+\end{problem}
+\begin{proof}
+	Let $ \sigma(\mathcal{A}) $ be the smallest $ \sigma\text{-algebra} $ that contains $ \mathcal{A} $, and let $ \mathbb{E} $ be
+	\[ \mathbb{E} = \set{E \subset X: E^c \text{ or } E \text{ is countable}}. \]
+	We want to show that $ \mathbb{E} = \mathcal{A} $.
+	First, it is easy to check that $ \mathbb{E} $ is a sigma algebra and since singletons are countable $ \mathbb{E} $ contains the collection $ \mathcal{A} $. Since $ \sigma(\mathcal{A}) $ is the smallest $ \sigma\text{-algebra} $ that contains $ \mathcal{A} $ then $ \sigma(\mathcal{A}) \subseteq \mathbb{E} $. For the converse, let $ E \in \mathbb{E} $. Then $ E $ or $ E^c $ is countable. If $ E $ is countable then $ E = \bigcup_{x\in E}\set{x} \in \sigma(\mathcal{A}) $ (i.e. we can write it as a countable union of singletons, this it is in $ \sigma(\mathcal{A}) $). If $ E^c $ is countable, then $ E^c = \bigcup_{x\in E^c}\set{x} \in \sigma(\mathcal{A}) $. Thus $ \mathbb{E} \subseteq \sigma(\mathcal{A}) $. This implies that 
+	\[ \sigma(\mathcal{A}) = \mathbb{E}. \]
+\end{proof}

@@ -101,6 +101,52 @@ The following theorem is an important converse-like statement for the Cauchy-Rie
 	then we conclude that $ f $ is holomorphic (follows from the characterization of holomorphic functions).
 \end{proof}
 
+\section{Second Review Notes}
+These notes are from my second review of the chapter 2 of Stein Complex analysis.
+
+A function $ f: \Omega \to \C $ is holomorphic at $ z_0 \in \Omega $ if 
+\[ \lim_{h\to 0} \frac{f(z+h) - f(z) }{h}  \]
+exists. This is equivalent to the existence of a complex number $ a \in \C $ such that 
+\[ f(z_0 + h) = f(z_0) + h a + h \psi(h) \]
+where $ \psi(h) \to 0 $ as $ h \to 0 $. Alternatively, instead of $ h\psi(h) $ we can write $ o(h) $.
+
+
+\subsection{A Clear Discussion on the Holomorphic Functions}
+First, note the following association
+\[ \boxed{(a+ ib)(h_1+ih_2) \quad \longleftrightarrow\quad \matt{a}{-b}{b}{a}\vectt{h_1}{h_2}},  \]
+as well as
+\[ \boxed{f(x+iy) = u(x,y) + iv(x,y) \quad\longleftrightarrow\quad F(x,y)=(u(x,y),v(x,y))}, \]
+where $ f $ is a complex function whereas $ F $ is a map $ \R^2 \to \R^2 $. $ F $ is differentiable at $ X \in \R^2 $ if there exists a linear map (i.e. $ 2\times2 $ matrix) $ J $ such that 
+\[ F(X+\vec{h}) = F(X) + J \vec{h} + o(\norm{\vec{h}}), \tag{1.2.1.I}\]
+where $ h = (h_1,h_2) \in\R^2 $ and the linear map $ J $ is given by
+\[ J = \matt{u_x}{u_y}{v_x}{v_y}. \] 
+It is easy to check the following identity
+\[ \matt{a}{b}{c}{d} \vectt{h_1}{h_2} = \frac{1}{2}\matt{a+d}{b-c}{c-b}{a+d}\vectt{h_1}{h_2} + \frac{1}{2}\matt{a-d}{-b-c}{b+c}{a-d}\vectt{h_1}{-h_2}. \]
+Thus we can write the Jacobi matrix as
+\[ Jh = \matt{u_x}{u_y}{v_x}{v_y}\vectt{h_1}{h_2} = \frac12\matt{u_x+v_y}{u_y-v_x}{v_x-u_y}{u_x+v_y}\vectt{h_1}{h_2} + \frac12\matt{u_x-v_y}{-u_y-v_x}{u_y+v_x}{u_x-v_y}\vectt{h_1}{-h_2}. \]
+Using the associations we had before we can write
+\begin{align*}
+	\frac12\matt{u_x+v_y}{u_x-v_x}{v_x-u_x}{u_x+v_y}\vectt{h_1}{h_2} \quad\longleftrightarrow \quad \frac12\left(\frac{\partial}{\partial x}(u+iv) - i(\frac{\partial }{\partial y}(u + iv))\right)(h_1+ih_2) &= \frac12\left(\frac{\partial f}{\partial x} -i \frac{\partial f}{\partial y}\right)(h_1+ih_2)\\ 
+	& := \frac{\partial f}{\partial z} h .
+\end{align*}
+Similarly
+\begin{align*}
+	\frac12\matt{u_x-v_y}{-u_y-v_x}{u_y+v_x}{u_x-v_y}\vectt{h_1}{-h_2}
+	\quad \longleftrightarrow \quad
+	\frac12\left( \frac{\partial f}{\partial x} + i \frac{\partial f}{\partial y} \right) (h_1 - i h_2) := \frac{\partial f}{\partial \bar{z}} \bar{h}
+\end{align*}
+Thus we can write
+\begin{align*}
+	 F(X+\vec{h}) = F(X) &+ J \vec{h} + o(\norm{\vec{h}}) \\ 
+	 &\updownarrow \\
+	 f(z+h) = f(z) + \frac{\partial f}{\partial x} h &+ \frac{\partial f}{\partial \bar{z}}\bar{h} + o(\abs{h}).
+\end{align*}
+Thus complex function $ \Omega\to \C $ that is differentiable function is not necessarily holomorphic. However, it is holomorphic if and only if $ \partial f/\partial\bar{z} = 0 $.
+
+This is a very interesting and clear characterization of the holomorphic functions. The condition $ \partial f/\partial \bar{z} = 0 $ implies 
+\[ \boxed{f \text{ holomorphic}} \Longleftrightarrow \boxed{\frac{\partial f}{\partial \bar{z}} = 0} \Longleftrightarrow \boxed{\frac{\partial f}{\partial x} = \frac{1}{i}\frac{\partial f}{\partial y}} \quad \Longrightarrow \quad \boxed{u_x = v_y,\ u_y = -v_x}, \]
+which is the Cauchy-Riemann equations for a holomorphic function.
+
 
 \newpage
 

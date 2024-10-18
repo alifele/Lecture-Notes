@@ -321,6 +321,7 @@ newparttoc, % Required for writing the part toc entry number in a standard way (
 \definecolor{remarkColor}{HTML}{2f4858}
 \definecolor{corColor}{HTML}{86bbd8}
 \definecolor{defColor}{RGB}{242, 100, 25}
+\definecolor{obsColor}{RGB}{140,3,252}
 
 
 
@@ -374,6 +375,7 @@ newparttoc, % Required for writing the part toc entry number in a standard way (
 \newtheorem{lemmaT}{Lemma}[chapter]
 \newtheorem{summaryT}{Summary}[chapter]
 \newtheorem{trickT}{Trick}[chapter]
+\newtheorem{observationT}{observation}[chapter]
 
 
 \theoremstyle{blacknumNOTboxExample}
@@ -480,6 +482,26 @@ rightmargin=0cm % Outside right margin width
 ]{propositionBox}
 
 
+%% Proposition box
+\newmdenv[
+skipabove=7pt, % Whitespace above box
+skipbelow=7pt, % Whitespace below box
+rightline=false, % Right line visible
+leftline=true, % Left line visible
+topline=false, % Top line visible
+bottomline=false, % Bottom line visible
+backgroundcolor=obsColor!10, % BackgroundColor
+linecolor=obsColor, % Border color
+linewidth=4pt, % Border width
+innerleftmargin=5pt, % Inside left margin width
+innerrightmargin=5pt, % Inside right margin width
+innertopmargin=0pt, % Inside top margin height
+innerbottommargin=5pt, % Inside bottom margin height
+leftmargin=0cm, % Outside left margin width
+rightmargin=0cm % Outside right margin width
+]{observationBox}
+
+
 %% Lemma - Corollary Box
 \newmdenv[
 skipabove=7pt, % Whitespace above box
@@ -506,6 +528,8 @@ rightmargin=0cm % Outside right margin width
 \newenvironment{lemma}{\begin{lemmaCorBox}\begin{lemmaT}}{\end{lemmaT}\end{lemmaCorBox}}
 \newenvironment{summary}{\begin{summaryBox}\begin{summaryT}}{\end{summaryT}\end{summaryBox}}
 
+\newenvironment{observation}{\begin{observationBox}\begin{observationT}}{\end{observationT}\end{observationBox}}
+
 
 \newenvironment{trick}{\begin{summaryBox}\begin{trickT}}{\end{trickT}\end{summaryBox}}
 
@@ -514,7 +538,7 @@ rightmargin=0cm % Outside right margin width
 \newenvironment{corollary}{\begin{lemmaCorBox}\begin{corollaryT}}{\end{corollaryT}\end{lemmaCorBox}}
 \newenvironment{example}{\begin{exampleT}}{\hfill{\tiny\ensuremath{\blacksquare}}\end{exampleT}}
 
-\renewenvironment{problem}{\begin{problemT}}{\end{problemT}}
+\renewenvironment{problem}{\hrule\begin{problemT}}{\end{problemT}}
 
 \newcommand{\definitionTautorefname}{Definition}
 \newcommand{\theoremTautorefname}{Theorem}

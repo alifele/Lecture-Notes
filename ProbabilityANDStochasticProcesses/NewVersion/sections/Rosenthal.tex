@@ -1,0 +1,198 @@
+\chapter{Probability by Rosenthal}
+In this chapter, I will include sporadic notes during my study of probability from the Rosenthal book. Also, I will try to compile a set of solutions for the problems in this book.
+
+
+
+\section{Probability Triples}
+
+\begin{definition}[Semialgebra]
+	Let $ X $ be a set. A Semialgebra $ \mathcal{I} $ of the subsets of $ X $ is a collection of the subsets of such that 
+	\begin{enumerate}[(a)]
+		\item $ \emptyset, X \in \mathcal{I} $.
+		\item $ \mathcal{I} $ is closed \emph{finite} \textbf{intersection}.
+		\item For $ E \in \mathcal{I} $ it complement $ E^c $ can be written as a \emph{finite disjoint} \textbf{union} of sets in $ \mathcal{I} $.
+	\end{enumerate}
+\end{definition}
+\begin{remark}
+	One canonical example for a semialgebra is the set of all intervals in $ \R $, where the term interval contains all open, closed and half open intervals, as well as the empty set, singletons, and the whole space. 
+\end{remark}
+
+\begin{definition}[Algebra]
+	Let $ \mathcal{M} $ be a collection of sets. Then $ \mathcal{M} $ is an algebra if 
+	\begin{enumerate}[(a)]
+		\item $ \Omega, \emptyset \in \mathcal{M} $
+		\item $ \mathcal{M} $ is closed under complements.
+		\item $ \mathcal{M} $ is closed under finite intersection.
+		\item $ \mathcal{M} $ is closed under finite union.
+	\end{enumerate}
+\end{definition}
+
+\begin{proposition}
+	Let $ \mathcal{I} $ be a semialgebra, and $ \mathcal{F} = \sigma(\mathcal{I}) $. Let $ \mathbb{P},\mathbb{Q} $ be two probability measures defined on $ \mathcal{F} $. Then if $ \mathbb{P} $ agrees with $ \mathbb{Q} $ on $ \mathcal{I} $, then they agree on $ \mathcal{F} $.
+\end{proposition}
+\begin{remark}
+	The condition that $ \mathcal{I} $ is a semialgebra is crucial. See \autoref{prob:BeingSemiAlgebraIsImportant} for an example.
+\end{remark}
+
+
+\newpage
+
+\subsection{Solved Problems}
+\begin{problem}
+	Let $ \Omega = \set{1,.2,3,4} $. Determine whether or not each of the following is a $\sigma\text{-algebra}$.
+	\begin{enumerate}[(a)]
+		\item $ \mathcal{F}_1 = \set{\emptyset, \set{1,2},\set{3,4},\set{1,2,3,4}} $.
+		\item $ \mathcal{F}_2 = \set{\emptyset,\set{3},\set{4},\set{1,2},\set{3,4},\set{1,2,3},\set{1,2,4},\set{1,2,3,4}} $.
+		\item $ \mathcal{F}_3 = \set{\emptyset, \set{1,2},\set{1,3},\set{1,4},\set{2,3},\set{2,4},\set{3,4},\set{1,2,3,4}} $.
+	\end{enumerate}
+\end{problem}
+\begin{solution}
+	\begin{enumerate}[(a)]
+		$ \, $
+		\item $ \mathcal{F}_1  $ is a $\sigma\text{-algebra}$ and the set of its atoms are $ \set{\set{1,2},\set{3,4}} $. 
+		\item $ \mathcal{F}_2 $ is a $\sigma\text{-algebra}$ and the set of its atoms are $ \set{\set{3},\set{4},\set{1,2}} $.
+		\item $ \mathcal{F}_3 $ is \textbf{not} a $\sigma\text{-algebra}$ because $ \set{1,2},\set{2,3} \in \mathcal{F}_3 $ but $ \set{1,2}\cap\set{2,3} = \set{2} \notin \mathcal{F}_3 $.
+ 	\end{enumerate}
+\end{solution}
+
+\begin{problem}
+	Let $ \Omega = \set{1,2,3,4} $, and let $ \mathcal{I} = \set{\set{1},\set{2}} $. Describe explicitly the $\sigma\text{-algebra}$ $ \sigma(\mathcal{I}) $ (i.e. the smallest $\sigma\text{-algebra}$ containing the collection $ \mathcal{I} $).
+\end{problem}
+\begin{solution}
+	The smallest $\sigma\text{-algebra}$ containing the collection $ \mathcal{I} $ is
+	\[ \sigma(\mathcal{I}) = \set{\set{1},\set{2},\set{3,4},\set{1,2},\set{2,3,4},\set{1,3,4},\set{1,2,3,4},\emptyset}. \]
+	One way to check to see if this is really the smallest $\sigma\text{-algebra}$ is to first observe that the cardinality of $\sigma\text{-algebra}$ of a finite set should always be of the form $ 2^n $ for some $ n \in \N $, where $ n $ is the number of atoms (or the number of the non-empty sets the the $\sigma\text{-algebra}$ does not contain any of its subsets). Observe that $ \set{1} $ and $ \set{2} $ are already the atoms of the $\sigma\text{-algebra}$. Thus the size of $ \sigma(\mathcal{I}) $ must be at least four. However, we know that $ \sigma(\mathcal{I}) $ contains at least $ 5 $ elements (i.e. $ \set{1},\set{2},\set{1,2},\set{1,2,3,4},\emptyset $). This suggests that there should be at least one other atom in the set. Choosing that atom to be $ \set{3,4} $ will yield that $ \sigma(\mathcal{I}) $ that contains $ 8 $ elements. Since this already includes that collection $ \mathcal{I} $, and we can not have any smaller $\sigma\text{-algebra}$ then we are sure that this is the smallest $\sigma\text{-algebra}$.
+\end{solution}
+
+
+\begin{problem}
+	Suppose $ \mathcal{F} $ is a collection of subsets of $ \Omega $, such that $ \Omega \in \mathcal{F} $.
+	\begin{enumerate}[(a)]
+		\item Suppose $ \mathcal{F} $ is an algebra. Prove that $ \mathcal{F} $ is a semialgebra.
+		\item Suppose that whenever $ A,B \in \mathcal{F} $, then also $ A\backslash B \equiv A \cap B^c \in \mathcal{F} $. Prove that $ \mathcal{F} $ is an algebra. 
+		\item Suppose that $ \mathcal{F} $ is closed under complement, and also closed under finite \emph{disjoint} unions. Give a counter example to show that $ \mathcal{F} $ might not be an algebra. 
+	\end{enumerate}
+\end{problem}
+
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item Firstly, Since $ \mathcal{F} $ is an algebra, then it is closed under complement, hence $ \emptyset \in \mathcal{F} $. Secondly, Since it is closed under finite intersection, then it meets the closedness under finite intersection property of a semialgebra. Lastly, let $ E \in \mathcal{F} $. Since $ \mathcal{F} $ is an algebra then $ E^c \in \mathcal{F} $. So we can trivially write $ E^c = E^c $ as a finite disjoint union of sets in $ \mathcal{F} $. Thus $ \mathcal{F} $ is a semialgebra.
+		\item Firstly, since $ \Omega \in \mathcal{F} $, then by hypothesis $ \Omega \backslash \Omega = \emptyset \in \mathcal{F} $. Secondly, let $ A \in \mathcal{F} $. Then by hypothesis $ \Omega \ A = A^c \in \mathcal{F} $, thus $ \mathcal{F} $ is closed under complement. Lastly, Let $ A,B \in \mathcal{F} $. By the reasoning above $ B^c \in \mathcal{F} $. And by hypothesis $ A\backslash B^c \in \mathcal{F} $. This implies that $ A \cap B \in \mathcal{F} $
+		\item One simple counter example can be constructed when we let $ \Omega = \set{1,2,3,4} $ and then let 
+		\[ \mathcal{F} = \set{\Omega,\emptyset, \set{1,2},\set{1,3},\set{1,4},\set{2,3},\set{2,4},\set{3,4}}. \]
+		This collection is closed under finite disjoint union as well as complement. But it fails to be an algebra. For instance $ \set{1,2},\set{2,3} \in \mathcal{F} $, but their intersection is not in the collection.
+	\end{enumerate}
+\end{solution}
+
+\begin{problem}
+	Let $ \mathcal{F}_1,\mathcal{F}_2,\cdots $ be a sequence of collections of subsets of $ \Omega $, such that $ \mathcal{F}_n \subseteq \mathcal{F}_{n+1} $ for each $ n $. 
+	\begin{enumerate}[(a)]
+		\item Suppose that each $ \mathcal{F}_i $ is an algebra. Prove that $ \bigcup_{i=1}^\infty \mathcal{F}_i $ is also an algebra. 
+		\item Suppose that each $ \mathcal{F}_i $ is a $\sigma\text{-algebra}$. Show (by counterexample) that $ \bigcup_{i=1}^\infty  \mathcal{F}_i$ need not be a $\sigma\text{-algebra}$.
+	\end{enumerate}
+\end{problem}
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item Let $ \mathcal{G} = \bigcup_{i=1}^\infty \mathcal{F}_i $. First, observe that since $ \Omega, \emptyset \in \mathcal{F}_i $ for all $ i\in \N $ (since all of them are algebra), then it follows that $ \Omega, \emptyset \in \mathcal{G} $. Furthermore, let $ A \in \mathcal{G} $. Then $ A \in \mathcal{F}_i $ for some $ i\in\N $. Since $ \mathcal{F}_i $ is an algebra, then $ A^c \in \mathcal{F}_i $, hence $ A^c \in \mathcal{G} $. Lastly, let $ A,B \in \mathcal{G} $. Then $ A\in\mathcal{F}_i $ and $ B \in \mathcal{F}_j $ for some $ i,j \in \N $. WLOG we can assume $ i \leq j $. Then $ \mathcal{F}_i \subset \mathcal{F}_j $, hence $ A,B \in \mathcal{F}_j $. Since $ \mathcal{F}_j $ is an algebra, then $ A\cap B \in \mathcal{F}_j $. Thus $ A \cap B \in \mathcal{G} $. This proves that $ \mathcal{G} $ is an algebra. 
+		\item Let $ \Omega = \N $. Let $ \mathcal{F}_n $ be the smallest $\sigma\text{-algebra}$ that contains the collection $ \set{\set{1},\cdots,\set{n}} $. On other way to think about $ \mathcal{F}_n $ is the $\sigma\text{-algebra}$ that contains the power set of $ \set{1,\cdots,n} $ as well as all of their complements (with respect to $ \Omega $). For instance, we have
+		\[ \mathcal{F}_1 = \set{\emptyset,\set{1},\N, \set{1}^c}. \]
+		Similarly
+		\[ \mathcal{F}_2 = \set{\emptyset,\set{1},\set{2},\set{1,2},\N,\set{1}^c,\set{2}^c,\set{1,2}^c}, \]
+		and etc. Let $ A_i = \set{2 i} $. Clearly $ A_i \in \bigcup_i \mathcal{F}_i $. However, $ \bigcup_i A_i \notin \bigcup_i \mathcal{F}_i$ as it does not belong to any $ \mathcal{F}_k $. Thus $ \bigcup_i\mathcal{F}_i $ is not a $\sigma\text{-algebra}$.
+	\end{enumerate}
+\end{solution}
+
+\begin{problem}
+	\label{prob:BeingSemiAlgebraIsImportant}
+	Let $ \Omega = \set{1,2,3,4} $, with $ \mathcal{F} $ the collection of all subsets of $ \Omega $. Let $ \mathbb{P} $ and $\mathbb{Q}$ be two probability measures on $ \mathcal{F} $ such that $ \mathbb{P}\set{1} = \mathbb{P}\set{2} = \mathbb{P}\set{3} = \mathbb{P}\set{4} = 1/4 $, and $ \mathbb{Q}\set{2} = \mathbb{Q}\set{4} = 1/2 $, extended to $ \mathcal{F} $ by linearity. Finally, let $ \mathcal{I}=\set{\emptyset,\Omega,\set{1,2},\set{2,3},\set{3,4},\set{1,4}} $.
+	\begin{enumerate}[(a)]
+		\item Prove that $ \mathbb{P}(A) = \mathbb{Q}(A) $ for all $ A \in \mathcal{I} $.
+		\item Prove that there is $ A \in \sigma(\mathcal{I}) $ with $ \mathbb{P}(A) \neq \mathbb{Q}(A) $.
+		\item Why does this not contradict Proposition 2.5.8 (in Rosenthal)?
+	\end{enumerate}
+\end{problem}
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item By a simple calculation we can show the identity above. For instance
+		\[ \mathbb{P}\set{1,2} = \mathbb{P}\set{1} + \mathbb{P}\set{2} = 1/4 + 1/4 = 1/2, \]
+		where as
+		\[ \mathbb{Q}\set{1,2} = \mathbb{Q}\set{1} + \mathbb{Q}\set{2} = 0 + 1/2 = 1/2. \]
+		By a similar computation we can show
+		\[ \mathbb{P}\set{2,3}=\mathbb{Q}\set{2,3}=1/2,\quad \mathbb{P}\set{3,4}=\mathbb{Q}\set{3,4}=1/2, \quad \mathbb{P}\set{1,4}=\mathbb{Q}\set{1,4}=1/2, \]
+		and so on.
+		
+		\item First, observe that $ \set{1,2,3} \in \sigma(\mathcal{I}) $. That is because $ \set{3} = \set{2,3}\cap \set{3,4} \in \sigma(\mathcal{I}) $. Thus $ \set{1,2}\cup\set{3} = \set{1,2,3} \in \sigma(\mathcal{I}) $. But
+		\[ \mathbb{P}\set{1,2,3} = 3/4, \qquad \mathbb{Q}\set{1,2,3} = 1/2. \]
+		Thus if we let $ A = \set{1,2,3} \in \sigma(\mathcal{I}) $ then $ \mathbb{P}(A) \neq \mathbb{Q}(A) $.
+		
+		\item That is because the proposition 2.5.8 requires the collection $ \mathcal{I} $ be a semialgebra, which is not here. For instance $ \mathcal{I} $ is not closed under finite intersection as $ \set{1,2},\set{2,3} \in\mathcal{I} $ whereas their intersection is not in the collection.
+	\end{enumerate}
+\end{solution}
+
+\begin{problem}
+	Let $ (\Omega, \mathcal{M},\lambda) $ be Lebesgue measure on the interval $ [0,1] $. Let
+	\[ \Omega' = \set{(x,y)\in \R^2: 0<x\leq 1, 0<y\leq 1}. \]
+	Let $ \mathcal{F} $ be the collection of all subsets of $ \Omega' $ of the form
+	\[ \set{(x,y)\in \R^2: x\in A, 0<y\leq 1} \]
+	for some $ A \in \mathcal{M} $. Finally, defined a probability $ \mathbb{P} $ on $ \mathcal{F} $ by
+	\[ \prob\set{(x,y)\in\R^2: x\in A, 0<y\leq 1} = \lambda(A). \]
+	\begin{enumerate}[(a)]
+		\item Prove that $ (\lambda', \mathcal{F},\prob) $ is probability space.
+		\item Let $ \prob^* $ be the outer measure corresponding to $ \prob $ and $ \mathcal{F} $. Define the subset $ S \subseteq \Omega' $ by
+		\[ S = \set{(x,y)\in \R^2: 0<x\leq 1, y = 1/2}. \]
+		(Note that $ S \notin \mathcal{F} $.) Prove that $ \prob^*(S)=1 $ and $ \prob^*(S^c)=1 $.
+	\end{enumerate}
+
+\end{problem}
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item $ \mathcal{F} $ being a $\sigma\text{-algebra}$ follows immediately from $ \mathcal{M} $ being a $\sigma\text{-algebra}$. To see this, for instance let $ H \in \mathcal{F} $. Then there exists some $ A \in \mathcal{M} $ such that $ H = A \times (0,1] $, where $ \times $ is the Cartesian product of two sets. Then $ H^c = \Omega'\backslash H $ will be given as $ H^c = A^c \times(0,1] $. Since $ A^c \in \mathcal{M} $ then it follows that $ H^c \in \mathcal{F} $. With a similar reasoning we can show that $ \mathcal{F} $ is a $\sigma\text{-algebra}$.
+		
+		\noindent Furthermore, $ \prob $ being a probability measure follows immediately from the fact that $ \lambda $ is a probability measure. For instance $ \prob(\Omega') = \lambda(\Omega) = 1 $, and $ \prob(B) \geq 0 $ for all $ B \in \mathcal{F} $ since we can write $ B = A \times(0,1] $ where $ A \in \mathcal{M} $ and by definition $ \prob(A) = \lambda(A) > 0 $. Countable additivity also follows from a similar line of reasoning.
+		
+		\item From the monotonicity of the outer measure and using the fact that $ S \subset \Omega' $ one gets that $ \prob^*(S) \leq \prob^*(\Omega') = \prob(\Omega') = 1 $. Furthermore, observe that we can write $ S = \Omega \times\set{1/2} $. Let $ \set{I_k \in \mathcal{F}} $ be any open cover for $ S $. Thus for each $ I_k $ there exists $ A_k \in\mathcal{M} $ such that $ I_k = A_k \times(0,1] $. Since $ S = \Omega\times\set{1/2} $ the  $ \set{B_k} $ will be an open cover for $ \Omega $. Using the fact that $ \prob(I_k) = \lambda(B_k) $
+		\[ 1 = \lambda(\Omega)  \leq \sum_k \lambda(B_k) = \sum_k \prob(I_k)  \]
+		Since the inequality above holds for any open cover $ \set{I_k} $ for $ S $ then we can conclude that $ 1 \leq \prob^*(S) $. So far
+		\[ \prob^*(S) \geq 1, \qquad \prob^*(S)\leq 1. \]
+		Then it follows that 
+		\[ \prob^*(S) = 1. \]
+	\end{enumerate}
+\end{solution}
+
+\begin{problem}
+	\label{prob:ModifiedTHeorem}
+	\begin{enumerate}[(a)]
+		\item Where in the proof of Theorem 2.3.1 was assumption 2.3.3 used?
+		\item How would the  of Theorem 2.3.1 be modified?
+	\end{enumerate}
+\end{problem}
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item It is only used with proving the equality $ \prob(A) = \prob^*(A) $ for $ A \in \mathcal{I} $. I.e. to show that $ \prob^* $ is an extension of $ \prob $ to a larger domain $ \mathcal{M} $ which is a $\sigma\text{-algebra}$ that contain the collection $ \mathcal{I} $.
+		\item Then the identity $ \prob^*(A) = \prob(A) $ for $ A \in \mathcal{I} $ should be replaced with $ \prob^*(A) \leq \prob(A) $.
+ 	\end{enumerate}
+\end{solution}
+
+\begin{problem}
+	Let $ \Omega=\set{1,2} $, and let $ \mathcal{I} $ be the collection of all subsets of $ \Omega $, with $ \prob(\emptyset)=0, \prob(\Omega) = 1 $, and $ \prob\set{1}=\prob\set{2} = 1/3 $.
+	\begin{enumerate}[(a)]
+		\item Verify that all assumptions of theorem 2.3.1 other than 2.3.3 are satisfied.
+		\item Verify that the assumption 2.3.3 is not satisfies.
+		\item Describe precisely the $ \mathcal{M} $ and $ \prob^* $ that would result in this example from the modified version of Theorem 2.3.1 in \autoref{prob:ModifiedTHeorem}.
+	\end{enumerate}
+\end{problem}
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item First, notice that the power set of $ \Omega $ finite, is always an algebra thus semialgebra. So $ \mathcal{I} $ is a semialgebra. On the other hand by the hypothesis we have $ \prob(\emptyset) = 0 $ and $ \prob(\Omega) = 1 $ which satisfies some of the conditions in Theorem 2.3.1. For the super-additivity, it holds because 
+		\[ \prob(\set{1}\cup\set{2}) = 1 > \prob\set{1} + \prob\set{2} = 2/3. \]
+		\item It is easy to check as $ \set{1,2},\set{1},\set{2} \in \mathcal{I} $ with $ \set{1,2} \subseteq \set{1}\cup \set{2} $ but
+		\[ \prob\set{1,2} \not\leq \prob\set{1}+\prob\set{2}.\]
+		\item {\color{red} \noindent TODO: TOBEADDED}
+	\end{enumerate}
+\end{solution}
+
+
+
+
+
+\newpage
