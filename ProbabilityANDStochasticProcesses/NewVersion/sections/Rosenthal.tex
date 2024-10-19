@@ -103,6 +103,77 @@ In this chapter, I will include sporadic notes during my study of probability fr
 \end{solution}
 
 \begin{problem}
+	Suppose that $ \Omega = \N  $ is the set of positive integers, and $ \mathcal{F} $ is the set of all subsets $ A $ such that either $ A $ or $ A^c $ is finite, and $ \prob $ is defined by $ \prob(A) = 0 $ if $ A $ is finite, and $ \prob(A) = 1 $ if $ A^c $ is finite. 
+	\begin{enumerate}[(a)]
+		\item Is $ \mathcal{F} $ an algebra?
+		\item Is $ \mathcal{F} $ a $\sigma\text{-algebra}$?
+		\item Is $ \prob $ finitely additive?
+		\item Is $ \prob $ countably additive on $ \mathcal{F} $, meaning that if $ A_1,A_2,\cdots \in \mathcal{F} $ are disjoint, and if it happens that $ \bigcup_n A_n \in \mathcal{F} $, then $ \prob(\bigcup_n A_n) = \sum_n \prob(A_n) $?
+	\end{enumerate}
+\end{problem}
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item Yes. First, observe that $ \emptyset, \Omega \in \mathcal{F} $ as $ \emptyset $ is finite, and $ \Omega $ has a finite complement. Further, let $ A \in \mathcal{F} $. Then either it is finite or it has a finite complement, where for both cases we have $ A^c \in \mathcal{F} $. Let $ A_1,\cdots,A_n $ be a finite collection of sets in $ \mathcal{F} $. If all $ A_i $ for $ i=1,\cdots,n $ are finite, then since the finite intersection and complement of any finite collection of finite sets is finite, $ \bigcap_{i=1}^n A_i $ as well as $ \bigcup_{i=1}^n A_i$ are finite as well, thus belongs to $ \mathcal{F} $. If $ A_i $ are all infinite, then since they all belong to $ \mathcal{F} $ then they have finite complement, hence $ \bigcup_{i=1}^n A_i^c $ and $ \bigcap_{i=1}^n A_i^c $ are finite as well, thus belongs to $ \mathcal{F} $. If the collection is not in any of the case above, then there is $ 1\leq j \leq n $ such that $ A_j $ is finite. Thus $ \bigcup_i A_i $ is finite, thus belongs to $ \mathcal{F} $. Being closed under finite intersection and complements implies being closed under finite union.
+		
+		\item No. Let $ A_n = \set{2n} $. Then $ A_n \in \mathcal{F} $ for all $ n\in\N $. However, $ \bigcup_n A_n \notin \mathcal{F} $ as it is neither finite nor has a finite complement.
+		
+		\item Yes. First observe that if $ A,B $ are both infinite with $ A^c, B^c $ finite (this $ A,B \in \mathcal{F} $), then $ A\cap B \neq\emptyset $. Otherwise, $ A^c \cup B^c = \N $ which implies that either of them is infinite which is a contradiction. Thus given $ A,B $, if both are finite then $ \prob(A\cup B) = \prob(A) + \prob(B) = 0 $ as $ A\cup B $ is also finite. If both are infinite, then based on our argument above then they are not disjoint, so the argument of additivity does not apply to them. However if WLOG $ A $ is finite and $ B $ is infinite and $ A\cap B = 0 $, then $ A\cup B $ is also infinite thus $ 1 = \prob(A\cup B) = \prob(A) + \prob(B) = 0 + 1 $.
+		
+		\item No. Let $ A_n = \set{n} $. Then 
+		\[ \prob(\bigcup_n A_n) = \prob(\N) = 1 \neq \sum_n \prob(A_n) = 0. \]
+	\end{enumerate}
+	
+\end{solution}
+
+\begin{proposition}
+	Let $ \Omega = \N $ and let $ \mathcal{F} $ be the collection of all subsets of $ \Omega $ that is \emph{countable} or has countable \emph{complement}. Then $ \mathcal{F} = \sigma(\mathcal{A}) $ where $ \mathcal{A} = \set{\set{1},\set{2},\cdots} $, i.e. the set of all singletons.
+\end{proposition}
+\begin{proof}
+	Let $ E \in \mathcal{F} $. First, note that the collection $ \mathcal{F} $ is a $\sigma\text{-algebra}$. Then, notice that $ \mathcal{F} $ contain $ \mathcal{A} $ as singletons are finite, hence countable. Since $ \sigma(\mathcal{A}) $ is the smallest $\sigma\text{-algebra}$ that contain $ \mathcal{A} $ then $ \sigma(\mathcal{A})\subset \mathcal{F} $. Let $ E \in \mathcal{F} $. Then $ E $ is either countable or has a countable complement. If $ E $ is countable then it can be written as a countable union of singletons in which each singleton contains one element of $ E $. Thus $ E \in \sigma(\mathcal{A}) $. If $ E^c $ is countable, then $ E^c $ can be written as a countable union of singleton of its element. By applying De Morgan's law $ E $ can be written as a countable union of the complements of singletons (which belong to $ \sigma(\mathcal{A}) $). Thus case also implies $ E \in \sigma(\mathcal{A}) $. Thus $ \mathcal{F} = \sigma(\mathcal{A}) $.
+\end{proof}
+
+\begin{problem}
+	Suppose that $ \Omega = [0,1] $ is the unit interval, and $ \mathcal{F} $ is the set of all subsets $  A $ such that either $ A $ or $ A^c $ is finite, and $ \prob $ is defined by $ \prob(A) = 0 $ of $ A $ is finite and $ \prob(A) = 1 $ if $ A^c $ is finite. 
+	\begin{enumerate}[(a)]
+		\item Is $ \mathcal{F} $ an algebra?
+		\item Is $ \mathcal{F} $ a $\sigma\text{-algebra}$?
+		\item Is $ \prob $ finitely additive?
+		\item Is $ \prob $ countably additive on $ \mathcal{F} $?
+	\end{enumerate}
+\end{problem}
+
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item Yes. Being closed under complement is immediate from the definition. Thus $ \emptyset, \Omega \in \mathcal{F} $. Let $ A,B \in\mathcal{F} $. Then if $ A,B $ are both finite, then $ A\cap B $ is also finite thus $ A\cap B \in \mathcal{F} $. If $ A,B $ are both infinite, then $ A^c, B^c $ are both finite, so it is $ A^c \cup B^c $. Being closed under complement it implies that $ A\cup B  \in \mathcal{F}$. If one of $ A,B $ is infinite and the other one is finite, then $ A \cap B $ is finite, hence $ A\cap B \in \mathcal{F} $. Thus $ \mathcal{F} $ is a $\sigma\text{-algebra}$.
+		\item No. Consider the collection $ \set{A_q}_{q \in \Q} $ where $ q \in A  $. Each of these sets are finite, hence $ A_q \in \mathcal{F} $ for all $ q \in \Q $. However $ \bigcup_q A_q $ is not finite and its complement is also not finite. Thus $ \mathcal{F} $ is not closed under countable union. 
+		\item Yes. First observe that if $ A,B \in \mathcal{F} $ both infinite, then their intersection can not be empty, otherwise $ A^c \cup B^c = [0,1] $ which means that at least one of them is infinite which is a contradiction. With this in mind let $ A,B \in \mathcal{F} $. If $  A,B $ both finite with empty intersection then $ 0 = \prob(A\cup B) = \prob(A) + \prob(B) = 0 + 0 $ as $ A\cup B $ is also finite. If WLOG $ A $ is infinite and $ B $ is finite and $ A\cup B = \emptyset$, then $ A\cup B $ is also infinite and we have $ 1 = \prob(A\cup B) = \prob(A) + \prob(B) = 0 + 1 $. Thus $ \prob $ is finitely additive.
+		\item Yes. First observe that we can not find any two $ A,B \in \mathcal{F} $ disjoint and infinite with empty intersection since then $ A^c\cup B^c = [0,1] $ that implies at least one of them is infinite. So let $ A_1,A_2,\cdots $ be a sequence of \emph{finite} sets in $ \mathcal{F} $. Then 
+		\[ 0 = \prob(\bigcup_i A_i) = \sum_i \prob(A_i) = 0. \]
+		In case if just one of $ A_i $ is infinite (no more than two can be infinite at the same time) then 
+		$ \bigcup_i A_i  $ is infinite and 
+		\[ 1 = \prob(\bigcup_i A_i) = \sum_i \prob(A_i) = 1.  \]
+	\end{enumerate}
+\end{solution}
+
+\begin{problem}
+	Suppose that $ \Omega =[0,1] $ is the unit interval, and $ \mathcal{F} $ is the set of all subsets $ A $ such that either $ A $ or $ A^c $ is countable (i.e. finite or countable finite), and $ \prob $ is defined by $ \prob(A) =0 $ if $ A $ is countable, and $ \prob(A) = 1 $ if $ A^c $ is countable.
+	\begin{enumerate}[(a)]
+		\item Is $ \mathcal{F} $ an algebra?
+		\item Is $ \mathcal{F} $ a $\sigma\text{-algebra}$?
+		\item Is $ \prob $ finitely additive?
+		\item Is $ \prob $ countably additive?
+	\end{enumerate}
+\end{problem}
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item Yes. Being closed under complement follows immediately from the definition. On the other hand, since $ \emptyset $ is finite, then $ \Omega $ (complement of the empty set) also belongs to $ \Omega $.  Let $ A,B \in \mathcal{F} $. If both are countable then $ A\cap B $ is also countable, thus $ A\cap B \in \mathcal{F} $. If for both their complement is countable, then $ A^c \cup B^c = (A\cap B)^c $ is countable. Thus $ A\cap B \in \mathcal{F} $. If one of them is countable, WLOG $ A $, then $ A\cap B $ is also countable, thus $ A\cap B \in \mathcal{F} $. Thus it is an algebra.  
+		\item Yes. Being closed under complement follows from the definition and from this it follows that $ \Omega \in \mathcal{F} $. Let $ E_1,E_2,\cdots $ be a sequence of sets in $ \mathcal{F} $. If at least one of them is countable, then $ \bigcap_i E_i $ is also countable hence belonging to $ \mathcal{F} $. If all is uncountable, then $ \bigcup_i E^c_i $ is countable. We can write $ \bigcup_i E^c_i = (\bigcap_i E_i)^c $ that is finite. Thus $ \bigcap+i E_i \in \mathcal{F} $. This shows that $ \mathcal{F} $ is closed under countable union. Being closed under union follows from being closed under intersection and complement. Thus $ \mathcal{F} $ is a $\sigma\text{-algebra}$.
+		\item We will show additivity for two sets and finite additivity will follow by induction. Let 
+	\end{enumerate}
+\end{solution}
+
+
+\begin{problem}
 	\label{prob:BeingSemiAlgebraIsImportant}
 	Let $ \Omega = \set{1,2,3,4} $, with $ \mathcal{F} $ the collection of all subsets of $ \Omega $. Let $ \mathbb{P} $ and $\mathbb{Q}$ be two probability measures on $ \mathcal{F} $ such that $ \mathbb{P}\set{1} = \mathbb{P}\set{2} = \mathbb{P}\set{3} = \mathbb{P}\set{4} = 1/4 $, and $ \mathbb{Q}\set{2} = \mathbb{Q}\set{4} = 1/2 $, extended to $ \mathcal{F} $ by linearity. Finally, let $ \mathcal{I}=\set{\emptyset,\Omega,\set{1,2},\set{2,3},\set{3,4},\set{1,4}} $.
 	\begin{enumerate}[(a)]
