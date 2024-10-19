@@ -156,7 +156,8 @@ In this chapter, I will include sporadic notes during my study of probability fr
 \end{solution}
 
 \begin{problem}
-	Suppose that $ \Omega =[0,1] $ is the unit interval, and $ \mathcal{F} $ is the set of all subsets $ A $ such that either $ A $ or $ A^c $ is countable (i.e. finite or countable finite), and $ \prob $ is defined by $ \prob(A) =0 $ if $ A $ is countable, and $ \prob(A) = 1 $ if $ A^c $ is countable.
+	\label{prob:countableAdditivityOfProbabilityOnSigmaAlg}
+	Suppose that $ \Omega =[0,1] $ is the unit interval, and $ \mathcal{F} $ is the set of all subsets $ A $ such that either $ A $ or $ A^c $ is countable (i.e. finite or countable), and $ \prob $ is defined by $ \prob(A) =0 $ if $ A $ is countable, and $ \prob(A) = 1 $ if $ A^c $ is countable.
 	\begin{enumerate}[(a)]
 		\item Is $ \mathcal{F} $ an algebra?
 		\item Is $ \mathcal{F} $ a $\sigma\text{-algebra}$?
@@ -168,8 +169,24 @@ In this chapter, I will include sporadic notes during my study of probability fr
 	\begin{enumerate}[(a)]
 		\item Yes. Being closed under complement follows immediately from the definition. On the other hand, since $ \emptyset $ is finite, then $ \Omega $ (complement of the empty set) also belongs to $ \Omega $.  Let $ A,B \in \mathcal{F} $. If both are countable then $ A\cap B $ is also countable, thus $ A\cap B \in \mathcal{F} $. If for both their complement is countable, then $ A^c \cup B^c = (A\cap B)^c $ is countable. Thus $ A\cap B \in \mathcal{F} $. If one of them is countable, WLOG $ A $, then $ A\cap B $ is also countable, thus $ A\cap B \in \mathcal{F} $. Thus it is an algebra.  
 		\item Yes. Being closed under complement follows from the definition and from this it follows that $ \Omega \in \mathcal{F} $. Let $ E_1,E_2,\cdots $ be a sequence of sets in $ \mathcal{F} $. If at least one of them is countable, then $ \bigcap_i E_i $ is also countable hence belonging to $ \mathcal{F} $. If all is uncountable, then $ \bigcup_i E^c_i $ is countable. We can write $ \bigcup_i E^c_i = (\bigcap_i E_i)^c $ that is finite. Thus $ \bigcap+i E_i \in \mathcal{F} $. This shows that $ \mathcal{F} $ is closed under countable union. Being closed under union follows from being closed under intersection and complement. Thus $ \mathcal{F} $ is a $\sigma\text{-algebra}$.
-		\item We will show additivity for two sets and finite additivity will follow by induction. Let 
+		\item Yes. We will show additivity for two sets and finite additivity will follow by induction. Let $ A,B \in \mathcal{F} $. If $ A,B $ both are disjoint countable then $ A\cup B $ is also countable. Thus $ 0= \prob(A\cup B) = \prob(A) + \prob(B) = 0+0 = 0 $. If $ A, B $ are both uncountable (i.e. $ A^c, B^c $ are countable) then $ A\cap B $ can not be non-empty, otherwise $ A^c\cup B^c = [0,1] $ which then implies that at least one of $ A^c $ or $ B^c $ be uncountable, which is a contradiction. When one of these sets is countable, WLOG $ A $, then $ A\cup B $ is also uncountable and we have $ 1 = \prob(A\cup B) = \prob(A) + \prob(B) = 1 + 0 $. Thus $ \prob $ is finitely countable.
+		\item Yes. Let $ A_1,A_2,\cdots $ be a sequence of disjoint sets in $ \mathcal{F} $. Then at most one set can be uncountable, otherwise they will fail to be disjoint (see the reasoning in part (c)). If non of them are uncountable, then their union is also countable (countable union of countable sets is countable). Thus $ 0 = \prob(\bigcup_i A_i) = \sum_i \prob(A_i) = 0 $. If one of them is uncountable, then the union is also uncountable and we will have $ 1 = \prob(\bigcup_i A_i) = \sum_i \prob(A_i) = 0 +\cdots + 0 + 1 + 0 + \cdots = 1 $. Thus $ \prob $ is additive on $ \mathcal{F} $.
 	\end{enumerate}
+\end{solution}
+
+\begin{problem}
+	For the example of \autoref{prob:countableAdditivityOfProbabilityOnSigmaAlg}, is $ \prob $ uncountably additive?
+\end{problem}
+\begin{solution}
+	No. Otherwise we can write $ \Omega = \bigcup_{x\in\Omega}\set{x} $. But we have
+	\[ 1 = \prob(\Omega) = \sum_{x\in\Omega}\set{x} = 0. \]
+\end{solution}
+
+\begin{problem}
+	Let $ \mathcal{F} $ be a $\sigma\text{-algebra}$, and write $ \abs{\mathcal{F}} $ for the total number of subsets in $ \mathcal{F} $. Prove that if $ \abs{\mathcal{F}}<\infty $, i.e. $ \mathcal{F} $  consists of just a finite number of subsets, then $ \abs{\mathcal{F}}=2^m $ for some $ m \in \N $. (\emph{Hint: Consider those non-empty subsets in $ \mathcal{F} $ which do not contain any other non-empty subset in $ \mathcal{F} $. How can all subsets in $ \mathcal{F} $ be build up from these particular subsets?}).
+\end{problem}
+\begin{solution}
+	Let $ \mathcal{A} $ be the collection of all non-empty sets in $ \mathcal{F} $ whose non of its subsets do not belong to $ \mathcal{F} $. Then for any $ E \in \mathcal{F} $ can be build up from these ``atom'' by union. For each atom there are two possibilities to be present in the union or not. Thus there are in total $ 2^m $ elements in $ \mathcal{F} $.
 \end{solution}
 
 
@@ -263,6 +280,72 @@ In this chapter, I will include sporadic notes during my study of probability fr
 \end{solution}
 
 
+\begin{problem}
+	Let $ \Omega = [0,1] $. Let $ \mathcal{I}' $ be the set of all half-open intervals of the form $ (a,b], $ for $ 0\leq a < b \leq 1 $, togheter with the sets $ \emptyset, \Omega $, and $ \set{0} $.
+	\begin{enumerate}[(a)]
+		\item Prove that $ \mathcal{I}' $ is s semialgebra. 
+		\item Prove that $ \sigma(\mathcal{I}') = \mathcal{B} $, i.e. that the $\sigma\text{-algebra}$ generated by this $ \mathcal{I}' $ is equal to the $\sigma\text{-algebra}$ generated by the $\sigma\text{-algebra}$ of (2.4.1) in Rosenthal.
+		\item Let $ \mathcal{B}'_0 $ be the collection of all finite disjoint unions of elements of $ \mathcal{I}' $. Is $ \mathcal{B}'_0 $ the same as the algebra $ \mathcal{B}_0 $ defined in (2.2.4) Rosenthal?
+	\end{enumerate}
+\end{problem}
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item By definition $ \mathcal{I}' $ contains $ \emptyset $ and $ \Omega $. To show being closed under intersection let $ A, B \in \mathcal{I}' $. If $ A,B $  are disjoint then $ A\cap B \in \mathcal{I'} $. However if $ A,B $ are not disjoint, then WLOG we can assume that $ A=(a_1,a_2], B = (b_1,b_2] $ where $ a_1 < b_1 < a_2 \leq b_2 $. Thus $ A\cap B = (b_1,a_2] $ which is also at $ \mathcal{I'} $. For the last property of a semialgebra, let $ A \in \mathcal{I'} $. We can assume $ A = (a,b] $ for $ 0\leq a<b \leq 1 $. Then $ A^c = [0,a] \cup (b,1] = \set{0}\cup (0,a] \cup (b,1] $ which is a finite disjoint union of elements of $ \mathcal{I'} $.
+		\item By (2.4.1) Rosenthal, $ \mathcal{B} $ is the smallest $\sigma\text{-algebra}$ of all intervals in $ [0,1] $ where the term intervals include all open, closed, half-open, intervals as well as the empty set, singletons, and the whole set $ [0,1] $. First, notice that $ \sigma(\mathcal{I'}) $ contains all of the intervals in $ [0,1] $. That is because by using complements, countable unions, as well as countable intersections one can construct any kind of intervals using the intervals of the type $ (a,b] $. Since $ \mathcal{B} $ is the smallest $\sigma\text{-algebra}$ containing $ \mathcal{I} $ thus $ \sigma(\mathcal{I})\subseteq \sigma(\mathcal{I}') $. To show the equality,  observe that $ \mathcal{I'} \subset \mathcal{I} $ thus $ \sigma(\mathcal{I'}) \subseteq \sigma(\mathcal{I}) $. These two inequalities implies that $ \sigma(\mathcal{I'}) = \sigma(\mathcal{I}) = \mathcal{B}$. 
+		\item No it is not. Since $ (1/3,1/2) \in \mathcal{B}_0 $ but not in $ \mathcal{B'}_0 $.
+	\end{enumerate}
+\end{solution}
+
+\begin{problem}
+	Let $ K $ be the Cantor set. Let $ D_n = K \oplus \frac{1}{n} $ be  a shifted Cantor set by $ 1/n $. Let $ B = \bigcup_n D_n $. 
+	\begin{enumerate}[(a)]
+		\item Draw a rough sketch of $ D_3 $.
+		\item What is $ \lambda(D_3) $?
+		\item Draw a rough image of $ B $.
+		\item What is $ \lambda(B) $?
+	\end{enumerate}
+\end{problem}
+\FloatBarrier
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item See figure below.
+		\item Since $ K \in \mathcal{B} $, then it is shift invariant, thus $ \lambda(K_3) = \lambda(K)  = 0 $.
+		\item See the figure below.
+		\item From the countable sub-additivity we have
+		\[ \lambda(B) = \lambda(\bigcup_n K_n) \leq \sum_n \lambda(K_n) = 0. \]
+	\end{enumerate}
+	\input{Images/CantorShifted.tex}
+	\FloatBarrier
+\end{solution}
+\begin{remark}
+	Note that $ K \oplus K = \bigcup_{x\in K}( K \oplus x) = [0,2] $. I.e. the set of all numbers that can be created by adding two Cantor numbers is all the numbers in $ [0,2] $. Note that the Cantor set has Lebesgue measure zero, however $ [0,2] $ has measure 2. That is because $ \bigcup_{x\in K}) $ is in fact an uncountable union of sets (since a Cantor set is uncountable).
+\end{remark}
+
+\begin{problem}
+	Let $ \Omega $ be a finite non-empty set, and let $ \mathcal{I} $ consist of all singletons in $ \Omega $, together with $ \emptyset $ and $ \Omega $. Let $ p: \Omega \to [0,1] $ with $ \sum_{\omega \in \Omega}p(\omega) = 1 $, and define $ \prob(\emptyset) = 0,\prob(\Omega) = 1 $, and $ \prob\set{\omega}=\prob(w) $ for all $ \omega \in \Omega $.
+	\begin{enumerate}[(a)]
+		\item Prove that $ \mathcal{I} $ is a semialgebra.
+		\item Prove that (2.3.2) and $ (2.3.3) $ are satisfied. 
+		\item Describe precisely the $ \mathcal{M} $ and $ \prob^* $ that result from applying Theorem 2.3.1 in Rosenthal.
+		\item Are these $ \mathcal{M} $ and $ \prob^* $ the same as those described in Theorem 2.2.1 in Rosenthal?
+ 	\end{enumerate}
+\end{problem}
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item By definition $ \mathcal{I} $ contains $ \emptyset $ and well as $ \Omega $. $ \mathcal{I} $ is also closed under finite intersection as the intersection of two singletons is either a singleton or the empty set, and the intersection of $ \Omega $ with any singleton is a singleton. Furthermore, the intersection of any singleton with empty set is the empty set that is contained in $ \mathcal{I} $. Finally, let $ E \in \mathcal{I} $. If $ E $ is either $ \Omega $ or the empty set, then it complement can trivially be written as the disjoint union of $ \emptyset $ or $ \Omega $ respectively. If $ E $ is a singleton, then $ E^c $ can be written as the disjoint union of the singleton of its elements. Thus $ \mathcal{I} $ is a semialgebra.
+		
+		\item To check $ (2.3.2) $ let $ A_1,\cdots,A_k \in \mathcal{I} $ disjoint with $ \bigcup_i A_i \in \mathcal{I} $. Then $ \bigcup_i A_i = \Omega $ the collection $ A_i $'s are all of the singletons. Thus 
+		\[ 1 = \prob(\bigcup_i A_i) = \prob(\Omega) = \sum_i \prob(A_i) = \sum_{\omega\in\Omega}\prob(\set{\omega}) = \sum_{\omega\in\Omega}p(\omega) = 1. \]
+		Thus $ 2.3.2 $ holds with equality
+		
+		\noindent To verify $ (2.3.3) $ let $ A,A_1,A_2,\cdots,A_k \in \mathcal{I} $ with $ A \subset \bigcup_i A_i $. If $ A $ is empty set, then (2.3.3) holds as $ 0 \leq a $ for all $ a\in [0,1] $. If $ A $ is $ \Omega $, then the the sets $ A_i $ are the sets of all singletons. Thus 2.3.3 holds as $ 1\leq 1 $. Lastly, if $ A $ is a singleton, then at least one of $ A_i $'s should be the same as $ A $. Then $ \prob(A) \leq \prob(A_1) + \cdots + \prob(A_j) +  \cdots + \prob(A_k) $ for some $ 0\leq j \leq n $. Since $ \prob(A_j) = \prob(A) $ then 2.3.3 holds.
+		
+		\item The collection $ \mathcal{M} $ will be the same as the power set of $ \Omega $. And the probability measure $ \prob^* $ will be give as
+		\[ \prob^*(A) = \sum_{\omega\in A} p(\omega). \]
+		
+		\item Although $ \mathcal{M} $ is the same as in theorem $ 2.3.1 $, but $ \prob^* $ is not the same. The probability measure defined in Theorem 2.3.1 is the uniform probability measure, where here it is not. The probability measure $ \prob^* $ is a more general one and will be the same as probability measure in Theorem 2.3.1 if we choose $ p(\omega) = 1/\abs{\Omega} $.
+	\end{enumerate}
+\end{solution}
 
 
 
