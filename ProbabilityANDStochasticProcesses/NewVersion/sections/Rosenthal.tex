@@ -385,7 +385,17 @@ In this chapter, I will include sporadic notes during my study of probability fr
 		\item Find a set $ A \in \mathcal{F} $ such that $ \prob(A) = 3/4 $.
 	\end{enumerate}
 \end{problem}
-
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item The set $ \Omega $ is 
+		\[ \Omega = \set{1,2}\times [0,1]. \]
+		The collection $ \mathcal{F} $ is given by
+		\[ \mathcal{F} = \set{\set{1}\times B: B \in\mathcal{B}}\quad \cup\quad \set{\set{2}\times B: B \in \mathcal{B}} \quad\cup\quad \set{\set{1,2}\times B: B \in \mathcal{B}}. \]
+		And $ \prob $ is given by
+		\[ \prob(\set{1}\times B) = \lambda(B)/3,\quad \prob(\set{2}\times B) = 2\lambda(B)/3,\quad \prob(\set{1,2}\times B) = \lambda(B). \]
+		\item One easy choice for such a set would be $ \set{1,2}\times(0,3/4) $.
+	\end{enumerate}
+\end{solution}
 
 
 \newpage
