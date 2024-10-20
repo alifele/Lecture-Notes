@@ -347,6 +347,45 @@ In this chapter, I will include sporadic notes during my study of probability fr
 	\end{enumerate}
 \end{solution}
 
+\begin{problem}
+	Let $ \prob $ and $ \mathbb{Q} $ be two probability measures defined on the same sample space $ \Omega $ and $\sigma\text{-algebra}$ $ \mathcal{F} $. 
+	\begin{enumerate}[(a)]
+		\item Suppose that $ \prob(A) = \mathbb{Q}(A) $ for all $ A \in \mathcal{F} $ with $ \prob(A) \leq 1/2 $. Prove that $ \prob = \mathbb{Q} $, i.e. that $ \prob(A) = \mathbb{Q}(A) $ for all $ A \in \mathcal{F} $.
+		\item Give an example where $ \prob(A) = \qrob(A) $ for all $ A \in \mathcal{F} $ with $ \prob(A)<1/2 $, such that $ \prob \neq \qrob $, i.e. that $ \prob(A) \neq \qrob(A) $ for some $ A \in \mathcal{F} $.
+	\end{enumerate}
+\end{problem}
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item Let $ A \in \mathcal{F} $ with $ \prob(A) > 1/2 $, hence $ \prob(A^c) \leq 1/2 $. Also, let $ E \in\mathcal{F} $ such that $ \prob(E)\leq 1/2 $. By definition (by using 2.3.7 or using the fact that $ \mathcal{F} $ is a $\sigma\text{-algebra}$ thus closed under intersection and complement) we can write
+		\[ \prob(A) = \prob(A \cap E) + \prob(A\cap E^c). \]
+		Observe that $ A\cap E \subseteq E $ thus by monotonicity $ \prob(A\cap E) \leq \prob(E) \leq 1/2 $. Further more, we can write $ \prob(A\cap E^c) = 1 - \prob(A^c \cup E) $. For the second term in the RHS we have
+		\[ \prob(A^c \cup E) = \prob(A^c) + \prob(E) - \prob(A^c\cap E). \]
+		Note that $ \prob(A^c)\leq 1/2 $ as well as since $ A^c\cap E \subset A^c $ thus by monotonicity $ \prob(A^c\cap E) \leq \prob(A^c) \leq 1/2 $. Thus
+		\[ \prob(A) = \prob(A\cap E) + 1 - \prob(A^c) - \prob(E) + \prob(A^c\cap E). \]
+		For all the terms in the RHS, since their measure with respect to $ \prob $ is less than oe equal to $ 1/2 $, thus $ \prob $ and $ \qrob $ agrees on them. Thus 
+		\[ \prob(A) = \qrob(A\cap E) + 1 - \qrob(A^c) - \qrob(E) + \qrob(A^c\cap E) = \qrob(A). \]
+		This completes the proof.
+		
+		\noindent \textbf{An easier solution}. Let $ A \in \mathcal{F} $ with $ \prob(A) > 1/2 $. Then $ \prob(A) = 1 - \prob(A^c) = 1 - \qrob(A^c) = \qrob(A) $, where we used the fact that $ \prob(A^c)\leq 1/2 $ thus $ \prob(A^c) = \qrob(A^c) $.
+		
+		\item Let $ \Omega =  \set{1,2} $ with $ \mathcal{F} $ being the power set of $ \Omega $. Then defined
+		\[ \prob(\emptyset) = 0, \quad \prob(\set{1}) = \prob(\set{2}) = 1/2, \quad \prob(\set{1,2}) = 1. \]
+		And
+		\[ \qrob(\emptyset) = 0, \quad \qrob(\set{1}) = 1/10, \quad \qrob(\set{2})=9/10, \quad \qrob(\set{1,2}) = 1. \]
+	\end{enumerate}
+\end{solution}
+\begin{remark}
+	The hypothesis in part (a) in question above means that $ \prob $ and $ \qrob $ on all of the sets that has measure less than or equal to 1/2 w.r.t $ \prob $, must agree on all of the element of $ \mathcal{F} $.
+\end{remark}
+
+\begin{problem}
+	Let $ (\Omega_1,\mathcal{F}_1,\prob_1) $ be Lebesgue measure on $ [0,1] $. Consider a second probability triple $ (\Omega_2, \mathcal{F}_2, \prob_2) $, defined as follows: $ \Omega_2 = \set{1,2} $, $ \mathcal{F}_2 $ consists of all subsets of $ \Omega_2 $, and $ \prob_2 $ is defined by $ \prob_2\set{1} = 1/3 $ and $ \prob_2\set{2} = 2/3 $, and additivity. Let $ (\Omega,\mathcal{F},\prob) $ be the product measure of $ (\Omega_1, \mathcal{F}_1, \prob_1) $ and $ (\Omega_2,\mathcal{F_2},\prob_2) $.
+	\begin{enumerate}[(a)]
+		\item Express each of $ \Omega, \mathcal{F} $ and $ \prob $ as explicitly as possible.
+		\item Find a set $ A \in \mathcal{F} $ such that $ \prob(A) = 3/4 $.
+	\end{enumerate}
+\end{problem}
+
 
 
 \newpage
