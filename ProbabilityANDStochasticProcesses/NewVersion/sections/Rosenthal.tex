@@ -400,14 +400,90 @@ In this chapter, I will include sporadic notes during my study of probability fr
 
 
 \section{Further Probabilistic Foundations}
+\begin{definition}
+	Let $ (\Omega,\mathcal{F},\prob) $ be a probability space and $ E_1,E_2 \in \mathcal{F} $ be two events. Then $ E_1 $ and $ E_2 $ are said to be independent events if and only if we have
+	\[ \prob(E_1\cap E_2) = \prob(E_1)\prob(E_2). \]
+	Another way to formulate this is to write
+	\[ \prob(E_1 | E_2) = \prob(E_1). \]
+\end{definition}
+\begin{remark}
+	The following diagram is very suggestive to make an intuition to see how does two independent events (i.e. sets) look like.
+	\input{Images/VanDiagramProb.tex}
+	\FloatBarrier
+	The intuition is that the proportion of $ A $ in the restricted world $ B $ (i.e. $ \prob(A|B) $) is the same as the proportion of $ A $ in the whole world. I.e.
+	\[ \prob(A|B) = \frac{\prob(A\cap B)}{\prob(B)} = \frac{\prob(A)}{\prob(\Omega)} = \frac{\prob(A)}{1} = \prob(A). \]
+\end{remark}
+
+
+
+\subsection{Solved Problems}
 \begin{problem}
 	Let $ X $ be a real-valued random variable defined on a probability triple $ (\Omega, \mathcal{F},\prob) $. Fill in the following blanks:
 	\begin{enumerate}[(a)]
 		\item $ \mathcal{F} $ is a collection of subsets of \blank.
 		\item $ \prob(A) $ is a well-defined element of \blank provided that $ A $ is an element of \blank.
-		\item $ \set{X\leq 5} $ is shorthand notation for the particular subset of \blank which is defined \blank.
+		\item $ \set{X\leq 5} $ is shorthand notation for the particular subset of \blank which is defined by \blank.
 		\item If $ S $ is a subset of \blank, then $ \set{X\in S} $ is a subset of \blank.
 		\item If $ S $ is a \blank subset of \blank, then $ \set{X \in S} $ must be a element of \blank.
 	\end{enumerate}
 \end{problem}
+\begin{solution}
+	$ \quad $
+	\begin{enumerate}[noitemsep]
+		\item $ \Omega $.
+		\item $ \R $, $ \mathcal{F} $.
+		\item $ \Omega $, $ \set{\omega\in \Omega: X(\omega)\leq 5} $.
+		\item $ \mathcal{B} $, $ \mathcal{F} $.
+		\item Borel, $ \R $, $\sigma\text{-algebra}$ $ \mathcal{F} $.
+	\end{enumerate}
+\end{solution}
+
+\begin{problem}
+	Let $ (\Omega, \mathcal{F},\prob) $ be Lebesgue measure on $ [0,1] $. Let $ A = (1/2,3/4) $ and $ B = (0,2/3) $. Are $ A $ and $ B $ independent events?
+\end{problem}
+\begin{solution}
+	Yes. It is easy to check that  $ \prob(A \cap B) = \prob(A) \prob(B) $ holds for $ A,B $ as above.
+\end{solution}
+
+
+\begin{problem}
+	Give an example of events $ A,B $, and $ C $, each of probability strictly between $ 0 $ and $ 1 $, such that 
+	\begin{enumerate}[(a)]
+		\item $ \prob(A\cap B) = \prob(A)\prob(B) $, $ \prob(A\cap C) = \prob(A)\prob(C) $, and $ \prob(B\cap C) = \prob(B)\prob(C)$; but it is not the case that $ \prob(A\cap B \cap C) = \prob(A)\prob(B)\prob(C) $.
+		\item $ \prob(A\cap B) = \prob(A)\prob(B), \prob(A\cap C) = \prob(A)\prob(C) $, and $ \prob(A\cap B\cap C) = \prob(A)\prob(B)\prob(C) $; but it is not the case that $ \prob(B\cap C) = \prob(B)\prob(C) $.
+	\end{enumerate}
+\end{problem}
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item Let $ \Omega = \set{a,b,c,d} $ and $ \prob $ a uniform discrete distribution on $ \Omega $. Let $ A = \set{a,b}, B = \set{a,c}, C = \set{a,d} $. Then we have 
+		\[ \prob(A\cap B) = \prob(A\cap C) = \prob(B\cap C) = \prob(\set{a})=\frac{1}{4} = \prob(A)\prob(B) = \prob(A)\prob(C) = \prob(B)\prob(C). \]
+		However, 
+		\[ \prob(A\cap B\cap C) = \prob(\set{a}) \neq \prob(A)\prob(B)\prob(C) = \frac{1}{8}. \]
+		\item Let $ \Omega = \set{1,2,3,4,5,6,7,8} $ and $ \prob $ a uniform discrete distribution on $ \Omega $. Define
+		\[ A = \set{1,2,3,4}, \quad B = \set{3,4,5,6}, \quad C = \set{1,3,5,6}. \]
+		Then we have $ \prob(A\cap B) = \prob(\set{3,4}) = \prob(A)\prob(B) = \frac{1}{4} $. Also $ \prob(A\cap C) = \prob(\set{1,3})=\prob(A)\prob(C) = \frac{1}{4} $. Furthermore $ \prob(A\cap B \cap C) = \prob(A)\prob(B)\prob(C) = \frac{1}{8} $. However $ \prob(B\cap C) = \prob(\set{3,5,6}) = \frac{3}{8} \neq \prob(B)\prob(C) = \frac{1}{4}$.
+	\end{enumerate}
+\end{solution}
+
+
+\begin{problem}
+	Suppose $ \set{A_n}\nearrow A $. Let $ f:\Omega\to \R $ be any function. Prove that $ \lim_{n\to\infty}\inf_{\omega\in A_n} f(\omega) = \inf_{\omega\in A}f(\omega) $.
+\end{problem}
+\begin{solution}
+	Since $ \set{A_n}\nearrow A $ then $ A_1\subseteq A_2\subseteq \cdots $ with $ \bigcup_n A_n = A $. Let $ f(A_i) \subset \R $ denote the image of set $ A_i $ under the map $ f $. Then we have $ f(A_1)\subseteq f(A_2) \subseteq \cdots  $. Thus from properties of the infimum we have $ \inf f(A_1) \geq \inf f(A_2) \geq \cdots $. Observe that $ A_i \subset A $ for all $ i\in \N $, thus $ \inf(A_i)\geq \inf(A) $ for all $ i\in \N $. Thus the sequence of real numbers $ \set{\inf f(A_n)} $ is a decreasing sequence bounded from below. By monotone convergence theorem we conclude that $ \lim_{n\to\infty}f(A_n) $ exists. Then the next step is to show that this limit is the same as $ \inf f(A) $. Let $ \epsilon>0 $ given. Then there is $ \alpha\in f(A) $ such that $ \alpha < \inf f(A) + \epsilon $. Because $ f(A) = f(\bigcup_n A_n) = \bigcup_n f(A_n) $, then $ \exists m \in \N $ such that $ \alpha \in f(A_m) $. Then $ \inf f(A_m) \leq \alpha $. Thus $ \inf f(A_m) \leq \inf f(A) + \epsilon  $. Since we can find such $ A_m $ for every $ \epsilon>0 $, and since $ \inf f(A_n) $ is a decreasing sequence bounded below, then by the definition of limit we get
+	\[ \lim_{n\to\infty} \inf_{A_n} f(A_n) = \inf_A f(A).  \]
+\end{solution}
+
+\begin{problem}
+	Let $ (\Omega, \mathcal{F},\prob) $ be a probability triple such that $ \Omega $ is countable, and $ \mathcal{F} = 2^\Omega $. Prove that it is impossible for there to exist a sequence $ A_1,A_2,\cdots \in \mathcal{F} $ which is \emph{independent}, such that $ \prob(A_i)=\frac{1}{2} $ for each $ i $.
+\end{problem}
+\begin{solution}
+	Let $ \omega \in \Omega $. Then define the sequence $ B_n $ as 
+	\[ B_n = \begin{cases}
+		A_n \qquad \omega \in A_n, \\
+		A_n^c \qquad \omega \notin A_n.
+	\end{cases} \]
+	Then 
+\end{solution}
+
 

@@ -1,0 +1,72 @@
+\begin{figure}[h!]
+	
+	\centering
+	% Pattern Info
+	
+	\tikzset{
+		pattern size/.store in=\mcSize, 
+		pattern size = 5pt,
+		pattern thickness/.store in=\mcThickness, 
+		pattern thickness = 0.3pt,
+		pattern radius/.store in=\mcRadius, 
+		pattern radius = 1pt}
+	\makeatletter
+	\pgfutil@ifundefined{pgf@pattern@name@_rptkzohuz}{
+		\pgfdeclarepatternformonly[\mcThickness,\mcSize]{_rptkzohuz}
+		{\pgfqpoint{0pt}{0pt}}
+		{\pgfpoint{\mcSize+\mcThickness}{\mcSize+\mcThickness}}
+		{\pgfpoint{\mcSize}{\mcSize}}
+		{
+			\pgfsetcolor{\tikz@pattern@color}
+			\pgfsetlinewidth{\mcThickness}
+			\pgfpathmoveto{\pgfqpoint{0pt}{0pt}}
+			\pgfpathlineto{\pgfpoint{\mcSize+\mcThickness}{\mcSize+\mcThickness}}
+			\pgfusepath{stroke}
+	}}
+	\makeatother
+	
+	% Pattern Info
+	
+	\tikzset{
+		pattern size/.store in=\mcSize, 
+		pattern size = 5pt,
+		pattern thickness/.store in=\mcThickness, 
+		pattern thickness = 0.3pt,
+		pattern radius/.store in=\mcRadius, 
+		pattern radius = 1pt}
+	\makeatletter
+	\pgfutil@ifundefined{pgf@pattern@name@_k41gami1g}{
+		\pgfdeclarepatternformonly[\mcThickness,\mcSize]{_k41gami1g}
+		{\pgfqpoint{0pt}{-\mcThickness}}
+		{\pgfpoint{\mcSize}{\mcSize}}
+		{\pgfpoint{\mcSize}{\mcSize}}
+		{
+			\pgfsetcolor{\tikz@pattern@color}
+			\pgfsetlinewidth{\mcThickness}
+			\pgfpathmoveto{\pgfqpoint{0pt}{\mcSize}}
+			\pgfpathlineto{\pgfpoint{\mcSize+\mcThickness}{-\mcThickness}}
+			\pgfusepath{stroke}
+	}}
+	\makeatother
+	\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
+	
+	\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+		%uncomment if require: \path (0,300); %set diagram left start at 0, and has height of 300
+		
+		%Shape: Rectangle [id:dp16467167448696318] 
+		\draw   (110,80) -- (270,80) -- (270,200) -- (110,200) -- cycle ;
+		%Shape: Circle [id:dp8792785092509503] 
+		\draw  [pattern=_rptkzohuz,pattern size=6pt,pattern thickness=0.75pt,pattern radius=0pt, pattern color={rgb, 255:red, 80; green, 227; blue, 194}] (150,140) .. controls (150,117.91) and (167.91,100) .. (190,100) .. controls (212.09,100) and (230,117.91) .. (230,140) .. controls (230,162.09) and (212.09,180) .. (190,180) .. controls (167.91,180) and (150,162.09) .. (150,140) -- cycle ;
+		%Shape: Rectangle [id:dp7768458786910091] 
+		\draw  [pattern=_k41gami1g,pattern size=6pt,pattern thickness=0.75pt,pattern radius=0pt, pattern color={rgb, 255:red, 189; green, 16; blue, 224}] (190,80) -- (270,80) -- (270,200) -- (190,200) -- cycle ;
+		
+		% Text Node
+		\draw (255.6,85.6) node [anchor=north west][inner sep=0.75pt]  [font=\footnotesize,color={rgb, 255:red, 0; green, 0; blue, 0 }  ,opacity=1 ]  {$A$};
+		% Text Node
+		\draw (157,132.4) node [anchor=north west][inner sep=0.75pt]  [font=\footnotesize,color={rgb, 255:red, 0; green, 0; blue, 0 }  ,opacity=1 ]  {$B$};
+		% Text Node
+		\draw (111,202.4) node [anchor=north west][inner sep=0.75pt]    {$\Omega $};
+		
+		
+	\end{tikzpicture}
+\end{figure}
