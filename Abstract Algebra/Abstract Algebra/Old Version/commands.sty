@@ -1,0 +1,163 @@
+\ProvidesPackage{commands}
+
+\usepackage{amsmath} % AMS Math Package
+\usepackage{amsthm} % Theorem Formatting
+\usepackage{amssymb}    % Math symbols such as \mathbb
+\usepackage{graphicx} % Allows for eps images
+\usepackage[dvips,letterpaper,margin=1in,bottom=0.7in]{geometry}
+\usepackage{commath}
+\usepackage{tensor}
+\usepackage{mathtools}
+\usepackage{pgfplots}
+\usetikzlibrary{arrows.meta}
+\usepackage{xcolor}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage{fullpage}
+\usepackage{enumerate}
+\usepackage[listings,skins,breakable]{tcolorbox}
+\tcbuselibrary{theorems}
+\usepackage{siunitx}
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
+
+
+\renewcommand{\proof}[1]{\underline{\emph{#1}}}
+\newcommand{\floor}[1]{\lfloor #1 \rfloor}
+
+\let\vaccent=\v % rename builtin command \v{} to \vaccent{}
+\renewcommand{\v}[1]{\ensuremath{\mathbf{#1}}} % for vectors
+\newcommand{\gv}[1]{\ensuremath{\mbox{\boldmath$ #1 $}}} 
+% for vectors of Greek letters
+\newcommand{\uv}[1]{\ensuremath{\mathbf{\hat{#1}}}} % for unit vector
+\newcommand{\avg}[1]{\left< #1 \right>} % for average
+\newcommand{\pdc}[3]{\left( \frac{\partial #1}{\partial #2}
+ \right)_{#3}} % for thermodynamic partial derivatives
+\let\baraccent=\= % rename builtin command \= to \baraccent
+\newcommand{\divides}{\phantom{i} \arrowvert \phantom{i}}
+\newcommand{\ndiv}{\nmid}
+\newcommand{\bicon}{\Leftrightarrow}
+\newcommand{\imply}{\Rightarrow}
+
+\newcommand{\Mod}[1]{\ (\mathrm{mod}\ #1)}
+\newcommand{\modd}[3]{#1 \equiv #2 \Mod{#3}}
+\renewcommand{\mod}[3]{#1 \stackrel{#3}{\equiv} #2}
+
+
+
+
+\newcommand{\sol}{\\ \\ \emph{Solution.}}
+\newcommand{\soln}{\emph{Solution.}}
+\newcommand{\pset}[1]{\mathcal{P}({#1})}
+\newcommand{\rel}{\mathrel{R}}
+\newcommand{\nrel}{\not \mathrel{R}}
+\newcommand{\Arg}[1]{\mathrm{Arg}\left({#1}\right)}
+\newcommand{\limi}[1]{\lim_{#1 \rightarrow \infty}}
+\newcommand{\limni}[1]{\lim_{#1 \rightarrow -\infty}}
+\newcommand{\rie}{\mathcal{R}}
+\newcommand{\intinf}{\int_{-\infty}^{\infty}}
+\newcommand{\infint}{\int_{-\infty}^{\infty}}
+
+\renewcommand{\=}[1]{\stackrel{#1}{=}} % for putting numbers above 
+\renewcommand{\emptyset}{\varnothing}
+\renewcommand{\H}{\mathcal{H}}
+
+%\dif is differential symbol
+%\od[n-th deriv]{f}{x}, n-th deriv can be left out for 1
+%\pd does same thing as above, for partial derivatives
+%adding t (ex. \tpd) will make it text style, d (ex. \dpd) will make it display style
+%\md will do mixed derivatives. ex. \md{f}{5}{x}{2}{y}{3}
+%\eval[optional argument]{first argument} is a command for the notation of an expression denoted by the first argument evaluated at a particular condi- tion. The value for the optional argument ranges from 0 to 4 with higher values resulting in larger delimiters. The default value for the optional argument is -1 which results in automatic sizing for the delimiters. For example, \eval{f(\epsilon)}_{\epsilon=0}
+%\enVert}[optional argument]{first argument}is a command which enclose the argument in double vert-bar delimiters.
+%\fullfunction{first argument}....{fifth argument}isacommandwhich nicely formats a function. The first argument denotes the function name, the second the domain and the third the image of the function. The forth is the parameter which is mapped to the expression denoted by argument five. E.g.:\fullfunction{f}{\mathbb R}{\mathbb R}{x}{\sqrt{x}}
+\newcommand{\xhat}{\hat{\v{x}}}
+\newcommand{\yhat}{\hat{\v{y}}}
+\newcommand{\zhat}{\hat{\v{z}}}
+\newcommand{\rhat}{\hat{\v{r}}}
+\newcommand{\shat}{\hat{\v{s}}}
+\newcommand{\phihat}{\hat{\bm{\phi}}}
+\newcommand{\thetahat}{\hat{\bm{\theta}}}
+
+
+\newcommand{\m}[1]{\begin{pmatrix}#1\end{pmatrix}}
+\newcommand{\paulix}{\begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}}
+\newcommand{\pauliy}{\begin{pmatrix} 0 & -i \\ i & 0 \end{pmatrix}}
+\newcommand{\pauliz}{\begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix}}
+\newcommand{\imatrix}{\begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}}
+\newcommand{\zmatrix}{\begin{pmatrix} 0 & 0 \\ 0 & 0 \end{pmatrix}}
+
+\providecommand{\fr}{\frac}
+\providecommand{\RR}{\mathbb{R}}
+\providecommand{\NN}{\mathbb{N}}
+\providecommand{\ZZ}{\mathbb{Z}}
+\providecommand{\QQ}{\mathbb{Q}}
+\providecommand{\CC}{\mathbb{C}}
+\providecommand{\II}{\mathbb{I}}
+\providecommand{\seq}{\subseteq}
+\providecommand{\e}{\epsilon}
+%
+\newtheorem{prop}{Proposition}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{axiom}{Axiom}[section]
+\newtheorem{p}{Problem}[section]
+\newtheorem{problem}{}
+\usepackage{cancel}
+\newtheorem{lem}{Lemma}[section]
+\theoremstyle{definition}
+\newtheorem{dfn}{Definition}
+
+
+\renewenvironment{sol}
+  {\begin{proof}[Solution.]}
+  {\end{proof}}
+\newenvironment{disproof}
+  {\begin{proof}[Disproof.]}
+  {\end{proof}}
+
+
+\newcommand{\heading}[1]{
+  \begin{tcolorbox}
+    \begin{center}
+    \begin{Large}
+      \textbf{Lecture Notes For:\ #1} \\
+      \vspace{5pt}
+    \end{Large}
+    \begin{large}
+          Ali Fele Paranj \\
+          alifele@student.ubc.ca \\
+          
+          \vspace{5pt}
+      \emph{\today}
+    \end{large}
+    \end{center}
+  \end{tcolorbox}
+  }
+
+\DeclareMathOperator{\arccosh}{arccosh}
+\DeclareMathOperator{\arcsinh}{arcsinh}
+\DeclareMathOperator{\arctanh}{arctanh}
+\DeclareMathOperator{\arcsech}{arcsech}
+\DeclareMathOperator{\arccsch}{arccsch}
+\DeclareMathOperator{\arccoth}{arccoth} 
+
+\newcommand{\Tr}{\mathrm{Tr}}
+\newcommand{\dyad}[2]{\lvert #1 \rangle \langle #2 \rvert}
+\newcommand{\ket}[1]{\lvert #1 \rangle}
+\newcommand{\bra}[1]{\langle #1 \rvert}
+\newcommand{\braket}[2]{\langle #1 \lvert #2 \rangle}
+\newcommand{\ip}[2]{\langle #1 \vert #2 \rangle}
+\newcommand{\mat}[1]{\begin{pmatrix} #1 \end{pmatrix}}
+\renewcommand{\abs}[1]{\lvert #1 \rvert}
+\newcommand{\dc}{\substack{DC \\ \longleftrightarrow \\ \phantom{o}}}
+
+\newtcolorbox{defbox}[1]{colback=red!5!, colframe=red!75!black,fonttitle=\bfseries, title=Definition:\ #1}
+\newtcolorbox{thmbox}[1]{colback=blue!5, colframe=blue!55!black, fonttitle=\bfseries, title=Theorem:\ #1}
+\newtcolorbox{lembox}[1]{colback=blue!5, colframe=blue!55!black, fonttitle=\bfseries, title=Lemma: #1}
+\newtcolorbox{corbox}[1]{colback=blue!5, colframe=blue!55!black, fonttitle=\bfseries, title=Corollary:\ #1}
+\newtcolorbox{propbox}[1]{colback=blue!5, colframe=blue!55!black, fonttitle=\bfseries, title=Proposition:\ #1}
+\newtcolorbox{axiombox}[1]{colback=green!5, colframe=green!35!black, fonttitle=\bfseries, title=Axiom:\ #1}
+\newtcolorbox{example}[1]{breakable, enhanced jigsaw, colback=gray!5, colframe=white!40!black, fonttitle=\bfseries, title=Example:\ #1}
+
+
+
+\newcommand{\DC}{\substack{DC \\ \longleftrightarrow \\ \phantom{o}}}

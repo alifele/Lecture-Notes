@@ -414,8 +414,30 @@ In this chapter, I will include sporadic notes during my study of probability fr
 	\[ \prob(A|B) = \frac{\prob(A\cap B)}{\prob(B)} = \frac{\prob(A)}{\prob(\Omega)} = \frac{\prob(A)}{1} = \prob(A). \]
 \end{remark}
 
+\begin{proposition}
+	\label{prop:IndependentEvents}
+	Let $ A,B $ be two independent events, i.e. $ \prob(A\cap B) = \prob(A) \prob(B) $. Then the pair of events, $ (A^c, B^c) $, $ (A^c,B) $, and $ (A,B^c) $ are also independent.
+\end{proposition}
+\begin{proof}
+	We start by showing that $ A^c, B $ are independent events. Observe that
+	\[ \prob(A^c\cap B) = 1 - \prob(A\cup B^c) = 1 - (\prob(B^c)+\prob(A\cap B)) = \prob(B) + \prob(A)\prob(B) = \prob(A^c) \prob(B). \]
+	Thus $ A^c $ and $ B $ are independent events. Similarly we can prove that $ A,B^c $ are independent events. To show that the event $ A^c, B^c $ are independent we have
+	\begin{align*}
+		\prob(A^c\cap B^c) &= 1 - \prob(A\cup B) = 1 - \prob(A) - \prob(B) + \prob(A\cap B) = \prob(A^c) - \prob(B) + \prob(A)\prob(B) \\
+		&= \prob(A^c)-\prob(B)(1-\prob(A)) = \prob(A^c)(1-\prob(B)) = \prob(A^c)\prob(B^c). 
+	\end{align*}
+	Thus $ A^c $ and $ B^c $ are independent.
+\end{proof}
 
-
+\begin{proposition}
+	\label{prop:SeqIndependentEvents}
+	Let $ A_1,A_2,\cdots $ be a sequence of independent events. Then the sequence of events $ B_1,B_2,\cdots $ are also independent where $ B_i $ is either equal to $ A_i $ or $ A_i^c $. In particular $ A_1^c, A_2^c,\cdots $ is a sequence of independent events.
+\end{proposition}
+\begin{proof}
+ 	Use the result of \autoref{prop:IndependentEvents} with Exercise 3.2.2 in Rosenthal.
+\end{proof}
+ 
+ 
 \subsection{Solved Problems}
 \begin{problem}
 	Let $ X $ be a real-valued random variable defined on a probability triple $ (\Omega, \mathcal{F},\prob) $. Fill in the following blanks:
@@ -483,7 +505,23 @@ In this chapter, I will include sporadic notes during my study of probability fr
 		A_n \qquad \omega \in A_n, \\
 		A_n^c \qquad \omega \notin A_n.
 	\end{cases} \]
-	Then 
+	Then by \autoref{prop:SeqIndependentEvents} the sequence of events $ B_n $ are also independent. and we have $ \prob(B_n)=1/2 $ for all $ n $. By construction we have $ \omega \in \bigcap_n B_n $. Thus 
+	\[ \prob(\set{\omega}) \leq \prob(\bigcap_n B_n) = \prod_n \prob(B_n) = \frac{1}{2^n} \]
+	Since this is true for all $ n \in \N $ then $ \prob(\set{\omega}) = 0 $ for all $ \omega \in \Omega $. However, since $ \Omega $ is countable we have $ \Omega = \bigcup_{\omega \in \Omega}\set{\omega} $ which is a disjoint countable union. By countable additivity of the probability measure we have
+	\[ 1 = \prob(\Omega) = \sum_{\omega\in\Omega}\prob(\omega) = 0,  \]
+	which is a contradiction.
 \end{solution}
+\begin{solution}[A second solution!]
+	Since $\mathbb{P}(A_i) = 1/2$ for all $i$, we have $\sum_i \mathbb{P}(A_i) = \infty$. Noting that $A_i$'s are independent then by Borel-Cantelli we have
+	
+	$$ \mathbb{P}(\{ A_n \ \text{i.o.} \}) = 1.$$
+	
+	Observe that $ \{ A_n \ \text{i.o.} \} \subseteq \Omega $, thus it is at most countable. So it can be written as a disjoint union of the singletons of its element. Applying the countable additivity of $\mathbb{P}$ will result in 1 = 0 which is a contradiction.
+\end{solution}
+
+\begin{problem}
+	Let $ (\Omega,\mathcal{F},\prob) $ be the uniform distribution on $ \Omega = \set{1,2,3} $ as in Example 2.2.2. Give an example of a sequence $ A_1,A_2,\cdots\in\mathcal{F} $ such that 
+	\[ \prob(\liminf_n A_n) < \liminf_n \prob(A_n) < \limsup_n \prob(A_n) < \prob(\limsup_n A_n). \]
+\end{problem}
 
 

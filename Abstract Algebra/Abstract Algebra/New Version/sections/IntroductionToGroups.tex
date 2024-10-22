@@ -1,0 +1,61 @@
+\chapter{Lee Abstract Algebra}
+
+\section{A Simple Example}
+
+\subsection{Solved Problems}
+
+\begin{problem}
+	In $ S_4 $ let $ \sigma = \begin{pmatrix} 1 & 2 & 3 & 4 \\ 3 & 1 & 4 & 2 \end{pmatrix} $ and $ \tau  = \begin{pmatrix} 1 & 2 & 3 & 4 \\ 3 & 4 & 1 & 2 \end{pmatrix} $. Calculate the followings.
+	\begin{enumerate}[(a)]
+		\item $ \sigma \tau $
+		\item $ \tau\sigma $
+		\item the inverse of $ \sigma $
+	\end{enumerate}
+\end{problem}
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item 
+		\[ \sigma\tau = \begin{pmatrix} 1 & 2 & 3 & 4 \\ 4 & 2 & 3 & 1 \end{pmatrix}. \]
+		\item 
+		\[ \tau \sigma = \begin{pmatrix} 1 & 2 & 3 & 4 \\ 1 & 3 & 2 & 4 \end{pmatrix}. \]
+		\item \[ \sigma^{-1} = \begin{pmatrix} 1 & 2 & 3 & 4 \\ 2 & 4 & 1 & 3 \end{pmatrix}. \]
+	\end{enumerate}
+\end{solution}
+
+\begin{problem}
+	In $ S_5 $, let $ \sigma = \begin{pmatrix} 1 & 2 & 3 & 4 & 5 \\ 5 & 3 & 2 & 1 & 4 \end{pmatrix} $ and $ \tau = \begin{pmatrix} 1 & 2 & 3 & 4 & 5 \\ 2 & 4 & 1 & 3 & 5\end{pmatrix} $. Calculate the following.
+	\begin{enumerate}[(a)]
+		\item $ \sigma\tau\sigma $
+		\item $ \sigma\sigma\tau $
+		\item the inverse of $ \sigma $
+	\end{enumerate}
+\end{problem}
+
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item 
+		\[ \sigma\tau\sigma = \begin{pmatrix} 1 & 2 & 3 & 4 & 5 \\ 4 & 5 & 1 & 3 & 2 \end{pmatrix}. \]
+		\item 
+		\[ \sigma \sigma \tau = \begin{pmatrix} 1 & 2 & 3 & 4 & 5 \\ 2 & 5 & 4 & 3 & 1 \end{pmatrix}. \]
+		\item 
+		\[ \inv{\sigma} = \begin{pmatrix} 1 & 2 & 3 & 4 & 5 \\ 4 & 3 & 2 & 5 & 1 \end{pmatrix}. \]
+	\end{enumerate}
+\end{solution}
+
+\begin{problem}
+	How many permutations are there in $ S_n $? How many of those permutation satisfy $ \alpha(2) = 2 $?
+\end{problem}
+\begin{solution}
+	There are $ n $ choices for $ \alpha(1) $, $ n-1 $ choices for $ \alpha(2) $, and so on. So there are in total $ n! $ elements in $ S_n $. Fixing the value of $ \alpha(2) = 2 $ will leave $ 4 $ possible values for $ \alpha(1) $, 3 possible values for $ \alpha(3) $, and so on. Thus there will be $ 4! = 24 $ permutations satisfying $ \alpha(2) = 2 $.
+\end{solution}
+
+\begin{problem}
+	Let $ H $ be the set of all permutations $ \alpha \in S_5 $ satisfying $ \alpha(2) =2 $. Which of the properties, closure, associativity, identity, and inverse does $ H $ enjoy under composition of functions?
+\end{problem}
+\begin{solution}
+	Closure is satisfied: Let $ \alpha,\beta \in H $. Then $ \alpha(\beta(2)) = \alpha(2) = 2 $ and also $ \beta(\alpha(2)) = \beta(2) = 2 $. Associativity is satisfied which follows from the axioms of the group. The identity of the group is in $ H $, which is given by
+	\[ e = \begin{pmatrix} 1 & 2 & 3 & 4 & 5 \\ 1 & 2 & 3 & 4 & 5\end{pmatrix}. \] 
+	Every element in $ H $ also has an inverse. Let $ \alpha \in H $. Let $ \tau \in S_5 $ be its inverse. We have
+	\[ \tau(2) = \tau(\alpha(2)) = e(2) = 2. \]
+	Thus $ \tau \in H $.
+\end{solution}
