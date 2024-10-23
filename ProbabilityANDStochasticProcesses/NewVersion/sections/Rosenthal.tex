@@ -448,7 +448,16 @@ In this chapter, I will include sporadic notes during my study of probability fr
  	Here, I will give a very intuitive explanation of the meaning of $ \limsup_n A_n $ as well as $ \limsup_n B_n $. Consider $ A_1,A_2,\cdots $ as sum lamps in a row that if $ w \in A_i $ then then $ i $th lamp turns on. Thus $ \limsup_n A_n $ are those elements in $ \Omega $ that if we evaluate its presence in the sequence of sets, a pattern will emerge where as you move further in the row of lamps you will still find a lamp that is on. Similarly for $ \limsup_n B_n $. However, the meaning of $ \omega \in (A_n\cap B_n) $ is that there is lamp position $ i $ such that this lamp is on for both $ A_n $ sequence and $ B_n $ sequence. Thus $ \limsup_n (A_n\cap B_n) $ is the set of all elements that if you evaluate its presence in the $ A_n $ sequence and $ B_n $ sequence, no matter how far you move in the sequence, you will still find spots where both lamps for $ A_i $ and $ B_i $ are on.
  \end{observation}
  
+ \begin{proposition}[Borel-Cantelli Lemma]
+ 	Let $ A_1,A_2,\cdots \in \mathcal{F} $.
+ 	\begin{enumerate}[(a)]
+ 		\item If $ \sum_n \prob(A_n) < \infty $, then $ \prob(\limsup_n A_n) = 0 $.
+ 		\item If $ \sum_n \prob(A_n) = \infty $, and the events are \emph{independent}, then $ \prob(\limsup_n A_n) = 1 $.
+ 	\end{enumerate}
+ \end{proposition}
+ 
 \subsection{Solved Problems}
+\[  \]
 \begin{problem}
 	Let $ X $ be a real-valued random variable defined on a probability triple $ (\Omega, \mathcal{F},\prob) $. Fill in the following blanks:
 	\begin{enumerate}[(a)]
@@ -591,3 +600,91 @@ In this chapter, I will include sporadic notes during my study of probability fr
 	\[ \prob(\limsup_n A_n) = \prob(\liminf_n A_n) = \prob(B) = \prob(C). \]
 \end{solution}
 
+
+\begin{problem}
+	Let $ \set{X_n} $ be independent random variables, with $ \prob(X_n = i) = 1/n $ for $ i=1,2,3,\cdots, n $. Compute $ \prob(X_n = 5\ i.o.) $, the probability that an infinite number of the $ X_n $ are equal to $ 5 $.
+\end{problem}
+\begin{solution}
+	Let $ A_n = \set{X_n = 5} $. Then by hypothesis $ \prob(A_n) = 0 $ for $ n < 5 $ and $ \prob(A_n) = 1/n $ for $ n \geq 5 $. Thus $ \sum_n \prob(A_n) = \infty $. As the random variables $ X_n $ are all independent, so is the events $ A_n $. Thus using the Borel-Cantelli Lemma we conclude that $ \prob(A_n\ i.o.) = 1 $.
+\end{solution}
+
+
+\begin{problem}
+	Let $ X $ be a random variable with $ \prob(X>0)>0 $. Prove that there exists $ \delta>0 $ such that $ \prob(X \geq \delta) > 0 $. (\emph{Hint: Use the continuity of the probability function})
+\end{problem}
+\begin{solution}
+	Let $ A = \set{X>0} $, and consider the events $ A_n = \set{X > 1/n} $. Observe that $ \set{A_n}\nearrow A $. The sequence of real numbers $ \set{\prob(A_n)} $ is an increasing sequence (by the monotonicity) and is converging to $ \prob(A) $ (by the continuity). Let $ \epsilon = \prob(A)/2 $. Then by the definition of the convergence of real numbers for all $ N>0 $ we have $ \epsilon < \prob(A_n) $ for all $ n>N $. Let $ \delta = 1/N $. This completes the proof.
+\end{solution}
+
+
+\begin{problem}
+	Let $ X_1,X_2,\cdots $ be defined jointly on some probability space $ (\Omega,\mathcal{F},\mathcal{P}) $, with $ \sum_{i=1}^{\infty}i^2\prob(i \leq X_n < i+1) \leq C <\infty $ for all $ n $. Prove that $ \prob(X_n \geq n\ i.o.) = 0 $.
+\end{problem}
+\begin{solution}
+	Observe that
+	\begin{align*}
+		C &\geq \sum_{i=1}^{\infty}i^2\prob(i\leq X_n < i+1) \\
+		&\geq \sum_{i=n}^{\infty}i^2\prob(i\leq X_n < i+1) \\
+		&\geq n^2 \sum_{i=n}^{\infty}\prob(i\leq X_n<i+1) \\
+		&= n^2 \prob(X_n \geq n).
+	\end{align*}
+	Thus we have $ \prob(X_n\geq n) \leq C/n^2 $. Since $ C/n^2 $ is summable, and the probability function is positive, then $ \prob(X_n \geq n) $ is also summable. I.e.
+	\[ \sum_n \prob(X_n \geq n) < \infty. \]
+	Using Borel-Cantelli lemma we then have
+	\[ \prob(X_n \geq n\ i.o.) = 0. \]
+\end{solution}
+
+
+\begin{problem}
+	Let $ \delta,\epsilon>0 $, and let $ X_1,X_2,\cdots $ be a sequence of independent non-negative random variables such that $ \prob(X_i \geq \delta) \geq \epsilon $ for all $ i $. Prove that with probability one, $ \sum_{i=1}^{\infty}X_i = \infty $. I.e. $ \prob(\sum_{i=1}^{\infty}X_i = \infty) = 1 $.
+\end{problem}
+\begin{solution}
+	Let $ A_n = \set{X_n \geq \delta} $. Since $ \prob(A_n)\geq\epsilon $ for all $ n $, then 
+	\[ \sum_n \prob(A_n) = \infty. \]
+	Since the random variables $ X_1,X_2,\cdots $ are independent, the events $ A_1,A_2,\cdots $ are also independent. Thus by Borel-Cantelli we have
+	\[ \prob(A_n\ i.o.) = 1. \]
+	We claim
+	\[ \limsup_n A_n \subseteq \set{\sum_n X_n = \infty}. \]
+	To see this let $ \omega\in \limsup_n A_n $. Then it means that $ \forall m > 0 $ there exists $ n_m > m $ such that $ \omega \in A_{n_m} $, or equivalently $ X_{n_m}(\omega) \geq \epsilon $. Considering the subsequence $ \set{X_{n_m}} $ we see that $ \sum_m X_{n_m}(\omega) = \infty $. Thus the inclusion above holds. By the monotonicity of the probability and using the result above 
+	\[ 1 = \prob(\limsup_n A_n) \leq \prob(\set{\sum_n X_n = \infty}). \]
+	Thus we conclude that 
+	\[ \prob(\set{\sum_n X_n = \infty}) = 1. \]
+\end{solution}
+
+\begin{problem}
+	Consider infinite, independent, fair coin tossing, and let $ H_n $ be the event that the $ n^\text{th} $ coin is heads. Determine the following probabilities.
+	\begin{enumerate}[(a)]
+		\item $ \prob(H_{n+1}\cap H_{n+2} \cap \cdots\cap H_{n+9}\ i.o.) $
+		\item $ \prob(H_{n+1}\cap H_{n+2}\cap \cdots\cap H_{2n}\ i.o.) $
+		\item $ \prob(H_{n+1}\cap H_{n+2}\cap \cdots \cap H_{n+2\log_2 n}\ i.o.) $
+		\item Prove that $ \prob(H_{n+1}\cap H_{n+2}\cap\cdots\cap H_{n+\log_2n}\ i.o.) $ must equal either 0 or 1.
+		\item Determine $ \prob(H_{n+1}\cap H_{n+2}\cap \cdots \cap H_{n+\log_2n} i.o.) $
+	\end{enumerate}
+\end{problem}
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item Let $ A_0 = H_1\cap\dots\cap H_{9}, A_1 = H_2\cap\cdots\cap H_{10}, A_2 = H_3\cap\cdots\cap H_{11}, A_3 = H_4\cap\cdots\cap H_{12} $, and so on. Then $ A_1,A_2,\cdots $ are not necessarily independent, but there is a subsequence $ A_0,A_{10},A_{20},\cdots $ that are independent. Observe that $ \prob(A_n) = 1/2^{10} $. Thus 
+		\[ \infty = A_0+A_{10}+A_{20}+\cdots \leq \sum_n \prob(A_n)  \]
+		 Thus $ \prob(A_{10k}\ i.o.) = 1 $. Since $ \set{A_{10k}\ i.o.} \subseteq \set{A_{k}\ i.o.} $, by monotonicity of probability $ \prob(A_{10k}\ i.o.)\leq\prob(A_k\ i.o.) $. This implies that $ \prob(A_k\ i.o.) = 1 $, i.e. \[ \prob(H_{n+1}\cap\cdots\cap H_{n+9}\ i.o.) = 1. \]
+		 \item Observe that $ \prob(H_{n+1}\cap\cdots\cap H_{2n}) = \frac{1}{2^n} $, which is summable.
+		 \[ \sum_n \prob(H_{n+1}\cap\cdots\cap H_{2n}) < \infty. \] 
+		 This implies that $ \prob(H_{n+1}\cap\cdots\cap H_{2n}) = 0 $.
+		 \item The probability $ \prob(H_{n+1}\cap\dots\cap H_{n+2\log_2n}) $ is approximately $ (\frac{1}{2})^{\log_2n^2} = \frac{1}{n^2} $ which is summable. Thus by Borel-Cantelli $ \prob(H_{n+1}\cap\cdots\cap H_{n+2\log_2n}\ i.o.) = 0 $.
+		 
+		 \item Since $ \set{H_{n+1}\cap\cdots\cap H_{n+\log_2n}} $ is a tail even, then by Kolmogorov zero-one law the probability is either zero or one.
+		 
+		 \item It is suggestive to write down some of the event explicitly. Let
+		 \begin{align*}
+		 	&A_2 = H_3,\ A_3=H_4,\\
+		 	& A_4=H_5\cap H_6,\ \cdots ,\ A_7 = H_8\cap H_9,\\
+		 	& A_8=H_9\cap H_{10}\cap H_{11},\ \cdots,\  A_{15}=H_{16}\cap H_{17}\cap H_{18} \\
+		 	& A_{16}=H_{17}\cap H_{18}\cap H_{19}\cap H_{20},\ \cdots,\  A_{31} = H_{32}\cap H_{33}\cap H_{34} \cap H_{35},\\
+		 	&A_{32}=H_{33}\cap H_{34}\cap H_{35}\cap H_{36}\cap H_{37},\ \cdots,\ A_{63}=H_{64}\cap H_{65}\cap H_{66}\cap H_{67}\cap H_{67}, \\
+		 	&\text{and so on.}
+		 \end{align*}
+		 Note that each $ A_{2^k} $ up to $ A_{2^{k+1}} $ we have probability $ \frac{1}{2^k} $. However, we can roughly find $ 2^k/k $ independent events among them. 
+		 Thus 
+		 \[ \infty = \sum_k \frac{2^k/k}{2^k} \leq \sum_n \prob(A_n). \]
+		 Thus $ \prob(A_n\ i.o.) = 1 $.
+	\end{enumerate}
+\end{solution}
