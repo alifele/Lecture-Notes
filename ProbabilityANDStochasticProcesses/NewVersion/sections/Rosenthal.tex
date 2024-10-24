@@ -688,3 +688,55 @@ In this chapter, I will include sporadic notes during my study of probability fr
 		 Thus $ \prob(A_n\ i.o.) = 1 $.
 	\end{enumerate}
 \end{solution}
+
+
+\section{Distribution of Random Variables}
+
+\begin{proposition}[Cumulative distribution function is right-continuous]
+	Let $ X $ be a random variable whose cumulative distribution function is defined as $ F_X(x) = \prob(X \leq x) $. Then $ F_X(x) $ is right-continuous.
+\end{proposition}
+\begin{proof}
+	Fix $ x \in \R $. Let $ \set{x_n} $ be any sequence that $ x_n \to x $ as $ n \to\infty $ and for all $ n $ $ x \leq x_n $. Observe that 
+	\[ \bigcap_n (-\infty,x_n] = (-\infty,x], \tag{\eighthnote}\]
+	and also 
+	\[ (-\infty,x_1] \supseteq (-\infty,x_2] \supseteq (-\infty,x_3] \supseteq \cdots. \tag{\twonotes}\]
+	Thus we have $ \set{(-\infty,x_n]}\downarrow (-\infty,x] $ as $ n\to\infty $. Since $ (\eighthnote) $ and $ (\twonotes) $ are both preserved by the pre-image $ \inv{X} $, so we also have
+	\[ \set{\inv{X}(-\infty,x_n]}\downarrow \inv{X}((-\infty,x]) \quad \text{as $ n\to\infty $}.\]
+	From continuity of probability we have
+	\[ \prob(X\leq x_n) \to \prob(X\leq x) \quad \text{as } n \to \infty. \]
+	Thus by the definition of cumulative distribution we have
+	\[ F_X(x_n) \to F_X(x) \quad \text{as }n\to\infty. \]
+\end{proof}
+\begin{remark}
+	Note that we can not do a similar argument to show that $ F_X(x) $ is left continuous. The obstacle is that if we choose $ \set{x_n} $ such that $ x_n\to x $ and for all $ n $ we have $ x_n \leq x $, then the union
+	\[ \bigcup_n(-\infty,x_n] \]
+	is not necessarily equal to $ (-\infty,x] $. For instance if we let $ x_n = x - 1/n $ then 
+	\[ \bigcup_n(-\infty,x_n] = (-\infty,x). \]
+\end{remark}
+
+
+\section{Inequalities and Convergence}
+\begin{proposition}[Markov's inequality]
+	Let $ X $ be a \emph{non-negative} random variable. Let $ \alpha > 0 $, then
+	\[ \prob(X\geq \alpha)\leq \frac{\E{X}}{\alpha} \]
+\end{proposition}
+
+\begin{remark}
+	Note that the random variable being \emph{non-negative} is the key for the inequality to hold.
+\end{remark}
+
+
+
+\subsection{Solved Problems}
+\begin{problem}
+	Give an example of a random variable $ X $ and $ \alpha > 0 $ such that $ \prob(X\geq\alpha) > \E{X}/\alpha $. (\emph{Hint: Obviously $ X $ can not be non-negative}). Where does the proof of the Markov inequality break down in this case?
+\end{problem}
+\begin{solution}
+	Consider $ (\Omega,\mathcal{F},\prob) $ where $ \Omega = \set{1,2,3,4} $ with uniform probability measure $ \prob $, and $ \mathcal{F} = 2^\Omega $. Define the random variable $ X: \Omega \to \R$ as 
+	\[ X(1) = -1,\ X(2)=-2,\ X(3)=3,\ X(4)=4. \]
+	It is easy to calculate
+	\[ \E{X} = (-1 -2 + 3 + 4) \cdot \frac{1}{4} = 1.  \]
+	However
+	\[ \prob(X\geq 3) = \prob(X = 3) + \prob(X=4) = \frac{1}{2}. \]
+	It is clear that the Markov inequality does not hold.
+\end{solution}
