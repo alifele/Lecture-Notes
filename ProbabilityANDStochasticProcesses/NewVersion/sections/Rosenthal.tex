@@ -725,6 +725,81 @@ In this chapter, I will include sporadic notes during my study of probability fr
 	Note that the random variable being \emph{non-negative} is the key for the inequality to hold.
 \end{remark}
 
+\begin{definition}[Almost Surely Convergence]
+	Let $ X_1,X_2,\cdots $ be a sequence of random variables. Then we say $ \set{X_n} $ is converging to the random variable $ X $ \emph{almost surely} if
+	\[ \prob(X_n \to X) = 1, \]
+	where the arrow notation show a point-wise convergence. 
+\end{definition}
+\begin{remark}
+	The almost sure convergence is when we have a point-wise convergence on a set of measure 1.
+\end{remark}
+
+\begin{definition}[Convergence in probability]
+	\label{def:convergInProb}
+	Let $ X,X_1,X_2,\cdots $ be random variables. We say $ X_n $ converges to $ X $ in \emph{probability} if for all $ \epsilon>0 $ we have
+	\[ \prob(\abs{X_n - X} \geq \epsilon) \to 0 \quad \text{as }  n\to\infty . \]
+\end{definition}
+
+\begin{observation}
+	For a given $ \epsilon $, the sequence of reals formed for each $ n $ by
+	\[ \prob(\abs{X_n - X} \geq \epsilon) \]
+	is very important. Its convergence (and the rate of convergence up to the summability of the sequence) will draw lines between the almost sure convergence and the convergence in probability. To The following proposition and corollary will make this more clear. 
+\end{observation}
+
+
+The idea of the proof of the following Lemma is very important and will show up again in the future.
+\begin{lemma}
+	\label{prop:infiniteOftenThenAlmostSurely}
+	Let $ \set{X_n} $ be a sequence of random variables and $ X $ a random variable. If $ \forall \epsilon>0 $ we have
+	\[ \prob(\abs{X_n-X} \geq \epsilon\ i.o.) = 1, \]
+	then 
+	\[ \prob(X_n \to X) = 1, \]
+	i.e. $ X_n $ converges to $ X $ almost surely.
+\end{lemma}
+\begin{proof}
+	Consider
+	\[ \prob(X_n\to X) = \prob(\bigcup_{r=1}^\infty \set{\abs{X_n-X}\leq \epsilon\ a.a.}) = 1 - \prob(\bigcup_{r=1}^\infty \set{\abs{X_n-X}\leq \epsilon\ a.a.} ). \]
+	From the countable sub-additivity of the probability measure we know that
+	\[ \prob(\bigcup_{r=1}^\infty \set{\abs{X_n-X}\leq \epsilon\ a.a.} ) \leq \sum_{r=1}^\infty\prob(\set{\abs{X_n-X}\leq \epsilon\ a.a.}) = 0. \]
+	Thus
+	\[ \prob(X_n\to X) = 1 - \prob(\bigcup_{r=1}^\infty \set{\abs{X_n-X}\leq \epsilon\ a.a.} ) = 1. \]
+\end{proof}
+
+\begin{remark}[Important!]
+	In the proof above we used the following important fact
+	\[ \boxed{\set{X_n \to X} = \bigcup_{r=1}^{\infty} \set{\abs{X_n-X}\leq 1/r\ a.a.}} \]
+	or equivalently
+	\[ \boxed{\set{X_n \to X} = \bigcup_{r\in\Q^+} \set{\abs{X_n-X}\leq q\ a.a.}} \]
+	This is literally the definition of the point wise convergence. To see this first remember that
+	\[ \set{\abs{X_n-X}\leq \epsilon\ a.a.} = \bigcap_{N=1}^\infty \bigcup_{n=N}^{\infty}\set{\abs{X_n - X} \leq \infty }. \]
+	So if we let $ \omega \in \set{X_n \to X} $ then from the definition of the convergence we know that $ \forall N \in \N $ we can find $ n>N $ such that $ \abs{Z_n(\omega) - Z(\omega)} \leq \epsilon $. I.e. by the definition of union and intersection
+	\[ \omega \in \bigcap_{N=1}^\infty \bigcup_{n=N}^{\infty}\set{\abs{X_n - X} \leq \infty. } \]
+	To show the converse let $ \omega \in \bigcup_{n=N}^{\infty}\set{\abs{X_n - X} \leq \infty. } $. So $ \forall N \in \N $ there exists $ n\leq N $ such that $ \omega \in \set{\abs{X_n - X}\leq \epsilon} $. I.e. $ \abs{X_n(\omega) - X(\omega)} \leq \epsilon  $
+	which is precisely the definition of the point wise convergence $ X_n(\omega) \to X(\omega)$.
+\end{remark}
+
+\begin{corollary}
+	Let $ \set{X_n} $ be a sequence of random variables and $ X $ be a random variable. Then if for all $ \epsilon>0 $
+	\[ \sum_n \prob(\abs{X_n-X}\geq \epsilon) < \infty, \]
+	then $ X_n $ converges to $ X $ almost surely.
+\end{corollary}
+\begin{proof}
+	Apply Borel-Cantelli along with \autoref{prop:infiniteOftenThenAlmostSurely}.
+\end{proof}
+
+\begin{summary}
+	\label{sum:ConvergenceInPropVsAlmsotSure}
+	Let $ X,X_1,X_2,\cdots $ be random variables. Consider the sequence of reals given by
+	\[ a_n =  \prob(\abs{X_n - X}\geq \epsilon). \]
+	If for any $ \epsilon>0 $ we have
+	\[ a_n \to 0 \]
+	as $ n\to\infty $ then by \autoref{def:convergInProb} $ X_n $ converges to $ X $ is probability. However, if the sequence is also summable for any $ \epsilon $, i.e.
+	\[ \sum_n a_n < \infty, \]
+	then $ X_n $ converges to $ X $ almost surely.
+\end{summary}
+
+
+
 
 
 \subsection{Solved Problems}
@@ -740,3 +815,181 @@ In this chapter, I will include sporadic notes during my study of probability fr
 	\[ \prob(X\geq 3) = \prob(X = 3) + \prob(X=4) = \frac{1}{2}. \]
 	It is clear that the Markov inequality does not hold.
 \end{solution}
+
+\begin{problem}
+	Suppose $ X $ is a non-negative random variable with $ \E{X} = \infty $. What does Markov's inequality can say in this case?
+\end{problem}
+\begin{solution}
+	Then the Markov's inequality will be trivially true,
+	\[ \prob(X\geq\alpha) \leq \infty. \]
+\end{solution}
+
+\begin{problem}
+	For general jointly defined random variables $ X $ and $ Y $ prove that $ \abs{\Corr(X,Y)}\leq 1 $. (\emph{Hint: Don't forget the Cauchy-Schwartz inequality}.)
+\end{problem}
+\begin{solution}
+	Recall the formula for $ \Corr $
+	\[ \Corr(X,Y) = \frac{\operatorname{Cov}(X,Y)}{\sqrt{\Var(X),\Var(Y)}}. \]
+	Note that $ \Var(X) = \operatorname{Cov}(X,X) $, and in general
+	\[ \operatorname{Cov}(X,Y)=\E{(X-\mu_X)(Y-\mu_Y)}. \]
+	From C-S inequality we have
+	\[\abs{ \operatorname{Cov}(X,Y)} = \E{\abs{(X-\mu_X)(Y-\mu_Y)}} \leq \sqrt{\E{(X-\mu_X)^2}\E{(Y-\mu_Y)^2}} = \sqrt{\Var(X) \Var(Y)}. \]
+	Thus it immediately follows that 
+	\[ \abs{\Corr(X,Y)} \leq 1. \]
+\end{solution}
+\begin{remark}
+	Note the similarities between $ \Corr $ can $ \cos $ as defined for vectors
+	\[ \cos(\theta) = \frac{a \cdot b}{\sqrt{(a\cdot a)(b\cdot b)}}. \]
+	for which we also have
+	\[ \abs{\cos\theta} \leq 1. \]
+\end{remark}
+
+\begin{problem}
+	Let $ \phi(x) = x^2 $.
+	\begin{enumerate}[(a)]
+		\item Prove that $ \phi $ is a convex function.
+		\item What does Jensen's inequality say for this choice of $ \phi $?
+		\item Where in the text have we already see the result of part (b)?
+	\end{enumerate}
+\end{problem}
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item This follows from 
+		\begin{align*}
+			\left(\lambda a^2 + (1-\lambda)b^2\right) - \left(\lambda a + (1-\lambda)b\right)^2 &= \lambda a^2 + (1-\lambda)b^2 - \lambda^2a^2 - (1-\lambda)^2b^2 - 2ab\lambda(1-\lambda)\\
+			&= \lambda a^2 (1-\lambda) + (1-\lambda)b^2 (1-(1-\lambda)) - 2ab\lambda(1-\lambda) \\
+			&= \lambda(1-\lambda)(a^2+b^2 - 2ab) = \lambda(1-\lambda)(b-a)^2 \geq 0.
+		\end{align*}
+		Thus it follows that
+		$$
+		\left(\lambda a^2 + (1-\lambda)b^2\right) \geq \left(\lambda a + (1-\lambda)b\right)^2
+		$$
+		
+		\item Jensen's inequality with this choice of $ \phi $ will result in 
+		\[ \E{X}^2 \leq \E{X^2}. \]
+		
+		\item From above and using the definition of variance we have
+		\[ \Var(X) = \E{X^2} - \E{X}^2 \geq 0. \]
+		Thus this implies that $ \Var(X) $ is always positive.
+
+	\end{enumerate}
+\end{solution}
+
+\begin{problem}
+	Let $ X_1,X_2,\cdots $ be a sequence of random variables, with $ \E{X_n} = 8 $ and $ \Var(X_n) = 1/\sqrt{n} $
+\end{problem}
+\begin{solution}
+	Using Chebychev's inequality we can write
+	\[ a_n = \prob(\abs{X_n - X}\geq \epsilon) \leq \frac{\Var(X_n)}{\epsilon^2} = \frac{1}{\sqrt{n}\epsilon^2}.  \]
+	We see that for any choice of $ \epsilon $ the sequence $ a_n \to 0 $ as $ n\to\infty $. Thus by definition the sequence converges to $ 0 $ is probability.
+\end{solution}
+\begin{remark}
+	Observe that the sequence $ a_n $ is not summable for any choice of $ \epsilon>0 $. Thus by \autoref{sum:ConvergenceInPropVsAlmsotSure} we see that $ X_n $ does \emph{not} converge to $ X $ almost surely.
+\end{remark}
+
+\begin{problem}
+	Give (with proof) an example of two discrete random variables having the same mean and the same variance, but which are not identically distributed.
+\end{problem}
+\begin{solution}
+	We demonstrate this by giving an explicit example. Let $ (\Omega,\mathcal{F},\prob) $ where $ \Omega = \set{1,2,3,4,5,6} $, $ \mathcal{F} = 2^\Omega $, and
+	\[ \prob(\set{1})=\prob(\set{2})=\frac{4}{20},\quad \prob(\set{3})=\prob(\set{4})=\prob(\set{5})=\prob(\set{6})=\frac{3}{20}. \]
+	Define the random variables $ X,Y $ as
+	\[ X(1)=-2,\ X(2)=2,\ X(3)=0,\ X(4)=0,\ X(5)=-1,\ X(6)=1, \]
+	and
+	\[ Y(1)=-1,\ Y(2)=1,\ Y(3)=-2,\ Y(4)=2,\ Y(5)=-1,\ Y(6)=1. \]
+	It is easy to check that
+	\[ \E{X} = 0, \qquad \E{Y} = 0. \]
+	And
+	\[ \Var(X) = \frac{38}{20},\qquad \Var(Y) = \frac{38}{20}. \]
+	Consider the following permutation
+	\[ 
+	\sigma = \begin{pmatrix}
+		-2 & -1 & 0 & 1 & 2 \\
+		0 & 1 & -2 & 2 & -1
+	\end{pmatrix},
+	 \]
+	 and define the function $ f $ be the extension of $ \sigma $ on $ \R $ where it assume the value 0 for all points in its domain other than $ \set{-2,-1,0,1,2} $. The we will have
+	 \[ f(X(1))=0,\ f(X(2))=-1,\ f(X(3))=-2,\ f(X(4))=-2,\ f(X(5))=1,\ f(X(6))=2, \]
+	 and
+	 \[ f(Y(1))=1,\ f(Y(2))=2,\ f(Y(3))=0,\ f(Y(4))=-1,\ f(Y(5))=1,\ f(Y(6))=2. \]
+	 It is easy to calculate
+	 \[ \E{f(X)} = \frac{-7}{20},\qquad \E{f(Y)} = \frac{18}{20}. \]
+	 The following diagram summarizes the whole idea!
+	 \input{Images/masstableDiagram.tex}
+	 Note that we can also find other Borel measurable function. For instance you can figure out a continuous function that behaves differently on positive numbers, vs. negative numbers.
+\end{solution}
+
+\begin{problem}
+	Prove that if $ \set{Z_n} $ converges to $ X $ almost surely, then for each $ \epsilon>0 $ we have $ \prob(\abs{Z_n - Z}\geq \epsilon\ i.o.) = 0 $.
+\end{problem}
+\begin{solution}
+	We start with
+	\begin{align*}
+		1 = \prob(Z_n\to Z) &= \prob(\bigcap_{q\in\Q^+}\set{\abs{Z_n-Z}<q\ a.a.}) \\
+		&= 1 - \prob(\bigcup_{q\in\Q^+}\set{\abs{Z_n-Z}\geqq\ i.o.})
+	\end{align*}
+	Thus
+	\[ \prob(\bigcup_{q\in\Q^+}\set{\abs{Z_n-Z}\geq\ i.o.}) = 0. \]
+	Observe that for all $ \epsilon>0 $
+	\[ \set{\abs{Z_n-Z}\geq\epsilon\ i.o.} \subseteq \bigcup_{q\in\Q}\set{\abs{Z_n-Z}\geq q\ i.o.}. \]
+	Thus by monotonicity of the probability function we will have
+	\[ \prob(\set{\abs{Z_n-Z}\geq\epsilon\ i.o.}) \leq \prob(\bigcup_{q\in\Q}\set{\abs{Z_n-Z}\geq q\ i.o.}) = 0. \]
+	So
+	\[  \prob(\set{\abs{Z_n-Z}\geq\epsilon\ i.o.}) = 0. \]
+\end{solution}
+
+
+\begin{problem}
+	Let $ X_1,X_2,\cdots $ be a sequence of random variables that are independent. Then prove that \[ X_n \to X \ a.s. \implies \sum_n \prob(\abs{X_n-X}>\epsilon) < \infty. \]
+\end{problem}
+\begin{solution}
+	We do by the proof by contrapositive. 
+	We want to proof 
+	$$ \exists \epsilon>0 \quad \sum_{n} \mathbb{P}(|X_n-X|>\epsilon) = \infty \implies P(X_n\to X) = 0 $$
+	
+	Since $X_n$'s are independent, then by Borel-Cantelli we have
+	\[ \mathbb{P}(|X_n-X|>\epsilon\ i.o.) = 1. \tag{1}. \]
+	This implies 
+	\[ \mathbb{P}(\bigcup_{q\in \mathbb{Q}^+} \{|X_n-X|>q\ i.o.\}) = 1. \tag{2} \]
+	(if this is not clear for you see the remark below)
+	
+	Thus
+	$$ \mathbb{P}(\bigcap_{r\in\mathbb{Q}^+}\{|X_n-X|\leq q\ a.a.\}) = 0. $$
+	
+	which is equivalent to 
+	$$ \mathbb{P}(X_n \to X) = 0. \qed $$
+\end{solution}
+\begin{remark}
+	To see why (1) implies (2) see the below:
+	$$\{|X_n-X|>\epsilon\ i.o.\} \subseteq \bigcup_{q\in \mathbb{Q}} \{|X_n-X|>q\ i.o.\}.$$
+	By monotonicity of the probability measure
+	$$ 1 = \mathbb{P}(\{|X_n-X|>\epsilon\ i.o.\}) \leq \mathbb{P}(\bigcup_{q\in \mathbb{Q}^+} \{|X_n-X|>q\ i.o.\}).$$
+	Thus 
+	$$ \mathbb{P}(\bigcup_{q\in \mathbb{Q}^+} \{|X_n-X|>q\ i.o.\}) = 1. $$
+\end{remark}
+
+\begin{problem}
+	Let $ X_1,X_2,\cdots $ be a sequence of independent random variable with $ \prob(X_n=3^n) = \prob(X_n = 3^{-n}) = \frac{1}{2} $. Let $ S_n = X_1+\cdots+X_n $.
+	\begin{enumerate}[(a)]
+		\item Compute $ \E{X_n} $ for each $ n $.
+		\item For $ n \in \N $, compute $ R_n $ defined as
+		\[ R_n = \sup\set{r\in\R : \prob(\abs{S_n}\geq r) = 1}, \]
+		i.e. the largest number such that $ \abs{S_n} $ is always at least $ R_n $.
+	\end{enumerate}
+\end{problem}
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item Observe that $ X_n $ is a simple random variable, thus
+		\[ \E{X_n} = \frac{1}{2}3^n - \frac{1}{2}3^{n} = 0. \]
+		
+		\item The value of $ R_n $ equal to the case where for $ S_n $ all the random variables $ X_1,X_2,\cdots, X_{n-1} $ assume their lowest value i.e. $ -3,-9,\cdots,-3^{n-1} $ respectively, and the random variable $ X_n $ assumes its largest value, i.e. $ 3^n $.
+		So we will have
+		\[ S_n = 3^n - (3+9+\cdots+3^{n-1}) = 3^n - \frac{3^n-3}{2} = \frac{3^n+3}{2}. \]
+	\end{enumerate}
+\end{solution}
+
+
+
+
+
+
