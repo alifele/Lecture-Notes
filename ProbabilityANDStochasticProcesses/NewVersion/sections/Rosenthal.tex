@@ -690,29 +690,31 @@ In this chapter, I will include sporadic notes during my study of probability fr
 \end{solution}
 
 
-\section{Distribution of Random Variables}
+\section{Expected Values}
+\subsection{Solved Problems}
+\begin{problem}
+	Let $ X $ be a random variable with finite mean, and let $ a\in \R $ be any real number. Prove that 
+	\[ \E{\max(X,a)} \geq \max(\E{X},a). \]
+	\emph{Hint: Consider separately the cases $ \E{X}\geq a $ and $ \E{X}<a $.}
+\end{problem}
+\begin{solution}
+	First observe that we can write
+	$$ X = X \mathds{1}_{X\geq a} + a \mathds{1}_{X<a}. $$
+	So by the linearity of the expectation we can write
+	\[\E{\max(X,a)} = \E{X\mathds{1}_{X\geq a}} + \E{a\mathds{1}_{X<a}}. \tag{\halfnote}\]
+	For the first term observe that 
+	\[ \E{X\mathds{1}_{X\geq a}} \geq \E{a\mathds{1}_{X\geq a}}, \tag{\quarternote} \]
+	while for the second term
+	\[ \E{a\mathds{1}_{X< a}} \geq \E{X\mathds{1}_{X< a}}. \tag{\eighthnote}\]
+	By ($ \quarternote $) and ($ \halfnote $) we get
+	\[ \E{\max(X,a)} \geq \E{a\mathds{1}_{X\geq a}} + \E{a\mathds{1}_{X<a}} = \E{a} = a. \]
+	And by ($ \eighthnote $) and ($ \halfnote $)
+	\[ \E{\max(X,a)} \geq \E{X\mathds{1}_{X< a}} + \E{X\mathds{1}_{X\geq a}} = \E{X}. \]
+	These two equations imply that
+	\[ \E{\max(X,a)} \geq \max(\E{X},a). \]
+\end{solution}
 
-\begin{proposition}[Cumulative distribution function is right-continuous]
-	Let $ X $ be a random variable whose cumulative distribution function is defined as $ F_X(x) = \prob(X \leq x) $. Then $ F_X(x) $ is right-continuous.
-\end{proposition}
-\begin{proof}
-	Fix $ x \in \R $. Let $ \set{x_n} $ be any sequence that $ x_n \to x $ as $ n \to\infty $ and for all $ n $ $ x \leq x_n $. Observe that 
-	\[ \bigcap_n (-\infty,x_n] = (-\infty,x], \tag{\eighthnote}\]
-	and also 
-	\[ (-\infty,x_1] \supseteq (-\infty,x_2] \supseteq (-\infty,x_3] \supseteq \cdots. \tag{\twonotes}\]
-	Thus we have $ \set{(-\infty,x_n]}\downarrow (-\infty,x] $ as $ n\to\infty $. Since $ (\eighthnote) $ and $ (\twonotes) $ are both preserved by the pre-image $ \inv{X} $, so we also have
-	\[ \set{\inv{X}(-\infty,x_n]}\downarrow \inv{X}((-\infty,x]) \quad \text{as $ n\to\infty $}.\]
-	From continuity of probability we have
-	\[ \prob(X\leq x_n) \to \prob(X\leq x) \quad \text{as } n \to \infty. \]
-	Thus by the definition of cumulative distribution we have
-	\[ F_X(x_n) \to F_X(x) \quad \text{as }n\to\infty. \]
-\end{proof}
-\begin{remark}
-	Note that we can not do a similar argument to show that $ F_X(x) $ is left continuous. The obstacle is that if we choose $ \set{x_n} $ such that $ x_n\to x $ and for all $ n $ we have $ x_n \leq x $, then the union
-	\[ \bigcup_n(-\infty,x_n] \]
-	is not necessarily equal to $ (-\infty,x] $. For instance if we let $ x_n = x - 1/n $ then 
-	\[ \bigcup_n(-\infty,x_n] = (-\infty,x). \]
-\end{remark}
+
 
 
 \section{Inequalities and Convergence}
@@ -975,6 +977,9 @@ The idea of the proof of the following Lemma is very important and will show up 
 		\item For $ n \in \N $, compute $ R_n $ defined as
 		\[ R_n = \sup\set{r\in\R : \prob(\abs{S_n}\geq r) = 1}, \]
 		i.e. the largest number such that $ \abs{S_n} $ is always at least $ R_n $.
+		\item Compute $ \lim_{n\to\infty}R_n/n $.
+		\item For which $ \epsilon>0 $ (if any) is it the case that $ \prob(\frac{1}{n}\abs{S_n}\geq \epsilon)\not\to 0? $
+		\item Why does this result not contradict the various laws of large numbers?
 	\end{enumerate}
 \end{problem}
 \begin{solution}
@@ -985,11 +990,183 @@ The idea of the proof of the following Lemma is very important and will show up 
 		\item The value of $ R_n $ equal to the case where for $ S_n $ all the random variables $ X_1,X_2,\cdots, X_{n-1} $ assume their lowest value i.e. $ -3,-9,\cdots,-3^{n-1} $ respectively, and the random variable $ X_n $ assumes its largest value, i.e. $ 3^n $.
 		So we will have
 		\[ S_n = 3^n - (3+9+\cdots+3^{n-1}) = 3^n - \frac{3^n-3}{2} = \frac{3^n+3}{2}. \]
+		
+		\item From what we had in part (b) we can see that
+		\[ \lim_{n\to\infty}\frac{R_n}{n} = \lim_{n\to\infty}\frac{3^n + 3}{2n} = \infty. \]
+		
+		\item There is no $ \epsilon>0 $ that works. That is because we know that $ \abs{S_n} \geq R_n $ almost everywhere. On the other hand, in part (b) we observed that $ R_n/n \to \infty$ as $ n\to\infty $. So for all $ \epsilon>0 $ the sequence of reals $ \prob(\abs{S_n}/n\geq \epsilon) $ will converge to zero.
+		
+		\item This does not contradicts any of the law of large number. That is because the variance of $ X_n $ is
+		\[ \Var(X_n) = \E{X^2} - \E{X}^2 = 3^n, \]
+		which does not remain finite as $ n\to\infty $.
 	\end{enumerate}
 \end{solution}
 
+\begin{problem}
+	Suppose $ \E{2^X}=4 $. Prove that $ \prob(X\geq 3)\leq 1/2 $.
+\end{problem}
+\begin{solution}[The first method]
+	We can start with
+	\[ \E{2^X} = \E{2^X\mathds{1}_{X\geq3}} + \E{2^X\mathds{1}_{X<3}} = 4. \]
+	For the first and the second terms we have the following bounds
+	\[ \E{2^X\mathds{1}_{X\geq3}} \geq 8\prob(X\geq 3), \]
+	So 
+	\[ 8\prob(X\geq 3) \leq \E{2^X\mathds{1}_{X\geq 3}} = 4 - \E{2^X\mathds{1}_{X<3}}. \]
+	This implies that 
+	\[ \prob(X\geq 3) \leq \frac{1}{2} - \E{2^X\mathds{1}_{X<3}} \leq \frac{1}{2}, \]
+	where we have used the fact that the expectation of a non-negative random variable is positive.
+\end{solution}
+\begin{remark}[Connection to the conditional expectation]
+	If one has already used the conditional expectation before, then they can recover the definition of it using the answer above. 
+	\[ \E{X\mathds{1}_B} = \E{X|B} \E{\mathds{1}_B} = \E{X|B}\prob(B).  \]
+	In fact the conditional expectation is a way to factor the expectation when the random variable is of the form $ X\mathds{1}_A $.
+\end{remark}
+\begin{solution}[The second method]
+	Define the random variable
+	\[ Y = 2^X. \]
+	Thus $ X = \log(Y) $, where $ \log $ is considered to be base 2 logarithm function. Thus
+	\[ \prob(X\geq 3) = \prob(\log(Y)\geq 3) = \prob(Y\geq 9) \leq \frac{\E{Y}}{9} \frac{4}{9}\leq \frac{4}{8} = \frac{1}{2}, \]
+	where we have used the Markov's inequality. Note that the random variable $ Y $ is non-negative and that is the reason we could use the Markov's inequality.
+\end{solution}
+
+\begin{problem}
+	Give examples of random variables $ Y $ with mean $ 0 $ and variance $ 1 $ such that
+	\begin{enumerate}[(a)]
+		\item $ \prob(\abs{Y}\geq 2) = 1/4 $.
+		\item $ \prob(\abs{Y}\geq 2) < 1/4 $.
+	\end{enumerate}
+\end{problem}
+\begin{solution}
+	For all of the examples below let $ ([0,1],\mathbb{B},\lambda) $ be the probability space.
+	\begin{enumerate}[(a)]
+		\item An easy example is
+		\[ X = 2\mathds{1}_{[0,1/8)} -2\mathds{1}_{(1/8,2/8]}. \]
+		The graph of this random variable would look like as the following.
+		\input{Images/graphOfRandomVariable1.tex}
+		\FloatBarrier
+		\item The following example is a straightforward one.
+		\[ X = 2\mathds{1}_{[0,1/16)} - 2\mathds{1}_{[1/16,2/16)} + \mathds{1}_{(2/16,6/16]} - \mathds{1}_{(6/16,10/16]}. \]
+		\input{Images/graphOfRandomVariable2.tex}
+	\end{enumerate}
+\end{solution}
+\begin{remark}
+	Note that from the Chebychev inequality we have
+	\[ \prob(\abs{Y - \mu_Y}\geq \alpha) \leq \frac{\Var(Y)}{\alpha^2}. \]
+	The problem above demonstrates the cases where the equality holds, and the strict inequality holds.
+\end{remark}
+
+\begin{problem}
+	Suppose $ Y $ is a random variable with finite mean $ \mu_Y $ and $ \Var(Y)=\infty $. What does Chebychev's inequality say in this case?
+\end{problem}
+\begin{solution}
+	The Chebychev's inequality states that for any random variable $ X $ we have
+	\[ \prob(\abs{X - \mu_X} \geq \alpha) \leq \frac{\Var(X)}{\alpha^2}. \]
+	When $ \Var(X) = \infty $, then the Chebychev's inequality will be the trivial inequality
+	\[ \prob(\abs{X - \mu_X}\geq \alpha) \leq \infty. \]
+\end{solution}
+
+
+\begin{problem}
+	Give (with proof) an example of a sequence $ \set{Y_n} $ of jointly defined random variables, such that as $ n\to\infty $ we have all of three
+	\begin{enumerate}[(i)]
+		\item $ Y_n/n $ converges to $ 0 $ in probability.
+		\item $ Y_n/n^2 $ converges to $ 0 $ with probability 1.
+		\item $ Y_n/n $ does \emph{not} converge to 0 with probability 1.
+	\end{enumerate}
+\end{problem}
+\begin{solution}
+	Let $ ([0,1],\mathcal{B},\lambda) $ be the probability space, and define the sequence of random variables $ \set{Y_n} $ given as
+	\[ Y_n = n\mathds{1}_{A_n}, \]
+	where $ A_n \in \mathcal{B} $ with $ \prob(A_n) = 1/n $. Then we will have
+	\[ Y_n/n = \mathds{1}_{A_n},\qquad Y_n/n^2 = \mathds{1}_{A_n}/n. \]
+	Then
+	\[ \prob(\abs{Y_n/n}\geq \epsilon) = 
+	\begin{cases}
+		0 \qquad \epsilon > 0\\
+		1/n \qquad 0<\epsilon\leq 1
+	\end{cases}, \qquad
+	\prob(\abs{Y_n/n^2}\geq \epsilon) = 0 \qquad \text{for $ n $ large enough.}
+	 \]
+	 Thus we can see that $ Y_n/n $ converges to 0 in probability, $ Y_n/n $ does not converge to 0 with probability one (as $ \prob(\abs{Y_n/n}\geq \epsilon) $ is not summable). Lastly, $ Y_n/n^2 $ converges to 0 with probability 1.
+\end{solution}
+
+
+\begin{problem}
+	Let $ r\in \N $. Let $ X_1,X_2,\cdots $ be independently distributed random variables having finite mean $ m $, which are $ r\text{-dependent} $, i.e. such that $ X_{k_1},X_{k_2},\dots,X_{k_j} $ are independent whenever $ k_{i+1}>k_i + r $ for each $ i $ (thus independent random variables are 0-dependent). Prove that with probability one $ \frac{1}{n}\sum_{i=1}^{n}X_i \to m $ as $ n\to\infty $. (\emph{Hint: break up the sum into $ r+1 $ different sums.})
+\end{problem}
+\begin{solution}
+	Let $ S_n = \frac{1}{n}\sum_{i=1}^{n}X_i $ represent the partial sums of the infinite sum. Let $ R = r+1 $. We are interested in the subsequence terms of the form $ S_{Rn} $. These terms can be written as
+	\begin{align*}
+		S_{nR} &= \frac{1}{R}\cdot\frac{1}{n}(X_1+X_{1+R}+X_{1+2R}+\cdots + X_{1+(n-1)R})\\
+		&+ \frac{1}{R}\cdot\frac{1}{n}(X_2+X_{2+R}+X_{2+2R}+\cdots + X_{2+(n-1)R}) \\
+		&\vdots \\
+		&+ \frac{1}{R}\cdot\frac{1}{n}(X_R+X_{R+R}+X_{R+2R}+\cdots + X_{R+(n-1)R}).
+	\end{align*}
+	Let
+	\[ Y_{i,n} = \frac{1}{R}\cdot\frac{1}{n}(X_i+X_{i+R}+X_{i+2R}+\cdots + X_{i+(n-1)R}). \]
+	Note that the terms in each $ Y_{i,n} $ are i.i.d. random variables by the hypothesis and all of them have mean $ n $, thus by the SLLN we have
+	\[ \prob(Y_{i,n}\to m) = 1 \qquad \forall i\in \N. \]
+	On the other hand, the decomposition of the sum above we can write
+	\[ S_{nR} = \frac{1}{R}\sum_{i=1}^{R}Y_{{i,n}}. \]
+	Each of the terms in the RHS goes to $ m $ with probability one, thus the LHS goes to $ Rm/R = m $ with probability 1.  
+\end{solution}
+\begin{remark}
+	This is a very clear generalization of the notion of the independent random variables. In this general notion the random variables are $ r\text{-dependent} $ if they are independent whenever they are $ r $ terms away from each other. This notion will be very useful in considering the systems who have an exponentially decaying memory through time.
+\end{remark}
 
 
 
+\section{Distribution of Random Variables}
+
+\begin{proposition}[Cumulative distribution function is right-continuous]
+	Let $ X $ be a random variable whose cumulative distribution function is defined as $ F_X(x) = \prob(X \leq x) $. Then $ F_X(x) $ is right-continuous.
+\end{proposition}
+\begin{proof}
+	Fix $ x \in \R $. Let $ \set{x_n} $ be any sequence that $ x_n \to x $ as $ n \to\infty $ and for all $ n $ $ x \leq x_n $. Observe that 
+	\[ \bigcap_n (-\infty,x_n] = (-\infty,x], \tag{\eighthnote}\]
+	and also 
+	\[ (-\infty,x_1] \supseteq (-\infty,x_2] \supseteq (-\infty,x_3] \supseteq \cdots. \tag{\twonotes}\]
+	Thus we have $ \set{(-\infty,x_n]}\downarrow (-\infty,x] $ as $ n\to\infty $. Since $ (\eighthnote) $ and $ (\twonotes) $ are both preserved by the pre-image $ \inv{X} $, so we also have
+	\[ \set{\inv{X}(-\infty,x_n]}\downarrow \inv{X}((-\infty,x]) \quad \text{as $ n\to\infty $}.\]
+	From continuity of probability we have
+	\[ \prob(X\leq x_n) \to \prob(X\leq x) \quad \text{as } n \to \infty. \]
+	Thus by the definition of cumulative distribution we have
+	\[ F_X(x_n) \to F_X(x) \quad \text{as }n\to\infty. \]
+\end{proof}
+\begin{remark}
+	Note that we can not do a similar argument to show that $ F_X(x) $ is left continuous. The obstacle is that if we choose $ \set{x_n} $ such that $ x_n\to x $ and for all $ n $ we have $ x_n \leq x $, then the union
+	\[ \bigcup_n(-\infty,x_n] \]
+	is not necessarily equal to $ (-\infty,x] $. For instance if we let $ x_n = x - 1/n $ then 
+	\[ \bigcup_n(-\infty,x_n] = (-\infty,x). \]
+\end{remark}
+
+\begin{proposition}
+	Let $ X $ and $ Y $ be two random variables (possibly defined on different probability triples). Then $ \mu_X = \mu_Y $ if and only if $ \E{f(X)} = \E{f(Y)} $ for all Borel-measurable $ f:\R \to \R $ for which either expectation is well-defined.
+\end{proposition}
+\begin{proof}
+	To show the $ \boxed{\Longrightarrow} $, using the change of variable theorem we see that
+	\[ \E{f(X)} = \int_\R f d\mu_X = \int_\R f d\mu_Y =  \E{f(Y)}. \]
+	To show the $ \boxed{\Longleftarrow} $, let $ B \in \mathcal{B} $, and let $ f = \mathds{1}_B $. Then 
+	\[ \E{f(X)} = \E{\mathds{1}_{B}(X)} = \E{\mathds{1}_{X\in B}} = \prob(X\in B) = \mu_X.  \]
+	with a similar reasoning we get $ \E{f(Y)} = \mu_Y $. Then since $ \E{f(X)} = \E{f(Y)} $,
+	\[ \mu_X = \mu_Y. \]
+\end{proof}
+
+
+\begin{corollary}
+	If $ X $ and $ Y $ are random variables with $ \prob(X=Y) = 1 $, then \[ \E{f(X)} = \E{f(Y)} \]
+	for all Borel-measurable $ f:\R \to \R $ for which either expectation is well-defined. 
+\end{corollary}
+\begin{proof}
+	We claim that $ \prob(X=Y) = 1 $ implies $ \mu_X = \mu_Y $. To see this let $ B \in \mathcal{B} $. Then
+	\begin{align*}
+		\mu_X (B) = \prob(\set{X\in B}) &= \prob(\set{X\in B}\cap\set{X=Y} \dot{\cup} \set{X\in B}\cap \set{X\neq Y}) \\
+		&=\prob(\set{X\in B}\cap\set{X=Y}) + \prob(\set{X\in B}\cap \set{X\neq Y})
+	\end{align*}
+	Note that $ \set{X\in B}\cap \set{X \neq Y} \subseteq \set{X \neq Y} $ thus from the monotonicity $ \prob(\set{X\in B}\cap \set{X \neq Y}) \leq \prob(\set{X\neq Y}) = 0 $. Thus
+	\[ \mu_X (B) = \prob(\set{X\in B}) = \prob(\set{X\in B}\cap\set{X=Y}) = \prob(\set{Y\in B}\cap\set{X=Y}) = \prob(\set{Y\in B}) = \mu_Y(B). \]
+	Now using the proposition above we get that
+	\[ \E{f(X)} = \E{f(Y)}. \]
+\end{proof}
 
 
