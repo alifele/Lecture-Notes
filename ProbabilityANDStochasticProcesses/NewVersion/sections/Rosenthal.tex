@@ -1170,3 +1170,207 @@ The idea of the proof of the following Lemma is very important and will show up 
 \end{proof}
 
 
+\subsection{Solved Problems}
+\begin{problem}
+	Let $ \mu $ have density $ 4x^3\mathds{1}_{0<x<1} $, and let $ \nu $ have density $ x/2\mathds{1}_{0<x<2} $.
+	\begin{enumerate}[(a)]
+		\item Compute $ \E{X} $ where $ \mathcal{L}(X) = \mu/3 + 2\nu/3 $.
+		\item Compute $ \E{Y^2} $ where $ \mathcal{L}(Y) = 1/6\mu + 1/3\delta_2 + 1/2\delta_5 $.
+		\item Compute $ \E{Z^3} $ where $ \mathcal{L}(Z) = 1/8\mu+1/8\nu + 1/4\delta_3 + 1/2\delta_4 $.
+	\end{enumerate}
+\end{problem}
+
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item Denote $ \mathcal{L}(X) $ with $ \eta $. Then by definition and then using the change of variable principle we have
+		\[ \E{X} = \int_\Omega X \prob(d\omega) = \int_\R x \eta(dx) = 1/3\int_\R  x \mu(dx) + 2/3\int_\R x \nu(dx)  \]
+		where for the last equality we have used the proposition 6.2.1 Rosenthal. Now using proposition 6.2.3 Rosenthal we can write
+		\[ \E{X} = 4/3\int_{0}^{1} x^4 \lambda(dx)  + 1/3\int_{0}^{2} x^2 \lambda(dx)  = 4/15 + 8/9 = 52/45. \]
+		where $ \lambda $ is the Lebesgue measure.
+		
+		\item Similar to the reasoning in part (a), we will get
+		\begin{align*}
+			\E{X^2} &= 1/6\int_\R x^2 \mu(dx) + 1/3\int_\R x^2 \delta_2(dx) + 1/2\int_R x^2 \delta_5(dx) \\
+			&= 2/3 \int_{0}^{1}x^5 \lambda(dx) + 1/3\int_{-\infty}^{+\infty} x^2\delta(x-2)\lambda(dx) + 1/2\int_{-\infty}^{+\infty} x^2\delta(x-5)\lambda(dx) \\
+			&= 2/18 + 4/3 + 25/2 = 251/18.
+		\end{align*}
+		
+		\item Similar to the part (a) we will get
+		\begin{align*}
+			\E{X^3} &= 1/8\int_\R x^3 \mu(dx) + 1/8\int_\R x^3\nu(dx) + 1/4\int_\R x^3 \delta_4(dx) + 1/2\int_\R x^3\delta_4(dx) \\
+			&= 1/2\int_{0}^{1}x^6\lambda(dx) + 1/16\int_{0}^{2}x^4\lambda(dx) + 1/4\int_{-\infty}^{+\infty}x^3\delta(x-3)\lambda(dx) + 1/2\int_{-\infty}^{+\infty} x^3 \delta(x-4) \lambda(dx)\\
+			&=1/14 + 32/80 + 27/4 + 32.
+		\end{align*}
+	\end{enumerate}
+\end{solution}
+
+\begin{problem}
+	Suppose $ \prob(Z=0)=\prob(Z=1)=\frac{1}{2} $, that $ Y\sim \mathcal{N}(0,1),$ and that $ Y $ and $ Z $ are independent. Set $ X=YZ $. What is the law of $ X $?
+\end{problem}
+\begin{solution}
+	Using the conditional probability (see the proposition below), and by letting $ B\in \mathbb{B} $ we can write
+	\[ \mu_X(B) = \prob(X\in B) = \prob(YZ\in B) = \prob(0\in B)\prob(Z=0) + \prob(Y\in B)\prob(Z=1) = \frac{\delta_0(B) + \mu_\mathcal{N}(B)}{2}. \]
+	Thus the law of $ X $ is given by
+	\[ \mu_X = \frac{\delta_0 + \mu_\mathcal{N}}{2}.\]
+\end{solution}
+\begin{observation}[Conditional probability and conditional expectation]
+	The notion of conditional probability and conditional expectation are so natural to work with that one often forgets what is the rigorous basis of these notions. Let $ B,C \in \mathcal{F} $ be two sets that partitions the samples space $ \Omega $. Then for any $ A\in\mathcal{F} $ we can write
+	\[ A =( A\cap B) \dot\cup (A \cap C).\]
+	Then using the countable additivity of the probability measure we can write
+	\[ \prob(A) = \prob(A\cap B) + \prob(A\cap C). \]
+	We can then define the notion of the conditional probability that enables us to factor the terms in RHS in some useful sense. Define
+	\[ \prob(A|B) = \prob(A\cap B)/\prob(B),\qquad \prob(A|C) = \prob(A\cap C)/\prob(C). \]
+	Then we can write
+	\[ \boxed{\prob(A) = \prob(A|B)\prob(B) + \prob(A|C)\prob(C).} \]
+	We can do the same thing with the notion of the indicator function that is a dual notion for the set theoretic operations we had above. Again, let $ B,C $ defined as above, and let $ X $ be any random variable. Then
+	\[ X = X \mathds{1}_B  + X \mathds{1}_C, \]
+	where we have used the fact that 
+	\[ \mathds{1}_B + \mathds{1}_C = 1 \quad \text{since } \Omega = B \dot\cup C. \]
+	Then 
+	\[ \E{X} = \E{X\mathds{1}_B} + \E{X\mathds{1}_C}. \]
+	Now we define the notion of the conditional expectation that enables us to factor the terms in the RHS. Define
+	\begin{align*}
+		&\E{X|B} = \E{X\mathds{1}_B}/\E{\mathds{1}_B} = \E{X\mathds{1}_B}/\prob(B),\\ 
+		&\E{X|C} = \E{X\mathds{1}_C}/\E{\mathds{1}_C} = \E{X\mathds{1}_C}/\prob(C). 
+	\end{align*}
+	Then we can write
+	\[ \boxed{\E{X} = \E{X|B}\prob(B) + \E{X|C}\prob(C).} \]
+\end{observation}
+
+\begin{problem}
+	Let $ X\sim \operatorname{Poisson}(5) $.
+	\begin{enumerate}[(a)]
+		\item Compute $ \E{X} $.
+		\item Compute $ \Var(X) $.
+		\item Compute $ \E{3^X} $. 
+	\end{enumerate}
+\end{problem}
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item To find $ \E{X} $ we can start with
+		\begin{align*}
+			\E{X} &= \sum_{n=0}^{\infty} n \frac{e^{-\lambda} \lambda^n}{n!} \\
+			&=e^{-\lambda} \sum_{n=1}^{\infty} \frac{\lambda^n}{(n-1)!} \\
+			&=\lambda e^{-\lambda} \sum_{n=1}^{\infty} \frac{\lambda^{n-1}}{(n-1)!}\\
+			&=\lambda e^{-\lambda} \sum_{n=0}^{\infty} \frac{\lambda^{n}}{(n)!}\\
+			&=\lambda e^{-\lambda} e^\lambda \\
+			&=\lambda,
+		\end{align*}
+		where we have used the fact that $ e^\lambda = \sum_{n=0}^{\infty}\lambda^n/n!. $
+		
+		\item To harvest the possible cancellations, we start with
+		\begin{align*}
+			\E{X(X-1)} &= \sum_{n=1}^{\infty} n(n-1) \frac{e^{-\lambda} \lambda^n}{n!} \\
+			&= e^{-\lambda} \sum_{n=2}^{\infty} \frac{\lambda^n}{(n-2)!} \\
+			&= \lambda^2 e^{-\lambda} \sum_{n=2}^{\infty} \frac{\lambda^{n-2}}{(n-2)!} \\
+			&= \lambda^2 e^{-\lambda} \sum_{n=0}^{\infty} \frac{\lambda^{n}}{n!}\\
+			&= \lambda^2 e^{-\lambda} e^\lambda \\
+			&= \lambda^2.
+		\end{align*}
+		Thus $ \E{X(X-1)} = \E{X^2}-\E{X} = \lambda^2 $, which implies
+		\[ \E{X^2} = \lambda_2 + \lambda. \]
+		Now using the formula for variance we will get
+		\[ \Var(X) = \E{X^2} - \E{X}^2 = \lambda^2 + \lambda - \lambda^2 = \lambda. \]
+		
+		
+		\item We can write
+		\[ \prob(3^X) = \sum_{n=0}^{\infty} 3^n \prob(X=n) = \sum_{n=0}^{\infty} 3^n \frac{e^{-\lambda}\lambda^n}{n!} = e^{-\lambda} \sum_{n=0}^{\infty} (3\lambda)^n/n! = e^{-\lambda}e^{3\lambda} = e^{2\lambda}. \]
+	\end{enumerate}
+\end{solution}
+
+\begin{problem}
+	Compute $ \E{X},\E{X^2} $ and ere $ \Var(X) $ where the law of $ X $ is given by
+	\begin{enumerate}[(a)]
+		\item $ \mathcal{L}(X) = \delta_1/2 + \lambda/2, $ where $ \lambda $ is Lebesgue measure on $ [0,1] $.
+		\item $ \mathcal{L}(X) = \delta_2/3 + 2\mu_\mathcal{N}/3 $, where $ \mu_\mathcal{N} $ is the standard normal distribution $ \mathcal{N}(0,1) $.
+	\end{enumerate}
+\end{problem}
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item For $ \E{X} $ we can write
+		\[ \E{X} = 1/2\int_{[0,1]}x\delta_1(dx) + 1/2\int_{[0,1]}x\lambda(dx) = 1/2\int_{[0,1]} x\delta(x-1)\lambda(dx) + 1/2\int_{[0,1]}x\lambda(dx) = 1/2+1+4 = 3/4.  \]
+		Similarly, for $ \E{X^2} $ we can write
+		\[ \E{X^2} = 1/2\int_{[0,1]}x^2\delta_1(dx) + 1/2\int_{[0,1]}x^2\lambda(dx) = 1/2\int_{[0,1]} x^2\delta(x-1)\lambda(dx) + 1/2\int_{[0,1]}x^2\lambda(dx) = 1/2 + 1/6 = 2/3. \]
+		And using the formula for $ \Var(X) $ we can compute
+		\[ \Var(X) = \E{X^2} - \E{X}^2 = 2/3 - 9/16 = 5/48. \]
+		\item Similar to part (a), for $ \E{X} $ we have
+		\[ \E{X} = 1/3\int_{[0,1]} x\delta_2(dx) + 2/3\int_\R x\mu_\mathcal{N}(dx) = 2/3 + 2/3\underbrace{\int_\R xf(x)\lambda(dx)}_{0} = 2/3, \]
+		where $ f(x)=1/2\sqrt{\pi}e^{-x^2/2} $ is the probability density function for the normal distribution. Also note that we have used the fact that mean of the normal distribution is zero. Similarly, for $ \E{X^2} $ we can write
+		\[ \E{X^2} = 1/3\int_{[0,1]} x^2\delta_2(dx) + 2/3\int_\R x^2\mu_\mathcal{N}(dx) = 4/3 + 2/3\underbrace{\int_\R x^2f(x) \lambda(dx)}_{1} = 4/3 + 2/3 = 2,  \]
+		where we have used the fact that for a random variable $ Z $ with the standard normal distribution $ \Var(Z) = \E{Z^2} = 1 $. And finally
+		\[ \Var(X) = \E{X^2} - \E{X}^2 = 2 - 4/9 = 14/9. \] 
+	\end{enumerate}
+
+\end{solution}
+
+\begin{problem}
+	Let $ X $ and $ X $ be independent, with $ X\sim\mathcal{N}(0,1) $, and with $ \prob(Z=1)=\prob(Z=-1)=1/2 $. Let $ Y = XZ $.
+	\begin{enumerate}[(a)]
+		\item Prove that $ Y \sim \mathcal{N}(0,1) $.
+		\item Prove that $ \prob(\abs{X} = \abs{Y}) = 1 $.
+		\item Prove that $ X $ and $ Y $ are not independent.
+		\item Prove that $ \Corr(X,Y) = 0 $.
+		\item It is sometimes claimed that if $ X $ and $ Y $ are normally distributed random variables with $ \Corr(X,Y)=0 $, then $ X,Y $ are independent. Is this correct?
+	\end{enumerate}
+\end{problem}
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item Let $ B \in \mathcal{B} $. Let $ \mu_Y $ be the distribution of $ Y $. Then
+		\[ \mu_Y(B) = \prob(Y \in B) = \prob(X\in B|Z = 1)\prob(Z=1) + \prob(-X\in B| Z=-1)\prob(Z=-1) = \mu_X/2 + \mu_X/2 = \mu_X = \mu_\mathcal{N},  \]
+		where we have used the fact that for the random variable $ X \sim \mathcal{N}(0,1)$ we have $ \mu_{X} = \mu_{-X}. $ To see why the random variables $ X $ and $ -X $ have the same law, observe that
+		\[ F_{-X}(x) = \prob(-X\leq x) = \prob(X > -x) = 1 - F_X(-x). \]
+		On the other hand since
+		\[ F_X(t) = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^{t} e^{-x^2/2} dx \]
+		and using the fact
+		\[ \frac{1}{\sqrt{2\pi}}\int_{-\infty}^{-t} e^{-x^2/2} dx  = \frac{1}{\sqrt{2\pi}}\int_{t}^{\infty} e^{-x^2/2} dx, \]
+		we get $ F_{-X}(t) = 1- F_X(t) $, which combining with the expression we found for $ F_{-X}(x) $ above we can see that
+		\[ F_{-X}(x) = F_X(x). \]
+		By proposition 6.0.2 Rosenthal, we can conclude that $ \mu_X = \mu_{-X} $.
+		
+		\item[(a')] There is also another easier solution to this. Let $ B\in\mathcal{B} $. Then
+		\begin{align*}
+			\mu_Y = \prob(Y \in B) &= \prob(XZ \in B) = \frac{1}{2} \prob(XZ \in B | Z = 1) + \frac{1}{2} \prob(XZ \in B | Z = -1) \\
+			&= \frac{1}{2} \prob(X \in B) + \frac{1}{2} \prob(X \in \bar{B}),
+		\end{align*}
+		where $ \bar{B} $ is the conjugate set to $ B $ where $ \bar{B} = \set{-x: x\in B} $. Since $ X $ has standard normal distribution, $ \prob(X\in B) = \prob(X\in\bar{B}) $. This comes from the fact that the density function for $ \mathcal{N} $ is an even function. So
+		\[ \prob(Y\in B) = \prob(X\in B). \]
+		
+		\item We can write
+		\begin{align*} 
+			\set{\abs{X}=\abs{Y}} = \set{\abs{X} = \abs{Y}}\cap\set{Z=1} \dot\cup \set{\abs{X} = \abs{Y}}\cap\set{Z=-1}
+		\end{align*}
+		Thus
+		\[ \prob(\abs{X}=\abs{Y}) = 1/2\prob(\abs{X}=\abs{X}) + 1/2 \prob(\abs{X} = \abs{-X}) = \prob(\abs{X}=\abs{X}) = 1. \]
+		
+		\item Let $ B \in \mathcal{B} $. Then since $ \mu_X = \mu_Y $ we have
+		\[ \prob(X\in B) = \prob(Y\in B). \]
+		On the other hand, 
+		\[ \set{X\in B}\cap \set{Y\in B} = \set{X\in B} \cap \set{XZ\in B} = \set{X\in B}\cap \set{Z=1}. \]
+		Since $ X,Z $ are independent
+		\[ \prob(\set{X\in B}\cap \set{Z=1}) = 1/2\prob(\set{X\in B}). \]
+		So we can see that $ \prob(\set{X\in B}\cap\set{Y\in B})$ is not equal to $ \prob(\set{X\in B})\prob(\set{Y\in B}) $ in general, unless $ \prob(B) = 0$. Thus $ X,Y $ are not independent. 
+		
+		\item By the formula for $ \Corr $ we have
+		\begin{align*}
+			\Corr(X,Y) &= \E{XY} - \E{X}\E{Y} = \E{X^2Z} - \E{X}\E{XZ} \\
+			&= \E{X^2}\E{Z} - \E{X}^2\E{Z} = \E{Z}\Var(X) = 0. 
+		\end{align*}
+		where we have used the fact that $ X,Z $ are independent, as well as $ X^2, Z $. Thus $ \E{XZ} = \E{X}\E{Z} $, and $  \E{X^2Z}=\E{X^2}\E{Z} $.
+		
+		\item No it is not. All the calculations above demonstrates a counterexample for this claim.
+	\end{enumerate}
+\end{solution}
+
+\begin{observation}
+	The conclusion in the part (e) of the question above is very important. In this example we can see two random variables $ X,Y $ which both of them has the same distribution, $ \mu_X = \mu_Y $ and their absolute value agrees almost everywhere $ \abs{X} = \abs{Y}\ a.e. $, and their correlation is zero $ \Corr(X,Y) = 0 $. However, we can see that they are \emph{not} independent.
+\end{observation}
+
+\begin{problem}
+	Let $ X $ be a random variable, and let $ F_X(x) $ be its cumulative distribution function. For fixed $ x\in\R $, we know by right-continuoity that $ \lim_{y\searrow x} F_X(y) = F_X(x) $.
+	\begin{enumerate}[(a)]
+		\item Give a necessary and sufficient condition that $ \lim_{y\nearrow x}F_X(y) = F_X(x) $.
+		\item More generally, give a formula for $ F_X(x) - (\lim_{y\nearrow x}F_X(y)) $, in terms of a simple property of $ X $.
+	\end{enumerate}
+\end{problem}
+
+
