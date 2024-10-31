@@ -18,3 +18,91 @@ We start this chapter by the Goursat's theorem which in nutshell states that for
 	{\color{red} \noindent TODO: TO BE WRITTEN}
 	
 \end{proof}
+
+
+
+\section{Solved Problems}
+
+\begin{problem}[From Stein]
+	Suppose $ f $ is continuously complex differentiable on $ \Omega $, and $ T\subset\Omega $ is a triangle whose interior is also contained in $ \Omega $. Apply Green's theorem to show that
+	\[ \int_T f(z)dz = 0. \]
+	This provides a proof of Goursat's theorem under the additional assumption that $ f' $ is continuous. \emph{Hint: Green's theorem says that if $ (F,G) $ is a continuously differentiable vector field, then}
+	\[ \int_T Fdx + Gdy = \int_{int(T)} \left( \frac{\partial G}{\partial x} - \frac{\partial F}{\partial y} \right) dx dy. \]
+	\emph{For appropriate $ F $ and $ G $, one can then use the Cauchy-Riemann equations.}
+\end{problem}
+\begin{solution}
+	Let $ T $ be parameterized by piece-wise smooth $ \gamma:[0,1] \to \R $, given by $ \gamma(t) = x(t) + iy(t) $. Let $ f = u+iv $. By the definition of the Contour integral
+	\begin{align*}
+		\int_T f(z)dz &= \int_{a}^{b} f(\gamma(t))\gamma'(t)dt = \int_{a}^{b} (u(x,y)+iv(x,y)) (x'(t)+iy'(t)) dt \\
+		&=\int_{a}^{b}((u+iv)x'(t) + (iu-v)y'(t)) dt = \int_T f dx + g dy,
+	\end{align*}
+	where
+	\[ f(u,v) = u+iv, \qquad g(u,v) = iu-v. \]
+	Using Green's theorem
+	\[ \int_T fdx+gdy = \int_{T^\circ} \left( \frac{\partial g}{\partial x} - \frac{\partial f}{\partial y} \right) dx dy  \]
+	where $ T^\circ $ denotes the interior of the triangle. Observe that
+	\[ \frac{\partial f}{\partial y} = u_y + i v_y,\qquad \frac{\partial g}{\partial x}=iu_x - v_x. \]
+	Thus
+	\[ \frac{\partial g}{\partial x} - \frac{\partial f}{\partial y} = - (u_y + v_x) + (u_x - v_y) = 0, \]
+	where we have used the fact that the Cauchy-Riemann equations hold (as $ f $ is complex differentiable.)
+	Thus
+	\[ \int_T f(z) dz = 0. \]
+\end{solution}
+
+\begin{observation}
+	In the question above, using the fact that $ f $ is complex differentiable, \emph{plus} the extra regularity condition, that $ f' $ is continuous, we can simply use the Green's theorem to prove a variant of the Goursat's theorem. The reason that we need the extra regularity is that for the Green's theorem, we need the partial derivatives of the components of the vector field to be continuous.
+\end{observation}
+
+
+\begin{problem}[From Stein]
+	Let $ \Omega $ be an open subset of $ C $ and let $ T\subset \Omega $ be a triangle whose interior is also contained in $ \Omega $. Suppose that $ f $ is a function holomorphic in $ \Omega $ except possibly at a point $ \omega \in T^\circ $, where $ T^\circ $ is the interior of the triangle. Prove that if $ f $ is bounded near $ w $, then
+	\[ \int_T f(z)dz  = 0. \]
+\end{problem}
+\begin{solution}
+	Consider the following figure
+	\input{Images/Chapter2Problem5.tex}
+	where we connect the point $ w \in T^\circ $ to the edges. On each of the line segments $ (v_i,w) $  we choose the points $ a_n,b_n,c_n $ respectively for $ i=1,2,3 $ such that $ a_n,b_n,c_n \to w $ as $ n \to \infty $. By the cancellation of the integral on the paths that have been traversed twice on opposite directions we can write
+	\[ \int_{T}f(z)dz = \int_{A_n} f(z)dz + \int_{B_n}f(z)dz + \int_{C_n}f(z)dz + \int_{T_n}f(z)dz,  \]
+	were $ A_n,B_n, $ and $ C_n $ are the tetragons as shown above, and $ T_n $ is the central triangle. Observe that the integration over each tetragon can further be broken down into two integral on two triangles, where by applying the Goursat's theorem it evaluates to zero. Thus the only remaining term will be
+	\[ \int_{T} f(z)dz = \int_{T_n}f(z)dz. \]
+	We can write
+	\[ \abs{\int_{T} f(z)dz} = \abs{\int_{T_n}f(z)dz} \leq \max_{z\in T_n}\abs{f(z)} \ell(T_n). \]
+	Since the function $ f $ is bounded around $ w $ then $ \max_{z\in T_n}\abs{f(z)} \leq C $ for some $ C\in \R $ and $ \ell(T_n)\to 0 $ as $ n\to\infty $, we will have
+	\[ \int_T f(z) dz = 0. \]
+\end{solution}
+
+
+\begin{problem}[From Stein]
+	Suppose $ f:\D \to \C $ is holomorphic. Show that the diameter $ d=\sup_{z,w\in\D}\abs{f(z)-f(w)} $ of the image of $ f $ satisfies
+	\[ 2\abs{f'(0)} \leq d. \]
+	Moreover, it can be show that the equality holds precisely when $ f $ is linear, $ f(z) = a_0 + a_1 z $. \emph{Hint: You can use the fact that $ 2f'(0) = \frac{1}{2\pi i}\int_{\abs{\xi}=r}\frac{f(\xi)-f(-\xi)}{\xi^2}d\xi $ whenever $ 0<r<1 $.}
+\end{problem}
+\begin{solution}
+	Using the Cauchy integral formula we can write
+	\[ f'(0) = \frac{1}{2\pi i}\int_{\abs{\xi}=r} \frac{f(\xi)}{\xi^2}d\xi = - \int_{\abs{\xi}=r} \frac{f(-\xi)}{\xi^2}d\xi, \]
+	where the second equality holds by a simple change of variable. Then we can write
+	\[ 2f'(0) = \frac{1}{2\pi i}\int_{\abs{\xi}=r}\frac{f(\xi)-f(-\xi)}{\xi^2} d\xi. \] 
+	Then
+	\begin{align*}
+		2\abs{f'(0)} &= \frac{1}{2\pi i}\abs{\int_{\abs{\xi}=r}\frac{f(\xi)-f(-\xi)}{\xi^2} d\xi} \\
+		&\leq \frac{1}{2\pi i}\int_{\abs{\xi}=r}\frac{\abs{f(\xi)-f(-\xi)}}{\abs{\xi^2}} d\xi\\
+		&\leq \frac{d}{2\pi} \int_{\abs{\xi}=r}\frac{1}{\abs{\xi}^2}d\xi \\
+		&\leq \frac{d}{2\pi} \frac{2\pi r}{r^2} = d/r. 
+	\end{align*}
+	This for all $ r \in (0,1) $ we have $ 2\abs{f'(0)}\leq d/r $. This implies
+	\[ 2\abs{f'(0)}\leq \inf_{r\in(0,1)}\frac{d}{r} = d. \]
+\end{solution}
+
+\begin{problem}[From Stein]
+	If $ f $ is holomorphic function on the strip $ -1<y<1 $ and $ x\in \R $ with
+	\[ \abs{f(z)}\leq A(1+\abs{z})^\eta,\qquad \text{$ \eta $ a fixed real number} \]
+	for all $ z $ in that strip, show that for each integer $ n\geq 0 $ there exists $ A_n\geq 0 $ so that 
+	\[ \abs{f^{(n)}(x)}\leq A_n(1+\abs{x})^\eta, \qquad \text{for all $ x\in\R $}. \]
+	\emph{Hint: Use the Cauchy inequalities.}
+\end{problem}
+\begin{solution}
+	Let $ x\in \R $. This point is in the strip where $ f $ is holomorphic. Consider the set $ \abs{z-x}=R $ that is a circle with radius $ R $ centered at $ x $. Then So using the Cauchy inequalities
+	\[ \abs{f^{(n)}(x)}\leq \frac{n!}{R^n}\sup_{\abs{z-x}=r} \abs{f(z)} \leq \frac{An!}{R^n} \sup_{\abs{z-x}=r}(1+\abs{z})^\eta \leq \frac{An!}{R^n}(1+\abs{x+R})^\eta\leq \frac{An!}{R^n}(1+\abs{x}+R)^\eta.  \]
+	By letting $ R=1/2 $ and using the fact that $ 3/2+\abs{x}\leq 3/2(1+\abs{x}) $, we will get
+	\[ \abs{f^{(n)}(x)} \leq \frac{An!}{(1/2)^n}\cdot(\frac{3}{2})^\eta (1+\abs{x})^\eta = A_n (1+\abs{x})^\eta \]
+\end{solution}

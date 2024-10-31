@@ -1371,6 +1371,23 @@ The idea of the proof of the following Lemma is very important and will show up 
 		\item Give a necessary and sufficient condition that $ \lim_{y\nearrow x}F_X(y) = F_X(x) $.
 		\item More generally, give a formula for $ F_X(x) - (\lim_{y\nearrow x}F_X(y)) $, in terms of a simple property of $ X $.
 	\end{enumerate}
+
 \end{problem}
+
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item A necessary and sufficient condition is $ \mu_X(\set{x}) = 0 $, where $ \mu_X $ is the law, or the distribution of the random variable $ X $.
+		\item The value of $ F_X(x) - (\lim_{y\nearrow x}F_X(y)) $ is precisely the value of $ \mu_X $ evaluated on the singleton $ \set{x} $. In other words
+		\[ F_X(x) - (\lim_{y\nearrow x}F_X(y)) = \mu_X(\set{x}). \]
+	\end{enumerate}
+\end{solution}
+
+\section{More Probability Theorems}
+
+\begin{observation}[Almost sure convergence and the convergence of the expected values]
+	Let $ X,X_1,X_2,\cdots $ be random variables, and assume that $ X_n\to X $ almost surely. Then the real sequence $ \E{X_n} $ \emph{does not} necessarily converge to $ \E{X} $ as $ n\to \infty $. One example is the following: Let $ X_n = \mathds{1}_{[0,1/n]} $. Then $ X_n\to 0 $ on pointwise on $ (0,1] $. So we can say that $ X_n\to  X $ almost surely on $ [0,1] $. However, a simple calculation reveals that $ \E{X_n} = 1 $ for all $ n $, however $ \E{X} = 0 $. 
+\end{observation}
+
+
 
 

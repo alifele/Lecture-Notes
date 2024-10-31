@@ -1,0 +1,330 @@
+\documentclass[10pt,a4paper,twocolumn]{article}
+\usepackage{commands}
+\usepackage{placeins}
+\usepackage{minted}
+
+\usepackage{natbib} 
+%\setcitestyle{authoryear, open={([},close={)]}}
+%\setcitestyle{numbers,square}
+
+
+\title{The Duality Between (Scalar)}
+\author{Ali Fele-Paranj}
+
+\begin{document}
+	\maketitle
+	
+	\section{Introduction}
+	In this document, we explore the analogies between vector calculus in continuum settings and graph-based flow analysis. Specifically, we delve into the concepts of gradient, divergence, and curl on graphs, as well as the role of Graham's cohomology in characterizing loops and flows in networks.
+	
+	\section{Gradient, Divergence, and Laplacian Operators}
+	In both continuum and graph settings, we define various operators to analyze scalar and vector fields. These operators have close analogies in both domains.
+	
+	\subsection{Continuum Setting}
+	In continuum space (e.g., $\mathbb{R}^n$), we define:
+	\begin{itemize}
+		\item \textbf{Scalar field:} A function \( f \colon \mathbb{R}^n \rightarrow \mathbb{R} \) that assigns a scalar value to each point in space.
+		\item \textbf{Vector field:} A function \( F \colon \mathbb{R}^n \rightarrow \mathbb{R}^n \) that assigns a vector to each point in space.
+		\item \textbf{Gradient} \( \nabla \): Converts a scalar field to a vector field. The gradient of \( f \) is defined as \( \nabla f \), which points in the direction of maximum increase of \( f \).
+		\item \textbf{Divergence} \( \text{div} \): Converts a vector field to a scalar field, measuring the net flux exiting or entering a region. For a vector field \( F \), \( \text{div} \, F \) is defined as the sum of partial derivatives \( \sum_{i} \frac{\partial F_i}{\partial x_i} \).
+	\end{itemize}
+	
+	In this setting, the Laplacian operator, \( \Delta = \text{div} \nabla \), acts on scalar fields:
+	\[
+	\text{div}(\nabla f) = \Delta f
+	\]
+	where \( \Delta f \) measures the "smoothness" or rate of change of \( f \) across the space. Additionally, we have:
+	\[
+	\text{curl}(\nabla f) = 0
+	\]
+	indicating that gradients are \textit{exact fields} with no circulation around any point, a property central to cohomological interpretation.
+	
+	\subsection{Graph Setting}
+	For a graph with nodes and edges:
+	\begin{itemize}
+		\item \textbf{Gradient operator} \( \nabla \): Maps scalar functions on nodes (e.g., pressure or potential) to functions on edges (e.g., flow along edges).
+		\item \textbf{Adjoint gradient (Divergence)} \( \nabla^* \): Converts flows back into node-based values, effectively aggregating flow differences across edges.
+	\end{itemize}
+	
+	The graph \textbf{Laplacian} operator, defined as \( \nabla^* \nabla \), is often expressed as:
+	\[
+	L = I - P
+	\]
+	where \( I \) is the identity matrix and \( P \) is the Markov (or transition) operator, describing a random walk on the graph. This formulation relates to the "smoothness" of functions over the graph structure.
+	
+	\section{Boundary and Coboundary Operators}
+	In both topology and graph theory, boundary operators help describe the structure and relationships of cycles.
+	
+	\subsection{Simplices and Boundaries}
+	A \textbf{simplex} represents a fundamental building block in space. For instance:
+	\begin{itemize}
+		\item A \textit{0-simplex} is a point.
+		\item A \textit{1-simplex} is a line segment between two points.
+		\item A \textit{2-simplex} is a triangle formed by three points.
+	\end{itemize}
+	
+	The \textbf{boundary operator} \( \partial \) maps an \( n \)-dimensional simplex to its \((n-1)\)-dimensional boundary simplices. In graphs, this operator captures the notion of flux or flow across nodes.
+	
+	\subsection{Coboundary Operator}
+	The \textbf{coboundary operator} \( \delta \), dual to the boundary operator, maps cochains (functions on simplices) to another cochain in a higher dimension. In graphs, this captures the idea of "change" along edges, forming the basis for defining differential forms and cohomology.
+	
+	\section{Graham's Cohomology and Loops in Networks}
+	In network theory, \textbf{loops} or \textbf{cycles} are collections of edges forming closed paths. Graham's cohomology classifies cycles based on their ability to carry non-exact, harmonic flows, identifying loops that cannot be represented by a scalar potential.
+	
+	\subsection{Exact and Non-Exact Chains}
+	Exact chains have no boundary, analogous to closed fields where the \textit{curl of the gradient} is zero. In graph cohomology:
+	\begin{itemize}
+		\item Flows derived from a scalar potential lie in the \textbf{exact cochain}.
+		\item Independent cycles correspond to non-exact cohomology classes.
+	\end{itemize}
+	These cohomology classes reveal the intrinsic "holes" in a space, capturing cycles independent of the boundary.
+	
+	\section{Defining a Notion of Curl on Graphs}
+	To define a curl-like operator on graphs:
+	\begin{itemize}
+		\item A curl-like operation can detect non-gradient flows or circulation around cycles.
+		\item This is achieved by evaluating flow on each cycle in the network; non-zero circulation indicates a curl-like structure.
+	\end{itemize}
+	
+	We can analyze flows on each cycle using incidence matrices and cochain complexes. If the net "circulation" around a cycle is non-zero, the flow represents a \textbf{non-exact cohomology class}.
+	
+	\section{Gradient and Non-Gradient Flows on Graphs}
+	\begin{itemize}
+		\item A \textbf{gradient flow} (or \textit{exact flow}) is a flow derived from a scalar potential.
+		\item A \textbf{circulatory flow} (or \textit{solenoidal flow}) cannot be derived from a potential function and is associated with cycles.
+		\item \textbf{Harmonic flows} are divergence-free, non-gradient flows that represent intrinsic topology; they cannot be reduced to any scalar potential.
+	\end{itemize}
+	
+	\subsection{Hodge Decomposition of Flows}
+	The Hodge decomposition theorem for graphs states that any flow \( F \) can be decomposed into:
+	\[
+	F = F_{\text{grad}} + F_{\text{circ}} + F_{\text{harmonic}}
+	\]
+	where:
+	\begin{itemize}
+		\item \( F_{\text{grad}} \): Gradient flow, derived from a scalar potential.
+		\item \( F_{\text{circ}} \): Circulatory flow, representing cycles.
+		\item \( F_{\text{harmonic}} \): Harmonic flow, a topological property associated with the graph’s cohomology.
+	\end{itemize}
+	
+	\section{Summary and Conclusion}
+	In summary:
+	\begin{itemize}
+		\item Graham's cohomology identifies non-trivial cycles in graphs that carry circulatory flow not derivable from a scalar potential.
+		\item The \textbf{curl-like operator} in graph theory detects these circulatory flows.
+		\item Flows are classified as \textbf{exact (gradient)}, \textbf{circulatory (non-gradient)}, and \textbf{harmonic}, with harmonic flows indicating topologically significant cycles.
+	\end{itemize}
+	
+	\section{Keywords for Further Research}
+	To further explore these concepts, consider the following keywords:
+	\begin{itemize}
+		\item Graph signal processing
+		\item Network analysis
+		\item Discrete differential geometry
+		\item Graph Cohomology
+		\item Graham's Cohomology and Network Analysis
+		\item Hodge Decomposition on Graphs
+		\item Gradient and Circulatory Flows in Graph Theory
+		\item Discrete Laplacian and Markov Operators
+		\item Topological Flow Analysis on Networks
+		\item Boundary and Coboundary Operators in Graphs
+	\end{itemize}
+	
+	\section{Introduction}
+	In this document, we explore the analogies between vector calculus in continuum settings and graph-based flow analysis. Specifically, we delve into the concepts of gradient, divergence, and curl on graphs, as well as the role of Graham's cohomology in characterizing loops and flows in networks.
+	
+	\section{Gradient, Divergence, and Laplacian Operators}
+	In both continuum and graph settings, we define various operators to analyze scalar and vector fields. These operators have close analogies in both domains.
+	
+	\subsection{Continuum Setting}
+	In continuum space (e.g., $\mathbb{R}^n$), we define:
+	\begin{itemize}
+		\item \textbf{Scalar field:} A function \( f \colon \mathbb{R}^n \rightarrow \mathbb{R} \) that assigns a scalar value to each point in space.
+		\item \textbf{Vector field:} A function \( F \colon \mathbb{R}^n \rightarrow \mathbb{R}^n \) that assigns a vector to each point in space.
+		\item \textbf{Gradient} \( \nabla \): Converts a scalar field to a vector field. The gradient of \( f \) is defined as \( \nabla f \), which points in the direction of maximum increase of \( f \).
+		\item \textbf{Divergence} \( \text{div} \): Converts a vector field to a scalar field, measuring the net flux exiting or entering a region. For a vector field \( F \), \( \text{div} \, F \) is defined as the sum of partial derivatives \( \sum_{i} \frac{\partial F_i}{\partial x_i} \).
+	\end{itemize}
+	
+	In this setting, the Laplacian operator, \( \Delta = \text{div} \nabla \), acts on scalar fields:
+	\[
+	\text{div}(\nabla f) = \Delta f
+	\]
+	where \( \Delta f \) measures the "smoothness" or rate of change of \( f \) across the space. Additionally, we have:
+	\[
+	\text{curl}(\nabla f) = 0
+	\]
+	indicating that gradients are \textit{exact fields} with no circulation around any point, a property central to cohomological interpretation.
+	
+	\subsection{Graph Setting}
+	For a graph with nodes and edges:
+	\begin{itemize}
+		\item \textbf{Gradient operator} \( \nabla \): Maps scalar functions on nodes (e.g., pressure or potential) to functions on edges (e.g., flow along edges).
+		\item \textbf{Adjoint gradient (Divergence)} \( \nabla^* \): Converts flows back into node-based values, effectively aggregating flow differences across edges.
+	\end{itemize}
+	
+	The graph \textbf{Laplacian} operator, defined as \( \nabla^* \nabla \), is often expressed as:
+	\[
+	L = I - P
+	\]
+	where \( I \) is the identity matrix and \( P \) is the Markov (or transition) operator, describing a random walk on the graph. This formulation relates to the "smoothness" of functions over the graph structure.
+	
+	\section{Boundary and Coboundary Operators}
+	In both topology and graph theory, boundary operators help describe the structure and relationships of cycles.
+	
+	\subsection{Simplices and Boundaries}
+	A \textbf{simplex} represents a fundamental building block in space. For instance:
+	\begin{itemize}
+		\item A \textit{0-simplex} is a point.
+		\item A \textit{1-simplex} is a line segment between two points.
+		\item A \textit{2-simplex} is a triangle formed by three points.
+	\end{itemize}
+	
+	The \textbf{boundary operator} \( \partial \) maps an \( n \)-dimensional simplex to its \((n-1)\)-dimensional boundary simplices. In graphs, this operator captures the notion of flux or flow across nodes.
+	
+	\subsection{Coboundary Operator}
+	The \textbf{coboundary operator} \( \delta \), dual to the boundary operator, maps cochains (functions on simplices) to another cochain in a higher dimension. In graphs, this captures the idea of "change" along edges, forming the basis for defining differential forms and cohomology.
+	
+	\section{Graham's Cohomology and Loops in Networks}
+	In network theory, \textbf{loops} or \textbf{cycles} are collections of edges forming closed paths. Graham's cohomology classifies cycles based on their ability to carry non-exact, harmonic flows, identifying loops that cannot be represented by a scalar potential.
+	
+	\subsection{Exact and Non-Exact Chains}
+	Exact chains have no boundary, analogous to closed fields where the \textit{curl of the gradient} is zero. In graph cohomology:
+	\begin{itemize}
+		\item Flows derived from a scalar potential lie in the \textbf{exact cochain}.
+		\item Independent cycles correspond to non-exact cohomology classes.
+	\end{itemize}
+	These cohomology classes reveal the intrinsic "holes" in a space, capturing cycles independent of the boundary.
+	
+	\section{Defining a Notion of Curl on Graphs}
+	To define a curl-like operator on graphs:
+	\begin{itemize}
+		\item A curl-like operation can detect non-gradient flows or circulation around cycles.
+		\item This is achieved by evaluating flow on each cycle in the network; non-zero circulation indicates a curl-like structure.
+	\end{itemize}
+	
+	We can analyze flows on each cycle using incidence matrices and cochain complexes. If the net "circulation" around a cycle is non-zero, the flow represents a \textbf{non-exact cohomology class}.
+	
+	\section{Gradient and Non-Gradient Flows on Graphs}
+	\begin{itemize}
+		\item A \textbf{gradient flow} (or \textit{exact flow}) is a flow derived from a scalar potential.
+		\item A \textbf{circulatory flow} (or \textit{solenoidal flow}) cannot be derived from a potential function and is associated with cycles.
+		\item \textbf{Harmonic flows} are divergence-free, non-gradient flows that represent intrinsic topology; they cannot be reduced to any scalar potential.
+	\end{itemize}
+	
+	\subsection{Hodge Decomposition of Flows}
+	The Hodge decomposition theorem for graphs states that any flow \( F \) can be decomposed into:
+	\[
+	F = F_{\text{grad}} + F_{\text{circ}} + F_{\text{harmonic}}
+	\]
+	where:
+	\begin{itemize}
+		\item \( F_{\text{grad}} \): Gradient flow, derived from a scalar potential.
+		\item \( F_{\text{circ}} \): Circulatory flow, representing cycles.
+		\item \( F_{\text{harmonic}} \): Harmonic flow, a topological property associated with the graph’s cohomology.
+	\end{itemize}
+	
+	\section{Summary and Conclusion}
+	In summary:
+	\begin{itemize}
+		\item Graham's cohomology identifies non-trivial cycles in graphs that carry circulatory flow not derivable from a scalar potential.
+		\item The \textbf{curl-like operator} in graph theory detects these circulatory flows.
+		\item Flows are classified as \textbf{exact (gradient)}, \textbf{circulatory (non-gradient)}, and \textbf{harmonic}, with harmonic flows indicating topologically significant cycles.
+	\end{itemize}
+	
+	\section{Keywords for Further Research}
+	To further explore these concepts, consider the following keywords:
+	\begin{itemize}
+		\item Graph Cohomology
+		\item Graham's Cohomology and Network Analysis
+		\item Hodge Decomposition on Graphs
+		\item Gradient and Circulatory Flows in Graph Theory
+		\item Discrete Laplacian and Markov Operators
+		\item Topological Flow Analysis on Networks
+		\item Boundary and Coboundary Operators in Graphs
+	\end{itemize}
+	
+	
+	\section{Evolution on Edge Weights, Energy Minimization, and Theoretical Connections}
+	
+	In this section, we explore the theoretical implications of defining an evolution on the weights of the edges in a graph, such that it minimizes a given energy functional. This adjustment of edge weights affects the graph’s loop structure, connectivity, and flow characteristics. We also consider analogous dynamics in continuum settings, vector bundle formalisms, and a categorical framework to generalize these notions.
+	
+	\subsection{Evolution on Edge Weights and Energy Functional}
+	When defining a dynamic on the edge weights of a graph to minimize an energy functional, represented as a flow that adjusts weights toward lower energy, let \( w_{ij}(t) \) denote the weight of the edge between nodes \( i \) and \( j \) at time \( t \). Suppose that \( w_{ij} \) evolves according to a gradient descent on some energy functional \( E(w_{ij}) \):
+	\[
+	\frac{d w_{ij}}{dt} = -\frac{\partial E}{\partial w_{ij}}.
+	\]
+	This process modifies the edge weights, causing some to increase and others to decrease, which influences network connectivity and loop structures in the following ways:
+	\begin{itemize}
+		\item \textbf{Change in Loop Structure:} As weights change, loops (cycles) may form or dissolve depending on connectivity changes. Lighter weights may effectively remove edges from the network, while stronger weights may reinforce certain paths.
+		\item \textbf{Impact on Flow and Cohomology:} The evolving weights affect cohomology classes, with new loops possibly introducing additional non-trivial cycles, and some disappearing as weights decrease.
+	\end{itemize}
+	
+	\subsection{Dual Notion in the Continuum Setting}
+	This evolution resembles a \textbf{Ricci flow} in a continuum setting, where the manifold shape evolves to minimize a curvature-based energy functional. Similarly, the edge weights on a graph evolve to optimize network connectivity, and the graph’s "curvature" (in terms of connectivity and loop structure) changes as weights evolve, analogous to the effects of Ricci flow on a manifold.
+	
+	\subsection{Tracking the Formation or Destruction of Loops}
+	To analyze loop creation or destruction during weight evolution:
+	\begin{itemize}
+		\item \textbf{Persistent Homology:} This technique analyzes topological changes by quantifying the birth and death of features (loops, cavities) as a function of weight, revealing loop evolution over time.
+		\item \textbf{Betti Numbers:} These numbers provide a measure of the graph’s topological invariants (e.g., connected components and cycles). Calculating Betti numbers dynamically allows tracking of loop structure changes as weights evolve.
+	\end{itemize}
+	
+	\subsection{Theorems for Vector Fields in the Continuum Setting}
+	Theorems from vector calculus offer insights into dynamics on graphs:
+	\begin{itemize}
+		\item \textbf{Stokes’ Theorem and Gauss’ Divergence Theorem:} These relate fluxes across boundaries to sources or sinks, providing tools to analyze how flows redistribute on weighted graphs.
+		\item \textbf{Poincaré’s Lemma:} In a simply connected domain, a curl-free field can be expressed as a gradient of a scalar potential. For graphs without loops, conservative flows can be represented as gradient flows, with loop creation corresponding to non-exactness, yielding non-trivial cohomology classes.
+	\end{itemize}
+	
+	\subsection{Manifold Theorems and Their Applications}
+	Theorems from manifold theory, such as the \textbf{Hairy Ball Theorem}, provide insights for graph theory:
+	\begin{itemize}
+		\item The Hairy Ball Theorem states that there is no continuous, non-vanishing vector field on even-dimensional spheres. In graph theory, this suggests constraints on global flow directionality, especially for high-dimensional graphs, pointing to inevitable singularities such as sources or sinks in complex graph structures.
+	\end{itemize}
+	
+	\subsection{Formalizing the Dynamics of the Vector Field on Graphs}
+	The dynamics of a vector field on a graph can be formalized as an evolution on a \textbf{vector bundle} over the graph:
+	\begin{itemize}
+		\item A vector bundle on a graph assigns a vector space (such as the set of flows) to each node. Here, each edge represents a connection or transition, with weights modulating the flow across edges.
+		\item As weights evolve, the "fiber" (possible flows) at each node changes, resulting in a dynamic vector field. This resembles a dynamical system on a vector bundle, driven by energy minimization on the edges.
+	\end{itemize}
+	
+	\subsection{Categorical Perspective: Categories and Functors}
+	Category theory offers an abstract framework for formalizing the evolution of graph structure and flow dynamics:
+	\begin{itemize}
+		\item \textbf{Category of Graphs:} Define a category where objects are graphs with weighted edges, and morphisms are structure-preserving maps (e.g., homomorphisms) that respect edge weights.
+		\item \textbf{Functorial Connections:} Define a functor from the category of weighted graphs to vector spaces, where each graph is mapped to its cohomology vector space, associating each graph with its flow space and topological features.
+		\item \textbf{Homology Functor:} Define a homology functor \( H \) that maps each weighted graph to its set of homology classes, tracking changes in topological features (such as loops) over time. This functor captures changes in connectivity and flow dynamics as the graph evolves.
+	\end{itemize}
+	
+	\subsection{Summary of Key Concepts}
+	\begin{itemize}
+		\item \textbf{Energy Minimization on Graphs:} Evolving edge weights alters the graph’s loop structure and connectivity.
+		\item \textbf{Continuum Dual:} The process has an analogue in Ricci flow, where space evolves to minimize curvature.
+		\item \textbf{Tracking Loops:} Persistent homology and Betti numbers allow tracking of loop creation and destruction dynamically.
+		\item \textbf{Theoretical Connections:} Vector calculus theorems offer insights into flux and circulation in graphs.
+		\item \textbf{Vector Bundle Analogy:} Evolving edge weights form a dynamic system on a vector bundle over the graph.
+		\item \textbf{Category Theory:} Categories and functors formalize the graph’s structure and dynamics, giving a coherent framework for analyzing flow and topology changes.
+	\end{itemize}
+	
+	\subsection{Keywords for Further Research}
+	For further exploration, consider the following keywords:
+	\begin{itemize}
+		\item Persistent Homology and Graphs
+		\item Vector Bundle Dynamics in Graph Theory
+		\item Ricci Flow and Network Evolution
+		\item Category Theory for Graph Analysis
+		\item Functorial Homology and Cohomology
+	\end{itemize}
+	
+	
+	
+	
+	
+	\clearpage
+	\onecolumn
+	\bibliographystyle{dinat}
+	\bibliography{references}
+	\twocolumn
+	
+\end{document}
