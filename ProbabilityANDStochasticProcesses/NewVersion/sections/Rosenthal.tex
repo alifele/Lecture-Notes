@@ -1390,4 +1390,184 @@ The idea of the proof of the following Lemma is very important and will show up 
 
 
 
+\section{Solved Problems}
 
+\begin{problem}
+	For the ``simple counter-example'' with $ \Omega = \N $ and $ \prob(\omega) = 2^{-\omega} $ for $ \omega \in \Omega $ and $ X_n(\omega) = 2^n\delta_{n,\omega} $, verify explicitly that the hypotheses of each of the monotone convergence theorem, the bounded convergence theorem, the dominated convergence theorem, and the uniform integrablity convergence theorem, are all violated.
+\end{problem}
+\begin{solution}
+	\begin{enumerate}[(i)]
+		\item The \emph{Monotone Convergence Theorem} can not be used since the sequence $ \set{X_n} $ is not monotone. It is not increasing as
+		\[ 0=X_{n+1}(n)\leq X_{n}(n) = 1, \]
+		and it is not decreasing as
+		\[ 1=X_{n+1}(n+1)\geq X_n(n+1) = 0. \]
+		\item The \emph{Bounded Convergence Theorem} can not be used since the sequence is not uniformally bounded. I.e. $ \forall K \in \R $ we can find $ n $ large enough so that $ \abs{X_n} > K $.
+		\item The \emph{Dominated Convergence Theorem} can not be used since there does not exists any random variable $ Y $ such that $ \abs{X_n}\leq Y $ with $ \E{Y}<\infty $. That is because to meet the first condition we need to have $ Y(k)\geq 2^k $ for $ k\in\Omega  $, which then will imply
+		\[ \E{Y} \geq \sum_{n=1}^\infty 1 = \infty. \]
+		\item The \emph{Uniform Integrablity Convergence Theorem} can not be used since collection $ \set{X_n} $ are not uniformally integrable. That is because for all $ \alpha\in \R $, there exists $ N\in \N $ such that $ \forall n>N $ we have $ \E{\abs{X}\mathds{1}_{\abs{X_n}\geq\alpha}} = 1 $.
+	\end{enumerate}
+\end{solution}
+
+
+\begin{problem}
+	Give an example of a sequence of random variables which is unbounded but still uniformally integrable. For bonus points, make the sequence also be undominated, i.e. violate the hypothesis of the dominated convergence theorem.
+\end{problem}
+\begin{solution}
+	Let $ \Omega = \N $, with $ \prob(\omega) = 2^{-\omega} $. Define $ X_n = \frac{2^n}{n}\delta_{n,\omega} $. To see that the sequence is uniformally integrable first observe that $ \E{\abs{X_n}} = 1/n $, and since $ \abs{X_n}\mathds{1}_{\abs{X_n}\geq \alpha} \leq \abs{X} $ for any $ \alpha\in \R $, we have
+	\[ \E{\abs{X_n}\mathds{1}_{\abs{X_n}\geq\alpha}} \leq \E{\abs{X}} = 1/n. \]
+	Consider the $ \alpha $ of the form $ \alpha = 2^k/k $ for $ k\in \N $. Then for any fixed $ k\in \N $ we have $ \abs{X_n}\geq \alpha(k) $ for all $ n\geq k $. Thus
+	\[ \E{\abs{X_n}\mathds{1}_{\abs{X_n}\geq\alpha(k)}} \leq 1/k, \]
+	that goes to zero as $ k\to\infty $ (i.e. $ \alpha\to \infty $). However, the sequence is undominated. That is because the dominating function $ Y $ should assume the value at least $ 2^n/n $ for $ n\in\Omega $ which will lead to
+	\[ \E{Y} = \sum_{n=1}^{\infty}\frac{1}{n} = \infty. \]
+\end{solution}
+
+
+\begin{problem}
+	Let $ X,X_1,X_2,\cdots $ be non-negative random variables, defined jointly on some probability triple triple $ (\Omega,\mathcal{F},\prob) $, each having finite expected value. Assume that $ \lim_{n\to\infty}X_n(\omega) = X(\omega) $ for all $ \omega\in \Omega $. For $ n,K \in \N $, let $ Y_{n,k}=\min(X_n,K) $. For each of the following statements either prove it must true, or provide a counter example to show it is sometimes false. 
+	\begin{enumerate}[(a)]
+		\item $ \lim_{K\to\infty}\lim_{n\to\infty} \E{Y_{n,k}} = \E{X} $.
+		\item $ \lim_{n\to\infty}\lim_{K\to\infty} \E{Y_{n,k}} = \E{X} $.
+	\end{enumerate}
+\end{problem}
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item This statement is true. To prove this observe that for a fixed $ K $ we have $ \set{Y_{n,k}}\nearrow \min(X,K)$ as $ n\to\infty $. Thus from monotone convergence theorem we have
+		\[ \lim_{n\to\infty} \E{Y_{n,k}} = \E{\min(X,K)}. \]
+		On the other hand $ \set{\min(X,K)}\nearrow X $ as $ K\to\infty $. So again by monotone convergence theorem we have
+		\[ \lim_{K\to\infty}\lim_{n\to\infty} \E{Y_{n,k}} = \lim_{K\to\infty}\E{\min(X,K)} = \E{X}.\]
+		
+		\item This statement is not true. Let $ \Omega=\N $, $ \prob(\omega) = 2^{-\omega} $ and define $ X_n = 2^{n} $. We know that $ X_n(\omega)\to X(\omega) $ for all $ \omega\in\Omega $ as $ n\to\infty $. Observe that for a fixed $ n $ we have $ \set{Y_{n,k}}\nearrow X_n $ as $ k\to\infty $. So from the monotone convergence theorem 
+		\[ \lim_{K\to\infty}\E{\min(X_n,K)} = \E{X_n}. \]
+		Thus
+		\[ \lim_{n\to\infty }\lim_{K\to\infty}\E{\min(X_n,K)} = \lim_{n\to\infty} \E{X_n} = 1 \neq \E{X} = 0. \]
+	\end{enumerate}
+\end{solution}
+\begin{observation}
+	In the question above, we worked with the random variable $ \min(X_n,K) $. This random variable is very interesting. Because if $ X_n\to X $ almost surely, then
+	\[ \set{\min(X_n,k)} \nearrow X_n \quad as\ k\to\infty, \]
+	and also
+	\[ \set{\min(X_n,k)} \nearrow \min(X,k) \quad as\ n\to\infty. \]
+	The whole idea of the problem above is precisely around the behaviour of $ \min(X_n,K) $ as shown above.
+\end{observation}
+
+
+\begin{problem}
+	Suppose that $ \lim_{n\to\infty} X_n(\omega) = 0 $ for all $ \omega\in \Omega $, but $ \lim_{n\to\infty}\E{X_n}\neq 0 $. Prove that $ \E{\sup_n \abs{X_n}} = \infty $.
+\end{problem}
+\begin{solution}
+	Assume otherwise, i.e. $ \E{\sup_n\abs{X_n}} < \infty $. Let $ Y = \sup_n\abs{X_n} $. The $ Y $ is a possible choice for the dominant r.v. in the theorem 9.1.2. Thus by the dominated convergence theorem we will have
+	\[ \lim_{n\to\infty}\E{X_n} = \E{X} = 0. \]
+	This contradicts the assumption. So the we should have $ \E{\sup_n\abs{X_n}}=\infty $.
+\end{solution}
+
+
+\begin{problem}
+	Prove that Theorem $ 9.1.2 $ implies Theorem 4.2.2, assuming $ \E{\abs{X}}<\infty $. In other words, prove that the Dominated Convergence Theorem, implies the Monotone Convergence Theorem if $ \E{\abs{X}}<\infty $.
+\end{problem}
+\begin{solution}
+	Let $ X,X_1,X_2,\cdots $ be non-negative random variables such that $ \set{X_n}\nearrow X $ as $ n\to\infty $. By hypothesis we have $ \E{\abs{X}} < \infty $. So $ \set{X_n} $ is dominated by $ X $, and using dominated convergence theorem we conclude that $ \E{X_n}\to\E{X} $ as $ n\to\infty $.
+\end{solution}
+
+\begin{problem}
+	Let $ X_1,X_2,\cdots $ be i.i.d., each with $ \prob(X_i=1)=\prob(X_i=-1)=1/2 $. 
+	\begin{enumerate}[(a)]
+		\item Compute the moment generating function $ M_{X_i}(s) $.
+		\item Use Theorem 9.3.4 to obtains an exponentially-decreasing upper bound on $ \prob(\frac{1}{n}(X_1+\cdots+X_n)\geq 0.1). $ 
+	\end{enumerate}
+\end{problem}
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item From the formula for the moment generating function we have
+		\[ M_{X_i}(s) = \E{e^{sX_i}} = 1/2e^s + 1/2 e^{-s} = \cosh(s). \]
+		
+		\item Observe that $ \E{X_i} = M'_{X_i}(0) = 0 $. Let $ \epsilon=0.1 $. Then 
+		\[ \rho = \inf_s (e^{-s\epsilon}\cosh(s)) \approx 0.995. \]
+	\end{enumerate}
+\end{solution}
+
+
+\begin{problem}
+	Let $ X_1,X_2,\cdots $ be i.i.d., each having the standard normal distribution $ \mathcal{N}(0,1) $. Use Theorem 9.3.4 to obtain an exponentially decreasing upper bound on $ \prob(1/n(X_1+\cdots+X_n)\geq 0.1) $. \emph{Hint: You can use the fact that for $ X\sim\mathcal{N}(0,1) $ we have}
+	\[ M_X(s) = e^{s^2/2}. \]
+\end{problem}
+\begin{solution}
+	Using the formula for $ \rho $ we can write
+	\[ \rho = \inf_{s>0}(e^{-s(m+\epsilon)M_{X_i}(s)}). \]
+	Observe that $ m = 0 $, and also $ M_{X_i}(s) = e^{s^2/2} $. Thus
+	\[ \rho = \inf_{s>0} (e^{s^2/2-0.1s}). \]
+	Doing a numerical computation will reveal that
+	\[ \rho \approx 0.995012. \]
+\end{solution}
+
+
+\begin{problem}
+	Let $ X\sim \operatorname{Exp}(5) $ with density $ f_X(x) = 5e^{-5x} $ for $ x\geq 0 $ and $ f_X(x) = 0 $ for $ x<0 $.
+	\begin{enumerate}[(a)]
+		\item Compute the moment generating function $ M_X(s) $.
+		\item Use $ M_X(s) $ to compute (with explanation) the expected value $ \E{X} $.
+	\end{enumerate}
+\end{problem}
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item Using the formula for the moment generating function we can write
+		\begin{align*}
+			M_X(s) = \E{E^{sX}} &= \int_{-\infty}^{+\infty} e^sx f_X(x) dx \\
+			&= \lambda \int_{0}^{+\infty} e^sx e^{\lambda x} dx \\
+			&= \frac{\lambda}{s-\lambda}e^{x(s-\lambda)}\big|_{0}^\infty \\
+			&= \frac{\lambda}{\lambda - s},
+		\end{align*}
+		where we have assumed that $ s-\lambda < 0 $.
+		
+		\item We know that $ \E{X} = M'_X(0) $. So we first calculate $ M'_X $
+		\[ M'_X(s) = \frac{\lambda}{(\lambda-s)^2}. \]
+		Then it is straightforward to see that $ \E{X} = 1/\lambda $.
+	\end{enumerate}
+\end{solution}
+
+
+\begin{problem}
+	Let $ X\sim \text{Poisson}(a) $ and $ Y\sim\text{Poisson}(b) $ be independent. Let $ Z = X+Y $. Use the convolution formula to compute $ \prob(Z=z) $ for all $ z\in\R $, and prove that $ Z\sim \text{Poisson}(a+b) $.
+\end{problem}
+\begin{solution}
+	Recall that for a random variable $ X $ with Poisson distribution $ \operatorname{Poisson(a)} $ we have
+	\[ \prob(X = k) = \frac{e^{-\lambda}\lambda^k}{k!}. \]
+	On the other hand we know that $ p_Z = p_X \ast p_Y  $. So 
+	\begin{align*}
+		p_Z(k) &= \sum_{n} p_X(n)p_Y(k-n) = \sum_n \frac{e^{-a}a^n}{n!}\cdot\frac{e^{-b}b^{k-n}}{(k-n)!}\\
+		&=\sum_{n=1}^{\infty} e^{-(a+b)}\frac{a^nb^{k-n}}{(k-n)!} \\
+		&=  e^{-(a+b)}/k! \frac{k!}{n!(k-n)!}a^n b^{n-k} \\
+		&= \frac{e^{-(a+b)}(a+b)^k}{k!}.
+	\end{align*}
+	Thus $ Z \sim \operatorname{Poisson}(a+b) $.
+\end{solution}
+
+
+\section{Weak Convergence}
+
+
+\section{Canonical Examples}
+\begin{example}[Converging in probability but not almost surely]
+	Let $ X, X_1,X_2,\cdots $ be random variables with $ X\equiv 0 $, and $ X_n = \mathds{1}_{B_n} $ for some $ B_n \in \mathcal{B} $ such that $ \prob(B)=1/n $. In other words $ \prob(X_n = 1) = 1/n $ and $ \prob(X_n=0) = 1-1/n $. Then 
+	\begin{enumerate}[(a)]
+		\item $ X_n \to X $ in probability.
+		\item $ X_n \not\to X $ almost surly. (Because $ 1/n $ is not summable). 
+	\end{enumerate}
+\end{example}
+\begin{remark}
+	\begin{enumerate}[(a)]
+		\item Defining $ B_n $ such that $ \prob(B_n) =1/n^2 $ then we will also have the almost sure convergence.
+		\item Defining $ X_n = n\mathds{1}_{B_n} $ with $ \prob(B_n)=1/n $, then $ X_n\to X $ in probability, and $ 1 = \E{X_n} \not\to \E{X} = 0 $.
+		\item Defining $ X_n = n^2\mathds{1}_{B_n} $ with $ \prob(B_n)=1/n^2 $, then $ X_n\to X $ almost surely, but $ 1 = \E{X_n} \not\to \E{X} = 0. $
+	\end{enumerate}
+\end{remark}
+
+
+\begin{example}[Convergence in distribution but not in probability]
+	Let $ X,X_1,X_2,\cdots $ be i.i.d. random variables each equal to $ \pm 1 $ with probability $ 1/2 $. Then obviously $ \mu_n \Rightarrow \mu $ however $ X_n $ does not converge to $ X $ in probability. For instance, let $ \epsilon=2 $. Then $ \prob(\abs{X_n-X}\geq 2) = 1/2 \not\to 0 $.
+\end{example}
+
+
+\begin{example}
+	We give an example of a sequence of random variables which is unbounded, uniformly integrable, and undominated (in the sense of the hypothesis of dominated convergence theorem). Define
+	\[ \Omega = \N,\quad \prob(\Omega)=2^{-\omega},\quad X_n(\omega) = \frac{2^n}{n}\delta_{\omega,n} \]
+\end{example}

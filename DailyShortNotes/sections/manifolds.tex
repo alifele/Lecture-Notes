@@ -110,4 +110,17 @@ Reviewing the nice properties of the second-countable spaces and the Hausdorff s
 \chapter{$\R$eal Analysis}
 
 
+Dini's theorem provides the conditions that can upgrade a point-wise convergence to a uniform convergence.
+\begin{theorem}[Dini's theorem]
+	Assume $ f_n(x)\to f(x) $ for all $ x $ in $ K $ \emph{compact}, and assume that for each $ x\in K $ the sequence $ f_n(x) $ is \emph{increasing}. If $ f_n $ and $ f $ are \emph{continuous}, then $ f_n\to f $.
+\end{theorem}
+\begin{proof}
+	let $ g_n = f-f_n $. Then $ g_n $ is defined on compact $ k $ and is continuous, and for any $ x\in g_n(x) $ the sequence or reals $ \set{g_n(x)} $ is decreasing and converging to zero. For arbitrary $ \epsilon>0 $ define
+ 	\[ K_n = \set{x\in K: g_n(x)\geq \epsilon}. \] 
+ 	Then since $ g_n(x) $ is decreasing, we have $ K_1 \supseteq K_2 \supseteq \cdots $. If $ K_n\neq \emptyset $ for all $ n\in \N $, then using the fact that $ K_n $ are nested closed subsets of a compact set, then $ \exists x^*\in \bigcap_n K_n $, which implies $ g_n(x^*)\geq \epsilon $ for all $ n\in \N $. This contradicts that $ g_n $ converges to $ 0 $ pointwise. So there must be $ N\in \N $ such that for all $ n>N $ we should have $ K_n = \emptyset $. So for all $ \epsilon>0 $ we can find $ N $ such that for all $ n>N $ we have 
+ 	\[ g_n(x) < \epsilon. \]
+ 	Thus is the uniform convergence.
+\end{proof}
+
+
 
