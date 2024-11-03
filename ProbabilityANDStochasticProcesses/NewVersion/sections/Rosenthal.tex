@@ -1545,6 +1545,158 @@ The idea of the proof of the following Lemma is very important and will show up 
 \section{Weak Convergence}
 
 
+\subsection{Solved Problems}
+
+\begin{problem}
+	Suppose $ \mathcal{L}(X_n)\Rightarrow \delta_c $ for some $ c\in \R $. Prove that $ \set{X_n} $ convergence to $ c $ in probability.
+\end{problem}
+\begin{solution}
+	Let $ \epsilon>0 $ give. Then
+	\begin{align*}
+		\prob(\abs{X_n - c} \geq \epsilon) &= 1 - \prob(\abs{X_n - c}<\epsilon) \\
+		&= 1-\prob(X_n \in (c-\epsilon,c+\epsilon))\\
+		&= 1 - \mu_n ((c-\epsilon,c+\epsilon)) \to 1 - 1 = 0.
+	\end{align*}
+	Note that we have used the fact that $ \mu_n(A)\to \mu(A) $ for $ A\in \mathcal{B} $ such that $ \mu(\partial A) = 0 $, and the fact that $ \mu((c-\epsilon,c+\epsilon)) = 1 $. So we conclude that $ X_n\to X $ in probability.
+\end{solution}
+
+\begin{problem}
+	Let $ X,Y_1,Y_2,\cdots $ be independent random variables, with $ \prob(Y_n=1)=1/n $ and $ \prob(Y_n=0)=1-1/n $. Let $ Z_n = X + Y_n $. Prove that $ \mathcal{L}(Z_n)  \Rightarrow \mathcal{L}(X) $, i.e. that the law of $ Z_n $ converges weakly to the law of $ X $.
+\end{problem}
+
+\begin{solution}
+	Let $ \epsilon>0 $ given. Then 
+	\begin{align*}
+		\prob(\abs{Z_n-X}\geq \epsilon) = \prob(\abs{Y_n}\geq \epsilon) \to 0 \quad as \quad n\to \infty.
+	\end{align*}
+	So we observe that $ Z_n $ converges to $ X $ in probability, which implies convergence in distribution.
+\end{solution}
+
+\begin{problem}
+	Let $ \mu_n = \mathcal{N}(0,1/n) $ be a normal distribution with mean 0 and variance $ 1/n $.  Doe the sequence $ \set{\mu_n} $ converge weakly to some probability measure? If yes, to what measure?
+\end{problem}
+\begin{solution}
+	Yes. $ \mu_n \Rightarrow \delta_0 $ as $ n\to\infty $. To see this let $ f $ denote the density the $ \mathcal{N}(0,1) $ distribution. So 
+	\[ f(x) = \frac{1}{\sqrt{2\pi}}e^{-x^2/2}. \]
+	Similarly, let $ f_n $ denote the density of the $ \mathcal{N}(0,1/n) $ distribution. So
+	\[ f_n(x) = \frac{n}{\sqrt{2\pi}}e^{-x^2n^2/2} = nf(nx). \]
+	We want to show that $ F_n $ (cumulative distribution for $ \mathcal{N}(0,1/n) $) converges to $ H $ that is the cumulative distribution of the $ \delta_0 $ distribution on $ \R $ except the origin that is the point of discontinuity of $ H $. Let $ t\neq 0 $. 
+	Then 
+	\[ F_n(t) = \int_{0}^{t}f_n(t)dt = \int_{0}^{t} nf(nt)dt = \int_{0}^{nt} f(y)dy = F_\mathcal{N}(nt), \]
+	where $ F_\mathcal{N} $ is the cumulative distribution for $ \mathcal{N}(0,1) $. Observe that when $ t>0 $ we have $ F_n(t) \to 1 $ as $ n\to \infty $ and when $ t<0 $ we have $ F_n(t) \to 0 $ as $ n\to-\infty $. So $ F_n(t) $ converges to $ H $ when $ t\neq 0 $. So $ \mu_n \Rightarrow \delta_0 $ as $ n\to\infty $.
+\end{solution}
+
+\begin{problem}
+	Let $ a_1,a_2,\cdots $ be any sequence of non-negative real numbers with $ \sum_i a_i = 1 $. Define the discrete measure $ \mu $ by $ \mu(\cdot) = \sum_{i\in \N}a_i\delta_i(\cdot) $, where $ \delta_i(\cdot) $ is a point-mass at the positive integer $ i $. Construct a sequence $ \set{\mu_n} $ of probability measure, each having a density with respect to Lebesgue measure, such that $ \mu_n \Rightarrow \mu $ as $ n\to\infty $.
+\end{problem}
+\begin{solution}
+	Define $ \mu_n $ as
+	\[ \mu_n(A) = \sum_{i=1}^{\infty}na_i \lambda(A\cap(i-1/n,i]) \]
+	for any $ A \in \mathcal{B} $. With this definition of $ \mu_n $ we are in fact approximating a discontinuous function ($ F_n $) with a piece-wise linear function as shown below. It is easy to show that $ F_n $ converges point-wise to $ F $ everywhere except at the point of discontinuity.
+	\input{Images/discontnousApprox.tex}
+	
+\end{solution}
+
+\begin{remark}
+	In the question above, if there are no limitations that the sequence $ \set{\mu_n} $ should ave a density with respect to Lebesgue measure, then one natural choice is
+	\[ \mu_n = \sum_{i}^{n} a_i \delta_i + (\sum_{i=n+1}^{\infty}a_i)\delta_{n+1}. \]
+\end{remark}
+
+
+\begin{problem}
+	Let $ \mathcal{L}(Y) = \mu $, where $ \mu $ has continuous density $ f $. For $ n\in \N $, let $ Y_n = \ceil{nY}/n $, and let $ \mu_n = \mathcal{L}(Y_n) $.
+	\begin{enumerate}[(a)]
+		\item Describe $ \mu_n $ explicitly.
+		\item Prove that $ \mu_n \Rightarrow \mu $.
+		\item Is $ \mu_n $ discrete, or absolutely continuous, or neither? What about $ \mu $?
+	\end{enumerate}
+\end{problem}
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item We start by calculating the cumulative distribution function for $ Y_n $.
+		\begin{align*}
+			F_n(y) &= \mu_n((-\infty,x]) = \prob(Y_n\in(-\infty,y]) \\
+			&= \prob(\frac{\floor{nY}}{n}\in (-\infty,y]) \\
+			&= \prob(\floor{nY}\in (-\infty,ny]) \\
+			&= \prob(nY \in (-\infty,\floor{ny}+1))\\
+			&= \prob(Y \in (-\infty,\frac{\floor{ny}}{n} + 1/n))\\
+			&= \prob(Y \in (-\infty,\frac{\floor{nY}}{n}]) + \mu((\frac{\floor{ny}}{n},\frac{\floor{ny}+1}{n})) \\
+			&= F(\frac{\floor{ny}}{n}) + \mu((\frac{\floor{ny}}{n},\frac{\floor{ny}+1}{n}))
+ 		\end{align*}
+ 		\item First observe that 
+ 		\[ \frac{\floor{ny}}{n} \to y \quad as \quad n\to\infty. \]
+ 		On the other hand
+ 		\[ \mu((\frac{\floor{ny}}{n},\frac{\floor{ny}+1}{n})) \to \mu((y,y)) = \mu(\emptyset) = 0 \quad as \quad n\to\infty. \]
+ 		So from part (a) we can see that
+ 		\[ F_n(y) \to F(y) \quad as \quad n\to\infty \]
+ 		for all $ y\in \R $. Thus $ \mu_n \Rightarrow \mu $ as $ n\to\infty $.
+ 		\item {\color{red} \noindent TODO: TO BE ADDED.}
+	\end{enumerate}
+\end{solution}
+
+
+\begin{problem}
+	Let $ f:[0,1]\to (0,\infty) $ be a continuous function such that $ \int_{0}^{1}fd\lambda = 1 $ (where $ \lambda $ is Lebesgue measure on $ [0,1] $). Define probability measure $ \mu $ and $ \set{\mu_n} $ by $ \mu(A) = \int_{0}^{1}f\mathds{1}_A d\lambda $ and $ \mu_n(A) = \sum_{i=1}^{n}f(i/n)\mathds{1}_{A}(i/n)/\sum_{i=1}^{n}f(i/n) $.
+	\begin{enumerate}[(a)]
+		\item Prove that $ \mu_n \Rightarrow \mu $ as $ n\to\infty $.
+		\item Explicitly construct  random variables $ Y $ and $ \set{Y_n} $ so that $ \mathcal{L}(Y)=\mu $, $ \mathcal{L}(Y_n)=\mu_n $, and $ Y_n\to Y $ with probability 1. 
+	\end{enumerate}
+\end{problem}
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item Let $ A \in \mathcal{B} $ such that $ \mu(\partial A) = 0 $. Then
+		\begin{align*}
+			\lim_n \mu_n(A) &= \lim_n \frac{\sum_{i=1}^{n}f(i/n)\mathds{1}_{A}(i/n)}{\sum_{i=1}^{n}f(i/n)} \\
+			&= \lim_n \frac{\sum_{i=1}^{n}f(i/n)\mathds{1}_{A}(i/n)1/n}{\sum_{i=1}^{n}f(i/n)1/n} \\
+			&= \frac{\lim_n \sum_{i=1}^{n}f(i/n)\mathds{1}_{A}(i/n)1/n}{\lim_n \sum_{i=1}^{n}f(i/n)1/n} \\
+			&= \frac{\int_{0}^{1} f \mathds{1} d\lambda}{\int_{0}^{1} f d\lambda} \\
+			&= \int_{0}^{1}f\mathds{1}_A d\lambda  = \mu(A).
+		\end{align*}
+		Since $ A $ was arbitrary then $ \mu_n \Rightarrow \mu $ as $ n\to\infty $.
+		
+		\item From the definition of $ \mu $ and $ \mu_n $ we define $ F_n $ and $ F $ (the cumulative distribution functions) and then define the random variables $ Y, Y_1,Y_2,\cdots $ as
+		\[ Y_n(\omega) = \sup_x\set{x: F_n(x)< \omega},\qquad Y(\omega)= \sup_x \set{x: F(x)<\omega}. \]
+	\end{enumerate}
+\end{solution}
+\begin{remark}
+	In Rosenthal, Theorem 7.2.1 defines the ``inverse'' of $ F $ as
+	\[ Y(\omega) = \inf_x\set{x: F(x)\geq \omega}. \]
+	{\color{red} \noindent  It is not clear to me }if these two definitions are the same or not. Because one of them leads to a left continuous function while the other one leads to a right continuous function.
+\end{remark}
+
+
+
+\section{Interesting Questions From Other Books}
+
+\begin{problem}[From Billingsley]
+	\label{prob:DiscreteSpaceIndependentEvents}
+	\begin{enumerate}[(a)]
+		\item Show that a discrete probability space (see Example 2.8 for the formal definition) can not contain an infinite sequence $ A_1,A_2,\cdots $ of independent events each of probability $ 1/2 $. Note that $ A_n $ ve be identified with heads on the $ n $-the toss of a coin. 
+		\item Suppose that $ 0\leq p_n \leq 1 $. and put $ \alpha_n = \min(p_n,1-p_n) $. Show that if $ \sum_n a_n $ diverges, then no discrete probability space can contain independent events $ A_1,A_2,\cdots $ such that $ A_n $ has probability $ p_n $.
+	\end{enumerate}
+\end{problem}
+
+\begin{solution}
+	\begin{enumerate}
+		Let $ \set{x} \subset \Omega $. Then $ x $ belongs to only one of the four disjoint sets below
+		\[ A_1\cap A_2,\quad A_1^c\cap A_2 \quad A_1\cap A_2^c,\quad A_1^c \cap A_2^c. \]
+		Observe that the probability of each of these events are $ 1/4 $ (noting that if $ A,B $ are independent then $ A^c, B^c $ are independent as well). So $ \set{x} $ must have probability $ 1/4 $ at most. Now consider the events $ A_1,A_2,A_3 $. Then $ x $ should belong to only one of the disjoint events below
+		\begin{align*}
+			A_1\cap A_2\cap A_3, \quad A_1\cap A_2^c\cap A_3, \quad A_1\cap A_2\cap A_3^c, \quad A_1\cap A_2^c\cap A_3^c, \\
+			A_1^c\cap A_2\cap A_3, \quad A_1^c\cap A_2^c\cap A_3, \quad A_1^c\cap A_2\cap A_3^c, \quad A_1^c\cap A_2^c\cap A_3^c. 
+		\end{align*}
+		Since $ A_1,A_2,A_3 $ are independent events the probability of each of the events above are $ 1/8 $. So $ \set{x} $ can have probability $ 1/8 $ at most. Continuing this we will get $ \prob(\set{x}) = 0 $ for all $ x\in \Omega $. On the other hand since $ \Omega $ is countable then 
+		\[ 1 = \prob(\Omega ) = \sum_{x\in \Omega} \prob(\set{x}) = 0 \]  
+		which is a contradiction. 
+	\end{enumerate}
+\end{solution}
+
+\begin{remark}
+	Note that by discrete probability measure we also require it to be countable.
+\end{remark}
+
+\newpage
+
 \section{Canonical Examples}
 \begin{example}[Converging in probability but not almost surely]
 	Let $ X, X_1,X_2,\cdots $ be random variables with $ X\equiv 0 $, and $ X_n = \mathds{1}_{B_n} $ for some $ B_n \in \mathcal{B} $ such that $ \prob(B)=1/n $. In other words $ \prob(X_n = 1) = 1/n $ and $ \prob(X_n=0) = 1-1/n $. Then 
@@ -1571,3 +1723,8 @@ The idea of the proof of the following Lemma is very important and will show up 
 	We give an example of a sequence of random variables which is unbounded, uniformly integrable, and undominated (in the sense of the hypothesis of dominated convergence theorem). Define
 	\[ \Omega = \N,\quad \prob(\Omega)=2^{-\omega},\quad X_n(\omega) = \frac{2^n}{n}\delta_{\omega,n} \]
 \end{example}
+
+
+\begin{observation}
+	Let $ x\in \R $. Then $ 1-x < e^{-x} $. This is a very important inequality that can be justified by simply looking at the graph of $ (1-x) $ and $ e^{-x} $. This inequality is used in the proof of the Borel-Cantelli lemma, as well as in Problem \autoref{prob:DiscreteSpaceIndependentEvents}.
+\end{observation}
