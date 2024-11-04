@@ -1767,9 +1767,2273 @@ The meaning of ``almost all'' is that the set of all points $ \eta \in [0,1] $ s
 \end{remark}
 
 
-\begin{problem}
-	Define a set $ A $ to be trifling if for each $  $
+\begin{problem}[From Ross]
+	Ben can talk a course in compute science or chemistry. If she takes the computer science course, then she will get A grade with probability $\frac{1}{2}$. If she takes the chemistry course, then she will get A grade with probability $\frac{1}{3}$. She decides to base her decision on the flip of a fair coin. What is the probability that she gets an A in chemistry?
 \end{problem}
+\begin{solution}
+	We define the following events
+	\begin{quote}
+		$A$: she will get an A grade.\\
+		$CO$: she will take the computer science course.\\
+		$CH$: she will take the chemistry course.
+	\end{quote}
+	Then the question is basically asking for $\prob(A \cap CH)$. We can compute it by
+	\[ \prob(A \cap CH) = \prob(A|CH)\prob(CH) = \frac{1}{3}\cdot\frac{1}{2} = \frac{1}{6}. \]
+\end{solution}
+
+\begin{problem}
+	And urn contains seven black balls and five white balls. We draw two times from the urn. Given that the each ball has the same probability to be drawn, what is the probability that both balls drawn are black?
+\end{problem}
+\begin{solution}
+	This question nicely demonstrates the fact that there are many ways to define the event spaces, and not all of them are very useful in computing the desired probability. Define
+	\begin{quote}
+		$E$: two drawn balls are black.
+	\end{quote}
+	The question is in fact asking $\prob(E)$. But this even is not very useful in any progress with the solution. Thus we need to define some finer events
+	\begin{quote}
+		$E_1$: The first drawn ball is black.\\
+		$E_2$: The second drawn ball is black.
+	\end{quote}
+	It is clear that $E = E_1 \cap E_2$. These two finer events allows us to compute the probability of interest given the data we have in our hand.
+	\[ \prob(E_1 \cap E_2) = \prob(E_2 | E_1) \prob(E_1) = \frac{6}{11} \cdot \frac{7}{12} \]
+\end{solution}
+
+\begin{problem}[From Ross]
+	Three men at a party through their hats into the center of the room, and then, after mixing the hats, each pick a hat randomly. What is the probability if non of them get their own hat back.
+\end{problem}
+\begin{solution}
+	There are a million ways to tack a probability problem. We can construct a suitable sample space and then compute the probabilities explicitly, or we can use the properties of the probability function to computer the desired probability without any need to construct the sample space. Here, we will demonstrate two ways.
+	
+	\textbf{Solving the problem by utilizing the properties of the probability function.} First we need to define some suitable events. There are again many ways to define event sets and each have their own pros and cons. We proceed with the following definition.
+	\begin{quote}
+		$E_i$: The person $i$ ``selects'' his own hat.  
+	\end{quote}
+	Also, with this particular construction of the event sets, it is much more easier to compute the complementary probability of the desired probability first and then compute the desired one by simply subtracting it from 1. The complement of the event ``no men gets his own hat back'' is ``at least one man gets his hat back'' which is $\prob(E_1\cup E_2 \cup E_3)$. To compute the terms of this we first need to calculate $\prob(E_i)$, $\prob(E_i \cap E_j)$ where $i\neq j$ and also $\prob(E_1 \cap E_2 \cap E_3)$. We know that $\prob(E_i) = 1/3$ for $i=1,2,3$. That is because it is equally likely he selects any of the hats at the center. For $\prob(E_i\cap E_j)$ we can write
+	\[ \prob(E_i\cap E_j) = \prob(E_i|E_j)\prob(E_j) = \frac{1}{2}\cdot \frac{1}{3} =  \frac{1}{6}.   \]
+	In which we used the fact that $\prob(E_i|E_j)$ is $\frac{1}{2}$ for distinct $i,j$. That is because given person $j$ selects his hat correctly, then there are two possibilities for $E_i$ to select his hat (he can pick the correct one or the wrong one). Lastly for $\prob(E_1\cap E_2\cap E_3)$ we write
+	\[ \prob(E_1\cap E_2\cap E_3) = \prob(E_1|E_2\cap E_3)\prob(E_2\cap E_3) = \prob(E_1|E_2\cap E_3) \prob(E_2 | E_3) \prob(E_3) = 1 \cdot \frac{1}{2} \cdot \frac{1}{3} = \frac{1}{6}.  \]
+	Thus 
+	\[ \prob(E_1 \cup E_2 \cup E_3) = (1) - (1/2) + (1/6) = \frac{4}{6}. \]
+	Then the probability of interest will be
+	\[ \prob(E) = 1-\frac{4}{6} = \frac{1}{3}. \]
+	
+	\textbf{Solving by constructing a sample space.} A suitable sample space for this problem can be the set of all permutations on three letters. This set is
+	\[ \Omega = 
+	\set{\begin{pmatrix}
+			a & b & c \\
+			\boxed{a} & \boxed{b} & \boxed{c}
+		\end{pmatrix},
+		\begin{pmatrix}
+			a & b & c \\
+			\boxed{a} & c & b
+		\end{pmatrix},
+		\begin{pmatrix}
+			a & b & c \\
+			b & a & \boxed{c}
+		\end{pmatrix},
+		\begin{pmatrix}
+			a & b & c \\
+			b & c & a
+		\end{pmatrix},
+		\begin{pmatrix}
+			a & b & c \\
+			c & a & b
+		\end{pmatrix},
+		\begin{pmatrix}
+			a & b & c \\
+			c & \boxed{b} & a
+	\end{pmatrix}}.
+	\]
+	Note that the elements in the box represents the fixed point of the permutation. The probability of interest is basically the number of permutations that has no fixed point. As it is clear from the set $\Omega$, the probability is
+	\[ \prob(E) = \frac{2}{6} = \frac{1}{3}. \]
+\end{solution}
+
+\begin{problem}[Conditional probability mass function (from Ross)]
+	Let $ X,Y $ be two random variables with the joint probability mass function given as 
+	\[ P(1,1) = 0.5 \qquad P(1,2)=0.1,\qquad P(2,1)=0.1, \qquad P(2,2)=0.3. \]
+	Calculate the conditional probability mass function of $ X $ given that $ Y = 1 $.
+\end{problem}
+\begin{solution}
+	We will use the following identity
+	\[ P_{X|Y}(x|y) = \prob(X=x|Y=y) = \frac{\prob(X=x,Y=y)}{\prob(Y=y)}. \]
+	Observe that 
+	\[ \prob(Y=y) = \sum_x \prob(Y=y,X=x) \]
+	thus $ \prob(Y=1) = 0.5 + 0.1 = 0.6. $
+	So we will have
+	\[ P_{X|Y}(1|1) = \frac{0.5}{0.6} = \frac{5}{6}, \qquad P_{X|Y}(2|1) = \frac{0.1}{0.6} = \frac{1}{6}. \]
+\end{solution}
+
+\begin{problem}[Conditional probability mass function for geometric random variables (from Ross)]
+	Let $ X_1,X_2 $ be two independent random variables with geometric distributions with parameters $ (n_1,p) $ and $ (n_2,p) $. Calculate the conditional probability mass function of $ X_1 $ given that $ X_1+X_2 = m $.
+\end{problem}
+\begin{solution}
+	First, observe that $ Y = X_1 + X_2 $ is a binomial distribution with parameter $ (n_1+n_2, p) $. Thus we can write
+	\[ P_{X_1|Y}(k|m) = \prob(X_1 = k | Y = m) = \frac{\prob(X_1 = k, X_1+X_2 = m)}{\prob(X_1+X_2 = m)} = \frac{\prob(X_1=k, X_2 = m-k)}{\prob(Y = m)} \]
+	Since the random variables $ X_1 $ and $ X_2 $ are independent, we can write
+	\[ P_{X_1|Y}(k|m) = \frac{\prob(X_1=k)\prob(X_2 = m-k)}{\prob(Y=m)} = \frac{\binom{n_1}{k}\binom{n_2}{m-k}}{\binom{n_1+n_2}{m}}. \]
+\end{solution}
+
+\begin{problem}[Conditional probability mass function for Poisson random variables (from Ross)]
+	Let $ X,Y $ be two independent Poisson random variables with parameters $ \lambda_1 $ and $ \lambda_2 $ respectively. Calculate the conditional probability mass function for $ X $ given that $ X_1 + X_2 = n $.
+\end{problem}
+\begin{solution}
+	First observe that $ Z = X + Y $ is a Poisson random variable with parameter $ \lambda_1 + \lambda_2 $. Thus we will have
+	\[ P_{X|X+Y}(m|n) = \frac{\prob(X=m|X+Y=n)}{\prob(X+Y = n)} = \frac{\prob(X=m,Y=n-m)}{\prob(X+Y = n)} \]
+	Given that $ X,Y $ are independent random variables then we can write
+	\[ P_{X|X+Y}(m,n) = \frac{\prob(X=m)\prob(Y=n-m)}{\prob(X+Y=n)} = \frac{\lambda_1^n \lambda_2^{n-m}n!}{m!(n-m)!(\lambda_1+\lambda_2)^n} = \binom{n}{m} (\frac{\lambda_1}{\lambda_1+\lambda_2})^m ( \frac{\lambda_2}{\lambda_1+\lambda_2})^{n-m} \]
+	Thus the conditional probability mass function of $ X $ given that $ X+Y = n $ will be a binomial random variable with parameter $ (n,\lambda_1/(\lambda_1+\lambda_2)) $. We can now easily compute the conditional expectation value as
+	\[ \E{X|X+Y = n} = \frac{n\lambda_1}{\lambda_1 + \lambda_2} \]
+\end{solution}
+
+\begin{problem}
+	Let $ X,Y $ be two discrete random variables. Prove that 
+	\[ \E{\E{X|Y}} = \E{X}. \]
+\end{problem}
+\begin{solution}
+	We start with the definition of the expectation of a discrete random variable.
+	
+	\begin{align*}
+		\E{\E{X|Y}} &= \sum_y \E{X|Y=y} \prob(Y=y) = \sum_y \sum_x x\prob(X=x|Y=y)\prob(Y=y) \\
+		& = \sum_{x,y} x\prob(X=x,Y=y) = \sum_x x \sum_y \prob(X=x,Y=y) = \sum_x x\prob(X=x) = \E{X}
+	\end{align*}
+\end{solution}
+
+\begin{problem}[The expectation of a random number of random variables (from Ross)]
+	Let the expected number of injures in an industrial field be 4 per week. Also, assume that the number of workers injured at each incidence are independent random variables with average 2. Then what is the expected number of injuries in one week?
+\end{problem}
+\begin{solution}
+	Let $ X_1,X_2,\cdots $ be i.i.d random variables representing the number of workers injured at each incidence. We are interested in 
+	\[ \E{X_1+\cdots+X_N} \]
+	where $ N $ is a random variable representing the number of incidences occurred in a week. By the law of conditional expectation we can write
+	\[ \E{X_1 + \cdots + X_N} = \sum_n \E{X_1+\cdots+X_n}\prob(N=n) = \sum_n n\E{X} \prob(N=n) = \E{X} \E{N}.\]
+	Thus the average number of workers injured in a week will be 8. 
+\end{solution}
+
+\begin{problem}[An alternative way to compute the expectation of a geometric random variable]
+	Consider a coin with probability $ p $ to fall heads. What is the expectation value of the number of tosses required until we get the first head?
+\end{problem}
+\begin{solution}
+	Let $ X_1,X_2,\cdots $ be Bernoulli random variables with parameter $ p $. Let $ N $ be a random variable denoting the number of tosses required until we get the first heads. We can condition the expected value of $ E $ to the first outcome.
+	\[ \E{N} = \E{N|X_1 = H }\underbrace{\prob(X_1 = H)}_{=p} + \E{N|X_1=T}\underbrace{\prob(X_1=T}_{=1-p})  \]
+	Observe that 
+	\[ \E{N|X_1=H} =1 ,\qquad \E{N|X_1=T} = 1+\E{N}.\]
+	Thus we will have
+	\[ \E{N} = \frac{1}{p}. \]
+\end{solution}
+
+\begin{problem}[Trapped miner (from Ross)]
+	A miner is trapped in the mine and has three doors in front of him. He is equally likely to choose any of the three. The first door will take him to safety after 2 hours of walking, the second door will take him to the mine again after 3 hours of walking, and the third door will take him to the mine again after 5 hours of walking. What is the expected time that the miner will arrive to safety?
+\end{problem}
+\begin{solution}
+	Let $ X_1,X_2,\cdots $ be random variables denoting the doors that the miner choose at each time that he attempts to escape. Furthermore, let $ T $ be a random variable showing the the time it takes for the miner to escape. To calculate $ \E{T} $ we can condition it on the first door choice. I.e.
+	\[ \E{T} = \E{T|X_1 =1}\prob(X_1=1) + \E{T|X_1 =2}\prob(X_1=2)+\E{T|X_1 =3}\prob(X_1=3) \]
+	Observe that 
+	\[ \prob(X_1=1) = \prob(X_1=2) = \prob(X_1=3) = 1/3. \]
+	Also
+	\[  \E{T|X_1 =1} = 2,\qquad  \E{T|X_1 =2} = 3+\E{T}, \qquad \E{T|X_1 =3} = 3+\E{T}. \]
+	Thus we will have
+	\[ \E{T} = 10. \]
+	So on average it will take the miner to exit the mine in 10 hours. Note that this does not guarantee that the miner will eventually escape. It is possible that we will get in trap by repeatedly choosing the door number 3.
+\end{solution}
+
+\begin{problem}[From Rosenthal]
+	Suppose that $ \Omega = \set{1,2}, $ with $ \prob(\emptyset) = 0 $ and $ \prob(\set{1,2}) = 1 $. Suppose $ \prob(\set{1}) = \frac14 $. Prove that $ \prob $ is countably additive if and only if $ \prob(\set{2})=\frac34 $.
+\end{problem}
+\begin{solution}
+	The proof has two parts
+	\begin{itemize}
+		\item [$ \boxed{\Longrightarrow} $] Since $ \prob $ is countably additive, then 
+		\[ \prob(\set{1} \dot\cup \set{2}) = \prob(\set{1}) + \prob(\set{2}) = 1. \]
+		This implies $ \prob(\set{2}) = 3/4 $.
+		\item [$ \boxed{\Longleftarrow} $] Assume $ \prob(\set{2}) = 3/4 $. Then it is very straightforward to check that for every disjoint subset $ A,B \subset \Omega $, we have
+		\[ \prob(A \dot\cup B) = \prob(A) + \prob(B). \]
+		Thus we conclude that $ \prob $ is countably additive.
+	\end{itemize}
+\end{solution}
+
+\begin{problem}[From Rosenthal]
+	Suppose $ \Omega = \set{1,2,3} $ and $ \mathcal{F} $ is a the collection of all subsets of $ \Omega $. Find (with proof) necessary and sufficient conditions on the real numbers $ x,y,z $ such that there exists a countably additive probability measure $ \prob $ on $ \mathcal{F} $ such that $ x = \prob\set{1,2}, y=\prob\set{2,3}, z=\prob\set{1,3} $.
+\end{problem}
+\begin{solution}
+	To find the necessary conditions, we assume that $ \prob $ is an additive probability measure. Let $ a = \prob\set{1}, b=\prob\set{2} $, and $ c = \prob\set{3} $. Then the countable additivity implies
+	\[ a+b=x,\qquad b+c=y,\qquad a+c=z. \]
+	Then due to countable additivity, and the fact that $ \prob $ is a probability measure (i.e. $ \prob\set{1,2,3} = 1 $), we have $ a+b+c = 1 $, thus we need to have
+	\[ x+y+z = 2. \tag{\eighthnote} \]
+	Further, we solve the $ a,b,c $ in terms of $ x,y,z $ are require the singleton probabilities to be positive. We have
+	\[ a = \frac{x-y+z}{2},\qquad b = \frac{x+y-z}{2},\qquad c=\frac{-x+y+z}{2}. \]
+	One of the necessary conditions is also to have
+	\[ x-y+z\geq0,\qquad x+y-z\geq0,\qquad -x+y+z \geq0. \tag{\twonotes}  \]
+	The two conditions ($ \eighthnote $) and $ (\twonotes) $  together are the necessary and sufficient conditions for $ \prob $ to be a valid probability measure.
+\end{solution}
+
+\begin{problem}[From Rosenthal]
+	Suppose that $ \Omega = \N $ is the set of positive integers, and $ \prob $ is defined for all $ A\subseteq \Omega $ by $ \prob(A) = 0 $ if $ A $ is finite, and $ \prob(A) = 1 $ if $ A $ is infinite. Is $ \prob $ finitely additive?
+\end{problem}
+\begin{solution}
+	Not it is not. Consider the partitioning of the set $ \Omega $ by the even $ E $ and odd $ O $ integers.
+	\[ \prob(\Omega) = \prob(E) + \prob(O) \implies 1 = 2, \]
+	which is not true. Thus $ \prob $ is not finitely additive.
+\end{solution}
+
+\begin{problem}[From Rosenthal]
+	Suppose that $ \Omega = \N $, and $ \prob $ is defined for all $ A \subseteq \Omega $ by $ \prob(A) = \abs{A} $ if $ A $ is finite, and $ P(A)=\infty $ if $ A $ is infinite.  This $ P $ is of course not a probability measure (in fact it is counting measure), however we can still ask the following: (be the convention $ \infty+\infty = \infty $)
+	\begin{enumerate}[(I)]
+		\item Is $ \prob $ finitely additive?
+		\item Is $ \prob $ countably additive?
+	\end{enumerate}
+\end{problem}
+\begin{solution}
+	\begin{enumerate}[(I)]
+		\item Yes. $ \prob $ being finitely additive is equivalent being additive for disjoint $ A,B \subset \Omega $. There are three cases for these choices
+		\begin{enumerate}[(i)]
+			\item $ A,B $ are both finite. In this case $ \prob(A\dot\cup B) = \prob(A) + \prob(B) $ since $ 0=0+0 $.
+			\item $ A,B $ are both infinite. In this case $ \prob(A\dot\cup B) = \prob(A) + \prob(B) $ since $ \infty+\infty = \infty $.
+			\item One of the sets $ A,B $ is infinite. Then $ \prob(A\dot\cup B) = \prob(A) + \prob(B) $ since $ 0+\infty = \infty. $
+		\end{enumerate}
+		\item No. We will show this by counterexample. We can write $ \Omega = \dot\bigcup_{i\in \N}\set{i} $. Then the countable additivity implies
+		\[ \prob(\Omega) = \prob(\dot\bigcup_{i\in \N}\set{i}) \implies 1 = 0.\]
+		which is not true.
+	\end{enumerate}
+\end{solution}
+
+
+\begin{problem}[From Rosenthal]
+	Let $ \mathcal{I} $ be the set of all intervals in $ [0,1] $ (open, closed, half-open, singleton, empty set). Show that $ \mathcal{I} $ is a semi-algebra.
+\end{problem}
+\begin{solution}
+	By definition of $ \mathcal{I} $ we have $ \emptyset\in \mathcal{I} $. Let $ A_1, A_2 $ be two intervals in $ [0,1] $. If $ A_1,A_2 $ are disjoint, then $ A_1\cap A_2 \in \mathcal{I} $. If they are not disjoint, then without loss of generality we can assume that 
+	\[ A_1 = \set{x\in[0,1]\ |\ a<x<b}, A_2 = \set{x\in[0,1]\ |\ c<x<d}, \]
+	where $ a<c<b<d $. Thus $ A_1\cap A_2 = (c,b) $. So $ \mathcal{I} $ is closed under finite intersection. The proof is the same for any other choices of $ A_1,A_2 $ (i.e. being closed set, etc). To show the third property, again, without the loss of generality, let $ A = (a,b) $. Then $ A^c = (-\infty,a] \dot\cup [b,\infty) $. For other choices of $ A $ (i.e. being closed, etc) we will have a similar argument. Thus we conclude that the collection $ \mathcal{I} $ is a semi-algebra of the subsets of $ [0,1] $.
+\end{solution}
+
+\begin{problem}[From Rosenthal]
+	Let $ \mathcal{I} $ be the semi-algebra consisting of all intervals in $ [0,1] $. Define
+	\[ \mathcal{B}_0 = \set{\text{all finite unions of elements of $ \mathcal{I} $}.} \]
+	Show that $ \mathcal{B}_0 $ is not a $ \sigma\text{-algebra} $.
+\end{problem}
+\begin{solution}
+	Along with many other sets, $ \mathcal{I} $ contains all of the singletons, so does $ \mathcal{B}_0 $. Consider the following collection
+	\[ \mathcal{A} = \set{\set{x}\ :\ x \in \Q \cap [0,1]}. \]
+	By definition, all of the sets in the collection $ \mathcal{A} $ belongs to $ \mathcal{B}_0 $. However, the following countable union
+	\[ \dot\bigcup_{A \in \mathcal{A}} A = [0,1] \cap \Q \]
+	does not belong to $ \mathcal{B}_0 $ (as it is not possible to generate with only finite unions of the elements of singletons in $ \mathcal{I} $).
+\end{solution}
+
+\begin{problem}[From Rosenthal]
+	Prove that the outer measure $ \prob^* $ is countably sub-additive, i.e.
+	\[ \prob^*(\bigcup_{n=1}^{\infty} B_n) \leq \sum_{n=1}^{\infty} \prob^*(B_n) \qquad \text{for any $ B_1,B_2,\cdots \in \Omega $}.\]
+\end{problem}
+\begin{solution}
+	This problem is the proof of Lemma 2.3.6 in Rosenthal. See the text for more context. A very quick review on the context is that we have a semi-algebra $ \mathcal{I} $ of the subsets of $ \Omega $, and we have the function $ \prob: \mathcal{I} \to [0,1] $ that satisfies the properties required for the extension theorem, hence there exist a valid probability space $ (\Omega, \mathcal{M}, \prob^*) $, where $ \mathcal{M} $ is a $ \sigma\text{-algebra} $ and $ \prob^* $ is a probability measure (which is also the outer measure). The proof of this question is as follows. 
+	
+	Fix $ \epsilon>0 $. Since the outer measure is the infimum of the sum of the probabilities on all $ \mathcal{I} $ covers, then for each $ B_n $ we can find a collection $ \set{C_{nk}} $ where $ C_{nk}\in\mathcal{I} $ such that 
+	\[ \sum_k \prob(C_{nk}) \leq \prob^*(B_n) + \epsilon2^{-n}. \]
+	On the other hand, since $ \set{C_{nk}}_{nk} $ covers $ \bigcup_n B_n $, then again from the properties of inf we have
+	\[ \prob^*(\bigcup_n B_n) \leq \sum_{nk} \prob(C_{nk}). \]
+	combining these two we will get
+	\[  \prob^*(\bigcup_n B_n) \leq \sum_n \prob^*(B_n) + \epsilon. \]
+	Since this is true for all $ \epsilon>0 $, then it implies that 
+	\[  \prob^*(\bigcup_n B_n) = \sum_n \prob^*(B_n). \]
+\end{solution}
+
+\begin{problem}[From Rosenthal]
+	\label{prob:countableAdditivity}
+	If $ A_1,A_2,\cdots \in \mathcal{M} $ are disjoint, then prove that 
+	\[ \prob^*(\dot\bigcup_n A_n) = \sum_n \prob^*(A_n). \]
+\end{problem}
+\begin{solution}
+	First, we start to show the finite additivity, and then using the properties of monotnonicity and sub-additivity, we will prove the countable additivity as well. Let $ A_1, A_2 \in \mathcal{M} $ disjoint. In particular, since $ A_1 \in \mathcal{M} $, from the definition of $ \mathcal{M} $ (see page 12 Rosenthal), then
+	\[ \prob^*(A_1 \cup A_2) = \prob^*(A_1^c \cap (A_1\cup A_2)) + \prob^*(A_1 \cap (A_1 \cup A_2)) = \prob^*(A_2) + \prob^*(A_1). \]
+	This implies that for any finite disjoint collection of $ A_i $ we have the additivity property (by induction). Now for any $ m \in \N $ we have
+	\[  \sum_{n<m} \prob^*(A_n)  = \prob^*(\bigcup_{n\leq m}A_n)  \leq \prob^*(\bigcup_n A_n) \]
+	where the last inequality follows form the monotnonicity property of $ \prob^* $. Since this is true for all $ m \in \N $, then we conclude that 
+	\[ \prob^*(\bigcup_n A_n) \geq \sum_n \prob^*(A_n). \]
+	On the other hand, from the sub-additivity property we have
+	\[ \prob^*(\bigcup_n A_n) \leq \sum_n \prob^*(A_n). \]
+	These two implies that 
+	\[ \prob^*(\bigcup_n A_n) = \sum_n \prob^*(A_n). \]
+\end{solution}
+
+\begin{problem}[From Rosenthal]
+	Let $ \mathcal{M} $ be the $ \sigma\text{-algebra} $ we get from the extension theorem, where by definition it contains all of the sets like $ A \in \Omega $ for which the outer measure is additive on the union of $ A \cap E $ and $ A^c \cap E $ for $ \forall E \subset \Omega  $. In other words
+	\[ \mathcal{M} = \set{A \subseteq \Omega\ :\ \prob^*(A\cap E) + \prob^*(A^c \cap E) = \prob^*(E) \quad \text{for all } E \subset \Omega}. \]
+	Prove that $ \mathcal{M} $ is an algebra.
+\end{problem}
+\begin{solution}
+	Let $ A = \Omega $. Then
+	\[ \prob^*(A \cap E) + \prob^*(A^c\cap E) = \prob^*(E) + \prob^*(\emptyset) = \prob^*(E). \]
+	So we conclude that $ \Omega \in \mathcal{M} $. Also, it follows immediately from the definition of $ \mathcal{M} $ that if $ A \in \mathcal{M} $ then $ A^c \in \mathcal{M} $. Now it remains to show if $ A_1, A_2 \in \mathcal{M} $ then $ A_1\cap A_2 \in \mathcal{M} $. Let $ E \subset \Omega $. Then 
+	\begin{align*}
+		&\prob^*(E \cap (A_1 \cap A_2)) + \prob^*(E \cap (A_1 \cap A_2)^c ) \\
+		&= \prob^*(E\cap (A_1\cap A_2)) + \prob^*(E\cap A_1^c \cap A_2) + \prob^*(E\cap A_1 \cap A_2^c) + \prob^*(E\cap A_1^c \cap A_2^c) \\
+		&\leq \prob^*(E\cap A_1\cap A_2) + \prob^*(E \cap A_1^c \cap A_2) + \prob^*(E \cap A_1 \cap A_2^c) + \prob^*(E\cap A_1^c \cap A_2^c)\\
+		&=\prob^*(E\cap A_2) + \prob^*(E\cap A_2^c) \qquad \text{(because $ A_1 \in \mathcal{M} $)} \\
+		&=\prob^*(E) \qquad \text{(because $ A_2 \in \mathcal{M} $)}.
+	\end{align*}
+	On the other hand, from the sub-additivity property we know that 
+	\[ \prob^*(E\cap (A_1\cap A_2)) + \prob^*(E \cap (A_1\cap A_2)^c) \geq \prob^*(E). \]
+	Thus we conclude that 
+	\[ \prob^*(E\cap (A_1\cap A_2)) + \prob^*(E\cap (A_1\cap A_2)^c) = \prob^*(E). \]
+	This implies that $ A_1\cap A_2 \in \mathcal{M} $ and this finishes the proof.
+\end{solution}
+
+
+\begin{problem}[From Rosenthal]
+	Let $ A_1,A_2,\cdots \in \mathcal{M} $ be disjoint. For each $ m\in \N $, let $ B_m = \bigcup_{n\leq m} A_n $. Prove that for all $ m\in \N $, and for all $ E \subseteq \Omega $ we have
+	\[ \prob^*(E\cap B_m) = \sum_{n\leq m} \prob^*(E\cap A_n). \]
+\end{problem}
+\begin{solution}
+	First, observe that this statement is true for $ m=1 $ in a trivial way. For $ m=2 $, since $ A_2 \in \mathcal{M} $, then we can expand $ E\cap B_2 $ according to $ A_2 $, i.e.
+	\[ \prob^*(E\cap B_2) = \prob^*((E\cap B_2)\cap A_2) + \prob^*((E \cap B_2)\cap A_2^c) \]
+	On the other hand $ (E\cap B_2)\cap A_2 = E \cap A_2 $ and $ (A\cap B_2)\cap A_2^c = E\cap B_1 = E\cap A_1 $. Thus we can write
+	\[ \prob^*(E\cap B_2) = \prob^*(E\cap A_1) + \prob^*(E\cap A_2). \]
+	In general, for $ m \in \N $ we can write
+	\[ \prob^*(E\cap B_m) = \prob^*(E\cap A_m) + \prob^*(E\cap B_{m-1}). \]
+	Thus using induction we can write
+	\[ \prob^*(E\cap B_m) = \sum_{n\leq m }\prob^*(E\cap A_n). \]
+\end{solution}
+
+\begin{problem}[From Rosenthal]
+	In this question covers some of the proves for constructing a uniform probability measure on $ \Omega = [0,1] $. Let $ \mathcal{I} $ be the set of all intervals in $ \Omega $, and let $ \mathcal{P}:\mathcal{I} \to [0,1] $ be a function that assigns the length of an interval to that interval. We want to prove that $ \mathcal{P} $ satisfies the property (2.3.3) of extension theorem (2.3.1) in Rosenthal. I.e. we want to prove that for $ A, A_1,\cdots \in \mathcal{I} $ such that $ A \subset \cup_{i}A_i$ satisfies 
+	\[ \prob(A) \leq \sum_{i} \prob(A_i). \]
+\end{problem}
+\begin{solution}
+	We will do this in three parts. 
+	\begin{enumerate}[(i)]
+		\item Step 1. First, we prove that for any finite $ A, A_1,\cdots,A_n \in\mathcal{I} $ collection where $ A \subset \cup_{i=1}^{n} A_i $ we have
+		\[ \prob(A) \leq \sum_{i=1}^{n} \prob(A_i). \]
+		To see this let $ A_1,A_2, A \in \mathcal{I} $ such that $ A \subset A_1 \cup A_2 $. We also assume that $ A_1\cap A \neq \emptyset $ as well as $ A_2 \cap A \neq \emptyset $. This is to ensure that we do not have redundant interval in our collection that does not cover $ A $. Note that from any collection of intervals we can put aside the redundant intervals and do our reasoning here and then finally at the last step consider the redundant intervals as well. So our assumption above does not lose the generality of the proof. Let $ a_i, b_i $ represent the left (right) endpoints of the intervals $ A_i $ and $ a_0,b_0 $ represent the left (right) endpoints of the interval $ A $. In order to the intervals $ A_1, A_2 $ to cover $ A $ white neither of them are redundant we need to have
+		\[ \min\set{a_1,a_2} \leq a_0 \leq a_2 \leq b_1 \leq b_0 \leq \max\set{b_1,b_2}. \]
+		Then it follows that 
+		\[ b_0 - a_0 \leq (b_1 - a_1) + (b_2 - a_2). \]
+		Thus this implies that 
+		\[ \prob(A) \leq \prob(A_1) + \prob(A_2). \]
+		We can generalize this by induction to any finite number of intervals.
+		\item Step 2. We now want to prove that for any countable \emph{open} intervals $ A_1,A_2,\cdots \in \mathcal{I} $ such that $ A \subset \cup_n A_n $ for $ A \in \mathcal{I} $ closed, we have
+		\[ \prob(A) \leq \sum_n \prob(A_n). \]
+		To see this, we will use the Heine-Borel theorem. Since the collection $ \set{A_1,A_2,\cdots} $ is an open cover for the closed set $ A $. if $ A $ is the whole space $ \Omega $, then the inequality that we want to show follows immediately (LHS is 1 while RHS is infinite). However, if $ A $ is not the whole space, then it is bounded. Thus $ A $ is closed and bounded, hence compact (by Heine-Borel). So the open cover has a finite sub-cover and this completes the proof by reducing this case to case (i) above.
+		\item Step 3. We now want to show that if $ A_1,A_2,\cdots \in \mathcal{I} $ is any countable collection of intervals, and if $ A \subset \cup_n A_n $ for any $ A \in \mathcal{I} $ then 
+		\[ \prob(A) \leq \sum_{i=1}^\infty\prob(A_i).  \]
+		{\color{red} \noindent TODO: TO BE COMPLETED}
+	\end{enumerate}
+	
+\end{solution}
+
+
+\begin{problem}[From Rosenthal]
+	Let $ \mathcal{A} = \set{(-\infty,x]\ :\ x\in \R} $. Prove that $ \sigma(\mathcal{A}) = \mathcal{B} $, i.e. that the smallest $ \sigma $-algebra of subsets of $ \R $ which contains $ \mathcal{A} $ is equal to the Borel $ \sigma $-algebra of subsets of $ \R $.
+\end{problem}
+\begin{solution}
+	By definition, we know that $ \mathcal{B} $ is the smallest $ \sigma\text{-algebra} $ that contains all of the intervals. However, we claim that the $ \sigma\text{-algebra} $ $ \sigma(\mathcal{A}) $ also contains all of intervals. To see this, let $ I $ be an interval which will have different cases $(-\infty,a),(-\infty,a],(a,b),[a,b],(a,b],[a,b),(a,\infty),[a,\infty) $. Each of these sets can be constructing by using the sets in $ s \sigma(\mathcal{A}) $ and using its sigma-algebra properties. Thus we showed that $ \sigma(\mathcal{A}) $ contains $ \mathcal{I} $ the set of all intervals. However, by definition $ \mathcal{B} $ was the smallest $ \sigma\text{-algebra} $ containing all of intervals. Thus the $ \sigma\text{-algebra} $ generated by $ \mathcal{A} $ (i.e. the smallest $ \sigma\text{-algebra} $ by definition) is equal to $ \mathcal{B} $. 
+\end{solution}
+
+\begin{problem}[From Rosenthal]
+	Prove the following statements. 
+	\begin{enumerate}[(a)]
+		\item Prove that the Cantor set $ K $ and its complement $ K^c $ is in $ \mathcal{B} $, the Borel set of the subset of $ [0,1] $.
+		\item Prove that $ K,K^c \in \mathcal{M} $, where $ \mathcal{M} $ is the $ \sigma\text{-algebra} $ by the extension applied for the uniform distribution on $ [0,1] $ (see theorem 2.4.4 Rosenthal).
+		\item Prove that $ K^c \in \mathcal{B}_1 $ where $ \mathcal{B}_1 $ is defined by (2.2.6) Rosenthal (i.e. the set of all finite or countable unions of intervals $ \mathcal{I} $).
+		\item Prove that $ \mathcal{B}_1 $ is not a $ \sigma\text{-algebra} $.
+		
+	\end{enumerate}
+\end{problem}
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item In the construction of the cantor set, at each step we remove the middle 1/3 of the intervals. So starting with $ I_0 = [0,1] $ at the first step we will get $ I_1 =  [0,1/3]\cup[2/3,1] $, etc. The Cantor set is $ I_0 \cap I_1 \cap I_2 \cap \cdots $. Since $ I_i \in \mathcal{B} $ for all $ i \in \N $, and $ \mathcal{B} $ is a $ \sigma\text{-algebra} $ and is closed under countable intersection, then $ K \in \mathcal{B} $ as well. It follows immediately that $ K^c \in \mathcal{B} $ as well, as $ \mathcal{B} $ is closed under complement.
+		\item Since $ \mathcal{M} \supset \mathcal{B}$, and as we showed above that $ K,K^c \in \mathcal{B} $, then $ K,K^c \in \mathcal{M} $ as well.
+		\item From the construction given in part (a), we have
+		\[ K = I_0 \cap I_1 \cap I_2 \cap \cdots. \]
+		From the De Morgan's law we will have
+		\[ K^c = I_0^c \cup I_1^c \cup I_2^c \cup \cdots. \]
+		Thus by definition of $ \mathcal{B}_1 $ we have $ K^c \in \mathcal{B}_1 $.
+		\item First, observe that (see Rosenthal page 17) that the Cantor set is uncountable. So there is no way to construct it by finite or countable union of singletons (which are in $ \mathcal{I} $). We can not construct it with the finite or countable union of any intervals as $ K $ is a nowhere dense set. I.e. for every interval $ (a,b) \in \mathcal{I} $ containing $ x \in K $ there exists, $ y\in \R $ such that $ y \notin K $. To put this precisely, let $ I_1,I_2,I_3,\cdots $ is collection of intervals such that $ I = \cup_n I_n $. Since $ K $ is nowhere dense, for any $ I_i $ in the collection that contains $ x \in K $ we can find some $ y \in \R $ that $ y \notin K $. This is a contradiction and we have $ I \subset \cup_n I_n $.
+		\item As we saw above, $ K^c \in \mathcal{B}_1 $ but $ K \notin \mathcal{B}_1 $. Thus $ \mathcal{B}_1 $ is not closed under complement, thus it is not a $ \sigma\text{-algebra} $.
+	\end{enumerate}
+\end{solution}
+
+\begin{problem}[An extension of the extension theorem (from Rosenthal)]
+	Let $ \mathcal{I} $ be a semialgebra of subsets of $ \Omega $. Let $ \prob:\mathcal{I}\to [0,1] $ with $ \prob(\emptyset) = 0 $ and $ \prob(\Omega) = 1 $, satisfying 
+	\[ \prob(\bigcup_n A_n) \geq \sum_n \prob(A_n)\ \qquad \text{for $ A_1,A_2,\cdots \in \mathcal{I} $ \emph{disjoint}, and $ \bigcup_n A_n \in \mathcal{I} $}, \]
+	as well as 
+	\[ \prob(A) \leq \prob(B), \qquad A \subseteq B, \]
+	and
+	\[ \prob(\bigcup_n B_n) \leq \sum_n \prob(B_n) \qquad \text{for $ B_1,B_2,\cdots \in \mathcal{I} $, and $ \bigcup_n B_n \in \mathcal{I} $}.\]
+	Then there exist a valid probability space $ (\Omega, \mathcal{M},\prob^*) $ such that $ \prob $ and $ \prob^* $ agree on the elements of $ \mathcal{I} $
+\end{problem}
+\begin{solution}
+	According to the extension theorem 2.3.1 we need to prove that these alternative statements implies $ 2.3.3 $. Let $ A, A_1,A_2,\cdots \in \mathcal{I} $ (note that the union of $ A_i $s do not belong to $ \mathcal{I} $ necessarily). Define
+	\[ B_n = A_n \cap A. \]
+	Then we will have $ A = \cup_n B_n $, thus $ \cup_n B_n \in \mathcal{I} $. So
+	\[ \prob(A) = \prob(\bigcup_n B_n) \leq \sum_n \prob(B_n) \leq \sum_n \prob(A_n). \]
+\end{solution}
+\begin{observation}
+	In the prove above, one might attempt 
+	\[ \prob(A) \leq \prob(\bigcup_i A_i) \leq \sum_i \prob(A_i) \]
+	where for the first inequality we use the monotnonicity (as $ A \subset \bigcup_i A_i $) and for the second inequality we use the countable sub additivity given in the statement of the theorem. However, this prove is \emph{wrong!}. Because we are not allowed to use the second inequality, as it does not satisfies the requirements for the sub-additivity statement to work. That is because $ \bigcup_n A_n $ may not be in $ \mathcal{I} $ necessarily.
+\end{observation}
+
+\begin{problem}[Uniqueness property of the extension theorem (from Rosenthal)]
+	Let $ \mathcal{I},\prob, \prob^* $ be the same as in Theorem 2.3.1 (Rosenthal). Let $ \mathcal{F} $ be any $ \sigma\text{-algebra} $ with $ \mathcal{I} \subseteq \mathcal{F} \subseteq \Omega $. Let $ \Q $ be any probability measure on $ \mathcal{F} $, such that $ \Q(A) = \prob(A) $ for all $ A \in \mathcal{I} $. Then prove that $ \Q(A) = \prob^*(A) $ for all $ A \in \mathcal{F} $.
+\end{problem}
+\begin{solution}
+	Let $ A \in \mathcal{F} $, and $ A_i \in \mathcal{I} $ for $ i=1,2,\dots $ such that $ A \subseteq \bigcup_i A_i $. Since $ \Q $ is a probability measure, then 
+	\[ \Q(A) \leq \Q(\bigcup_i A_i) \leq \sum_i \Q(A_i). \]
+	Then we can write
+	\begin{align*}
+		\prob^*(A) &= \inf_{\substack{A_1,A_2,\cdots \in \mathcal{I} \\ A \subseteq \bigcup_i A_i}}\sum_i \prob(A_i) \\
+		&= \inf_{\substack{A_1,A_2,\cdots \in \mathcal{I} \\ A \subseteq \bigcup_i A_i}}\sum_i \Q (A_i) \\
+		&\geq \inf_{\substack{A_1,A_2,\cdots \in \mathcal{I} \\ A \subseteq \bigcup_i A_i}}\Q(\bigcup_i A_i)\\
+		&\geq \inf_{\substack{A_1,A_2,\cdots \in \mathcal{I} \\ A \subseteq \bigcup_i A_i}}\Q(A)\\
+		& = \Q(A).
+	\end{align*}
+	However, we could do the same with $ A^c \in \mathcal{F} $, which would lead to
+	\[ \prob^*(A^c) \geq \Q(A^c). \]
+	Since $ \prob^*(A^c) = 1 - \prob^*(A) $ and $ \Q(A^c) = 1 - \Q(A) $, then this implies  $  \prob^*(A) \geq \Q(A)  $. Thus $ \prob^*(A) = \Q(A) $.
+\end{solution}
+
+
+\begin{problem}[Properties of Random Variables (from Rosenthal)]
+	\label{prob:capcupcapcup}
+	Prove the followings.
+	\begin{enumerate}[(i)]
+		\item If $ X,Y $ are random variables and $ c\in\R $, then $ X+c, cX, X^2, X+Y,  $ and $ XY $ are random variables. 
+		\item If $ Z_1,Z_2,\cdots $ are random variables such that $ \lim_{n\to \infty} Z_n(\omega) $ exists for all $ \omega\in \Omega $,, and $ Z(w) = \lim_{n\to \infty}Z_n(\Omega) $, then $ Z $ is also a random variable.
+	\end{enumerate}
+\end{problem}
+
+\begin{solution}
+	the proves are as follows.
+	\begin{enumerate}[(i)]
+		\item \begin{enumerate}[(a)]
+			\item $ \inv{(X+c)}((-\infty,x]) = \set{w\ :\ X(w)+c \leq x} = \set{w\ :\ X(w)\leq x-c} = \inv{X}((0\-\infty,x-c]) \in \mathcal{F} $.
+			\item Assume $ c\neq 0 $. Then $ \inv{(cX)}((-\infty, x]) = \set{w\ :\ cX(w) \leq x} = \set{w\ :\ X(w) \leq x/c}  = \inv{X}((-\infty,x/c]) \in \mathcal{F}. $ For the case were $ c=0 $, then $ cX \equiv 0 $ on all $ \Omega $, and this is a random variable as $ (\inv{cX})((0,x]) = \emptyset$ if $ x < 0 $ and $ (\inv{cX})((0,x]) = \Omega $ if $ x\geq 0 $.
+			\item $ X^2((-\infty,a]) = \set{w\ :\ X^2 \leq a} = \set{w\ :\ X \in [-\sqrt{a},\sqrt{a}]} \in \mathcal{F} $.
+			\item $ \inv{(X+Y)}((\infty,x]) = \set{w\ :\ X(w)+Y(w) < x} = \bigcup_{r\in \Q}(\set{X < r} \cap \set{Y<x-r}) $. Since this is a countable union, thus in $ \mathcal{F} $.
+			\item I have the following prove but I am not sure if it is a correct one or not. I feel that this is a correct proof as there seems to be nothing that can make it not to work.
+			\[ \inv{(XY)}((-\infty,x]) = \set{XY < x} = \bigcup_{n\in\N} (\set{X<n} \cap \set{Y<x/n}). \]
+			The following prove is the idea by Rosenthal. Once we know that $ X^2 $, $ X+Y $, and $ cX $ are random variables, then we can deduce $ XY $ is also a random variable as
+			\[ XY = \frac{1}{2}((X+Y)^2 - X^2 - Y^2)) \]
+		\end{enumerate}
+		\item In a nutshell this statements claims that the point-wise convergence of a sequence of random variables is a random variable. We need to show that the event $ \set{Z\leq r} \in \mathcal{F} $. To see this, let $ w \in \set{Z\leq r} $. This means that $ Z(w) \leq r $. Since $ Z_n(\omega) \to Z(\omega) $ as $ n\to \infty $, then this implies that $ \forall m \in \N $ there exists $ N \in \N $ such that $ \forall n > N $ we have $ Z_n(\omega) \leq r + \frac{1}{m} $. Thus we can write
+		\[ \set{Z(w) \leq r} = \bigcap_{m=1}^{\infty} \bigcup_{N=1}^{\infty} \bigcap_{n=N}^{\infty} \set{ Z_n(\omega) \leq r + \frac{1}{m}} \]
+	\end{enumerate}
+\end{solution}
+
+\begin{problem}
+	Let $ f:\R \to \R $ be continouse or piece-wise continuous function. Then $ f $ is a Borel function.
+\end{problem}
+\begin{solution}
+	We first prove the statement for a continuous function. To show that $ f $ is a Borel function we need to show $ \inv{f}(B) \in \mathcal{B} $ for $ B \in \mathcal{B}$. Since the pre-image preserves the union, intersection, and complements, and by definition for a continuous function the pre-image of an open set is an open set, and using the fact that we can write any Borel set as a countable intersection, union, or complements of open sets then we conclude that $ \inv{f}(B) \in \mathcal{B} $.
+	A second way to show this is observe that $ \inv{f}((x,\infty)) \in \mathcal{B} $ as $ (x,\infty) $ is open and $ f $ is continuous, thus its pre-image is also an open set thus a Borel set. Then its complement is also a Borel set, i.e.
+	\[ (\inv{f}((x,\infty)))^c = \inv{f}((-\infty,x]) \in \mathcal{B}. \]
+	Thus shows that $ f $ is a Borel function (since the pre-image of $ (0,x] $ is a Borel set.
+	
+	For the case where $ f $ is piece-wise continuous, by the definition of the piece-wise continuoity, $ f $ has at most countably many discontinuities. The we can write $ f $ as 
+	\[ f(x) = f_1(x)\mathds{1}_{I_1}(x) + f_2(x)\mathds{1}_{I_2}(x) + f_3(x)\mathds{1}_{I_3}(x)  + \cdots + f_n(x)\mathds{1}_{I_n}(x),  \]
+	where $ I_1,I_2,I_3\cdots,I_n  $ are disjoint intervals on which $ f_1,f_2,f_3,\cdots, f_n $ are continuous respectively. By the statement for the first part of the proof, we know that $ f_i $ is a Borel function (since it is continuous) as well as the indicator function $ \mathds{1}_{I_i} $. Their multiplication is also a Borel function and the sum of these Borel functions is a also a Borel function, thus $ f(x) $ is a Borel function.
+\end{solution}
+
+\begin{problem}
+	Prove that if $ A,B $ are two independent events, then $ (A^c, B) $, $ (A,B^c) $, and $ (A^c, B^c) $ are pairwise independent.
+\end{problem}
+\begin{solution}
+	Since $ A,B $ are independent, then $ \prob(A\cap B) = \prob(A) \prob(B)$. From the identity $ B = (B\cap A) \dot\cup (B\cap A^c) $. From the properties of the probability measure we have
+	\[ \prob(B) = \underbrace{\prob(A\cap B)}_{\prob(A)\prob(B)} + \prob(A^c \cap B). \]
+	Then we can write
+	\[ \prob(A^c\cap B) = \prob(B) - \prob(A\cap B) = \prob(B) (1-\prob(A)) = \prob(B)\prob(A^c). \]
+	Thus $ A^c,B $ are also independent events. We use a similar argument for $ A,B^c $. To show that the events $ A^c, B^c $ are also independent, we use the inclusion-exclusion principle. 
+	\[ \prob(A^c\cap B^c) = 1 - \prob(A\cup B) = 1 - (\prob(A)+\prob(B) - \prob(A)\prob(B)) = (1-\prob(A))(1-\prob(B))=\prob(A^c)\prob(B^c). \]
+	Another way of showing this without the inclusion-exclusion principle is to use the identity
+	\[ A^c = (A^c\cap B) \dot\cup (A^c\cap B^c). \]
+	Then 
+	\[ \prob(A^c) = \underbrace{\prob(A^c\cap B)}_{\prob(A^c)\prob(B)} + \prob(A^c\cap B^c). \]
+	We can write
+	\[ \prob(A^c \cap B^c) = \prob(A^c)(1-\prob(B)) = \prob(A^c) \prob(B^c).  \]
+\end{solution}
+\begin{problem}
+	Let $ X,Y $ be random variables, and $ f,g : \R \to \R $ be Borel functions. Then if $ X,Y $ are independent, $ f(X) $ and $ g(X) $ are also independent.
+\end{problem}
+\begin{solution}
+	Since $ X,Y $ are independent, thus for any $ S_1,S_2 \in \mathcal{B} $ we have
+	\[ \prob(\set{X \in S_1}\cap \set{Y\in S_2}) = \prob(\set{X\in S_1}) \prob(\set{Y \in S_2}). \]
+	Consider
+	\[ \prob(\set{f(X) \in S_1} \cap \set{g(Y) \in S_2})=\prob(\set{X \in \inv{f}(S_1)} \cap \set{Y \in \inv{g}(S_2)}) = \prob(\set{f(X) \in S_1}) \prob(\set{g(Y) \in S_2}). \]
+	The equality above hods because for any $ S_1, S_2 \in \mathcal{B} $ we have $ \inv{f}(S_1),\inv{g}(S_2) \in \mathcal{B} $, that is because $ f,g $ are Borel functions.
+\end{solution}
+
+\begin{problem}[Continuity of probabilities]
+	Prove that the probability measure function is continuous from bellow and above. I.e. for the continuity from below, let $ A, A_1, A_2,\cdots \in \mathcal{F} $ such that  $ \set{A_n}\nearrow A $, i.e. $ A_1 \subseteq A_2 \subseteq \cdots $ and $ A = \bigcup_n A_n $. Then $ \lim_{n\to \infty} \prob(A_n) = \prob(A) $. For the continuity from above, let $ A,A_1,A_2,\cdots \in \mathcal{F} $ such that $ \set{A_n}\searrow A $, i.e. $ A_1\subseteq A_2\subseteq \cdots $ and $ A = \bigcap_n A_n $, then $ \lim_{n\to \infty}\prob(A_n) = \prob(A) $.
+\end{problem}
+\begin{solution}
+	First, we prove the probability from below. In general, one can observe that if $ \set{A_n}\nearrow A $, then $ \set{\prob(A_n)} $ indeed converges as this is a bounded monotone sequence in $ \R $. However, to show that this sequence converges to $ \prob(A) $, we do as following. Consider the following sets
+	\[ B_1 = A_1, \qquad B_2 = A_2 \backslash A_1, \qquad B_3 = A_3 \backslash A_2, \cdots. \]
+	Then $ A = \dot\cup B_n $. Thus $ \prob(A) = \sum_{n=1}^{\infty}\prob(B_n) $. Thus the series on the rand hand side converges. This implies that the corresponding partial sums also converges. However, by the construction we have
+	\[ \prob(A_1) = \prob(B_1),\quad \prob(A_2) = \prob(B_1) + \prob(B_2)+ \cdots. \]
+	Thus the converges of the partial sums implies the convergence of $ \set{\prob(A_n)} $.
+	
+	For the proof for the continuity from above, first observe that if for a collection $ A,A_1,A_2,\cdots \in \mathcal{F} $ we have $ \set{A_n} \searrow A $, then this is equivalent to $ \set{A^c_n}\nearrow A^c $. This follows from the De Morgan's law as well as the change of the direction of the inclusion $ \subseteq $ under taking complements. By hypothesis we have $ \set{A_n}\searrow A $, which is equivalent to$ \set{A^c_n}\nearrow A^c $. From the first part of the proof, it follows that $ \lim_{n\to \infty}\prob(A^c_n) = \prob(A^c) $. Thus
+	\[ \lim_{n\to \infty}(1-\prob(A_n)) = 1 - \prob(A). \]
+	Note that $ \prob(A_n) $ converges to some real number as $ n\to \infty $, because it is a bounded decreasing sequence. Thus by the laws of the limit we can write
+	\[1 -  \lim_{n\to\infty} \prob(A_n) = 1 - \prob(A). \]
+	Then it follows that 
+	\[ \lim_{n\to \infty}\prob(A_n) = \prob(A). \]
+\end{solution}
+
+\begin{problem}[From Rosenthal]
+	Let $ A_1,A_2,\cdots,A_n \in \mathcal{F} $. Generalize the principle of inclusion-exclusion to:
+	\[ \prob(A_1\cup\cdots\cup A_n) = \sum_{i=1}^n A_i - \sum_{1\leq i < j \leq n} \prob(A_i \cap A_j) + \sum_{1\leq i < j < k \leq n} \prob(A_i \cap A_j \cap A_k) - \cdots \pm \prob(A_1\cap \cdots \cap A_n). \]
+	\emph{Hint: Expand $ 1 - \prod_{i=1}^n (1-\mathds{1}_{A_i}) $, and take expectation of both sides.}
+\end{problem}
+\begin{solution}
+	First, observe that $ \mathds{1}_{A^c} = 1 - \mathds{1}_A $. So
+	\[ 1 - \prod_{i=1}^n(1-\mathds{1}_{A_i}) = 1 - \prod_{i=1}^n \mathds{1}_{A_i^c} = 1 - \mathds{1}_{A_1^c\cap\cdots\cap A_n^c} = \mathds{1}_{A_1\cup\cdots\cup A_n}.  \]
+	On the other hand, 
+	\[ 1 - \prod_{i=1}^n (1-\mathds{1}_{A_i}) = \sum_{i=1}^{n}\mathds{1}_{A_i}  - \sum_{1 \leq i < j \leq n} \mathds{1}_{A_i \cap A_j} + \cdots \pm \mathds{1}_{A_1\cap\cdots\cap A_n}.  \]
+	So we have
+	\[ \mathds{1}_{A_1\cup\cdots\cup A_n} = \sum_{i=1}^{n}\mathds{1}_{A_i}  - \sum_{1 \leq i < j \leq n} \mathds{1}_{A_i \cap A_j} + \cdots \pm \mathds{1}_{A_1\cap\cdots\cap A_n}. \]
+	By applying the expectation to both sides we will get
+	\[ \prob(A_1\cup\cdots\cup A_n) = \sum_{i=1}^n A_i - \sum_{1\leq i < j \leq n} \prob(A_i \cap A_j) + \sum_{1\leq i < j < k \leq n} \prob(A_i \cap A_j \cap A_k) - \cdots \pm \prob(A_1\cap \cdots \cap A_n). \]
+\end{solution}
+
+\begin{problem}[From Rosenthal]
+	Let $ f(x) = ax^2 + bx + c $ be a second-degree polynomial function where $ a,b,c \in \R $.
+	\begin{enumerate}[(a)]
+		\item Find necessary and sufficient condition on $ a,b $ and $ c $ such that the equation $ \E{f(\alpha x)} = \alpha^2 \E{f(X)} $ holds for all $ \alpha \in \R $ and all random variable $ X $. 
+		\item Find necessary and sufficient condition on $ a,b $ and $ c $ such that the equation $ \E{f(x-\beta)} = \E{f(x)} $ holds of all $ \beta \in \R $ and all random variable $ X $.
+		\item Do parts $ (a) $ and $ (b) $ account for the properties of the variance function? Why or why not?
+	\end{enumerate}
+\end{problem}
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item For the LHS we have
+		\[ \E{\alpha^2 a x^2 + \alpha b x + c} = a\alpha^2 \E{x^2} + b\alpha \E{x} + c. \]
+		And for the RHS we have
+		\[ \alpha^2\E{f(x)} = a\alpha^2\E{x^2} + b\alpha^2 \E{x} + c\alpha^2. \] 
+		Thus the necessary and sufficient condition for the equality to hold for every $ \alpha \in \R $ is to have
+		\[ b = 0, \qquad c = 0. \]
+		\item For the LHS we have
+		\[ \E{f(x-\beta)} = a\E{x^2} + (b - 2a\beta)\E{x} + a\beta^2 - b\beta + c.  \]
+		For the RHS we have
+		\[ \E{f(x)} = a\E{x^2} + b\E{x} + c. \]
+		This implies that we need to have 
+		\[ a = 0, \qquad b = 0. \]
+		I.e. the polynomial should be a constant polynomial.
+		\item For the property $ \operatorname{Var}{(\alpha C)} = \alpha^2 \operatorname{Var}{(C)} $, it follows from the fact that in part (b) we found that for the polynomial we need to have $ b = 0 $ and $ c = 0 $. However, part (b) does not account for the property of variance that $ \operatorname{Var}(X+b) = \operatorname{Var}(X) $. Because in the case of $ \operatorname{Var} $ the constants of the polynomial depends on the random variable under consideration. I.e. we have
+		\[ b = - 2 \E{X}, \qquad c = \E{X}^2. \]
+	\end{enumerate}
+\end{solution}
+
+\begin{problem}[From Rosenthal]
+	Let $ X_1,X_2,\cdots $ be independent, each with mean $ \mu $ and variance $ \sigma^2 $, and let $ N $ be an integer-valued random variable with mean $ m $ and variance $ v $, with $ N $ independent of all the $ X_i $. Let $ S = X_1 + X_2 + \cdots + X_n = \sum_{i=1}^{\infty} X_i \mathds{1}_{N\geq i} $. Compute $ \operatorname{Var}(S) $ and $ \E{S} $.
+\end{problem}
+\begin{solution}[Using the conditional expectation]
+	For this problem we can either use the conditional expectation or use the first principles.
+	\[ \E{S} = \E{X_1+\cdots+X_N} = \sum_n \E{X_1+\cdots+X_n}\prob(N = n) = \mu \sum_n n \prob(N=n) = \mu m. \] 
+	Similarly we have
+	\begin{align*}
+		\E{S^2} &= \sum_n \E{S^2\ |\ N = n} \prob(N=n) \\
+		&= \sum_n \E{(X_1+\cdots+X_n)^2} \prob(N=n) \\
+		&= \sum_n \E{\sum_i X_i^2 + \sum_{i<j}X_iX_j} \prob(N=n) \\ 
+		&= \sum_n (\sum_i \E{X_i^2} + 2\sum_{i<j}\E{X_iX_j}) \prob(N=n) \\
+		&= \sum_n ((\sigma^2 + \mu^2)n + n(n-1)\mu^2) \prob(N=n)\\
+		&= (\sigma^2 + \mu^2)m + \mu^2(v+m^2 - m).
+	\end{align*}
+	Where we have used $ \E{X_i^2} = \operatorname{Var}(X_i) + \E{X_i}^2 = \mu^2 + \sigma^2 $, and also used the fact that the sum $ \sum_{i<j} $ has $ \binom{n}{2} $ terms.
+	Now we can compute the variance
+	\[ \operatorname{Var}(S) = \E{S^2} - \E{S}^2 = (\sigma^2 + \mu^2)m + \mu^2(v+m^2 - m) - \mu^2 m^2 = \sigma^2 m + \mu^2 v. \]
+\end{solution}
+\begin{problem}[from Rosenthal]
+	Let $ X,Z $ be independent random variables each with standard normal distribution. Let $ a,b\in \R $ (not both 0), and let $ Y = aX + bZ $.
+	\begin{enumerate}[(a)]
+		\item Compute $ \operatorname{Corr}(X,Y) $.
+		\item Show that $ \abs{\Corr(X,Y)} \leq 1 $.
+		\item Given necessary and sufficient conditions on the values of $ a $ and $ b $ such that $ \Corr(X,Y) = 1 $.
+		\item Given necessary and sufficient conditions on the values of $ a $ and $ b $ such that $ \Corr(X,Y) = -1 $.
+	\end{enumerate}
+\end{problem}
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item First, observe that 
+		\[ \E{X} = \E{Z} = 0, \quad \Var(X) = \Var(Y) = 1, \quad \E{Y} = a+b, \quad \Var(Y) = a^2 + b^2 \]
+		where we have used the properties of variance to compute $ \Var(Y) $. By the definition of correlation we have
+		\[ \Corr(X,Y) = \frac{\operatorname{Cov}(X,Y)}{\sqrt{\Var(X)\Var(Y)}} = \frac{\E{XY} - \E{X}\E{Y}}{\sqrt{a^2+b^2}} = \frac{a}{\sqrt{a^2+b^2}}. \]
+		
+		\item It follows immediately by
+		\[ \abs{\Corr(X,Y)} = \abs{\frac{1}{\sqrt{1+b^2/a^2}}} \leq 1. \]
+		
+		\item From our solution in part (a), the necessary and sufficient condition for $ \Corr(X,Y) = 1 $ is that $ b = 0 $ and $ a> 0 $.
+		
+		\item From the solution in part (a). the necessary and sufficient condition for $ \Corr(X,Y) = -1 $ is that $ b = 0 $ and $ a < 0 $.
+	\end{enumerate}
+	
+\end{solution}
+
+\begin{problem}[From Rosenthal]
+	Let $ X,Y $ be independent general non-negative random variables, and let $ X_n = \Psi_n(X) $, where $ \Psi_n(x) = \min(n,2^{-n}\floor{2^nx}) $.
+	\begin{enumerate}[(a)]
+		\item Give an example of a sequence of functions $ \Phi_n: [0,\infty) \to [0,\infty) $ other than $ \Phi_n = \Psi_n $, such that for all $ x $ we have $ 0 \leq \Phi_n(x) \leq x $ and $ \set{\Phi_n(x)}\nearrow x $ as $ n \to \infty $.
+		\item Suppose that $ Y_n = \Phi_n(Y) $ with $ \Phi_n $ as in part (a). Must $ X_n $ and $ Y_n $ be independent.
+		\item Suppose $ \set{Y_n} $ is an arbitrary collection of non-negative random variables such that $ \set{Y_n} \nearrow Y $. Must $ X_n $ and $ Y_n $ be independent?
+		
+		\item Under the assumption of part (c), determine which quantities in 4.2.7 are necessarily equal?
+	\end{enumerate}
+\end{problem}
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item Define
+		\[ f_n(x) = \min\set{n, \frac{1}{2^n}(\frac{1}{2}(2^n x + \floor{2^n x})) }. \] 
+		The graph of this function will be as follows.
+		\begin{figure}[h!]
+			\centering
+			\includegraphics[width=0.2\linewidth]{Images/PhiFunction}
+			\label{fig:phifunction}
+		\end{figure}
+		\FloatBarrier
+		
+		\item First observe that $ \Phi_n $ is a Borel measurable function as the pre-image of any open interval is a union of half open intervals or the empty set. Since $ X,Y $ are independent, then $ X_n, Y_n $ are also independent.
+		
+		\item No. We demonstrate a counterexample. Let 
+		\[ Y_n = \max\set{\Psi_n(Y) - \frac{1}{n^2}\Psi_n(X) , 0}. \]
+		
+		\item Since $ \set{X_n} \nearrow X $ and $ \set{Y_n } \nearrow Y $, then $ \set{X_n Y_n} \nearrow XY $. Thus by the monotone convergence theorem we have
+		\[ \E{XY} = \lim_n \E{X_n Y_n}. \]
+		Also since (by monotone convergence theorem) $ \E{X} = \lim_n \E{X_n} $ and $ \E{Y} = \lim_n \E{Y_n} $ then by the limit laws we have
+		\[ \lim_n \E{X_n} \E{Y_n} = \E{X} \E{Y}. \]
+		
+	\end{enumerate}
+\end{solution}
+
+\begin{problem}[From Rosenthal]
+	Give examples of a random variable $ X $ defined on Lebesgue measure on $ [0,1] $, such that 
+	\begin{enumerate}[(a)]
+		\item $ \E{X^+} = \infty $ and $ 0 < \E{X^-} < \infty $.
+		\item $ \E{X^-} = \infty $ and $ 0 < \E{X^+} < \infty $.
+		\item $ \E{X^+} = \E{X^-} = \infty $.
+		\item $ 0 < \E{X} < \infty $ but $ \E{X^2} = \infty $.
+	\end{enumerate}
+\end{problem}
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item Define 
+		\[ X^+ = 2\cdot \mathds{1}_{(1/2,3/4)} + \sum_{n=2}^\infty 2^n \cdot \mathds{1}_{(2^{-n}, 2^{-n+1})}, 
+		\qquad 
+		X^- = -2 \cdot \mathds{1}_{(3/4,1)}. \]
+		Then $ \E{X^+} = 1/2 + 1 + 1 + \cdots = \infty, \qquad \E{X^-} = 1/2 $.
+		
+		\item Similar to part (a) but exchange $ X^- $ and $ X^+ $.
+		
+		\item Define
+		\[ X^+ = \sum_{n\text{ even}} 2^n \cdot \mathds{1}_{(2^{-n}, 2^{-n+1})}, 
+		\qquad 
+		X^+ = \sum_{n\text{ odd}} 2^n \cdot \mathds{1}_{(2^{-n}, 2^{-n+1})}. \]
+		Clearly
+		\[ \E{X^+} = \E{X^-} = \infty. \]
+		
+		\item {\color{red} \noindent TODO: TO BE ADDED.}
+	\end{enumerate}
+\end{solution}
+
+
+
+
+\begin{problem}
+	An urn always contains 2 balls. Ball colors are red and blue. At each stage a ball  is randomly chosen and then replaced by a new ball, which with probability 0.8 is the same color, and with probability 0.2 is the opposite color, as the ball it replaces. If initially both balls are red, find the probability that the fifth ball selected is red. [This question is from Ross]
+	\begin{solution}
+		First, we need to translate this problem to a suitable Markov chain. There are many ways we can do so, each with its own pros and cons. The difference between all of these formulations come down to our choice for the state space (i.e. the co-domain of the random variable). For instance, we can assume that the state space is $S = \set{RR, RB, BB}$ that is the content of the Urn, or we can simply say that the state space is $S = \set{0,1,2}$ that is the number of red ball inside the Urn. Since these two sets are isomorphic (as there is a bijection between these two sets), but the actual choice depends on personal preference. Let's proceed with $S = \set{0,1,2}$. Then, we need to determine the transition matrix. We can do so by doing the first step argument. We start with $P(0,0)$. 
+		\[ P(0,0) = \prob(X_1 = 0|X_0 =0) = \prob(X_1=0|X_0=0,E_R)\underbrace{\prob(E_R|X_0=0)}_{0} + \underbrace{\prob(X_1=0|X_0=0,E_B)}_{0.8}\underbrace{\prob(E_B|X_0=0)}_{1}, \]
+		where $E_R$ is the event at which a red balls is drawn from the Urn, while $E_B$ is the event where a blue ball is drawn. The reason behind the values for the term above are very straight forward. For instance $\prob(E_R|X_0=0)=0$ because given the fact that number of red balls in the Urn is zero $(X_0 = 0)$, then the probability that we draw a red ball is zero (as there is not red balls in the Urn). For the term $\prob(X_1=0|X_0=0,E_B) = 0.8$, because given there is no red balls inside the urn, and also given the fact that the drawn ball is blue, the probability of ending up at the state $X_1=0$ (i.e. still no red balls) is that probability is that we replaced the drawn ball with a blue ball (same color) which has the probability $0.8$. Similarly, we can calculate the first step transition probabilities. 
+		\begin{align*}
+			&P(0,1) = \prob(X_1=1|X_0=0) = \prob_0(X_1=1) = \prob_0(X_1=1|E_R)\underbrace{\prob_0(E_R)}_{0} + \underbrace{\prob_0(X_1=1|E_B)}_{0.2}\underbrace{\prob_0(E_B)}_{1} = 0.2,\\
+			&P(0,2) = \prob(X_1=2|X_0=0) = \prob_0(X_1=2) = \prob_0(X_1=2|E_R)\underbrace{\prob_0(E_R)}_{0} + \underbrace{\prob_0(X_1=2|E_B)}_{0}\underbrace{\prob_0(E_B)}_{1} = 0,\\
+			&P(1,0) = \prob(X_1=0|X_0=1) = \prob_1(X_1=0) = \underbrace{\prob_1(X_1=0|E_R)}_{0.2}\underbrace{\prob_1(E_R)}_{0.5} + \underbrace{\prob_1(X_1=0|E_B)}_{0}\underbrace{\prob_1(E_B)}_{0.5} = 0.1.\\
+			&P(1,1) = \prob(X_1=1|X_0=1) = \prob_1(X_1=1) = \underbrace{\prob_1(X_1=1|E_R)}_{0.8}\underbrace{\prob_1(E_R)}_{0.5} + \underbrace{\prob_1(X_1=1|E_B)}_{0.8}\underbrace{\prob_1(E_B)}_{0.5} = 0.8.
+		\end{align*}
+		and so on. Then we will have the following transition matrix for this problem.
+		\[	M = \begin{pmatrix}
+			0.8 & 0.2 & 0 \\
+			0.1 & 0.8 & 0.1 \\
+			0 & 0.2 & 0.8
+		\end{pmatrix}\]
+		with the following graph
+		\begin{center}
+			\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=1.5cm,
+				semithick,scale=0.4]
+				\tikzstyle{every state}=[circle, draw, fill=orange!50,
+				inner sep=0pt, minimum size=15pt]
+				
+				\node[state] (A)              {$0$};
+				\node[state] (B) [right of=A] {$1$};
+				\node[state] (C) [right of=B] {$2$};
+				
+				\path 
+				(A) edge [loop left] node {$0.8$} (A)
+				(A) edge [bend left] node {$0.2$} (B)
+				(B) edge [loop above] node {$0.8$} (B)
+				(B) edge [bend left] node {$0.1$} (A)
+				(B) edge [bend left] node {$0.1$} (C)
+				(C) edge [bend left] node {$0.2$} (B)
+				(C) edge [loop right] node {$0.86$} (C);
+			\end{tikzpicture}
+		\end{center}
+		Now, we need to compute the probability that the fifth ball drawn is red. This means that we have already drawn four balls, and now we want to draw the fifth one. So, we need to consider the 4 step transition matrix, i.e. $M^4$. Then
+		\[ M^4 = \begin{pmatrix}
+			0.4872 & 0.4352 & 0.0776 \\
+			0.2176 & 0.5648 & 0.2176 \\
+			0.0776 & 0.4352 & 0.4872 \\
+		\end{pmatrix} \]
+		Given that we have started with 2 red balls, then the probability of finding the Urn with 0 red balls is $0.0776$, with 1 red ball is $0.4352$, and with 2 red balls is $0.4872$. So the probability that the next drawn balls is red is
+		\[ \prob(E_R) = \underbrace{\prob(E_R|X_4=0)}_{0}\underbrace{\prob(X_4=0)}_{0.0776} + \underbrace{\prob(E_R|X_4=1)}_{0.5}\underbrace{\prob(X_4=1)}_{0.4352} + \underbrace{\prob(E_R|X_4=2)}_{1}\underbrace{\prob(X_4=2)}_{0.4872} = 0.7048.  \]
+	\end{solution} 
+	
+\end{problem}
+
+\begin{problem}[Turning non-Markov processes to Markov-chain]
+	Suppose that whether or not it rains today depends on previous weather conditions through the last two days. Specifically, suppose that if it has rained for the past two days, then it will rain tomorrow with probability 0.7; if it rained today but not yesterday, then it will rain tomorrow with probability 0.5; if it rained yesterday but not today, then it will rain tomorrow with probability 0.4; if it has not rained in the past two days, then it will rain tomorrow with probability 0.2. [This question is from Ross]. Given that it rained on Monday and Tuesday, what is the probability that it will rain on Thursday?
+\end{problem}
+\begin{solution}
+	This random process is not a Markov chain, the value of the random variable at the next state, depends on two previous states. However, we can turn this into a Markov chain. Define the following states
+	\begin{quote}
+		$RR$: Rained yesterday and today.\\
+		$R\overline{R}$: Rained yesterday, but not today.\\
+		$\overline{R}R$: Not rained yesterday, but rained today.\\
+		$\overline{R}\overline{R}$: Not rained yesterday and today.
+	\end{quote}
+	Suppose that we are at state $RR$. Suppose that it rained yesterday and also today. Thus we are at state $RR$. If it rains tomorrow, then we will be still at state $RR$. That is because, That is because the yesterday of tomorrow is today! So if it rains tomorrow, since today (yesterday of tomorrow) was also rainy, thus if it rains tomorrow then we will stay at state $RR$. If it does not rain tomorrow, then we will get to state $\overline{R}R$. The following matrix is the transition matrix for this Markov chain
+	\[M = \begin{pmatrix}
+		0,7 & 0.3 & 0 & 0 \\
+		0 & 0 & 0.4 & 0.6 \\
+		0.5 & 0.5 & 0 & 0 \\
+		0 & 0 & 0.2 & 0.8
+	\end{pmatrix}\]
+	Now, to calculate the probability of raining on Thursday, given it rained on Monday and Tuesday, we first need to calculate the two step transition probability.
+	\[
+	M^2 = \begin{pmatrix}
+		\boxed{0.49} & 0.21 & \boxed{0.12} & 0.18 \\
+		0.2  & 0.2  & 0.12 & 0.48 \\
+		0.35 & 0.15 & 0.2  & 0.3  \\
+		0.1  & 0.1  & 0.16 & 0.64
+	\end{pmatrix}
+	\]
+	The probability to rain on Thursday is the sum of the boxed elements in the matrix above. So the desired probability is 
+	\[ p = 0.61. \]
+\end{solution}
+
+
+
+\begin{problem}
+	\label{exm:MarkovChain-EmptyFullUrns}
+	Suppose that balls are successively distributed among 8 urns, with each ball being equally likely to be put in any of these urns. What is the probability that there will be exactly 3 nonempty urns after 9 balls have been distributed? [Question from Ross]
+\end{problem}
+\begin{solution}
+Before going through the solution, it might be more informative to explicitly write down what is the sample space $ \Omega $. At each time step, we basically throwing a 8 sided dice, and then put a ball at the urn number $ i $ if the output of the dice is $ i $. So, each time we repeat the experiment, we will get a sequence of number each of which is one of $ 1,2,\cdots,8 $. So the sample space will be the set of all sequences consisting of number $ 1,\cdots,8 $.
+\[ \Omega = \set{21342\hdots, 44513\hdots, 11234\hdots, 88432\hdots, \cdots}. \]
+So, the outputs of the throwing dice at different steps are independent and identically distributed random variables. I.e. for a fixed $ \omega \in \Omega $, The $ t$-th element of the sequence is a random variable $ Y_t $ and all of the random variables $ \set{Y_t}_t $ are independent and identically distributed. Note that the sample space associated with these random variables is $ \set{1,2,3,4,5,6,7,8} $ (i.e. the sample space of a 8 sided dice experiment).w
+
+Let the random variable $X_n$ be the number of filled (non-empty) urns at step n. So the state space will be $S = \set{0,1,2,3,4,5,6,7,8}$, which is represented in the following graph.
+\begin{center}
+	\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=1.2cm,
+		semithick,scale=0.4]
+		\tikzstyle{every state}=[circle, draw, fill=orange!50,
+		inner sep=0pt, minimum size=15pt]
+		
+		\node[state] (A0)               {$0$};
+		\node[state] (A1) [right of=A0] {$1$};
+		\node[state] (A2) [right of=A1] {$2$};
+		\node[state] (A3) [right of=A2] {$3$};
+		\node[state] (A4) [right of=A3] {$4$};
+		\node[state] (A5) [right of=A4] {$5$};
+		\node[state] (A6) [right of=A5] {$6$};
+		\node[state] (A7) [right of=A6] {$7$};
+		\node[state] (A8) [right of=A7] {$8$};
+		%				\path 
+		%				(A) edge [loop left] node {$\frac{1}{2}$} (A)
+		%				(A) edge [bend left] node {$\frac{1}{2}$} (B)
+		%				(B) edge [loop right] node {$\frac{1}{2}$} (B)
+		%				(B) edge [bend left] node {$\frac{1}{2}$} (A);
+		
+	\end{tikzpicture}
+\end{center}
+This picture is not yet complete and we need to include the transition probabilities. We will do so by the first step argument. First, observe that $P(0,0) = 0$, because if we start with all of the urns empty, then after one step, we have put a ball somewhere, thus it is impossible to end up with zero filled urn. Similarly, $P(8,8) = 1$, that is because if all of the urns are filled, then adding any new ball somewhere to any of the urns will keep the number of filled urns at 8. Then for $X_0 =n$, i.e. starting with $n$ filled urns, we have
+\[ \prob_n(X_1=n-1) = 0. \]
+That is because starting with $n$ filled urns, after doing one step, it is not possible to have less urns filled. I.e. after each step, we can either end up with more filled urns or the same number of filled urns. For $P(n,n)$, define the event $E$ be the event of putting the ball in any of the filled urns. Thus $E^c$ will be the probability of putting the ball at one of the empty urns. 
+\[ \prob_n(X_1 = n) = \underbrace{\prob_n(X_1=n|E)}_{1}\underbrace{\prob_n(E)}_{n/8} + \underbrace{\prob_n(X_1=n|E^c)}_{0}\underbrace{\prob_n(E^c)}_{(8-n)/8} = \frac{n}{8}. \]
+Now for $\prob(n,n+1)$ we can write
+\[ \prob_n(X_1 = n+1) = \underbrace{\prob_n(X_1=n+1|E)}_{0}\underbrace{\prob_n(E)}_{n/8} + \underbrace{\prob_n(X_1=n+1|E^c)}_{1}\underbrace{\prob_n(E^c)}_{(8-n)/8} = 1-\frac{n}{8}. \]
+Thus the completed graph will be
+\begin{center}
+	\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=1.2cm,
+		semithick,scale=0.4]
+		\tikzstyle{every state}=[circle, draw, fill=orange!50,
+		inner sep=0pt, minimum size=15pt]
+		
+		\node[state] (A0)               {$0$};
+		\node[state] (A1) [right of=A0] {$1$};
+		\node[state] (A2) [right of=A1] {$2$};
+		\node[state] (A3) [right of=A2] {$3$};
+		\node[state] (A4) [right of=A3] {$4$};
+		\node[state] (A5) [right of=A4] {$5$};
+		\node[state] (A6) [right of=A5] {$6$};
+		\node[state] (A7) [right of=A6] {$7$};
+		\node[state] (A8) [right of=A7] {$8$};
+		
+		\path 
+		(A0) edge [bend left] node {$1$} (A1)
+		(A1) edge [bend left] node {$7/8$} (A2)
+		(A2) edge [bend left] node {$6/8$} (A3)
+		(A3) edge [bend left] node {$5/8$} (A4)
+		(A4) edge [bend left] node {$4/8$} (A5)
+		(A5) edge [bend left] node {$3/8$} (A6)
+		(A6) edge [bend left] node {$2/8$} (A7)
+		(A7) edge [bend left] node {$1/8$} (A8)
+		
+		(A1) edge [loop below] node {$1/8$} (A1)
+		(A2) edge [loop below] node {$2/8$} (A2)
+		(A3) edge [loop below] node {$3/8$} (A3)
+		(A4) edge [loop below] node {$4/8$} (A4)
+		(A5) edge [loop below] node {$5/8$} (A5)
+		(A6) edge [loop below] node {$6/8$} (A6)
+		(A7) edge [loop below] node {$7/8$} (A7)
+		(A8) edge [loop right] node {$1$} (A8)
+		
+		
+		;
+		%				\path 
+		%				(A) edge [loop left] node {$\frac{1}{2}$} (A)
+		%				(A) edge [bend left] node {$\frac{1}{2}$} (B)
+		%				(B) edge [loop right] node {$\frac{1}{2}$} (B)
+		%				(B) edge [bend left] node {$\frac{1}{2}$} (A);
+		
+	\end{tikzpicture}
+\end{center}
+The corresponding transition matrix will be
+\[
+M = \begin{pmatrix}
+	0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+	0 & 1/8 & 7/8 & 0 & 0 & 0 & 0 & 0 & 0 \\
+	0 & 0 & 1/8 & 6/8 & 0 & 0 & 0 & 0 & 0 \\
+	0 & 0 & 0 & 3/8 & 5/8 & 0 & 0 & 0 & 0 \\
+	0 & 0 & 0 & 0 & 4/8 & 4/8 & 0 & 0 & 0 \\
+	0 & 0 & 0 & 0 & 0 & 5/8 & 3/8 & 0 & 0 \\
+	0 & 0 & 0 & 0 & 0 & 0 & 6/8 & 2/8 & 0 \\
+	0 & 0 & 0 & 0 & 0 & 0 & 0 & 7/8 & 1/8 \\
+	0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 \\
+\end{pmatrix}
+\]
+The probability that after 9 steps, there are exactly three empty urns is $(M^9)_{(0,3)}$, which is
+\[ p = (M^9)_{(0,3)} \approx 0.007572. \]
+\end{solution}
+
+\begin{problem}
+	It is a good practice to derive the value of the transition probability of a simple Markov chain using the first principles. Consider the Markov chain representing a lamp that turns on with probability $1/2$ and turns off with probability $1/2$, and stays at the old state with probability $1/2$. Thus we will have the following diagram for this Markov chain.
+	\input{Images/explicitDerivationMarkovChainExample.tex}\\
+	In this example, the state space is $S = \{0,1\}$, and the sample space is
+	\[ \Omega = \{ (x_1,x_2,\cdots): x_i \in S \} \]
+	which is basically the set of all sequences of one's and zero's. Given this, the random variables $(X_n)_n$ defined t be
+	\[  X_n (\omega) = x_n, \]  
+	where $\omega \in \Omega$ and $x_n$ is the $n$-th letter in $\omega$. Intuitively speaking, we know that 
+	\[  P(1,0) = \prob(X_{n+1} = 1 | X_n = 0) = \frac{1}{2}. \]
+	However, here we want to derive that number more explicitly by working directly with the elements of the probability space. First, we need to determine the event associated with $X_{n+1} = 1$. This is the event that has elements where the $n+1$-th position is 1. I.e.
+	\[  E = \{  (x_1,x_2, \cdots, x_n, 1, x_{n+2}, \cdots) : x_i \in S\}.  \]
+	Similarly, we have
+	\[ F = \{ (x_1,x_2, \cdots, x_{n-1},0,x_{n+1},\cdots): x_i \in S \}. \]
+	So we have
+	\[ \prob(X_{n+1} = 1 | X_n = 0)  = \prob(E|F) = \frac{\prob(E\cap F)}{\prob(F)} =\frac{\prob(E\cap F)}{\prob(F\cap E) + \prob(F\cap E^c)} = \frac{\frac{1}{\abs{\Omega}}}{\frac{1}{\abs{\Omega}} + \frac{1}{\abs{\Omega}}} = \frac{1}{2}. \]
+	Note that $\prob(E\cap F) = \frac{1}{\abs{\Omega}}$, since out of many combinations of the sequence of zeros and ones, there is one one sequence whose $n$-th place is 0 and $n+1$-th place is 1. Furthermore, $\prob(F\cap E^c) = \frac{1}{\abs{\Omega}}$ as there is only one string where its $n$-th and $(n+1)$-th string are both zero. 
+\end{problem}
+
+\begin{problem}
+	In a sequence of independent flips of a fair coin, let N denote the number of flips until there is a run of three consecutive heads. Find
+	\begin{enumerate}[(a)]
+		\item $\prob(N\leq 8)$,
+		\item $\prob(N = 8)$.
+	\end{enumerate}
+\end{problem}
+\begin{solution}
+	Let $X_n$ denote the number of consecutive heads at step $n$. For instance for the outcome $\omega \in \Omega$ where $\omega = HTTHTTHHHTTHT\hdots$, $X_2(\omega) = 0$ since the second symbol is $T$ thus there is no consecutive heads. But $X_4(\omega) = 1$, as there is one consecutive heads at step 4. Lastly $X_9(\omega) = 3$, since there is three consecutive heads at step 9. This Markov chain will have the following transition diagram.
+	
+	\begin{center}
+		\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.1cm,
+			semithick,scale=0.7]
+			\tikzstyle{every state}=[circle, draw, fill=orange!50,
+			inner sep=0pt, minimum size=15pt]
+			
+			\node[state] (A1)              {$1$};
+			\node[state] (A2) [right of = A1] {$2$};
+			\node[state] (A0) [above=of $(A1)!0.5!(A2)$,yshift=-1cm]   {$0$};
+			\node[state] (A3) [right of = A2] {$3$};
+			
+			\path 
+			(A0) edge [loop above] node {$0.5$} (A0)
+			(A0) edge [bend left] node [sloped,below] {$0.5$} (A1)
+			(A1) edge [bend left] node [sloped] {$0.5$} (A0)
+			(A2) edge node [above, sloped] {$0.5$} (A0)
+			(A1) edge node [below] {$0.5$} (A2)
+			(A2) edge node {$0.5$} (A3)
+			(A3) edge [loop right] node {$1$} (A3)
+			;
+			
+			%				\path 
+			%				(A) edge [loop left] node {$\frac{1}{2}$} (A)
+			%				(A) edge [bend left] node {$\frac{1}{2}$} (B)
+			%				(B) edge [loop right] node {$\frac{1}{2}$} (B)
+			%				(B) edge [bend left] node {$\frac{1}{2}$} (A);
+			
+		\end{tikzpicture}
+	\end{center}
+	The transition probabilities are simply computed by the first step argument. For instance, for $P(0,1)$ we have
+	\[ \prob_0(X_1 = 1) = \underbrace{\prob_0(X_1 = 1|H)}_{1}\underbrace{\prob_0(H)}_{1/2} + \underbrace{\prob_0(X_1 = 1|T)}_{0}\underbrace{\prob_0(T)}_{1/2}, \]
+	where $H$ is the event that the flipped coin is heads and $H^c = T$. The transition matrix for this Markov chain will be
+	\[
+	M = \begin{pmatrix}
+		0.5 & 0.5 & 0 & 0 \\
+		0.5 & 0 & 0.5 & 0 \\
+		0.5 & 0 & 0 & 0.5 \\
+		0 & 0 & 0 & 1 \\
+	\end{pmatrix}
+	\]
+	Since the state $3$ is an absorbing state, then if we get there we will be there for the rest of our life! Thus the probability that the random walker has got there for $N\leq 8$ is simply $(M^8)_{(0,3)}$. Then
+	\[ \prob(N\leq 8) = 0.4180. \]
+	Now for part (b), the probability that the random walker has arrived at the state 3 right at the step 8, is
+	\[ \prob(N = 8) = \prob(N\leq 8) - \prob(N\leq 7) = 0.0508. \]
+	
+	There is yet another approach that we can compute the probability $\prob(N=8)$. To do this, we need to consider 4 states $S = \set{0,1,2,3,4}$ where the state 4 is of when 3 consecutive heads has occurred at the past. So when the random walker enters the state 3 at some time, it moves to the state $4$ at the next time and remains there forever. The state diagram will be
+	
+	\begin{center}
+		\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2cm,
+			semithick,scale=0.7]
+			\tikzstyle{every state}=[circle, draw, fill=orange!50,
+			inner sep=0pt, minimum size=15pt]
+			
+			\node[state] (A1)              {$1$};
+			\node[state] (A2) [right of = A1] {$2$};
+			\node[state] (A0) [above=of $(A1)!0.5!(A2)$,yshift=-1cm]   {$0$};
+			\node[state] (A3) [right of = A2] {$3$};
+			\node[state] (A4) [right of = A3] {$4$};
+			
+			
+			\path 
+			(A0) edge [loop above] node {$0.5$} (A0)
+			(A0) edge [bend left] node [sloped,below] {$0.5$} (A1)
+			(A1) edge [bend left] node [sloped] {$0.5$} (A0)
+			(A2) edge node [above, sloped] {$0.5$} (A0)
+			(A1) edge node [below] {$0.5$} (A2)
+			(A2) edge node {$0.5$} (A3)
+			(A3) edge node {$1$} (A4)
+			(A4) edge [loop right] node {$1$} (A4)
+			;
+			
+			%				\path 
+			%				(A) edge [loop left] node {$\frac{1}{2}$} (A)
+			%				(A) edge [bend left] node {$\frac{1}{2}$} (B)
+			%				(B) edge [loop right] node {$\frac{1}{2}$} (B)
+			%				(B) edge [bend left] node {$\frac{1}{2}$} (A);
+			
+		\end{tikzpicture}
+	\end{center}
+	Then the transition matrix will be
+	\[
+	M = \begin{pmatrix}
+		0.5 & 0.5 & 0 & 0 & 0 \\
+		0.5 & 0 & 0.5 & 0 & 0 \\
+		0.5 & 0 & 0 & 0.5 & 0 \\
+		0 & 0 & 0 & 0 & 1 \\
+		0 & 0 & 0 & 0 & 1
+	\end{pmatrix}
+	\]
+	Then the probability $\prob(N=8) = (M^8)_{(0,3)} = 0.05080.$
+\end{solution}
+
+
+\begin{problem}[Gambler's Ruin]
+	Suppose Alice and Bob have in total of $N$ coins. Alice and Bob play a game with a fair coin. When Alice wins, gets a coin from Bop, and vise versa. What is the probability that Alice wins if she starts with $0\leq a \leq N$ coins.
+\end{problem}
+\begin{solution}
+	There are many ways to tackle a probability problem like this and the solution presented here is not the only way to find the solution to this problem. We want to model this with Markov chain whose state space is $\{0,1,2,\cdots,N\}$. Thus $X_n$ represents the fortune of Alice after playing the games for $n$ times. 
+	\input{Images/GamblersRuinExample.tex} \\
+	Let $p_a$ be the probability of Alice wining if she starts with $a$ coins. First, observe that $p_0 = 0$ and $p_N= 1$. Let $E$ denote that event of Alice wining the whole game. Also, let $F_1$ be the event in which she looses the first game and $F_2$ the event in which she wins the first game. Then
+	\[ p_a = \prob_a(E) =  \underbrace{\prob_a(E | F_1)}_{\prob(E|F_1,X_0=a)} \prob(F_1) + \underbrace{\prob_a(E|F_1^c)}_{\prob(E|F_1^c,X_0=a)}\prob(F_1^c) \]
+	(note that this identity is actually true for any set $F_1$, but here $F_1$ is the specific event explained above). The probability that she looses or wins the first game is $\frac{1}{2}$. Also, observe that $\prob_a(E|F_1) = p_{a+1}$ (since if she wins the first game she will have one more coin) and $\prob_a(E|F_1^c) = p_{a-1}$. Thus 
+	\[ p_a = \frac{1}{2}p_{a+1} + \frac{1}{2}p_{a-1}. \]
+	Now we can solve this recurrent equation with the characterization polynomial which is $2 = X + 1/X$ or $X^2 - 2X + 1 = (X-1)^2 = 0$. Thus the characteristic polynomial has a double root. Thus 
+	\[ p_a = (Aa + B)(1)^a = Aa + B. \]
+	Since $p_0 = 0,\ p_N =1$, then it turns out that
+	\[ p_a = \frac{a}{N}. \]
+\end{solution}
+
+\begin{problem}[Gambler's Ruin with Draw]
+	Let Alice and Bob play Rock-Paper-Scissors. If Alice and Bob has a total of $N$ coins, and at each play, the winner gets one coin from the loser, what is the probability that Alice will win the game if he starts with $a$ coins. When they draw, then they repeat the game (or equivalently, they play another game without any coins exchange).
+\end{problem}
+\begin{solution}
+	We need to do a first step analysis similar to what we did before. Let $E$ be the event that Alice wins the whole game, and the event $F=F_{-1}\cup F_0 \cup F_1$ where
+	\begin{quote}
+		$F_{-1}$: Alice loses the first game,\\
+		$F_0$: Alice draws the first game,\\
+		$F_1$: Alice wins the first game.
+	\end{quote}
+	It is clear that $\prob(F) = 1$, since the components are mutually disjoint. Thus $E\cap F_{-1},\ E\cap F_0,\ E\cap F_1$ are also mutually disjoints where. Thus we can write
+	\[\prob_a(E) = \prob_a(E\cap F_{-1}) + \prob_a(E\cap F_0) + \prob_a(E\cap F_1)
+	= \prob_a(E|F_{-1})\prob_a(F_{-1}) + \prob_a(E|F_0)\prob_a(F_0) + \prob_a(E|F_1)\prob_a(F_1).
+	\]
+	Since the game is fair we know
+	\[ \prob_a(F_{-1}) = \prob_a(F_0) = \prob_a(F_1) = \frac{1}{3}.  \]
+	Furthermore, we know
+	\[ \prob_a(E|F_{-1}) = p_{a-1}, \qquad \prob_a(E|F_0) = p_a, \qquad \prob_a(E|F_1) = p_{a+1}. \]
+	Thus the first step analysis will lead to the following identity.
+	\[  \prob_a(E) = p_a = \frac{1}{3} ( p_{a-1} + p_{a} + p_{a+1}),\]
+	which after simplification becomes
+	\[ 2p_a = p_{a-1} + p_{a+1}, \]
+	which is the same recursive formula we got in the previous example. So the possibility of the draw, will not change the behaviour of the system.
+\end{solution}
+
+\begin{problem}
+	Consider the a simple random walker on the following graph. Let $B = \{ T_{\tilde{x}} < T_{\set{\tilde{z},\tilde{y}}} \}$. Compute the probability $\prob_0(B)$.
+	
+	\begin{center}
+		\begin{tikzpicture}[scale=1.5, every node/.style={circle, draw}]
+			\tikzstyle{every node}=[circle, draw, fill=white,
+			inner sep=0pt, minimum width=15pt]
+			
+			\node[fill=cyan!50] (a) at (0,0) {0};
+			\node[fill=orange!50] (z1) at (1/2,0) {$z$};
+			\node[fill=orange!50] (z2) at (2/2,0) {};
+			\node[fill=orange!50] (z3) at (3/2,0) {\ };
+			\node[fill=orange!50] (z4) at (4/2,0) {\ };
+			\node[fill=red!50] (ze) at (5/2,0) {$\tilde{z}$};
+			
+			\node[fill=orange!50] (x1) at (-1/2,1/2) {$x$};
+			\node[fill=green!50] (xe) at (-1,1) {$\tilde{x}$};
+			
+			\node[fill=orange!50] (y1) at (-1/2,-1/2) {$y$};
+			\node[fill=orange!50] (y2) at (-2/2,-2/2) {};
+			\node[fill=red!50] (ye) at (-3/2,-3/2) {$\tilde{y}$};
+			
+			
+			\draw (a) -- (z1);
+			\draw (z1) -- (z2);
+			\draw (z2) -- (z3);
+			\draw (z3) -- (z4);
+			\draw (z4) -- (ze);
+			
+			\draw (a) -- (y1);
+			\draw (y1) -- (y2);
+			\draw (y2) -- (ye);
+			
+			\draw (a) -- (x1);
+			\draw (x1) -- (xe);
+			
+		\end{tikzpicture}
+	\end{center}
+\end{problem}
+\begin{solution}
+	This problem is simply asking what is the probability that we hit $\tilde{x}$ state before hitting any of $\tilde{y}$ or $\tilde{z}$ states, given the fact that the random walker starts from the state $0$. To keep unnecessary details out of the way, we have only labeled the vertices that we will use in our analysis. We will have the following notation to simplify the solution
+	\[ p_v = \prob_v(B), \]
+	where $v$ is any vertex in the graph. Note that starting at 0, i.e. $X_0=0$, then going to any of the states $x,y$, or $z$, are mutually disjoint events, and the probability of the union of these events is one. With our first time step analysis (see \autoref{prop:FirstTimeStepArgument}) we can write
+	\[ \prob_0(B) = \frac{1}{3} ( p_x + p_y + p_z). \]
+	Now we need to analyze each of terms in the RHS. Let's start with $p_z$. Consider two events $\{ T_0 < T_{\tilde{z}}  \}$ and $\{ T_0 > T_{\tilde{z}}  \}$, where the first time is the event where the random walker hits the $0$ state before hitting the $\tilde{z}$ step first, and the second one is the vice versa. These two events are disjoint and the probability of the union is 1. Thus we write the conditional expansion of $p_z$ based on these events
+	\[ p_z = \prob_z(B) = \prob_z(B|T_0 < T_{\tilde{z}})\prob_z(T_0 < T_{\tilde{z}}) + \prob_z(B|T_0 > T_{\tilde{z}})\prob_z(T_0 > T_{\tilde{z}}). \]
+	We know that $\prob_z(B|T_0 > T_{\tilde{z}}) = \prob(B|X_0=z,X_i=\tilde{z})$ for some $i > 0$. From Markov property it follows that 
+	\[ \prob(B|X_0=z,X_i=\tilde{z}) = \prob(B|X_i=\tilde{z}) = \prob(B|X_0 = \tilde{z})  = p_{\tilde{z}}.\]
+	Also $\prob_z(B|T_0<T_{\tilde{z}}) = \prob_0(B) = p_0$ by the Markov property. Lastly, $\prob_z(T_0<T_{\tilde{z}})$ is determined by the Gambler's ruin method we say before, which is basically
+	\[ \prob_z(T_0 < T_{\tilde{z}}) = \frac{5}{4}, \qquad \prob_z(T_0>T_{\tilde{z}}) = \frac{1}{5}. \]
+	By doing the same kind of analysis for $p_x$ as well as $p_y$ we will get
+	\[ p_z = \frac{4}{5}p_0 , \qquad p_y = \frac{2}{3}p_0, \qquad p_x =\frac{1}{2}p_0 + \frac{1}{2}. \]
+	Now by substituting in the identity we got from the first time step argument, we can fine that 
+	\[ p_0 = \frac{15}{31}, \]
+	And this completes our solution for the problem.
+\end{solution}
+
+\begin{problem}
+	Consider the graph $\gamma=  (V,E)$ drawn below. Set $Z = \{2,3\}$, and $W = \set{6,9}$. Compute $\prob_0(T_Z<T_W)$. In colors: we start at blue, win if we reach green, and lose of we reach red.
+	
+	\begin{center}
+		\begin{tikzpicture}[scale=1.5, every node/.style={circle, draw}]
+			\tikzstyle{every node}=[circle, draw, fill=orange!50,
+			inner sep=0pt, minimum width=15pt]
+			
+			\node[fill=blue!50] (n0) at (1/2,0) {0};
+			\node (n1) at (0/2,0) {1};
+			\node[fill=green!50] (n2) at (-1/2,-1/2) {2};
+			\node[fill=green!50] (n3) at (-1/2,1/2) {3};
+			\node (n4) at (-2/2,2/2) {4};
+			\node (n5) at (2/2,-1/2) {5};
+			\node[fill=red!50] (n6) at (3/2,-2/2) {6};
+			\node (n7) at (2/2,1/2) {7};
+			\node (n8) at (3/2,2/2) {8};
+			\node[fill=red!50] (n9) at (3/2,0/2) {9};
+			
+			
+			\draw (n0) -- (n1);
+			\draw (n1) -- (n2);
+			\draw (n1) -- (n3);
+			\draw (n3) -- (n4);
+			\draw (n0) -- (n7);
+			\draw (n0) -- (n5);
+			\draw (n5) -- (n6);
+			\draw (n7) -- (n9);
+			\draw (n7) -- (n8);
+			
+		\end{tikzpicture}
+	\end{center}
+\end{problem}
+
+\begin{solution}
+	As always, we start with our powerful tool in hand, which is the first step argument (which is basically a special form of the more general conditional expansion). We start with first step argument at state $0$. We will get
+	\[ \prob_0(B) = \frac{1}{3} (\prob_1(B) + \prob_7(B) + \prob_5(B) ), \]
+	and now we need to analyze each of the terms in the right hand side. We start with $\prob_5(B)$ which is the most straight forward one. As we saw in the last example, we can analyze this state with a conditional expansion on the two disjoint events, whose union probability is 1. Let those two events be $\set{T_6 < T_0}$ (where the random walker hits the state $6$ before hitting the state $0$), and $\set{T_6 > T_0}$, where the random walker hits the state $0$ before hitting the state $6$. Thus the expansion will be
+	\[ \prob_5(B) = \prob_5(B|T_6 < T_0) \prob_5(T_6 < T_0) + \prob_5(B|T_6 > T_0)\prob_5(T_6 > T_0). \]
+	We know that if we hit the state $6$ before $0$, we have no chance to hit any of the green states (we will lose). Thus
+	\[ \prob_5(B|T_6<T_0) = 0. \]
+	And from the Gambler's ruin we know that $\prob_5(T_6>T_0) = 1/2$, and from the Markov property we know that $\prob_5(B|T_6>T_0) = \prob_0(B)$, because the conditional probability $\prob_5(B|T_6>T_0)$ is basically stating what is the probability of $B$ happening, if we start from $5$ and $X_i = 0$ for some $i$ in the future. Thus 
+	\[ \prob_5(B) = \frac{\prob_0(B)}{2}. \]
+	Now, we need to analyze the term $\prob_1(B)$. Again, at this step, we do another first step analysis.
+	\[  \prob_1(B) = \frac{1}{3} (\underbrace{\prob_3(B)}_{=1} + \underbrace{\prob_2(B)}_{=1} +\prob_0(B)) = \frac{2+\prob_0(B)}{3}. \]
+	Note that from the assumption, we know that if we reach any of green states, then we are declared winner, that is why we have $\prob_3(B) = \prob_2(B) = 1$. Now it only remains to analyze the term $\prob_7(B)$. Again, similar to the case above, we do a first time step argument
+	\[ \prob_7(B) = \frac{1}{3} ( \prob_0(B) + \underbrace{\prob_8(B)}_{=\prob_7(B)} + \underbrace{\prob_9(B)}_{=0} ) \implies \prob_7(B) = \frac{\prob_0(B)}{2}.\]
+	Note that $\prob_8(B) = \prob_7(B)$ by a first stem analysis when starting at the state $8$. Putting all of these terms back to the original identity we derived the first, we can conclude that 
+	\[ p_0 = \prob_0(B) = \frac{2}{5}. \]
+\end{solution}
+
+
+\begin{problem}
+	The French roulette game has slots numbered from 0 to 36. The slot 0 is green, Among the slots from 1 to 36, 18 are black and 18 are red. Alex goes to a casino to play roulette. Their strategy is to always bet ``red''. They start with 50 coins, play 1 coin each turn, and stop when reaching 100 or getting broke.
+	\begin{enumerate}[(a)]
+		\item What is the probability that Alex reaches 100?
+		\item How many coins should Alex start with to have about $50\%$ chance to reach 100?
+	\end{enumerate}
+\end{problem}
+
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item
+		Let $B$ be the event $B = \set{T_{100} < T_0}$ and we are looking for $\prob_a(B)$ where $0 \leq a \leq 100$ and indicates the number of coins we are starting with. First observe that
+		\begin{itemize}
+			\item $p_0 = 0$: Since if we start with zero coins we are already broken and the game is over.
+			\item $p_{100} = 1$: Since if we start with 100 coins then we won the game and the game is finished.
+		\end{itemize}
+		To compute the probability for intermediate values of $a$, we do the first step argument. Let $WF$ be the event where Alex wins the first bet, and $LF$ the event where Alex loses the first bet. Then we can write
+		\[ p_a = \prob_a(B) = \prob_a(B|WF)\prob_a(WF) + \prob_a(B|LF) \prob_a(LF). \]
+		Since there are 18 red spots, then the chance to win the first bet is
+		\[ \prob_a(WF) = \frac{18}{37}. \]
+		and since there are 19 non-red spots in total, then the chance to win is
+		\[ \prob_a(LF)  = \frac{19}{37}.\]
+		Also, from Markov property, we know that
+		\[ \prob_a(B|WF)= p_{a+1}, \qquad \prob_a(B|LF)=p_a. \]
+		Thus the first step argument formula will be
+		\[  p_a = \frac{18}{37}p_{a+1} + \frac{19}{37}p_{a-1} \implies \boxed{37p_a = 18p_{a+1} + 19p_{a-1}}. \]
+		The characteristic equation for the recursive equation is
+		\[ 37 = 18 x + \frac{19}{x} \implies \boxed{18x^2 - 37x + 19 = 0}. \]
+		We can write it as $(x-1)(18x-19) = 0$. Thus the roots will be
+		\[ r_1 = 1, \qquad r_2 = \frac{19}{18}. \]
+		So
+		\[ p_a = A + Br_2^a. \]
+		To fine $A$ and $B$ we use the fact $p_0 = 0$, and $p_{100} = 1$. Then $A = -B$, and $A = 1/(1-r_2^{100})$. Thus
+		\[ \boxed{p_a = \frac{1-r_2^a}{1-r_2^{100}}}.  \]
+		
+		\item  We basically need to compute find $a$ for which $p_a = 1/2$. Thus we need to solve for $a$
+		\[ \frac{1-r_2^a}{1-r_2^{100}} = \frac{1}{2}. \]
+		After some algebra we will find
+		\[  \boxed{a = \frac{\ln(\frac{1+r_2^{100}}{2})}{\ln(r_2)} \approx 87.26}.  \]
+		Thus we need to start with at least 88 coins to have a $50\%$ chance of winning.
+	\end{enumerate}
+	\qed
+\end{solution}
+
+
+\begin{problem}
+	There are 6 coins on a table, each showing heads (H) or tails (T). In each step we 
+	\begin{itemize}
+		\item Select uniformly one of the coins. 
+		\item If it is heads, toss it and replace on the table (with random side).
+		\item If it sis tails, toss it. If it comes up heads, leave it at that. If it comes up tails, toss it a second time, and leave the result as it is.
+		Let $X_n$ be the number of heads showing after $n$ such steps. Answer the following questions
+		\begin{enumerate}[(a)]
+			\item Determine the transition probabilities for this Markov chain.
+			\item Draw the transition diagram and write the transition matrix.
+			\item What is $\prob(X_2 = 4| X_0=5)$?
+		\end{enumerate}
+	\end{itemize}
+\end{problem}
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item To compute the transition probabilities, we need to perform the first step analysis. Let the events \[I = \set{X_1 = a+1},\qquad S = \set{X_1 = a},\qquad D = \set{X_1 = a-1},\]
+		where $0 \leq a \leq 6$ is the number of heads. So to compute the transition probabilities, we need to compute
+		\[ P(a,a+1) = \prob_a(I), \qquad P(a,a) = \prob_a(S), \qquad P(a,a-1) = \prob_a(D). \]
+		We start with $\prob_a(I)$. Let $ST$ be the event where the selected coin is tails, and $SH$ be the event where the selected coin is heads. These two events are disjoint and the probability of their union is 1, thus
+		\[ \prob_a(I) = \underbrace{\prob_a(I|SH)}_{\text{see Eq (2.I.1)}}\underbrace{\prob_a(SH)}_{\frac{a}{6}} + \underbrace{\prob_a(I|ST)}_{\text{see Eq (2.I.2)}}\underbrace{\prob_a(ST)}_{\frac{6-a}{6}}. \tag{2.I}\]
+		Note that if we start with $a$ coins heads, then the chance we choose a random coin from the table and find it heads is $\frac{a}{6}$, hence $\prob_a(SH) = \frac{a}{6}$, and $\prob_a(ST) = \frac{6-a}{6}$. Now we need to expand the remaining terms with appropriate conditioning. Let $TT$ be the event where we toss a coin and find it tails and $TH$ be the event where we toss a coin and find it heads. Thus we can write
+		\[ \prob_a(I|SH) = \underbrace{\prob_a(I|SH,TH)}_{0}\underbrace{\prob_a(TS)}_\frac{1}{2} + \underbrace{\prob_a(I|SH,TT)}_{0}\underbrace{\prob_a(TT)}_\frac{1}{2}. \tag{2.I.1}  \]
+		Note that $\prob_a(TT) = \prob_a(TH) = \frac{1}{2}$, since the coin tossing is fair. Also, note that $\prob_a(I|SH,TH)=\prob_a(I|SH,TT)=0$ since if we select a heads, and then toss it, finding it either heads or tails will not increase the total number of heads on the table. Similarly, for the other term in $(2.1)$ we have
+		\[ \prob_a(I|ST) = \underbrace{\prob_a(I|ST,TH)}_{1}\underbrace{\prob_a(TH)}_{\frac{1}{2}} + \underbrace{\prob_a(I|ST,TT)}_\text{see Eq (2.I.3)}\underbrace{\prob_a(TT)}_{\frac{1}{2}}. \tag{2.I.2} \]
+		Now we need to expand the remaining terms in the equation above.
+		\[ \prob_a(I|ST,TT) = \underbrace{\prob_a(I|ST,TT,TH)}_{1}\prob_a(TH) + \underbrace{\prob_a(I|ST,TT,TT)}_{0}\prob_a(TT) = \frac{1}{2}. \tag{2.I.3}  \]
+		Putting all together we can write
+		\[ \boxed{P(a,a+1) = \prob_a(I) = \frac{6-a}{8}}. \]
+		Similarly, we can compute other transition probabilities. For instance for $\prob_a(S)$ we can write
+		\[ \prob_a(S) = \underbrace{\prob_a(S|SH)}_{\text{see Eq (2.S.1)}}\underbrace{\prob_a(SH)}_{\frac{a}{6}} + \underbrace{\prob_a(S|ST)}_{\text{see Eq (2.S.2)}}\underbrace{\prob_a(ST)}_{\frac{6-a}{6}}. \tag{2.S}\]
+		and for the remaining terms we can write
+		\[ \prob_a(S|SH) = \underbrace{\prob_a(S|SH,TH)}_{1}\underbrace{\prob_a(TS)}_\frac{1}{2} + \underbrace{\prob_a(S|SH,TT)}_{0}\underbrace{\prob_a(TT)}_\frac{1}{2}, \tag{2.S.1}  \]
+		and
+		\[ \prob_a(S|ST) = \underbrace{\prob_a(S|ST,TH)}_{0}\underbrace{\prob_a(TH)}_{\frac{1}{2}} + \underbrace{\prob_a(S|ST,TT)}_\text{see Eq (2.S.3)}\underbrace{\prob_a(TT)}_{\frac{1}{2}}. \tag{2.S.2} \]
+		And for the remaining term above
+		\[ \prob_a(S|ST,TT) = \underbrace{\prob_a(S|ST,TT,TH)}_{0}\prob_a(TH) + \underbrace{\prob_a(S|ST,TT,TT)}_{1}\prob_a(TT) = \frac{1}{2}. \tag{2.S.3}  \]
+		and by putting all together we will get
+		\[\boxed{ P(a,a) =  \prob_a(S) = \frac{6+a}{24}}. \]
+		Finally, since $\prob_a(I\cup S \cup D) = 1$, and $I,S,D$ are mutually disjoint, we can write 
+		\[ \prob_a(D) = 1 - (\prob_a(I) + \prob_a(S)), \] 
+		hence
+		\[ \boxed{P(a,a-1) = \prob_a(D) = \frac{a}{12}}. \]
+		so the transition probabilities are as calculated.
+		
+		\item The transition diagram is plotted below. 
+		
+		\begin{center}
+			\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=1.9cm,
+				semithick,scale=0.4]
+				\tikzstyle{every state}=[circle, draw, fill=orange!50,
+				inner sep=0pt, minimum width=10pt]
+				
+				\node[state] (A)              {$0$};
+				\node[state]         (B) [right of=A] {$1$};
+				\node[state]         (C) [right of=B] {$2$};
+				\node[state]         (D) [right of=C] {$3$};
+				\node[state]         (E) [right of=D] {$4$};
+				\node[state]         (F) [right of=E] {$5$};
+				\node[state]         (G) [right of=F] {$6$};
+				
+				\path (A) edge [bend left] node {$p_{01}$} (B)
+				(B) edge [bend left] node {$p_{10}$} (A)
+				(A) edge [loop left] node {$p_{00}$} (A)
+				
+				(B) edge [bend left] node {$p_{12}$} (C)
+				(B) edge [loop above] node {$p_{11}$} (C)
+				(C) edge [bend left] node {$p_{21}$} (B)
+				
+				(C) edge [bend left] node {$p_{23}$} (D)
+				(C) edge [loop below] node {$p_{22}$} (D)
+				(D) edge [bend left] node {$p_{32}$} (C)
+				
+				(D) edge [bend left] node {$p_{34}$} (E)
+				(D) edge [loop above] node {$p_{33}$} (E)
+				(E) edge [bend left] node {$p_{43}$} (D)
+				
+				(E) edge [bend left] node {$p_{45}$} (F)
+				(E) edge [loop below] node {$p_{44}$} (E)
+				(F) edge [bend left] node {$p_{54}$} (E)
+				
+				(F) edge [bend left] node {$p_{56}$} (G)
+				(F) edge [loop above] node {$p_{55}$} (E)
+				(G) edge [bend left] node {$p_{65}$} (F)
+				(G) edge [loop right] node {$p_{66}$} (G);
+			\end{tikzpicture}
+		\end{center}
+		And the transition matrix is
+		\[  M =
+		\begin{pmatrix}
+			1/4 & 3/4 & 0 & 0 & 0 & 0 & 0 \\
+			1/12 & 7/24 & 5/8 & 0 & 0 & 0 & 0 \\
+			0 & 1/6 & 1/3 & 1/2 & 0 & 0 & 0 \\
+			0 & 0 & 1/4 & 3/8 & 3/8 & 0 & 0 \\
+			0 & 0 & 0 & 1/3 & 5/12 & 1/4 & 0 \\
+			0 & 0 & 0 & 0 & 5/12 & 11/24 & 1/8 \\
+			0 & 0 & 0 & 0 & 0 & 1/2 & 1/2
+		\end{pmatrix}
+		\]
+		
+		\item $\prob(X_2 = 4|X_0=5)$ is the second transition probability $P_2(5,4)$. To compute this, we need to fine the element in the 6-th row and 5-th column in the $M^2$ matrix, which is basically the inner product between the vectors formed by the 6-th row and the 5-th column.
+		\[ P_2(5,4) = (\frac{5}{12})^2 + \frac{11}{24}\cdot\frac{5}{12} = \frac{35}{96} \]
+		which after simplification becomes
+		\[ \boxed{P_2(5,4) = \frac{35}{96}}. \]
+		\qed
+		
+	\end{enumerate}
+\end{solution}
+
+
+
+\begin{problem}
+	A clock is broken. It has only one hand which moves every hour either clockwise with probability 1/2 or counter-clockwise with probability 1/2 (the numbers are from 0 to 11 and the hand moves by one full hour when it moves). Assume it starts at 0. What is the probability that it reaches 7 before coming back to 0 for the first time?
+\end{problem}
+\begin{solution}
+	First, let's draw the graph representing the state space of the random variable of interest.
+	\begin{center}
+		\begin{tikzpicture}[scale=0.6, every node/.style={circle, draw}]
+			\tikzstyle{every node}=[circle, draw, fill=orange!50,
+			inner sep=0pt, minimum width=15pt]
+			
+			
+			\node[fill=cyan!50] (n0) at (0,3) {0};
+			\node (n1) at (1,2) {1};
+			\node (n2) at (2,1) {2};
+			\node (n3) at (3,0) {3};
+			\node (n4) at (2,-1) {4};
+			\node (n5) at (1,-2) {5};
+			\node (n6) at (0,-3) {6};
+			
+			\node (n11) at (-1,2) {11};
+			\node (n10) at (-2,1) {10};
+			\node (n9) at (-3,0) {9};
+			\node (n8) at (-2,-1) {8};
+			\node[fill=green!50] (n7) at (-1,-2) {7};
+			
+			
+			\draw (n0) -- (n1);
+			\draw (n1) -- (n2);
+			\draw (n2) -- (n3);
+			\draw (n3) -- (n4);
+			\draw (n4) -- (n5);
+			\draw (n5) -- (n6);
+			\draw (n6) -- (n7);
+			\draw (n7) -- (n8);
+			\draw (n8) -- (n9);
+			\draw (n9) -- (n10);
+			\draw (n10) -- (n11);
+			\draw (n11) -- (n0);
+			
+		\end{tikzpicture}
+	\end{center}
+	
+	Define the event $B$ be $B = \set{T^+_0 > T_7}$. We are interested in finding $\prob_0(B)$. Now we can perform the first step argument as follows
+	\[ p_0 = \frac{1}{2}(p_1 + p_{11}). \tag{3.1} \]
+	Then we analyze each term in the right hand side of the equation above. For $p_1$ we have
+	\[ \prob_1(B) = \underbrace{\prob_1(B|T_0>T_7)}_{1}\underbrace{\prob_1(T_0>T_7)}_{1/5} + \underbrace{\prob_1(B|T_0<T_7)}_{0}\underbrace{\prob_1(T_0<T_7)}_{6/7} = \frac{1}{5}. \]
+	Note that $\prob_1(B|T_0>T_7)=1$ since it literally means the random walker reaches 7 before 0. Also $\prob_1(B|T_0<T_7)=0$ since the event $B$ is conditioned on reaching 0 before 7, which is clearly 0. The term $\prob_1(T_0>T_7)$ is computed using the Gambler's ruin analysis. Similarly, for the $p_{11}$ term we have
+	\[ \prob_{11}(B) = \underbrace{\prob_{11}(B|T_0>T_7)}_{1}\underbrace{\prob_{11}(T_0>T_7)}_{1/7} + \underbrace{\prob_{11}(B|T_0<T_7)}_{0}\prob_{11}(T_0<T_7) = \frac{1}{7}. \]
+	The rationale behind the values of the terms are the same as the ones discussed above. Now we can substitute everything in $(3.1)$
+	\[ \boxed{p_0 = \frac{1}{2} (\frac{12}{35}) = \frac{6}{35}}. \]
+	
+\end{solution}
+
+\begin{problem}
+	The Fibonacci sequence is the sequence $(F_n)_{n\geq0}$ defined by $F_0 = 0, F_1=1$ and 
+	\[ F_{n+2} = F_{n+1} + F_n \quad \text{for } n\geq 0.  \]
+	Find a general formula for $F_n$
+\end{problem}
+\begin{solution}
+	First, we construct the characteristic polynomial of the sequence. From the recursive formula we can write
+	\[ X^2 = X + 1 \implies \boxed{X^2 - X - 1 = 0}. \]
+	The roots of the equation is 
+	\[ r_1, r_2 = \frac{1 \pm \sqrt{5}}{2}. \]
+	Now the general formula will be
+	\[ F_n = Ar_1^n + Br_2^n. \] 
+	To find the coefficients, we utilize the first two terms 
+	\[ 0 = A + B, \qquad 1 = \frac{1}{2}(A+B) + \frac{\sqrt{5}}{2}(A-B). \]
+	This system of equations implies that
+	\[ A = \frac{1}{\sqrt{5}}, \qquad B=\frac{-1}{\sqrt{5}}.  \]
+	Thus the general formula will be
+	\[ \boxed{F_n = \frac{1}{\sqrt{5}}((\frac{1+\sqrt{5}}{2})^n - \frac{1-\sqrt{5}}{2})^n)}. \]
+	
+	\qed
+	
+\end{solution}
+
+
+\begin{problem}
+	Let $(X_n)$ be the simple random walk on the following graph. Compute $\prob_0(T_3<T_7)$.
+	
+	\begin{center}
+		\begin{tikzpicture}[scale=1, every node/.style={circle, draw}]
+			\tikzstyle{every node}=[circle, draw, fill=orange!50,
+			inner sep=0pt, minimum width=15]
+			
+			
+			\node[fill=cyan!50] (n0) at (0,0) {0};
+			\node (n1) at (0,1) {1};
+			\node (n2) at (-1,1.6) {2};
+			\node[fill=green!50] (n3) at (-2,1) {3};
+			\node (n4) at (-2,0) {4};
+			\node (n5) at (-1,-0.6) {5};
+			\node (n9) at (1,1.6) {9};
+			\node (n8) at (2,1) {8};
+			\node[fill=red!50] (n7) at (2,0) {7};
+			\node (n6) at (1,-0.6) {6};
+			
+			\draw (n0) -- (n1);
+			\draw (n1) -- (n2);
+			\draw (n2) -- (n3);
+			\draw (n3) -- (n4);
+			\draw (n4) -- (n5);
+			\draw (n5) -- (n0);
+			\draw (n0) -- (n6);
+			\draw (n6) -- (n7);
+			\draw (n7) -- (n8);
+			\draw (n8) -- (n9);
+			\draw (n9) -- (n1);
+			
+			
+		\end{tikzpicture}
+	\end{center}
+\end{problem}
+\begin{solution}
+	For a much more simpler solution, let's define the two following notations
+	\[ B = \{T_3 < T_7\}, \qquad p_v = \prob_v(B). \]
+	Then, by first step argument at state $0$, we can write
+	\[ p_0 = \frac{1}{3} (p_5 + p_6 + p_1).  \tag{5.1}\]
+	Now we need to evaluate each of the terms in the right hand side. We start with $p_5$.
+	\[ p_5 = \prob_5(B) = \underbrace{\prob_5(B|T_3<T_0)}_{1}\underbrace{\prob_5(T_3<T_0)}_{1/3} + \underbrace{\prob_5(B|T_3>T_0)}_{p_0}\underbrace{\prob_5(T_3>T_0)}_{2/3} = \frac{1}{3} + \frac{2}{3}p_0. \]
+	note that $\prob_5(B|T_3<T_0) = 1$, since if we get to state 3, before getting to state 0, then it means that we have reached the state 3 before reaching the state 7, thus the event $B$ occurs with probability 1. Also $\prob_5(T_3<T_0) = 1/3$ from the Gambler's ruin. Furthermore $\prob_5(B|T_3>T_0) = p_0$ by using the Markov property, and finally $\prob_5(T_3>T_0) = 2/3$ by the Gambler's ruin. \\
+	Now, we need to evaluate the term $p_6$. To analyze this term, we will do a first step argument starting at this point
+	\[ p_6 = \prob_6(B) = \frac{1}{2}(\underbrace{p_7}_{0} + p_0) = \frac{p_0}{2}. \]
+	Note that $p_7 = 0$, since then the event $B$ has not occurred. \\
+	Finally, we need to analyze the term $p_1$. Again, by first step argument on this state we have
+	\[ p_1 = \frac{1}{3}(p_0 + p_9 + p_2). \]	
+	By doing a analysis on $p_9$ similar to the one we did for 5, we can write
+	\[ p_9 = \prob_9(B)= \underbrace{\prob_9(B|T_7<T_1)}_{0}\prob_9(T_7<T_1) + \underbrace{\prob_9(B|T_7>T_1)}_{p_1}\underbrace{\prob_9(T_7>T_1)}_{2/3} = \frac{2}{3}p_1. \]
+	The rationale behind the values for each term in the equation above, is exactly the same as in analyzing the terms of $p_5$.\\
+	Now, we analyze the term $p_2$ by performing another first step analysis, similar to the one we did for state 6.
+	\[ p_2 = \frac{1}{2}(\underbrace{p_3}_1 + p_1) = \frac{1}{2}(1+p_1). \]
+	Now we can calculate $p_1$ in terms of $p_0$ which turns out to be
+	\[ p_1 = \frac{6}{11}p_0 + \frac{3}{11}.  \]
+	Now we insert all of the terms in the equation $(5.1)$ to get
+	\begin{align*}
+		&3p_0 = \frac{1}{3}+\frac{2}{3}p_0 + \frac{1}{2}p_0 + \frac{6}{11}p_0 + \frac{3}{11} \\ 
+		&\implies 3p_0 - \frac{113}{66}p_0 = \frac{40}{33} \\
+		&\implies p_0 = \frac{66}{85}\cdot\frac{40}{33} = \frac{16}{17}\\
+		&\implies \boxed{p_0 = \frac{16}{17}}.
+	\end{align*}
+	
+	
+	\qed
+	
+\end{solution}
+
+
+\begin{problem}
+	Consider the Markov chain on the state space $S = \set{1,2,\cdots,9}$ which has the following transition diagram.
+	
+	\begin{center}
+		\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
+			semithick,scale=1]
+			\tikzstyle{every state}=[circle, draw, fill=orange!50,
+			inner sep=1pt, minimum size=20pt]
+			
+			\node[state] 		 (n1)              {$1$};
+			\node[state] 		 (n2) [left of=n1] {$2$};
+			\node[state] 		 (n3) [above right of=n1] {$3$};
+			\node[state] 		 (n4) [above left of=n1] {$4$};
+			\node[state] 		 (n5) [left of=n2] {$5$};
+			\node[state] 		 (n6) [right of=n1] {$6$};
+			\node[state] 		 (n7) [right of =n6] {$7$};
+			\node[state] 		 (n8) [above right of=n6] {$8$};
+			\node[state] 		 (n9) [left of=n4] {$9$};
+			
+			
+			\path
+			(n1) edge node {$2/3$} (n2)
+			(n2) edge node {$1$} (n5)
+			(n5) edge [bend right] node[below]  {$1$} (n1)
+			(n1) edge node[sloped] {$1/3$} (n4)
+			(n4) edge node[sloped] {$1/2$} (n5)
+			(n4) edge node[above] {$1/2$} (n9)
+			(n9) edge [loop left] node {$1$} (n9)
+			(n3) edge node[above,sloped] {$1/4$} (n1)
+			(n3) edge [bend left] node {$3/4$} (n6)
+			(n6) edge [bend left] node {$1/2$} (n3)
+			(n6) edge node[below,sloped] {$1/2$} (n8)
+			(n7) edge [bend left] node {$1$} (n8)
+			(n8) edge [bend left] node {$1$} (n7)
+			;
+			
+		\end{tikzpicture}
+	\end{center}
+	
+	\begin{enumerate}[(a)]
+		\item Which states are recurrent? (Justify it only for the states 1 and 7).
+		\item What are the periods of all states? (Justify it only for the state 2).
+		\item What are the communicating classes of the chain?
+		\item Compute $f_3$.
+		\item Compute $f_1$.
+	\end{enumerate}
+	
+\end{problem}
+
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item The transient states are $T = \set{4,5,2,1,3,6}$, and the recurrent states are $R = \set{9,8,7}$.\\
+		\textbf{Justification for state 1}. The state 1 is transient. Because there is a positive probability that a random walk starting from this state will never come back to this state. For instance, if the random walker takes the path $1\rightarrow4$ with probability $1/3$ and then take the path $4\rightarrow9$ with probability $1/2$, then there is a $1/6$ chance that the random walker starting from state $1$ will end up at $9$ and will never return to the state $1$ again. \\
+		\textbf{Justification for state 7}. The state 7 is indeed recurrent. That is because there is no chance for a random walker starting from the state 7 do not come back to 7. To be more specific, if $X_0 = 7$, then $\prob_7(X_1=8) = 1$ and $\prob_7(X_2 = 7) = \prob_8(X_1=7) = 1$. Thus the random walker will return to the state $7$ every even step.
+		
+		\item To calculate the period, we first need to determine $\mathcal{T}(x) = \set{n\geq 1: P_n(x,x)>0}$. Then $\operatorname{per}(x) = \gcd(\mathcal{T}(x))$.
+		\begin{itemize}
+			\item \textbf{State 1}. $\mathcal{T}(1) = \set{3,6,9,\cdots}$. Thus $\operatorname{per}(1) = 3$.
+			\item \textbf{State 2}. $\mathcal{T}(2) = \set{3,6,9,\cdots}$. Thus $\operatorname{per}(2) = 3$.
+			\item \textbf{State 3}. $\mathcal{T}(3) = \set{2,4,6,8,\cdots}$. Thus $\operatorname{per}(3) = 2$.
+			\item \textbf{State 4}. $\mathcal{T}(4) = \set{3,6,9,\cdots}$. Thus $\operatorname{per}(4) = 3$.
+			\item \textbf{State 5}. $\mathcal{T}(5) = \set{3,6,9,\cdots}$. Thus $\operatorname{per}(5) = 3$.
+			\item \textbf{State 6}. $\mathcal{T}(6) = \set{2,4,6,\cdots}$. Thus $\operatorname{per}(6) = 2$.
+			\item \textbf{State 7}. $\mathcal{T}(7) = \set{2,4,6,\cdots}$. Thus $\operatorname{per}(7) = 2$.
+			\item \textbf{State 8}. $\mathcal{T}(8) = \set{2,4,6,\cdots}$. Thus $\operatorname{per}(8) = 2$.
+			\item \textbf{State 9}. $\mathcal{T}(9) = \set{1,2,3,\cdots}$. Thus $\operatorname{per}(9) = 1$.
+		\end{itemize}
+		\textbf{Justification for state 2}. The set of all different paths that we can start from the state 2 and return to this state is $\mathcal{P} = \set{\overrightarrow{2512},\overrightarrow{2514512}}$ or any concatenation of these two paths. Thus the first return times will be $\set{3,6,9,\cdots}$, whose $\gcd$ is 3. Thus the period of the state 2 is 3.		
+		
+		\item The communicating classes of the graph are $\set{9}, \set{1,2,5,4}, \set{3,6},\ \text{and}\ \set{8,7}$.
+		
+		\item $f_3$ is the probability that the random walker will return to the state 3 given $X_0=3$. We do a first step analysis. Let the event $E$ = $\set{T^+_3 < \infty| X_0 = 3}$, and $E' = \set{T_3 < \infty| X_0 \neq 3}$.
+		%		Note that $E_3 = \set{T^+_3 < \infty}$, while $E_x = \set{T_3 < \infty}$ for any $x\neq 3$.
+		
+		\[ \prob_3(E) = P(3,1)\underbrace{\prob_1(E')}_{0} + \underbrace{P(3,6)}_{3/4}\prob_6(E').\]
+		$\prob_1(E)=0$ because there the state 3 is not accessible from the state 1. Now we need to determine $\prob_6(E)$ as follows
+		\[ \prob_6(E') = P(6,8)\underbrace{\prob_8(E')}_{0} + \prob(6,3)\underbrace{\prob_3(E')}_{1}. \]
+		$\prob_8(E)=0$ because the state 3 is not accessible from the state 8. Also note that we put a $'$ on $E$ in $\prob_3(E')$, that is because it is not the same is $\prob_3(E)$. The reason is that $\prob_3(E')$ is basically 1 because it is when the first recurrence to the state $E$ has happened. Putting all of these together we will get
+		\[ \prob_3(E) = \frac{3}{8}. \]
+		Thus we can conclude 
+		\[ \boxed{f_3 = \frac{3}{8} }.\]
+		
+		\item We want to compute $f_1 = \prob_1(T_1^+ < \infty)$. For convenience in notation, let $E = \set{T_1^+ <\infty|X_0=1}$ and $E' = \set{T_1 < \infty|X_0\neq 1}$. Note that $E$ is the first recurrent time given we are started at 1 while $E'$ is simply the event where we will visit the state $1$ in finite time if we start elsewhere. So $f_1 = \prob_1(E)$. We can do the first step analysis
+		\[ \prob_1(E) = P(1,4)\prob_4(E') + P(1,2)\underbrace{\prob_2(E')}_{1}. \]
+		Note that $\prob_2(E') = 1$ because starting at the state 2, there are no any other possibilities but reaching the state 1 just after 2 steps. But we need to determine $\prob_4(E')$ more carefully. We again do a first step analysis
+		\[ \prob_4(E') = P(4,5)\underbrace{ \prob_5(E')}_{1} + P(4,9) \underbrace{\prob_9(E')}_{0} \]
+		Note that $\prob_9(E') = 0$ since the state 1 is not accessible from state 9. However, $\prob_5(E')=1$ as starting at the state 5, we will touch the state 1 just after 1 step. In summary
+		\[\boxed{ \prob_1(E) = \frac{1}{6} + \frac{2}{3} = \frac{5}{6}}. \]
+	\end{enumerate}
+\end{solution}
+
+
+
+\begin{problem}
+	Consider the following Markov chains on a chess board (the state space consists of the 64 squares of a chess board). You can solve the problem on a 4 times 4 chess board as it will be easier to explain the ideas on the drawings.
+	\begin{enumerate}[(a)]
+		\item A chess king moves on it uniformally to an allowed position (there are no other pieces on the board). Is this irreducible? Are the states periodic? recurrent?
+		\item Same questions if the king replaced by a bishop?
+		\item Same questions if the king is replaced by a knight?
+	\end{enumerate}
+\end{problem}
+
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item Consider the following diagram 
+		\begin{center}
+			\newgame
+			\scalebox{0.7}{
+				\chessboard[
+				setfen=8/8/8/4K3/8/8/8/8 w - - 0 0,
+				pgfstyle=border,
+				markfields={d4,e4,f4,d5,f5,d6,e6,f6},
+				color=blue,
+				pgfstyle=color,
+				opacity=0.1,
+				color=red,
+				markfield={e5},
+				]
+			}
+		\end{center}
+		As it is represented in the board game, the King can move to any position. This means that starting from any position, the king can reach other positions, thus implying that every two state commutes. Thus we can say that this system is irreducible.\\
+		The states are \emph{not} periodic. In short, that is because of the availability of the diagonal move of the King. In other words, $\mathcal{T}(x) = (2,3,4,5,\cdots) $. It is now clear that $\operatorname{per}(x) = 1$. \\
+		Since the Markov chain is irreducible, then it means that all of the states communicate. On the other hand, since the number of states is finite, thus there should be at least one recurrent state. But since this recurrent state is at the same communication class of any other state, then it means that all of the states are recurrent.
+		
+		
+		\item The following shows the possible \emph{next} moves for the bishop initially located at e5.
+		\begin{center}
+			\newgame
+			\scalebox{0.7}{\chessboard[
+				setfen=8/8/8/4B3/8/8/8/8 w - - 0 0,
+				pgfstyle=border,
+				markfields={e5,f6,g7,h8,d6,c7,b8,f4,g3,h2,d4,c3,b2,a1},
+				color=blue!50,
+				pgfstyle=color,
+				opacity=0.1,
+				color=red,
+				markfield={e5}
+				]}
+		\end{center}
+		
+		This Markov chain is \emph{not} irreducible. The reason is that we have two communicating classes: white squares and black squares. I bishop starting at a white square can only go to the white square at its life time and a bishop starting at a black square can only go to the black square. \\
+		To determine the periodicity, we need to calculate the set $\mathcal{T}(x)$. This set is $\mathcal{T}(x) = \set{2,3,4,\cdots}$. Thus $\operatorname{per}(x) = 1$ which indicates that the states are not periodic.\\
+		If a bishop starts from a white square, then all of the white squares will be communicating with the initial square, and any black square will be no accessible. Since the number of states are finite, amount the white squares there will be at least one state that is recurrent. And since the recurrency is class property, then it means that all of the white squares will be recurrent, while all of the black squares will be transient. Similarly, if a bishop starts from a black square, then all of the black squares will be recurrent, while all of the white squares will be transient.
+		
+		\item Consider the following chess board
+		\begin{center}
+			\newgame
+			\scalebox{0.7}{
+				\chessboard[
+				setfen=8/8/8/4N3/8/8/8/8 w - - 0 0, % Place a knight on e5
+				pgfstyle=border,
+				markfields={e5,d7,f7,g6,g4,f3,d3,c4,c6}, % Knight's moves from e5
+				color=blue!50,
+				pgfstyle=color,
+				opacity=0.1,
+				color=red,
+				markfield={e5} % Highlight the knight's position
+				]}
+		\end{center}
+		First, notice that if the knight starts are a black square, then it moves to a white square at the next step, and if starts at a white square, it moves to a black square at the next step. Also, due to the ``knight's tour'' property, the knight can reach every state of the board. Thus we can say that any two states on the board communicates. Thus the Markov chain is irreducible. \\
+		To determine the periodicity, we determine $\mathcal{T}(x) = {2,4,6,\cdots}$. Note that the knight can not come back to its original position after an odd number of moves. That is because every time a knight moves, the destination state has the opposite color of the initial state. Thus it is impossible to get back to the same color as the starting point after odd number of moves. This $\operatorname{pre}(x) =2$.\\
+		Since the Markov chain is irreducible (i.e. all of the states communicated), and the number of states is finite, then there is at least one recurrent state. Then all of the states are recurrent.
+	\end{enumerate}
+\end{solution}
+
+
+
+\begin{problem}
+	Consider the fair Gambler's ruin problem on $\set{0,1,\cdots,N}$.  Let $u_a = \mathbb{E}_a[\min(T_0,T_N)]$ be the expected duration (=average number of steps) of the game if Alice starts with $0\leq a \leq N$ coins (so in particular we have $u_0 = u_N = 0$).
+	\begin{enumerate}[(a)]
+		\item Show that if $1\geq a \geq N-1$, we have
+		\[ u_a = \frac{1}{2}(1+u_{a-1}) + \frac{1}{2}(1+u_{a+1}). \]
+		\item Define $v_a = u_a - u_{a-1}$ for $1 \leq a \leq N$. Show that $v_a = v_{a+1} + 2$ and $\sum_{a=1}^{N} v_a =0$.d
+	\end{enumerate}
+\end{problem}
+
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item 
+		We are basically dealing with a conditional probability
+		\[ \mathbb{E}_a[\min(T_0, T_N)] = \mathbb{E}[\min(T_0,T_N)|X_0 = a]. \]
+		Now we do a first step analysis
+		
+		
+		\begin{equation*}
+			\begin{split}
+				\mathbb{E}[\min(T_0,T_N)|X_0=a] = &  \overbrace{P(a,a+1)}^{1/2}\overbrace{\mathbb{E}[\min(T_0,T_N)|X_1=a+1]}^{1+u_{a+1}} \\
+				& + \underbrace{P(a,a-1)}_{1/2}\underbrace{\mathbb{E}[\min(T_0,T_N)|X_1=a-1]}_{1+u_{a-1}} \\
+				= &\frac{1}{2}(1+u_{a+1}) + \frac{1}{2}(1+u_{a-1}).
+			\end{split}
+		\end{equation*}
+		Note that in the equation above we have used the fact that $\mathbb{E}[\min(T_0,T_N)|X_0=a+1]$ as by moving from the state $a$ to the state $a+1$ (and similarly to $a-1$) one step is already passed. 
+		
+		\item 
+		First, we define \( v_a = u_a - u_{a-1} \) for \( 1 \leq a \leq N \). Using the recursive relation from part (a), we have:
+		\[ u_a = \frac{1}{2}(1 + u_{a-1}) + \frac{1}{2}(1 + u_{a+1}) \]
+		Now, by substituting the definition of \( v_a \) into the equation, we get:
+		\[ u_{a-1} = u_a - v_a \]
+		\[ u_{a+1} = u_a + v_{a+1} \]
+		Now, substituting these into the equation for \( u_a \) yields:
+		\[ u_a = \frac{1}{2}(1 + u_a - v_a) + \frac{1}{2}(1 + u_a + v_{a+1}) \]
+		\[ 2u_a = 2 + 2u_a - v_a + v_{a+1} \]
+		\[ v_a = v_{a+1} + 2 \]
+		This shows that \( v_a = v_{a+1} + 2 \).
+		For the second part, we consider the sum:
+		\[ \sum_{a=1}^{N} v_a = \sum_{a=1}^{N} (u_a - u_{a-1}) \]
+		This is a telescoping series, and thus we have:
+		\[ \sum_{a=1}^{N} v_a = (u_1 - u_0) + (u_2 - u_1) + \ldots + (u_N - u_{N-1}) \]
+		\[ \sum_{a=1}^{N} v_a = -u_0 + u_N \]
+		Since \( u_0 = u_N = 0 \) (as given in the exercise), it follows that:
+		\[ \sum_{a=1}^{N} v_a = 0 \]
+		This completes the answer for part (b).
+		
+		
+		\item
+		We have from part (b) that \( v_a = v_{a+1} + 2 \). Iterating this, we find a linear relation:
+		\[ v_a = v_1 - 2(a - 1) \]
+		We also know from the sum \( \sum_{a=1}^{N} v_a = 0 \) that:
+		\[ Nv_1 - 2\sum_{a=1}^{N} (a - 1) = 0 \]
+		\[ Nv_1 - 2\left(\frac{N(N - 1)}{2}\right) = 0 \]
+		\[ v_1 = N - 1 \]
+		Substituting back into \( v_a \) gives us:
+		\[ v_a = N + 1 - 2a \]
+		From the recursive definition \( u_a = u_{a-1} + v_a \), we can express \( u_a \) as:
+		\[ u_a = \sum_{k=1}^{a} (N + 1 - 2k) \]
+		\[ u_a = a(N + 1) - 2\left(\frac{a(a + 1)}{2}\right) \]
+		\[ u_a = a(N - a) \]
+		This completes the proof for part (c).
+		
+		
+		\item [(e)] From part we see that the average time of the game is 
+		\[ t = \frac{a(N-a)}{1-\delta}. \]
+		By simply substituting $N=5$, $a=2$, and $\delta = 1/3$, we will get
+		\[ t = \frac{2\cdot3}{2/3} = 9. \]
+	\end{enumerate}
+\end{solution}
+
+
+
+
+
+\begin{problem}
+	Let $(X_n)_n$ be the simple random walk on the following graph.
+	\begin{center}
+		\begin{tikzpicture}[,auto,node distance=1.2cm,
+			semithick,scale=1]
+			\tikzstyle{every state}=[circle, draw, fill=orange!50,
+			inner sep=1pt, minimum size=15pt]
+			
+			\node[state] 		 (n1)              {$1$};
+			\node[state] 		 (n2) [below left of=n1] {$2$};
+			\node[state] 		 (n3) [above left of=n1] {$3$};
+			\node[state] 		 (n4) [below right of=n1] {$4$};
+			\node[state] 		 (n5) [above right of=n1] {$5$};
+			
+			
+			\path 
+			(n1) edge (n3)
+			(n1) edge (n2)
+			(n1) edge (n5)
+			(n1) edge (n4)
+			(n4) edge (n5)
+			;			
+		\end{tikzpicture}
+	\end{center}
+	\begin{enumerate}[(a),itemsep=0pt]
+		\item What is $\prob_3(T_5 < \infty)$.
+		\item What is $\expt_2[N_4]$?
+		\item Let $\mu = (0\quad 0.1\quad 0.2\quad 0.3\quad 0.4)$. Compute $\prob_\mu(T_5<T_2)$.
+		\item Compute $\expt_\mu[T_5]$.
+	\end{enumerate}
+\end{problem}
+
+
+
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item We can do a first step argument, but instead, we will use the fact that the Markov chain is irreducible (all of the states communicate with each other). Since the state space is finite, then there should be a recurrent state. On the other hand, since all of the nodes are at the same communication class, then all of the states are recurrent. So every node will be visited infinitely many times. Thus we can write
+		\[ \prob_3(T_5 < \infty) = 1. \]
+		
+		\item As we argued in section (a), all of the states are recurrent, thus every state will be visited infinitely many times. Thus
+		\[ \expt_2[N_4] = \infty. \]
+		
+		\item First we need to calculate $\prob_v(T_5<T_2)$ for $v \in \set{1,\hdots,5}$. Let $E=\set{T_5<T_2}$. Also, observe that $\prob_5(E) = 1, \prob_2(E) = 0$.
+		
+		By doing the first step argument for long enough steps we can write
+		\begin{align*}
+			\prob_1(E) &= \frac{1}{4}(\underbrace{\prob_3(E)}_{\prob_1(E)} + \underbrace{\prob_2(E)}_{0} + \underbrace{\prob_4(E)}_{1/2(\prob_1(E)+\prob_5(E))} + \prob_5(E)) = \frac{3}{5}.\\
+			\prob_3(E) &= \prob_1(E) = \frac{3}{5}.\\
+			\prob_4(E) &= \frac{1}{2} (\prob_1(E) + \prob_5(E)) = \frac{1}{2}(\frac{3}{5} + 1) = \frac{4}{5}.
+		\end{align*}
+		Now we can calculate $\prob_\mu(E)$ using
+		\[ \prob_\mu(E) = \prob(E|X_0\sim \mu) = \sum_{i=1}^{5}\underbrace{\prob(E|X_0=i)}_{\prob_i(E)}\mu(i) = 0.2\cdot \frac{3}{5} + 0.3\cdot \frac{4}{5} + 0.4 = 0.76. \]
+		
+		\item Observe that 
+		\[ \expt_\mu[T_5] = \sum_{x\in S} \expt[T_5|X_0=x]\prob(X_0=x) = \sum_{x\in S} \expt_x[T_5]\mu(x). \]
+		So, first we need to calculate $\expt_x[T_5]$. To simplify the notation we denote $u_x = \expt_x[T_5]$. Also, observe that $u_5 = 0$, since starting at 5, we are already at 5, thus the hitting time will be zero, thus the expected value of the hitting time will be zero.
+		Then we can write
+		\[ u_1 = \frac{1}{4}(\underbrace{u_2}_{u_1 + 1}+ \underbrace{u_3}_{u_1+1} + \underbrace{u_4}_{1/2(u_1 + u_5)+1} + \underbrace{u_5}_{0})+1 \implies \boxed{u_1 = \frac{14}{3}}. \]
+		Similarly, for the other states we can write
+		\begin{align*}
+			u_2 = u_1 + 1 \implies &\boxed{u_2 = \frac{17}{3}},\\
+			u_3 = u_1 + 1 \implies &\boxed{u_3 = \frac{17}{3}}, \\
+			u_4 = \frac{1}{2}(u_1 + u_5) + 1 \implies &\boxed{u_4 = \frac{10}{3}}.
+		\end{align*}
+		Putting all of these results together we will get
+		\[ \expt_\mu[T_5] = (0\times \frac{14}{3}) + (0.1\times \frac{17}{3}) + (0.2\times\frac{17}{3}) + (0.3\times\frac{10}{3}) + (0.4\times0) = 2.7.  \]
+		
+		
+	\end{enumerate}
+\end{solution}
+
+
+
+\begin{problem}
+	A Pokemon trainer is walking randomly in a one dimensional field which we represent as follows
+	\begin{center}
+		\begin{tikzpicture}[,auto,node distance=1.2cm,
+			semithick,scale=1]
+			\tikzstyle{every state}=[circle, draw, fill=orange!50,
+			inner sep=1pt, minimum size=15pt]
+			
+			\node[state] 		 (n0)              {$0$};
+			\node[state] 		 (n1) [right of=n0] {$1$};
+			\node[state] 		 (n2) [right of=n1] {$2$};
+			\node[state] 		 (n3) [right of=n2] {$3$};
+			\node[state] 		 (n4) [right of=n3] {$4$};
+			\node[state] 		 (n5) [right of=n4] {$5$};
+			\node[state] 		 (n6) [right of=n5] {$6$};
+			\node[state] 		 (n7) [right of=n6] {$7$};
+			
+			\path 
+			(n0) edge (n1)
+			(n1) edge (n2)
+			(n2) edge (n3)
+			(n3) edge (n4)
+			(n4) edge (n5)
+			(n5) edge (n6)
+			(n6) edge (n7)
+			;			
+		\end{tikzpicture}
+	\end{center}
+	The trainer just started their journey and only has a Charmander. Each time the trainer visists the left end of the field (the vertex 0), a wild Caterpie attacks and Charmander beats it. If the trainer is at the right end of the field (at vertex 7), their rival attacks them with a Squirtle. To beat Squirtle, Charmander needs to train on Caterpies: it beats squirtle if and only of it has beaten $\geq 3$ Caterpies before. What is the probability that Charmander beats Squirtle if the trainer starts at 2?
+\end{problem}
+\begin{solution}
+	After abstracting away all of the details, we are basically aiming at finding the probability that the trainer hits the state 0 at least three times before hitting the state 7. To put it more formally, Let $E_1 = \set{T_0^{(1)}<T_7^{(1)}}$ which is the event at which we touch the state 0 before the state 7 for the first time. Similarly, define $E_2=\set{T_0^{(2)}<T_7^{(2)}}$ and $E_3 = \set{T_0^{(3)} < T_7^{(3)}}$. Also define the event $W$ where the Charmander beats the Squirtle. Then we can write
+	\[ \prob_2(W) = \prob_2(W|E_1)\underbrace{\prob_2(E_1)}_{6/8} + \underbrace{\prob_2(W|E_1^c)}_{0}\underbrace{\prob_2(E_1^c)}_{2/8}. \]
+	Note that $\prob_2(E_1) = 6/8$ from the Gambler's ruin problem. Now we need to determine $\prob_2(W|E_1)$:
+	\[  \prob_2(W|E_1) = \prob_1(W) = \prob_1(W|E_2)\underbrace{\prob_1(E_2)}_{7/8} + \underbrace{\prob_1(W|E_2^c)}_{0}\prob_1(E_2^c).\]
+	and finally
+	\[ \prob_1(W|E_2) = \prob_1(W) = \underbrace{\prob_1(W|E_3)}_{1}\underbrace{\prob_1(E_3)}_{7/8} + \underbrace{\prob_1(W|E_3^c)}_{0}\prob_1(E_3^c) \]
+	So the final answer will be
+	\[\boxed{ \prob_2(W) = \frac{7}{8}\times \frac{7}{8} \times \frac{6}{8} }. \]
+\end{solution}
+
+
+
+\begin{problem}
+	Are the following sums finite of infinite? Justify it only for (d).
+	\begin{enumerate}[(a)]
+		\item $\sum_{n=1}^{\infty}\frac{1}{n^6}$,
+		\item $\sum_{n=1}^{\infty}\frac{\ln(n)}{n}$,
+		\item $\sum_{n=1}^{\infty}\frac{(\ln(n))^{549816}}{n^{1.00017}}$,
+		\item $\sum_{n=2}^{\infty}\frac{1}{\sqrt{n}\ln(n)}$.
+	\end{enumerate}
+\end{problem}
+
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item Converges.
+		\item Diverges.
+		\item Converges.
+		\item Diverges.
+		We can tackle this question with different approaches, among which I will present two. One is to use the Comparison test. The $\ln$ function grows slower than $x^{1/4}$. I.e. $\exists C \in \R$ such that $\ln(n) < Cn^{1/4}$ for $n$ large enough. Thus for $n$ large enough
+		\[ \ln(n) < Cn^{1/4} \implies  \frac{1}{\ln(n)}>\frac{1}{Cn^{1/4}} \implies \frac{1}{\sqrt{n}\ln(n)}>\frac{1}{\sqrt{n}Cn^{1/4}} = \frac{C_0}{n^{3/4}}, \]
+		for some $C_1 \in \R$. Observe that
+		\[ \sum_{n=N}^{\infty}\frac{C_0}{n^{3/4}} = \infty. \]
+		Thus by comparison test we can conclude that the series of interest diverges as well.
+		
+		A second way to show this is to use the Cauchy's condensation test. To show the series $\sum f(n)$ converges or diverges (for monotone decreasing function $n$), it is enough to show $\sum 2^n f(2^n)$ converges or diverges. So we can transform the series of interest to 
+		\[ \sum_{n=2}^{\infty}\frac{2^n}{\sqrt{2^n}\ln(2^n)} = \sum_{n=2}^{\infty} \frac{2^{n/2}}{n\ln(2)}  = \infty.\]
+	\end{enumerate}
+\end{solution}
+
+
+
+\begin{problem}
+	If $\Gamma = (V,E)$ is a finite connected graph, we call cover time of $\Gamma$ the first time at which the simple random walk on $\Gamma$ has visited al vertices at least once.
+	\[ T_{cov} := \max_{x\in V} T_x \]
+	The aim of this exercise is to study the cover time of the segment of length $N\geq 1$, which is the graph $\operatorname{Seg}_N = (V,E)$ where $V = \set{0,1,\cdots,N}$ and $E = \set{\set{n,n+1}:0\leq n \leq N-1}$.
+	\begin{enumerate}[(a),itemsep=0pt]
+		\item What is the stationary distribution $\pi$ for the simple random walk on $\operatorname{Seg}_N$?
+		\item Let $a \in V$. Compute $\expt_a[T_{cov}]$.
+	\end{enumerate}
+\end{problem}
+
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item Intuitively speaking the stationary distribution is the fraction of time that the random walker spends on each node. To be more specific, for simple random walk on a graph, the value of the stationary distribution for vertex $v \in V$ is $\deg(v)/(2\abs{E})$. So the stationary distribution $\pi$ will be
+		\[ \pi = (\frac{1}{2N}\quad \frac{1}{N}\quad \frac{1}{N}\quad \cdots\quad \frac{1}{N}\quad \frac{1}{2N}). \]
+		
+		\item 
+		To calculate \( E_a(T_{\text{cov}}) \), we employ a method that involves establishing recurrence relations for the expected hitting times and then determining the expected cover time using the boundary conditions of the segment graph.
+		
+		Let \( H_a \) denote the expected time to hit either end of the segment starting from vertex \( a \). The recurrence relations for \( H_a \) are given by:
+		\begin{equation}
+			H_a = \frac{1}{2}H_{a-1} + \frac{1}{2}H_{a+1} + 1, \quad 1 \leq a \leq N-1.
+		\end{equation}
+		with boundary conditions \( H_0 = H_N = 0 \).
+		
+		The solution to the recurrence relations is obtained iteratively starting from the boundary conditions, leading to the following explicit formulas for the hitting times:
+		\begin{equation*}
+			H_a = a(N-a), \quad 0 \leq a \leq N.
+		\end{equation*}
+		
+		The expected cover time starting from vertex \( a \) is given by the maximum expected hitting time to either end of the segment:
+		\begin{equation*}
+			E_a(T_{\text{cov}}) = \max(H_a, H_{N-a}).
+		\end{equation*}
+		
+		Due to the symmetry of \( \text{Seg}_N \), it suffices to calculate \( H_a \) for \( a \leq \frac{N}{2} \) and reflect the results for \( a > \frac{N}{2} \).
+		
+		For a given vertex \( a \), the expected cover time \( E_a(T_{\text{cov}}) \) is formally expressed as:
+		\begin{equation*}
+			E_a(T_{\text{cov}}) = a(N-a), \quad \text{for } a \leq \frac{N}{2}.
+		\end{equation*}
+		For \( a > \frac{N}{2} \), we have:
+		\begin{equation*}
+			E_a(T_{\text{cov}}) = (N-a)a.
+		\end{equation*}
+		
+		\subsubsection*{Small N example}
+		we calculate the expected cover time for a random walk on the segment graph \( \text{Seg}_3 \), which is a path graph with vertices \( V = \{0, 1, 2, 3\} \) and edges \( E = \{\{n, n+1\}\} \) for \( n = 0, 1, 2 \).
+		
+		For vertex \( a = 1 \), the expected cover time \( E_1(T_{\text{cov}}) \) is determined by the maximum expected time to visit all other vertices. Due to the small size of the graph, we can calculate this explicitly.
+		
+		We denote the expected time to hit vertex 0 starting from vertex 1 as \( H_{1,0} \) and the expected time to hit vertex 3 starting from vertex 1 as \( H_{1,3} \). Due to the linearity of the graph, we have the following:
+		\begin{align*}
+			H_{1,0} &= 1 + H_{0,0} = 1 \\
+			H_{1,3} &= 1 + H_{2,3} = 1 + 1 + H_{3,3} = 2.
+		\end{align*}
+		
+		The cover time \( T_{\text{cov}} \) from vertex 1 is the maximum of the hitting times:
+		\begin{equation*}
+			T_{\text{cov}} = \max(H_{1,0}, H_{1,3}) = \max(1, 2) = 2.
+		\end{equation*}
+		
+		Since the random walk must visit both vertices 0 and 3 to cover the graph, and the times to visit each vertex are independent, we have:
+		\begin{equation*}
+			E_1(T_{\text{cov}}) = H_{1,0} + H_{1,3} = 1 + 2 = 3.
+		\end{equation*}
+		
+	\end{enumerate}
+\end{solution}
+
+
+
+\begin{problem}
+	If $\Gamma = (V,E)$ is a finite connected graph, we call cover time of $\Gamma$ the first time at which the simple random walk on $\Gamma$ has visited al vertices at least once.
+	\[ T_{cov} := \max_{x\in V} T_x \]
+	The aim of this exercise is to study the cover time of the segment of length $N\geq 1$, which is the graph $\operatorname{Seg}_N = (V,E)$ where $V = \set{0,1,\cdots,N}$ and $E = \set{\set{n,n+1}:0\leq n \leq N-1}$.
+	\begin{enumerate}[(a),itemsep=0pt]
+		\item What is the stationary distribution $\pi$ for the simple random walk on $\operatorname{Seg}_N$?
+		\item Let $a \in V$. Compute $\expt_a[T_{cov}]$.
+	\end{enumerate}
+\end{problem}
+
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item Intuitively speaking the stationary distribution is the fraction of time that the random walker spends on each node. To be more specific, for simple random walk on a graph, the value of the stationary distribution for vertex $v \in V$ is $\deg(v)/(2\abs{E})$. So the stationary distribution $\pi$ will be
+		\[ \pi = (\frac{1}{2N}\quad \frac{1}{N}\quad \frac{1}{N}\quad \cdots\quad \frac{1}{N}\quad \frac{1}{2N}). \]
+		
+		\item 
+		To calculate \( E_a(T_{\text{cov}}) \), we employ a method that involves establishing recurrence relations for the expected hitting times and then determining the expected cover time using the boundary conditions of the segment graph.
+		
+		Let \( H_a \) denote the expected time to hit either end of the segment starting from vertex \( a \). The recurrence relations for \( H_a \) are given by:
+		\begin{equation}
+			H_a = \frac{1}{2}H_{a-1} + \frac{1}{2}H_{a+1} + 1, \quad 1 \leq a \leq N-1.
+		\end{equation}
+		with boundary conditions \( H_0 = H_N = 0 \).
+		
+		The solution to the recurrence relations is obtained iteratively starting from the boundary conditions, leading to the following explicit formulas for the hitting times:
+		\begin{equation*}
+			H_a = a(N-a), \quad 0 \leq a \leq N.
+		\end{equation*}
+		
+		The expected cover time starting from vertex \( a \) is given by the maximum expected hitting time to either end of the segment:
+		\begin{equation*}
+			E_a(T_{\text{cov}}) = \max(H_a, H_{N-a}).
+		\end{equation*}
+		
+		Due to the symmetry of \( \text{Seg}_N \), it suffices to calculate \( H_a \) for \( a \leq \frac{N}{2} \) and reflect the results for \( a > \frac{N}{2} \).
+		
+		For a given vertex \( a \), the expected cover time \( E_a(T_{\text{cov}}) \) is formally expressed as:
+		\begin{equation*}
+			E_a(T_{\text{cov}}) = a(N-a), \quad \text{for } a \leq \frac{N}{2}.
+		\end{equation*}
+		For \( a > \frac{N}{2} \), we have:
+		\begin{equation*}
+			E_a(T_{\text{cov}}) = (N-a)a.
+		\end{equation*}
+		
+		\subsubsection*{Small N example}
+		we calculate the expected cover time for a random walk on the segment graph \( \text{Seg}_3 \), which is a path graph with vertices \( V = \{0, 1, 2, 3\} \) and edges \( E = \{\{n, n+1\}\} \) for \( n = 0, 1, 2 \).
+		
+		For vertex \( a = 1 \), the expected cover time \( E_1(T_{\text{cov}}) \) is determined by the maximum expected time to visit all other vertices. Due to the small size of the graph, we can calculate this explicitly.
+		
+		We denote the expected time to hit vertex 0 starting from vertex 1 as \( H_{1,0} \) and the expected time to hit vertex 3 starting from vertex 1 as \( H_{1,3} \). Due to the linearity of the graph, we have the following:
+		\begin{align*}
+			H_{1,0} &= 1 + H_{0,0} = 1 \\
+			H_{1,3} &= 1 + H_{2,3} = 1 + 1 + H_{3,3} = 2.
+		\end{align*}
+		
+		The cover time \( T_{\text{cov}} \) from vertex 1 is the maximum of the hitting times:
+		\begin{equation*}
+			T_{\text{cov}} = \max(H_{1,0}, H_{1,3}) = \max(1, 2) = 2.
+		\end{equation*}
+		
+		Since the random walk must visit both vertices 0 and 3 to cover the graph, and the times to visit each vertex are independent, we have:
+		\begin{equation*}
+			E_1(T_{\text{cov}}) = H_{1,0} + H_{1,3} = 1 + 2 = 3.
+		\end{equation*}
+		
+	\end{enumerate}
+\end{solution}
+
+
+
+\begin{problem}
+	Consider the Markov chain on the state space $S = \set{1,2,\hdots,5}$ which has the following transition diagram. 
+	\begin{center}
+		\begin{tikzpicture}[->,>=stealth,shorten >=1pt,auto,node distance=1.5cm,thick,
+			scale=2]
+			%		\tikzstyle{state} =[circle, draw, fill=white,
+			%		inner sep=3pt, minimum width=10pt]
+			\tikzstyle{every state}=[circle, draw, fill=orange!50,
+			inner sep=1pt, minimum size=15pt]
+			\foreach \i in {1,...,5}
+			\node[state] (\i) at (-72*\i:1) {\i};
+			\draw (1) edge node {$2/3$} (2);
+			\draw (1) edge node[midway, right, pos=0.4] {$1/3$} (5);
+			\draw (2) edge [bend left] node {$1$} (3);
+			\draw (3) edge node {$6/7$} (4);
+			\draw (3) edge [bend left] node {$1/7$} (2);
+			\draw (4) edge node {$4/5$} (5);
+			\draw (4) edge node[midway, left, pos=0.5] {$1/5$} (1);
+			\draw (5) edge [loop right] node {$1$} (5);
+		\end{tikzpicture}
+	\end{center}
+	\begin{enumerate}[(a),itemsep=0pt]
+		\item What is $\expt_2[T_1]?$
+		\item Let $\mu = (0.2\quad 0.2\quad 0.2\quad 0.2\quad 0.2)$. What is $\prob_\mu(X_2 = 5)$?
+		\item Compute $f_3$.
+	\end{enumerate}
+\end{problem}
+
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item First, observe that the state $5$ is recurrent, and does not communicate with the state 1. Starting from the state 2, there is a positive probability that we end up in state 5, where we will remain forever. Thus the conditional expectation value of hitting time of state 1, given we start at state 2 is infinite. I.e.
+		\[ \expt_2[T_1] = \infty. \]
+		\item We have
+		\[ \prob_\mu(X_2 = 5) = \prob(X_2 = 5|X_0 \sim \mu) = \sum_{x\in S}\prob_x(X_2=5)\mu(x). \]
+		If we denote the transition matrix to be $M$, then
+		\[ \prob_x(X_2=5) = (M^2)_{(x,5)}. \]
+		The transition matrix and its second power will be
+		\[ 
+		M = \begin{pmatrix}
+			0 & 2/3 & 0 & 0 & 1/3 \\
+			0 & 0 & 1 & 0 & 0 \\
+			0 & 1/7 & 0 & 6/7 & 0 \\
+			1/5 & 0 & 0 & 0 & 4/5 \\
+			0 & 0 & 0 & 0 & 1
+		\end{pmatrix}, \qquad
+		M^2 = \begin{pmatrix}
+			0 & 0 & 2/3 & 0 & 1/3 \\
+			0 & 1/7 & 0 & 6/7 & 0 \\
+			6/35 & 0 & 1/7 & 0 & 24/35 \\
+			0 & 2/15 & 0 & 0 & 13/15 \\
+			0 & 0 & 0 & 0 & 1 \\
+		\end{pmatrix}
+		\]
+		Now, we can easily calculate the desired probability
+		\[ \prob_\mu[X_2 = 5] = 0.2 (1/3 + 24/35 + 13/15 + 1) = \frac{101}{175}. \]
+		
+		\item To compute $f_3 = \prob_3(T^+_3 < \infty)$, define $E = \set{T^+_3<\infty}$ and $E'=\set{T_3 < \infty}$. Then we can do the first time step argument as follows
+		\[ \prob_3(E) = \frac{1}{7}\prob_2(E') + \frac{6}{7}\prob_4(E'). \]
+		Note that $\prob_2(E') = 1$ since if we end up at state 2, then we will certainly be at state 3 after one step. Now we need to determine $\prob_4(E')$. We need to do the first step argument again
+		\[ \prob_4(E') = \frac{1}{5}\prob_1(E') + \frac{4}{5}\prob_5(E'). \]
+		Note that since $\prob_5(E') =0$ since the state 5 is absorbing state. Now we need to calculate the term $\prob_1(E')$ with another first step analysis
+		\[ \prob_1(E') = \frac{2}{3}\prob_2(E') + \frac{1}{3} \prob_5(E'). \]
+		Putting all of pieces together, we will get
+		\[\boxed{ f_3 = \frac{9}{35} }.\]
+	\end{enumerate}
+\end{solution}
+
+
+\begin{problem}
+	Find the (probability) generating function $s\mapsto G_X(s) = \expt[s^X]$ if
+	$X$ has the following distributions (you have to compute the infinite sums):
+	\begin{enumerate}
+		%\item (3p) $\Bernoulli(p)$%(i.e. $\bbP(X=1)=p$ and $\bbP(X=0)=1-p$)
+		%,
+		%\item (3p) $\Bin(n,p)$,
+		\item (3p) $\operatorname{Poisson}(\lambda)$ \quad (i.e. $\prob(X=k) = e^{-\lambda}\frac{\lambda^k}
+		{k!}$ for $k=0,1,2,\dots$),
+		\item (3p) $\operatorname{Geom}(p)$ \quad (i.e. $\prob(X=k) = p(1-p)^{k-1}$ for $k=1,2,\dots$).
+	\end{enumerate}
+\end{problem}
+
+\begin{solution}
+	\subsubsection*{1. Poisson Distribution: \(X \sim \operatorname{Poisson}(\lambda)\)}
+	Given the probability mass function (PMF) for the Poisson distribution as \(\prob(X=k) = e^{-\lambda}\frac{\lambda^k}{k!}\) for \(k=0,1,2,\dots\), the probability generating function (PGF) is calculated as follows:
+	\begin{align*}
+		G_X(s) &= \mathbb{E}[s^X] = \sum_{k=0}^{\infty} s^k \cdot \prob(X=k) \\
+		&= \sum_{k=0}^{\infty} s^k \cdot e^{-\lambda}\frac{\lambda^k}{k!} \\
+		&= \exp(\lambda(s - 1)).
+	\end{align*}
+	
+	\subsubsection*{2. Geometric Distribution: \(X \sim \operatorname{Geom}(p)\)}
+	Given the PMF for the geometric distribution as \(\prob(X=k) = p(1-p)^{k-1}\) for \(k=1,2,\dots\), the probability generating function (PGF) is calculated as follows:
+	\begin{align*}
+		G_X(s) &= \mathbb{E}[s^X] = \sum_{k=1}^{\infty} s^k \cdot \prob(X=k) \\
+		&= \sum_{k=1}^{\infty} s^k \cdot p(1-p)^{k-1} \\
+		&= \frac{ps}{ps - s + 1}, \quad \text{for } |s(1-p)| < 1.
+	\end{align*}
+	
+\end{solution}
+
+
+\begin{problem}
+	Let $(X_n)_{n\geq 0}$ be an irreducible Markov chain on a finite state space $S$, and let $\pi$ be its transition matrix. We recall that $\pi(x) = \frac{1}{\expt_x[T_x^+]}$ for $x\in S$.
+	\begin{enumerate}[(a)]
+		\item (5p) Consider a knight initially at a corner of an $8\times 8$ chessboard. How long does the knight need on average to come back to its starting corner?
+		\item (12p) Show that the drunk man in 1 dimension needs on average an infinite number of steps to come back to 0 (i.e. show that on $\operatorname{Grid}_1$ we have $\expt_0[T_0^+] = \infty$). \textit{Hint. Start by explaning why $\expt_0[T_0^+] \geq 1 + \expt_1[\min(T_0,T_N)]$, for all $N\geq 1$ (For this part, rereading the solution of H4E5 can be helpful). Then compute $\expt_1[ \min(T_0,T_N)]$ (you can do it since it is the same as on a segment).}
+		\item (7p) Deduce that on $\operatorname{Grid}_2$ we also have $\expt_0[T_0^+] = \infty$.
+	\end{enumerate}
+\end{problem}
+
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item {\color{red} \noindent TODO: TO BE ADDED.}
+		\item 
+		We start by considering the base case, where the drunk man moves one step away from the origin. Without loss of generality, assume he moves to position 1. The expected time to return to 0, $\expt_0[T_0^+]$, can then be expressed as:
+		\[
+		\expt_0[T_0^+] \geq 1 + \expt_1[\min(T_0,T_N)], \quad \forall N \geq 1.
+		\]
+		This relation is based on the fact that the drunk man needs at least one step to move away from the origin and then additional steps to return.
+		
+		To prove that $\expt_0[T_0^+] = \infty$, consider the symmetric random walk's properties. The expected time to reach either 0 or $N$ from 1 increases without bound as $N \to \infty$. This infinite expectation implies that the drunk man, on average, never returns to the origin, hence $\expt_0[T_0^+] = \infty$.
+		\item 
+		Given that a two-dimensional random walk (or drunk man's walk) allows for movement in four directions, the space for movement is significantly larger. However, despite the increased freedom, the probability of never returning to the origin remains non-zero. By analogy to the one-dimensional case and considering the nature of two-dimensional random walks, it is known to be recurrent but with an infinite expected return time. Thus, we conclude $\expt_0[T_0^+] = \infty$ for a two-dimensional grid.
+	\end{enumerate}
+	
+\end{solution}
+
+
+\begin{problem}
+	Consider a BGW process $(Z_n)_{n\geq 0}$ and let $\mu$ and $\sigma$ be respectively the mean and the standard deviation of its offspring distribution.
+	\begin{enumerate}
+		\item (10p) Let $n\geq 1$. Find an expression of $\operatorname{Var}(Z_n)$ which depends only on $\mu, \sigma$, and $\operatorname{Var}(Z_{n-1})$. \textit{Hint: Differentiate $G_{n+1} = G_1\circ G_n$ twice.}
+		\item (5p) Conclude that for $n\geq 1$, $\operatorname{Var}(Z_n) = \sigma^2\mu^{n-1}(1+\mu +...+\mu^{n-1})$. \textit{Hint: prove it by induction.}
+	\end{enumerate}
+\end{problem}
+
+\begin{solution}
+	\begin{enumerate}
+		\item 
+		Consider a Bienaymé-Galton-Watson process $(Z_n)_{n\geq 0}$ with mean $\mu$ and standard deviation $\sigma$ of its offspring distribution. Let $n \geq 1$. We aim to find an expression for $\operatorname{Var}(Z_n)$ that depends only on $\mu$, $\sigma$, and $\operatorname{Var}(Z_{n-1})$.
+		
+		Given the hint to differentiate $G_{n+1} = G_1 \circ G_n$ twice, we proceed as follows. The first derivative of the generating function $G_{n+1}(s)$ with respect to $s$ is:
+		
+		\[
+		G'_{n+1}(s) = G'_1(G_n(s)) \cdot G'_n(s)
+		\]
+		
+		And the second derivative is:
+		
+		\[
+		G''_{n+1}(s) = G''_1(G_n(s)) \cdot [G'_n(s)]^2 + G'_1(G_n(s)) \cdot G''_n(s)
+		\]
+		
+		At $s=1$, the variance of $Z_n$ can be expressed as:
+		
+		\[
+		\operatorname{Var}(Z_n) = G''_{n+1}(1) + G'_{n+1}(1) - [G'_{n+1}(1)]^2
+		\]
+		
+		Simplifying, and considering $G'_1(1) = \mu$ and $G''_1(1) = \sigma^2 + \mu - \mu^2$, we find:
+		
+		\[
+		\operatorname{Var}(Z_n) = \mu^2 \cdot \operatorname{Var}(Z_{n-1}) + \sigma^2 + \mu - \mu^2
+		\]
+		
+		This formula links the variance of the process at step $n$ to the variance at step $n-1$, and the parameters of the offspring distribution, providing a recursive method to compute the variance at any step given the initial conditions.
+		
+		\item
+		
+		
+		\subsection*{Base Case (\(n=1\))}
+		For \(n=1\), we have:
+		\[
+		\operatorname{Var}(Z_1) = \sigma^2
+		\]
+		which matches the formula \(\operatorname{Var}(Z_n) = \sigma^2\mu^{n-1}(1+\mu + \dots + \mu^{n-1})\) for \(n=1\).
+		
+		\subsection*{Inductive Step}
+		Assume for some \(n = k\) that:
+		\[
+		\operatorname{Var}(Z_k) = \sigma^2\mu^{k-1}(1+\mu + \dots + \mu^{k-1})
+		\]
+		We need to show that:
+		\[
+		\operatorname{Var}(Z_{k+1}) = \sigma^2\mu^k(1+\mu + \dots + \mu^k)
+		\]
+		
+		Given:
+		\[
+		\operatorname{Var}(Z_{n}) = \mu^2 \cdot \operatorname{Var}(Z_{n-1}) + \sigma^2
+		\]
+		Substitute \(n=k+1\) and use the inductive hypothesis:
+		\[
+		\operatorname{Var}(Z_{k+1}) = \mu^2 \cdot \sigma^2\mu^{k-1}(1+\mu + \dots + \mu^{k-1}) + \sigma^2
+		\]
+		
+		Simplifying, we find:
+		\[
+		\operatorname{Var}(Z_{k+1}) = \sigma^2\mu^k(1+\mu + \dots + \mu^k)
+		\]
+		thereby confirming our inductive step.
+	\end{enumerate}
+	
+\end{solution}
+
+\begin{problem}
+	Consider a BGW process with offspring distribution $(p_j)_{j\in\Z_+} = \left(\frac{2}{3}\frac{1}{3^j}\right)_{j\in\Z_+}$. What are $\mu, \sigma, \eta$ for this process?
+\end{problem}
+
+\begin{solution}
+	Given the offspring distribution \((p_j)_{j\in\mathbb{Z}_+} = \left(\frac{2}{3}\frac{1}{3^j}\right)_{j\in\mathbb{Z}_+}\), we calculate the mean (\(\mu\)), variance (\(\sigma^2\)), and extinction probability (\(\eta\)) of the process.
+	
+	\subsection*{Mean (\(\mu\))}
+	The mean of the offspring distribution is calculated as:
+	\[
+	\mu = 0.5
+	\]
+	
+	\subsection*{Variance (\(\sigma^2\))}
+	The variance of the offspring distribution is calculated as:
+	\[
+	\sigma^2 = 0.75
+	\]
+	
+	\subsection*{Extinction Probability (\(\eta\))}
+	Because $ \mu < 1 $, then we are at sub-critical phase, thus $ \eta = 1 $.
+\end{solution}
+
+
+\begin{problem}
+	Let $ P $ be finite and irreducible. Let $ \pi $ be the stationary distribution of $ P $, and let $ (\lambda,f) $ be a right eigenpair of $ P $ (i.e. $ Pf = \lambda f $) such that $ \lambda \neq 1 $. Show that $ \pi f= 0 $. \emph{Hint: try to plug $ P $ between $ \pi $ and $ f $.}
+\end{problem}
+
+\begin{solution}
+	The given conditions include:
+	\begin{itemize}
+		\item $P$ is the transition matrix of the Markov chain, which is finite and irreducible.
+		\item $\pi$ is the stationary distribution of $P$, implying $\pi P = \pi$.
+		\item $(\lambda, f)$ is a right eigenpair of $P$, where $Pf = \lambda f$ and $\lambda \neq 1$.
+	\end{itemize}
+	
+	\noindent Given $Pf = \lambda f$, we can express:
+	\[
+	\pi (Pf) = \pi (\lambda f).
+	\]
+	Since $\pi P = \pi$, it follows that:
+	\[
+	\pi (Pf) = (\pi P) f = \pi f.
+	\]
+	Thus, we have:
+	\[
+	\pi (\lambda f) = \pi f.
+	\]
+	
+	\noindent Expanding the equation gives us:
+	\[
+	\lambda (\pi f) = \pi f.
+	\]
+	Rearranging, we find:
+	\[
+	(\lambda - 1) (\pi f) = 0.
+	\]
+	Given that $\lambda \neq 1$, $\lambda - 1 \neq 0$. Therefore, the only solution for $(\lambda - 1) (\pi f) = 0$ is if $\pi f = 0$.
+	
+\end{solution}
+
+
+\begin{problem}
+	In this exercise we consider the BGW processes $ (Z_n) $ with $ p_0 = \frac{7}{10}, p_3=\frac{2}{10}, p_10=\frac{0}{100},p_50=\frac{1}{100} $, where $ p_i $ is the probability that each spices will have $ i $ offspring. For example Covid was roughly similar to this. People has a high probability $ p_0 $ to contaminate no one, but also a not-so-small probability to contaminate many people (i.e. a small number of people contributed to a significant proportion of the contamination).
+	\begin{enumerate}[(a)]
+		\item What is $ G_1 $ in this case?
+		\item Compute $ \mu $ and $ \sigma $.
+		\item Make a drawing representing the graph of $ G_1 $ and the first diagonal $ y=x $. Indicating the drawing of the find $ \eta $ and use a calculator to find an approximation of $ \eta $
+	\end{enumerate}
+\end{problem}
+
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item Given the probabilities for the branching process, we can write the generating function \( G_1(s) \) as follows:
+		
+		\[ G_1(s) = \frac{7}{10} + \frac{2}{10} s^3 + \frac{1}{100} s^{10} + \frac{1}{100} s^{50} \]
+		
+		This function generates the probabilities of the number of offspring an individual can have, based on the provided distribution.
+		
+		
+		\item The mean \( \mu \) of the offspring distribution can be found by taking the first derivative of \( G_1(s) \) and evaluating it at \( s = 1 \):
+		
+		\[ \mu = G_1'(1) = \left. \frac{d}{ds} \left(\frac{7}{10} + \frac{2}{10} s^3 + \frac{1}{100} s^{10} + \frac{1}{100} s^{50}\right) \right|_{s=1} \]
+		
+		After calculation, we find that \( \mu = 1.2 \).
+		
+		The variance \( \sigma^2 \) can be found by taking the second derivative of \( G_1(s) \), evaluating it at \( s = 1 \), and using the formula \( \sigma^2 = G_1''(1) + \mu - \mu^2 \):
+		
+		\[ \sigma^2 = \left. \frac{d^2}{ds^2} \left(\frac{7}{10} + \frac{2}{10} s^3 + \frac{1}{100} s^{10} + \frac{1}{100} s^{50}\right) \right|_{s=1} + \mu - \mu^2 \]
+		
+		After calculation, we find that \( \sigma^2 = 26.36 \).
+		
+		
+		\item 
+	\end{enumerate}
+\end{solution}
+
+
+
+
+
+
+
+
 
 \newpage
 
