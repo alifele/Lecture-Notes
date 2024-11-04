@@ -1666,7 +1666,70 @@ The idea of the proof of the following Lemma is very important and will show up 
 
 
 
-\section{Interesting Questions From Other Books}
+\section{Interesting Questions and Remarks From Other Books}
+This section will contain the interesting questions and remarks collected from other books. The content will be cited.
+
+
+\subsection{Normal Numbers, Coin Tossing, WLLN, and SLLN}
+This subsection contains a brief summary of the interesting story in Billingsley section 1.1. This story is interesting because it contains most of the main ideas under one umbrella demonstrates most of the interesting concepts at once.
+
+The story begins by the notion of length for half open intervals as a subset of $ [0,1] $. Let $ (a,b] $ be such an interval. The notion of length for this interval is 
+\[ \ell((a,b]) = b-a.\]
+Now let $ \Omega $ be the space of all infinitely long binary strings. For instance $ \omega = 01110101 \in \Omega $. Each point in $ \Omega $ can be thought of as an experiment in which we toss a coin infinitely many times. For instance $ \omega $ given above corresponds to the experiment where on the first toss we got a Tails, on the second toss we got a heads, and etc. Consider the set $ A_0 \subset \Omega $ given by
+\[ A_0 = \set{\omega: d_1(\omega ) = 0}.  \]
+Similarly we can define 
+\[ A_{10} = \set{\omega: d_1(\omega)=1, d_2(\omega)=0}, \]
+and etc. We associate each $ \omega\in\Omega $ with a real number as follows
+\[ \Omega \ni u_1u_2u_3\cdots \quad \longleftrightarrow \quad 0.u_1u_2u_3\cdots \in [0,1]. \tag{\halfnote} \]
+With this association it is easy to check that for instance we have
+\[ A_{10} \ \longleftrightarrow \ (\frac{1}{2},\frac{3}{4}], \ A_{101} \ \longleftrightarrow\ (\frac{5}{8},\frac{6}{8}],\quad  \text{and etc.} \]
+And in general
+\[ A_{u_1\cdots u_n} \ \longleftrightarrow\ (0.u_1\cdots u_n, 0.u_1\cdots u_n + \frac{1}{2^n}]. \]
+With an slightly different point of view, we can get a very clear understanding of the weak law of large numbers, as well as the strong law of large numbers. Let $ d_n:[0,1] \to \set{0,1} $ be the ``$ i^\text{th} $ component function in base 2''. For instance $ d_2(0.01101\cdots) = 1 $ as the second position in the binary expansion is 1. The graph of $ d_n $ is depicted in the following figure for few different values of $ n $.
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.5\linewidth]{Images/components}
+	\label{fig:components}
+\end{figure}
+\FloatBarrier
+Now assume that in our coin tossing experiment, we are interested in the total number of Heads. For instance in $ \omega = 1010100\dots $, where the sequence of 0s continue in the tail, the number of Heads is 3. This can also be calculated by the function $ H_n:[0,1]\to\N $ given as
+\[ H_n = \sum_{i=1}^n d_i, \]
+that gives the number of heads in the first $ n $ trials. So for the example above, the number of heads are also given as $ H_8(0.1010100\dots) = d_1(0.1010100\dots) + d_2(0.1010100\dots) + d_3(0.1010100\dots) + \cdots + 0 = 1 + 0 + 1 + 0 + 1 + 0 + 0 + \cdots + 0  = 3 $. So the 1-1 correspondence between $ \Omega $ and $ [0,1] $ in $ (\halfnote) $ is a very useful correspondence. That is because most of the events of interests on $ \Omega $ can be converted back to some intervals on $ [0,1] $ for which we can assign probability. For another example, we want to know the behaviour of the fraction of heads as the number of experiments goes to infinity. For $ \omega \in \Omega $, the fraction of heads in the $ n $ first trials is
+\[ F_n(\omega) = \frac{1}{n}\sum_{i=1}^{n} d_i(\omega) = \frac{H_n(\omega)}{n}. \]
+Consider the following example.
+\begin{example}
+	In an infinite coin tossing experiment what is the probability that the sum of first three tosses is 2 (i.e. 2 heads appear in the first 3 trials?)
+\end{example}
+\begin{solution}
+	Consider the pre-image $ 2 $ under $ F_3 $. I.e.
+	\[ \inv{F_3}(2) = (\frac{3}{8},\frac{4}{8}] \cup (\frac{5}{8},\frac{6}{8}] \cup (\frac{6}{8},\frac{7}{8}]. \]
+	The length of $ \inv{F_3}(2) $ is $ 3/8 $. So we can assign the probability $ 3/8 $ to this set. 
+\end{solution}
+
+The graph of the set functions $ F_n $ is very illustrative as in the following figure
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.6\linewidth]{Images/FractionRandomVariable}
+	\label{fig:fractionrandomvariable}
+\end{figure}
+\FloatBarrier
+The graph of the functions $ F_n $ shows that $ F_n $ the ``deviation'' of the sequence of function from $ 1/2 $ gets more and more ``negligible''. Mathematically, for any $ \epsilon>0 $ (in the figure above $ \epsilon=1/4 $) we have
+\[ \prob(\abs{F_n - 1/2}\geq \epsilon)\to 0 \quad \text{as } n\to\infty. \]
+This is shown in the figure below
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.5\linewidth]{Images/convergenceInProb}
+	\label{fig:convergenceinprob}
+\end{figure}
+\FloatBarrier
+This is the Weak Law of Large Numbers! In fact, more is true with our coin tossing experiment. For ``almost all'' of the points $ \omega \in [0,1] $ we have
+\[ F_n(\omega) \to 1/2 \quad \text{as}\ n\to\infty. \]
+The meaning of ``almost all'' is that the set of all points $ \eta \in [0,1] $ such that $ F_n(\eta)\not\to 1/2 $ is ``negligible''. This is the Borel's Normal Numbers Theorem.
+
+
+
+
+\subsection{Solved Problems}
 
 \begin{problem}[From Billingsley]
 	\label{prob:DiscreteSpaceIndependentEvents}
@@ -1688,12 +1751,25 @@ The idea of the proof of the following Lemma is very important and will show up 
 		Since $ A_1,A_2,A_3 $ are independent events the probability of each of the events above are $ 1/8 $. So $ \set{x} $ can have probability $ 1/8 $ at most. Continuing this we will get $ \prob(\set{x}) = 0 $ for all $ x\in \Omega $. On the other hand since $ \Omega $ is countable then 
 		\[ 1 = \prob(\Omega ) = \sum_{x\in \Omega} \prob(\set{x}) = 0 \]  
 		which is a contradiction. 
+		
+		
+		\item When $ p_n $ goes to zero fast enough such that $ \sum_n p_n <\infty $, then $ A_n $ can be independent events on a discrete probability space. To see this let $ B_i $ be $ A_i $ or $ A_i^c $ for each $ i $. Then 
+		\[ \prob(B_1\cap \cdots\cap B_n) \leq \prod_{i=1}^{n}(1-\alpha_i) \leq e^{-\sum_{i=1}^{n}\alpha_i}. \]
+		Thus when the sum $ \sum_i \alpha_i $ diverges the RHS goes to zero and this leads to conclusion that $ \prob(\set{x}) = 0 $ for all $ x\in \Omega $ which leads to a similar kind of contradiction we had in part (a). But when $ \sum_i\alpha_i $ is converging, then we don't have a contradiction which leads to the conclusion that such independent events can exist.
 	\end{enumerate}
 \end{solution}
 
-\begin{remark}
-	Note that by discrete probability measure we also require it to be countable.
+\begin{remark} 
+	\begin{enumerate}[(i)]
+		\item Note that by discrete probability measure we also require it to be countable.
+		\item In part (b) of the question above we use an argument very similar to the one in the proof of Borel-Cantelli. However, it is not yet clear for me if we can somehow directly use Borel-Cantelli Lemma.
+	\end{enumerate}
 \end{remark}
+
+
+\begin{problem}
+	Define a set $ A $ to be trifling if for each $  $
+\end{problem}
 
 \newpage
 
