@@ -1,0 +1,42 @@
+\chapter{Solutions for Gamelin Complex Analysis}
+
+
+\begin{theorem}[Runge's Approximation Theorem]
+	\label{thm:RungeApproximationFirstVersion}
+	Let $ K $ be a compact subset of $ \C $ contained in a an open set $ D $. If $ f $ is analytic (holomorphic) on $ D $, then it can be approximated \emph{on} $ K $ uniformally by \emph{rational} functions with poles \emph{off} $ K $.
+\end{theorem}
+
+There is some flexibility regarding the location of the poles of the approximating rational functions. This is captured by the following Lemma.
+
+\begin{lemma}
+	\label{lemma:FlexibilityOfSingularities}
+	Let $ K $ be a compact subset of $ \C $, and $ U $ be a \emph{connected open} subset of $ \C^* \backslash K $, and let $ z_0 \in U $. Every \emph{rational} function $ f $ with poles at $ U $ can be approximated uniformally \emph{on} $ K $ with \emph{rational} with poles at $ z_0 $. 
+\end{lemma}
+
+
+\section{Approximation Theorems}
+\begin{problem}
+	Show that any analytic function $ f(z) $ on a domain $ D $ can be approximated normally on $ D $ by a sequence of rational functions that are analytic on $ D $.
+\end{problem}
+\begin{solution}
+	Let $ K \subset D $ be any compact subset of $ D $. By \autoref{thm:RungeApproximationFirstVersion} $ f $ can be approximated uniformly on $ K $ by rational functions with poles off $ K $. Let $ U = \C^*\backslash K $, and ;et $ z_0 \in U\cap (\closure{D})^c $ (where $ \closure{D} $ is the closure of $ D $). By \autoref{lemma:FlexibilityOfSingularities} each of the approximating functions above can be approximated by rational functions with poles at $ z_0 $. Since $ z_0 \in (\closure{D})^c $, then all of these approximating rational functions are holomorphic (analytic on $ D $). So $ f $ can be approximated normally (on every compact subset of $ D $) with rational functions that are holomorphic on $ D $.
+\end{solution}
+
+\begin{problem}[]
+	Show that there is a sequence of polynomials $ \set{p_n(z)} $ such that $ p_n(z)\to 1 $ if $ \Re{z}>0 $, $ p_n(z)\to 0 $ if $ \Re{z} = 0 $, and $ p_n(z) \to -1 $ if $ \Re{z}<0 $.
+\end{problem}
+\begin{solution}
+	{\color{red} \noindent TODO: TO BE ADDED.}
+\end{solution}
+\begin{remark}
+	I have not been able to solve the question above yet. The followings are my attempts 
+	\begin{itemize}
+		\item I was thinking what if we use some conformal map to map the Left-Right half planes to the Interior-Exterior of the unit disk where the imaginary axis maps to the boundary of the disk. This is easily possible by simply rotating the Riemann sphere by 90 degrees around the y axis. I am not sure if this mapping will help.
+		\item The function $ \tanh(z) = (e^z-e^{-z})/(e^z + e^{-z}) $ has a very interesting behaviour. Define $ f_n(z) = \tanh(nz) $. Then for the Left half plane $ f_n(z) \to -1 $ while for the Right half plane $ f_n(z) \to 1$. But on the imaginary axis the function oscillates. Not sure if some modifications of this function will help.
+	\end{itemize}
+\end{remark}
+
+
+\begin{problem}
+	Let $ \set{z_j} $ be a sequence of distinct points in a domain $ D $ that accumulates on $ \partial D $, and let $ \set{w_j} $ be a sequence of complex numbers. Show that there is an analytic function $ f(z) $ on $ D $ such that $ f(z_j)=w_j $ for all $ j $. The sequence $ \set{z_j} $ is called an interpolating sequence for analytic functions on $ D $.
+\end{problem}
