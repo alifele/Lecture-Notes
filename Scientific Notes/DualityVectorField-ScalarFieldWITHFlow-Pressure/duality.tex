@@ -8,15 +8,35 @@
 %\setcitestyle{numbers,square}
 
 
-\title{The Duality Between (Scalar)}
+\title{A Theoretical Exposition on the Topology of Vascular Networks}
 \author{Ali Fele-Paranj}
 
 \begin{document}
 	\maketitle
-	
+
 	\section{Introduction}
 	In this document, we explore the analogies between vector calculus in continuum settings and graph-based flow analysis. Specifically, we delve into the concepts of gradient, divergence, and curl on graphs, as well as the role of Graham's cohomology in characterizing loops and flows in networks.
 	
+	
+	
+	\section{Boundary and Co-Boundary Operators}
+	Let $ G = (E,V) $ be a graph. Define the ``pressure'' and ``flow'' on the nodes and edges respectively by the functions
+	\[ p:V \to \R, \qquad Q: E \to \R \]
+	
+	\begin{enumerate}[(i)]
+		\item Talk about the incidence matrix and the whole theory of flow in networks. 
+		\item Talk about the coboundary ($ \nabla $) and the boundary ($ \nabla^* $) operators abstractly and show that $ \nabla^*\nabla = \mathcal{L} $ is the Laplacian operator.
+		\item Show that these operator are adjoint operators (i.e. the incidence matrix and its transpose).
+		\item Talk about how this can form a chain complex.
+		\item Talk about the statement that gradient flow are curl less, thus there will be no cycles in the network if we demand that the edges with less flow will shrink.
+		\item But the vascular networks in real life has loops (e.g. the ROSE data set).
+		\item Given the fact that the flow in microvasculature is a gradient flow, then we can conclude that the energy functional does not include only terms in response to flow. It must have other terms --> Gap junction, functional shunt, etc.
+		\item Hodge decomposition of flow: Decomposition into three orthogonal components: gradient, curl, and harmonic flows.
+ 	\end{enumerate}
+	
+	
+	
+	\clearpage
 	\section{Gradient, Divergence, and Laplacian Operators}
 	In both continuum and graph settings, we define various operators to analyze scalar and vector fields. These operators have close analogies in both domains.
 	

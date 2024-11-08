@@ -1,0 +1,34 @@
+\chapter{Probability by Le Gall}
+
+\section{Integration of Measurable Functions}
+
+The following properties become very useful in the following chapters. 
+\begin{proposition}
+	Let $ f $ be a \emph{non-negative} measurable function.
+	\begin{enumerate}[(i)]
+		\item We have
+		\[ \int f d\mu = 0 \biImp f = 0,\ \mu\ a.e. \]
+	\end{enumerate}
+\end{proposition}
+\begin{proof}
+	For the proof we will have
+	\begin{enumerate}[(i)]
+		\item Define 
+		\[ A_n = \set{f \geq 1/n}. \]
+		Then by the Markov inequality
+		\[ \mu(A_n) = \mu(\set{f \geq 1/n}) \leq \frac{\int f\d\mu}{1/n} = 0. \]
+		Also observe that $ \set{f > 0} = \bigcup_n \set{f \geq 1/n} = \bigcup_n A_n $. Thus
+		\[ \mu(\bigcup_n A_n) \leq \sum_n \mu(A_n) = 0. \]
+		This implies $ \mu(\set{f>0}) = 0 $, thus $ f = 0 $ almost everywhere.
+		
+	\end{enumerate}
+\end{proof}
+\begin{remark}
+	For proof for part (i) in the proposition above, I also have the following proof using the conditional expectation. But I don't know how that translates to the integrals. Note that we have $ \E{X} = 0 $ and we want to show $ \prob(X = 0) = 1 $. We can write
+	\begin{align*}
+		0 = \E{X} &= \E{X\I_{X=0} + X\I_{X\neq 0}} = \E{X\I_{X=0}} + \E{X\I_{X\neq0}} \\
+		&= \underbrace{\E{X|X=0}\E{\I_{X=0}}}_{0} + \E{X|X\neq 0} \E{\I_{X\neq 0}} \\
+		&= \E{X|X\neq 0} \E{\I_{X\neq 0}}.
+	\end{align*}
+	Observe that we have $ \E{X|X\neq 0} > 0 $ since $ X $ is a non-negative random variable. Thus we need to have $ \E{I_{X\neq 0}} = \prob(X\neq0) = 1 $.
+\end{remark}
