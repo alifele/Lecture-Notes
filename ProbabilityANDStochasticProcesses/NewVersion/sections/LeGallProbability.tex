@@ -32,3 +32,30 @@ The following properties become very useful in the following chapters.
 	\end{align*}
 	Observe that we have $ \E{X|X\neq 0} > 0 $ since $ X $ is a non-negative random variable. Thus we need to have $ \E{I_{X\neq 0}} = \prob(X\neq0) = 1 $.
 \end{remark}
+
+
+\section{Convergence of Random Variables}
+In the following we will have a quick review of the different definitions of convergence.
+
+\begin{definition}[Convergence almost surely]
+	Let $ X,X_1,X_2,\cdot $ be random variables. We say $ X_n $ converges to $ X $ almost surely if it converges to $ X $ point-wise on a set of measure 1. In other words
+	\[ \prob(X_n \to X) = 1, \]
+	where $ X_n\to X$ should be interpreted by point wise convergence as $ n\to \infty $.
+\end{definition}
+
+\begin{definition}[Convergence in Probability]
+	Let $ X,X_1,X_2,\cdots $ be random variables. We say that $ X_n $ converges to $ X $ in probability if for any $ \epsilon>0 $ we have
+	\[ \prob(\abs{X_n - X} \geq \epsilon) \to 0 \qquad \text{as $ n\to \infty $}. \]
+\end{definition}
+\begin{remark}
+	Note that if for all $ \epsilon>0 $ the convergence $ \prob(\abs{X_n - X}\geq\epsilon) \to 0 $ is fast enough so that it is summable, i.e. $ \sum\prob(\abs{X_n-X}\geq\epsilon)<\infty $, then by Borel Cantelli we can conclude that $ \prob(\abs{X_n-X}\geq\epsilon\ i.o.) = 0 $, hence $ \prob(\abs{X_n-X}<\epsilon\ a.a.) = 1 $, this $ X_n\to X $ almost surely.
+\end{remark}
+
+\begin{definition}[Convergence in $ L^p $]
+	Let $ X,X_1,X_2,\cdots $ be random variables with $ \E{\abs{X}^p} < \infty$ as well as $ \E{\abs{X_n}^p} < \infty $ for all $ n \in \N $, then we say that $ X_n $ converges to $ X $ in $ L^p $ if 
+	\[ \E{\abs{X_n - X}^p} \to 0\qquad \text{as $ n\to\infty $}. \]
+\end{definition}
+\begin{remark}
+	With the notation $ \norm{X}_p = (\E{\abs{X}^p})^{1/p} $ we can state the theorem above as: if $ \norm{X}_p < \infty $ and $ \norm{X_n}_p <\infty $ for all $ n $, then $ X_n \to X $ in $ L^p $ if 
+	\[ \norm{X_n - X}_p \to 0. \]
+\end{remark}

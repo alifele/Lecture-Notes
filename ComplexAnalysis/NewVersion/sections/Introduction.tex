@@ -148,6 +148,75 @@ This is a very interesting and clear characterization of the holomorphic functio
 which is the Cauchy-Riemann equations for a holomorphic function.
 
 
+
+\section{Summary}
+\begin{summary}
+	In a nutshell, every holomorphic function is a mapping from $ \R^2\supset\Omega\to\R^2 $ such that its Jacobian is of the form
+	\[ \matt{\mu}{-\omega}{\omega}{\mu}, \]
+	for some real numbers $ \omega, \mu \in \R $. This property makes the holomorphic functions to be a special kind of maps from $ \R^2 $ to $ \R^2 $. In particular they preserve the angles, etc. 
+\end{summary}
+
+\begin{summary}
+	One interesting fact about the complex plane is that it brings together two fundamental behaviours ``oscillation'' and ``growth'' in an orthogonal way! This is a very lose statement, and what I mean is that ``oscillation'' and ``growth'' are two fundamental behaviours that a function does and for instance the function $ e^z $ has oscillator behaviour on the imaginary axis and growth behaviour on the real axis (and some combined behaviour on the quadrants.) 
+\end{summary}
+
+\begin{summary}
+	The zeros of a non-trivial holomorphic function are isolated. On other words if $ f $ is holomorphic on open $ \Omega $ and $ z_0 \in \Omega $ is a zero of $ f $ (i.e. $ f(z_0) = 0 $), then there is an open disk around $ z_0 $ such that it contains no other zeros of the function $ f $, unless $ f $ is identically zero.
+\end{summary}
+
+\begin{theorem}[Local Characterization of a Holomorphic Function Near a Zero]
+	Let $ f $ be holomorphic function on $ \Omega $ with $ z_0\in \Omega $ such that $ f(z_0) = 0 $. Then there is an open neighborhood $ z_0 \in U \subset \Omega $ such that there exist a non-vanishing holomorphic function $ g $ on $ U $ for which we can write
+	\[ f(z) = (z-z_0)^n g(z), \]
+	where $ n $ is the order of the zero.
+\end{theorem}
+\begin{remark}
+	Proof idea: Since $ f $ is holomorphic then it has a power series expansion near $ z_0 $ like $ f(z) = a_n(z-z_0)^n + a_{n+1}(z-z_0)^{n+1}+\cdots $ for some $ n\geq 1 $ (note that the leading term is not constant as $ z_0 $ is a zero of $ f $). By factoring $ (z-z_0)^n $ we will have $ f(z) = (z-z_0)^n (a_n + a_{n+1}(z-z_0)+ \dots) $. 
+\end{remark}
+
+Using the definition of a pole and the theorem above we will have the following characterization of the poles of a holomorphic function.
+
+\begin{theorem}[Local Characterization of a Holomorphic Function Near a Pole]
+	If $ f $ is holomorphic and has a pole at $ z_0 \in \Omega $, then in a neighborhood of that point there is a non-vanishing holomorphic function $ h(z) $ such that 
+	\[ f(z) = (z-z_0)^{-n} h(z), \]
+	for some $ n \geq 1 $. $ n $ is the order of the pole.
+\end{theorem}
+\begin{remark}
+	Proof idea. By definition $ z_0 $ (i.e. the pole of $ f $) is a zero of $ 1/f $. So by the local characterization of holomorphic functions near a zero we can write
+	\[ 1/f = (z-z_0)^{n}g(z) \]
+	where $ g $ is a non-vanishing holomorphic function one some open neighborhood of $ z_0 $. Define $ h(z)=1/g(z) $.
+\end{remark}
+
+The theorem above will give us the following generalization of the power series for holomorphic functions.
+
+\begin{proposition}
+	Let $ f $ be holomorphic on $ \Omega $ except at $ z_0 $ that is a pole. Then on an open neighborhood near $ z_0 $ we can write
+	\[ f(z) = \frac{a_{-n}}{(z-z_0)^n} + \frac{a_{-n+1}}{(z-z_0)^{n-1}} + \cdots + G(z) \]
+	where $ G(z) $ is a holomorphic function on the same neighborhood.
+\end{proposition}
+\begin{remark}
+	Proof idea: Using the characterization of holomorphic functions near a pole, we can write
+	\[ f(z) = (z-z_0)^{-n} g(z) \]
+	where $ g(z) $ is a non-vanishing holomorphic function on some open neighborhood containing $ z_0 $. Since $ g(z) $ has a power series on that neighborhood we can write
+	\[ g(z) = A_0 + A_1(z-z_0) + \cdots. \]
+	So we will have
+	\[ f(z) = \frac{a_{-n}}{(z-z_0)^n} + \frac{a_{-n+1}}{(z-z_0)^{n-1}} + \cdots + G(z). \]
+\end{remark}
+\begin{summary}
+	In the expansion $ f(z) = \frac{a_{-n}}{(z-z_0)^n} + \frac{a_{-n+1}}{(z-z_0)^{n-1}} + \cdots + G(z) $, the sum
+	\[ \frac{a_{-n}}{(z-z_0)^n} + \frac{a_{-n+1}}{(z-z_0)^{n-1}} + \cdots + G(z) \]
+	is called the \textbf{principal part} of $ f $ and the coefficient $ a_{-1} $ is called the residue of $ f $ at $ z_0 $ and we write $ \res_{z_0}f = a_{-1} $.
+\end{summary}
+
+\begin{theorem}[Generalization of Cauchy Integral Theorem]
+	Let $ \Omega $ be an open set that contain a toy contour $ \gamma $ and its interior. And let $ f $ be a holomorphic function in $ \Omega $ except at poles $ z_1,\cdots,z_n $ inside the contour. Then
+	\[ \int_\gamma f(z)dz = 2\pi i \sum_{i=1}^n \res_{z_i}f. \]
+\end{theorem}
+\begin{remark}
+	Proof idea: By turning the contour into a keyhole like contour with narrow corridors, and letting the width of the corridors to go to zero, the integral of $ f $ on $ \gamma $ will be the same as the sum of integrals on small circles around each pole. Then by the characterization of holomorphic functions near poles, the only term from the principal part of function around each pole only the term with $ 1/(z-z_i) $ will be non-zero/
+\end{remark}
+
+
+
 \newpage
 
 \section{Solved Problems}
