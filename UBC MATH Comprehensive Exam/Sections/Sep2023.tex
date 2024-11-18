@@ -122,4 +122,33 @@
 	Recall that an orthogonal projection matrix is a matrix $ P $ that satisfies 
 	\[ P^2 = P, \quad P = P^T. \]
 	Suppose $ P $ is an $ n\times n $ projection matrix with $ \rank(P) = k $. In the following, $ I_m $ denotes the $ m\times m $ identity matrix. 
+	
+	\begin{enumerate}[(a)]
+		\item List all the eigenvalues of $ P $, including multiplicity. Be sure to justify your reasoning.
+		\item Show that $ P = AA^T $ for some $ n\times k $ matrix $ A $ such that $ A^TA = I_k $.
+		\item Suppose $ P_1, P_2 $ are two $ n\times n $ projection matrices with rank $ k $. Show that there exists an $ n\times n $ orthonormal matrix $ U $ (i.e. such that $ U^T U = I_n, UU^T = I_n$) such that $ P_2 = UP_1 U^T $.
+	\end{enumerate}
 \end{problem}
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item The projection matrix $ P $ has only two eigenvalues $ \lambda_1 = 1 $ and $ \lambda_2 = 0 $. The eigenvectors corresponding to $ \lambda_2 $ eigenvalue are the basis vectors of the null-space of $ P $ (that has dimension $ n - k $), and the eigenvectors corresponding to $ \lambda_1 $ are the basis vectors of the orthogonal sub-space to the null space of $ P $. Thus $ \lambda_2 $ has multiplicity $ n-k $ and $ \lambda_1 $ has multiplicity $ k $. 
+		
+		\item Since $ P $ is symmetric, then we can choose the eigenvectors to form an orthogonal basis. Let $ U = [U_1\ U_2] $ be the matrix that its columns are the eigenvectors and $ U_1 $ are the one with eigenvalue 1 while $ U_2 $ are the one with eigenvalue 0. Note that since the columns in $ U $ are orthogonal, then $ \inv{U} = U^T $. Let $ D $ be the diagonal matrix of $ P $, then we can write
+		\[ P = U D U^T = [U_1\ U_2] \matt{I_k}{0}{0}{0} \vectt{U_1^T}{U_2^T} = U_1 U_1^T. \]
+		Note that $ U_1^T U_1  = I_k$ since $ U $ is orthogonal matrix.
+		
+		\item From part (b) we know that there are matrices $ A_1, A_2 $ such that 
+		\[ P_1 = A_1A_1^T,\qquad P_2 = A_2A_2^T. \]
+		Define $ U = A_1A_2^T $. Then
+		\[ P_1 = A_1A_1^T = A_1 (A_2^TA_2 A_2^T A_2) A_1^T = (A_1A_2^T) A_2A_2^T (A_2A_1^T) = U P_2 U^T. \]
+	\end{enumerate}
+\end{solution}
+
+
+\section{Real Analysis}
+\begin{problem}
+	Let $ S $ be the part of the paraboloid $ z = 2 - x^2 - y^2 $ above the cone $ z = \sqrt{x^2+y^2} $, with upward orientation. Let
+	\[ F = (\tan\sqrt{z}) + \sin(y^3) \hat{i} + e^{-x^2} \hat{j} + z \hat{k}. \]
+	Evaluate the flux integral $ \iint_S F\cdot dS.\ $
+\end{problem}
+

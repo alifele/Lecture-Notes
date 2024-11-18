@@ -124,3 +124,26 @@ Dini's theorem provides the conditions that can upgrade a point-wise convergence
 
 
 
+
+\section{Weierstrass M-Test}
+While trying to solve a question on the PhD comprehensive exam, I came across that Weierstrass M-Test and I am surprised why I didn't understand this simple concept before. In words, it says that a series of functions converges \emph{uniformly, and absolutely} if each of the functions in the series are uniformally bounded where the bound is summable.
+
+\begin{theorem}[Weierstrass M-Test]
+	Let $ \set{f_k}:D \to \R $ be a sequence of functions. Then 
+	\[ \sum_{k=1}^{\infty}f_k(x) \]
+	converges absolutely and uniformly if $ \abs{f_k(x)} \leq M_k $ for all $ x\in D $ and some $ M_k \geq 0 $ such that $ \sum_{k=1}^{\infty}M_k < \infty $.
+\end{theorem}
+\begin{proof}
+	First, we need to show that the series $ \sum f_k(x) $ converges for all $ x \in D $, and then we will show that the convergence is uniform convergence. Since $ \sum_k M_k <\infty$ then by Cauchy criteria we know that $ \forall \epsilon>0 $ there exists $ N \in \N $ such that $ \forall n,m > N $ we have $ \sum_{k=1}^{m} M_k < \epsilon $. For any given $ \epsilon $, choose $ N $ as above, and let $ n,m > N $. Then
+	\[ \abs{\sum_{k=n}^{m}f_k(x)} \leq \sum_{k=n}^{m}\abs{f_k(x)} \leq \sum_{k=n}^{m}M_k < \epsilon. \]
+	So by Cauchy criteria $ \sum_k f_k(x) $ converges for all $ x \in D $ (call it $ S(x) $). To show that the convergence is uniform consider
+	\begin{align*}
+		\sup_{x\in D} \abs{\sum_{k=1}^{n}f_k(x) - S(x)} &= \sup_{x\in D} \abs{\sum_{k=1}^{n}f_k(x) - \lim_{m\to\infty} \sum_{k=1}^m f_k(x)} \\
+		&= \sup_{x\in D}\lim_{m\to\infty} \abs{\sum_{k=1}^{n}f_k(x) -  \sum_{k=1}^m f_k(x)} \\
+		&= \sup_{x\in D}\lim_{m\to\infty} \abs{\sum_{k=n}^{m}} < \epsilon. 
+	\end{align*}
+	Thus $\sum_{k=1}^{\infty} f_k(x)$ converges uniformly to $ S(x) $.
+\end{proof}
+\begin{remark}
+	Since $ \sum_{k=1}^{\infty} f_k(x) $ converges uniformally, we can now do a term by term differentiation, etc if needed. 
+\end{remark}
