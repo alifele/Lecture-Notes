@@ -152,3 +152,26 @@
 	Evaluate the flux integral $ \iint_S F\cdot dS.\ $
 \end{problem}
 
+
+\begin{problem}
+	Let $ f(x) = \sum_{n=1}^{\infty}\sin(nx)x^n$ for those $ x $ for which the series converges. Note that this is NOT a power series. 
+	\begin{enumerate}[(a)]
+		\item Show that $ f $ is defined and continuous on $ (-1,1) $.
+		\item Shoat the $ f $ is differentiable and that $ f' $ is continuous on $ (-1,1) $.
+	\end{enumerate}
+\end{problem}
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item We use the Weierstrass M-test to show that the series converges uniformally on $ (-1,1) $. To see this let $ r \in (0,1) $. Then on $ [-r,r] $ we have $ \abs{\sin(nx)x^n} \leq r^n $. Since $ \sum r^n < \infty $ (by the geometric series) then by Weierstrass M-test the series $ \sum_n \sin(nx)x^n $ converges on $ [-r,r] $ uniformly and absolutely for all $ r\in (0,1) $. This implies uniform and absolute converges on $ (-1,1) $. To show the continuity of the series, observe that $ \sin(nx)x^n $ is continuous for all $ n $. Thus this continuity carries over through the uniform converges. 
+		
+		\item First, observe that each term in the sum is continuously differentiable. Denote the $ n $-th term by $ f_n(x) $, then we will have
+		\[ f_n(x) = n\cos(nx)x^n + nx^{n-1}\sin(nx) = nx^{n-1} (x\cos(nx) + \sin(nx)). \]
+		For $ x \in (-1,1) $, the term inside the parenthesis will be
+		\[ \abs{x\cos nx + \sin nx} \leq \abs{x}\abs{\cos nx} + \abs{\sin nx} \leq 2. \]
+		Let $ r \in (0,1) $ and $ x \in [-r,r] $, then we will have 
+		\[ nx^{n-1} \leq nr^{n-1} \quad \forall x \in [-r,r]. \]
+		Observe that the series $\sum_n nr^{n-1} $ converges for $ r\in (-1,1) $ (you can see this easily by the ratio test). So for $ r\in (0,1) $
+		\[ f_k(x) \leq M_k  \qquad \forall x\in (-r,r). \]
+		for some $ M_k > 0 $ (to be precise $ M_k = 2kr^{k-1} $) where $ \sum_k M_k < \infty $. So by the Weierstrass M-test $ \sum_k f'_k(x) $ converges uniformly on any compact subset $ [-r,r] $ for $ r\in (0,1) $, and because each term is continuous, the $ f' $ is also continuous on $ (-1,1) $. So far have observed that $ \sum_k f_k(x) $ converges on compact subsets of $ (-1,1) $, $ \sum_k f'_k(x) $ converges on compact subsets of $ (-1,1) $, and $ f_k $ is continuously differentiable. So we can do a term by term differentiation. 
+	\end{enumerate}
+\end{solution}
