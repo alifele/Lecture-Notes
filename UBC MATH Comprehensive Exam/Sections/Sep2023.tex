@@ -151,6 +151,9 @@
 	\[ F = (\tan\sqrt{z}) + \sin(y^3) \hat{i} + e^{-x^2} \hat{j} + z \hat{k}. \]
 	Evaluate the flux integral $ \iint_S F\cdot dS.\ $
 \end{problem}
+\begin{solution}
+	{\color{red} \noindent TODO: Final answer to be added.}
+\end{solution}
 
 
 \begin{problem}
@@ -175,3 +178,174 @@
 		for some $ M_k > 0 $ (to be precise $ M_k = 2kr^{k-1} $) where $ \sum_k M_k < \infty $. So by the Weierstrass M-test $ \sum_k f'_k(x) $ converges uniformly on any compact subset $ [-r,r] $ for $ r\in (0,1) $, and because each term is continuous, the $ f' $ is also continuous on $ (-1,1) $. So far have observed that $ \sum_k f_k(x) $ converges on compact subsets of $ (-1,1) $, $ \sum_k f'_k(x) $ converges on compact subsets of $ (-1,1) $, and $ f_k $ is continuously differentiable. So we can do a term by term differentiation. 
 	\end{enumerate}
 \end{solution}
+
+\begin{problem}
+	Let $ \set{x_n} $ be a sequence of positive real numbers, and define
+	\[ \alpha = \liminf_{n\to\infty}\frac{x_{n+1}}{x_n},\qquad \beta = \limsup_{n\to\infty}\frac{x_{n+1}}{x_n}. \]
+	Note that $ \alpha = \infty $ and $ \beta = \infty $ may occur.
+	\begin{enumerate}[(a)]
+		\item Prove that if $ \beta < 1 $, the sequence $ \set{x_n} $ converges. 
+		\item Prove that if $ \alpha > 1 $, the sequence $ \set{x_n} $ diverges. 
+		\item Give an example of a  convergent sequence $ \set{x_n} $ for which $ \alpha = 1/2 $.
+		\item Give an example of a divergent sequence $ \set{x_n} $ for which $ \beta = 1 $.
+	\end{enumerate}
+\end{problem}
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item We choose $ \epsilon>0 $ small enough such that $ r = \beta + \epsilon < 1 $. Since $ \beta $ is the limsup of the sequence $ x_{n+1}/x_n $, then we know that $ \exists N \in \N $ such that $ \forall n > N $ we have $ x_{n+1}/x_n < r $. Calling $ x_{n} = C $ we see that the each term in sequence $ x_{N}, x_{N+1},\dots $ will be dominated by $ C, rC, r^2C,\dots $. Since the latter sequence is summable (since $ r<1 $), the former is summable as well. This implies that $ \sum_n x_n $ converges. 
+		
+		\item We choose $ \epsilon>0 $ small enough such that $ r = \alpha - \epsilon > 1 $. So there exists $ N\in \N $ such that $ \forall n > N $ we have $ x_{n+1}/x_n > r $. Calling $ x_n = C $ we see that each term in the sequence $ C, rC, r^2C, \dots $ is dominated by $ x_{n},x_{n+1},x_{n+2},\dots $.  Since the former diverges, the latter diverges as well. This implies that $ \sum_n x_n $ diverges. 
+		
+		\item Let $ \set{x_n} $ be the geometric series $ 1,r,r^2,\cdots $ with $ r = 1/2 $. Then $ \alpha = r $ and we know that the series $ \sum_n r^n  $ converges to 2.
+		
+		\item One classic example is $ x_n = 1/n $, the harmonic series. 
+	\end{enumerate}
+\end{solution}
+
+
+\section{Complex Analysis}
+\begin{problem}
+	\begin{enumerate}[(a)]
+		\item Find
+		\[ \int_C \left(  \frac{z}{(z-1)(z^2+1)} + \frac{e^z}{z-3i}  \right) dz, \]
+		where $ C $ is the counterclockwise oriented circle centered at $ (0,0) $ of radius 2.
+		\item Find all values of $ z \in \C $ such that $ f(z) = 2(x^3-3xy^2+y) + i(3yx^2-y^3) $ is analytic at $ z $.
+	\end{enumerate}
+	
+\end{problem}
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item We use the generalized Cauchy theorem. To state the theorem, let $ \Omega $ be an open set containing a closed curve and its interior and $ f $ be a holomorphic function on $ \Omega $ except at poles $ z_1,\cdots,z_n $ inside the closed curve, then
+		\[ \int_\gamma  f(z) dz = 2\pi i (\sum_{i=1}^n \operatorname{res}_{z_i}f). \]
+		Observe that the integrand has 4 residues, three of which lies inside the closed curve $ C $, i.e. $ z_1=1, z_2 = i, z_3 = -i $. We now need to calculate the residue of the integrand at these points. For $ z_1 = 1 $ we have
+		\[ \operatorname{res}_{z_1}f = \lim_{z\to1} (z-1)f(z) = \frac{1}{2}. \]
+		Similarly for $ z_2 = i $
+		\[ \operatorname{res}_{z_2}f = \lim_{z\to i} (z-i)f(z) = \frac{1}{2(i-1)}. \]
+		And finally for $ z_3 = -i $
+		\[ \operatorname{res}_{z_2}f = \lim_{z\to i} (z-i)f(z) = \frac{-1}{2(i+1)}. \]
+		So the sum of residues at the poles inside $ C $ is zero. This implies that the integral evaluates to zero.
+		
+		\item We will use the converse of the Cauchy-Riemann equations, i.e. we demand the partial derivatives to exist and be continuous, and the Cauchy-Riemann equations to hold. The partial derivatives of $ u,v $ are continuous. So we only demand the C-R equations to hold.
+		\[ u_x = v_y, \qquad u_y = -v_x. \]
+		Observe that $ u_x = 2(3x^2-3y^2), u_y = 2(-6xy+1), v_x=6xy, v_y=3x^2-3y^2. $
+		Thus we need to have
+		\[ 2(3x^2-3y^2) = 3x^2-3y^2, \qquad -12xy+2 = -6xy. \]
+		The first equation results in $ x^2 = y^2  $ and the second equation results in $ xy = 1/3 $. So $ f $ is holomorphic at only the points where $ x = y = \pm \frac{1}{\sqrt{3}} $. I.e. $ z = \pm\frac{1}{\sqrt{3}}(1+i) $.
+	\end{enumerate}
+	
+\end{solution}
+
+
+\begin{problem}
+	Find the domain of analyticity of $ f(z) = \sqrt{\log(z+1) - \frac{\pi}{2}i} $, where the square root is given by the principal branch and $ \log(z) $ is the principal branch of log function.
+\end{problem}
+\begin{solution}
+	We need to consider the branch cuts of the log function and the square root function. For the latter, if $ w = \log(z+1) - \frac{\pi}{2}i $ the branch cut is where $ w \leq 0 $. Using the fact that $ \log(z+1) = \ln\abs{z+1} + i\arg(z) $, we need to have
+	\[ \ln\abs{z+1} \leq 0 \qquad \arg(z) = \pi/2. \]
+	The first equation above implies that $ \abs{z+1}\leq 1 $ and the second equation implies that $ z = -1 + it $ for $ t\geq 0 $. So the branch cut for square root will be the set $ \set{-1+it:\ t \in [0,1] } $. Furthermore the branch cut of the function $ \log(z+1) $ is the set $ \set{t:\ t\leq -1} $. So the domain of analyticity of the function $ f $ will be
+	\[ \set{-1+it:\ t \in [0,1] } \cup \set{t:\ t\leq -1}. \]
+\end{solution}
+
+\begin{problem}
+	Suppose that $ f $ is an analytic function on $ H = \set{z\in \C:\ \real(z)\leq 0} $ with
+	\[ f(-1) = f'(-1) = 0 \qquad \text{and} \qquad f''(-1) = \frac{i}{2}. \]
+	\begin{enumerate}[(a)]
+		\item Show that $ g(z)=f(z)/(z+1)^2 $ is analytic on $ H $. Find the residue of $ g $ at $ -1 $ and the residue of $ f(z)/(z+1)^3 $ at $ -1 $.
+		\item Suppose $ \abs{f(z)}\leq \frac{1}{2}\abs{z+1}^2 $. Show that $ \abs{f(-3/2)}\leq 9/80 $.
+	\end{enumerate}
+\end{problem}
+
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item Since $ f $ is holomorphic on $ H $, then at every point of $ H $ it has a power series. In particular
+		\[ f(z) = (z-1) + (z-1)f'(z) + (z-1)^2f''(z)/2 + (z-1)^3f'''(z)/6 + \cdots. \]
+		Since $ f(-1) = f'(-1) = 0 $, we have
+		\[ f(z) = (z-1)^2h(z) \]
+		for some holomorphic function $ h $ that is non-vanishing close to $ z=-1 $. So
+		\[ g(z) = f(z)/(z+1)^2 = h(z). \]
+		The residue of $ g(z) $ at $ z=-1 $ is zero. However, for $ f(z)/(z+1)^3 $ we can write
+		\[ f(z)/(z+1)^3 = h(z)/(z+1). \]
+		The residue of this function at $ z =-1 $ is calculated by
+		\[ \lim_{z\to -1}(z+1)h(z)/(z+1) = h(-1). \]
+		To calculate $ h(-1) $ observe that 
+		\[ f''(z)  = 2h(z) + \text{other terms with factor $ (z-1) $}. \]
+		So we will have $ f''(-1) = 2h(-1) = i/2 $. So $ h(-1) = i/4 $. So the residue of the function above at $ z = -1 $ is $ i/4 $.
+		\item See the remark below. {\color{red} \noindent TODO: Final answer to be added.}
+	\end{enumerate}
+\end{solution}
+\begin{remark}
+	I was not able to solve the problem. But I have a feeling that I need to use the Cauchy's estimate for the $ n $-th derivative for some appropriate chosen radius $ R $
+	\[ \abs{f^{(n)}(z)} \leq \frac{n!}{R^n}M, \qquad M = \sup_{z\in C}\abs{f(z)}, \]
+	where $ C $ is a disk centered at $ z $ with radius $ R $.
+\end{remark}
+
+
+\section{September 2022}
+\begin{problem}
+	Find the shortest distance from $ x $ to $ U = \operatorname{span}\set{u_1,u_2} \subseteq \R^4 $ where 
+	\[ u_1 = \begin{bmatrix}
+		1 \\ 1 \\ 1 \\ 1 
+	\end{bmatrix},\qquad
+	u_2 = \begin{bmatrix}
+		2 \\ 0 \\ 2 \\ 0 
+	\end{bmatrix}, \qquad
+	x = \begin{bmatrix}
+		1 \\ 1 \\ 1 \\ 0
+	\end{bmatrix}.
+	 \]
+\end{problem}
+\begin{solution}
+	First, we form a matrix that its column spaces is the same as $ U $. I.e.
+	\[ A = \begin{bmatrix}
+		1 & 2 \\
+		1 & 0 \\
+		1 & 2 \\
+		1 & 0
+	\end{bmatrix}. \]
+	We can write $ x = x_{U} + x_\perp $. Since $ x_{U} $ is in the column space, then $ \exists c\in U $ such that $ A c = x_{U} $. However, by definition we know that $ x_\perp $ is in $ U_\perp $. Thus it belongs to the null space of $ A^T $. I.e. $ A^T x_\perp = 0 $. We can write $ A^T (x - x_U) = A^T(x- Ac) = 0 $.
+	\[ A^T A c= A^T x. \]
+	This is the systems of equations
+	\[ \begin{bmatrix}
+		4 & 4 \\
+		4 & 8
+	\end{bmatrix}
+	\begin{bmatrix}
+		c_1 \\ c_2 
+	\end{bmatrix}
+	= \begin{bmatrix}
+		3 \\ 4
+	\end{bmatrix} \]
+	By manipulating the augmented matrix we find that 
+	\[ c_1 = 1/2, \qquad c_2 = 1/4. \]
+	So 
+	\[ x_U = Ac = \frac{1}{2}\begin{bmatrix}
+		2 \\ 1 \\ 2 \\1 
+	\end{bmatrix}, \]
+	and
+	\[ x_\perp = \frac{1}{2}\begin{bmatrix}
+		0 \\ 1 \\ 0 \\ -1
+	\end{bmatrix}. \]
+	So the shortest distance from $ x $ to $ U $ is
+	\[ \norm{x_\perp} = \frac{\sqrt{2}}{2}. \]	
+\end{solution}
+
+\begin{problem}
+	Let $ A $ be a real $ 3\times 3 $ matrix and suppose that the vectors
+	\[ \begin{bmatrix}
+		1 \\ 1 \\ 0
+	\end{bmatrix}, \qquad
+	\begin{bmatrix}
+		1 \\ 2 \\ 0
+	\end{bmatrix}, \qquad
+	\begin{bmatrix}
+		2 \\ 1 \\ 0
+	\end{bmatrix}, \qquad
+	\begin{bmatrix}
+		0 \\ 0 \\ 1
+	\end{bmatrix}, \]
+	are the eigenvectors of $ A $. Show that $ A $ is symmetric.
+\end{problem}
+
+
+
+
