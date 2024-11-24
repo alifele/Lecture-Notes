@@ -21,7 +21,7 @@
 		\node[
 		anchor=north west, % Anchor point on the image
 		inner sep=0pt, % Inner padding
-		] at (current page.north west) {\includegraphics[angle=0,width=\paperwidth]{Images/math4OriginalSinze.jpg}};
+		] at ([yshift=-2cm]current page.north west) {\includegraphics[angle=0,width=\paperwidth]{Images/math4OriginalSinze.png}};
 	}
 \end{tikzpicture}
 
@@ -43,8 +43,8 @@
 
 \tableofcontents
 
-\input{sections/ProbabilityTheory.tex}
 \input{sections/Rosenthal.tex}
+\input{sections/ProbabilityTheory.tex}
 %\input{sections/BasicsAndDefinitions.tex}
 \input{sections/LeGallProbability.tex}
 \input{sections/markovChain.tex}
