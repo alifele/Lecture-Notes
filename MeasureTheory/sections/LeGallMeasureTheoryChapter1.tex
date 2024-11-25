@@ -16,6 +16,109 @@ In a nutshell, the idea of measure is to assign a real number to \emph{some} sub
 
 
 
+
+\begin{proposition}
+	Let $ \set{A_n} $ be a collection of measurable sets. We have
+	\[ \mu(\liminf_n A_n) \leq \liminf_n \mu(A_n). \]
+	Also
+	\[ \mu(\limsup_n A_n) \geq \limsup_n \mu(A_n). \]
+	Using the fact that $ \limsup_n \mu(A_n) \geq \liminf_n \mu(A_n) $ we can write
+	\[ \mu(\liminf_n A_n) \leq \liminf_n \mu(A_n) \leq \limsup_n \mu(A_n) \leq \mu(\limsup_n A_n). \]
+\end{proposition}
+\begin{proof}
+	First, observe that
+	\[ \bigcap_{k\geq n} A_n \subseteq A_m \qquad \forall m\geq n. \]
+	By monotonicity
+	\[ \mu(\bigcap_{k\geq n} A_n) \leq \mu (A_m) \qquad \forall m \geq n. \]
+	So it follows that 
+	\[ \mu(\bigcap_{k\geq n} A_n) \leq \inf_{k\geq n}\mu(A_k).  \]
+	Using the fact that $ \bigcap_{k\geq n} A_n \uparrow \liminf_n A_n $, and thus 
+	\[\lim_{n\to\infty} \mu(\bigcap_{k\geq n} A_k) = \mu(\liminf_n A_n) \]
+	we can take limit of both sides
+	\[ \lim_{n\to\infty} \mu(\bigcap_{k\geq n}A_n) \leq \lim_{n\to\infty }\inf_{k\geq n} \mu(A_k). \]
+	Using the fact that. Then we will have
+	\[ \mu(\liminf_n A_n) \leq \liminf_n \mu(A_n). \]
+\end{proof}
+
+
+\subsection{Measurable Functions}
+
+The following proposition comes very handy when checking that some function between to measure spaces is a measurable function. In a nutshell, to check to see a function from $ (\Omega, \mathcal{F}) $ to $ (\Gamma, \mathcal{E}) $ is measurable, we do not need to check to see if the pre-image of all sets in $ \mathcal{E} $ is measurable. We only need to check this for a collection of sets that the $\sigma\text{-algebra}$ that they generate is $ \mathcal{E} $.
+
+\begin{proposition}
+	Let $ (\Omega, \mathcal{F}) $ and $ (\Gamma, \mathcal{E}) $ be two measure spaces and $ F: \Omega \to \Gamma $ a function. Then $ F $ is a measurable function if there exists some subclass $ C \subset \mathcal{E} $ such that $ \mathcal{E} = \sigma(C) $ and $ \inv{F}(B) \in \mathcal{F} $ for all $ B \in  C $.
+\end{proposition}
+\begin{proof}
+	To see this, let 
+	\[ \mathcal{G} = \set{B \in \mathcal{E}: \inv{F}(B) \in \mathcal{F}}. \]
+	By assumption $ C \subset \mathcal{G} $. Since $ \inv{F}(A^c) = (\inv{F}(A))^c $, $ \inv{F}(\bigcup_n A_n) = \bigcup_n \inv{F}(A_n) $, and $ \inv{F}(\bigcap_n A_n) = \bigcap_n \inv{F}(A_n) $, it is easy to check that $ \mathcal{G} $ is a $\sigma\text{-algebra}$.  So $ C \subseteq \mathcal{G} $. Because $ \mathcal{E} = \sigma(C) $, then we conclude that $ \mathcal{G} = \mathcal{E} $ and this completes the proof.
+\end{proof}
+
+
+One of the very important applications of the proposition above is the following Lemma.
+\begin{lemma}
+	Let $ (E,\mathcal{A}) $, $ (F_1,\mathcal{B}_1) $ and $ (F_2,\mathcal{B}_2) $ be measurable spaces and equip the product space $ F_1\times F_2 $ with $ \mathcal{B}_1 \otimes \mathcal{B}_2 $ (that is defined to be $ \sigma(B_1\times B_2) $). Let $ f_1: E\to F_1 $ and $ f_2: E \to F_2 $ be measurable functions and define $ f: E \to F_1\times F_2 $ where $ f = (f_1,f_2) $. Then $ f $ is measurable if and only if $ f_1 $ and $ f_2 $ are measurable.
+\end{lemma}
+\begin{proof}
+	For the $ \boxed{\Longrightarrow} $ direction, we know that $ f $ is measurable. So $ \inv{f}(B) \in \mathcal{A} $ for $ B \in \mathcal{B}_1\otimes \mathcal{B}_2 $. Let $ B_1\in\mathcal{B}_1 $ and $ B_2 \in \mathcal{B}_2 $, and define $ B = B_1\times B_2 $. Then since $ \inv{f}(B_1\times B_2) = \inv{f_1}(B_1) \cap \inv{f_2}(B_2) $, and $ \inv{f}(B_1\times B_2) \in \mathcal{A} $, we conclude that $ \inv{f}_1(B_1)\in \mathcal{A} $ and $ \inv{f}_2(B_2) \in \mathcal{A} $. Thus $ f_1 $ and $ f_2 $ are both measurable.
+	
+	For the $ \boxed{\Longleftarrow} $ direction, we know that $ \inv{f}_1 $ and $ \inv{f}_2 $ are measurable. So for any $ B_1 \in \mathcal{B}_1 $ and $ B_2\in \mathcal{B}_2 $ we have $ \inv{f}(B_1\times B_2) = \inv{f}_1(B_1) \cap \inv{f}_2(B_2) \in \mathcal{A} $ because $ \inv{f}_1(B_1) \in \mathcal{A} $ and $ \inv{f}_2(B_2)\in \mathcal{A} $. By proposition above, we can conclude that $ f $ is measurable on $ \sigma(\mathcal{B}_1\times \mathcal{B}_2) $.n 
+\end{proof}
+
+
+
+The following two simple properties of $ \inf $ and $ \sup $ are very important in establishing very interesting results.
+\begin{lemma}[Simple properties of $ \inf $ and $ \sup $]
+	Let $ \set{a_n} $ be a sequence of real numbers, and $ c \in \R $. Then
+	\[ \sup_n a_n \leq c \implies \forall n \in \N\ a_n \leq c, \]
+	and
+	\[ \inf_n a_n \leq c \implies \exists n \in \N \st a_n \leq c. \]
+\end{lemma}
+\begin{proof}
+	Proof follows immediately from the definition.
+\end{proof}
+The following proposition makes is very important and demonstrates the beautiful interplay between $ \limsup $ (and $ \liminf $) of numbers and sets.
+
+\begin{proposition}
+	Let $ (E,\mathcal{A}) $ be a measurable space, and let $ f: E \to \R $. Let $ a \in \R $. Then
+	\[ \set{\limsup f_n \leq a} = \limsup \set{f_n \leq a}, \]
+	and 
+	\[ \set{\liminf f_n \leq a} = \liminf \set{f_n \leq a}. \]
+	Note the remark below for the notation convention used above.
+\end{proposition}
+\begin{proof}
+	Let $ x \in \set{\limsup f_n \leq a} $. So $ \limsup f_n(x) \leq a $. From definition $ \limsup f_n(x) = \inf_{n}\sup_{k\leq n} f_k(x) $. Having $ \inf_n \sup_{k\leq n} f_n(x) \leq a $ implies that $ \exists n \in N $ we have $ \sup_{k\geq n} f_n(x) \leq a $. The second statement in turn implies that $ \forall k \geq n  $ we have $ \sup_{k\geq n} f_n(x) \leq a $. In summary $ \limsup f_n(x)\leq a $ implies $ \exists N \in \N $ such that $ \forall n\geq N $ we have $ f_n(x) \leq a $. This is precisely
+	\[ \set{\limsup_n f_n} = \bigcup_n \bigcap_{k\geq n} \set{f_n \leq a}. \] 
+	For the second statement, let $ x \in \set{\liminf f_n \leq a} $. Then $ \liminf_n f_n(x)\leq a $. By definition $ \sup_{n}\inf_{k\geq n} f_n(x) \leq a $. So $ \forall n \in \N $ we have $ \inf_{k\geq n} f_n(x)\leq a $, which further implies that $ \exists k \geq n $ we have $ f_n(x) \leq a $. This is precisely
+	\[ \set{\liminf f_n \leq a} = \bigcap_n \bigcup_{k\geq n} \set{f_n \leq a}.  \] 
+\end{proof}
+
+
+\begin{remark}
+	In the proposition above use the following notation which is frequently used in probability theory context.
+	\[ \set{f \leq a} = \set{x \in E: f(x)\leq a}. \]
+\end{remark}
+
+
+The Proposition and Lemma above result in the following very useful Corollary. Note that the co-domain of the measurable functions below is $ \R $.
+
+\begin{corollary}
+	Let $ \set{f_n} $ be a sequence of measurable function from the measurable space $ (E,\mathcal{A}) $ to $ \R $. Then
+	\[ \inf_n f_n,\quad \sup_n f_n,\quad \liminf_n f_n,\quad \limsup_n f_n, \]
+	are all measurable functions.
+\end{corollary}
+\begin{proof}
+	We need to show that $ \set{f\leq a} \in \mathcal{A} $ for all $ a\in \R $. From proposition above 
+	\[ \set{\limsup f_n \leq a} = \limsup \set{f_n \leq a}, \]
+	and 
+	\[ \set{\liminf f_n \leq a} = \liminf \set{f_n \leq a}. \]
+	So it follows that $ \limsup_n f_n $ and $ \liminf_n f_n $ are measurable functions. Furthermore, be the Lemma above
+	\[ \set{\inf_n f_n \leq a} = \bigcup_n \set{f_n \leq a}, \]
+	and
+	\[ \set{\sup_n f_n \leq a} = \bigcap_n \set{f_n \leq a}. \]
+	Then it follows immediately that $ \sup_n f_n $ and $ \inf_n f_n $ are all measurable functions.
+\end{proof}
+
 \section{Solved Problems}
 
 \begin{problem}[Properties of measure, page 6]
@@ -78,29 +181,3 @@ In a nutshell, the idea of measure is to assign a real number to \emph{some} sub
 	Notice that the left hand side is
 	\[ \E{1 - \prod_i (1-\mathds{1}_{A_i})} = \E{1 - \prod_i \mathds{1}_{A_i^c}} = \E{1 - \mathds{1}_{\cap_i A_i^c}} = \E{\mathds{1}_{\cup A_i}} = \mu(A_1\cup\cdots\cup A_n). \]
 \end{remark}
-
-
-\begin{proposition}
-	Let $ \set{A_n} $ be a collection of measurable sets. We have
-	\[ \mu(\liminf_n A_n) \leq \liminf_n \mu(A_n). \]
-	Also
-	\[ \mu(\limsup_n A_n) \geq \limsup_n \mu(A_n). \]
-	Using the fact that $ \limsup_n \mu(A_n) \geq \liminf_n \mu(A_n) $ we can write
-	\[ \mu(\liminf_n A_n) \leq \liminf_n \mu(A_n) \leq \limsup_n \mu(A_n) \leq \mu(\limsup_n A_n). \]
-\end{proposition}
-\begin{proof}
-	First, observe that
-	\[ \bigcap_{k\geq n} A_n \subseteq A_m \qquad \forall m\geq n. \]
-	By monotonicity
-	\[ \mu(\bigcap_{k\geq n} A_n) \leq \mu (A_m) \qquad \forall m \geq n. \]
-	So it follows that 
-	\[ \mu(\bigcap_{k\geq n} A_n) \leq \inf_{k\geq n}\mu(A_k).  \]
-	Using the fact that $ \bigcap_{k\geq n} A_n \uparrow \liminf_n A_n $, and thus 
-	\[\lim_{n\to\infty} \mu(\bigcap_{k\geq n} A_k) = \mu(\liminf_n A_n) \]
-	we can take limit of both sides
-	\[ \lim_{n\to\infty} \mu(\bigcap_{k\geq n}A_n) \leq \lim_{n\to\infty }\inf_{k\geq n} \mu(A_k). \]
-	Using the fact that. Then we will have
-	\[ \mu(\liminf_n A_n) \leq \liminf_n \mu(A_n). \]
-\end{proof}
-
-
