@@ -2,7 +2,7 @@
 
 
 
-\section{Measure Spaces}
+\section{Measure Spaces - Chapter 1}
 In a nutshell, the idea of measure is to assign a real number to \emph{some} subsets of a given set. However, we require this number assignment to be consistent in the sense that the number assigned to the disjoint union of sets is the sum of the numbers assigned to each set. This notion is quire similar to the notion of the homomorphisms of groups which preserves the group action.
 
 \begin{remark}
@@ -81,9 +81,9 @@ The following proposition makes is very important and demonstrates the beautiful
 
 \begin{proposition}
 	Let $ (E,\mathcal{A}) $ be a measurable space, and let $ f: E \to \R $. Let $ a \in \R $. Then
-	\[ \set{\limsup f_n \leq a} = \limsup \set{f_n \leq a}, \]
+	\[ \set{\limsup f_n \leq a} = \liminf \set{f_n \leq a}, \]
 	and 
-	\[ \set{\liminf f_n \leq a} = \liminf \set{f_n \leq a}. \]
+	\[ \set{\liminf f_n \leq a} = \limsup \set{f_n \leq a}. \]
 	Note the remark below for the notation convention used above.
 \end{proposition}
 \begin{proof}
@@ -258,6 +258,40 @@ We can use the tools developed above to show that the set of all points where a 
 	This implies that $ \mu(E_k) > 0 $ for some $ k \in \Z $. Observe that by construction $ \abs{f(x) - f(y)} < \epsilon $ for all $ x,y \in E_k $. This completes the proof.
 \end{solution}
 
+
+\section{Integration of Measurable Functions - Chapter 2}
+
+\begin{remark}
+	There is a very beautiful parallel between the notion of the partial sums of a series and the definition of integral for measurable functions. To see this, let $ f: E \to [0,\infty) $ be any measurable function, where $ (E,\mathcal{A}, \mu) $ is a measurable space. We define the integral of $ f $ as 
+	\[ \int f d\mu = \sup_{h\in\mathcal{E}^+, h\leq f} \int h d\mu. \]
+	In other words, the integral of the non-negative function $ f $ is defined as the sup of the integral of the approximating simple functions that are less than $ f $. This definition makes a complete sense if we consider the domain of $ f $ to be $ \N $ and the measure $ \mu $ to be the counting measure. We need to highlight that $ f $ is non-negative function. Then the definition above is simply
+	\[ \sum_{n=1}^{\infty}f(n) = \lim_{m\to\infty} \sum_{n=1}^m f(n), \]
+	since $ \sum_{n=1}^{m} f(n) $ is same as $ \sum_{n=1}^{\infty} g_m(n) $ where $ g_m $ is a simple function such that has same values as $ f $ but has value equal to zero for $ n>m $), and we have $ g_m\leq f $. In short, $ g_m $ takes finitely many values and we have $ g_m\leq f $. 
+	
+	In conclusion, the definition of the integral for measurable functions is the same as the definition of the value of a series, which is the limit of its partial sums, and in the case that $ f $ is positive, it is the same as the sup of the partial sums. Each partial sum is in fact an integral (infinite series) of a simple function like $ g_m $ as discussed above
+\end{remark}
+
+
+\section{$ L^p $ Spaces - Chapter 4}
+
+
+
+\begin{problem}
+	WE assume that $ \mu(E) < \infty $. Let $ \set{f_n}_{n\in N} $ and $ f $ real measurable functions on $ E $, and let $ p \in [1,\infty) $. Show that the conditions
+	\begin{enumerate}[(i)]
+		\item $ f_n \to f,\ \mu a.e. $,
+		\item there exists a real $ r>p $ such that $ \sup_{n\in\N} \int \abs{f_n}^r d\mu < \infty $.
+	\end{enumerate}
+\end{problem}
+\begin{proof}
+	We will use the following inequality
+	\[ \left(\frac{\abs{a} + \abs{b}}{2}\right)^p \leq \frac{\abs{a}^p + \abs{b}^p}{2}, \]
+	for $ p \in [1,\infty) $. This simply comes from the fact that the mapping $ x\mapsto x^p $ is convex and for any convex function $ \phi $ we have $ \phi((a+b)/2) \leq (\phi(a) + \phi(b))/2 $.
+	
+	Since $ f_n \to f \ \mu\text{-a.e.} $ we have $ \abs{f_n - f} \to 0 \ \mu\text{-a.e.} $. So it is enough to find an integrable upper bound for $ \abs{f_n - f} $, then we can apply the dominated convergence theorem. Observe that
+	\[ \abs{f_n - f}^p \leq 2^{p-1}(\abs{f_n}^p - \abs{f}^p). \]
+	Since $ \mu $ is finite, using Corollary 4.2 and the fact that $ r>p $ and $ \norm{f}_r < \infty$, this implies that $ \norm{f}_p <\infty $, hence $  $
+\end{proof}
 
 
 

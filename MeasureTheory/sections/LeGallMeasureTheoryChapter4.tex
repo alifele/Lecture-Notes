@@ -1,0 +1,19 @@
+\chapter{$ L^p $ Spaces}
+
+
+\begin{problem}
+	WE assume that $ \mu(E) < \infty $. Let $ \set{f_n}_{n\in N} $ and $ f $ real measurable functions on $ E $, and let $ p \in [1,\infty) $. Show that the conditions
+	\begin{enumerate}[(i)]
+		\item $ f_n \to f,\ \mu a.e. $,
+		\item there exists a real $ r>p $ such that $ \sup_{n\in\N} \int \abs{f_n}^r d\mu < \infty $.
+	\end{enumerate}
+\end{problem}
+\begin{proof}
+	We will use the following inequality
+	\[ \left(\frac{\abs{a} + \abs{b}}{2}\right)^p \leq \frac{\abs{a}^p + \abs{b}^p}{2}, \]
+	for $ p \in [1,\infty) $. This simply comes from the fact that the mapping $ x\mapsto x^p $ is convex and for any convex function $ \phi $ we have $ \phi((a+b)/2) \leq (\phi(a) + \phi(b))/2 $.
+	
+	Since $ f_n \to f \ \mu\text{-a.e.} $ we have $ \abs{f_n - f} \to 0 \ \mu\text{-a.e.} $. So it is enough to find an integrable upper bound for $ \abs{f_n - f} $, then we can apply the dominated convergence theorem. Observe that
+	\[ \abs{f_n - f}^p \leq 2^{p-1}(\abs{f_n}^p - \abs{f}^p). \]
+	Since $ \mu $ is finite, using Corollary 4.2 and the fact that $ r>p $ and $ \norm{f}_r < \infty$, this implies that $ \norm{f}_p <\infty $, hence $  $
+\end{proof}

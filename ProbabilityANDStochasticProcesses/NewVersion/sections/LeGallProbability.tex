@@ -59,3 +59,63 @@ In the following we will have a quick review of the different definitions of con
 	With the notation $ \norm{X}_p = (\E{\abs{X}^p})^{1/p} $ we can state the theorem above as: if $ \norm{X}_p < \infty $ and $ \norm{X_n}_p <\infty $ for all $ n $, then $ X_n \to X $ in $ L^p $ if 
 	\[ \norm{X_n - X}_p \to 0. \]
 \end{remark}
+
+\subsection{Important Theorems}
+\begin{theorem}[A.s. Convergence implies convergence in probability]
+	\label{thm:a.s.ImpliesProb}
+	Let $ \set{X_n} $ be a collection of random variable such that $ X_n \to X\ a.s. $. Then $ X_n \to X $ in probability.
+\end{theorem}
+\begin{proof}
+	Let $ \epsilon>0 $ be given. Define
+	\[ A_n = \set{\abs{X_n - X} \geq \epsilon}. \]
+	Then if $ \omega \in \limsup_n A_n $ we have $ X_n(\omega) \not\to X(\omega) $. I.e. the set $ \limsup_n A_n $ precisely contains all the points for which $ X_n $ does not converge to $ X $ on those points. Since we have a.s. convergence, then we have
+	\[ \prob(\limsup_n A_n) = 0. \]
+	Observe that since the sequence of events $ \set{\bigcup_{k\geq n}A_k}_n $ is decreasing, then by continuity of probabilities
+	\[ \lim_{n\to\infty} \prob(\bigcup_{k\geq n} A_k) = \prob(\bigcap_n \bigcup_{k\geq n} A_k) = \prob(\limsup_n A_n) = 0. \]
+	Because $ A_n \subset \bigcup_{k\geq n} A_n $, then $ \prob(A_n) \leq \prob(\bigcup_{k\geq n} A_n) $ for all $ n\in \N $ which implies $ \prob(A_n) \to 0 $ as $ n\to\infty $.
+\end{proof}
+\begin{theorem}[Convergence in probability implies a.s. convergence along a subsequence]
+	Let $ \set{X_n} $ be a collection of random variables that converges to $ X $ in probability. Then there exists a subsequence $ \set{X_{n_k}} $ that convergence a.s. to $ X $.
+\end{theorem}
+\begin{proof}
+	Since $ \set{X_n} $ converges to $ X $ in probability then for all $ \epsilon>0 $
+	\[ \prob(A_n) \to 0, \]
+	where $ A_n = \set{\abs{X_n - X} \geq \epsilon} $. Since $ \set{\prob(A_n)} $ is a non-negative sequence that converges to $ 0 $, then there exists a subsequence $ \set{\prob(A_{n_k})} $ that is summable, i.e.
+	\[ \sum_k \prob(A_{n_k}) = 0. \]
+	By Borel-Cantelli this implies
+	\[ \prob(\limsup_k A_{n_k}) = 0. \]
+	As stated in the proof of \autoref{thm:a.s.ImpliesProb} $ \limsup_n A_n $ is the set of all points $ \omega \in \Omega $ such that $ X_n(\omega) $ does not converge to $ X(\omega) $. So $ \set{X_{n_k}} $ converges to $ X $ a.s..
+\end{proof}
+
+\begin{theorem}[Convergence in $ L^p $ implies convergence in probability]
+	Let $ \set{X_n} $ be a sequence of random variables that converge in $ L^p $. Then $ X_n \to X $ in probability.
+\end{theorem}
+\begin{proof}
+	Let $ \epsilon>0 $ be given. Then by Markov inequality we have
+	\[ \prob(\abs{X_n - X} \geq \epsilon) \leq \E{\abs{X_n-X}}/\epsilon = \norm{X_n-X}_p/\epsilon. \]
+	On the other hand using H\"{o}lder's inequality (i.e. Corollary 4.2 in the book) we can write $ \norm{X_n-X}_1 \leq \norm{X_n-X}_p $. So
+	\[ \prob(\abs{X_n - X} \geq \epsilon) \leq  \norm{X_n - X}_p/\epsilon \to 0 \quad \text{as $ n\to\infty $}, \]
+	where we have used the fact that $ X_n \to X $ in probability.xc
+	
+\end{proof}
+
+
+The following proposition is very important as it connects the convergence in probability to convergence in $ L^p $ (in moments), and its proof uses the Fatou's Lemma, H\"{o}lder's inequality as well as Minkowski's inequality.
+
+\begin{proposition}[Convergence in probability and convergence in $ L^p $]
+	Let $ \set{X_n} $ be a sequence of random variables that converge to $ X $ in probability. Then $ X_n $ converges to $ X $ in $ L^p $ if there exists $ r>p $ such that $ \E{\abs{X_n}^r} < \infty $ for all $ n\in \N $.
+\end{proposition}
+\begin{proof}
+	Since $ X_n\to X $ in probability, there exists a subsequence $ \set{X_{n_k}} $ that converges to $ X $ almost surely. In particular we can write $ \abs{X} = \liminf \abs{X_n} $. So
+	\[ \E{\abs{X}^r} = \E{\liminf_n \abs{X_n}^r} \leq \liminf \E{\abs{X_n}^r} \leq C < \infty, \]
+	where we have used the hypothesis in the last inequality. Consider
+	\begin{align*}
+		\E{\abs{X_n - X}^p} &= \E{\abs{X_n-X}^p \mathds{1}_{\abs{X_n - X} < \epsilon}} + \E{\abs{X_n - X}^p \mathds{1}_{\abs{X_n-X}\geq \epsilon} } \\
+		&\leq \epsilon^p + \E{(\abs{X_n-X}^p)^{r/p}}^{p/r} \prob(\abs{X_n-X} \geq \epsilon)^{1-p/r} \\
+		&= \epsilon^p + (\E{\abs{X_n - X}^r}^{1/r})^{p} \prob(\abs{X_n-X}\geq \epsilon)^{1-p/r} \\
+		&= \epsilon^p + \norm{X_n-X}_r^p\prob(\abs{X_n-X}\geq\epsilon)^{1-p/r} \\
+		&\leq \epsilon^p + (\norm{X}_r + \norm{X_n}_r)^p \prob(\abs{X_n-X}\geq\epsilon)^{1-p/r} \\
+		&\leq \epsilon^p + (2C)^{p}\prob(\abs{X_n-X}\geq\epsilon)^{1-p/r}.
+	\end{align*}
+	Using the fact that $ \prob(\abs{X_n-X}\geq \epsilon) \to 0 $ as $ n\to\infty $, then we conclude that $ \E{\abs{X_n-X}^p} \to 0 $ as $ n\to\infty $. So $ X_n \to X $ in $ L^p $.
+\end{proof}

@@ -1,0 +1,28 @@
+\chapter{Practice for Final - MATH 544}
+
+These are my solved problems that I was practicing for the final exam.
+
+\begin{problem}
+	Let $ X_1,X_2,\cdots $ be independent $ \mathcal{N}(0,1) $ (standard normal) random variables. Prove that
+	\[ \prob(\limsup_n \frac{\abs{X_n}}{\sqrt{\log n}} = \sqrt{2}) = 1. \]
+	You may use the fact that the cumulative distribution function $ \Phi $ of the standard normal obeys $ 1-\Phi(x) \sim \frac{1}{x}\frac{1}{\sqrt{2\pi}}e^{-x^2/2} $ as $ x\to \infty $.
+\end{problem}
+\begin{solution}
+	Let $ \epsilon \geq 0 $. Then as $ n\to\infty $ we have
+	\begin{align*}
+		 \prob(\frac{\abs{X_n}}{\sqrt{\log n}} \geq (\epsilon+1)\sqrt{2}) = \prob({\abs{X_n}}\geq {\sqrt{2\log n}} (\epsilon+1)) \sim \frac{C}{\sqrt{2\log n} \cdot n^{(\epsilon+1)^2}} \tag{\twonotes}
+	\end{align*}
+	When $ \epsilon=0 $ the RHS is not summable. By Borel Cantelli lemma, and using the fact that $ X_n $ are independent, we conclude
+	\[ \prob(\abs{X_n}\geq \sqrt{2\log n}\ i.o.) = 1. \]
+	Using that following fact
+	\[ \limsup_n \set{\frac{\abs{X_n}}{\sqrt{\log n}}\geq \sqrt{2}} = \set{\limsup_n \frac{\abs{X_n}}{\sqrt{\log n}}\geq \sqrt{2}}, \]
+	we conclude that
+	\[ \prob({\limsup_n \frac{\abs{X_n}}{\sqrt{\log n}}\geq \sqrt{2}}) = 1. \]
+	Let $ \epsilon>0 $. Then the RHS of $ (\twonotes) $ is summable. By Borel-Cantelli we get
+	\[ \prob(\abs{X_n}\geq (1+\epsilon)\sqrt{2\log n}\ i.o.) = 0.\]
+	This implies
+	\[ \prob(\frac{\abs{X_n}}{\sqrt{\log n}} \leq (1+\epsilon)\sqrt{2}\ a.a.) = 1. \]
+	Using the fact that $ \prob(\liminf A_n) \leq \prob(\limsup A_n) $ for any collection of measurable sets $ E_n $ (from monotonicity) we get 
+	\[ \prob(\frac{\abs{X_n}}{\sqrt{\log n}} \leq (1+\epsilon)\sqrt{2}\ i.o.) = 1. \]
+
+\end{solution}
