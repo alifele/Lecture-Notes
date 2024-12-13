@@ -17,12 +17,340 @@ These are my solved problems that I was practicing for the final exam.
 	Using that following fact
 	\[ \limsup_n \set{\frac{\abs{X_n}}{\sqrt{\log n}}\geq \sqrt{2}} = \set{\limsup_n \frac{\abs{X_n}}{\sqrt{\log n}}\geq \sqrt{2}}, \]
 	we conclude that
-	\[ \prob({\limsup_n \frac{\abs{X_n}}{\sqrt{\log n}}\geq \sqrt{2}}) = 1. \]
+	\[ \prob({\limsup_n \frac{\abs{X_n}}{\sqrt{\log n}}\geq \sqrt{2}}) = 1. \tag{\halfnote}\]
 	Let $ \epsilon>0 $. Then the RHS of $ (\twonotes) $ is summable. By Borel-Cantelli we get
 	\[ \prob(\abs{X_n}\geq (1+\epsilon)\sqrt{2\log n}\ i.o.) = 0.\]
 	This implies
 	\[ \prob(\frac{\abs{X_n}}{\sqrt{\log n}} \leq (1+\epsilon)\sqrt{2}\ a.a.) = 1. \]
-	Using the fact that $ \prob(\liminf A_n) \leq \prob(\limsup A_n) $ for any collection of measurable sets $ E_n $ (from monotonicity) we get 
-	\[ \prob(\frac{\abs{X_n}}{\sqrt{\log n}} \leq (1+\epsilon)\sqrt{2}\ i.o.) = 1. \]
-
+	Using the fact that $ \liminf\set{f_n \leq a} = \set{\limsup f_n \leq a} $ for any sequence of measurable function $ f_n $ we can write 
+	\[ \prob(\frac{\abs{X_n}}{\sqrt{\log n}} \leq (1+\epsilon)\sqrt{2}\ a.a.) = \prob(\limsup \frac{\abs{X_n}}{\sqrt{\log n}} \leq (1+\epsilon)\sqrt 2) = 1. \]
+	Taking $ \epsilon \to 0 $ and using $ (\halfnote) $ we will get 
+	\[ \prob(\limsup\frac{\abs{X_n}}{\sqrt{\log n}} = \sqrt{2}) = 1. \]
 \end{solution}
+
+\begin{problem}
+	This problem shows that the conclusion of the second Borel-Cantelli Lemma holds under the assumption that the events are pairwise independent only. It is due to Erdos and Renyi 1959. Suppose that the events $ A_1,A_2,\cdots $ are pairwise independent, i.e., that $ \prob(A_i \cap A_j) = \prob(A_i)\prob(A_j) $. Let $ S_n = \sum_{j=1}^{n}\mathds{1}_{A_j} $ and $ S_\infty = \sum_{j=1}^{\infty}\mathds{1}_{A_j} $.
+	\begin{enumerate}[(a)]
+		\item Prove that $ \operatorname{Cov}(\mathds{1}_{A_i},\mathds{1}_{A_j}) = \prob(A_i \cap A_j) - \prob(A_i)\prob(A_j) $.
+		\item Prove that 
+		\[ \Var(S_n) = \sum_{j=1}^{n}(\prob(A_j) - \prob(A_j)^2) \leq \sum_{j=1}^{n}\prob(A_j). \]
+		
+		\item Prove that 
+		\[ \prob(S_n \geq 1/2\sum_{j=1}^{n}\prob(A_j)) \leq \frac{4}{\sum_{j=1}^{n} \prob(A_j)} \]
+		
+		\item Prove that for all $ n\in \N $ we have
+		\[ \prob(S_\infty \geq 1/2\sum_{j=1}^{n}\prob(A_j)) \leq \frac{4}{\sum_{j=1}^{n} \prob(A_j)} \]
+		
+		\item Show that if $ \sum_{j=1}^{\infty} \prob(A_j)= \infty $ then $ \prob(S_\infty <\infty) = 0 $ and then conclude that $ \prob(A_n\ i.o.) = 0 $.
+	\end{enumerate}
+\end{problem}
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item This follows immediately from the definition. 
+		\begin{align*}
+			\operatorname{Cov}(\mathds{1}_{A_j},\mathds{1}_{A_j}) &= \E{\mathds{1}_{A_i}\mathds{1}_{A_j}} - \E{\mathds{1}_{A_i}}\E{\mathds{1}_{A_j}} \\
+			&= \E{\mathds{1}_{A_i\cap A_j}} - \prob(A_i)\prob(A_j) \\
+			&= \prob(A_i \cap A_j) - \prob(A_i)\prob(A_j).
+		\end{align*}
+		\item Starting with the definition of $ \Var $ we can write
+		\begin{align*}
+			\Var(S_n) &= \E{S_n^2} - \E{S_n}^2 = \E{(\sum_{j=1}^{n} \mathds{1}_{A_j})^2} - \E{\sum_{j=1}^{n} \mathds{1}_{A_j}}^2 \\
+			&= \sum_{i,j=1}^{n} (\E{\mathds{1}_{A_i}\mathds{1}_{A_j}} - \E{\mathds{1}_{A_i}}\E{\mathds{1}_{A_j}}) \\
+			&= \sum_{i,j=1}^{n} \operatorname{Cov}(\mathds{1}_{A_i},\mathds{1}_{A_j}) \\
+			&= \sum_{i,j=1}^{n} (\prob(A_i \cap A_j) - \prob(A_i)\prob(A_j)) \\
+			&= \sum_{i=1}^{n} (\prob(A_i) - \prob(A_i)^2).
+		\end{align*}
+		\item First, observe that
+		\[ \E{S_n} = \sum_{j=1}^{n}\prob(A_j). \]
+		So
+		\begin{align*}
+			\prob(S_n \leq 1/2\sum_{j=1}^{n}\prob(A_j))& = \prob(-S_n \geq -1/2\sum_{j=1}^{n}\prob(A_j)) = \prob(\E{S_n} - S_n \geq 1/2\sum_{j=1}^{n}\prob(A_j))  \\
+			& \leq \prob(\abs{\E{S_n} - S_n} \geq 1/2\sum_{j=1}^{n}\prob(A_j)) \\ 
+			& \leq \frac{4\Var(S_n)}{(\sum_{j=1}^{n}\prob(A_j))^2} \\
+			& \leq \frac{4\sum_{j=1}^{n}\prob(A_j)}{(\sum_{j=1}^{n}\prob(A_j))^2} \\
+			& = \frac{4}{\sum_{j=1}^{n}\prob(A_j)}
+		\end{align*}
+		
+		\item First, observe that $ S_\infty \geq S_n $ for all $ n\in \N $. This implies $ \set{S_\infty \leq a} \subset \set{S_n \leq a} $ for all $ n\in \N $ and $ a \in \R $. So using the monotonicity of probability for any $ n\in \N $ we can write
+		\[ \prob(S_\infty \leq 1/2\sum_{j=1}^{n} \prob(A_j)) \leq \prob(S_n \leq 1/2\sum_{j=1}^{n} \prob(A_j)) \leq \frac{4}{\sum_{j=1}^{n}\prob(A_j)}. \]
+		
+		\item It immediately follows from above that
+		\[ \prob(S_\infty  < \infty) = 0. \]
+		Thus we can write $ \prob(S_\infty = \infty) = 1 $. Note that $ \set{S_\infty = \infty} $ should be interpreted in the sense that $ \omega \in \set{S_\infty = \infty} $ then $ S_\infty(\omega) \geq M$ for all $ M\in \R $. Observe that from definition $ \set{S_\infty = \infty} \subset \set{A_i i.o.} $. Using monotonicity
+		\[ \prob(A_n i.o.) = 1. \]
+	\end{enumerate}
+\end{solution}
+
+\begin{problem}
+	Let $ X\geq 0 $ be a non-negative random variable with $ \E{X^2}< \infty $. 
+	\begin{enumerate}[(a)]
+		\item Prove that 
+		\[ \prob(X > 0) \geq \frac{\E{X}^2}{\E{X^2}}. \]
+		\item Prove that for $ \theta \in [0,1] $ we have
+		\[ \prob(X > \theta \E{X}) \geq (1-\theta)^2 \frac{\E{X}^2}{\E{X^2}}. \]
+	\end{enumerate}
+\end{problem}
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item We can write
+		\[ \E{X} = \E{X\mathds{1}_{X>0}} + \E{X\mathds{1}_{X=0}} \leq \E{X^2}^{1/2}\prob(X>0)^{1/2}, \]
+		where we have used the Cauchy-Schwartz inequality. This implies
+		\[ \prob(X>0) \geq \frac{\E{X}^2}{\E{X^2}}. \]
+		
+		\item Let $ \mu = \E{X} $ for easier notation. Using similar idea as above we can write
+		\begin{align}
+			\mu &= \E{X} = \E{X\mathds{1}_{X\leq \theta\mu}} + \E{X\mathds{1}_{X>\theta\mu}}\\
+			&=\theta\mu + \E{X^2}^{1/2}\prob(X>\theta\mu) ^{1/2},
+		\end{align}
+		where we have used the fact that $ \mu\theta \geq \mathds{1}_{X<\mu\theta} $ for the first term and Cauchy-Schwartz inequality for the second term. This implies
+		\[ \prob(X > \theta \E{X}) \geq (1-\theta)^2 \frac{\E{X}^2}{\E{X^2}}. \]
+	\end{enumerate}
+\end{solution}
+
+\begin{problem}
+	Let $ X $ be a random variable such that $ \E{\abs{X}}<\infty $. Prove that
+	\[ \E{\abs{X}\mathds{1}_{\abs{X}\geq n}}\to0 \quad \text{as $ n\to\infty $}. \]
+\end{problem}
+\begin{solution}
+	Observe that for all $ \omega \in \Omega $ as $ n\to\infty $ we have
+	\[ \abs{X(\omega)}\mathds{1}_{\abs{X(\omega)}\geq n} \to 0, \]
+	because $ X(\omega) $ is a real number and is eventually less that $ n $ as $ n\to\infty $. Further, observe that for all $ n\in \N $
+	\[ \abs{X}\mathds{1}_{\abs{X}\geq n} \leq \abs{X}. \]
+	Since $ \E{\abs{X}}<\infty $, by dominated convergence theorem we have
+	\[ \E{\abs{X}\mathds{1}_{\abs{X}\geq n}}\to \E{0} = 0 \quad \text{as $ n\to\infty $}. \]
+\end{solution}
+
+\begin{problem}
+	Let $ X_1,X_2,\cdots $ be i.i.d.  with $ \E{X^+}=\infty $ and $ \E{X^-}<\infty $. Let $ S_n = X_1 + \cdots + X_n $. Prove that $ S_n/n \to\infty $ a.s. as $ n\to\infty $.
+\end{problem}
+\begin{solution}
+	We will consider the truncated random variables $ X_{i,N} = \min\set{X_i, N} $. First, observe that $ X_{i,N} $ has finite mean because
+	\[ \E{\abs{X_{i,N}}} = \E{X_{i,N}^+} + \E{X_{i,N}^-} <\infty \]
+	where we have used the fact that $ X_{i,N}^- = X_i^- $ thus $ \E{X_{i,N}^-}<\infty $ and $ X_{i,N}^+ \leq N $, thus $ \E{X_{i,N}^+}<N $. By applying the SLLN to $ X_{i,N} $ we see that 
+	\[ S_{n,N}/n \to \E{X_{1,N}} \quad \text{as $ n\to\infty $}. \]
+	Since $ S_{n,N}\leq S_{n} $ for all $ n,N\in \N $ we have
+	\[ \liminf S_{n}/n \geq \liminf S_{n,N}/n = \E{X_{1,N}}. \]
+	On the other hand observe that $ X_{i,N}^+ \uparrow X_i^+ $ and $ X_{i,N}^- = X_i^- $. Using Monotone Convergence theorem with the first statement we see $ \E{X_{i,N}^+} \to \infty $ as $ N\to \infty $ and for the second statement we have $ \E{X_{i,N}^-}\to \E{X_i^-} < \infty $. This implies
+	\[ \E{X_{1,N}}\to \infty\quad \text{as $ n\to\infty $}. \]
+	So we will have 
+	\[ \liminf S_n/n \geq \infty. \]
+\end{solution}
+
+\begin{problem}
+	Let $ X $ and $ Y $ be random variables with finite mean. Suppose that for any $ A \in \mathcal{F} $ we have $ \E{X\mathds{1}_A}\leq \E{Y\mathds{1}_A} $. Prove that $ X \leq Y $ a.s.
+\end{problem}
+\begin{proof}
+	First, observe that for all $ A\in\mathcal{F} $ we have 
+	\[ \E{(Y-X)\mathds{1}_A} \geq 0.  \]
+	We want to show $ \prob(X>Y) = 0 $. Let $ A_n = \set{X-Y > 1/n} $. Then $ \set{X>Y} = \bigcup_n A_n $. From sub additivity we have
+	\[ \prob(X>Y) \leq \sum_n \prob(A_n). \]
+	On the other hand, observe that 
+	\[ 0 \leq \E{(Y-X)\mathds{1}_{A_n}} \leq \frac{-1}{n}\prob(A_n), \]
+	which implies $ \prob(A_n) = 0 $ for all $ n\in\N $. Thus we conclude that 
+	\[ \prob(X > Y) = 0 \biImp \prob(X\leq Y)  =1. \]
+\end{proof}
+\begin{summary}[A very important note]
+	The theme of the proof above is the proof by contradiction (or contrapositive. I don't know!). To show $ \prob(X\leq Y) = 1 $ we instead prove $ \prob(X>Y) = 0 $. This theme shows up a lot in probability. For instance, to show that a sequence of random variables $ \set{X_n} $ converges almost surely to some other random variable $ X $, we instead usually show that the set of points where this does not happen is small (has measure zero). In other words we show $ \prob(\limsup_n \set{\abs{X_n-X}\geq \epsilon}) = 0 $.
+\end{summary}
+
+\begin{problem}
+	Let $ (\Omega, \mathcal{F},\prob) $ be the uniform distribution on $ \Omega = \set{1,2,3} $. Find random variables $ X,Y, $ and $ Z $ on this space such that
+	\[ \prob(X>Y)\prob(Y>Z)\prob(Z>X) > 0, \]
+	and
+	\[ \E{X} = \E{Y} = \E{Z}. \]
+\end{problem}
+\begin{solution}
+	Define 
+	\[ X(\omega) = \begin{cases}
+		1 \quad \omega \in \set{1},\\
+		0 \quad \omega \in \set{2,3}.
+	\end{cases},\quad
+	Y(\omega) = \begin{cases}
+		1 \quad \omega \in \set{2},\\
+		0 \quad \omega \in \set{1,3}.
+	\end{cases}, \quad
+	Z(\omega) = \begin{cases}
+		1 \quad \omega \in \set{3},\\
+		0 \quad \omega \in \set{1,2}.
+	\end{cases}.
+	 \]
+	 Then 
+	 \[ \E{X} = \E{Y} = \E{Z} = 1/3, \]
+	 and 
+	 \[ \prob(X>Y) = \prob(Y>Z) = \prob(Z>X) = 1/3. \]
+\end{solution}
+
+\begin{problem}
+	Suppose $ \prob(Z=0)=\prob(Z=1) = 1/2 $, that $ Y \sim \mathcal{N}(0,1) $, and that $ Y $ and $ Z $ are independent. Set $ X = YZ $. What is the law of $ X $?
+\end{problem}
+\begin{solution}
+	Let $ A \in \mathcal{B} $. Then 
+	\begin{align*}
+		\mu_X(A) &= \prob(X \in A) = \prob(X\in A|Z=1)\prob(Z=1) + \prob(X\in A|Z=0)\prob(Z=0)\\
+		&=1/2 \prob(Y \in A) + 1/2 \prob(0 \in A).
+	\end{align*}
+	So we can write
+	\[ \mu_X = \frac{1}{2} \mu_Y + \frac{1}{2} \delta_0. \]
+\end{solution}
+
+\begin{problem}
+	Prove Cantelli's inequality, which states that if $ X $ is a random variable with finite mean $ m $ and finite variance $ v $, then for $ \alpha > 0 $,
+	\[ \prob(X - m \geq \alpha) \leq \frac{v}{v+\alpha^2}. \]
+	\emph{Hint: First show $ \prob(X-m \geq \alpha) \leq \prob((X-m+y)^2\geq (\alpha+y)^2)$ for all $ y>0 $. Then use Markov's inequality, and minimize the resulting bound over choice of $ y > 0 $.}
+\end{problem}
+\begin{solution}
+	Observe that $ \set{X-m \geq \alpha}\subseteq \set{(X-m+y)^2\geq (\alpha+y)^2} $. By monotonicity of probability it follows that $ \prob(X-m \geq \alpha)\leq \prob((X-m+y)^2\geq (\alpha+y)^2) $. Using the Markov's inequality we will have
+	\[  \prob(X-m \geq \alpha)\leq \prob((X-m+y)^2\geq (\alpha+y)^2) \leq \frac{\E{(X-m+y)^2}}{(\alpha+y)^2} = \frac{\E{(X-m)^2}+y^2}{(\alpha+y)^2}.  \]
+	By setting the derivative of RHS equal to zero we will get $ y = v/\alpha $. Substituting this value in the RHS we will get
+	\[ \prob(X-m \geq \alpha)\leq  \frac{v}{v+\alpha^2}. \]
+\end{solution}
+
+
+\begin{problem}
+	For $ p\geq 1 $ let $ \norm{X}_p = \E{\abs{X}^p}^{1/p} $. Let $ \norm{X}_\infty = \inf\set{M: \prob(\abs{X}>M)=0}. $
+	\begin{enumerate}[(a)]
+		\item Prove that $ \norm{XY}_1 \leq \norm{X}_1 \norm{Y}_\infty $.
+		\item Prove that $ \norm{X}_\infty = \lim_{p\to\infty} \norm{X}_p $.
+	\end{enumerate}
+\end{problem}
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item First, observe that we have $ \abs{Y}\leq \norm{Y}_\infty $ a.s. This implies $ \abs{XY}\leq \abs{X}\norm{Y}_\infty $ a.s. So we will have $ \E{\abs{XY}}\leq \E{\abs{X}}\norm{Y}_\infty $. In other words
+		\[ \norm{XY}_1 \leq \norm{X}_1 \norm{Y}_\infty. \]
+		\item First, observe that since $ \abs{X}\leq \norm{X}_\infty\ a.s. $, we will have $ \norm{X}_p \leq \norm{X}_\infty $ for all $ p\geq 1 $. So we can write
+		\[ \limsup_{p\to\infty} \leq \norm{X}. \tag{\halfnote} \]
+		On the other hand, because $ \norm{X}_\infty $ is the essential suprimum of $ X $,  for any $ \epsilon > 0 $, if we define $ A_\epsilon = \set{\abs{X}>\norm{X}_\infty - \epsilon} $ we will have $ \prob(A_\epsilon)>0 $. So we can write
+		\[ \norm{X}_p = \E{\abs{X}^p}^{1/p} = \left( \E{\abs{X}^p \mathds{1}_{A_\epsilon}} + \E{\abs{X}^p \mathds{1}_{A_\epsilon^c}} \right)^{1/p} \geq \left( \E{\abs{X}^p \mathds{1}_{A_\epsilon}} \right)^{1/p} \geq (\norm{X}_\infty - \epsilon)\prob(A_\epsilon)^{1/p}. \]
+		This implies that 
+		\[ \liminf_{p\to\infty} \norm{X}_p \geq (\norm{X}_\infty - \epsilon) \quad \forall \epsilon>0. \]
+		Since this is true for all $ \epsilon>0 $, we can conclude $ \liminf_{p\to\infty}\norm{X}_p \geq \norm{X}_\infty $. Combining with $ (\halfnote) $ and using the fact that $ \liminf $ of any sequence of always less than or equal to $ \limsup $ that sequence, we conclude that 
+		\[ \norm{X}_\infty = \limsup_{p\to\infty} \norm{X}_p = \liminf_{p\to\infty}\norm{X}_p = \lim_{p\to\infty}\norm{X}_p. \]
+	\end{enumerate}
+\end{solution}
+
+\begin{problem}
+	Let $ X_0 = (1,0) \in \R^2 $ and define $ X_n \in \R^2 $ inductively by declaring that $ X_{n+1} $ is chosen at random from the ball of radius $ \abs{X_n} $ centered at the origin, i.e., $ X_{n+1}/\abs{X_n} $ is uniformly distributed on the ball of radius 1 and independent of $ X_1,\cdots, X_n $. Prove that $ n^{-1}\log\abs{X_n} \to c $ a.s. and compute $ c $.
+\end{problem}
+\begin{solution}
+	Let $ X_{n+1}/\abs{X_n} = U_{n+1} $, where $ U_{n+1} $ is uniformly distributed on the unit ball. So we can write $ \abs{X_n} = \abs{U_n \cdots U_1}\abs{X_0} $. Taking log from both sides we will have
+	\[ \log\abs{X_n} = \sum_{i=1}^{n}\log(U_n). \]
+	Using the SLLN's we have 
+	\[ n^{-1} \log\abs{X_n} = n^{-1}\sum_{i=1}^{n}\log(U_n) \to \E{\log(U_1)}. \]
+	Note that we have used the fact that $ \log(U_n) $ are i.i.d. (because $ X_n $ and $ U_n $ are) and has finite mean (we did not check the latter statement here). Furthermore observe that $ \prob(U_n \leq r) = r^2 $, thus $ U_n $ has density $ 2r $. So
+	\[ \E{\log(U_1)} = \int_{0}^{1} 2r\log r dr = \frac{-1}{2}. \]
+	Thus we conclude
+	\[ n^{-1}\log{X_n} \to \frac{-1}{2}. \]
+\end{solution}
+
+\begin{problem}
+	Use Jensen's inequality to prove that $ \norm{X}_p \leq \norm{X}_q $ for $ 1\leq p \leq q \leq \infty $.
+\end{problem}
+\begin{solution}
+	Let $ \phi(x) = \abs{x}^{q/p} $ that is a convex function when $ q\geq p $. Observe that
+	\[ \phi(\E{\abs{X}^p}) \leq \E{\phi(\abs{X}^p)} = \E{\abs{X}^q}. \] 
+	By using the fact that $ \phi(\E{\abs{X}^p}) = \E{\abs{X}^p}^{q/p} $ and raising the both side to power $ 1/q $ we will get
+	\[ (\E{\abs{X}^p})^{1/p} \leq (\E{\abs{X}^q})^{1/q}. \]
+\end{solution}
+\begin{remark}
+	Another way to prove the inequality above is to use H\"{o}lder's inequality.
+\end{remark}
+
+\begin{problem}
+	Let $ X,X_1,X_2,\cdots $ be random variables on the same probability space. Let $ p\in[1,\infty) $. We say that $ X_n \to X $ in $ L^p $ if $ \lim_{n\to\infty}\norm{X_n - X}_p  = 0$.
+	\begin{enumerate}[(a)]
+		\item Show that if $ X_n \to X $ in $ L^p $ then $ X_n \to X $ in probability. 
+		\item Give a counterexample to the converse of (a).
+		\item Let $ 1 \leq p \leq q <\infty $. Show that $ \norm{Y}_p \leq \norm{Y}_q $ for any random variable $ Y $ and hence if $ X_n\to X $ in $ L^q $ then $ X_n\to X $ i $ L^p $.
+	\end{enumerate}
+\end{problem}
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item We can prove this very easily with Markov's inequality
+		\[ \prob(\abs{X_n - X} \geq \epsilon) = \prob(\abs{X_n - X}^p \geq \epsilon^p ) \leq \frac{\E{\abs{X_n - X}^p}}{\epsilon^p} \to 0 \quad \text{as $ n\to\infty $}. \]
+		
+		\item [(a')] In one of my attempts to solve this problem, my brain followed the following pathway!
+		\begin{align*}
+			\E{\abs{X_n-X}^p} &= \E{\abs{X_n - X}^p\mathds{1}_{\abs{X_n-X}\geq \epsilon}} + \E{\abs{X_n-X}^p \mathds{1}_{\abs{X_n-X}<\epsilon}} \\
+			& \geq  \E{\abs{X_n - X}^p\mathds{1}_{\abs{X_n-X}\geq \epsilon}} \\
+			& \geq \epsilon\prob(\abs{X_n-X}\geq \epsilon).
+		\end{align*}
+		Since $ \E{\abs{X_n-X}^p}\to 0 $ as $ n\to\infty $, it follows that $ \prob(\abs{X_n - X}\geq \epsilon) \to 0 $ as $ n\to\infty $ and for any choice of $ \epsilon>0 $.
+		
+		\item Take $ X_n: (0,1) \to\R $ and $ X_n = \mathds{1}_{[0,1/n]} $. Then $ X_n \to 0 $ in probability but $ 1 = \E{X_n} \not\to \E{X} = 0 $.
+		
+		\item Let $ \phi(x) = \abs{x}^{q/p} $ that is a convex function when $ q\geq p $. Observe that
+		\[ \phi(\E{\abs{X}^p}) \leq \E{\phi(\abs{X}^p)} = \E{\abs{X}^q}. \] 
+		By using the fact that $ \phi(\E{\abs{X}^p}) = \E{\abs{X}^p}^{q/p} $ and raising the both side to power $ 1/q $ we will get
+		\[ (\E{\abs{X}^p})^{1/p} \leq (\E{\abs{X}^q})^{1/q}. \]
+	\end{enumerate}
+\end{solution}
+
+\begin{problem}
+	Suppose $ \E{\abs{X}} < \infty $. Prove that, for any $ \epsilon>0 $, there exists a $ \delta>0 $ such that $ \E{\abs{X}\mathds{1}_{A}}<\epsilon $ for all $ A\in \mathcal{F} $ with $ \prob(A)<\delta $.
+\end{problem}
+\begin{solution}
+	First, we want to show if $ \E{\abs{X}} <\infty$ then $ \E{\abs{X}\mathds{1}_{\abs{X}\geq n}} \to 0 $ as $ n\to\infty $. To see why, observe that
+	\[ \abs{X}\mathds{1}_{\abs{X}\geq n} \to 0 \qquad \text{as $ n\to\infty $}. \]
+	Furthermore, observe that
+	\[ \abs{X}\mathds{1}_{\abs{X}\geq n} \leq \abs{X}. \]
+	Since $ \E{\abs{X}} < \infty $, using the Dominated Convergence Theorem we can conclude that $ \E{\abs{X}\mathds{1}_{\abs{X}\geq n}} \to 0 $ as $ n\to\infty $.
+	
+	Let $ \epsilon>0 $ given. Choose $ N $ large enough such that $ \E{X\mathds{1}_{\abs{X}\geq n}}<\epsilon/2 $ for all $ n\geq N $. Choose $ \delta = \epsilon/(2N) $. Let $ A\in \mathcal{A} $ such that $ \prob(A) < \delta $. Then we can write
+	\begin{align*}
+		\E{\abs{X}\mathds{1}_A} &= \E{\abs{X}\mathds{1}_{A\cap\set{\abs{X}\geq N}}} + \E{\abs{X}\mathds{1}_{A\cap\set{\abs{X}<N}}} \\
+		&\leq \frac{\epsilon}{2} + \frac{N\epsilon}{2N} = \epsilon.
+	\end{align*}
+\end{solution}
+
+\begin{problem}
+	Calculate the variance and mean of Poisson random variable. \emph{Hint: Probability generating function will be useful!}
+\end{problem}
+\begin{solution}
+	Recall that for $ X\sim \operatorname{Poisson}(\lambda) $ we have
+	\[ \prob(X = k) = \frac{e^{-\lambda}\lambda^k}{k!}. \]
+	So we can calculate the probability generating function
+	\[ G_X(z) = \E{z^X} = \sum_{k=0}^{\infty}z^k\prob(X=k) = e^{-\lambda}\sum_{k=0}^{\infty}\frac{(\lambda z)^k}{k!} = e^{\lambda(z-1)}, \]
+	where we have used the fact the the series above is absolutely convergent and converges to $ e^{\lambda z} $. Using the fact that $ G_X^{(n)}(z)  = \lambda^n e^{\lambda(z-1)}$.
+	\[ \E{X} = G_X'(1) = \lambda, \qquad \E{X(X-1)}=G_X''(1) = \lambda. \]
+	Using the fact that $ \Var(X) = \E{X^2} - \E{X}^2 $ we will get
+	\[ \Var{X} = \lambda. \]
+\end{solution}
+
+\begin{problem}
+	Let $ \set{X_n}, X $ be random variables with law $ \mu_n, \mu$. Suppose $ \mu_n \Rightarrow \delta_c $ for some $ c \in \R $. Prove that $ \set{X_n} $ converges to $ c $ in probability.
+\end{problem}
+\begin{solution}
+	For a given $ \epsilon>0 $ consider
+	\[ \prob(\abs{X_n - c} \geq \epsilon) = \prob(X_n \leq c - \epsilon) + \prob(X_n \geq c + \epsilon) = 1 + \prob(X_n \leq c - \epsilon) - \prob(X_n < c+\epsilon) = 1 - \mu_n((c-\epsilon,c+\epsilon)).  \]
+	Observe that since $ \mu(\partial(c-\epsilon,c+\epsilon)) = 0 $ and $ \mu_n \Rightarrow \mu $  then $ \mu_n((c-\epsilon,c+\epsilon)) \to \mu((c-\epsilon,c+\epsilon)) = 1  $, hence for any choice of $ \epsilon $ we have
+	\[ \prob(\abs{X_n - X} \geq \epsilon) \to 0 \quad \text{as $ n\to\infty $}. \]
+\end{solution}
+
+\begin{problem}
+	Let $ 0 < M < \infty $, and let $ f,f_1,f_2,\cdots: [0,1] \to [0,M] $ be Borel-measurable functions with $ \int_{0}^{1}f\ d\lambda = \int_{0}^{1} f_n\ d\lambda = 1 $. Suppose $ \lim_n f_n(x) = f(x) $ for each fixed $ x\in [0,1] $. Define probability  measures $ \mu,\mu_1,\mu_2,\cdots $ by $ \mu(A) = \int_{A} f\ d\lambda $, and $ \mu_n(A) = \int_A f_n\ d\lambda $, for Borel $ A \subset [0,1] $. Prove that $ \mu_n \Rightarrow \mu $.
+\end{problem}
+\begin{solution}
+	Let $ g: [0,1]\to\R $ be any bounded continuous function. Then by change of variable formula we have
+	\[ \int g d\mu_n = \int_0^1 g f_n d\lambda, \qquad \int g d\mu = \int_0^1 gf d\lambda. \]
+	Since $ f_n \to f $ pointwise, then $ gf_n \to gf $ pointwise as well. Observe that $ gf_n \leq gM $ and since $ g $ is bounded and continuous then $ \int gM d\lambda < \infty $. Thus by monotone convergence theorem we have
+	\[ \int {gf_n} {d\lambda} \to \int gf d\lambda \quad \text{as $ n\to\infty $}. \]
+	In other words $ \int g d\mu_n \to \int g d\mu $ as $ n\to\infty $. This proves that $ \mu_n \Rightarrow \mu $.
+\end{solution}
+
+
+\begin{problem}
+	Let $ \phi(t) $ be the characteristic function of the random variable $ X $. Suppose that $ \abs{\phi(t_0)} = 1 $ for some $ t_0 \neq 0 $. Prove there exists $ a,b \in \R $ such that $ \prob(X \in a + b\Z) = 1 $.
+\end{problem}
+\begin{solution}
+	Since $ \abs{\phi(t_0)} = 1 $, it is on the unit circle in complex plane. I.e. $ \exists a \in \R $ such that $ \phi(t_0) = e^{iat_0} $. On the other hand, from definition we have
+	\[ \phi(t_0) = \int e^{it_0 X} d\prob. \]
+	This implies $ 1 = \int e^{it_0(X-a)} d\prob $. So $ \int (1-e^{it_0(X-a)}) d\prob = 0 $. This implies that 
+	\[ 1 - e^{it_0(X-a)} = 0\ a.s. \]
+	Taking the real part we will get $ \cos(t_0(X-a)) = 1 a.s. $, hence $ t_0(X-a)\in 2\pi\Z $ almost surely. This implies $ X \in a\Z + b $ almost surely, for some $ a,b \in \R $.
+	\[  \]
+\end{solution}
+
+
+
+
+

@@ -1625,7 +1625,7 @@ The idea of the proof of the following Lemma is very important and will show up 
  		\end{align*}
  		\item First observe that 
  		\[ \frac{\floor{ny}}{n} \to y \quad as \quad n\to\infty. \]
- 		On the other hand
+ 		That is because $ \abs{\frac{\floor{ny}}{n} - y} = \frac{\abs{\floor{ny} - ny}}{n} \leq \frac{1}{n}. $ On the other hand
  		\[ \mu((\frac{\floor{ny}}{n},\frac{\floor{ny}+1}{n})) \to \mu((y,y)) = \mu(\emptyset) = 0 \quad as \quad n\to\infty. \]
  		So from part (a) we can see that
  		\[ F_n(y) \to F(y) \quad as \quad n\to\infty \]
@@ -1633,6 +1633,19 @@ The idea of the proof of the following Lemma is very important and will show up 
  		\item {\color{red} \noindent TODO: TO BE ADDED.}
 	\end{enumerate}
 \end{solution}
+
+
+\begin{problem}
+	Let $ 0 < M < \infty $, and let $ f,f_1,f_2,\cdots: [0,1] \to [0,M] $ be Borel-measurable functions with $ \int_{0}^{1}f\ d\lambda = \int_{0}^{1} f_n\ d\lambda = 1 $. Suppose $ \lim_n f_n(x) = f(x) $ for each fixed $ x\in [0,1] $. Define probability  measures $ \mu,\mu_1,\mu_2,\cdots $ by $ \mu(A) = \int_{A} f\ d\lambda $, and $ \mu_n(A) = \int_A f_n\ d\lambda $, for Borel $ A \subset [0,1] $. Prove that $ \mu_n \Rightarrow \mu $.
+\end{problem}
+\begin{solution}
+	Let $ g: [0,1]\to\R $ be any bounded continuous function. Then by change of variable formula we have
+	\[ \int g d\mu_n = \int_0^1 g f_n d\lambda, \qquad \int g d\mu = \int_0^1 gf d\lambda. \]
+	Since $ f_n \to f $ pointwise, then $ gf_n \to gf $ pointwise as well. Observe that $ gf_n \leq gM $ and since $ g $ is bounded and continuous then $ \int gM d\lambda < \infty $. Thus by monotone convergence theorem we have
+	\[ \int {gf_n} {d\lambda} \to \int gf d\lambda \quad \text{as $ n\to\infty $}. \]
+	In other words $ \int g d\mu_n \to \int g d\mu $ as $ n\to\infty $. This proves that $ \mu_n \Rightarrow \mu $.
+\end{solution}
+
 
 
 \begin{problem}

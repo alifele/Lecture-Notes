@@ -81,11 +81,29 @@ In the following we will have a quick review of the different definitions of con
 	Since $ \set{X_n} $ converges to $ X $ in probability then for all $ \epsilon>0 $
 	\[ \prob(A_n) \to 0, \]
 	where $ A_n = \set{\abs{X_n - X} \geq \epsilon} $. Since $ \set{\prob(A_n)} $ is a non-negative sequence that converges to $ 0 $, then there exists a subsequence $ \set{\prob(A_{n_k})} $ that is summable, i.e.
-	\[ \sum_k \prob(A_{n_k}) = 0. \]
+	\[ \sum_k \prob(A_{n_k}) <\infty. \]
 	By Borel-Cantelli this implies
 	\[ \prob(\limsup_k A_{n_k}) = 0. \]
 	As stated in the proof of \autoref{thm:a.s.ImpliesProb} $ \limsup_n A_n $ is the set of all points $ \omega \in \Omega $ such that $ X_n(\omega) $ does not converge to $ X(\omega) $. So $ \set{X_{n_k}} $ converges to $ X $ a.s..
 \end{proof}
+
+\begin{theorem}[Convergence in probability vs Almost sure convergence]
+	Let $ \set{X_n} $ be a sequence of random variables converging to $ X $ in probability. Then if for any choice of $ \epsilon>0 $
+	\[ \sum_{n}\prob(\abs{X_n - X} \geq \epsilon) <\infty, \]
+	then $ X_n \to X $ almost surely. Furthermore, if
+	\[ \sum_{n}\prob(\abs{X_n - X} \geq \epsilon) <\infty = \infty, \]
+	\textbf{and $ \set{X_n} $ are independent}, then $ X_n \not\to X $ almost surely.
+\end{theorem}
+\begin{proof}
+	The proof follows immediately from Borel-Cantelli lemma by considering the facts that if for all $ \epsilon>0 $
+	\[ \prob(\abs{X_n-X}\geq \epsilon\ i.o.) = 0  \quad\text{then}\quad X_n\to X \ \text{a.s.}.  \]
+	And if for all $ \epsilon>0 $
+	\[ \prob(\abs{X_n-X}\geq \epsilon\ i.o.) = 1  \quad\text{then}\quad X_n\not\to X \ \text{a.s.}. \]
+\end{proof}
+\begin{remark}
+	An important remark is that sumability of $ \prob(\abs{X_n - X}\geq \epsilon) $ has information about a.s. convergence. But unsummability of $ \prob(\abs{X_n - X}\geq \epsilon) $ has information about a.s. convergence only when $ \set{X_n} $ are independent. For instance let $ X_n $ be defined as $ X_n = \mathds{1}_{[0,1/n]} $. Then $ \prob(\abs{X_n - X}\geq \epsilon) $ is not summable. However since $ \set{X_n} $ are not independent, we can not conclude that $ X_n $ is not converging to $ X $ almost surely (because it does converge a.s.). However, if we let $ \set{X_n} $ be independent with $ \prob(X_n=1) = 1/n $ and $ \prob(X_n = 0) = 1-1/n $, then $ X_n $ converges to $ X $ in probability, but not almost surely. Because for any $ \epsilon>0 $, $ \prob(\abs{X_n - X} \geq \epsilon\ i.o.) = 1 $ (by Borel Cantelli Lemma).n
+\end{remark}
+
 
 \begin{theorem}[Convergence in $ L^p $ implies convergence in probability]
 	Let $ \set{X_n} $ be a sequence of random variables that converge in $ L^p $. Then $ X_n \to X $ in probability.
@@ -96,8 +114,11 @@ In the following we will have a quick review of the different definitions of con
 	On the other hand using H\"{o}lder's inequality (i.e. Corollary 4.2 in the book) we can write $ \norm{X_n-X}_1 \leq \norm{X_n-X}_p $. So
 	\[ \prob(\abs{X_n - X} \geq \epsilon) \leq  \norm{X_n - X}_p/\epsilon \to 0 \quad \text{as $ n\to\infty $}, \]
 	where we have used the fact that $ X_n \to X $ in probability.xc
-	
 \end{proof}
+\begin{remark}
+	We can also do this without using the H\"{o}lder's inequality:
+	\[ \prob(\abs{X_n - X} \geq \epsilon) = \prob(\abs{X_n - X}^p \geq \epsilon^p) \leq \frac{\E{\abs{X_n - X}^p}}{\epsilon^p} = \frac{\norm{X_n-X}_p^p}{\epsilon^p} \to 0 \quad \text{as $ n\to\infty $}. \]
+\end{remark}
 
 
 The following proposition is very important as it connects the convergence in probability to convergence in $ L^p $ (in moments), and its proof uses the Fatou's Lemma, H\"{o}lder's inequality as well as Minkowski's inequality.
