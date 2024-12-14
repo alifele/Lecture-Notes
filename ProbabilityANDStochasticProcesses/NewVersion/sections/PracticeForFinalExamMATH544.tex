@@ -347,7 +347,19 @@ These are my solved problems that I was practicing for the final exam.
 	This implies $ 1 = \int e^{it_0(X-a)} d\prob $. So $ \int (1-e^{it_0(X-a)}) d\prob = 0 $. This implies that 
 	\[ 1 - e^{it_0(X-a)} = 0\ a.s. \]
 	Taking the real part we will get $ \cos(t_0(X-a)) = 1 a.s. $, hence $ t_0(X-a)\in 2\pi\Z $ almost surely. This implies $ X \in a\Z + b $ almost surely, for some $ a,b \in \R $.
-	\[  \]
+\end{solution}
+
+\begin{problem}
+	Recall that for a Geometric distribution with parameter $ p $ we have $ \prob(X = k) = (1-p)^{k-1}p $. Consider the following variation. $ X_n $ has p.m.f given as $ \prob(X_n = k/n) = (1-\lambda/n)^{k-1}(\lambda/n) $ for $ k\in \N $, with $ \lambda >0 $. Apply the Continuity theorem  to prove that $ X_n $ converges weakly to an $ \operatorname{Exp}(\lambda) $ random variable. 
+\end{problem}
+\begin{solution}
+	First, we need to calculate the characteristic function of $ X_n $. 
+	\[ \phi_{X_n}(\xi) = \E{e^{i\xi X}} = \frac{\lambda}{n}\sum_{k=1}^{\infty}e^{i\xi k /n} (1-\lambda/n)^{k-1} = \frac{\lambda}{n}\cdot \frac{e^{i\xi /n}}{1 - e^{i\xi /n}(1-\lambda/n)}, \]
+	where we have used the geometric progression sum formula. The denominator is a asymptotically
+	\[ 1 - e^{i\xi /n}(1-\lambda/n) = 1 - (1+i\xi/n + O(1/n^2))(1-\lambda/n) = \frac{\lambda - i\xi}{n} + O(1/n^2), \quad \text{as $ n\to\infty $}. \]  
+	So we will have
+	\[ \phi_{X_n} (\xi) \to \frac{\lambda}{\lambda - i \xi} \quad \text{as $ n\to\infty $}, \]
+	which is the characteristic function of an exponential random variable.
 \end{solution}
 
 
