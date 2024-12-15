@@ -362,6 +362,137 @@ These are my solved problems that I was practicing for the final exam.
 	which is the characteristic function of an exponential random variable.
 \end{solution}
 
+\begin{problem}[Convergence in distribution to uniform distribution]
+	Let $ \mu $ be Lebesgue measure on $ [0,1] $, and let $ \mu_n $ be defined by $ \mu_n (i/n) = 1/n $ for $ i=1,2,\cdots, n $. Show to $ \mu_n \Rightarrow \mu $  as $ n\to\infty $.
+\end{problem}
+\begin{solution}
+	First, observe that $ \mu $ is the distribution of a uniform random variable, call it $ U $. The c.d.f of this random variable is $ F_U(x) = x $ on $ [0,1] $, 0 on $ (-\infty,0) $ and 1 on $ (1,\infty) $. We want to show that c.d.f of $ \mu_n $ converges to $ \mu $ on (0,1) (i.e. all continuity points of $ F_U(x) $). Observe that
+	\[ \mu_n((-\infty, x]) = \frac{\floor{nx}}{n} \]
+	Then for $ x\in (0,1) $ we have
+	\[ \abs{\mu((-\infty,x]) - \mu_n((-\infty,x])} = \abs{x - \frac{\floor{nx}}{n}} \leq 1/n.  \]
+	So $ \mu_n((-\infty, x]) \to \mu((-\infty, x]) $ as $ n\to\infty $.
+\end{solution}
+
+\begin{problem}[Convergence in distribution to uniform distribution]
+	\label{prob:convergenceToUniformInDist}
+	Let $ Y_1,Y_2,\cdots $ be i.i.d. uniform with values in $ \set{0,1,2,\cdots,9} $. Define 
+	\[ X_n = \sum_{i=1}^{n} \frac{Y_i}{10^i}. \]
+	Show that $ X_n \Rightarrow U $ where $ U $ is a random variable with uniform distribution.
+\end{problem}
+\begin{solution}
+	First, we calculate the characteristic function of $ Y_1 $:
+	\[ \phi_{Y_1}(\xi) = \E{e^{i\xi Y}} = \frac{1}{10}\sum_{k=0}^{9}e^{i\xi k} = \frac{1}{10}\cdot \frac{1-e^{10 i\xi}}{1 - e^{i\xi}}. \]
+	So for $ X_n $ we will have
+	\[ \phi_{X_n}(\xi) = \phi_{Y_1}(\xi/10) \phi(Y_1)(\xi/100)\cdots \phi_{Y_1}(\xi/10^n) = \frac{1}{10^n}\frac{1-e^{i\xi}}{1-e^{i\xi/10^n}} \sim \frac{1-e^{i\xi}}{10^n (-i\xi/10^n)} \to \frac{e^{i\xi} - 1}{i\xi}, \]
+	as $ n\to\infty $, which is the characteristic function of a uniform random variable on $ [0,1] $.
+\end{solution}
+
+\begin{problem}
+	\label{prob:convergenceInDistImpliesCharFuncIsEquic}
+	Using the definition of the convergence in distribution, prove that if $ \mu_n \Rightarrow \mu $ then $ \set{\mu_n} $ is tight.
+\end{problem}
+\begin{solution}
+	Let $ \epsilon>0 $ be given. Choose $ a,b\in \R $ such that $ \mu[a,b] > 1-\epsilon $, and $ a,b $ are not atoms of $ \mu $. So by definition $ \mu_n[a,b] \to\mu[a,b] $. I.e. $ \exists N\in \N $ such that for all $ n>N $ we have $ \mu_n[a,b] > 1-\epsilon $. Enlarge $ [a,b] $ to $ [a_n , b_n] $ such that for all $ n \leq N $ we have $ \mu_n [a_n,b_n] \geq 1-\epsilon $. Let $ [A,B] = \bigcup_{n=1}^{N} [a_n,b_n] $. So by construction $ \mu_n [A,B] \geq 1- \epsilon $ for all $ n\in \N $. So the collection $ \set{\mu_n} $ is tight.
+\end{solution}
+
+\begin{problem}
+	Using the fact that if $ \set{\mu_n} $ is tight, then $ \set{\phi_n} $ is equicontinuous, prove that if $ \mu_n \Rightarrow \mu $ then $ \phi_n \to \phi $ uniformly on compact sets. Show that the convergence should not be uniform on all real line.
+\end{problem}
+\begin{solution}
+	We use the result of Problem \autoref{prob:convergenceInDistImpliesCharFuncIsEquic}. Since $ \mu_n \Rightarrow \mu $, $ \set{\mu_n} $ is tight. Also, since $ \set{\mu_n} $ is tight, $ \set{\phi_n} $ is equicontinuous. We know that $ \mu_n \Rightarrow \mu $ implies $ \phi_n(\xi) \to \phi(\xi) $ pointwise. Pointwise convergence of equicontinuous family of functions is uniform convergence on compact sets. This proves the first part. For the second part, consider $ \mu_n = \mathcal{N}(0,1/n^2) $. Then $ \phi_n(\xi) = e^{-\xi^2 n^2/2} \to 1 $ pointwise on $ \R $. However, this convergence is not uniform all all$ \R $ as $ \phi_n (\xi) $ decays to zero as $ \xi \to \infty $ or $ \xi \to -\infty $.
+\end{solution}
+
+\begin{problem}
+	Using the identity $ \sin t = 2 \sin (t/2)\cos(t/2) $ repeatedly leads to $ \sin(t)/t = \prod_{m=1}^{\infty}\cos(t/2^m) $. Prove the last identity by interpreting each side as a characteristic function.
+\end{problem}
+\begin{problem}
+	Observer that by applying the trigonometric identity for 3 times we will get
+	\[ \sin(t) = \frac{1}{2^3}\sin(\frac{t}{8})\cos(\frac{t}{8})\cos(\frac{t}{4})\cos(\frac{t}{2}).  \]
+	For any $ n $ large we can write
+	\[ \sin(t) = \frac{1}{2^n}\sin(\frac{t}{2^n})\prod_{i=1}^n \cos(\frac{t}{2^n})\sim t\prod_{i=1}^n \cos(\frac{t}{2^n}). \]
+	So we can write
+	\[ \frac{\sin t}{t} = \prod_{n=1}^{\infty} \cos(\frac{t}{2^n}). \]
+	The RHS can be thought as the characteristic function of $ Y_1+Y_2+\cdots $ where $ Y_i = B_i/2^i $ where $ B_i $ is Bernoulli random variable (with values in $ \set{-1,1} $ and parameter $ p=1/2 $). The LHS can be thought as the characteristic function of uniform distribution on $ [-1,1] $. So this identity shows that
+	\[ \sum_{i=1}^{n}\frac{B_i}{2^i} \Rightarrow \mu_U \quad \text{as $ n\to\infty $}. \]
+	where $ U $ is the uniform distribution on $ [-1,1] $.
+\end{problem}
+\begin{remark}
+	Notice the similarity between the problem above and Problem \autoref{prob:convergenceToUniformInDist}.
+\end{remark}
+
+\begin{problem}
+	Show that if $ \phi $ is a characteristic function, then $ \Re \phi $ and $ \abs{\phi}^2 $ are also characteristic functions. Also, show that if $ \phi_1,\phi_2,\cdots,\phi_n $ are characteristic function, then any convex linear combination is also a characteristic function.
+\end{problem}
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item For $ \Re\phi $: Let $ X $ be a random variable with characteristic function $ \phi $. Let $ Y $ be a random variable such that $ \prob(Y=1) = \prob(Y=0)=1/2 $ (i.e. $ Y $ is a Bernoulli random variable). Let $ Z $ be a random variable that is $ X $ when $ Y = 1 $ and $ X' $ when $ Y = 0 $, where $ X' $ is an independent copy of $ -X $ (hence $ \phi_{X'}=\conj{\phi_X} $). So the c.d.f of $ Z $ will be
+		\[ F_Z(x) = \prob(Z \leq x) = \frac{1}{2} \prob(X\leq x) + \frac{1}{2}\prob(X'\leq x) = \frac{1}{2}F_X(x) + \frac{1}{2}F_{X'}(x). \]
+		And the law of $ Z $ will be
+		\[ \mu_Z = \frac{1}{2}\mu_X + \frac{1}{2}\mu_{X'}. \]
+		So the characteristic function of $ Z $ will be
+		\[ \phi_Z(\xi) = \frac{1}{2}\int e^{i\xi x} \mu_X(dx) + \frac{1}{2}\int e^{i\xi x} \mu_{X'}(dx) = \frac{\phi_X(\xi) + \conj{\phi_{X}(\xi)}}{2} = \Re{\phi_X(\xi)}. \]
+		
+		\item For $ \abs{\phi}^2 $: Let $ X' $ be an independent copy of $ -X $ (hence $ \phi_{X'} = \conj{\phi_X} $). Define the random variable $ Z = X + X' $. Then the characteristic function of $ Z $ is 
+		\[ \phi_Z(\xi) = \phi_{X}(\xi) \conj{\phi_X(\xi)} = \abs{\phi_X(\xi)}^2. \]
+		
+		\item For $ \sum_{i=1}^{n}\lambda_i \phi_i $ (i.e. convex linear combination): This generalizes the item (a) above. Let $ Y $ be a random variable with values in $ \set{1,2,\cdots,n} $ such that $ \prob(Y = i) =\lambda_i $. Define $ Z $ to be a random variable that is equal to $ X_i $ (that has characteristic function $ \phi_i $) when $ Y = i $. Then the law of $ Z $ will be
+		\[ \mu_Z =  \sum_{i=1}^{n} \lambda_i \phi_i. \]
+		So the characteristic function of $ Z $ will be
+		\[ \phi_Z = \sum_{i=1}^{n} \lambda_i \phi_i. \]
+	\end{enumerate}
+	
+\end{solution}
+
+\begin{problem}
+	Show that if $ \lim_{t\to 0 }(\phi(t)-1)/t^2 = c > -\infty $, then $ \E{X} = 0 $ and $ \E{X^2} = -2c < \infty $. In particular, if $ \phi(t) = 1 + o(t^2) $, then $ \phi(t) \equiv 1 $.
+\end{problem}
+\begin{solution}
+	First observe that 
+	\[ \lim_{t\to 0}\conj{\frac{\phi(t) - 1}{t^2}} = \lim_{t\to0}\frac{\conj{\phi(t)} - 1}{t^2} = \lim_{t\to 0} \frac{\phi(-t)-1}{t^2} = c. \]
+	So by adding these two limits and noting that $ \phi(0) = 1 $ we will have
+	\[ \lim_{t\to 0}\frac{\phi(t) + \phi(-t) -2}{t^2} = 2c. \]
+	For this part of the reasoning I will be using a weak arguments, however you can see 3.3.21 Durrent for a more precise argument. The limit about ``looks like'' the second derivative of $ \phi $. So we conclude that $ \E{X^2}<\infty $. So we can have the following expansion for $ \phi $
+	\[ \phi(\xi) = 1 + i\xi\E{X} - \xi^2/2\E{X^2} + o(t^2).  \]
+	Using this expansion with $  \lim_{t\to 0 }(\phi(t)-1)/t^2 = c $ implies that 
+	\[ \E{X} = 0, \qquad \E{X^2} = -2c < \infty. \]
+	
+	In particular, if we know $ \phi(\xi) = 1 + o(\xi) $, then
+	\[ \lim_{t\to 0}\frac{\phi(t)-1}{t^2} = \lim_{t\to 0}\frac{o(t^2)}{t^2} = 0. \]
+	So $ \E{X} = 0,$ and $\E{\abs{X}^2} = 0 $. Thus $ \abs{X} = 0 $ almost surely. This implies that $ X\equiv 0 $ almost surely. So $ \phi(t) = 1 $.
+\end{solution}
+
+
+\begin{problem}
+	If $ Y_n $ are random variables with characteristic functions $ \phi_n $, then $ Y_n \Rightarrow 0 $ if and only if there is a $ \delta >0 $ such that $ \phi_n(t) \to 1 $ for $ \abs{t} \leq \delta $.
+\end{problem}
+\begin{solution}
+	Using Lemma 11.1.13 we see that $ \set{\mu_n} $ is tight. So there is a convergent subsequence $ \set{\mu_{n_k}} $ that $ \mu_{n_k} \Rightarrow \nu $ as $ k \to\infty $. So $ \phi_{n_k} \to \phi $. Thus every subsequence of $ \set{\mu_n} $ converges to $ \nu $. Since $ \phi_n \to 1 $ on $ [-\delta,\delta] $, so $ \phi = 1 $ on $ [-\delta, \delta] $. This implies that 
+	\[ \phi(t) = 1 + o (t^2) \quad \text{as $ t\to 0 $}. \]
+	(To see this observe that $ \lim_{t\to0} (1-\phi(t)) = 0 $ as $ \phi =1 $ on $ [-\delta,\delta] $). From the problem above we see that $ \phi(t) \equiv 1 $ on. This implies that $ X = 0 $ almost surely, thus $ Y_n \Rightarrow X $. This completes the proof.
+\end{solution}
+\begin{remark}
+	Most of the work above is done to show that $ \phi_n \to \phi $, where $ \phi $ is some characteristic function with $ \phi(\xi) = 1 $ on $ [-\delta, \delta] $. If we know that $ \phi_n $ converges pointwise to some characteristic function that is equal to 1 on some closed neighborhood of 0, then we can immediately write $ \phi(\xi) = 1 + o(\xi^2) $ and conclude that $ \phi(\xi) \equiv 1 $.
+\end{remark}
+
+\begin{problem}
+	Let $ X_1,X_2,\cdots $ be independent. If $ S_n = \sum_{m\leq n}X_m $ converges in distribution then it converges in probability. \emph{Hint: The last exercise implies that if $ m,n \to \infty $, then $ S_m - S_n \to 0 $ in probability.}
+\end{problem}
+\begin{solution}
+	First observe that $ \phi_{S_n}(\xi) = (\phi_X(\xi))^n $. Because $ \phi_{X} $ is a characteristic function (hence uniformly continuous), then $ \exists \delta>0 $ such that $ \phi_X(\xi) > 0 $ when $ \xi \in [-\delta, \delta] $. Let $ m,n\in \N $ with $ n > m $. Then
+	\[ (S_n - S_m)(\xi) = \sum_{l=m}^{n}X_l = (\phi_X(\xi))^{m-n} = \frac{\phi_X(\xi)^m}{\phi_X(\xi)^n}. \] 
+	Let $ \xi \in [-\delta, \delta] $. Then
+	\[ \lim_{m,n\to\infty}(S_n(\xi) - S_m(\xi)) =  \lim_{m,n\to\infty}\frac{\phi_X(\xi)^m}{\phi_X(\xi)^n} = \frac{\lim_{m\to\infty}\phi_X(\xi)^m}{\lim_{n\to\infty}\phi_X(\xi)^n} = 1.  \]
+	So $ (S_m - S_n)(\xi) \to 1 $ on $ [\delta, \delta] $. This implies that $ S_m - S_n \Rightarrow 0 $ as $ m,n\to\infty $. Since the limiting measure is constant, then the convergence in distribution can be upgraded to converges in probability. So $ S_m - S_n \to 0 $ as $ m,n \to \infty $.
+\end{solution}
+
+\begin{problem}
+	The distribution of a random variable \( X \) is called \textit{infinitely divisible} if, for all \( n \in \mathbb{N} \), there exists a sequence of independent and identically distributed random variables \( Y_1^{(n)}, Y_2^{(n)}, \ldots, Y_n^{(n)} \) such that \( X \) and \( Y_1^{(n)} + Y_2^{(n)} + \cdots + Y_n^{(n)} \) have the same distribution. Prove that the characteristic function \( \phi \) of an infinitely divisible distribution is nonzero for all real \( t \), i.e., that \( \phi(t) \neq 0 \) for all \( t \in \mathbb{R} \).
+	
+	\smallskip
+	\noindent
+	\textbf{Hint:} Let \( \phi_n \) be the characteristic function of \( Y_i^{(n)} \). Let \( \psi_n(t) = |\phi_n(t)|^2 \) and \( \psi(t) = |\phi(t)|^2 \). Explain why these are also characteristic functions. Study the limit of \( \psi_n(t) \).
+	
+\end{problem}
 
 
 
