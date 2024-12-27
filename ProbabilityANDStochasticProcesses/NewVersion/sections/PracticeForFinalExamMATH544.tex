@@ -491,9 +491,141 @@ These are my solved problems that I was practicing for the final exam.
 	\smallskip
 	\noindent
 	\textbf{Hint:} Let \( \phi_n \) be the characteristic function of \( Y_i^{(n)} \). Let \( \psi_n(t) = |\phi_n(t)|^2 \) and \( \psi(t) = |\phi(t)|^2 \). Explain why these are also characteristic functions. Study the limit of \( \psi_n(t) \).
-	
 \end{problem}
+\begin{solution}
+	Let $ \phi_n(\xi) $ denote the characteristic function of $ Y^{(n)}_1 $ and $ \phi(\xi) $ denote the characteristic function of $ X $. Because $ X $ is infinitely divisible
+	\[ \phi(\xi) = (\phi_n(\xi))^n \qquad \forall  n\in \N . \]
+	Let $ \psi(\xi) = \abs{\phi(\xi)}^2 $ and $ \psi_n(\xi) = \abs{\phi_n(\xi)}^2 $. Then we can write
+	\[ \psi_n(\xi) = \abs{\phi(\xi)^{1/n}}^2 = (\abs{\phi(\xi)}^2)^{1/n} = \psi_n(\xi)^{1/n}.  \]
+	Let $ g(\xi) = \lim_{n\to\infty}\psi_n(\xi) $. Then if $ \psi_n(\xi) >0 $ then $ g(\xi) = 1 $ and if $ \psi_n(\xi) = 0 $ then $ g(\xi) = 0 $. Since $ \psi_n $ is a characteristic function then $ \psi_n(0) =1 $ and exists $ \delta > 0 $ such that $ \psi_n(\xi) > 0 $ on $ [-\delta, \delta] $. This implies that $ g(\xi) = 1 $ on $ [-\delta, \delta] $. We can show (see the remark below) that $ g $ is a characteristic function and on $ [-\delta, \delta] $ we can write $ g(\xi) = 1 + o(\xi^2) $. This implies that $ g(\xi) \equiv 1 $.
+\end{solution}
+\begin{remark}
+	Since $ \psi_n \to g $ and $ g $ is continuous then the collection of corresponding distributions is dense. Thus there exists a subsequence of distributions that converge to some distribution. Thus the corresponding subsequence of the characteristic functions should also converge to the corresponding characteristic function of that distribution which is $ g $. So $ g $ is a characteristic function of some distribution.
+\end{remark}
 
+\begin{problem}[Application of Central Limit Theorem]
+	An astronomer is interested in measuring, in light years, the distance from her observatory to a distant star. Although she has a measuring technique, she knows that because of changing atmospheric conditions and experimental error, each time a measurement is made it will not yield the exact value but rather an approximate value. As a result the astronomer plans to make a series of measurements and then use the average of these as the estimated value of the actual distance. She believes that the values of the measurement errors are not systematic, so that the measurements are described by a random variable with mean \( d \) (the true distance) and a variance of \( 4 \, \text{(light years)}^2 \). Use the central limit theorem to determine approximately the number of measurements that should be made to be 95\% sure that the estimated distance is accurate to within \( \pm 0.5 \) light years.
+\end{problem}
+\begin{solution}
+	Let $ S_n/n $ denote the average measured value. Then we want to have
+	\[ \prob(\abs{S_n/n - d} \leq 1/2) = 0.95. \]
+	To find the value of $ n $ we can write
+	\begin{align*}
+		0.95 = \prob(\abs{S_n/n -d} \leq 1/2) = \prob(\abs{\frac{S_n - nd}{\sqrt{n\sigma^2}}} \leq \frac{\sqrt{n}}{2\sigma}) \approx \prob(\abs{Z}\leq \frac{\sqrt{n}}{2\sigma}) = 1 - 2 \Phi(\frac{\sqrt{n}}{2\sigma}),
+	\end{align*}
+	where $ Z $ has standard normal distribution. Using the standard normal distribution table we get $ \sqrt{n}/(2\sigma) = 1.96 $. This implies
+	\[ n \approx 62.\]
+\end{solution}
+
+\begin{problem}
+	Let \( X_1, X_2, \dots \) be i.i.d. random variables with known mean \( m \) and unknown variance \( \sigma^2 \), both finite and with \( \sigma^2 \neq 0 \). Prove that
+	\[
+	\frac{S_n - nm}{\sqrt{\sum_{k=1}^n (X_k - m)^2}} \Rightarrow N(0,1).
+	\]
+	To avoid \( \frac{0}{0} \) issues, assume that \( P(X_k = m) = 0 \).
+\end{problem}
+\begin{solution}
+	Replace $ X_1,X_2,\cdots $ with $ Y_1 = X_1-m, Y_2=X_2-m,\cdots $. So $ \E{Y_i} = 0 $. Let $ S_n = Y_1 + Y_2 + \cdots + Y_n $. Thus we want to show 
+	\[ \frac{S_n}{\sum_{i=1}^{n}Y_i^2} \Rightarrow \mathcal{N}(0,1). \]
+	First observe that by CLT 
+	\[ \frac{S_n}{\sqrt{n\sigma^2}} \Rightarrow \mathcal{N}(0,1). \]
+	Also, observe that by weak law of large numbers
+	\[ \frac{\sum_{i=1}^{n} Y_i^2}{n} \to \E{Y_i^2} = \sigma^2 \quad \text{in probability}. \]
+	So $ \frac{\sum_{i=1}^{n} Y_i^2}{\sigma^2 n} \to 1 $ in probability. The multiplication of these two will also converge in distribution to $ 1\cdot\mathcal{N}(0,1) $. So
+	\[ \frac{S_n}{\sum_{i=1}^{n}Y_i^2} \Rightarrow \mathcal{N}(0,1) \]
+\end{solution}
+
+\begin{problem}
+	Let \( X_1, X_2, \dots \) be i.i.d. random variables with c.d.f. \( F \). The \textit{empirical c.d.f.} \( \hat{F}_n : \mathbb{R} \to [0,1] \) is defined by
+	\[
+	\hat{F}_n(x) = \frac{1}{n} \sum_{k=1}^n \mathbf{1}_{\{X_k \leq x\}}.
+	\]
+	Thus, for each \( x \in \mathbb{R} \), \( \hat{F}_n(x) \) is a random variable.
+	\begin{itemize}
+		\item[(a)] For each \( x \in \mathbb{R} \), prove that \( \hat{F}_n(x) \to F(x) \) a.s.
+		\item[(b)] If \( x \) satisfies \( 0 < F(x) < 1 \), prove that
+		\[
+		\frac{\sqrt{n} \left( \hat{F}_n(x) - F(x) \right)}{\sqrt{F(x)[1 - F(x)]}} \Rightarrow N(0,1).
+		\]
+	\end{itemize}
+\end{problem}
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item For the first part we use the SLLN. First observe that since $ X_i $ are i.i.d. then $ \mathds{1}_{X_i\leq x} $ are also i.i.d. Furthermore, observe that the average of these random variables is finite. Because
+		\[ \E{\mathds{1}_{X_i\leq x}} = \prob(\set{X_i\leq x}) = F_i(x). \]
+		So using the strong law of large numbers for i.i.d. random variables with finite mean we will have
+		\[ \hat{F}_n(x) \to \E{\mathds{1}_{X_i\leq x}} = F_1(x) \ a.s. \]
+		\item For the second part, notice that 
+		\[ \E{\mathds{1}_{X_i\leq x}^2} = F_i(x). \]
+		So the variance of $ \mathds{1}_{X_i\leq x} $ will be
+		\[ \Var(\mathds{1}_{X_i\leq x}) = F(x) - F(x)^2 = F(x)(1 - F(x)). \]
+		So using the central limit theorem we have
+		\[ \frac{n\hat{F}_n(x) - nF(x)}{\sqrt{n F(x)(1 - F(x)) }} =  \frac{\sqrt{n} \left( \hat{F}_n(x) - F(x) \right)}{\sqrt{F(x)[1 - F(x)]}} \Rightarrow N(0,1) \]
+	\end{enumerate}
+\end{solution}
+
+\begin{problem}
+	This problem concerns the method of Monte Carlo integration, which is a method for the approximate evaluation of an integral \( I = \int_0^1 f(x) \, dx \).
+	
+	\begin{itemize}
+		\item[(a)] Let \( U_1, \dots, U_N \) be i.i.d. uniform random variables on the interval \( (0,1) \), and let
+		\[
+		I_N = \frac{1}{N} \left[ f(U_1) + \cdots + f(U_N) \right].
+		\]
+		Suppose that \( \int_0^1 f(x)^2 \, dx < \infty \), and let \( \sigma^2 = \text{Var} f(U_1) = \int_0^1 f(x)^2 \, dx - I^2 \). Apply the central limit theorem to show that \( I_N \) converges to \( I \) as \( N \to \infty \), in the sense that
+		\[
+		P\left( \left| I_N - I \right| \leq \frac{\sigma x}{\sqrt{N}} \right) \to P(|Z| \leq x),
+		\]
+		where \( Z \) is a standard normal random variable.
+		
+		\item[(b)] Assuming that \( \sigma \leq 1 \), how large should \( N \) be taken to be 95\% confident that \( I_N \) is within 0.01 of \( I \)?
+	\end{itemize}
+\end{problem}
+\begin{solution}
+	First notice that $ f(U_i) $ has finite mean $ I $ and finite variance $ \Var(f(U_1)) = \int_{0}^{1}f(x)^2\ dx - I_2 = \sigma^2 $. So by central limit theorem we have
+	\[ \prob(\frac{NI_n - NI}{\sqrt{N\sigma^2}} \leq x) \to \prob(Z \leq x) = 1-2\Phi(x). \] 
+	So using the fact that
+	\[ \prob(\abs{\frac{NI_n - NI}{\sqrt{N\sigma^2}}} \leq x) = \prob(\abs{I_n - I} \leq \frac{x\sigma}{\sqrt{N}})\]
+	we have
+	\[ \prob(\abs{I_n - I} \leq \frac{x\sigma}{\sqrt{N}}) \to 1 - \Phi(x). \]
+	By change of variable $ y = \frac{x\sigma}{\sqrt{N}} $ we can write
+	\[ \prob(\abs{I_n - I} \leq y) \approx 1 - 2\Phi(\frac{\sqrt{N}y}{\sigma}). \]
+	We have $ y = 0.01 $ and we assume $ \sigma = 1 $. Then we need to have
+	\[ 1 - 2 \Phi(\sqrt{N}/100) = 0.95. \]
+	This implies $ \Phi(\sqrt{N}/100) = 0.025 $. From the standard normal distribution we read $ \sqrt{N}/100 = 1.96 $. Thus we need to have
+	\[ N \approx (196)^2. \]
+\end{solution}
+
+
+\begin{problem}
+	Let $ X_1,X_2,\dots $ be i.i.d. with $ \E{X_i} = 0 $ and $ 0 < \Var(X_i)<\infty $, and let $ S_n = X_1 + \cdots + X_n $.Use the central limit theorem and Kolomogrov's zero-one law to conclude that $ \limsup S_n/\sqrt{n} = \infty $ almost surely.
+\end{problem}
+\begin{solution}
+	Observe that 
+	\[ \limsup_n \prob(\frac{S_n}{\sqrt{n}} > M) = \limsup_n \prob(\frac{S_n}{\sigma\sqrt{n}} > \frac{M}{\sigma}) = \prob(Z>M/\sigma) > 0. \]
+	Also observe that 
+	\[ \prob(\frac{S_n}{\sqrt{n}} > M\ i.o.) \geq \limsup_n \prob(\frac{S_n}{\sqrt{n}} > M) > 0. \]
+	Since $ \set{\frac{S_n}{\sqrt{n}} > M\ i.o.} $ is a tail event and its probability is positive then it should be 1. Thus
+	\[ \prob(\frac{S_n}{\sqrt{n}} > M\ i.o.) = 1. \]
+	So 
+	\[ \limsup_n \frac{S_n}{\sqrt{n}} = \infty \ a.s. \]
+\end{solution}
+
+\begin{problem}
+	Let $ X_1,X_2,\dots $ be i.i.d. with $ X_i \geq 0 $ and $ \E{X_i} = 1 $, and $ \Var(X_i) = \sigma^2 \in (0,\infty) $. Show that $ 2(\sqrt{S_n} - \sqrt{n}) \Rightarrow \sigma \chi $.
+\end{problem}
+\begin{solution}
+	By CLT we have
+	\[ \frac{S_n - n}{\sqrt{n}} \Rightarrow \sigma \chi. \]
+	We can write the LHS as 
+	\[ \frac{S_n - n}{\sqrt{n}} = \frac{(\sqrt{S_n} - \sqrt{n})(\sqrt{S_n} + \sqrt{n})}{\sqrt{n}} = 2(\sqrt{S_n} - \sqrt{n}) \cdot \frac{(\sqrt{S_n} + \sqrt{n})}{2\sqrt{n}} = 2(\sqrt{S_n} - \sqrt{n}) \cdot (\sqrt{S_n/n} + 1)/2. \]
+	By WLLN we have
+	\[ S_n/n \to \E{X_1} =1 \quad \text{in probability.} \]
+	So by continuous mapping theorem (Durrent) we have
+	\[ (\sqrt{S_n/n} + 1)/2 \to 1 \quad \text{in probability}. \]
+	By converging together theorem (Durrent) we have
+	\[ 2(\sqrt{S_n} - \sqrt{n}) \to \sigma\chi. \]
+\end{solution}
 
 
 
