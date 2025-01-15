@@ -1,0 +1,31 @@
+\chapter{Conditional Expectation}
+
+Throughout this chapter the probability space $ (\Omega,\mathcal{F},\prob) $ where $ \Omega = \set{a,b,c,d,e,f} $, $ \mathbb{F} = \mathcal{P}(\Omega) $, and $ \prob $ uniform will be running example to demonstrate different notions in a tangible way. The following random variables will be in particular useful.
+\[ X = \begin{pmatrix}
+	a & b & c & d & e & f \\
+	1 & 2 & 3 & 5 & 7 & 11
+\end{pmatrix}, \quad
+Y = \begin{pmatrix}
+	a & b & c & d & e & f \\
+	1 & 1 & 4 & 4 & 6 & 6 \\
+\end{pmatrix},\quad
+Z = \begin{pmatrix}
+	a & b & c & d & e & f \\
+	8 & 8 & 8 & 8 & 9 & 9
+\end{pmatrix}.
+\]
+It is also important to describe $ \sigma(X), \sigma(Y) $, and $ \sigma(Z) $ explicitly. The atoms of $ \sigma(X) $ will be the $ \inv{X}(1)=\set{a},\inv{X}(2)=\set{b},\inv{X}(3)=\set{c},\inv{X}(5)=\set{d}, \inv{X}(7)=\set{e},\inv{X}(11)=\set{f} $. Thus $ \sigma(X) = \mathcal{P}(\Omega) $. With a similar argument the atoms of $ \sigma(Y) $ is $ \inv{Y}(4) = \set{a,b}, \inv{Y}(4)=\set{c,d}, \inv{Y}(6) = \set{e,f} $. And finally, the atoms of $ Z $ will be $ \inv{Z}(8) = \set{a,b,c,d} $, and $ \inv{Z}(9) = \set{e,f} $. In summary
+\begin{align*}
+	\operatorname{Atom}(\sigma(X)) &= \set{\set{a},\set{b},\set{c},\set{d},\set{e},\set{f}}, \\
+	\operatorname{Atom}(\sigma(Y)) &= \set{\set{a,b},\set{c,d},\set{e,f}}, \\
+	\operatorname{Atom}(\sigma(Z)) &= \set{\set{a,b,c,d},\set{e,f}}.
+\end{align*}
+
+
+\begin{example}[from Nima Moshayedi's lecture notes]
+	Let $ N \sim \operatorname{Poisson}(\lambda) $. Consider a game, where we say that when $ N = n $ we do $ n $ independent tossing of a coin where each time one obtains $ 1 $ with probability $ p \in[0,1] $ and $ 0 $ with probability $ 1-p $. Define also $ S $ to be the random variable giving the total number of $ 1 $ obtained in the game. Therefore, if $ N = n $ is given, we get that $ S $ has binomial distribution with parameters $ (p,n) $. compute
+	\begin{enumerate}[(a)]
+		\item $ \E{S | X} $.
+		\item $ \E{X | S} $.
+	\end{enumerate}
+\end{example}

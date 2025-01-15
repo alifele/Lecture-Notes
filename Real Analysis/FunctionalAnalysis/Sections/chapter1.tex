@@ -1,0 +1,95 @@
+\chapter{Point-set Topology}
+
+We will review some basic notions of the topology, and then we will present solved solutions for the related problems.
+
+
+\begin{definition}
+	Let $ (X,\mathcal{T}) $ be a topological space an let $ A \subseteq X $ be a subset. Then 
+	\begin{itemize}
+		\item The \emph{interior} of $ A $ denoted by $ A^\circ $ is defined as
+ \		\[ A^\circ = \bigcup_{\substack{V\subset A,\\ V \text{open}}} V.\]
+		In words, the interior of a set is the union of all open sets contained in the set. 
+		
+		\item The \emph{closure} of $ A $ denoted by $ \closure{A} $ is defined as
+		\[ \closure{A} = \bigcap_{\substack{F \supset A,\\ F \text{closed}}} F. \]
+		In words, the closure of a set is the intersection of all closed sets containing $ A $.
+		
+		\item The \emph{boundary} or $ A $ is defined as
+		\[ \partial A = \closure{A} \backslash A^\circ. \]
+		
+		\item $ A $ is \emph{dense} in $ X $ if
+		\[ \closure{A} = X. \]
+		
+		\item $ A $ is \emph{nowhere dense} if 
+		\[ (\closure{A})^\circ = \emptyset. \]
+	\end{itemize}
+\end{definition}
+
+\begin{remark} 
+	Consider the following remarks for the definition above.
+	\begin{itemize}
+		\item By the definition above, if $ x\in A^\circ $, then there exists $ V \in \mathcal{T} $ such that $ x \in V \subset A $. Also, we can interpret the interior of $ A $ as the largest open set contained in $ A $.
+		
+		\item We can interpret $ \closure{A} $ as the smallest closed set containing $ A $. There is a very interesting parallel between this definition and the notion of smallest $\sigma\text{-algebra}$ containing a collection. The smallest $\sigma\text{-algebra}$ containing a collection is the intersection of all $\sigma\text{-algebra}$ that contains that collection.
+	\end{itemize}
+\end{remark}
+
+\begin{proposition}[Basic Properties]
+	Let $ (X,\mathcal{T}) $ be a topological space, and $ A,F \subseteq X $ a subset. Then we have
+	\begin{enumerate}[(a)]
+		\item $ A^\circ \subseteq A \subseteq \closure{A} $.
+		\item $ A^\circ $ is open and $ \closure{F} $ is closed.
+		\item $ A $ is open iff $ A = A^\circ $.
+		\item $ F $ is closed iff $ F = \closure{F} $.
+		\item $ (\closure{A})^c = (A^c)^\circ. $
+		\item $ (A^\circ)^c = \closure{(A^c)} $.
+		\item $ A $ is open iff it is a neighborhood of all of its points.
+		\item If $ A_1 \subseteq A_2 $ then $ A_1^\circ \subseteq A_2^\circ $ as well as $ \closure{A_1} \subseteq \closure{A_2} $.
+		\item $ (A^\circ)^\circ = A^\circ $, and $ \closure{(\closure(A))} = \closure(A) $.
+		\item $ \closure{A_1\cup A_2} = \closure{A_1} \cup \closure{A_2} $.
+		\item $ (A_1\cap A_2)^\circ = A_1^\circ \cap A_2^\circ $.
+		\item $ \closure{A} = A \cup A' $, where $ A' $ is the derived set of $ A $.
+	\end{enumerate}
+\end{proposition}
+\begin{proof}
+	\begin{enumerate}[(a)]
+		\item Let $ x \in A^\circ $. Then $ \exists V \in \mathcal{T} $ such that $ x \in V \subseteq A $. Thus $ x \in A $, so $ A^\circ \subseteq A $. For the second part, Let $ x \in A $. Then $ x \in F $ for every $ F $ that contains $ A $. Consider the intersection of all such $ F $s that are also closed. $ x $ also belongs to their intersection, which is by definition $ \closure{A} $. So $ A \subseteq \closure{A} $.
+		
+		\item $ A^\circ $ is open since it is the union of open sets. $ \closure{F} $ is closed since it is the intersection of closed sets. 
+		
+		\item First, we assume $ A $ is open. Since $ A^\circ = \bigcup V $ for all $ V\subseteq A $ and $ V $ open, we can take the collections of open sets on the RHS to be only $ A $, and it proves that $ A^\circ = A $. For the other direction, we assume $ A = A^\circ $. We know that $ A^\circ $ is open. Thus $ A $ is also open.
+		
+		\item First, we assume that $ F $ is closed. Then since $ \closure{F} = \bigcap A $ where $ F \subseteq A $ and $ A $ is closed, we can take the union on the RHS to be $ F $ and this proves that $ F = \closure{F} $. For the converse, we assume $ F = \closure{F} $. Since $ \closure{F} $ is open this implies that $ F $ is closed.
+		
+		\item Let $ x \in (\closure{A})^c $. This implies $ x \in (\closure{A})^c = (\bigcap_{\substack{A \subseteq F,\\ F\text{closed}}}F)^c = \bigcup_{\substack{A \subseteq F,\\ F\text{closed}}} F^c  $. Let $ F^c = V $. Then we can write
+		\[ x \in \bigcup_{\substack{V\subseteq A^c\\ V\text{open}}} V = (A^c)^\circ. \]
+		So $ (\closure{A})^c \subseteq (A^c)^\circ $. For the converse, let $ x \in (A^c)^\circ $. This implies $ x \in \bigcup_{\substack{V\subseteq A^c,\\V\text{open}}} V $. Or equivalently $ x \notin \bigcap_{\substack{V\subseteq A^c,\\V\text{open}}} V^c $. Let $ F = V^c $. Then we can write 
+		\[ x\notin \bigcap_{\substack{A\subseteq F,\\ F\text{closed}}} F = \closure{A}. \]
+		So $ x \in (\closure{A})^c $. Thus we conclude that $ (\closure{A})^c = (A^c)^\circ $.
+		
+		\item Let $ x \in (A^\circ)^c $. Then 
+		\[ x \in (\bigcup_{\substack{V \subseteq A,\\ V\text{open}}} V)^c = \bigcap_{\substack{V \subseteq A,\\ V\text{open}}} V^c = \bigcap_{\substack{A^c \subseteq F,\\ F\text{closed}}} F = \closure{A^c}. \]
+		This implies $ (A^\circ)^c \subseteq \closure{A^c} $. For the converse let $ x \in \closure{A^c} $. Then $ x \in \bigcap_{\substack{A^c \subseteq F,\\ F\text{closed}}} F $. This implies
+		\[ x \notin \bigcup_{\substack{A^c \subseteq F,\\ F\text{closed}}} F^c = \bigcup_{\substack{V\subseteq A,\\ V\text{open}}} V = A^\circ . \]
+		This implies that $ x \in (A^\circ)^c $. Thus $ \closure{A^c} \subseteq (A^\circ)^c $.
+		
+		\item We assume that $ A $ is open. Then for any $ x \in A $ we have $ x \in A \subseteq A $. Thus $ A $ is a neighborhood of $ x $. For the converse, we assume that $ A $ is a neighborhood of all of its points. So for any $ x \in A $ there exits $ V_x \in \mathcal{T} $ such that $ x \in V \subseteq A $. $ A $ can be written as $ A = \bigcup_x V_x $ where $ V_x $ is as above. This $ A $ is open.
+		
+		\item Let $ x \in A_1^\circ $. Then $ \exists V \in \mathcal{T} $ such that $ x \in V \subseteq A_1 $. From assumption we also have $ x \in V \subseteq A_2 $. This implies that $ x \in A_2^\circ $. For the second statement, let $ x \in \closure{A_1} $.
+	\end{enumerate}
+\end{proof}
+\begin{remark}
+	In item (e), by taking the complement from both sides we will have
+	\[ \closure{A} = ((A^c)^\circ)^c \]
+\end{remark}
+
+
+
+
+
+
+
+
+
+
+

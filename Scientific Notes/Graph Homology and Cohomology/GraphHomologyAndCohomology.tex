@@ -58,7 +58,7 @@
 	So this space as dimension 2, hence the betti $ \beta_2 $ number of this graph is $ 2 $ (this results is in the chapter four of \cite{Gross2005}).
 	
 	On the other hand, by following the definition of $ \beta_2 $, that is the rank of the $ n^\text{th} $ homology group, we find different answers. I constructed a chain complex for this graph according to \cite{Lim2019} as follows
-	\[ W_V \xleftarrow{\div} W_E \xleftarrow{\curl^*} W_T, \]
+	\[ W_V \xleftarrow{\div} W_E \xleftarrow{\curl^*} W_T,  \tag{1} \]
 	where the boundary operators are given as
 	\[ \div = \begin{pmatrix}
 		1 & 0 & 0 & 1 & 1 \\
@@ -99,7 +99,7 @@
 	This is precisely that column space of $ \curl^* $. This reveals that $ H^1 = \{0\} $ is a trivial group, hence its rank is zero, thus $ \beta_1 = 0 $. This is an apparent contradiction to what we had above, where we calculated that $ \beta_1 = 2 $.
 	
 	Trying to resolve the paradox, I constructed a co-chain complex as below (the reason was that I thought maybe the betti number is the rank of the $ k^\text{th} $ \emph{cohomology} group rather than the rank of the $ k^\text{th} $ \emph{homology} group.)
-	\[ W_V \xrightarrow{\grad} W_E \xrightarrow{\curl} W_T, \]
+	\[ W_V \xrightarrow{\grad} W_E \xrightarrow{\curl} W_T, \tag{2}\]
 	where the $ \grad $ and $ \curl $ operators are given as
 	\[ \grad = \begin{pmatrix}
 		1 & 1 & 0 & 0 \\
@@ -132,11 +132,10 @@
 	Then I thought all these are happening since I am working with mod 2 systems for the undirected and unweighted graphs (as $ W_V, W_E $, and $ W_T $ are built on $ \mathbb{F}_2 $). The ``topological caveats'' discussed in section 5.1 of \cite{Lim2019} made this thought more strong. But then I noticed that in the calculations above, I am not using any of the tools that \cite{Lim2019} is developing during section 1 and section 2 of that article, and all of my calculations above are the bare-metal calculations, and there is no possible way that the ``topological caveats'' might be the reason for this paradox.
 	
 	These paradoxical observations come to an end when I read \cite{dewan2016graph}, where in section 6 of this article, the authors mentions the following chain complex (that is also called the ordinary homology of graph):
-	\[ \cdots \xleftarrow{d_{-1}=0} 0 \xleftarrow{d_{0}=0} W_V \xleftarrow{d_{1}=\div} W_E \xleftarrow{d_{2}=0} 0 \xleftarrow{d_{3}=0} \cdots, \]
+	\[ \cdots \xleftarrow{d_{-1}=0} 0 \xleftarrow{d_{0}=0} W_V \xleftarrow{d_{1}=\div} W_E \xleftarrow{d_{2}=0} 0 \xleftarrow{d_{3}=0} \cdots, \tag{3} \]
 	where they assume that the spaces after $ W_E $ are trivial spaces, i.e. $ \{0\} $. With this definition of the chain complex, all of the paradoxes go away, as in this case the image of $ d_2 $ operator is the trivial subspace $ 0 $. After this observation I came across \cite{Wiki2024}, where in the section ``Higher dimensional homologies'', they also report a similar observation as mine above.
 	
-	
-	
+	In conclusion, the interpretation of the betti numbers really depends on the chain, or cochain complex of under study, i.e. it is crucial to know the all chains or co-chains in the complex and this will affect the final result. In the most simple cases we use simple chain complex (as in (3)), but for some applications (like Hodge decomposition for which see \cite{2024,Lim2019,strang2020applications} for a very good starting point to study this) we use chain complexes that are richer	(like (1),(2) above). Notice that in $ (1),(2) $ above, we have not written down that higher or lower chains when they are zero and the boundary and co-boundary operators are the trivial operators.  
 	
 	
 	

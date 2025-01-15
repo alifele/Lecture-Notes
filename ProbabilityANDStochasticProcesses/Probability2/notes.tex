@@ -1,0 +1,51 @@
+\documentclass[10pt]{book}
+\usepackage{commands}
+\usepackage{amsfonts}
+\usepackage{dsfont}
+\usepackage{amsmath}
+
+
+\newcommand{\Corr}{\operatorname{Corr}}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\blank}[1][2cm]{\rule{#1}{0.4pt}}
+
+\begin{document}
+
+
+
+
+\begin{tikzpicture}[remember picture,overlay]
+	% If a chapter image has been specified
+	\expandafter\ifstrequal\expandafter{\thechapterimage}{}{}{
+		% Output the chapter imagee
+		\node[
+		anchor=north west, % Anchor point on the image
+		inner sep=0pt, % Inner padding
+		] at ([yshift=-2cm]current page.north west) {\includegraphics[angle=0,width=\paperwidth]{Images/front.png}};
+	}
+\end{tikzpicture}
+
+\vspace{7cm}
+
+\heading{Probability and Stochastic Process}
+
+
+%\begin{figure}[h!]
+%	\centering
+%	\includegraphics[width=1\linewidth]{Images/realAnalysis}
+%	\caption*{$\mathbb{R}$eal Analysis, Created by DALL-E!}
+%	\label{fig:realanalysis}
+%	
+%\end{figure}
+
+
+
+
+\tableofcontents
+
+\input{sections/conditionalProbability.tex}
+
+
+
+
+\end{document}

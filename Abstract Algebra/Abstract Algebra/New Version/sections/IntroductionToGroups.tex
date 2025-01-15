@@ -1,8 +1,33 @@
-\chapter{Abstract Algebra (G. T. Lee Book)}
+\chapter{Intro to Groups (G. T. Lee Book)}
 
-\section{A Simple Example}
 
-\subsection{Solved Problems}
+\begin{theorem}
+	Let $ G $ be a group and let $ a \in G $. Suppose $ i,j \in \Z $. Then
+	\begin{enumerate}[(i)]
+		\item If $ a $ has infinite order, then $ a^i = a^j $ if and only if $ i = j $.
+		\item If $ \abs{a} = n < \infty $, then $ a^i = a^j $ if and only if $ i\equiv j \pmod n $.  
+	\end{enumerate}
+\end{theorem}
+\begin{proof}
+	Proof for (i) and (ii) is as follows.
+	\begin{enumerate}[(i)]
+		\item $ \boxed{\Rightarrow} $ : Assume $ a^i = a^j $ for some $ i,j \in \Z $. Thus $ a^{i-j} = e $. However, since $ a $ has infinite order, it implies that $ i-j = 0 $, hence $ i=j $.
+		
+		\noindent $\boxed{\Leftarrow} $ : The converse direction follows immediately from the definition of group.
+		
+		
+		\item $ \boxed{\Rightarrow} $ : Assume $ a^i = a^j $ for some $ i,j\in \Z $. We can write $ a^{i-j} = e $. Using division algorithm we can write $ i-j = nq + r $ where $ q,r \in \Z $ and $ 0 \leq r < n $. So
+		\[ a^{i-j} = (a^n)^q a^r = e. \]
+		Since $ n $ is the order of $ a $, it implies that $ a^n = e $. Thus the equality above implies that $ a^r = e $. By definition $ n $ was the smallest number with this property, and by division algorithm we have $ 0 \leq r < n $. This implies that $ r = 0 $. So $ i-j = nq $ or equivalently $ i \equiv j \pmod n $.
+		
+		\noindent $ \boxed{\Leftarrow} $ : Assume $ i\equiv j \pmod n $. This implies $ i-j = qn $ for some $ q\in \Z $. Thus $ a^{i-j} = (a^n)^q = e $. This implies $ a^{i} = a^j $.
+		
+	\end{enumerate}
+\end{proof}
+
+
+
+\section{Solved Problems}
 The following problems are from Gregory T. Lee abstract algebra book in SUMS.
 \begin{problem}
 	In $ S_4 $ let $ \sigma = \begin{pmatrix} 1 & 2 & 3 & 4 \\ 3 & 1 & 4 & 2 \end{pmatrix} $ and $ \tau  = \begin{pmatrix} 1 & 2 & 3 & 4 \\ 3 & 4 & 1 & 2 \end{pmatrix} $. Calculate the followings.
