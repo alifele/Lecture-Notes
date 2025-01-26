@@ -213,25 +213,7 @@
 		}
 		{\end{Defbox}}
 
-\newcounter{example}[section]
-\newenvironment{example}[2][]{
-		\refstepcounter{example}	%% setting the counter
-		\par\medskip\noindent		%% setting the spacings	
-		\begin{Example}{\thesection.\theexample}{#2}	%% Creating the tcolorbox
-		\par\medskip				%% Spacing setting 
-		}
-		{\end{Example}}
-		
-\newcounter{remark}[section]
-%\stepcounter{remark}
-\newenvironment{remark}[1][]{
-	\refstepcounter{remark}	%% setting the counter
-	\par\medskip\noindent		%% setting the spacings	
-	\begin{Remark}{\thesection.\theremark}	%% Creating the tcolorbox
-	%\par\medskip				%% Spacing setting 
-	}
-	{\end{Remark}}
-	
+
 \newenvironment{ans}{
 	\vspace{5pt}
 	\hrule

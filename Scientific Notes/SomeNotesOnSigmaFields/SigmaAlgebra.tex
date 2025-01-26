@@ -1,0 +1,219 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage{commands}
+
+
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{thmtools}
+\usepackage{xcolor}
+\usepackage{nameref}
+\usepackage{placeins}
+
+\usepackage{tkz-graph}
+\usepackage{dsfont}
+
+\newtheorem{summary}{Summary}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+
+\theoremstyle{remark}
+\newtheorem{example}{Example}
+\newtheorem{remark}{Remark}
+
+
+
+
+
+
+\title{Some Notes on $\sigma\text{-algebra}$ and Random Variables}
+\author{Ali Fele Paranj}
+
+
+
+\begin{document}
+	
+	\maketitle
+	
+	
+	\section{Introduction}
+	The probability theory is so natural that one can start thinking about some basic problems as soon as they start to know how to count! Because finding the answer to most of the problems boils down to counting the number of all possible scenarios, and then reporting the proportion of the outcomes of interest to the total number. The first shock in probability theory is experienced when you sit in a undergraduate level probability course. Then you will learn about the notion of a random variable that is a function! And even more shockingly, there is nothing random about a random variable. Surviving so many abuse of notations (like probability density function, probability function, distribution, law, etc) then you might get a feeling that you understand what probability is saying and you can imagine a peaceful life after your course. However, once one encounters the treatment of probability theory in a graduate level course, at first, you might even think that you are sitting in a wrong class (and continue thinking the same way for 4 more weak if not the whole term!). That is because you will hear about different notions like $\sigma\text{-algebra}$, measurable random variables, a filtration, adaptive random variable, and etc. The situation becomes even more scary when you hear for the first time that conditional expectation is a random variable! In this note, I will provide a more algebraic treatment of the notion of $\sigma\text{-algebra}$ which will help to understand these notions better. Also, by the end of these notes you will have a more tangible sense of the damn sentence ``we can think of $\sigma\text{-algebra}$ as information available to us!''. Seriously.
+	
+	{\color{red} \noindent Things to be added or changed later:} Notice that for any $ \Omega $ the $ 2^\Omega $ already has the same algebraic structure as discussed below, i.e. $ 2^\Omega = \oplus_{x\in\Omega}\mathbb{F}_2 $. Then any $\sigma\text{-algebra}$ will be a subspace of this space $ 2^\Omega $.
+	
+	
+	\section{$\sigma\text{-Algebra}$}
+	
+	The notion of $\sigma\text{-algebra}$ is easiest to understand when considered in a finite setting. We are not going to review the definition of $\sigma\text{-algebra}$ here. However, we want to highlight that we can look at a $\sigma\text{-algebra}$ of a sample space $ \Omega $ in a way that resembles a vector space. Then we can talk about subspaces of that vector spaces (which will be the notion of sub $ \sigma $-fields). We start with an explicit example.
+	
+	\subsection{Finite Case}
+	
+	Let $ \Omega = \set{1,2,3} $ be our sample space. Then for $\sigma\text{-algebra}$ we have many options. One one extreme we can have $ \mathcal{F}_0 = \set{\emptyset, \Omega} $, and on the other extreme we can have 
+	\[ \mathcal{F}_3 = \set{\set{1},\set{2},\set{3},\set{1,2},\set{2,3},\set{1,3},\set{1,2,3}, \Omega} \]
+	We can consider any of these collections as a collection of functions rather than a collection of sets. For instance, we can define
+	\[ \mathcal{F}_3 = \set{f:\set{1,2,3}\to \mathbb{F}_2}, \]
+	where $ \mathbb{F}_2 = \set{0,1} $ is a field with characteristic 2. For instance the set $ \set{1} $ will be the same as the function $ f $ where $ f(1) = 1, f(2)=0$, and $f(3) = 0 $. And when the domain of those functions is finite, then the followings are equivalent representations of the same thing.
+	\[ f(1)=1,f(2)=0,f(3)=0, \qquad (1,0,0), \qquad \vecttt{1}{0}{0}, \qquad \begin{pmatrix}
+		1 & 2 & 3 \\
+		1 & 0 & 0 
+	\end{pmatrix}, \qquad 100,  \]
+	and the list above is not an exhaustive one. Thus we can also represent the elements of $ \mathcal{F}_3 $ as 
+	\[ \mathcal{F}_3 = \left\{\vecttt{1}{0}{0}, \vecttt{0}{1}{0}, \vecttt{0}{0}{1},\vecttt{1}{1}{0}, \vecttt{1}{0}{1}, \vecttt{0}{1}{1},\vecttt{1}{1}{1},\vecttt{0}{0}{0} \right\}. \]	
+	It is easy to see that $ \mathcal{F}_3 $ forms a vector field on $ \mathbb{F}_2 $. In other way of seeing this is to observe that 
+	\[ \mathcal{F}_3 = \bigoplus_{i=1}^3 \mathbb{F}_2, \]
+	i.e. $ \mathcal{F}_3 $ is a direct sum (equivalently direct product when we can dealing with finitely many of spaces)  of the underlying field $ \mathbb{F}_2 $.
+	But what about the case that we choose
+	\[ \mathcal{F}_1 = \set{\set{1},\set{2,3},\set{1,2,3},\emptyset}. \]
+	Then how we can show this collection as a vector space in above? It turns out that we can write it as
+	\[ \mathcal{F}_1 = \set{f: \set{\set{1},\set{2,3}} \to \mathbb{F}_2}. \]
+	Observe that $ \set{\set{1},\set{2,3}} $ is in fact a partition of $ \Omega $. So in general we can summarize as below.
+	
+	\begin{summary}
+		\label{sum:DefinitionOfSigAlg}
+		Let $ \Omega $ be a finite sample space, and $ \mathcal{P} = \set{P_1,P_2,\cdots,P_n} $ be any partition. Then the $\sigma\text{-algebra}$ generated by $ \mathcal{P} $, denoted as $ \mathcal{F} = \sigma(\mathcal{P}) $, is given as
+		\[ \mathcal{F} = \set{\bigcup_{P\in A} P\ |\ A\subseteq \mathcal{P} }. \]
+		Or equivalently
+		\[ \mathcal{F} = \set{f: \mathcal{P} \to \mathbb{F}_2} = \bigoplus_{P\in \mathcal{P}} \mathbb{F}_2. \]
+		Observe that $ \mathcal{F} $ has a vector space structure. The elements of the partition $ \mathcal{P} $ is called the \textbf{atoms} of $ \mathcal{F} $. Furthermore, the collection $ \mathbb{B} = \set{f_i} \subset \mathcal{F} $, where $ f_i(P_j) = \delta_{i,j} $ forms a basis for the $ \mathcal{F} $.
+	\end{summary}
+	
+	We will follow the second interpretation above, as it provides a more clear algebraic structure. To understand the notion of measurable functions (i.e. random variable) we need to introduce the dual basis to $ \mathbb{B} $. Consider the collection of functionals $ \set{\mathds{1}_i}_{i=1}^n $ defined as
+	\[ \mathds{1}_{i}: \mathcal{F} \to \mathbb{F}_2, \quad \text{where} \quad \mathds{1}_{i}(f_j) = \delta_{i,j}. \]
+	This collection forms a dual basis for $ \mathcal{F} $, i.e. it is a basis for $ \mathcal{F}' $.
+	
+	\begin{summary}
+		\label{sum:DualBasis}
+		In the same setting as the summary above, the collection  $ \set{\mathds{1}_i}_{i=1}^n $ defined as
+		\[ \mathds{1}_{i}: \mathcal{F} \to \mathbb{F}_2, \quad \text{where} \quad \mathds{1}_{i}(f_j) = \delta_{i,j} \]
+		forms a dual basis for $ \mathcal{F} $. With some abuse of notation, these functions are the similar to the indicator function $ \set{\mathds{1}_{P}}_{P\in \mathcal{P}} $ when we view the $\sigma\text{-algebra}$ as $ \mathcal{F} = \set{\bigcup_{P\in A} P\ |\ A\subseteq \mathcal{P} } $.
+	\end{summary}
+	
+	With this point of view, the notion of measurable functions becomes very easy to grasp. A measurable function is simply an element of $ \mathcal{F}' $. I.e. $ X:\Omega \to \R $ is measurable if and only if we can write it as a linear combination of dual basis. With slight abuse of notation (see the summary below for clarification) we can write:
+	\[ X = \sum_{i=1}^{n} \alpha_i \mathds{1}_{i}, \]
+	or with the notation of the indicator functions
+	\[ X = \sum_{P\in \mathcal{P}} \alpha_i \mathds{1}_{P}. \] 
+	
+	
+	\begin{summary}
+		$ X $ is $ \mathcal{F} $-measurable if and only if $ X \in \mathcal{F}' $ in the sense that we can write $ X $ as
+		\[ X = \sum_{i=1}^n \alpha_i \mathds{1}_{i}\circ q \]
+		where $ q: \Omega\to \mathcal{P} $ is the quotient map.
+	\end{summary}
+	
+	The following example demonstrates our setup above. However, this example might sound quite silly, as we are over-killing our machinery for the purpose of demonstrating the tools we have in our disposal.
+	
+	\vspace{5pt}
+	\hrule
+	\begin{example}
+		Consider an experiment of tossing a dice. So the sample space will be
+		\[ \Omega = \set{1,2,3,4,5,6}. \]
+		Assume that we don't have enough technology to determine the exact outcome of an experiment. Instead, our measurement device can only report the outcome of the experiments in $ \mod{2} $, i.e. if the outcome is even or is odd. So the set of atomic events (i.e. the $\sigma\text{-algebra}$) will be\footnote{Observe that $ \mathcal{A} $ is a partition of the set $ \Omega $.}
+		\[ \mathcal{A} = \set{\set{1,3,5},\set{2,4,6}}. \]
+		And the $\sigma\text{-algebra}$ of interest will be the sigma algebra generated by these atoms, i.e.
+		\[ \mathcal{F} = \sigma(\mathcal{A}) = \set{\set{1,3,5},\set{2,4,6},\Omega,\emptyset}.\]
+		Or in a more algebraic point of view we have
+		\[ \mathcal{F}  = \bigoplus_{p\in \mathcal{A}}\mathbb{F}_2 = \mathbb{F}_2 \oplus \mathbb{F}_2 = \set{f:\mathcal{A}\to \mathbb{F}_2}. \]
+		Fixing a basis for this space (as discussed in \autoref{sum:DefinitionOfSigAlg}) we can write the elements of this vector space explicitly as
+		\[ \mathcal{F} = \big\{ \vectt{0}{1},\vectt{1}{0},\vectt{1}{1},\vectt{0}{0} \big\}. \]
+		Now suppose that we did some upgrade in our measurement system (or wrote down some theory that enables more accurate measurements) our device can now measure the exact value of the outcome of the experiment. So the atoms for this measurement device, i.e. random variable will be
+		\[ \mathcal{A}' = \set{\set{1},\set{2},\set{3},\set{4},\set{5},\set{6}}. \]
+		So the generated $\sigma\text{-algebra}$ will be
+		\[ \mathcal{F}' = \sigma(\mathcal{A}') = 2^\Omega, \]
+		i.e. the set of all subsets of of $ \Omega $. Or in the algebraic point of view we have
+		\[ \mathcal{F}' = \mathbb{F}_2 \oplus \mathbb{F}_2 \oplus \mathbb{F}_2. \]
+	\end{example}
+	\hrule
+	
+	
+	\begin{remark}
+		As we saw in the example above, it is usually the random variable that induces the $\sigma\text{-algebra}$ rather than having a $\sigma\text{-algebra}$ that determines which random variable is measurable and which is not. It is because of this reason that we are generally interested in the $\sigma\text{-algebra}$ generated by a collection of random variables.
+	\end{remark}
+	
+	
+	\subsection{Infinite Case}
+	
+	When considering finite sample spaces, most of the notions above seems to be too much complexity for a system that can by analyzed easily. But the usefulness of the notions above becomes more evident when we consider sample spaces with infinite cardinality, specially the sample spaces associated to the cases where each outcome is the result of a countably many repeated experiments. For instance, the sample space for an infinite coin toss, which is the space of sequences of $ 0 $s and $ 1 $s. This system will be our running example for the rest of this section.
+	
+	\vspace{5pt}
+	\hrule
+	\begin{example}[Running Example]
+		Imagine you tossing a coin infinitely many times. The sample space for this will be
+		\[ \Omega = \set{(1,0,\dots),(0,0,\cdots),(1,1,\dots),(1,0,\dots)}, \]
+		i.e. the set of all sequences composed of $ 1 $s and $ 0 $s. It is very hard to imagine this sample space in any practical and useful way. But we can identify the elements of this sample space with real numbers in $ (0,1] $. For each $ \omega \in \Omega $ we identify it with $ a \in (0,1] $ where the binary digits of $ a $ in the non-terminating expansion matches with $ \omega $. For instance let $ \omega_1 = (0,1,0,1,0,1,\dots) $. The corresponding real number $ a_1 $ will be
+		\[ a_1 = 0.01010101\dots. \]
+		And for $ \omega_2 = (1,0,0,0,\dots) $ the corresponding real number $ a_2 $ will be
+		\[ a_2 = 0.01111111\dots. \]
+		Observe that we chose the non-terminating representation of $ 0.10000\dots $ (for more details see my lecture notes on the probability theory, or see Billingsley section 1.1). Now imagine that one outcome $ \omega \in \Omega $ has occurred but we do not have enough machinery and technology to exactly say which one has occurred. Instead, our machinery can only determine what was the outcome of the coin flip on the fits toss. I.e. we have the following partition for the sample space
+		\[ \mathcal{A} = \set{A_{0},A_{1}}, \]
+		where $ A_{0} $ denotes the set of all outcomes whose first entry is 0 and $ A_1 $ denotes the set of all outcomes whose first entry if $ 1 $. So the $\sigma\text{-algebra}$ will be
+		\[ \mathcal{F}_1 = \sigma(\mathcal{A}) = \set{A_0,A_1,\Omega,\emptyset}. \]
+		Or for the algebraic point of view
+		\[ \mathcal{F}_1 = \sigma(\mathcal{A}) = \mathbb{F}_1 \oplus \mathbb{F}_2. \]
+		Using \autoref{sum:DualBasis} the dual basis will be
+		\[ \mathbb{B}' = \set{\mathds{1}_{A_0},\mathds{1}_{A_1}} \]
+		
+		Since it is hard to imagine the structure of $ \Omega $ as above, we use our identification above to construct the similar notions for $ \tilde\Omega = (0,1] $.
+		With our identification of elements of $ \Omega $ with real numbers it is easy to see that
+		\[ \tilde{\mathcal{A}} = \set{(0,\frac{1}{2}],(\frac{1}{2},1]}. \]
+		So 
+		\[ \tilde{\mathcal{F}}_1 = \set{(0,\frac{1}{2}],(\frac{1}{2},1],\Omega, \emptyset}. \]
+		And the dual basis functions will be
+		\[ \tilde{\mathbb{B}}' = \set{\mathds{1}_{(0,\frac{1}{2}]},\mathds{1}_{(\frac{1}{2},1]}}. \]
+	\end{example}
+	\hrule
+	\vspace{5pt}
+	
+	In the setting of example above, we are interested in some special random variables that will be crucial for the rest of our analysis. So for the space $ (\Omega,\mathcal{F}_1) $ as above we define
+	\[ X_1: \Omega \to \R, \qquad (x,\dots) \to x, \]
+	where $ \omega_1 $ is its first entry. Or in the corresponding space $ (\tilde\Omega, \tilde{\mathcal{F}}_1)$ we can write this random variable as
+	\[ d_1: \tilde\Omega \to \R, \qquad 0.x\dots \to x. \]
+	We call $ d_1 $ as dyadic function.
+	
+	
+	\vspace{5pt}
+	\hrule
+	\begin{example}
+		Assume that we have received some new measurement devices that can measure the second, and the third entry of each outcome respectively. Each of these devices will result in the following measurable spaces
+		\[ (\Omega, \mathcal{F}_2),\quad (\Omega, \mathcal{F}_3), \]
+		where 
+		\[ \mathcal{F}_2 = \sigma(\mathcal{A}_2) = \sigma(\set{A_{00},A_{01},A_{10},A_{11}}), \]
+		where $ A_{10} $ is the set of all outcomes that start with 10, and a similar definition for other sets. Similarly
+		\[ \mathcal{F}_3 = \sigma(\mathcal{A}_3) = \sigma(\set{A_{000},A_{001},A_{010},A_{011},A_{100},A_{101},A_{110},A_{111}}). \]
+		This becomes more interesting when we consider the $ \tilde\Omega $, the real-interval counterpart of these sets. We are not going to list all of them here but for instance we have
+		\[ A_{00} = (0,\frac{1}{4}], \quad A_{10}=(\frac{2}{2},\frac{3}{4}], \quad A_{110}=(\frac{6}{8},\frac{7}{8}], \quad A_{011} = (\frac{3}{8},\frac{4}{8}], \quad \dots. \]
+		It is also very informative to look at the dyadic functions $ d_2 $, and $ d_3 $ associated with these $\sigma\text{-algebra}$s.
+		
+		\begin{figure}[h!]
+			\centering
+			\includegraphics[width=0.5\linewidth]{Images/components}
+			\label{fig:components}
+		\end{figure}
+		\FloatBarrier
+		
+		First observe that
+		\begin{itemize}[noitemsep]
+			\item $ d_1 $ is $ \mathcal{F}_1 $ measurable.
+			\item $ d_2 $ is $ \mathcal{F}_2 $ measurable.
+			\item $ d_3 $ is $ \mathcal{F}_3 $ measurable.
+			\item $ d_4 $ is $ \mathcal{F}_4 $ measurable.
+		\end{itemize}
+		It is immediate to see the above as each of the dyadic functions above is simple a linear combination of the dual basis elements of their corresponding $\sigma\text{-algebra}$. It is also easy to see that these random variables are independent. For instance to check the independence between $ d_1 $ and $ d_2 $ we have
+		\[ \prob(\inv{d_1}(1)|\inv{d_2}(1)) = \frac{\prob((1/2,1] \cap ((1/4,1/2]\cup(3/4,1]))}{\prob((1/4,1/2]\cup(3/4,1]))} = \frac{1/4}{1/2} = 1/2 =  \prob(\inv{d}_1(1)). \]
+		\[ \prob(\inv{d_1}(0)|\inv{d_2}(0)) = \frac{\prob((0,1/2] \cap ((0,1/4]\cup(2/4,3/4]))}{\prob((0,1/4]\cup(2/4,3/4]))} = \frac{1/4}{1/2} = 1/2 =  \prob(\inv{d}_1(0)). \]
+	\end{example}
+	
+	
+	
+	
+	
+	
+	
+%	\newpage
+%	\bibliographystyle{dinat}
+%	\bibliography{references}
+%	
+	
+\end{document}
