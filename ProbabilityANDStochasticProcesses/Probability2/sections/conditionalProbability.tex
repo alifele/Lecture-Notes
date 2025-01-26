@@ -1,31 +1,159 @@
 \chapter{Conditional Expectation}
 
-Throughout this chapter the probability space $ (\Omega,\mathcal{F},\prob) $ where $ \Omega = \set{a,b,c,d,e,f} $, $ \mathbb{F} = \mathcal{P}(\Omega) $, and $ \prob $ uniform will be running example to demonstrate different notions in a tangible way. The following random variables will be in particular useful.
-\[ X = \begin{pmatrix}
-	a & b & c & d & e & f \\
-	1 & 2 & 3 & 5 & 7 & 11
-\end{pmatrix}, \quad
-Y = \begin{pmatrix}
-	a & b & c & d & e & f \\
-	1 & 1 & 4 & 4 & 6 & 6 \\
-\end{pmatrix},\quad
-Z = \begin{pmatrix}
-	a & b & c & d & e & f \\
-	8 & 8 & 8 & 8 & 9 & 9
-\end{pmatrix}.
-\]
-It is also important to describe $ \sigma(X), \sigma(Y) $, and $ \sigma(Z) $ explicitly. The atoms of $ \sigma(X) $ will be the $ \inv{X}(1)=\set{a},\inv{X}(2)=\set{b},\inv{X}(3)=\set{c},\inv{X}(5)=\set{d}, \inv{X}(7)=\set{e},\inv{X}(11)=\set{f} $. Thus $ \sigma(X) = \mathcal{P}(\Omega) $. With a similar argument the atoms of $ \sigma(Y) $ is $ \inv{Y}(4) = \set{a,b}, \inv{Y}(4)=\set{c,d}, \inv{Y}(6) = \set{e,f} $. And finally, the atoms of $ Z $ will be $ \inv{Z}(8) = \set{a,b,c,d} $, and $ \inv{Z}(9) = \set{e,f} $. In summary
-\begin{align*}
-	\operatorname{Atom}(\sigma(X)) &= \set{\set{a},\set{b},\set{c},\set{d},\set{e},\set{f}}, \\
-	\operatorname{Atom}(\sigma(Y)) &= \set{\set{a,b},\set{c,d},\set{e,f}}, \\
-	\operatorname{Atom}(\sigma(Z)) &= \set{\set{a,b,c,d},\set{e,f}}.
-\end{align*}
 
-
-\begin{example}[from Nima Moshayedi's lecture notes]
-	Let $ N \sim \operatorname{Poisson}(\lambda) $. Consider a game, where we say that when $ N = n $ we do $ n $ independent tossing of a coin where each time one obtains $ 1 $ with probability $ p \in[0,1] $ and $ 0 $ with probability $ 1-p $. Define also $ S $ to be the random variable giving the total number of $ 1 $ obtained in the game. Therefore, if $ N = n $ is given, we get that $ S $ has binomial distribution with parameters $ (p,n) $. compute
-	\begin{enumerate}[(a)]
-		\item $ \E{S | X} $.
-		\item $ \E{X | S} $.
-	\end{enumerate}
+\begin{example}[Running example 1 (Inspired by Gordan Zitkovic lecture notes)]
+	\label{exp:Running1}
+	Throughout this chapter the probability space $ (\Omega,\mathcal{F},\prob) $ where $ \Omega = \set{a,b,c,d,e,f} $, $ \mathbb{F} = \mathcal{P}(\Omega) $, and $ \prob $ uniform will be running example to demonstrate different notions in a tangible way. The following random variables defined as
+	\[ X: (\Omega,\mathcal{F})\to (I,\mathcal{I}),\qquad  Y: (\Omega,\mathcal{F})\to (I,\mathcal{I}),\qquad  Z: (\Omega,\mathcal{F})\to (I,\mathcal{I}), \]
+	where $ I = \set{1,\dots,10} $ and $ \mathcal{I}=\mathcal{P}(I) $. will be in particular useful:
+	\[ X = \begin{pmatrix}
+		a & b & c & d & e & f \\
+		1 & 3 & 3 & 5 & 5 & 7
+	\end{pmatrix}, \quad
+	Y = \begin{pmatrix}
+		a & b & c & d & e & f \\
+		2 & 2 & 1 & 1 & 7 & 7 \\
+	\end{pmatrix},\quad
+	Z = \begin{pmatrix}
+		a & b & c & d & e & f \\
+		3 & 3 & 3 & 3 & 2 & 2
+	\end{pmatrix}.
+	\]
+	It is also important to describe $ \sigma(X), \sigma(Y) $, and $ \sigma(Z) $ explicitly. The atoms of $ \sigma(X) $ will be the $ \inv{X}(1)=\set{a},\inv{X}(2)=\set{b},\inv{X}(3)=\set{c},\inv{X}(5)=\set{d}, \inv{X}(7)=\set{e},\inv{X}(11)=\set{f} $. Thus $ \sigma(X) = \mathcal{P}(\Omega) $. With a similar argument the atoms of $ \sigma(Y) $ is $ \inv{Y}(4) = \set{a,b}, \inv{Y}(4)=\set{c,d}, \inv{Y}(6) = \set{e,f} $. And finally, the atoms of $ Z $ will be $ \inv{Z}(8) = \set{a,b,c,d} $, and $ \inv{Z}(9) = \set{e,f} $. In summary
+	\begin{align*}
+		\operatorname{Atom}(\sigma(X)) &= \set{\set{a},\set{b},\set{c},\set{d},\set{e},\set{f}}, \\
+		\operatorname{Atom}(\sigma(Y)) &= \set{\set{a,b},\set{c,d},\set{e,f}}, \\
+		\operatorname{Atom}(\sigma(Z)) &= \set{\set{a,b,c,d},\set{e,f}}.
+	\end{align*}
 \end{example}
+
+\begin{example}[Running example 2 (inspired from Nima Moshayedi's lecture notes)]
+	\label{exp:running2}
+	$ N \sim \operatorname{Poisson}(\lambda) $. Consider a game, where we say that when $ N = n $ we do $ n $ independent tossing of a coin where each time one obtains $ 1 $ with probability $ p \in[0,1] $ and $ 0 $ with probability $ 1-p $. Define also $ S $ to be the random variable giving the total number of $ 1 $ obtained in the game. Therefore, if $ N = n $ is given, we get that $ S $ has binomial distribution with parameters $ (p,n) $. 
+\end{example}
+
+\begin{example}[Running example 3]
+	I will add some suitable random variable with density function $ f_{X,Y}(x,y) $. The goal is to later calculate $ f_{X|Y}(x,y) $ and $ \E{X|Y} $, etc. {\color{red} \noindent TODO: Will be designed and added later.}
+\end{example}
+
+
+We will be using the simple lemma below to demonstrate the main ideas of the conditional expectation. 
+\begin{lemma}[Projection Lemma]
+	\label{lem:Projection}
+	Let $ (\Omega,\mathcal{F},\prob) $ be a probability space and $ X $ a non-negative random variable. Then $ \E{X} \in \R $ is the unique number that minimizes
+	\[ \E{\abs{X-n}^2} \]
+	over all choices for $ n\in \R $.
+\end{lemma} 
+\begin{proof}
+	By differentiating and setting equal to zero we will have
+	\[ 0 = \frac{d}{dn}\E{\frac{d}{dn}\abs{X-n}^2} = \E{\abs{X}} - \E{\abs{n}}. \]
+	So 
+	\[ \E{X} = n. \]
+\end{proof}
+
+
+\section{Conditional Probability (Discrete Case)}
+\begin{summary}
+	Let $ (\Omega, \mathcal{F}, \prob) $ be a probability space, and $ X,Y:\Omega\to I $ discrete random variables. Then the conditional expectation $ \E{X|Y} : \Omega \to \R $:
+	\begin{enumerate}[(i)]
+		\item (Projective definition) is the unique $ \sigma(Y) $ measurable random variable that minimizes $ \E{\abs{X' - X}^2} $ among all $ \sigma(Y) $ measurable random variables $ X' $. So $ \E{X|Y} $ can be thought as the orthogonal projection of $ X \in L^2(\Omega, \mathcal{F},\prob) $ to the subspace $ L^2(\Omega, \sigma(Y),\prob) $.
+		\item (Alternative definition) is a random variable whose values are given as
+		\[ \E{X|Y}(\omega) =  \sum_{n\in I} n \prob(X=n|Y=Y(\omega)).\]
+	\end{enumerate}
+\end{summary}
+The nice thing about considering the conditional probability in the discrete case is the ability to do some explicit calculations.
+
+
+\begin{proposition}[Properties of conditional expectation]
+	\label{prop:PropertiesOfConditionalExpecation-Discrete}
+	\begin{enumerate}
+		\item Tower property: If $ \sigma(Z) \subseteq^\sigma \sigma(Y) $ then
+		\[ \E{\E{X|Y}|Z} = \E{X|Y}. \]
+		\item Pulling out what is known: Let $ Z $ be $ \sigma(Y) $ measurable. Then
+		\[ \E{XZ|Y} = Z\E{X|Y}. \]
+	\end{enumerate}.
+\end{proposition}
+
+\begin{example}
+	In the running example in \autoref{exp:Running1} calculate $ \E{X|Y} $, $ \E{X|Z} $, and explicitly verify if these random variables are $ \sigma(Y) $ and $ \sigma(Z) $ measurable (respectively). Then check the properties in \autoref{prop:PropertiesOfConditionalExpecation-Discrete}.
+\end{example}
+\begin{solution}
+	Recall that we had
+	\[ X = \begin{pmatrix}
+		a & b & c & d & e & f \\
+		1 & 3 & 3 & 5 & 5 & 7
+	\end{pmatrix}, \quad
+	Y = \begin{pmatrix}
+		a & b & c & d & e & f \\
+		2 & 2 & 1 & 1 & 7 & 7 \\
+	\end{pmatrix},\quad
+	Z = \begin{pmatrix}
+		a & b & c & d & e & f \\
+		3 & 3 & 3 & 3 & 2 & 2
+	\end{pmatrix}.
+	\]
+	\noindent \textbf{Calculating $ \E{X|Y} $}: So we want to calculate $ \E{X|Y} $. Let $ \omega \in \Omega $. Then
+	\[ \E{X|Y}(\omega) = \sum_{n=0}^{\infty}n\prob(X=n|Y=Y(\omega)). \]
+	When $ \omega = a $ we have
+	\[ \E{X|Y}(a) = 1\cdot\frac{\prob(X=1,Y=2)}{\prob(Y=2)} + 3\cdot\frac{\prob(X=3,Y=2)}{\prob(Y=2)} = (1+3)/2 = 2. \]
+	With a similar argument we can calculate $ \E{X|Y}(b) = 2 $. Let $ \omega = c $. Then
+	\[ \E{X|Y}(c) = 3\cdot\frac{\prob(X=3,Y=1)}{\prob(Y=1)} + 5\cdot\frac{\prob(X=5,Y=1)}{\prob(Y=1)} = (3+5)/2 = 8.  \]
+	With similar calculations we can see that
+	\[ \E{X|Y} = \begin{pmatrix}
+		a & b & c & d & e & f \\
+		2 & 2 & 4 & 4 & 6 & 6
+	\end{pmatrix}. \]
+	
+	\noindent \textbf{Calculating $ \E{X|Z} $}: Similar to above, let $ \omega = a $. Then
+	\[ \E{X|Z}(a) = 1\cdot\frac{\prob(X=1,Z=3)}{\prob(Z=3)} + 3\cdot\frac{\prob(X=3,Z=3)}{\prob(Z=3)} + 3\cdot\frac{\prob(X=3,Z=3)}{\prob(Z=3)} + 5\cdot\frac{\prob(X=5,Z=3)}{\prob(Z=3)} = (1+3+3+5)/4 = 3. \]
+	And with a similar computation we will get $ \E{X|Y}(e) = 6 $. So we can write
+	\[ \E{X|Z} = \begin{pmatrix}
+		a & b & c & d & e & f \\
+		3 & 3 & 3 & 3 & 6 & 6
+	\end{pmatrix}. \] 
+	
+	\noindent \textbf{Measurability of $ \E{X|Y},\E{X|Z} $}:
+	Recall the atoms of the $\sigma\text{-algebra}$ generated by $ X,Y,Z $ as 
+	\begin{align*}
+		\operatorname{Atom}(\sigma(X)) &= \set{\set{a},\set{b},\set{c},\set{d},\set{e},\set{f}}, \\
+		\operatorname{Atom}(\sigma(Y)) &= \set{\set{a,b},\set{c,d},\set{e,f}}, \\
+		\operatorname{Atom}(\sigma(Z)) &= \set{\set{a,b,c,d},\set{e,f}}.
+	\end{align*}
+	So it is clear that $ \E{X|Y} $ is $ \sigma(Y) $-measurable, while $ \E{X|Z} $ is $ \sigma(Z) $-measurable.
+	
+	\noindent \textbf{Verification of the projection interpretation.} Recall \autoref{lem:Projection}. Then it immediately follows that the only function that assumes constant values on the atoms of $ \sigma(Y) $ (or $ \sigma(Z) $), hence $ \sigma(Y) $-measurable (or $ \sigma(Z) $-measurable) is the function that assumes the average value of $ Y $ (or $ Z $) on the atoms of $ \sigma(Y) $ (or $ \sigma(Z) $) with the law $ \mathcal{L}(\dot|A) $ (or $ \mathcal{L}(\dot|B) $) where $ A $ is an atom of $ \sigma(X) $ (or where $ B $ is an atom of $ \sigma(Y) $).
+	
+	\noindent \textbf{Checking the Tower property}. For an easier notation we will write $ \tilde{X}_Y = \E{X|Y} $, and $ \tilde{X}_Z = \E{X|Z} $. Then 
+	\[ \E{\E{X|Y}|Z}(a) = \E{\tilde{X}_Y|Z} = (2+2+4+4)/4 = 3, \]
+	and similarly we can compute
+	\[ \E{\E{X|Y}|Z} = \begin{pmatrix}
+		a & b & c & d & e & f \\
+		3 & 3 & 3 & 3 & 6 & 6
+	\end{pmatrix}. \]
+	And similarly we can compute
+	\[ \E{X|Z} = \begin{pmatrix}
+		a & b & c & d & e & f \\
+		3 & 3 & 3 & 3 & 6 & 6
+	\end{pmatrix}. \]
+	In this case that the sample space and the random variables are finite, this property exactly translates to the fact that in order to compute the average of say n numbers, it is the same if we compute the average for the some disjoint sub-collections and then average those average values.
+	
+	\noindent \textbf{Checking the pull out property}. Let $ W $ be a random variable that is $ \sigma(Y) $ measurable, say given as
+	\[ W = \begin{pmatrix}
+		a & b & c & d & e & f\\
+		5 & 5 & 6 & 6 & 7 & 7
+	\end{pmatrix} \]
+	Then 
+	\[ WX = \begin{pmatrix}
+		a & b & c & d & e & f\\
+		5 & 15 & 18 & 30 & 35 & 49
+	\end{pmatrix} \]
+	So we can compute
+	\[ \E{WX|Y} = \begin{pmatrix}
+		a & b & c & d & e & f \\
+		10 & 10 & 24 & 24 & 42 & 42
+	\end{pmatrix}.  \]
+\end{solution}
+
+
+
+

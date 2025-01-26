@@ -45,10 +45,11 @@ We will review some basic notions of the topology, and then we will present solv
 		\item $ (A^\circ)^c = \closure{(A^c)} $.
 		\item $ A $ is open iff it is a neighborhood of all of its points.
 		\item If $ A_1 \subseteq A_2 $ then $ A_1^\circ \subseteq A_2^\circ $ as well as $ \closure{A_1} \subseteq \closure{A_2} $.
-		\item $ (A^\circ)^\circ = A^\circ $, and $ \closure{(\closure(A))} = \closure(A) $.
+		\item $ (A^\circ)^\circ = A^\circ $, and $ \closure{(\closure{A})} = \closure{A} $.
 		\item $ \closure{A_1\cup A_2} = \closure{A_1} \cup \closure{A_2} $.
 		\item $ (A_1\cap A_2)^\circ = A_1^\circ \cap A_2^\circ $.
 		\item $ \closure{A} = A \cup A' $, where $ A' $ is the derived set of $ A $.
+		\item $ A $ is closed iff $ A' \subset A $. In words, $ A $ is closed iff it contains all of its accumulation points.
 	\end{enumerate}
 \end{proposition}
 \begin{proof}
@@ -76,6 +77,20 @@ We will review some basic notions of the topology, and then we will present solv
 		\item We assume that $ A $ is open. Then for any $ x \in A $ we have $ x \in A \subseteq A $. Thus $ A $ is a neighborhood of $ x $. For the converse, we assume that $ A $ is a neighborhood of all of its points. So for any $ x \in A $ there exits $ V_x \in \mathcal{T} $ such that $ x \in V \subseteq A $. $ A $ can be written as $ A = \bigcup_x V_x $ where $ V_x $ is as above. This $ A $ is open.
 		
 		\item Let $ x \in A_1^\circ $. Then $ \exists V \in \mathcal{T} $ such that $ x \in V \subseteq A_1 $. From assumption we also have $ x \in V \subseteq A_2 $. This implies that $ x \in A_2^\circ $. For the second statement, let $ x \in \closure{A_1} $.
+		
+		
+		\item {\color{red} \noindent to be added.}
+		
+		\item {\color{red} \noindent to be added.}
+		
+		\item {\color{red} \noindent to be added.}
+		
+		\item \noindent $ \boxed{\Rightarrow} $. We want to show $ \closure{A} \subseteq A \cup A' $. We will prove by contrapositive. I.e. we equivalently prove $ A^c \cap (A')^c \subseteq \closure{A}^c $. Let $ x \in A^c \cap (A')^c $. This implies that $ x \notin A $ as well as $ x \notin A' $. So $ \exists U \in \mathcal{T} $ such that $ A\cap U = \emptyset $ (note that we both used $ x\notin A $ and $ x\notin A' $). Thus $ x\in U \subseteq A^c $. This implies $ x \in (A^c)^\circ = \closure{A}^c $.
+		
+		\noindent $ \boxed{\Leftarrow} $. We know that $ A \subseteq \closure{A} $. So it suffices to show $ A' \subseteq \closure{A} $. It is easier to prove the contrapositive, i.e. $ (\closure{A})^c \subseteq (A')^c $ or equivalently $ (A^c)^\circ \subseteq (A')^c $. Let $ x \in (A^c)^\circ $. This implies $ \exists U \in \mathcal{T} $ such that $ x \in U \subset A^c $. So $ A \cap (U\backslash\set{x}) = \emptyset $, thus $ x \notin A' $, or equivalently $ x \in (A')^c $.
+		\item \noindent $ \boxed{\Rightarrow} $. Assume $ A $ is closed. Then $ A = \closure{A} $. Using above we will have $ \closure{A} = A \cup A'  $ it implies that $ A' \subseteq A $.
+		
+		\noindent $ \boxed{\Leftarrow} $. Assume $ A' \subseteq A $. Then from above $ \closure{A} = A \cup A'$ it implies that $ \closure{A} = A$, hence A is closed.
 	\end{enumerate}
 \end{proof}
 \begin{remark}
@@ -84,10 +99,14 @@ We will review some basic notions of the topology, and then we will present solv
 \end{remark}
 
 
+\section{Sporadic Notes}
+In this section I will include the nodes that do not fit with the current layout of the document and will be added later when I start writing the corresponding sections. 
 
-
-
-
+\begin{observation}
+	The subspace topology is the weakest topology that makes the inclusion map continuous. Let $ (X,\mathcal{T}) $ be a topological space, and let $ A \subseteq X $. The topological space $ (A,\mathcal{T}_A) $ is a topological space and $ \mathcal{T}_A $ is called the subspace topology. Define the inclusion map
+	\[ \iota : A \to X. \]
+	The subspace topology is the weakest topology for which $ \iota  $ is continuous. Let $ U \in \mathcal{T} $. Then $ \inv{\iota}(U) = A \cap U \in \mathcal{T}_A $. {\color{red} \noindent TODO:} I above I just showed that under the subspace topology, the inclusion map is continuous. However, I also need to show that $ \mathcal{T}_A $ is the smallest such topology.
+\end{observation}
 
 
 
