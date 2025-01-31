@@ -1,0 +1,121 @@
+\chapter{Le Gall Probability}
+
+In this chapter I will cover the proofs, problems, and etc that are left to the reader. I will also add some remarks as I read through the text. I will also add some theorems and their proofs that are hard to understand in the text but I have made some helpful remarks.
+
+
+\begin{problem}
+	We define the discrete conditioning as
+	\[ \prob'(A) = \prob(A|B) := \frac{\prob(A\cap B)}{\prob(B)} \]
+	where $ A,B \in \mathcal{F} $ are measurable sets. Furthermore, we define the conditional expectation of a non-negative, or $ L^1 $ random variable $ X $ as
+	\[ \E{X|B} := \frac{\E{\mathds{1}_B X}}{\prob(X)}. \]
+	Show that $ \E{X|B} = \mathbb{E}_{\prob'}\left[X\right] $.
+\end{problem}
+\begin{solution}
+	We first show this for a random variable given as
+	\[ X = \alpha\mathds{1}_{B} \]
+	for some $ A \in \mathcal{F} $. Observe that
+	\begin{align*}
+		\mathbb{E}_{\prob'}\left[X\right] &= \mathbb{E}_{\prob'}\left[\alpha \mathds{1}_A \right] = \alpha \mathbb{E}_{\prob'}\left[\mathds{1}_A\right] \\
+		&= \alpha \prob'(A) = \alpha \prob(A|B) \\
+		&= \alpha\frac{\prob(A\cap B)}{\prob(B)} \\
+		&= \alpha \frac{\E{\mathds{1}_A\mathds{1}_B}}{\prob(B)} \\
+		&= \frac{\E{\alpha \mathds{1}_A \mathds{1}_B}}{\prob(B)} \\
+		&= \frac{\E{X\mathds{1}_B}}{\prob(B)} = \E{X|B}.
+	\end{align*} 
+	Using the linearity of the expectation, the conclusion above also follows for a simple random variable $ X = \sum_{i=1}^{n} \alpha_i \mathds{1}_{B_i} $ for $ B_i \in \mathcal{F} $ for all $ i=1,\dots,n $. Let $ X $ be a non-negative random variable. We can construct a sequence of random variables $ \set{X_n} $ such that $ X_n \uparrow X $. From monotone convergence theorem we have $ \mathbb{E}_{\prob'}\left[X_n \right] \uparrow \mathbb{E}_{\prob'}\left[X \right] $, as well as $ \E{\mathds{1}_B X_n} \uparrow \E{\mathds{1}_B X} $ as $ n\to\infty $. Since each $ X_n $ is a simple random variable we also have
+	\[ \mathbb{E}_{\prob'}\left[X_n \right] = \frac{\E{X_n\mathds{1}_B}}{\prob(B)}. \]
+	Letting $ n\to\infty $ on both sides of the equation above we will have
+	\[ \mathbb{E}_{\prob'}\left[X \right] = \frac{\E{X\mathds{1}_B}}{\prob(B)}. \]
+	And finally for the case that $ X \in L^1 $ we can write $ X = X^+ - X^- $ where $ X^+ $ and $ X^- $ are non-negative random variables and using the linearity of expectation it also follows that 
+	\[ \mathbb{E}_{\prob'}\left[X \right] = \frac{\E{X\mathds{1}_B}}{\prob(B)}. \]
+\end{solution}
+
+\begin{definition}
+	\label{def:E[X|Y]}
+	Let $ X\in L^1(\Omega,\mathcal{A},\prob) $ be a random variable and $ Y: (\Omega,\mathcal{A}) \to (E,2^E) $ be a random variable that assumes its values in a countable set $ E $. The conditional expectation of $ X $ knowing $ Y $ is defined as
+	\[ \E{X|Y} = \phi (Y), \]
+	where $ \phi: E \to \R $ is given as
+	\[ \phi(y) = \begin{cases}
+		\E{X|Y=y} \quad & y\in E'\\
+		0 \quad 		& y \notin E'
+	\end{cases}, \]
+	where $ E' = \set{y \in E: \prob(Y=y)> 0} $.
+	
+	\textbf{Alternatively}, let $ B_n = \inv{Y}(n) $ for $ n \in Y $. Then $ \mathcal{B} = \set{B_n}_{n\in E} $ is a countable partition for $ \Omega $. Let $ \mathcal{B} \supset \mathcal{B}' = \set{B \in \mathcal{B}: \prob(B) > 0}  $, i.e. those sets in the partition that has value zero. Then the conditional expectation of $ X $ knowing $ Y $ is given as
+	\[ \E{X|Y} = \sum_{B \in \mathcal{B}'} \E{X|B}\mathds{1}_B. \]
+	where $ \E{X|B} = \E{X\mathds{1}_B}/\prob(B) $ is as defined in Le Gall, page 228, first section of the page. Observe that with this definition it automatically follows that $ X = 0 $ on any $ B \notin \mathcal{B}' $.
+\end{definition}
+\begin{remark} 
+	Note that the value of $ \phi(y) $ when $ y\not\in E' $ can be any number and this will change $ \E{X|Y} $ only on a set of measure zero. But it is convention to set it to be zero.
+\end{remark}
+
+
+\begin{theorem}
+	Let $ Y: (\Omega,\mathcal{A}) \to (E,2^E) $ be a random variable where $ E $ is a countable set. Let $ X \in L^1(\Omega, \mathcal{A},\prob) $. Then we have $ \E{\abs{\E{X|Y}}} \leq \E{\abs{X}} $, and thus 
+	\[ \E{X|Y} \in L^1(\Omega, \mathcal{A},\prob). \]
+	Furthermore, for every bounded $ \sigma(Y) $-measurable random variable $ Z $ we have
+	\[ \E{ZX} = \E{Z\E{X|Y}}. \]
+\end{theorem}
+\begin{proof}
+	\textbf{Proof for $ \E{X|Y} \in L^1(\Omega,\mathcal{A},\prob) $:} 
+	I will provide two proves for this. The first one is an elaborated version of Le Gall's proof, and the second one is my proof based on the stuff you can read in the appendix of this note.
+	\begin{itemize}
+		\item \textbf{Proof (1)} For Le Gall's proof we we will have
+		\[ \E{\abs{\E{X|Y}}} = \sum_{y\in E'} \prob(Y=y)\abs{\E{X|Y=y}}. \]
+		Note that for this step we used the definition of expectation for a random variable that takes countably many values (i.e. $ \E{X|Y} $). Note that since $ Y $ takes countably many values, then by the definition of $ \E{X|Y} $ (see Le Gall Definition 11.1), $ \E{X|Y} $ also assumes countably many values. Furthermore, note that $ E' = \set{y \in E: \prob(Y=y)> 0} $. A different way to write this is to use the partition generated by $ Y $. I.e. we can write
+		\[ \E{\abs{\E{X|Y}}} = \sum_{B\in \mathcal{B}'} \prob(B) \abs{\E{X|B}} \]
+		which is exactly the same as the first expression replacing $ \set{Y = y} $ with $ B $ and changing the summation index accordingly. So we will have
+		\begin{align*}
+			\E{\abs{\E{X|Y}}} &= \sum_{y\in E'} \prob(Y=y) \abs{\E{X|Y=y}} \\
+			&= \sum_{y\in E'} \prob(Y=y) \abs{\frac{\E{X\mathds{1}_{\set{Y=y}}}}{\prob(Y=y)}} \\
+			&= \sum_{y \in E'}\abs{\E{X\mathds{1}_{\set{Y=y}}}} \\
+			&\leq \sum_{y\in E'}\E{\abs{X}\mathds{1}_{Y=y}} \\
+			&= \E{\abs{X}\sum_{y\in E'}\mathds{1}_{\set{Y=y}}} \\
+			&= \E{\abs{X}}.
+		\end{align*}
+		
+		\item \textbf{Proof (2)}
+		For this proof we will use the fact that since $ \E{X|Y} $ is $ \sigma(Y) $-measurable, then we can write it as
+		\[ \E{X|Y} = \sum_{y\in E'} \E{X|Y=y} \mathds{1}_{Y=y} \]
+		or equivalently
+		\[ \E{X|Y} = \sum_{B\in \mathds{B}'} \E{X|B} \mathds{1}_{B}, \]
+		where $ E' $ and $ \mathcal{B}' $ are as in \autoref{def:E[X|Y]}. For simplicity for the notation we will write $ \alpha_B = \E{X|B} $.
+		
+		So we will have
+		\begin{align*}
+			\E{\abs{\E{X|Y}}} &= \E{\abs{\sum_{B\in\mathcal{B}'} \alpha_B \mathds{1}_B }} \\
+			&\leq \E{\sum_{B\in\mathcal{B}'}\abs{\alpha_B} \mathds{1}_B} \\
+			&=\sum_{B\in\mathcal{B}'} \E{\abs{\alpha_B}\mathds{1}_B} \\
+			&=\sum_{B\in\mathcal{B}'} \abs{\alpha_B} \prob(B) \\
+			&=\sum_{B\in\mathcal{B}'} \frac{\abs{\E{X\mathds{1}_B}}}{\prob(B)}\prob(B) \\
+			&\leq \sum_{B\in\mathcal{B}'} \E{\abs{X}\mathds{1}_B} \\
+			&=\E{\abs{X}\sum_{B\in\mathcal{B}'}\mathds{1}_B} \\
+			&=\E{\abs{X}}.
+		\end{align*}
+	\end{itemize}
+	
+	\noindent \textbf{Proof for $ \E{ZX} = \E{Z\E{X|Y}} $}. Since $ Z $ is $ \sigma(Y) $-measurable, by Proposition 8.9 Le Gall, we can find a bounded function $ \phi $ such that $ Z = \phi(Y) $. So we can write
+	\begin{align*}
+		\E{Z\E{X|Y}} &= \E{\phi(Y)\E{X|Y}} \\
+		&= \sum_{y\in E} \phi(y) \E{X|Y=y}\prob(Y=y) \\
+		&= \sum_{y\in E} \phi(y) \E{X\mathds{1}_{\set{Y=y}}}\\
+		&= \E{X \sum_{y\in E} \phi(y) \mathds{1}_{\set{Y=y}} } \\
+		&=\E{XZ},
+	\end{align*}
+	where we have used the Fubini's theorem to interchange $ \mathbb{E}  $ with sum, and also we used the fact that $ Z = \sum_{y\in E} \phi(y)\mathds{1}_{Y=y} $ (that follows from $ Z=\phi(Y) $).
+
+\end{proof}
+
+
+\begin{problem}
+	In the properties of conditional expectation of random variables in Le Gall (page 234-245), right after part (d) he concludes that using the property (d) for any non-negative random variable $ (Y_n)_{n\in \N} $ we have
+	\[ \E{\sum_n Y_n \big| \mathcal{B}} = \sum_n \E{Y_n|\mathcal{B}}. \]
+	Prove this!
+\end{problem}
+\begin{solution}
+	Since $ (Y_n)_{n\in \N} $ is non-negative, then the sequence of partial sums form an increasing sequence $\sum_{n=1}^{m}Y_n  = X_m\uparrow \sum_n Y_n $. Using the linearity of conditional expectation we can write
+	\[ \E{\sum_{n=1}^{m} Y_n \big| \mathcal{B}} = \sum_{n=1}^{m} \E{Y_n \big| \mathcal{B}}. \]
+	Taking the limit of both sides and using the property (d) we will have
+	\[ \E{\sum_n Y_n \big| \mathcal{B}} = \sum_n \E{Y_n | \mathcal{B}}. \]
+\end{solution}
+
