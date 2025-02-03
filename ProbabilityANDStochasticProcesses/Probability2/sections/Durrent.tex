@@ -1,0 +1,20 @@
+\chapter{Durret Probability}
+
+\section{Conditioning}
+
+Here we will discuss the prove that if $ \E{X} < \infty $ then $ \E{X|\mathcal{B}} < \infty $ as proved in Durret Lemma 4.1.1. This is analogous to the proof (c) page 232 in Le Gall. 
+\begin{proposition}
+	Assume $ \E{|X|} < \infty $. Then $ Y = \E{X|\mathcal{B}} < \infty $.
+\end{proposition}
+\begin{proof}
+	We can write $ Y $ as
+	\[ Y = Y^+ - Y^-. \]
+	For $ Y^+ $ we have $ \E{Y^+} < \infty $. Indeed, for $ A = \set{Y > 0} $
+	\[ \E{Y^+} = \E{Y\mathds{1}_{A} } = \E{X\mathds{1}_A} \leq \E{\abs{X}\mathds{1}_A} < \infty. \] 
+	Similarly for $ Y^- $ we claim $ \E{Y^-} < \infty $. To see this we can write
+	\[ \E{Y^-} = \E{\mathds{1}_{A^c} (-Y)} = \E{\mathds{1}_{A^c} (-X)} \leq \E{\mathds{1}_{A^c}\abs{X}} < \infty. \]
+	This implies $ \E{Y^+} + \E{Y^-} < \infty $. Using the fact that $ Y = Y^+ + Y^- $ and using the linearity of expectation we can write
+	\[ \E{\abs{Y}} < \infty. \]
+\end{proof}
+
+Why do we care about 8 bytes? can't we do 4 bytes? or sizeof(int) bytes?

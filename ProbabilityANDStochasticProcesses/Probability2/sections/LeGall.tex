@@ -351,8 +351,6 @@ Now to understand the meaning of independent random variables we first need to u
 	Another way to write this is for every $ B \in \mathcal{B}_1 $ to have
 	\[ \E{\mathds{1}_B| \mathcal{B}_2} = \prob(B). \]
 	And we say that two random variables $ X,Y $ are independent, if their generating $\sigma\text{-algebra}$s are independent. For example, let $ d_n $ and $ d_m $ be two dyadic functions. If $ n\neq m $ then $ d_n $ and $ d_m $ are independent.
-	
-	
 	\begin{center}
 		
 		
@@ -400,11 +398,53 @@ Now to understand the meaning of independent random variables we first need to u
 			\draw (266.5,169.9) node [anchor=north west][inner sep=0.75pt]  [font=\tiny]  {$1$};
 			% Text Node
 			\draw (266.5,280.9) node [anchor=north west][inner sep=0.75pt]  [font=\tiny]  {$1$};
-			
-			
 		\end{tikzpicture}
 	\end{center}
-	
-	
+	The atoms of the generated $\sigma\text{-algebra}$s by these random variables is
+	\[ \mathcal{A}_1 = \set{(0,1/2],(1/2,1]},\qquad \mathcal{A}_2 = \set{(0,1/4]\cup (1/2,3/4], (1/4,1/2] \cup  (3/4,1]}. \]
+	It is easy to check that the sets in these atoms are independent.
 \end{summary}
 
+\begin{example}
+	Using the characterization of independent above, it is easy to prove some properties of conditional expectation (at least for discrete case where we can use the characterization above). Using this characterization prove that if $ \mathcal{B}_1 $ and $ \mathcal{B}_2 $ are two independent $\sigma\text{-algebra}$s, and if $ X $ is $ \mathcal{B}_1 $ measurable, then we have
+	\[ \E{X|B_2} = \E{X}. \]
+\end{example}
+\begin{solution}
+	Denote the atoms of $ \mathcal{B}_1 $ and $ \mathcal{B}_2 $ by $ \mathcal{A}_1 $ and $ \mathcal{A}_2 $ respectively. Then we can write $ X $ as 
+	\[ X = \sum_{B \in \mathcal{A}_1} \alpha_i \mathds{1}_B.  \]
+	So using the linearity of the conditional expectation we can write
+	\[ \E{X|B_2} = \E{\sum_{B\in\mathcal{A}_1}\alpha_i \mathds{1}_B\big|B_2} = \sum_{B\in\mathcal{A}_1}\alpha_i \E{\mathds{1}_B|B_2} = \sum_{B\in\mathcal{A}_1} \alpha_i \prob(B) = \E{X}. \]
+\end{solution}
+
+
+\begin{proposition}
+	Two sub-$\sigma\text{-algebra}$s $ \mathcal{B}_1 $ and $ \mathcal{B}_2 $ are independent if and only if for every $ B \in \mathcal{B}_2 $, we have $ \E{\mathds{1}_B|\mathcal{B}_2} = \prob(B) $.
+\end{proposition}
+\begin{proof}
+	$ \boxed{\Rightarrow} $ We assume that $ \mathcal{B}_1 $ and $ \mathcal{B}_2 $ are independent (for the definition of independent $\sigma\text{-algebra}$s see Le Gall page 169). Let $ B \in \mathcal{B}_1 $ and $ Z $ any $ \mathcal{B}_2 $-measurable random variable. By characterization of conditional expectation  (11.3 Le Gall) we can write
+	\begin{align*}
+		\E{Z\E{\mathds{1}_B|\mathcal{B}_2}} &= \E{Z\mathds{1}_B} \\
+		&= \E{Z}\E{\mathds{1}_B} && \text{(by independence of $ \mathds{1}_B $ and $ Z $)} \\
+		&= \prob(B) \E{Z} \\
+		&= \E{\prob(B)Z}. && \text{(linearity of expectation)}
+	\end{align*}
+	This implies that 
+	\[ \E{\mathds{1}_B|\mathcal{B}_2} = \prob(B) \quad a.s. \]
+	
+	\noindent $ \boxed{\Leftarrow} $ Let $ B_1 \in \mathcal{B}_1 $ and $ B_2 \in \mathcal{B}_2 $. We want to show $ \prob(B_1\cap B_2) = \prob(B_1) \prob(B_2) $ or equivalently $ \E{\mathds{1}_{B_1} \mathds{1}_{B_2}} = \E{\mathds{1}_{B_1}} \E{\mathds{1}_{B_2}} $. To see this we can write
+	\begin{align*}
+		\E{\mathds{1}_{B_1} \mathds{1}_{B2}} &= \E{\mathds{1}_{B_1} \E{\mathds{1}_{B_2}|\mathcal{B}_1}}  && \text{(characterization of cond. expec.)} \\
+		&=\E{\mathds{1}_{B_1} \prob(B_2)} && \text{(by assumption above)} \\
+		&=\prob(B_2) \E{\mathds{1}_{B_1}} && \text{(by linearity of expec.)} \\
+		&= \prob(B_2) \prob(B_1).
+	\end{align*}
+\end{proof}
+
+\begin{proposition}
+	If $ \mathcal{B}_1 $ and $ \mathcal{B}_2 $ are independent, we have $ \E{X|\mathcal{B}_1} = \E{X} $ for every non-negative $ \mathcal{B}_2 $-measurable random variable $ X $ and for every $ X \in L^1(\Omega,\mathcal{B}_2,\prob) $.
+\end{proposition}
+\begin{proof}
+	Assume $ X $ is non-negative random variable that is $ \mathcal{B}_2 $-measurable. Let $ Z $ be a $ \mathcal{B}_1 $-measurable random variable. Then using the independence of $\sigma\text{-algebra}$s we can write
+	\[ \E{XZ} = \E{X}\E{Z} = \E{\E{X} Z}. \]
+	Thus this satisfies the characteristic property (11.3) and thus $ \E{X|\mathcal{B}_1} = \E{X} $. When $ X $ is $ L^1 $ then we can have the same argument for each negative and positive parts $ X = X^+ - X^- $.opol
+\end{proof}
