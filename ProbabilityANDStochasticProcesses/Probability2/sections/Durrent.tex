@@ -103,7 +103,41 @@ Here we will discuss the prove that if $ \E{X} < \infty $ then $ \E{X|\mathcal{B
 	\[ \E{(X-\E{X|\mathcal{F}})^2} + \E{(\E{X|\mathcal{F}} - \E{X|\mathcal{G}})^2} = \E{(X-\E{X|\mathcal{G}})^2}. \]
 	Dropping the second term on the left, we get in inequality that says geometrically the larger the subspace the closer the projection is, or statically, more information means a smaller mean square error.
 \end{problem}
+\begin{solution}
+	We can expand the quadratic terms and using the linearity expectation we can write
+	\begin{align*}
+		 &\E{(X-\E{X|\mathcal{F}})^2} + \E{(\E{X|\mathcal{F}} - \E{X|\mathcal{G}})^2} \\
+		 &= \E{(X-\E{X|\mathcal{F}})^2+(\E{X|\mathcal{F}} - \E{X|\mathcal{G}})^2} \\
+		 &=\E{X^2 + \E{X|\mathcal{F}}^2 - 2X\E{X\mathcal{F}}^2 + \E{X|\mathcal{F}}^2 + \E{X|\mathcal{G}}^2 - 2\E{X|\mathcal{F}}\E{X|\mathcal{G}}} \\
+		 &=\E{X^2} + \E{\E{X|\mathcal{F}}^2} - 2\E{X\E{X|\mathcal{F}}} + \E{\E{X|\mathcal{F}}^2} +\E{ \E{X|\mathcal{G}}^2} - 2\E{\E{X|\mathcal{F}}\E{X|\mathcal{G}}}	 
+	\end{align*}
+	Observe that
+	\[ \E{\E{X|\mathcal{F}}^2} = \E{\E{X|\mathcal{F}}\E{X|\mathcal{F}}} = \E{\E{X\E{X|\mathcal{F}}|\mathcal{F}}} = \E{X\E{X|\mathcal{F}}} \]
+	And also
+	\[ \E{\E{X|\mathcal{F}}\E{X|\mathcal{G}}} = \E{\E{X\E{X|\mathcal{G}}|\mathcal{F}}} = \E{X\E{X|\mathcal{G}}}, \]
+	where we have used the fact that since $ \mathcal{G} $ is a sub-$\sigma\text{-algebra}$ of $ \mathcal{F} $, $ \E{X|\mathcal{G}} $ is $ \mathcal{F} $-measurable. Substituting the identities above in our calculation before, we will get
+	\begin{align*}
+		 &\E{(X-\E{X|\mathcal{F}})^2} + \E{(\E{X|\mathcal{F}} - \E{X|\mathcal{G}})^2} \\
+		 &=\E{X^2 + \E{X|\mathcal{G}}^2 - 2 X\E{X|\mathcal{G}}} \\
+		 &= \E{(X - \E{X|\mathcal{G}})^2}.
+	\end{align*}
+\end{solution}
 \begin{remark}
 	The equality above is the analogue of the Pythagorean theorem as depicted below.
 	\input{sections/images/orthogonalProjections.tex}
 \end{remark}
+\FloatBarrier
+
+\begin{problem}
+	An important spacial case of the previous result occurs when $ \mathcal{G} = \set{\emptyset, \Omega} $. Let $ \Var(X|\mathcal{F}) = \E{X^2|\mathcal{F}} - \E{X|\mathcal{F}}^2  $. Show that 
+	\[ \Var(X) = \E{\Var(X|\mathcal{F})} + \Var(\E{X|\mathcal{F}}). \]
+\end{problem}
+\begin{solution}
+	Using the result of the question above, and observing that $ \E{X|\mathcal{G}}= \E{X} $ we can write
+	\[ \E{(X-\E{X|\mathcal{F}})^2} + \E{(\E{X|\mathcal{F}} - \E{X})^2} = \E{(X-\E{X})^2}. \]
+	The expression on the right hand side is $ \Var(X) $. And using the fact that $ \E{X} = \E{\E{X|\mathcal{F}}} $, then second term in the left hand side is also $ \Var(\E{X|\mathcal{F}}) $. On the other hand observe that 
+	\[ \E{\E{X|\mathcal{F}}^2} = \E{\E{X|\mathcal{F}}\E{X|\mathcal{F}}} = \E{\E{X\E{X|\mathcal{F}}|\mathcal{F}}} = \E{X\E{X|\mathcal{F}}}, \]
+	we can write
+	\[ \E{(X-\E{X|\mathcal{F}}^2} = \E{X^2 + \E{X|\mathcal{F}}^2 - 2X\E{X|\mathcal{F}}} = \E{X^2 - \E{X|\mathcal{F}}^2} = \E{X^2 - \E{X^2|\mathcal{F}}}, \]
+	where we have used the fact that $ \E{X^2} = \E{\E{X^2|\mathcal{F}}} $.
+\end{solution}

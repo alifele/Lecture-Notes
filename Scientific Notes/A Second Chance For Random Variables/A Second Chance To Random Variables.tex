@@ -1,0 +1,139 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[left=2cm, right=2cm, top=2cm, bottom=2cm]{geometry}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{thmtools}
+\usepackage{xcolor}
+\usepackage{nameref}
+\usepackage{hyperref}
+\usepackage{physics}
+\usepackage{amsmath}
+\usepackage{tikz}
+\usepackage{mathdots}
+\usepackage{yhmath}
+\usepackage{cancel}
+\usepackage{color}
+\usepackage{siunitx}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{amssymb}
+\usepackage{gensymb}
+\usepackage{tabularx}
+\usepackage{extarrows}
+\usepackage{booktabs}
+\usetikzlibrary{fadings}
+\usetikzlibrary{patterns}
+\usetikzlibrary{shadows.blur}
+\usetikzlibrary{shapes}
+
+\usepackage{placeins}
+
+
+
+
+
+
+
+
+\title{A Second Chance For Random Varaibles}
+\author{Ali Fele Paranj}
+
+\newtheoremstyle{Example}
+{\topsep}   % Space above
+{\topsep}   % Space below
+{}  % Body font
+{}          % Indent amount
+{\bfseries} % Theorem head font (bold)
+{.}         % Punctuation after theorem head
+{ }         % Space after theorem head
+{}          % Theorem head spec
+
+
+\theoremstyle{Example}
+\newtheorem{example}{Example}
+
+\newcommand{\N}{\mathbb{N}}
+
+
+
+
+
+\begin{document}
+	\maketitle
+	\begin{abstract}
+		To me, the notion of random variables is something that I learn a new aspect of it as I encounter it in different situations. When I first learned the notion of random variable, it was already been abused by some physicists by the way that taught it to us (and it is most likely to be so to most of the people who learned it from non-mathematicians!). In this note I will explain some aspects of random variables through a running example. After this note you will have a clear understanding of the notion of random variables, martingales, filtration, and you will have an intuitive feeling about the statements like ``$\sigma\text{-algebra}$ can be thought of as information''.
+	\end{abstract}
+	
+	
+	
+	\section*{Random Variables}
+	We start with an example.
+	
+	\begin{example}
+		Consider an experiment in which we toss a coin infinitely many times. The sample space $ \Omega $ for such experiment will be the $ \mathbb{F}_2^\N $, i.e. the set of all sequences composed of zeros and ones. We want to show that $ \Omega $ is ``similar'' to the interval $ (0,1] $ in interesting ways. Consider the partition $ \Omega = A_0 \cup A_1 $, where $ A_0 $ is the set of all outcomes that start with $ 0 $ and $ A_1 $ is the set of all outcomes that start with 1. Similarly we can have the partition $ \Omega = A_{00} \cup A_{01} \cup A_{10} \cup A_{11} $ where $ A_{01} $, for instance, is the set of all outcomes that start with $ 01 $. We can associate with, say, $ A_{01} $ a subset of $ (0,1] $ whose the dyadic expansion of all numbers in that interval starts with 01. For instance
+		\[ A_{00} \mapsto (0,1/4], \qquad A_{01} \mapsto (1/4,1/2], \qquad A_{10} \mapsto (1/2,3/4], \qquad A_{11} \mapsto (3/4,1]. \]
+	\end{example}
+ 	
+ 	The idea of probability theory is to remove all kind of randomness by considering as big state space as possible. For instance, assume you want to do an infinite coin toss experiment. From the probability theory point of view, the moment you start to do your experiment you will be some $ \omega \in \Omega $, for which every step of your coin tossing is known. In other words, any combination of outcomes that you might encounter in your experiment is already included in the sample space, thus any particular outcome you might get is a concrete element of the probability space. Now imagine the following story!
+ 	
+ 	\begin{example}
+ 		You are talking with one of your friends over phone and he says while he was speaking he just started random coin toss experiment (with a fail coin!). Then you feel peculiar as you look at the real line on the black board of your office and you know that he is now assigned to some $ \omega \in (0,1] $. But which one? You wish you know the exact point, then you could bet with your friend that you can predict the outcome of all of his coin tosses and you get a lot of money.
+ 	\end{example}
+ 	
+ 	So far, you should have believed that anybody anywhere in this universe, once they start a random coin toss experiment, then they are automatically assigned to one of the points $ \omega \in (0,1] $, as by definition $ \Omega $ is the set of all possible outcomes that when anybody anywhere in this universe, once they start a random coin toss experiment, their result is also included in $ \Omega $. But in probability theory, do not care about the outcome of the particular experiment of your friend, but we instead are interested in looking at all of the possible experiments all at once, and make important observations. This is very similar to the idea of ensembles in statistical physics.
+ 	
+ 	\begin{example}
+ 		You friend from previous example tells you that since he started doing the infinite coin tossing experiment, he wants to do something with it. He decides to choose some direction (the same direction for the entire infinite experiment) and then start moving back and forth on that line based on the result of each coin toss. 1 step forward for a heads and 1 step backward for a tails. Once you notice his strange decision you get nervous, because you don't know where he will end up to be in. So you decide to do something and calculate how far one can possibly go? For instance if your friends comes up with an outcome like $ (H,T,H,T,H,\cdots) $, then there is no danger since he wont be able to go very far. But what about all other cases?
+ 	\end{example}
+ 	
+ 	The answer of the question above might be complicated at first, but it is very straightforward given the identification we had before. E.g. you know that all the experiments that start with a patters line $ (H,\cdots) $ should belong to $ A_{1} \mapsto (1/2,1] $, and etc. So you start drawing the following \emph{dyadic functions}.
+ 	\begin{figure}[h!]
+ 		\centering
+ 		
+ 		
+ 		\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
+ 		
+ 		\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+ 			%uncomment if require: \path (0,300); %set diagram left start at 0, and has height of 300
+ 			
+ 			%Straight Lines [id:da4148364298012466] 
+ 			\draw [color={rgb, 255:red, 155; green, 155; blue, 155 }  ,draw opacity=1 ]   (130,100) -- (130,22) ;
+ 			\draw [shift={(130,20)}, rotate = 90] [color={rgb, 255:red, 155; green, 155; blue, 155 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+ 			%Straight Lines [id:da5506235057459017] 
+ 			\draw [color={rgb, 255:red, 155; green, 155; blue, 155 }  ,draw opacity=1 ]   (120,60) -- (308,60) ;
+ 			\draw [shift={(310,60)}, rotate = 180] [color={rgb, 255:red, 155; green, 155; blue, 155 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+ 			%Straight Lines [id:da1158916305978619] 
+ 			\draw    (210,40) -- (290,40) ;
+ 			%Straight Lines [id:da258390182805619] 
+ 			\draw    (130,80) -- (210,80) ;
+ 			%Straight Lines [id:da011923656679230454] 
+ 			\draw    (210,40) -- (210,80) ;
+ 			%Straight Lines [id:da08747010776417685] 
+ 			\draw    (290,40) -- (290,60) ;
+ 			%Straight Lines [id:da607559943652312] 
+ 			\draw    (130,60) -- (130,80) ;
+ 			
+ 		\end{tikzpicture}
+ 	\end{figure}
+ 	\FloatBarrier
+ 	\noindent The function above (a random variable!) is very simple, yet tells us a very important fact. This function ``reports'' the result of the very first step for all the experiments. The experiments in $ (0,1/2] $ will go one step backwards as their first outcome is a tails, and the experiments in $ (1/2,1] $ will go one step forward, as their first outcome is a heads. Cool! Then you continued doing this for the second, and the third step.
+ 	\input{dyadicFunctions.tex}
+ 	
+ 	We call these functions as $ d_1,d_2, $ and $ d_3 $ respectively. The left most function (yet another random variable) is showing the result of the second step for different experiments, i.e. for those experiments in $ (0,1/4] $, that their second toss was a tails will move backwards one step. The other dyadic functions above have a similar interpretation. Very cool! So what if ... 
+ 	
+ 	\begin{example}
+ 		You do the calculation above and you suddenly realize if you add all of the dyadic functions above you will be able to look at the result of all of the experiments up to the froth coin toss! (based on the dyadic functions calculate above). Then you will get the following results.
+ 		\input{addedDyadicFunctions.tex}
+ 		\FloatBarrier
+ 		\noindent This is very interesting! In the last diagram above, you can see the end point of the people doing experiments for all possible experiments. The most far distance they can travel is four steps (forward or backward) and that happens only in $ 2/16 $ of experiments. The second most far that they can get is 2 steps (forward of backward) that happens in $ 8/16 $ of the experiments. Lastly, in $ 6/16 $ of the experiments the person will remain still after the four steps.
+ 	\end{example}
+ 	
+ 	
+ 	The example demonstrates how we can make more and more complicated spaces, as complex as that it contains the outcome of all experiments. Then random variables will be just functions that are reporting ``something'' about that particular outcome. For instance, rank $ k $ dyadic functions $ d_k $ simply reports if the $ k^\text{th} $ coin toss in an experiment is heads or tails. We can also make more complicated random variables that ``reports'' more sophisticated properties of a particular outcome. For instance, the same as we did above, we can define $ S(\omega) = \sum_{i=1}^n d_i(\omega) $, which is the sum of values of the tossed coins until the $ n^\text{th} $ toss. With this setting, knowing a probability measure on the space (that determines how likely is for an even $ A \in \mathcal{F} $ to happen), we can study the likelihood of different values that can be assume by our random variables.  
+ 	
+ 	
+\end{document}
+

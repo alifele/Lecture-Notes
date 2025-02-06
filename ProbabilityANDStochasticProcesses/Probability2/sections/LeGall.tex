@@ -440,11 +440,27 @@ Now to understand the meaning of independent random variables we first need to u
 	\end{align*}
 \end{proof}
 
+
 \begin{proposition}
 	If $ \mathcal{B}_1 $ and $ \mathcal{B}_2 $ are independent, we have $ \E{X|\mathcal{B}_1} = \E{X} $ for every non-negative $ \mathcal{B}_2 $-measurable random variable $ X $ and for every $ X \in L^1(\Omega,\mathcal{B}_2,\prob) $.
 \end{proposition}
 \begin{proof}
 	Assume $ X $ is non-negative random variable that is $ \mathcal{B}_2 $-measurable. Let $ Z $ be a $ \mathcal{B}_1 $-measurable random variable. Then using the independence of $\sigma\text{-algebra}$s we can write
 	\[ \E{XZ} = \E{X}\E{Z} = \E{\E{X} Z}. \]
-	Thus this satisfies the characteristic property (11.3) and thus $ \E{X|\mathcal{B}_1} = \E{X} $. When $ X $ is $ L^1 $ then we can have the same argument for each negative and positive parts $ X = X^+ - X^- $.opol
+	Thus this satisfies the characteristic property (11.3) and thus $ \E{X|\mathcal{B}_1} = \E{X} $. When $ X $ is $ L^1 $ then we can have the same argument for each negative and positive parts $ X = X^+ - X^- $.
 \end{proof}
+
+
+
+\section{Summary}
+
+\begin{summary}[Conditional Expectation - Connection to the Old]
+	In the undergraduate probability book, Ross, we have the following classic problem. $ Y_1,Y_2,\cdots $ are i.i.d. random variables, and $ N $ is a non-negative random variable assuming values in $ \N $, and $ X = Y_1 + \cdots + Y_N $. Then we are interested in calculating $ \E{X} $. The way that Ross handles this problem is to write
+	\[ \E{X} = \sum_n\E{X|N=n} \prob(N=n). \tag{\eighthnote} \]
+	Then it is easy to calculate $ \E{X|N=n} = \E{\sum_{i=1}^n Y_i} = \sum_{i=1}^n \E{Y_i} = n\mu $ and we get
+	\[ \E{X} = \sum_n n\mu \prob(N=n) = \mu \sum_n n \prob(N=n) = \mu \E{N}. \]
+	But how we can derive the useful formula $ (\eighthnote) $ with the principles of this chapter. The answer is to use the trick $ \mathds{1}_\Omega = \sum_{n\in\N}\mathds{1}_{N=n} $. Then we can write
+	\[ \E{X}=\E{X\sum_{n\in\N}\mathds{1}_{N=n}} = \sum_n \E{X\mathds{1}_{N=n}} = \sum_n \E{X|N=n}\prob(N=n). \]
+	where we have used the definition in page 228 Le Gall.
+	the interchanging expectation with sum requires justification that is not in our focus right now. 
+\end{summary}
