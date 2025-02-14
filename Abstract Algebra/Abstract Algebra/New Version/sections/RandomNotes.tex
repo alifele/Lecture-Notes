@@ -1,0 +1,28 @@
+\chapter{Random Notes}
+
+\section{Interesting Observations from Roman}
+
+\begin{observation}[Geometric Interpretation of Dual Vectors]
+	The notion of the dual space of a vector space is somewhat abstract and one usually struggles to have a geometric realization of the functionals and dual spaces. Here, I provide a very interesting point of view. Let $ V $  be a finite dimensional vectors space. Then every $ f \in V^* $ is characterized by a hyperplane $ H $ such that $ H = \operatorname{ker} f $. 
+	
+	\noindent With this point of view, $ f(x) = 0 $ corresponds to the fact that $ x \in  H $. Also, it is very straight forward to see the following properties of functionals with this geometric point of view.
+	\begin{proposition}
+		\begin{enumerate}[(a)]
+			\item If $ f(x) \neq 0 $ then 
+			\[ V = \langle x \rangle \oplus \ker f. \]
+			\item For every $ x\in V $ there exists $ f \in V^* $ such that $ f(x) \neq 0 $.
+			\item For $ x\in V $, $ f(x) = 0 $ for all $ f\in V^* $ implies $ x = 0 $.
+			\item 
+		\end{enumerate}
+	\end{proposition}
+	\begin{proof}(Geometric interpretation)
+		\begin{enumerate}[(a)]
+			\item If $ x\notin H $ for some hyperplane $ H $, then 
+			\[ V = \langle x \rangle \oplus H. \]
+			\item Given any point of the space, there is some hyperplane that misses that particular point.s
+			\item The only point that belongs to all hyperplanes is the origin.
+		\end{enumerate}
+	\end{proof}
+\end{observation}
+
+

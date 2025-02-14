@@ -1,0 +1,75 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[left=2cm, right=2cm, top=2cm, bottom=2cm]{geometry}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{thmtools}
+\usepackage{xcolor}
+\usepackage{nameref}
+\usepackage{hyperref}
+\usepackage{karnaugh-map}
+
+\usepackage{nicematrix}
+
+
+\title{Tensor Decomposition For Logic Circuits}
+\author{Ali Fele Paranj}
+\begin{document}
+	\maketitle
+	Let $ A $ represent a boolean variable. Then observe that
+	\[ A + \overline A = 1. \]
+	We can use this fact to simplify the logical circuits. For instance to implement $ f(A,B,C,D) = \overline A B C D + A \overline B C D  $ as it is we need more logic gates to implement its equivalent $ f(A,B,C,D) = CD $. Karnaugh map makes such simplification possible for any logic function. For instance,  consider the following truth table: 
+	
+	\begin{center}
+		\begin{NiceTabular}{|c|c|c|c|c|} 
+			\hline
+			A & B & C & D & F(A,B,C,D) \\
+			\hline
+			0 & 0 & 0 & 0 & 0 \\
+			0 & 0 & 0 & 1 & 0 \\
+			0 & 0 & 1 & 0 & 0 \\
+			0 & 0 & 1 & 1 & 0 \\
+			0 & 1 & 0 & 0 & 0 \\
+			0 & 1 & 0 & 1 & 0 \\
+			0 & 1 & 1 & 0 & 1 \\
+			0 & 1 & 1 & 1 & 0 \\
+			1 & 0 & 0 & 0 & 1 \\
+			1 & 0 & 0 & 1 & 1 \\
+			1 & 0 & 1 & 0 & 1 \\
+			1 & 0 & 1 & 1 & 1 \\
+			1 & 1 & 0 & 0 & 1 \\
+			1 & 1 & 0 & 1 & 1 \\
+			1 & 1 & 1 & 0 & 1 \\
+			1 & 1 & 1 & 1 & 0 \\
+			\hline
+		\end{NiceTabular}
+	\end{center}
+	We can write this function as
+	\[ F(A,B,C,D) = \overline A BC \overline D + A \overline{BCD} + A\overline{BC}D + A\overline B C \overline D + A\overline B CD + AB \overline{CD} + AB\overline{C}D + ABC\overline{D}. \]
+	To decompose 4-linear form and then use the identity above simplify the function we can use the Karnaugh map.
+	\begin{center}
+		\begin{karnaugh-map}[4][4][1][$CD$][$AB$]
+			\minterms{6,8,9,10,11,12,13,14}
+			\autoterms[0]
+			\implicant{8}{10}
+			\implicant{12}{9}
+			\implicant{6}{14}
+		\end{karnaugh-map}
+	\end{center}
+	The grouped boxes above shows which terms can be grouped to make a simpler term. For instance, the green box above show the following terms that can be grouped easily:
+	\begin{align*}
+		&AB\overline{CD} + AB\overline{C}D + A\overline{BCD} + A\overline{BC}D\\
+		&= AB\overline C (D+\overline D) + A\overline{BC}(D+\overline D)\\
+		&= A\overline C(B+\overline B) \\
+		&= A\overline C.
+	\end{align*}
+	With a similar reasoning, the red box results in the term $ A\overline B $ and the yellow box results in the term $ BC\overline D $. So the simplified function will be
+	\[ F(A,B,C,D) = A\overline C + A\overline B + BC\overline D. \]
+
+	
+	
+
+	
+\end{document}

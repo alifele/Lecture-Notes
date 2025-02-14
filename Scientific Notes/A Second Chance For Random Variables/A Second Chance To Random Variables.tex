@@ -130,6 +130,9 @@
  		\FloatBarrier
  		\noindent This is very interesting! In the last diagram above, you can see the end point of the people doing experiments for all possible experiments. The most far distance they can travel is four steps (forward or backward) and that happens only in $ 2/16 $ of experiments. The second most far that they can get is 2 steps (forward of backward) that happens in $ 8/16 $ of the experiments. Lastly, in $ 6/16 $ of the experiments the person will remain still after the four steps.
  	\end{example}
+ 	The graph below is a bonus! Observe that after 7 steps, there is a zero chance that one can return to the origin!
+ 	\input{giantdyadicAddition.tex}
+ 	\FloatBarrier
  	
  	
  	The example demonstrates how we can make more and more complicated spaces, as complex as that it contains the outcome of all experiments. Then random variables will be just functions that are reporting ``something'' about that particular outcome. For instance, rank $ k $ dyadic functions $ d_k $ simply reports if the $ k^\text{th} $ coin toss in an experiment is heads or tails. We can also make more complicated random variables that ``reports'' more sophisticated properties of a particular outcome. For instance, the same as we did above, we can define $ S(\omega) = \sum_{i=1}^n d_i(\omega) $, which is the sum of values of the tossed coins until the $ n^\text{th} $ toss. With this setting, knowing a probability measure on the space (that determines how likely is for an even $ A \in \mathcal{F} $ to happen), we can study the likelihood of different values that can be assume by our random variables.  

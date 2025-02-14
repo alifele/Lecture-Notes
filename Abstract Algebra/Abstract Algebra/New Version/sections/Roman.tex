@@ -1,0 +1,20 @@
+\chapter{Advanced Linear Algebra - Roman}
+
+\section{Tensor Product}
+
+We start with the following proposition
+\begin{proposition}
+	Let $ U,V $ be vector spaces. Then exists a unique linear map 
+	\[ \theta: U^* \otimes V^* \to (U\otimes V)^*, \]
+	defined by $ f\otimes v = f\odot g $ where
+	\[ (f\odot g)(u\otimes v) = f(u)g(v).  \]
+	Moreover, $ \theta $ is an embedding and is an isomorphism if $ U $ and $ V $ are finite dimensional. Thus the tensor product of linear functionals, i.e. $ f\otimes g $ is a linear functions, i.e. $ f\odot g $ on the tensor product.
+\end{proposition}
+
+\begin{proof}
+	Fix some $ f \in U^* $ and $ g\in V^* $. Consider the bilinear map
+	\[ G: U^* \times V^* \to (U\otimes V)^*  \]
+	given by $ G(f,g) = f\odot g $ where $ (f\odot g) (u\otimes v) = f(u)g(v) $. This map $ f\odot g $ exists, since the map $ F_{f,g}(u,v): U\times V \to F $ given by $ F_{f,g}(u,v) = f(u)g(v) $ is bilinear, and by the universal property of the tensor product, there exist some linear map from $ U\otimes V $ to $ F $ whose values matches $ f(u)g(v) $, and we call this map $ f\odot g $. The bilinear map $ G $ induces a linear map $ \theta: U^*\otimes V^* \to (U\otimes V)^* $ given by 
+	\[ \theta(f\otimes g) = f\odot g.  \]
+	For the rest of proof see Roman 14.7.
+\end{proof}
