@@ -26,3 +26,111 @@
 \end{observation}
 
 
+
+\begin{observation}[More Geometric Interpretation of Dual Vectors]
+	The characterization above, i.e. identifying the linear functionals with their kernel, i.e. hyperplanes, work surprisingly well in characterizing very interesting facts. For instance, we can have the following definition of the annihilators of a set.
+	\begin{definition}[Annihilators]
+		Let $ M \subset V $ (no necessarily a linear subspace). Then the annihilators of $ M $, denoted by $ M^0 $ is the set of all linear functionals that kills $ M $. I.e.
+		\[ M^0 = \set{f \in V^*| f(M) = 0}. \]
+		With the geometric point of view above, the annihilators of $ M $ is the set of all hyperplanes that contain $ M $.
+	\end{definition}
+	For instance, let $ L $ be a one dimensional linear subspace of $ \R^3 $. Then $ L^0 $ will be the set of all hyperplanes containing $ L $. Each such hyperplane can be represented by a normal vectors. So the set of all hyperplanes containing $ L $ is isomorphic to a plane perpendicular to $ L $ and going through the origin (more generally, any 2-dimensional linear subspace of $ \R^3 $ that does not contain $ L $). It is now very straightforward to see the result of Theorem 3.14 part (2). The set $ M^{00} $ is the set of all hyperplanes containing $ M^0 $. There is just one such hyperplane, and since it can be parameterized using one normal vector (along $ L $), we have 
+	\[ M^{00} \simeq \operatorname{span}L. \]
+\end{observation}
+
+
+\begin{observation}[Double Dual Map]
+	We start with the following definition.
+	\begin{definition}
+		Let $ \tau \in \mathcal{L}(U,V) $. The dual map $ \tau^\times \in \mathcal{L}(V^*,U^*) $ and, the double dual map $ \tau^{\times\times} = \mathcal{L}(U^{**},V^{**}) $ is defined as
+		\[  (\tau^\times f)(u) = f(\tau u), \qquad \text{for $ u\in U,\ f\in V^* $}, \]
+		and 
+		\[  (\tau^{\times\times} E)(f) = E (\tau^\times f), \qquad \text{for $ E\in V^{**},\ f\in W^* $}.  \]
+		In finite dimension, the following is a very useful characterization of $ \tau^{\times\times} $. Let $ u\in U $ and using the canonical map $ u \mapsto E_u \in V^{**} $, where $ E_u $ is the evaluation map at $ u $.Also let $ f\in V^* $. Then we can write
+		\begin{align*}
+			(\tau^{\times\times} E_u)(f) &= E_u(\tau^\times f) \\
+			&= (\tau^\times f)(u) \\
+			&=f(\tau u) \\
+			&=E_{\tau u} (f).
+		\end{align*} 
+		Thus we have
+		\[ \tau^{\times\times}E_u = E_{\tau u}. \]
+	\end{definition}
+\end{observation}
+
+\begin{observation}[Geometric Interpretation of Dual Map]
+	For $ \tau \in \mathcal{L}(V,W) $, the dual map $ \tau^\times \in \mathcal{L}(W^*,V^*) $ is given by
+	\[ (\tau^\times f)(v) = f(\tau v),  \]
+	where $ f\in W^* $ and $ v \in V $. Using out geometric point of view of the functionals (as hyperplanes) we can have a geometric interpretation of what is the dual of a map. The following is a high level summary:
+	\begin{quote}
+		Let $ f\in W^* $ be a functional, i.e. a hyperplane. Then $ \tau^\times $ returns a hyperplane in $ V $ that is the pre-image of restriction of $ f $ to $ \im(\tau) $.
+	\end{quote}
+	For instance, if $ \tau : \R^2 \to \R^3 $ the inclusion map that sends $ \R^2 $ to the $ xy $ plane in $ \R^3 $, the $ \tau^\times $ map maps the following red hyperplane (as a functional in $ \R^3 $) to the green hyperplane (as a functional in $ \R^2 $).
+	\begin{center}
+			\includegraphics[width=0.4\linewidth]{Images/DualMap}
+	\end{center}
+	
+	Using the interpretation above we can have the following ``geometric'' proof of the following facts in Roman (presented in Theorem 3.19).
+	\begin{proposition}
+		Let $ \tau \in \mathcal{L}(V,W) $. Then
+		\begin{enumerate}[(a)]
+			\item $ \ker(\tau^\times) = \im(\tau)^0 $.
+			\item $ \im(\tau^\times) = \ker(\tau)^0 $.
+		\end{enumerate}
+		\begin{proof}[Geometric proof]
+			\begin{enumerate}[(a)]
+				\item We want to show $ \ker(\tau^\times ) \subset \im(\tau)^0 $. Let $ f\in \ker(\tau^\times) $ be a hyperplane (i.e. functional). This means that if we restrict $ f $ to $ \im(\tau) $ and then consider its pre-image, it should be the whole space (i.e. the zero functional). Thus $ f $ should contain $ \im(\tau) $. So $ f\in \im(\tau)^0 $ (remember that $ \im(\tau)^0 $) is the set of all hyperplanes containing $ \im(\tau) $. For the converse, we want to show $ \im(\tau)^0 \subset \ker(\tau^\times) $. Let $ f \in \im(\tau)^0 $. I.e. $ f $ is a hyperplane that contains $ \im(\tau) $. So restricting $ f $ to $ \im(\tau) $ will be whole $ \im(\tau) $. So the pre-image of the restriction of $ f $ to $ \im(\tau) $ will be the whole space $ V $ (thus the zero functional). So $ f\in \ker(\tau^\times) $. \emph{Note: We have used the fact that for any linear map $ \tau $ we have $ \im(\tau) \simeq \dom(\tau) $}.
+				
+				\item 
+				
+			\end{enumerate}
+		\end{proof}
+	\end{proposition}
+\end{observation}
+
+
+
+\begin{observation}[Coordinate maps]
+	Let $ (V,F) $ be a vector space (defined on the field $ F $) with finite dimension $ n $. Once we choose an ordered basis for $ V $, like $ \mathcal{B} = (v_1,\cdots,v_n) $, we can define the coordinate map
+	\[ \phi_\mathcal{B}: V \to F^n, \]
+	that
+	\[ v = \sum_i \alpha_i v_n \mapsto \begin{bmatrix}
+		\alpha_1 \\
+		\vdots \\
+		\alpha_n
+	\end{bmatrix}. \]
+	In particular, for the basis vectors we have $ \phi(v_i) = e_i $, where $ e_i $ is a column vector whose entries are all zero, but the $ i^\text{th} $ row. This coordinate map $ \phi $ justifies the name ``vector space'' for this algebraic structure. The elements of any finite dimensional vector space defined on $ F $ can be ``coordinated'' by the elements of $ F^n $.
+\end{observation}
+
+\begin{observation}
+	As a continuiation of the note above, lets now focus on the linear maps $ \mathcal{L}(F^n,F^m) $. We know that every matrix in $ A \in \mathcal{M}_{n,m} $ induces a linear map $ \tau_A \in \mathcal{L}(F^n,F^m) $, given by
+	\[ \tau_A(v) = A v. \]
+	The converse is also true. Every linear map $ \tau \in \mathcal{L}(F^n,F^m) $ has a matrix representation $ A \in \mathcal{M}_{n,m} $ given by
+	\[ A = (\tau e_1 | \cdots | \tau e_n), \]
+	i.e. apply $ \tau $ on the basis vectors, write the coordinates of the resulting vector in the columns of a matrix to get the matrix representation of the linear transformation.
+\end{observation}
+
+
+\begin{observation}
+	I have started to notice a very interesting interaction between the following objects, and each pair of these notions induces a similar feeling. I have not yet been able to quantify this feeling. But I am sure there is some connection there. 
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|}
+
+			surjective & ker & spanning & exists \\
+			\hline
+			injective & img & linearly independent & for all \\
+
+		\end{tabular}
+	\end{center}
+\end{observation}
+
+
+
+
+\section{On going thoughts}
+
+
+
+
+
+
