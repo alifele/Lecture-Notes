@@ -126,8 +126,162 @@
 
 
 
+\begin{observation}[Change of basis]
+	Consider the following diagram.
+	% https://q.uiver.app/#q=WzAsNixbMSwxLCJWIl0sWzEsMywiVyJdLFsyLDAsIkZebiJdLFswLDAsIkZebiJdLFsyLDQsIkZebSJdLFswLDQsIkZebSJdLFswLDIsIlxccGhpX1xcbWF0aGNhbHtCfSIsMl0sWzAsMywiXFxwaGlfXFxtYXRoY2Fse1xcdGlsZGUgQn0iXSxbMSw0LCJcXHBoaV97XFxtYXRoY2Fse0N9fSJdLFsxLDUsIlxccGhpX1xcbWF0aGNhbHtcXHRpbGRlIEN9IiwyXSxbMCwxLCJcXHRhdSIsMV0sWzIsNCwiW1xcdGF1XV97XFxtYXRoY2Fse0J9XFxtYXRoY2Fse0N9fSIsMCx7ImN1cnZlIjotMn1dLFszLDUsIltcXHRhdV1fe1xcbWF0aGNhbHtcXHRpbGRlIEJ9XFxtYXRoY2Fse1xcdGlsZGUgQ319IiwyLHsiY3VydmUiOjJ9XSxbMiwzLCJcXHBoaV97XFxtYXRoY2Fse0J9XFxtYXRoY2Fse1xcdGlsZGUgQn19IiwyXSxbNCw1LCJcXHBoaV97XFxtYXRoY2Fse0N9XFxtYXRoY2Fse1xcdGlsZGUgQ319Il1d
+	\[\begin{tikzcd}
+		{F^n} && {F^n} \\
+		& V \\
+		\\
+		& W \\
+		{F^m} && {F^m}
+		\arrow["{[\tau]_{\mathcal{\tilde B}\mathcal{\tilde C}}}"', curve={height=12pt}, from=1-1, to=5-1]
+		\arrow["{M_{\mathcal{B}\mathcal{\tilde B}} = \phi_{\mathcal{B}\mathcal{\tilde B}}}"', from=1-3, to=1-1]
+		\arrow["{[\tau]_{\mathcal{B}\mathcal{C}}}", curve={height=-12pt}, from=1-3, to=5-3]
+		\arrow["{\phi_\mathcal{\tilde B}}", from=2-2, to=1-1]
+		\arrow["{\phi_\mathcal{B}}"', from=2-2, to=1-3]
+		\arrow["\tau"{description}, from=2-2, to=4-2]
+		\arrow["{\phi_\mathcal{\tilde C}}"', from=4-2, to=5-1]
+		\arrow["{\phi_{\mathcal{C}}}", from=4-2, to=5-3]
+		\arrow["{M_{\mathcal{C}\mathcal{\tilde C}} = \phi_{\mathcal{C}\mathcal{\tilde C}}}", from=5-3, to=5-1]
+	\end{tikzcd}\]
+	
+	where $ V,W $ are vector spaces with dimension $ n $ and $ m $ respectively. Furthermore, $ \mathcal{B} $ and $ \mathcal{\tilde B} $ are two ordered basis for $ V $ with the coordinate maps $ \phi_\mathcal{B} $ and $ \phi_\mathcal{\tilde B} $ respectively. Similarly $ \mathcal{C} $ and $ \mathcal{\tilde C} $ are two ordered basis for $ W $ with $ \phi_\mathcal{C} $ and $ \phi_\mathcal{\tilde C} $ as the corresponding coordinate maps. The change of basis matrices are given in Theorem 2.12 Roman. This diagram summarizes the relation between the vectors in the abstract vector spaces $ V $ and $ W $ with their representation with we change the basis in either of the spaces. Also it capture the transformation that happens for the representation of linear maps when we change basis. For instance it is very easy to see
+	\[ [\tau]_{\mathcal{\tilde B}\mathcal{\tilde C}} = M_{\mathcal{C}\mathcal{\tilde C}} [\tau]_{BC} M_{\mathcal{B}\mathcal{\tilde B}}^{-1}. \]
+	It is also easier to memorize the following relation instead
+	\[  [\tau]_{\mathcal{\tilde B} \mathcal{\tilde C}} M_{\mathcal{B}\mathcal{\tilde B}} =   M_{\mathcal{C}\mathcal{\tilde C}} [\tau]_{\mathcal{B}\mathcal{C}}. \]
+\end{observation}
 
-\section{On going thoughts}
+
+\begin{observation}[Characteristic of a filed and the alternating, v.s. skew-symmetric forms]
+	It is only when $ \Char(F) \neq 2 $ we have the equivalence between the alternating forms and the skew-symmetric forms
+	\[ \text{alternating} \qquad \Longleftrightarrow \qquad \text{skew-symmetric}. \]
+	For the forward direction we don't need any restriction on the characteristic of the field. To see this let $ f $ be an alternating bi-linear form.
+	\[ f(u+v,u+v) = f(u,u) + f(v,v) + f(u,v) + f(v,u). \]
+	Since $ f $ is alternating, we have $ f(u+v,u+v) = 0 $ as well as $ f(u,u) = f(v,v) = 0 $. So we can conclude that 
+	\[ f(u,v) = - f(v,u). \]
+	However, for the converse, we need $ \Char(F) \ neq 2 $. Because if $ f $ is skew-symmetric, then $ f(u,u) = - f(u,u) $, which implies $ 2f(u,u) = 0  $. We can only conclude $ f(u,u) = 0 $ when $ \Char(F) \neq 2 $, i.e. when $ 2 $ is invertible in the field. 
+\end{observation}
+
+
+\begin{observation}[Symmetric and Antisymmetric tensor products with Roman's notation]
+	In Roman text book, he introduces the notion of the symmetric and anti-symmetric tensor products with a notation that is not easy to understand, unless there is a running example. Here in this box, I will give an explicit example. Let $ V $ has dimension $ n=3 $ and let $ \set{e_1,e_2,e_3} $ be a basis for $ V $. We want to explicitly construct the basis vectors for the $ \ST^p(V) $ and $ \AT^p(V) $. We will have the following cases
+	\begin{enumerate}[(i)]
+		\item $ p = 2 $. Then the basis elements of $ \ST^2(V) $ will be
+		\begin{center}
+			\begin{tabular}{|c|c|c|}
+				\hline
+				$ M $ & $\sum_{t\in G_M}$t & equiv in $ F_2[e_1,e_2,e_3] $ \\
+				\hline
+				$ \set{1,1} $ & $ e_1\otimes e_1 $ & $ e_1\vee e_1 $ \\
+				\hline 
+				$ \set{2,2} $ & $ e_2\otimes e_2 $ & $ e_2\vee e_2 $ \\
+				\hline 
+				$ \set{3,3} $ & $ e_3\otimes e_3 $ & $ e_3\vee e_3 $ \\
+				\hline 
+				$ \set{1,2} $ & $ e_1\otimes e_2 + e_2\otimes e_1 $ & $ e_1\vee e_2 $ \\
+				\hline 
+				$ \set{1,3} $ & $ e_1\otimes e_3 + e_3\otimes e_1 $ & $ e_1\vee e_3 $ \\
+				\hline 
+				$ \set{2,3} $ & $ e_1\otimes e_2 + e_2\otimes e_1 $ & $ e_1\vee e_2 $ \\
+				\hline 
+			\end{tabular}
+		\end{center}
+		
+		And the basis elements of $ \AT^2(V) $ will be
+		
+		\begin{center}
+			\begin{tabular}{|c|c|c|}
+				\hline
+				$ M $ & $\sum_{t\in G_M}$t & equiv in $ F_2[e_1,e_2,e_3] $ \\
+				\hline
+				$ \set{1,2} $ & $ e_1\otimes e_2 - e_2\otimes e_1 $ & $ e_1\wedge e_2 $ \\
+				\hline
+				$ \set{1,3} $ & $ e_1\otimes e_3 - e_3\otimes e_1 $ & $ e_1\wedge e_3 $ \\
+				\hline
+				$ \set{2,3} $ & $ e_2\otimes e_3 - e_3\otimes e_2 $ & $ e_2\wedge e_3 $ \\
+				\hline
+			\end{tabular}
+		\end{center}
+		
+		
+		\item $ p=3 $. Then the basis elements of $ \ST^3(V) $ will be
+		\begin{center}
+			\begin{tabular}{|c|c|c|}
+				\hline
+				$ M $ & $\sum_{t\in G_M}$t & equiv in $ F_2[e_1,e_2,e_3] $ \\
+				\hline
+				$ \set{1,1,1} $ & $ e_1\otimes e_1\otimes e_1 $ & $ e_1\vee e_1 \vee e_1 $ \\
+				\hline
+				$ \set{2,2,2} $ & $ e_2\otimes e_2\otimes e_2 $ & $ e_2\vee e_2 \vee e_2 $ \\
+				\hline
+				$ \set{3,3,3} $ & $ e_3\otimes e_3\otimes e_3 $ & $ e_3\vee e_3 \vee e_3 $ \\
+				\hline
+				$ \set{1,2,2} $ & $ e_1\otimes e_2\otimes e_2 + e_2\otimes e_1\otimes e_2 + e_2\otimes e_2\otimes e_1 $ & $ e_1\vee e_2 \vee e_2 $ \\
+				\hline
+				$ \set{1,3,3} $ & $ e_1\otimes e_3\otimes e_3 + e_3\otimes e_1\otimes e_3 + e_3\otimes e_3\otimes e_1 $ & $ e_1\vee e_3 \vee e_3 $ \\
+				\hline
+				$ \set{2,1,1} $ & $ e_2\otimes e_1\otimes e_1 + e_1\otimes e_2\otimes e_1 + e_2\otimes e_2\otimes e_1 $ & $ e_1\vee e_1 \vee e_2 $ \\
+				\hline
+				$ \set{2,3,3} $ & $ e_2\otimes e_3\otimes e_3 + e_3\otimes e_2\otimes e_3 + e_3\otimes e_3\otimes e_2 $ & $ e_2\vee e_3 \vee e_3 $ \\
+				\hline
+				$ \set{3,1,1} $ & $ e_3\otimes e_1\otimes e_1 + e_1\otimes e_3\otimes e_1 + e_1\otimes e_1\otimes e_3 $ & $ e_1\vee e_1 \vee e_3 $ \\
+				\hline
+				$ \set{3,2,2} $ & $ e_3\otimes e_2\otimes e_2 + e_2\otimes e_3\otimes e_2 + e_2\otimes e_2\otimes e_3 $ & $ e_2\vee e_2 \vee e_3 $ \\
+				\hline
+				$ \set{1,2,3} $ & \makecell{$ e_1\otimes e_2\otimes e_3 + e_1\otimes e_3\otimes e_2 + e_2\otimes e_1\otimes e_3 $ \\ $ + e_2\otimes e_3\otimes e_1 + e_3\otimes e_1\otimes e_2 + e_3\otimes e_2\otimes e_1 $} & $ e_1\vee e_2 \vee e_3 $ \\
+				\hline
+			\end{tabular}
+		\end{center}
+		
+		And for $ \AT^3(V) $ we have
+		\begin{center}
+			\begin{tabular}{|c|c|c|}
+				\hline
+				$ M $ & $\sum_{t\in G_M}$t & equiv in $ F_2[e_1,e_2,e_3] $ \\
+				\hline
+				$ \set{1,2,3} $ & \makecell{$ e_1\otimes e_2\otimes e_3 - e_1\otimes e_3\otimes e_2 + e_2\otimes e_1\otimes e_3 $ \\ $ - e_2\otimes e_3\otimes e_1 + e_3\otimes e_1\otimes e_2 - e_3\otimes e_2\otimes e_1 $} & $ e_1\wedge  e_2 \wedge e_3 $ \\
+				\hline
+				
+			\end{tabular}
+		\end{center}
+		
+		This we have following two theorems.
+		
+		\begin{theorem}
+			Let $ V $ be a finite dimensional vector space, and let $ \mathcal{B} = \set{e_1,\cdots,e_n} $ be a basis. Then 
+			\[ \ST^p(V) \simeq F_p[e_1,\cdots,e_n], \]
+			and
+			\[ \AT^p(V) \simeq F_p^-[e_1,\cdots,e_n]. \]
+			In words,
+			\begin{quote}
+				The symmetric tensor space $ \ST^p(V) $ is isomorphic to the algebra $ F_p[e_1,\cdots,e_n] $ of homogeneous polynomials of degree $ p $. 
+			\end{quote}
+			And similarly
+			\begin{quote}
+				The anti-symmetric tensor space $ \AT^p(V) $ is isomorphic to the algebra $ F_p^-[e_1,\cdots,e_n] $ of anti-commutative homogeneous polynomials of degree $ p $.
+			\end{quote}
+		\end{theorem}
+		
+		It is easy to see (Roman Theorem 14.18) that 
+		\[ \dim(\AT^p(V)) = \binom{n}{p}, \qquad \dim(\ST^p(V))=\binom{n+p-1}{p}. \]
+		The formula for the dimension of $ \ST^p(V) $ resembles the formula for all possible distribution of $ p $ units on energy in $ n $ containers (see Schroeder, Equation 2.9).
+		
+		
+		
+	\end{enumerate}
+\end{observation}
+
+
+
+
+\section{Ongoing thoughts}
+
+\begin{observation}[Ongoing thought on the relation of the space of linear operators and the tensor product]
+	In many instances, I have noticed a similar structure between $ \mathcal{L}(V,W) $ and $ V \otimes W $. For instance, we know that while $ u\otimes v $ is a tensor (a pure tensor), but not every tensor can be written like this, but rather it is a linear combination of pure tensors. This is very similar to the idea that for $ A: V\to W $ and $ B: U\to W $, we can construct a linear map $ C: U\oplus V \to W $, that has a block diagonal representation. But, we can not write every matrix in a block diagonal representation. 
+	
+	Also, another hint is that $ \dim(\mathcal{L}(V,W)) = n\times m $, and similarly, $ \dim(U\otimes V) = n\times m $. Yet another hint is that every elements of $ U\otimes V $ has a matrix coordinate. I need to make this connection more clear and easy to see / understand.
+\end{observation}
 
 
 

@@ -1,0 +1,153 @@
+\chapter{Halmos Solution Manual}
+
+
+\section{Fields}
+
+
+\begin{problem}
+	\begin{solution}
+		\begin{enumerate}[(a)]
+			\item Holds because $ (F,0,+) $ is an abelean group.
+			\item Since $ (\mathcal{F},0,+) $ is an abelian group, then $ \alpha $ has an inverse (i.e. $ -\alpha $). Add this to both sides of the equation.
+			\item We can write
+			\begin{align*}
+				\alpha + (\beta - \alpha) &= \alpha + (\beta + (-\alpha)) \\
+				&= \alpha + \beta + (-\alpha) && \text{(distributivity of multiplication)} \\
+				&= \alpha + (-\alpha) + \beta = \beta && \text{($ (F,0,+) $ is abelian group)}
+			\end{align*}
+			\item We can write
+			\begin{align*}
+				\alpha\cdot0 = \alpha \cdot (0 + 0) = \alpha\cdot 0 + \alpha\cdot 0 = 2\alpha\cdot 0.
+			\end{align*}
+			Adding the inverse of $ \alpha\cdot 0 $ to both sides we will get
+			\[ \alpha\cdot0 = 0. \]
+			\item We can use the distributivity of multiplication and write
+			\[ (-1)\alpha + \alpha = (-1 + 1)\alpha = 0\cdot\alpha = 0. \]
+			Adding the inverse of $ \alpha $ to both sides we will get
+			\[ (-1)\alpha = -\alpha. \]
+			
+			\item We can write
+			\begin{align*}
+				(-\alpha)(-\beta) &= (-1(\alpha))(-\beta)  && \text{(property proved above)} \\
+				&= ((-1)(\alpha))((-1)(\beta)) && \text{(property proved above)} \\
+				&= (-1)(-1)\alpha\beta && \text{(associativity of product)} \\
+				&= -(-1 )\alpha \beta = \alpha\beta
+			\end{align*}
+			
+			\item If both $ \alpha $ and $ \beta $ are zero, then it follows that $ \alpha\beta = 0 $. If one of them is not zero, WLOG we can assume $ \beta \neq 0 $, then $ \beta^{-1} $ exists, and multiplying it on the both sides we will get 
+			\[ \alpha = 0. \]
+		\end{enumerate}
+	\end{solution}
+\end{problem}
+
+
+\begin{problem}
+	\begin{solution}
+		\begin{enumerate}[(a)]
+			\item No. $ (F,0,+) $ is not a group. $ (F\backslash\set{0},1,\cdot) $ is not a group.
+			\item No. $ (F\backslash\set{0},1,\cdot) $ is not a group. The set of all integers is a Ring with identity.
+			\item Yes. For instance, consider the set of all integers $ \Z $. Let $ \phi:\Z\to \Q $ be a bijection. Define the addition and multiplication as
+			\[ m \oplus n = \inv{\phi}(\phi(m) + \phi(n)),\qquad m\odot n = \inv{\phi}(\phi(m)\cdot\phi(n)). \]
+			Let $ z_1 = \inv{\phi}(1) $ and $ z_0= \inv{\phi}(0) $. Then we claim that $ (\Z,z_0,z_1,\oplus,\odot) $ is a field. It is straightforward to check that $ (\Z,z_0,\oplus) $, and $ (\Z\backslash\set{z_0},z_1,\odot) $ are groups, and the distributitivty law holds. For instance, to check for the associativity of addition let $ m,n,l \in \Z $. Then we have
+			\begin{align*}
+				(m\oplus n)\oplus l &= \inv{\phi}(\phi(m\oplus n) + \phi(l)) \\
+				&= \inv{\phi}(\phi(m) + \phi(n) + \phi(l)) \\
+				&= \inv{\phi}(\phi(m) + \phi(n\oplus l)) \\
+				&= m \oplus (n\oplus l),
+			\end{align*}
+			where we have used the fact that $ \phi(m\oplus n) = \phi(m) + \phi(n) $.
+		\end{enumerate}
+	\end{solution}
+\end{problem}
+
+
+\begin{problem}
+	\begin{solution}
+		\begin{enumerate}[(a)]
+			\item We can solve this part with different levels of abstraction. But we want to use the fact that the multiplicative group $ U(n) $ (i.e. the set of numbers in $ \Z_n $ that are prime relative to $ n $) is a group under multiplication (see example 3.3 Lee Abstract Algebra). When $ n $ is prime, then $ U(n) $ contains all numbers $ 1,\cdots,n-1 $. Thus when $ n $ is prime, $ (\Z_n\backslash\set{0}, \cdot) $ and $ (\Z_n,+) $ are both groups, and since the distribution law holds, it follows that $ \Z_n $ is a field if and only if $ n $ is a prime number. 
+			\item $ -1 = 4 $ in $ \Z_5 $.
+			\item $ \frac{1}{3} = 5 $ in $ \Z_7 $.
+		\end{enumerate}
+	\end{solution}
+\end{problem}
+\begin{observation}
+	The field $ \Z_p $ has characteristic $ p $.
+\end{observation}
+
+
+\begin{problem}
+	\begin{solution}
+		First, observe that if the cardinality of the underlying set of the field is infinite, then we have $ \underbrace{1+\cdots + 1}_m = m\cdot 1 \neq 0 $ for all $ m\in \N $.
+		However, when $ F $ is finite, then 
+		\[ F\text{ is finite} \implies m\cdot 1 =0 \text{ for some } m\in\N. \]
+		We can see this by contrapositive. If $ m\cdot 1 \neq 0 $ for all $ m\in \N $ then $ F $ has at least $ \N $ many elements. We want to show that the smallest such $ m $ is prime. Assume otherwise. Then $ m=pq $ for some $ p,q\neq 0 $. Then 
+		\[ 0 = m\cdot 1 = pq\cdot 1 = pq. \]
+		Since every field is an integral domain (has no zero divisors) (see Theorem 8.9 Lee Abstract Algebra), then it implies that $ p=0 $  or $ q=0 $, this is a contradiction.
+	\end{solution}
+\end{problem}
+
+\begin{problem}
+	\begin{solution}
+		\begin{enumerate}[(a)]
+			\item Yes. It is easy to check that $ (\Q(\sqrt{2}),0,+) $ and $ (\Q(\sqrt{2})\backslash\set{0},1,\cdot) $ are groups. The associativity and closedness of the operators can be shown directly. For instance
+			\begin{align*}
+				(\alpha + \beta\sqrt{2})(\eta + \gamma\sqrt{2}) = (\alpha\eta  + 2\beta\gamma )+ \sqrt{2}(\alpha\gamma + \beta\eta),
+			\end{align*}
+			hence the multiplication is closed. Also, $ 0,1 \in \Q $ are the same as $ 0,1\in \Q(\sqrt{2}) $. Also, it is easy to check that the additive inverse of $ \alpha + \sqrt{2}\beta $ is $ -\alpha - \sqrt{2}\beta $. And the multiplicative inverse is easy to calculate and follows from the observation that
+			\[ (\alpha + \beta\sqrt{2}) \cdot (\frac{\alpha - \beta\sqrt{2}}{\alpha^2 - 2\beta^2}) =1. \]
+			So the multiplicative inverse of $ \alpha + \beta\sqrt{2} $ is 
+			\[ \frac{\alpha - \beta\sqrt{2}}{\alpha^2 - 2\beta^2}. \]
+			\item No. Because $ 1+\sqrt{2} $ has no inverse of the form $ \alpha + \beta\sqrt{2} $ where $ \alpha,\beta \in \Z $. 
+		\end{enumerate}
+	\end{solution}
+\end{problem}
+
+\begin{problem}
+	\begin{solution}
+		\begin{enumerate}[(a)]
+			\item No. Not every polynomial has an inverse with integer coefficients. For instance, $ p= 2x^2 -1 $ should be multiplied by
+			\[ -1 + 2x^2 - 4x^4 + 8x^6 - \cdots \]
+			to get the $ 1 $ polynomial. But the expression above is not a polynomial.
+			\item No. The same problem above. The set of all polynomials with integer or real coefficients forms a commutative Ring. 
+		\end{enumerate}
+	\end{solution}
+\end{problem}
+
+\begin{problem}
+	\begin{solution}
+		\begin{enumerate}[(a)]
+			\item The addition part of OK! I.e. $ (F,(0,0),+) $ forms an abelian group. However, $ (F\backslash\set{(0,0)},\mathds{1},\cdot) $ does not form a group as defined above. Because by the provided definition of multiplication we need to have $ (\alpha,\beta)\mathds{1} = (\alpha,\beta) $ that implies that the only choice for $ \mathds{1} $ is
+			\[ \mathds{1} = (1,1). \]
+			But then the elements $ (0,1) $ and $ (1,0) $ have no multiplicative inverses. This is not the only obstacle though.
+			
+			\item Yes. This multiplication resolves the obstacles above and $ (F\backslash\set{(0,0)},\mathds{1},\cdot) $ is an abelian group. It is easy to check that the multiplicative identity should be
+			\[ \mathds{1} = (1,0). \]
+			I.e. this is the only choice that satisfies $ (\alpha,\beta)\cdot \mathds{1} = (\alpha,\beta) $. It is also easy to check that the inverse for a non-zero element $ (\alpha,\beta) $ is
+			\[ (\frac{\alpha}{\alpha^2 + \beta^2}, \frac{-\beta}{\alpha^2 + \beta^2}). \]
+			
+			\item It will lead to the same kind of structure. 
+		\end{enumerate}
+	\end{solution}
+\end{problem}
+
+
+\section{Vector Spaces}
+\begin{problem}
+	\begin{solution}
+		\begin{enumerate}[(a)]
+			\item This follows from $ (V,0,+) $ being an abelian group.
+			\item The additive inverse of the zero element in an additive group is itself. So this follows from $ (V,0,+) $ being an abelian group.
+			\item We can write
+			\[ \alpha\cdot0 = \alpha\cdot(0 + 0) = \alpha\cdot 0 + \alpha\cdot 0 \]
+			Since the set of vectors is an additive abelian group, we can add the inverse of $ \alpha\cdot 0 $ to both sides and get
+			\[ \alpha\cdot 0 = 0. \]
+			\item We can write
+			\[ 0\cdot x = (0+0)\cdot x = 0\cdot x + 0\cdot x. \]
+			Since the set of vectors is an additive abelian group, then adding the inverse of $ 0\cdot x $ to both sides we will get
+			\[ 0\cdot x = 0. \]
+			\begin{remark}
+				Note that in the expression above, the zero on the LHS is the zero element of the field, and the zero on the RHS is the zero element of the vector field. 
+			\end{remark}
+ 		\end{enumerate}
+	\end{solution}
+\end{problem}
