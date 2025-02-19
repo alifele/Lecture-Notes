@@ -3,8 +3,12 @@
 
 \section{Fields}
 
+\begin{observation}
+	In a group we can only add one element an integer number of times with itself. For instance we can only have $ \alpha + \alpha + \cdot + \alpha = m\alpha  $ for some $ m \in \N $. However, field is a generalization of group in the sense that we can have more general many times addition with itself for every element. For instance we can have $ q \alpha  $ where $ q $ is not necessarily an integer. The same is true in vector spaces. The fact that we can multiply a vector by some element of the underlying field (i.e. the scalar) shows this. 
+\end{observation}
 
-\begin{problem}
+
+\begin{problem} 
 	\begin{solution}
 		\begin{enumerate}[(a)]
 			\item Holds because $ (F,0,+) $ is an abelean group.
@@ -36,6 +40,7 @@
 			
 			\item If both $ \alpha $ and $ \beta $ are zero, then it follows that $ \alpha\beta = 0 $. If one of them is not zero, WLOG we can assume $ \beta \neq 0 $, then $ \beta^{-1} $ exists, and multiplying it on the both sides we will get 
 			\[ \alpha = 0. \]
+			{\color{red} \noindent In a second run, I observed that my proof above might be wrong. I am somehow using the conclusion to prove the hypothesis.}
 		\end{enumerate}
 	\end{solution}
 \end{problem}
@@ -148,6 +153,48 @@
 			\begin{remark}
 				Note that in the expression above, the zero on the LHS is the zero element of the field, and the zero on the RHS is the zero element of the vector field. 
 			\end{remark}
+			\item {\color{red} \noindent Still thinking. I was trying to do a similar proof as for problem 1 part (g), but I realized that my proof for that part is also not correct.}
+			
+			\item We can add $ x = 1\cdot x $ to $ (-1)x $. Then using the distributivity law we can write
+			\[ x + (-1)x = 0. \]
+			Adding the additive inverse of $ x $ to both sides we will get
+			\[ (-1)x = -x. \]
+			
+			\item We can write
+			\[ y + (x-y) = 1\cdot y + 1\cdot (x-y) = 1\cdot(y+x+(-y)) = 1\cdot x = x. \]
  		\end{enumerate}
 	\end{solution}
 \end{problem}
+
+\begin{problem}
+	The elements of $ \Z_p^n $ are the n-tuples, or equivalently the set of all functions $ f:[p]\to \Z_p $ where $ [n]= \set{1,2,\cdots,n} $. There are $ p^n $ such functions. 
+\end{problem}
+
+
+\begin{problem}
+	\begin{solution}
+		No. One of the immediate problems that I can see is that the scalar $ 1 $ does not interact nicely with the vectors. I.e. in the vector space axioms we have $ 1\cdot x = x $ for all $ x\in V $. However, in the definition above we have $ 1\cdot(\xi_1,\xi_2) = (1\xi_1,0) = (\xi_1,0) \neq (\xi_1,\xi_2).    $
+	\end{solution}
+\end{problem}
+
+\begin{problem}
+	\begin{solution}
+		We assume that the vector space $ \C^3 $ is defined on $ \C $ rather than $ \R $.
+		\begin{enumerate}[(a)]
+			\item No. While the vector space $ (V,0,+) $ forms a group, but the scalars does not behave nicely. For instance $ i\cdot(r_1,\xi_2,\xi_3) = (ir_1,\xi_2,\xi_3)  $ and the first argument is not longer a real number.
+			\item Yes.
+			\item No. because $ (\xi_1,0,\xi_2) + (0,\tilde\xi_2,\tilde\xi_3) = (\xi_1,\tilde\xi_2,\xi_2+\tilde\xi_3) $ and neither its first or second argument is zero.
+			\item The vector space $ (V,0,+) $ forms a group. The addition is closed: Let $ (\xi_1,\xi_2,\xi_3) $ and $ (\tilde\xi_1,\tilde\xi_2,\tilde\xi_3) $ be in the subspace. Then 
+			\begin{align*}
+				\alpha (\xi_1,\xi_2,\xi_3) + \beta(\tilde\xi_1,\tilde\xi_2,\tilde\xi_3) = (\alpha\xi_1+\beta\tilde\xi_1,\alpha\xi_2+\beta\tilde\xi_2,\xi_3+\tilde\xi_3).
+			\end{align*}
+			Since
+			\[ \alpha(\xi_1 + \xi_2) + \beta (\tilde\xi_1 + \tilde\xi_2) = 0, \]
+			then the sum is also in the subspace, and the addition is closed. Also, in additive inverse of $ (\xi_1,\xi_2,\xi_3) $ is
+			\[ (-\xi_1,-\xi_2,-\xi_3) \]
+			where since $ -(\xi_1+\xi_2) = 0 $ it implies that the inverse is also in the subspace. It is also easy to check that the scalars behave nicely with the vector space.
+			\item No. This subspace does not contain the origin $ (0,0,0) $.
+		\end{enumerate}
+	\end{solution}
+\end{problem}
+
