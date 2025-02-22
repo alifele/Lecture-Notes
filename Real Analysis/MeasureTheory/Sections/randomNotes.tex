@@ -1,0 +1,11 @@
+\chapter{Random Notes}
+
+\begin{observation}[Examples for the need to monotonicity in MCT]
+	The monotonicity condition for the monotone convergence theorem is essential (at least a.e.). The followings are examples were there is no monotonicity and the MCT breaks.
+	\begin{example}
+		Let $ f_n = n\chi_{(0,1/n)} $. Then it is easy to see $ \int f_n = 1 $ for all $ n\in \N $ (observe that $ f_n $ is simple function for all $ n\in \N $). But $ f_n \to 0 $ as $ n\to\infty $ thus MCT breaks.
+	\end{example} 
+	\begin{example}
+		Let $ f_n = \chi_{(n,n+1)} $. It is easy to see $ \int f_n = 1 $ (similar to above). But note that $ f_n \to 0 $ point-wise and thus by MCT we should have $ \int f_n \to 0 $ as $ n\to \infty $, which is not true. 
+	\end{example}
+\end{observation}

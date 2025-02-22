@@ -198,3 +198,35 @@
 	\end{solution}
 \end{problem}
 
+\begin{problem}
+	\begin{solution}
+		The answers to this question depends on the set where the coefficients of the polynomial belongs, as well as the scalars on which the vector space is defined. We assume that the coefficients are complex numbers and the scalars are also complex numbers. 
+		\begin{enumerate}[(a)]
+			\item Yes.
+			\item Yes. It is easier to see this if we identify each such polynomial with a 4-tuple $ (a_0,a_1,a_2,a_3) $, where these coordinates record the coefficients of the monomials $ 1,x^1,x^2$, and $ x^3 $ respectively. Then the subset of interest is 
+			\[ \tilde V = \set{(a_0,a_1,a_2,a_3): a_1 = 2a_0}. \]
+			This is subspace. Because the structure $ (\tilde V,+,0) $ is a group (it is easy to check that under addition of two such tuples the resulting tuple still satisfies $ \xi_1 = 2\xi_0 $). Also, it is straightforward to see that $ (0,0,0,0) \in \tilde V $. And the inverse of $ (a_0,2a_0,a_2,a_3) $ is $ (-a_0,-2a_0,-a_2,-a_3) $.
+			\item No. let $ x\in V $. So $ x(t) \geq 0 $ for $ t\in [0,1] $. Let $ \alpha = 2 $ be a scalar. Then $ \alpha x(t) \leq 0 $ for $ t\in [0,1] $. So $ \alpha x(t) \notin V $.
+			
+			\item Yes. The specified condition leads to 
+			\[ a_0 + a_1t + a_2t^2 + a_3t^3 = a_0 + a_1(1-t) + a_2(1-t)^2 + a_3(1-t)^3.  \]
+			This simplifies to 
+			\[ (2t-1)a_1 + (t^2-(1-t)^2)a_2 + (t^3 - (1-t)^3)a_3 = 0. \]
+			Observe that
+			\[ t^2 - (1-t)^2 = 2t-1. \]
+			Also
+			\[ t^3 - (1-t)^3 = 2t^3 - 3t^2 + 3t - 1. \]
+			So we will have
+			\[ (2t-1)a_1 + (2t-1)a_2 + (2t^3-3t^2+3t-1)a_3 = 0. \]
+			This is a hyperplane passing through the origin in $ \R^4 $ (if we identify each polynomial with a 4-tuple). This defines a subspace. Note: We could have said this without simplifying the coefficients, and I did that for no good reason!
+		\end{enumerate}
+	\end{solution}
+\end{problem}
+
+\section{Bases}
+\begin{observation}
+	Consider the vector space $ \C^1 $. Let $ z_1,z_2 \in \C^1 $ be any non-zero vectors. Then $ z_1,z_2 $ are linearly dependent vectors. The reason that I am highlighting this is that I was putting too much emphasis on the looking at $ \C^1 $ as $ \R^2 $ that I was not expecting to see that any two non-zero vectors in $ \C^1 $ is linearly dependent (which is definitely false, in $ \R^2 $ as not any two non-zero vectors are linearly dependent). Then I realized that it is the magic of scalars that makes the difference. If the vector space of consideration is $ (\C^1,\R^1) $, i.e. the scalars are real numbers, then not every two vectors in $ \C^1 $ is linearly dependent. For instance the vectors $ 1 $ and $ i $ are linearly independent (as there are no ways to multiply $ 1 $ at a real number and get $ i $). But in the case of $ (\C^1, \C) $ any two vectors are linearly dependent. Because in the example above we can multiply $ i $ be $ -i $ and get $ 1 $. I.e. in the second case the scalars are not only for enlarging the vectors, but also to rotate them.
+\end{observation}
+
+
+
