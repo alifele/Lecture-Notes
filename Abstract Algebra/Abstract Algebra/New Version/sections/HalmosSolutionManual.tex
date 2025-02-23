@@ -224,9 +224,266 @@
 \end{problem}
 
 \section{Bases}
-\begin{observation}
+\begin{observation}[Dimension depends on basis]
 	Consider the vector space $ \C^1 $. Let $ z_1,z_2 \in \C^1 $ be any non-zero vectors. Then $ z_1,z_2 $ are linearly dependent vectors. The reason that I am highlighting this is that I was putting too much emphasis on the looking at $ \C^1 $ as $ \R^2 $ that I was not expecting to see that any two non-zero vectors in $ \C^1 $ is linearly dependent (which is definitely false, in $ \R^2 $ as not any two non-zero vectors are linearly dependent). Then I realized that it is the magic of scalars that makes the difference. If the vector space of consideration is $ (\C^1,\R^1) $, i.e. the scalars are real numbers, then not every two vectors in $ \C^1 $ is linearly dependent. For instance the vectors $ 1 $ and $ i $ are linearly independent (as there are no ways to multiply $ 1 $ at a real number and get $ i $). But in the case of $ (\C^1, \C) $ any two vectors are linearly dependent. Because in the example above we can multiply $ i $ be $ -i $ and get $ 1 $. I.e. in the second case the scalars are not only for enlarging the vectors, but also to rotate them.
 \end{observation}
+
+\begin{observation}[$ \R $ can be infinite dimensional]
+	We often omit the underlying field when talking about the vector space $ \R $. But it turns out to be crucial when considering the dimension of the space. For instance, it is easy to see that $ (\R,\R) $ (i.e. the underlying field is $ \R $) is one dimensional. However, $ (\R,\Q) $ is infinite dimensional.
+\end{observation}
+
+\begin{problem}
+	\begin{solution}
+		To show that $ x,y,z $ are linearly independent, consider the linear combination
+		\[ \alpha x + \beta y + \gamma z = 0. \]
+		Considering the components of $ x,y,z $ we will have
+		\[ \begin{cases}
+			\alpha = 0,\\
+			\beta = 0,\\
+			\gamma = 0.
+		\end{cases}. \]
+		This $ \set{x,y,z} $ is linearly independent. For other combinations of vectors, one can easily mimic a similar approach.
+	\end{solution} 
+\end{problem}
+
+\begin{problem}
+	\begin{solution}
+		\noindent $ \boxed{\Rightarrow} $ We want to show that $ 1,\xi $ being linearly independent implies $ \xi \notin \Q $. We use prove by contrapositive. Let $ \xi \in\Q $. Then we will have
+		\[ \alpha + \beta \xi = 0 \]
+		when $ \beta = -\alpha / \xi \in \Q $. So $ 1,\xi $ is not linearly independent.
+		
+		\noindent $ \boxed{\Leftarrow} $ We want to show that $ \xi \notin \Q $ implies $ 1,\xi $ are linearly independent. We again use prove by contrapositive. Assume $ 1,\xi $ be linearly dependent. Then
+		\[ \alpha  + \beta \xi = 0 \]
+		holds while not both of $ \alpha,\beta = 0 $. However note that either $ \alpha $ or $ \beta $ being zero forces the other one to be zero as well. So $ \xi = -\alpha/\beta $ thus $ \xi \in \Q $. This completes the proof.
+	\end{solution}
+\end{problem}
+
+\begin{problem}
+	\begin{solution}
+		Consider the linear combination
+		\[ \alpha (x+y) + \beta (y+z) + \gamma (z+x) = 0. \]
+		By rearranging the terms we will have
+		\[ (\alpha + \gamma) x + (\alpha + \beta) y + (\beta + \gamma)z = 0. \]
+		Invoking the linear independence of $ x,y,z $ we will have
+		\[ \begin{cases}
+			\alpha = -\gamma ,\\
+			\alpha = -\beta, \\
+			\beta = -\gamma.
+		\end{cases} \]
+		This implies $ \alpha = \gamma = \beta = 0 $. So the specified vectors are linearly independent.
+	\end{solution}
+\end{problem}
+
+
+\begin{problem}
+	\begin{solution}
+		\begin{enumerate}[(a)]
+			\item Let $ A = (1+\xi) $ and $ B = (1-\xi) $. Consider the equation
+			\[ \alpha \vectt{A}{B} + \beta\vectt{B}{A} = \vectt{0}{0}. \]
+			We can write the system of equations as
+			\[ \matt{A}{B}{B}{A}\vectt{\alpha}{\beta} = \vectt{0}{0}. \]
+			If the determinant of the matrix above is non-zero, then the only solution is $ \alpha = 0,\beta = 0 $ (multiply both sides at the inverse of the matrix). Thus the vectors are linearly dependent if we have
+			\[ A^2 - B^2 = 0. \]
+			This implies
+			\[ \xi = 0. \]
+			
+			\item Similar to the solution above we need to have
+			\[ \det \begin{pmatrix}
+				\xi & 1 & 0 \\
+				1 & \xi & 1 \\ 
+				0 & 1 & \xi
+			\end{pmatrix} = 0. \]
+			This happens when
+			\[ \xi^3  = 2\xi, \]
+			The solutions for the equation above is
+			\[ \xi = 0, \qquad \xi = \pm\sqrt{2}. \]
+			
+			\item Then the vectors are linearly independent only when $ \xi = 0 $ (note that $ \xi $ can not take the values $ \pm \sqrt{2} $.)
+		\end{enumerate}
+	\end{solution}
+\end{problem}
+
+\begin{problem}
+	\begin{solution}
+		\begin{enumerate}[(a)]
+			\item In order for $ (\xi_1,\xi_2) $ and $ (\eta_1,\eta_2) $ be linearly dependent, we need to have
+			\[ \det\matt{\xi_1}{\eta_1}{\xi_2}{\eta_2} = 0. \]
+			This holds if $\xi_1\eta_2 = \xi_2\eta_1 $.
+			
+			\item For two vectors $ x,y \in \C^3 $ to be \emph{linearly independent}, the following matrix need to have rank 2.
+			\[ \begin{pmatrix}
+				x_1 & y_1 \\
+				x_2 & y_2 \\
+				x_3 & y_3
+			\end{pmatrix}. \]
+			This does not hold true if
+			\[ x_1y_2 = x_2y_1, \quad \text{and} \quad x_2y_3 = x_3y_2. \]
+			And for three vectors $ x,y,z\in \C^3 $ to be linearly dependent, the matrix below should have zero determinant:
+			\[ \det \begin{pmatrix}
+				x_1 & y_1 & z_1 \\
+				x_2 & y_2 & z_2 \\
+				x_3 & y_3 & z_3
+			\end{pmatrix} = 0. \]
+			
+			\item No. 
+		\end{enumerate}
+	\end{solution}
+\end{problem}
+
+
+\begin{problem}
+	Skipped. Will be added later.
+\end{problem}
+
+\begin{problem}
+	The following basis will do the job
+	\[ \mathcal{B}_1 = \big\{
+	\begin{bmatrix}
+		0 \\ 0 \\ 1 \\ 1
+	\end{bmatrix}, 
+	\begin{bmatrix}
+		1 \\ 1 \\ 0 \\ 0
+	\end{bmatrix}, 
+	\begin{bmatrix}
+		0 \\ 1 \\ 0 \\ 0
+	\end{bmatrix}, 
+	\begin{bmatrix}
+		0 \\ 0 \\ 1 \\ 0
+	\end{bmatrix}
+	\big\}, \]
+	and 
+	\[ \mathcal{B}_1 = \big\{
+	\begin{bmatrix}
+		0 \\ 0 \\ 1 \\ 1
+	\end{bmatrix}, 
+	\begin{bmatrix}
+		1 \\ 1 \\ 0 \\ 0
+	\end{bmatrix}, 
+	\begin{bmatrix}
+		1 \\ 0 \\ 0 \\ 0
+	\end{bmatrix}, 
+	\begin{bmatrix}
+		0 \\ 0 \\ 0 \\ 1
+	\end{bmatrix}
+	\big\}. \]
+\end{problem}
+
+\begin{problem}
+	Skipped. Will be added later.
+\end{problem}
+
+\begin{problem}
+	Skipped. Will be added later.
+\end{problem}
+
+\begin{problem}
+	Skipped. Will be added later.
+\end{problem}
+
+\begin{problem}
+	Skipped. Will be added later.
+\end{problem}
+
+
+
+\section{Isomorphism}
+\begin{observation}[A better proof of Theorem in \S 9 ]
+	Here we give a more formal prove of the theorem below.
+	\begin{theorem}
+		Every $ n $-dimensional vector space (defined over the field $ F $) is isomorphic to $ F^n $.
+	\end{theorem}
+	\begin{proof}
+		Let $ \set{b_i} $ be a basis for $ V $ and let $ \set{e_i} $ be the standard basis for $ F^n $. Define the map $ \phi: V \to F^n $ by
+		\[ \phi(b_i) = e_i \]
+		and extend to the whole space by linearity. We claim that $ \phi $ is an isomorphism. First, observe that $ \phi $ is a function. Indeed $ x \in V $ can be expanded $ x = \sum_i \alpha_i b_i $, and
+		\[ T(x) = T(\sum_i \alpha_i b_i) = \sum_i \alpha_i T(b_i) = \sum_i e_i.  \]
+		Also, $ \phi $ is linear by construction. Furthermore, we claim that $ \phi $ is injective. To show this we prove that $ \ker T = \set{0} $. Let $ x \in \ker T $. We expand $ x = \sum_i \alpha_i b_i $ and by applying $ T $  we have
+		\[ 0 = T(x) = T(\sum_i \alpha_i b_i) = \sum_i \alpha_i T(b_i) = \sum_i \alpha_i e_i.  \]
+		Since $ \set{e_i} $ is linearly independent, it follows that $ \alpha_i = 0 $ for all $ i $, thus $ x = 0 $. Also, we claim that $ T $ is surjective. To see this let $ y \in F^n $ with expansion $ y = \sum_i \alpha_i e_i $. Let $ x = \sum_i \alpha_i b_i $. We claim that $ T(x) = y $. Indeed
+		\[ T(x) = T(\sum_i \alpha_i b_i) = \sum_i \alpha_i T(b_i) = \sum_i \alpha_i e_i = y. \]
+	\end{proof}
+\end{observation}
+
+\begin{problem}
+	\begin{solution}
+		\begin{enumerate}[(a)]
+			\item For $ V = (\C,\R) $ the dimension is $ 2 $. Let $ \set{1,i} \subset \C $. Construct the map
+			\[ \phi: \C \to \R^2, \]
+			given by $ \phi(1) = e_1, \phi(i) = e_2 $, extended to the whole space by linearity. It is straight forward to see that $ \phi $ is an isomorphism of vector spaces. Thus $ V $ is two dimensional.
+			
+			\item We can choose the basis $ \set{(1,0\cdots,0),(i,0,\cdots,0),(0,1,0,\cdots,0),(0,i,0,\cdots,0),\cdots (0,\cdots,0,i)}, $ and we can construct an isomorphism to $ \set{e_1,e_2,\cdots,e_{2n}} $ similar to above. Thus $ V^- $ is $ 2n $ dimensional.
+		\end{enumerate}
+	\end{solution}
+\end{problem}
+
+\begin{problem}
+	\begin{solution}
+		No! $ (\R,\Q) $ is in fact infinite dimensional vector space with $ \dim_FV = \mathfrak{c} $. A basis for this space is $ \R/\Q $.
+	\end{solution}
+\end{problem}
+
+\begin{problem}
+	\begin{solution}
+		For an $ n $-dimensional vector space over the field $ \Z_p $ there is an isomorphism to $ (\Z_p)^n $. There are $ p^n $ vectors in this space. To see this note that the product space $ (\Z_p)^n $ is the space of all functions $ f:[n]\to\Z_p $ where $ f(i) \in \Z_p $ (using the notation $ [n] = \set{1,2,\cdots,n} $). There are $ p^n $ such maps. 
+		\begin{remark}
+			The functions in the product space is the same as the tuples if the dimension is finite.
+		\end{remark}
+	\end{solution}
+\end{problem}
+
+
+\begin{problem}
+	\begin{solution}
+		We assume that the vector spaces of interest of finite dimensional. Then the assertion is not true. Because $ \Q^n $ is countable for all $ n\in \N $, thus its cardinality is $ \aleph_0 $. However, dimension is an isomorphism invariant. So the assertion is not true. In particular, $ \Q^2 $ and $ \Q^3 $ both as the same cardinality $ \aleph_0 $, but they are not isomorphic (because they have different dimension).
+	\end{solution}
+\end{problem}
+
+
+\section{Dimension of a subspace}
+\begin{observation}
+	Denote by $ \mathcal{S} $, the set of all subspaces of a vector space $ V $. Observe that $ V,\emptyset \in \mathcal{S} $, and $ \mathcal{S} $ is closed under intersection (it is not closed under union).
+\end{observation}
+
+\begin{observation}[Definition of spanning]
+	In this definition box, I am highlighting the definition of the span of a set.
+	\begin{definition}[Span of a set]
+		Let $ S \subset V $ where $ V $ is some finite dimensional vector space. The span of $ S $, denoted by $ \Span S $, is the smallest linear subspace containing all $ S $.
+	\end{definition}
+	\begin{proposition}
+		Let $ {S},V $ be as in the definition above. Then $ \Span S $ is the same as the all linear combinations of vectors in $ S $.
+	\end{proposition}
+	\begin{proof}
+		The proof will have two parts. First, we prove that
+		\[ \Span S \subset \set{\sum_i \alpha_i s_i | s_i \in S}. \]
+		For easier notation we denote $ W = \set{\sum_i \alpha_i s_i | s_i \in S} $. To see the set inclusion above observe that $ W $ is a subspace. Indeed, any linear combination of linear combinations of vectors in $ S $ can be written as a linear combination of vectors in $ S $. Also, note that $ W  $ contains $ S $. However, by definition $ \Span S $ is the smallest subspace containing $ S $. So $ W $ must also contain $ S $, i.e. $ S\subset W $. Now we prove the reverse inclusion
+		\[ W \subset \Span S. \]
+		To see this note that $ \Span S $ is a subspace, and it contains $ S $. So it also contains all linear combination of vectors in $ S $ as well. So it contains $ W $. I.e. $ W\subset S $.
+	\end{proof}
+	The proof of the following proposition is left to the reader in \S11 Halmos.
+	\begin{proposition}
+		Let $ K,H $ be two linear subspaces of $ V $ and let $ S = \Span (K\cup H) $. Then $ S $ is the same as the set of all vectors of the form $ x+y $ where $ x\in K $ and $ y\in H $. 
+	\end{proposition}
+	\begin{proof}
+		From the proposition above we know that $ S $ contains all of linear combination of of elements of $ K\cup H $. Such a linear combination can be written as $ x + y $ where $ x \in K $ and $ y \in H $, and any linear combination of the form $ x+y $ is a linear combination of elements of $ K\cup H $. So $ S $ contains all such vectors.
+	\end{proof}
+\end{observation}
+
+
+
+\begin{problem}
+	\begin{solution}
+		Let $ \set{b_i}_{i=1}^n $ be a basis for $ M $. Since $ M\subset N $, and both of the are subspaces, then we can extend this basis to a basis on $ N $. Since $ N $ is also $ n $-dimensional, $ \set{b_i}_{i=1}^n $ is already a basis for $ N $ (adding any new vector will make the collection linearly dependent). Let $ y \in N $. We can expand $ y = \sum_i \alpha_i b_i $. This implies $ y \in M $. So $ N \subset M $. Then it follows that $ M = N $.
+	\end{solution}
+\end{problem}
+
+
+\begin{problem}
+	\begin{solution}
+		We state the problem in a better language: If $ M,N $ are subspaces of a vector space $ V $, and if $ V \subset M \cup N $, then $ V = M $ or $ V = N $. We prove by contrapositive. Assuming $ M\varsubsetneq V $ and $ N\varsubsetneq V $. Then $ \exists x \in V $ such that $ x \notin M $ and $ x\notin N $. I.e. $ x \in M^c \cap N^c = (M\cup N)^c $. Thus $ x \notin M\cup C $.
+		This completes the proof.
+	\end{solution}
+\end{problem}
+
 
 
 
