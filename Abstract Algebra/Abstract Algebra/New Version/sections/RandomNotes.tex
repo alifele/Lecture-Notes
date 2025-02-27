@@ -285,6 +285,48 @@
 
 
 
+\section{Questions}
+\begin{problem}
+	\begin{enumerate}[(a)]
+		\item Let $ Z $ be any vector space, and suppose we have for each $ i $ a linear map $ g_i: Z\to V_i $. Show that there is a unique $ g: Z\to \prod_i V_i $ such that $ \pi_i \circ g = g_i $ for all $ i $.
+	\end{enumerate}
+\end{problem}
 
+\begin{solution}
+	A quick reminder that $ \prod_{i\in I} V_i $ is 
+	\[ \prod_{i\in I} V_i = \set{f: I \to \bigcup_i V_i\ :\ f(i) \in V_i}. \]
+	This a generalization of $ n $-tuple. C
+	% https://q.uiver.app/#q=WzAsMyxbMSwwLCJaIl0sWzEsMSwiXFxwcm9kX3tpXFxpbiBJfSBWX2kiXSxbMCwxLCIoVl9pKV97aVxcaW4gSX0iXSxbMCwxLCJnIl0sWzAsMiwiKGdfaSlfe2lcXGluIEl9IiwyXSxbMSwyLCJcXHBpX2kiXV0=
+	\[\begin{tikzcd}
+		& Z \\
+		{(V_i)_{i\in I}} & {\prod_{i\in I} V_i}
+		\arrow["{(g_i)_{i\in I}}"', from=1-2, to=2-1]
+		\arrow["g", from=1-2, to=2-2]
+		\arrow["{\pi_i}", from=2-2, to=2-1]
+	\end{tikzcd}\]
+	Defien $ g: Z\to \prod_i V_i $ by
+	\[ \pi_i\circ g = g_i. \]
+	Note that $ g $ is uniquely determined by this definition. Indeed, for $ v\in Z $ we have
+	\[ (g(v))(i) = \pi_i (g(v)) = (\pi_i\circ g)(v) = g_i(v). \]
+	We need to show that $ g $ is linear. Let $ v,u\in Z$ and $ \alpha,\beta $ scalars. Then
+	\[ (g(\alpha v + \beta u))(i)  = (\pi_i\circ g)(\alpha v+\beta u) = g_i(\alpha v + \beta u) = \alpha g_i(v) + \beta g_i(u) = \alpha (g(u))(i) + \beta (g(v))(i).  \]
+	Since this is true for the $ g $ component-wise, then it follows that
+	\[ g(\alpha v + \beta u) = \alpha g(v) + \beta g(u). \]
+\end{solution}
+
+
+
+\begin{problem}
+	Let $ U,V,W $ be vector spaces, and let $ T: U\to V $ and $ S: V\to W $. 
+	\begin{enumerate}[(a)]
+		\item Suppose $ U,V $ are finite dimensional with bases $ \set{u_j}_{j=1}^m \subset U $ and $ \set{v_i}_{i=1}^n \subset V $, and let $ A \in M_{n,m}(F) $ be the matrix of $ T $ in those bases. Show that the matrix of the dual map $ T': V'\to U' $ with respect to the dual bases $ \set{u^j}, \set{v^j} $ is the transpose of $ A $.
+	\end{enumerate}
+\end{problem}
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item Let $ \tilde A $ denote the matrix representation of $ T' $. Then $ (\tilde A)_{i,j} $, is the $ i^\text{th} $ component (in the dual basis) of $ T' v^j $. Note that $ T'v^j $ is a functional on $ U $ and to get its $ i^\text{th} $ component we need to apply it on $ u_i  $. So
+		\[ (\tilde A)_{ij} = (T'(v^j))(u_i) = v^j(Tu_i) = (A)_{ji}. \]
+	\end{enumerate}
+\end{solution}
 
 

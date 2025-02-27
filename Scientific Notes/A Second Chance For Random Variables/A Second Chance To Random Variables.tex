@@ -137,6 +137,8 @@
  	
  	The example demonstrates how we can make more and more complicated spaces, as complex as that it contains the outcome of all experiments. Then random variables will be just functions that are reporting ``something'' about that particular outcome. For instance, rank $ k $ dyadic functions $ d_k $ simply reports if the $ k^\text{th} $ coin toss in an experiment is heads or tails. We can also make more complicated random variables that ``reports'' more sophisticated properties of a particular outcome. For instance, the same as we did above, we can define $ S(\omega) = \sum_{i=1}^n d_i(\omega) $, which is the sum of values of the tossed coins until the $ n^\text{th} $ toss. With this setting, knowing a probability measure on the space (that determines how likely is for an even $ A \in \mathcal{F} $ to happen), we can study the likelihood of different values that can be assume by our random variables.  
  	
+ 	In the example below we can see the similar random variables as above (position of the walker after $ n $ steps), but this time we have also included the stopping time. The walker will stop if they reach $ -2 $ or $ +3 $, which ever happens first. Then we will have
  	
+ 	\input{dyadicFunctionsWithStoppingTime.tex}
 \end{document}
 
