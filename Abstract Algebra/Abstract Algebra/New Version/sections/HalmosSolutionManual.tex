@@ -713,30 +713,203 @@
 
 
 \begin{problem}
-	Denote this set as $ \ker y $. Let $ v,u \in \ker f $ and $ \alpha,\beta $ scalars. Then
-	\[ y(\alpha u + \beta v) = \alpha y(u) + \beta y(v) = 0. \]
-	So $ \alpha u + \beta v \in \ker y $.
+	\begin{solution}
+		Denote this set as $ \ker y $. Let $ v,u \in \ker f $ and $ \alpha,\beta $ scalars. Then
+		\[ y(\alpha u + \beta v) = \alpha y(u) + \beta y(v) = 0. \]
+		So $ \alpha u + \beta v \in \ker y $.
+	\end{solution}
 \end{problem}
 
 
 \begin{problem}
-	{\color{red} \noindent TODO: Proof to be included later.}
+	\begin{solution}
+		Let $ x\in \ker y $. Assume $ x = \sum \xi_i e_i $. Then we will have
+		\[ y(x) = \xi_1 + \xi_2 + \xi_3 = 0. \]
+		Writing $ \xi_3 = -\xi_1 - \xi_2 $. Thus the components of $ x $ is $ x = (\xi_1,\xi_2,-\xi_1-\xi_2) $. Thus we can parameterize any $ x\in \ker y $ by $ \xi_1,\xi_2 $ only. We can write the components of $ x $ as
+		\[ (\xi_1,\xi_2,-\xi_1-\xi_2) = \xi_1(1,0,-1) + \xi_2(0,1,-1).  \]
+		So any $ x \in \ker y $ can be written as the linear combination above. So
+		\[ \mathcal{B} = \set{(1,0,-1),(0,1,-1)}, \]
+		is a basis for $ \ker y $.
+	\end{solution}
+\end{problem}
+
+\begin{problem} % Q5
+	{\color{red} \noindent Skipped. Will be added later}.
+\end{problem}
+
+\begin{problem} % Q6
+	{\color{red} \noindent Skipped. Will be added later}.
+\end{problem}
+
+\begin{problem} % Q7
+	\begin{solution}
+		We will have a combinatorical proof. First, pick one non-zero vector from the space. Recall that a vector space over a finite filed has $ q^p $ vectors (where $ p $ is the characteristic of the field).  There are $ q^p - 1 $ possible choices. Now pick another vector independent of this vector. We can not chose $ q $ vectors that are in the span of the first chosen vector. So there are $ q^p - p $ possible vectors. Choose the third vector, linearly independent from the first two, i.e. it should not belong to the span of the first two vectors (where there are $ q^2 $ of them). So there are $ q^p - q^2 $ choices. So to choose $ m $ linearly independent vectors (ordered basis) we have
+		\[ (q^n-1)(q^n-q^2)(q^n-q^3)\cdots(q^n-q^{n-m+1}). \]
+		To count the number of distinct subspaces, we need to divide the number above to the number of all ordered basis of a $ m $-dimensional vector space, where we use a similar method of counting, and we will have
+		\[ (q^m-1)(q^m-q^2)(q^m-q^3)\cdots(q^n-q^m). \]
+		So the total number of subspaces will be
+		\[ \frac{ (q^n-1)(q^n-q^2)(q^n-q^3)\cdots(q^n-q^{n-m+1})}{(q^m-1)(q^m-q^2)(q^m-q^3)\cdots(q^n-q^m)}. \]
+		This is the same as the Guassian binomial coefficient
+		\[ \binom{n}{m}_q, \]
+		that turns out to be symmetric in the sense
+		\[ \binom{n}{m}_q = \binom{n}{n-m}_q \]
+	\end{solution}
+	
+\end{problem}
+
+\begin{problem}
+	\begin{solution}
+		\begin{enumerate}[(a)]
+			\item First, note the Lemma below.
+			\begin{lemma}
+				Let $ S \subset V $ a subset of $ V $. Then we have
+				\[ (\Span S)^0 = S^0. \]
+				In particular $ \dim S^0  = \dim (\Span S)^0$.
+			\end{lemma}
+			\begin{proof}
+				Let $ f\in (\Span S)^0 $. Then $ f(x) = 0 $ for all $ x\in \Span S $, in particular $ x\in S $. So $ f\in S^0 $. For the converse, let $ f \in S^0 $, and let $ x \in \Span S $. We can write $ x = \sum_i \alpha_i s_i $ for $ s_i \in S $. Then it implies that 
+				\[ f(x) = f(\sum \alpha_i s_i) = \sum_i \alpha_i f(s_i) = 0.   \]
+				So $ f\in (\Span S)^0 $.
+			\end{proof}
+			Also, observe that $ S \subset S^{00} $ (from theorem 2) \S17, this implies that $ \Span S \subset S^{00} $. To see this let $ x \in \Span S $. From lemma above, $ \forall y \in S^0 $ we have $ y(x) = 0 $. Furthermore, from the natural correspondence, it follows that for all $ f\in S^0 $ $ z(f) = 0 $ for $ x\mapsto z $ under natural correspondence. So $ z\in S^{00} $. This proves that $ \Span S \subset S^{00} $. Now we do a similar dimension argument as in Theorem 2 \S17. If $ \Span S $ is $ m $ dimensional, then $ S^0 $ is $ n-m $ dimensional, and the dimension of $ S^{00} $ is $ n-(n-m) = m $. So $ \Span S = S^{00} $.
+			
+			\item Let $ f \in  J^0$. Then it implies that for all $ x\in J $ we have $ f(x) = 0 $. This holds true in particular for $ x\in S $ as $ S\subset J $. 
+			
+			
+			\item First we will prove $ (M+N)^0 = M^0 \cap N^0 $. Let $ f\in (M+N)^0 $. Using the fact that $ M\subset M+N $, and $ N\subset M+N $, it follows that $ f(x) = 0 $ for all $ x\in M $ and $ x\in N $. Thus $ f\in M^0\cap N^0 $. For the converse, let $ f\in M^0\cap N^0 $. Let $ x\in M+N $. Then $ x=m+n $ for $ m\in M $ and $ n\in N $. Then it follows that $ f(x) = f(m+n) = f(m) + f(n) = 0 $ for all $ x\in M+N $. So $ f\in (M+N)^0 $. To prove $ (M\cap N)^0 = M^0 + N^0 $, replace $ M,N $ with $ M^0,N^0 $ in the identity that we proved above, and using the fact that $ M^{00} = M $ (true in finite dimension) and applying $ (\cdot)^0 $ to both sides, we will prove the second statement.
+			
+			\item {\color{red} \noindent TODO: Not sure about my answer for this section.}
+		\end{enumerate}
+		
+	
+	\end{solution}
+
+	\begin{theorem}[Summary of the problem above]
+		Let $ S \subset V $ be a subset of a finite dimensional vector space. Then
+		\[ S^{00} = \Span S. \]
+	\end{theorem}
+\end{problem}
+
+\begin{problem}
+	{\color{red} \noindent Skipped. Will be added later}.
 \end{problem}
 
 
 
+\newpage
 
 
+\section{Dual of a direct sum}
+\begin{problem}
+	\begin{solution}
+		
+		\begin{enumerate}[(a)]
+			\item As in the characterization in Roman, if $ \C^4 = M\oplus N $, then $ 0 $ should have a unique representation. I.e. if $ m\in M $ and $ n\in N $, both of which non-zero, and $ m+n = 0 $, then the sum is not direct. First observe that the sets $ \set{x,y} $ and $ \set{u,v} $ are both linearly independent. Let $ 0 = a_1x + a_2y + a_3u + a_4v $. This defines
+			\[ \begin{pmatrix}
+				1 & 1 & 0 & 0 \\
+				1 & 0 & 1 & 0 \\
+				0 & 1 & 0 & 1 \\
+				0 & 0 & 1 & 1 
+			\end{pmatrix}
+			\begin{bmatrix}
+				a_1 \\ a_2 \\ a_3 \\ a_4
+			\end{bmatrix}
+			= 
+			\begin{bmatrix}
+				0 \\ 0 \\ 0 \\ 0 
+			\end{bmatrix}.
+			\]
+			It is easy to see that the determinant of the matrix above is zero. So there is a non-zero vector $ (a_1,a_2,a_3,a_4) $ that satisfies the system above. With Gaussian elimination, it turns out that the solution space is $ \set{w(1,-1,-1,1), w\in \C} $.
+			
+			\item With a similar argument as above, since
+			\[ \det 
+			\begin{pmatrix}
+				-1 & 0 & 1 & 0 \\
+				1 & 1 & 0 & 0 \\
+				1 & -1 & 0 & 0 \\
+				0 & 1 & 0 & 1
+			\end{pmatrix} = -2 \neq 0, \]
+			and using the fact that each $ \set{x,y} $ and $ \set{u,v} $ are linearly independent, we conclude that the sum is direct.
+			
+			\item We can see that 
+			\[ 
+			\det \begin{pmatrix}
+				1 & 0 & 1 & 0 \\
+				0 & 1 & 0 & 1 \\
+				0 & 1 & 1 & 0 \\
+				1 & 0 & 0 & 1
+			\end{pmatrix} = 0,
+			 \]
+			 and since $ \set{x,y} $ and $ \set{u,v} $ are both linearly independent, it follows that the sum is not unique, and there is a non-trivial representation of the origin. The solution space is $ \set{w(-1,-1,1,1)| w\in \C} $.
+		\end{enumerate}
+		
+	\end{solution}
+\end{problem}
+
+\begin{problem}
+	\begin{solution}
+		Let $ x\in M\cap N $. Then because $ x \in M $ it follows that $ x_1=\cdots=x_n = 0 $. And because $ x\in N $ if follows that $ x_j=x_{n+j} $ for all $ j=1,\cdots,n $. This implies $ x_1=x_2=\cdots=x_n=x_{n+1}=\cdots=x_{2n} = 0 $. Thus $ x=0 $. So $ M\cap N = \set{0} $. So the sum is direct.
+	\end{solution}
+\end{problem}
+
+\begin{problem}
+	\begin{solution}
+		Let $ V = \R^2 $, $ M = \Span\set{e_1} $, $ N_1=\Span\set{e_2} $, and $ N_2 = \Span\set{e_1+e_2} $. 
+	\end{solution}
+\end{problem}
+
+\begin{problem}
+	\begin{solution}
+		\begin{enumerate}[(a)]
+			\item We can do a universal property argument as we can find in Roman textbook. However, here we adopt a more straight forward approach. We claim that the spaces $ U\oplus(V\oplus W) $ is isomorphic to $ (U\oplus V)\oplus W $. Let $ x\in U\oplus(V\oplus W) $. So we can write $ x = x_U + x_{V\oplus W} $. And also $ x_{V\oplus W} = x_{V} + x_{W} $. So $ x = x_U + x_V + x_W $. Observe that $ x_U + x_V \in U\oplus V $. Denote this as $ x_{U\oplus V} = x_U \oplus x_V $. So $ x = x_{U\oplus V} + x_W  $. We claim that the mapping $ \phi: U\oplus(V\oplus W) \to (U\oplus V)\oplus W $ defined by $ x = x_{U}+x_{V\oplus W} \mapsto x_{U\oplus V} + x_W $ as in our discussion above. It is straightforward to check that this map linear, surjective, and injective. Thus an isomorphism.
+			
+			\item Similar to our discussion above, $ U\oplus V $ and $ V\oplus U $ are isomorphic.
+		\end{enumerate}
+		
+	\end{solution}
+	\begin{theorem}
+		The external direct sum is associative and commutative in the sense of isomorphicity. I.e. Let $ U,V,W $ be vector spaces, then $ U\oplus(V\oplus W) $ is isomorphic to $ (U\oplus V)\oplus W $. Also $ U\oplus V $ is isomorphic to $ V\oplus U $.
+	\end{theorem}
+\end{problem}
 
 
-
-
-
-
+\begin{problem}
+	\begin{solution}
+		\begin{enumerate}[(a)]
+			\item We want to prove if $ L,M,N $ are independent and $ V = L+M+N $, then $ L \oplus (M\oplus N) $ is direct. First observe that $ M\cap (L+N) = \set{0} $ and $ N\cap(L+M) = \set{0} $ implies that $ M\cap N = \set{0} $, otherwise, it contradicts the assumptions. So $ M\oplus N $ is direct. Furthermore, since $ L\cap (M+N) = \set{0} $, replacing $ M+N = M\oplus N $ we will have $ L\cap (M\oplus N) = \set{0} $. This and the fact that $ V = M+N+L $ together imply that the sum $ L\oplus (M\oplus N) $ is direct. For the converse, we prove by contrapositive. I.e. we assume that $ V $ is not the join of the subspaces, or the subspaces are not independent, and conclude that the sum is not direct. If $ V $ is not the join of the subspaces, then the sum $ L\oplus(M\oplus N) $ can not be direct. Also since if $ M\cap N $ is not trivial implies that $ M\oplus N $ is not direct, hence $ L\oplus(M\oplus N) $ is not direct, in the following cases we will assume that $ M\cap N $ is trivial. If $ L\cap (M+N) $ is non-trivial, (assuming $ M\cap N = \set{0} $) it implies that $ L\cap (M\oplus N) \neq \set{0} $ so the sum $ L\oplus(M\oplus N) $ is not direct. Also, if $ M\cap (L+N) $ is non-trivial, (assuming $ M\cap N=\set{0} $) it follows that $ M\cap L \neq \set{0} $, thus $ L\cap (M\oplus N) \neq \set{0} $, hence the sum $ L\oplus(M\oplus N) $ is not direct. The reasoning for the case $ N\cap (L+M) \neq \set{0} $ is also similar to above.
+			
+			\item Let $ V=\R^2 $, $ L = \Span \set{e_1} $, $ M = \Span\set{e_2} $, and $ N = \Span\set{e_1+e_2} $.
+			
+			\item First we prove $ L,M,N $ being independent implies $ x,y,z $ are linearly independent. We prove by contrapositive. Assume $ \set{x,y,z} $ be linearly dependent. If $ \set{x,y} $ is linearly dependent, then $ M\oplus N $ is not direct, hence $ L\oplus (M\oplus N) $ is not direct. If $ \set{x,y} $ is linearly independent but $ \set{x,y,z} $ is linearly dependent, then $ z = \alpha x + \beta y $ for some $ \alpha,\beta $ in the field. This implies $ L\cap (M\oplus N) \neq\set{0} $. So $ L\oplus(M\oplus N) $ is not direct (note that we used the fact that forming a direct sum is equivalent to being independent, as we proved in part (a))
+			
+			Now we prove that $ x,y,z $ being linearly independent implies $ L\oplus(M\oplus N)$ is direct. Since $ y,z $ is linearly independent, $ M\cap N  = \set{0}$. This implies that $ M\oplus N $ is direct. Since $ x,y,z $ is linearly independent, $ L\cap (M\oplus N) = \set{0} $, thus $ L\oplus(M\oplus N) $ is direct.
+			
+			
+			\item We use the principle of inclusion-exclusion generalized for three subspaces. We have
+			\[ \dim(L+M+N) = \dim(L) + \dim(M) + \dim(N) - \dim(M\cap N) - \dim(M\cap L) - \dim(N\cap L) + \dim (M\cap N\cap L). \]
+			So if the dimension of the sum of the subspaces is sum of their dimension, it follows that 
+			\[ \dim(L\cap M) = \dim (L\cap N) = \dim(M\cap N) = \dim (M\cap N\cap L) = 0. \]
+			This implies that $ L,M,N $ are independent. So $ L\oplus(M\oplus N) $ is direct. It is also easy to have a similar argument for the converse.
+			
+			\item
+		\end{enumerate}
+	\end{solution}
+\end{problem}
 
 
 
 \section{Dimension of Quotient Space}
+We start with a different proof of the Theorem 1 in \S22.
+\begin{theorem}
+	If $ M $ and $ N $ are complementary subspaces of a vector space $ V $, then the correspondence that assigns to each vector $ y\in N $ the vector $ y+M \in V/M $ is an isomorphism.
+\end{theorem}
+\begin{proof}
+	Consider the mapping $ N \ni y \mapsto y+M \in V/M $. We claim that this mapping is an isomorphism. To see this first observe that the mapping is linear. Because
+	\[ (\alpha y_1 +y_2) \mapsto (\alpha y_1 + y_2 + M = (\alpha y_1 + M) + (y_2 + M)). \]
+	Now we check to see if the mapping is injective. Let $ y \in N $ that maps to the zero vector in $ V/M $ by the mapping above. So $ y\mapsto 0 + M $. This implies that $ y \in M $. Since $ M\cap N = \set{0} $, we conclude that $ y = 0 $. Furthermore, we want to show that this mapping is surjective. To see this let $ y+M $ be a coset in $ V/M $. Since $ V = M\oplus N $, then we can writ $ y = y_m + y_n $ where $ y_m \in M $ and $ y_n\in N $. We claim that $ y_n \mapsto y+M $. That is because $ y+M = y_n + y_m +M = y_n + M $. So this mapping is surjective.
+\end{proof}
+
+
 \begin{problem}
 	\begin{solution}
 		\begin{enumerate}[(a)]
@@ -759,7 +932,7 @@
 
 \begin{problem}
 	\begin{solution}
-		Both empty set and the set $ \set{0} $ actas as the origin of the vector space. Any set that contains more than one element will not have an additive inverse. This is not an exhaustive list of possible problems.
+		Both empty set and the set $ \set{0} $ acts as the origin of the vector space. Any set that contains more than one element will not have an additive inverse. This is not an exhaustive list of possible problems.
 	\end{solution}
 \end{problem}
 

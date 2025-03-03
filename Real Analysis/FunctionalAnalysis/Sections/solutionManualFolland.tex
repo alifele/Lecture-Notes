@@ -1,8 +1,49 @@
 \chapter{Solution Manual Folland}
 
+Here is a list of theorems that are used in the problem sets.
+\begin{proposition}[Some properties]
+	\begin{enumerate}
+		\item Let $ T \in L(X,X) $. Then $ \norm{T^n} \leq \norm{T}^n $.
+	\end{enumerate}
+\end{proposition}
+\begin{proof}
+	\begin{enumerate}[(a)]
+		\item We demonstrate the statement for the case where $ n=2 $, and the general result follows by induction. Observe that
+		\[ \norm{T^2x} = \norm{T(Tx)} \leq \norm{T} \norm{Tx} \leq \norm{T}^2\norm{x}. \]
+		Since $ \norm{T^2} $ is smallest constant $ C $ such that $ \norm{T^2x}\leq C\norm{x} $ for all $ x\in X $, the it follows that $ \norm{T^2} \leq \norm{T}^2 $.
+	\end{enumerate}
+\end{proof}
+
+
 
 \section{Elements of Functional Analysis}
 
-\begin{problem}
-	If $ X $ is a normed vector space over $ K $ (= $ \R $ or $ \C $), then show that addition and scalar multiplication are continuous from $ X\times X $ and $ K\times X \to X $. Moreover, the norm is continuous from $ X $ to $ [0,\infty) $. In fact $ \abs{\norm{x} - \norm{y}} \leq \norm{x-y} $.
+
+\begin{problem}[Folland: Ch5,P7]
+	\begin{solution}
+		\begin{enumerate}[(a)]
+			\item First, we want to show that the series $ \sum_{n=0}^\infty (I-T)^n  $ converges. First, observe that this series converges absolutely. Because
+			\[ \sum_{n=0}^\infty \norm{(I-T)^n} \leq \sum_{n=0}^\infty \norm{I-T}^n  \leq \sum_{n=0}^{\infty} \gamma^n = \frac{1}{1-\gamma} < \infty. \]
+			Using the fact that $ X $ is a Banach space (hence complete), it follows that $ L(X,X) $ is also complete, thus by Theorem 5.1 Folland the absolutely convergent series converges in $ L(X,X) $. Let 
+			\[ L(X,X) \ni X = \sum_n (I-T)^n. \]
+			Now we want to prove that $ X $ is left and right inverse of $ T $. To see this we can write
+			\[ (I-T)X = \sum_{n=0}^\infty (I-T)^{n+1} = \sum_{n=1}^{\infty} (I-T)^n = \sum_{n=0}^{\infty} (I-T)^n - I = X-I. \]
+			This implies
+			\[ TX = X. \]
+			With a similar argument we can get $ X(I-T) = X-I $, thus $ XT = I $. So we conclude that $ X $ is the right and the left inverse of $ T $, thus $ T $ is a bijection and $ X = \inv{T} $.
+			\begin{remark}
+				I think in above, when we proved that $ X \in L(\mathcal{X},\mathcal{X}) $, we automatically proved that $ \inv{T} $ is bounded. However, in the solution manual that I got the idea of proof, the author separately proves that $ \inv{T} $ is bounded. For the sake of completeness I will do the same here as well.
+			\end{remark}
+			To show that $ \inv{T} $ is bounded, consider the sequence of partial sums of $ \inv{T} $
+			\[ S_n = \sum_{i=1}^n (I-T)^n. \]
+			Using the continuity of $ \norm{\cdot} $ we can write
+			\[ \norm{\inv{T}x} = \norm{\lim_{n} S_i x} = \lim_{n} \norm{S_n x} \leq \lim_n \sum_{i=0}^n \norm{(I-T)^nx} \leq \lim_n \sum_{i=0}^n \norm{I-T}^n \norm{x} \leq \frac{\norm{x}}{1-\gamma}. \]
+			
+			\item Observe that 
+			\[ \norm{(S\inv{T} - I)} = \norm{(S\inv{T}-I)T\inv{T}} = \norm{S\inv{T} - T\inv{T}} \leq \norm{(S-T)}\norm{\inv{T}} < 1. \]
+			So $ S\inv{T} $ has an inverse $ A \in L(\mathcal{X},\mathcal{X}) $ and we have $ A = T\inv{S} $. So $ \inv{S} = \inv{T}A $. It is also easy to see that $ \inv{S} $ is bounded. Because
+			\[ \norm{\inv{S}x} \leq \norm{\inv{T}}\norm{A}\norm{x}. \]
+		\end{enumerate}
+		
+	\end{solution}
 \end{problem}
