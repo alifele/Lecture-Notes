@@ -16,6 +16,7 @@
 \newcommand{\ST}{\operatorname{ST}}
 \newcommand{\AT}{\operatorname{AT}}
 \newcommand{\Span}{\operatorname{Span}}
+\newcommand{\End}{\operatorname{End}}
 
 \begin{document}
 
@@ -27,13 +28,13 @@
 	\expandafter\ifstrequal\expandafter{\thechapterimage}{}{}{
 		% Output the chapter imagee
 		\node[
-		anchor=north west, % Anchor point on the image
+		anchor=south, % Anchor point on the image
 		inner sep=0pt, % Inner padding
-		] at (current page.north west) {\includegraphics[angle=0,width=\paperwidth]{Images/math4OriginalSinze.jpg}};
+		] at (current page.south) {\includegraphics[angle=0,scale=0.83]{Images/math4OriginalSinze.jpg}};
 	}
 \end{tikzpicture}
 
-\vspace{2cm}
+\vspace{10cm}
 
 \heading{Abstract Algebra}
 

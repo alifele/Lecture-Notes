@@ -955,3 +955,66 @@ We start with a different proof of the Theorem 1 in \S22.
 \end{problem}
 
 
+
+
+\section{\S33 Transformation as vectors}
+\begin{problem}
+	\begin{solution}
+		\begin{enumerate}[(a)]
+			\item Linear map. This follows from the property of complex conjugation, $ \conj{(\alpha z_1 + \beta z_0)} = \alpha \conj z_1 + \beta\conj z_0 $.
+			\begin{observation}
+				Notice that the complex conjugation is a linear operator on $ \C $ only when considered on the field $ \R $. Otherwise, (when we consider the vector space over the field $ \C $) then the complex conjugation is no longer a linear map. There are several ways to see this. First, we can see by letting $ \set{1} $ be a basis for the space $ (\C,\C) $, and observe that the complex conjugation map maps $ 1\mapsto 1 $. So it should map every element to itself, which is obviously not correct. A more straight forward way to show this is to observe that if $ \C $ is defined over the field $ \C $, then the scalars are complex variables, thus 
+				\[ \conj{(\alpha z_1 + \beta z_0)} = \conj\alpha\ \conj z_1 + \conj\beta\conj z_0,  \]
+				which is not the desired value $ \alpha \conj z_1 + \beta\conj z_0  $.
+				
+				\item Linear map. let $ x,x' \in \mathcal{P} $ and $ \alpha $ be any scalar. Then
+				\begin{align*}
+					(A(\alpha x + x'))(t) &= (\alpha x + x')(t+1) - (\alpha x + x')(t)  \\
+					&= (\alpha x(t+1) - x'(t)) + (x'(t+1) - x'(t)) = \alpha (Ax)(t) + (Ax')(t).
+				\end{align*}
+			\end{observation}
+			
+			\item Yes. Since $ A $ permutes the indices but preserves the scalar coefficients.
+			
+			\item Yes. 
+			
+			\item For the question above, as well as this question, I have drafted a more complete solution. I feel it is correct, but tat the same time I feel that it is not correct! However, I am writing it here for my future reference in order to improve it.
+			Let $ w  $ be a $ k $-linear map. Then we can write it as
+			\[ w = \sum_{i_1,\cdots,i_k=1}^n \alpha_{i_1,\cdots,i_k} e^{i_1}\otimes\cdots\otimes e^{i_k}.  \]
+			Note that the sum above is the same as running the sum over all the functions $ f:\set{1,\cdots,n}\to \set{1,\cdots,n} $. Denote this set as $ [n]^{[n]} $. So we can write the sum above as
+			\[ w = \sum_{f\in[n]^{[n]}} \alpha_{f(1),\cdots,f(k)} e^{f(1)}\otimes\cdots\otimes e^{f(k)}.  \]
+			Now in a similar fashion for $ Aw $ given as in the problem statement we have
+			\[  w = \sum_{i_{\pi(1)},\cdots,i_{\pi(k)}=1}^n \alpha_{i_{\pi(1)},\cdots,i_{\pi(k)}} e^{i_{\pi(1)}}\otimes\cdots\otimes e^{i_{\pi(k)}}. \]
+			{\color{red} \noindent TODO: I don't know how to continue from here.w}
+			
+			\item {\color{red} \noindent TODO}
+			
+			\item {\color{red} \noindent TODO}
+		\end{enumerate}
+	\end{solution}
+\end{problem}
+
+\begin{problem}
+	\begin{solution}
+		There are different ways to approach this question. But I will adopt the following approach. Let $ A \in \End_F(V) $, and let $ \set{e_i} $ be a basis for the space $ V $. Then we can write
+		\[ Ae_i = \sum \alpha_{ji}e_j. \]
+		The coefficients $ \alpha_{ji} $ for $ j=1,\cdots,n $ and $ i=1,\cdots,n $ determine $ A $. Because for any $ x \in V $ we can write $ x = \sum_i \beta_i e_i $ and $ Ax $ can we expressed by the coefficients $ \alpha_{ji} $. Because
+		\[ A(x) = A(\sum_i \beta_i e_i) = \sum_i \beta_i A(e_i) = \sum_i \beta_i \sum_{i,j}\alpha_{j,i} e_j. \]
+		So it is easy to see that the dimension of the space is $ n^2 $.
+	\end{solution}
+\end{problem}
+
+\begin{problem}
+	\begin{solution}
+		\begin{enumerate}[(a)]
+			\item This is the dual space of $ U $, which is a vector space.
+			\item Let $ U = V \oplus W $. Let $ U \ni u = v + w $ where $ v\in V $ and $ W\in w $. By the definition of $ A $ we have $ Au = v $. To show that this mapping is linear, let $ u' = v' + w' $ be any other vector in $ U $, where $ v'\in V $ and $ w'\in W $. Let $ \alpha $ be any scalar. Then $ \alpha u  + u' = (\alpha v + v')  + (\alpha w+w') $. By the definition of $ A $ we have \[ A(\alpha  u + u') = \alpha v + v' = \alpha A(u) + A(v'). \]
+			So $ A $ is a linear map from $ U $ to $ V $.
+			\item Let $ V = U / W $ where $ W $ is some subspace. The the map $ A $ is in fact the quotient map. There are many different ways to show that this map is in fact a linear map (for instance using the universal property, etc). Or we can do manually. I will invoke the universal property to prove the linearity of the universal property.
+		\end{enumerate}
+		
+	\end{solution}
+\end{problem}
+
+
+
