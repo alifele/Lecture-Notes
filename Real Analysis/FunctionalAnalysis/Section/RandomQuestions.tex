@@ -1,0 +1,63 @@
+\chapter{Random Question}
+
+\begin{problem}
+	Let $ (X,\norm{\cdot}) $ be a finite dimensional vector space over $ K $, where $ K = \R $ or $ \C $. Then there is a finite basis $ (e_i)_{i=1}^n $ for the vector space $ X $. Therefore, the linear map $ \phi: K^n \to X $ defined by
+	\[ \phi(a_1,\cdots,a_n) = \sum_{i=1}^{n} a_i e_i  \qquad \text{for all } (a_1,\cdots,a_n) \in K^n, \]
+	is a bijection. Let $ K^n $  be equipped with the norm $ \norm{(a_1,\cdots,a_n)}_{1} = \sum_{i=1}^{n}\abs{a_i} $ for all $ i = 1,\cdots,n $.
+	\begin{enumerate}[(a)]
+		\item Show that $ \phi $ is a bounded linear map from $ (K^n,\norm{\cdot}_1) $ to $ (X,\norm{\cdot}) $.
+		\item Show that the unit sphere $ S = \set{(a_1,\cdots,a_n)\in K^n\ :\ \sum_{i=1}^{n}\abs{a_i} = 1} $ in $ (K^n,\norm{\cdot}_1) $ is a compact subset of $ K^n $.
+		
+		\item Show that $ \inv{\phi}: (X,\norm{\cdot})\to (K^n,\norm{\cdot}_1) $ is also bounded.
+		
+		\item Conclude that any two norms on $ X $ are equivalent.
+		
+		\item Show that any finite dimensional normed vector space is a Banach space. 
+	\end{enumerate}
+\end{problem}
+
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item First, we will show that $ \phi $ is a linear map. Let $ a,b \in K^n $ and $ \alpha \in K $. Then
+		\[ \phi(\alpha a + b) = \sum_{i=1}^{n} (\alpha a + b)_i e_i = \sum_{i=1}^{n} (\alpha a_i + b_i) e_i = \alpha \sum_{i=1}^{n}a_i e_i + \sum_{i=1}^{n}b_i e_i = \alpha \phi(a) + \phi(b). \]
+		Further, we need to show that this operator is bounded. Let $ a\in K^n $. Then we can write
+		\begin{align*}
+			\norm{\phi a} &= \norm{\sum_{i=1}^{n} a_i e_i} \\
+			& \leq \sum_{i=1}^{n} \abs{a_i}\norm{e_i} \\
+			& \leq M \sum_{i=1}^{n} \abs{a_i} \\
+			&=  M\norm{a}_1,
+		\end{align*}
+		where $ M = \max_{i}\set{\norm{e_i}} $.
+		
+		
+		\item Recall that the norm function is a continuous function (in the topology that it is generating). So the pre-image of closed sets is closed. This implies that the pre-image of $ \set{1} $ is closed. So the unit balls is closed. Unit ball is also trivially bounded (contained in unit ball which as a finite radius). On the other hand, in finite dimensional vector spaces, the closed and bounded sets are compact. So unit ball is a finite dimensional vector space is compact.
+		
+		
+		\item Since $ X $ and $ K^n $ are finite dimensional vector spaces, they are Banach spaces. Since $ \phi $ is a bijective linear map (in  particular it is surjective), then by open mapping theorem it is an open mapping. Let $ V \subset F^n $ be open. Then $ (\inv{\phi})^{-1}(V) = T(V)$ is open. So $ \inv{\phi} $ is continuous. Hence bounded. (The proof idea is coming from Theorem 11.30 Illustrative analysis book). 
+		
+		
+		\item Let $ \norm{\cdots} $ and $ \norm{\cdot}_* $ be two norms on $ X $. Then for $ v\in X $ we can write
+		\begin{align*}
+			\norm{v} &= \norm{\phi x} \leq \norm{\phi}\norm{x}_1 \\
+			&\leq  \norm{\phi}\norm{\inv{\phi}v}_1 \\
+			&\leq \norm{\phi}\norm{\inv{\phi}}\norm{v}_*.
+		\end{align*}
+		Similarly, we can write
+		\[ \norm{v}_* \leq \norm{\phi}\norm{\inv{\phi}}\norm{v}. \]
+		So we will have
+		\[ \frac{\norm{v}_*}{\norm{\phi}\norm{\inv{\phi}}} \leq \norm{v} \leq \norm{\phi}\norm{\inv{\phi}} \norm{v}_*.  \]
+		
+		
+	z
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	\end{enumerate}
+	
+\end{solution}

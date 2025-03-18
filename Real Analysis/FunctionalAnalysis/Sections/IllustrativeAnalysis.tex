@@ -1,0 +1,36 @@
+\chapter{Notes For the Illustrative Analysis Book}
+
+
+\section{Chapter 11: Linear Operators On Normed Spaces}
+
+\begin{observation}[Elaboration on Example 11.6]
+	Let
+	\[ P:= \set{p:[0,1]\to\R\ |\ p\in \R[x]}. \]
+	In Example 11.6 we show that the differentiation operator defined as $ Tp = p' $ is not a continuous operator in $ P $. In this box I will proved a second way to see this. First, note that the relation between $ P $ as a linear subspace of $ C([0,1],\R) $ is similar to the relation between $ \Q $ and $ \R $ when they are defined over the field $ \mathcal{F}_2 $. So similar to the dyadic expansion of a real number and representing it as a sequence of zeros and ones, we can also express the elements of $ C([0,1],\R) $ as a Taylor expansion and record the coefficients as a sequence of real numbers (don't take this analogy to serious, since we have smooth functions that are not analytic, hence do not have a Taylor's expansion!). So the elements of $ P $ will be sequences of real numbers with finite support. We summarize our note so far as below.
+	\begin{summary}
+		Elements of $ P $ can be seen as the sequence of real numbers with finite support. Then the $ \norm{\cdot}_{\infty} $ of $ p \in P $ with coordinates $ (\xi_0,\xi_1,\cdots,) $ will be
+		\[ \norm{p}_\infty = \sum_{i\in \N} \xi_i, \]
+		that is a finite sum because the sequence if finitely supported.
+	\end{summary}
+	Now consider the polynomials $ p_n(t) = t^n/n $. The coordinates of this polynomial is
+	\[ p_n = (0,\cdots,0,\underbrace{1/n}_{n^\text{th}\text{ position}},0,\cdots), \]
+	So
+	\[ \norm{p_n}_\infty = \frac{1}{n}. \]
+	It is easy to see 
+	\[ p'_n = (0,\cdots,0,\underbrace{1}_{(n-1)^\text{th}\text{ position}},0,\cdots), \]
+	whose norm is
+	\[ \norm{p'_n}_\infty = 1. \]
+	So with this norm $ p_n $ is converging to zero, but $ p'_n $ is not. So $ T $ is not continuous.
+	
+\end{observation}
+
+\begin{proposition}
+	See proposition 11.7 in textbook.
+\end{proposition}
+\begin{proof}
+	(i)$ \implies $ (ii): Let $ B \subset X $ by any bounded set. Then $ \exists r \in \R $ such that $ B \subset \mathbb{B}(0,r) $. We claim that $ T\mathbb{B}(0,r) \subset \mathbb{B}_{Y}(0,Mr) $. Let $ y \in TB(0,r) $. So $ \exists x \in X $ such that $ \norm{x} \leq r $ and $ Tx = y $. By hypothesis $ \norm{Tx} \leq M\norm{x} \leq Mr $.  So $ Tx \in \mathbb{B}_Y(0,Mr) $.
+	
+	(ii) $ \implies $ (i): Image of any bounded set is bounded. In particular $ T\mathbb{B}(0,1) \subset \mathbb{B}_Y(0,M) $. So
+	\[ \norm{Tx} = \norm{x}\norm{T\frac{x}{\norm{x}}} \leq M\norm{x}, \]
+	where we have used the fact that $ \frac{x}{\norm{x}} \in B(0,1) $.
+\end{proof}

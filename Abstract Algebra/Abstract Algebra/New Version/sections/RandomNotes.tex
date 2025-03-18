@@ -273,6 +273,215 @@
 \end{observation}
 
 
+\begin{observation}[Suitable basis for nilpotent maps]
+	This note is meant to accompany the sections 8.4 to 8.8 of Leohen's advanced linear algebra. I demonstrate a concrete example to show how we can find a suitable basis for a nilpotent map such that its matrix representation has Jordan blocks. Consider the following nilpotent matrix.
+	\[ A = 
+	\begin{pmatrix}
+		-16 & -20 & 34 \\
+		2 & 52 & -29 \\
+		0 & 72 & -36
+	\end{pmatrix}. \]
+	It is easy tot check that $ A^3 = 0 $. We want to find a suitable basis in which the matrix above has Jordan blocks in its structure. To do so, we first consider image $ A $. By writing the matrix in reduced row echelon form it is easy to see that the column space of $ A $ is
+	\[ W =  \im(A) = \Span\set{\vecttt{-16}{2}{0}, \vecttt{-20}{52}{72}}. \]
+	The subspace $ W $ is $ A $-invariant. So we can restrict $ A $ to this subspace. Fix the vectors above as the basis of $ W $. In this basis, let the matrix representation of $ A|_W $ is $ [A|_W] $. Then this needs to satisfy
+	\[ AM = M[A|_W], \]
+	where
+	\[ M = \begin{pmatrix}
+		-16 & 20 \\
+		2 & 52 \\
+		0 & 72
+	\end{pmatrix}. \]
+	One possible solution for $ B $ will be
+	\[ [A|_W] = \begin{pmatrix}
+		-16 & 128 \\
+		2 & 16
+	\end{pmatrix}. \]
+	Again, we need to consider the image of this matrix. Writing the matrix $ A|_W $ in reduced row echelon form we can see that 
+	\[ W' = \im(A|_W) = \Span\set{\vectt{-16}{2}}. \]
+	Now we need to restrict $ A|_W $ to $ W' $ above. However since $ W' $ is one dimensional and $ A|_W $ in nilpotent (since $ A $ is nilpotent), $ (A|_W)|_{W'} $ will be the zero map. So we can choose 
+	\[ e_1 = \vectt{-16}{2}, \]
+	as the first vector in the desired basis. 
+	Since $ \ker(A|_W) $ is the same as $ \im(A|_W) $, then $ \im(A|_W) + \ker(A|_W) = \im(A|_W) $ and the basis can not be extended further (stage to of finding suitable basis for the nilpotent map $ A|_W $). We need to perform stage $ 3 $ and find a vector in $ W $ that maps to $ W' $. One possible choice is 
+	\[ e_2 = \vectt{1}{0}. \]
+	Note that in both of the representations above we are assuming that the basis vectors for the space $ W $ is as fixed above. Lastly, we need to perform stage 2 for the map $ A $, and since $ \ker(A) \subset \im(A), $
+	this has no interesting result. Finally, for stage 3 for $ A $, we need to find some $ e_3 \in V $
+	such that $ Ae_3 = e_2 $. By using the pseudo inverse for $ A $ we can find 
+	\[ e_3 = \frac{1}{14}\vecttt{5}{-3}{-6}. \]
+	So the suitable basis is
+	\[ e_1 = -16\vecttt{-6}{2}{0} + 2\vecttt{20}{52}{72},\quad  e_2 = \vecttt{-16}{2}{0},\quad  e_3 = \frac{1}{14}\vecttt{5}{-3}{-6}.  \]
+	It is easy to see
+	\[ Ae_1 = 0, \quad A^2e_2 =0, \quad A^3e_3 = 0. \]
+	You can experiment with the code written in python to perform the computations above, where the code is included in the jupyter notebook file in the Codes folder of this latex project. 
+	
+	\begin{minted}{python}
+		from sympy import Matrix
+		import sympy as sp
+		
+		# Define the matrix
+		
+		# Perform row reduction (RREF - Reduced Row Echelon Form)
+		# rref_matrix, pivot_columns = A_sym.rref()
+		
+		
+		def imageBasis(matrix):
+		# List of basis vectors
+		colSpace = matrix.columnspace()  
+		# Stack the first two vectors into a matrix
+		return Matrix.hstack(*colSpace[:])  
+		
+		
+		
+		def kernelBasis(matrix):
+		"""Computes a basis for the null space (kernel) of a matrix."""
+		nullSpace = matrix.nullspace()
+		# Returns a list of basis vectors for the null space
+		return Matrix.hstack(*nullSpace[:])  
+		
+		
+		def restrictTo(A,M):
+		"""
+		Note that colSpace(B) should be image of A (thus A invariant)
+		"""
+		
+		return (M.T * M).pinv() * (M.T * A * M)
+		
+		
+	\end{minted}
+	
+\end{observation}
+
+
+
+\begin{observation}[Step by step walk through for calculating the generalized eigenspaces]
+	Consider the following matrix
+	\[
+	A  = 
+	\begin{bmatrix*}[r]
+		7 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+		0 & 7 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+		0 & 0 & 7 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+		0 & 0 & 0 & 7 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+		0 & 0 & 0 & 0 & 7 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+		0 & 0 & 0 & 0 & 0 & -4 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+		0 & 0 & 0 & 0 & 0 & 0 & -4 & 1 & 0 & 0 & 0 & 0 & 0 & 0 \\
+		0 & 0 & 0 & 0 & 0 & 0 & 0 & -4 & 1 & 0 & 0 & 0 & 0 & 0 \\
+		0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & -4 & 1 & 0 & 0 & 0 & 0 \\
+		0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & -4 & 0 & 0 & 0 & 0 \\
+		0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & i & 1 & 0 & 0 \\
+		0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & i & 1 & 0 \\
+		0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & i & 0 \\
+		0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & i
+	\end{bmatrix*}.
+	\]
+	We want to construct the generalized eigenspaces for this matrix. First, observe that the spectrum of this matrix is $ \Spect_A = \set{7,-4,i} $. This can be calculated by
+	\begin{minted}{python}
+		A.eigenvals()
+	\end{minted}
+	From the form of the matrix, it is immediate that for $ \lambda = 7 $, there are $ 3 $ associated generalized eigenspaces. To find these three, we first calculate the eigenvalues associated to $ \lambda = 7 $. We will have
+	\[ \ker(A - 7 I) = \Span\set{
+	\begin{bmatrix}
+		1 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0
+	\end{bmatrix}, \
+	\begin{bmatrix}
+		0 \\ 0 \\ 1 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0
+	\end{bmatrix}, \
+	\begin{bmatrix}
+		0 \\ 0 \\ 0 \\ 0 \\ 1 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0
+	\end{bmatrix}
+	} \]
+	These computations can be done by
+	\begin{minted}{python}
+		I = sp.eye(J.shape[0])
+		v1,v2,v3 = ((A - (7)*I)).nullspace()
+	\end{minted}
+	Now for each of the vectors above, we calculate their Jordan chain. I.e. we solve 
+	\[ (A - \lambda I)w = v, \]
+	where we start by $ v $ as one of the vector above to get $ w $ (second vector in the chain), and again, we replace $ v $  with $ w $ calculated above and solve the equation again to find a new $ w $, which will be the third element in the chain, and so on. This process will stop eventually (the solution of the equation will be the zero vector). Starting with the each of the vectors above, we will get
+	\[ V_1^1 = \Span\set{
+		\begin{bmatrix}
+			1 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0
+		\end{bmatrix}, \
+		\begin{bmatrix}
+			0 \\ 1 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0
+		\end{bmatrix}
+		}, \qquad
+		V_1^2 = \Span\set{
+		\begin{bmatrix}
+			0 \\ 0 \\ 1 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0
+		\end{bmatrix}, \
+		\begin{bmatrix}
+			0 \\ 0 \\ 0 \\ 1 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0
+		\end{bmatrix}
+		}, \qquad
+		V_1^3 = \Span\set{
+			\begin{bmatrix}
+				0 \\ 0 \\ 0 \\ 0 \\ 1 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0
+			\end{bmatrix}
+		}.
+	\]
+	Now for $ \lambda = -4 $ do a similar process. Observe that for this eigenvalue we have only one Jordan block matrix. First, we calculate the eigenvectors, and starting from each of them we compute the generalized eigenvectors. It turns out that there is just one eigenvalue for $ \lambda = -4 $
+	\[ \ker(A-(-4)I) = \Span\set{
+		\begin{bmatrix}
+			0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 1 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0
+		\end{bmatrix}
+	}. \]
+	Similar to above, we can calculate the Jordan chain for starting with this vector. We will see
+	\[ 
+	V_2^1 = \Span\set{
+	\begin{bmatrix}
+		0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 1 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0
+	\end{bmatrix}, \
+	\begin{bmatrix}
+		0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 1 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0
+	\end{bmatrix}, \
+	\begin{bmatrix}
+		0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 1 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0
+	\end{bmatrix}, \
+	\begin{bmatrix}
+		0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 1 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0
+	\end{bmatrix}, \
+	\begin{bmatrix}
+		0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 1 \\ 0 \\ 0 \\ 0 \\ 0
+	\end{bmatrix}
+	}.
+	\]
+	Finally, for $ \lambda = i $, it turns out (as also evident from the matrix), there are two eigenvalues (translates to two Jordan blocks) as
+	\[ \ker(A - iI) = \Span\set{
+	\begin{bmatrix}
+		0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 1 \\ 0 \\ 0 \\ 0
+	\end{bmatrix}, \
+	\begin{bmatrix}
+		0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 1
+	\end{bmatrix}
+	}. \]
+	And with the calculations similar to above we will get
+	\[ V_{3}^1 = \Span\set{
+		\begin{bmatrix}
+			0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 1 \\ 0 \\ 0 \\ 0
+		\end{bmatrix}, \
+		\begin{bmatrix}
+			0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 1 \\ 0 \\ 0
+		\end{bmatrix}
+	}, \qquad
+	V_{3}^2 = \Span\set{
+		\begin{bmatrix}
+			0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 1
+		\end{bmatrix}
+	}.
+	 \]
+	 
+	The calculation above can be found under Example 3 in the JordanForm.ipynb file inside the Codes directory.
+\end{observation}
+
+
+\begin{observation}[Step by step calculation of Jordan canonical form]
+	See StepByStepJordanCanonicalForm.ipynb in the Codes directory of this latex project for a complete example of calculating the Jordan canonical form.
+\end{observation}
+
+	
+	
+	
+
 
 
 \section{Ongoing thoughts}
