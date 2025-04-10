@@ -480,6 +480,219 @@
 
 	
 	
+\begin{observation}[Yet another chance to understand the universal property of tensor product]
+	The universal property for the tensor product states that if $ U,V $ are two vector spaces, and $ W $ is any other vector space, where $ f: U\times V \to W $ is a bilinear map, then there exists a universal pair $ (\tau, U\otimes V) $ such that $ f $ can be factored through $ \tau $, i.e. $ f = t\circ \tau $. In other words the following diagram commutes
+	% https://q.uiver.app/#q=WzAsMyxbMSwwLCJVXFx0aW1lcyBWIl0sWzEsMSwiVVxcb3RpbWVzIFYiXSxbMCwxLCJXIl0sWzAsMiwiZiIsMl0sWzAsMSwiXFx0YXUiXSxbMSwyLCJ0Il1d
+	\[\begin{tikzcd}
+		& {U\times V} \\
+		W & {U\otimes V}
+		\arrow["f"', from=1-2, to=2-1]
+		\arrow["\tau", from=1-2, to=2-2]
+		\arrow["t", from=2-2, to=2-1]
+	\end{tikzcd}\]
+	where $ f = t\circ \tau $.
+	Here is an intuitive construction for this concept. Let $ V = \R^3 $ and $ U = \R^2 $ that $ V = \Span\set{e'_1,e'_2,e'_3} $ and $ U = \Span\set{e_1,e_2} $. Let $ f: U\times V \to W $ be a bilinear map where $ W $ is any vector space $ \R^n $. For $ (a,b) \in U\times V $ we can write
+	\begin{align*}
+		f(a,b) &= f(a_1e_1+a_2e_2, b_1e'_1+b_2e'_2+b_3e'_3) \\
+		&= a_1b_1f(e_1,e'_1) + a_1b_2f(e_1,e'_2) + a_1b_3f(e_1,e'_3) + a_2b_1f(e_2,e'_1) + a_2b_2f(e_2,e'_2) + a_2b_3f(e_2,e'_3).
+	\end{align*}
+	So $ f $ is fully specified by knowing its effect on $ (e_i,e'_j) $ tuple.s Assume the map $ f $ sends
+	\[ (e_1,e'_1) \mapsto w_1,\quad (e_1,e'_2)\mapsto w_2,\quad (e_1,e'_3)\mapsto w_3,\quad (e_2,e'_1)\mapsto w_4, \quad (e_2,e'_2)\mapsto w_5, \quad (e_2,e'_3)\mapsto w_6,   \]
+	where $ w_1,\cdots,w_6 \in W $. So the effect of $ f $ can be written as
+	\[ 
+	\begin{pmatrix}
+		| & | & \cdots & | \\
+		w_1 & w_2 & \cdots & w_6 \\
+		| & | & \cdots & | 
+	\end{pmatrix}
+	\begin{bmatrix}
+		a_1 \begin{bmatrix}
+			b_1 \\ b_2 \\ b_3
+		\end{bmatrix} \\
+		a_2 \begin{bmatrix}
+			b_1 \\ b_2 \\ b_3
+		\end{bmatrix}
+	\end{bmatrix}
+	= 
+	\begin{pmatrix}
+		| & | & \cdots & | \\
+		w_1 & w_2 & \cdots & w_6 \\
+		| & | & \cdots & | 
+	\end{pmatrix}
+	\begin{bmatrix}
+		a_1b_1 \\ a_1b_2 \\ a_1b_3 \\ a_2b_1 \\ a_2 b_2 \\ a_2b_3
+	\end{bmatrix}
+	 \]
+	Intuitively, we form a basis that is the Cartesian product of the basis of the initial spaces to be able to write the bilinear form as a matrix multiplication.
+\end{observation}
+
+\begin{observation}[Yet another chance to understand the universal property of direct sum]
+	Let $ U = \R^2 = \Span\set{e_1,e_2} $ and $ V = \R^3 = \Span\set{e_1',e_2',e_3'} $. Let $ (f,g) $ be two linear maps $ f: U\to W $ and $ g: V\to W $ where $ W = \R^n $  is any vector space. Let $ a\in U $ and $ b\in V $ and observe that any such pair of linear maps $ (f,g) $ can be characterized by action of $ f $ and $ g $ as
+	\[ f(a) = f(a_1e_1+a_2e_2) = a_1f(e_1) + a_2f(e_2), \]
+	and
+	\[ g(b) = g(b_1e_1'+b_2e_2'+b_3e_3') = b_1g(e_1')+b_2g(e_2')+b_3(e_3'). \]
+	Assume 
+	\[ f:\quad e_1 \mapsto w_1, \quad e_2 \mapsto w_2, \]
+	and 
+	\[ g: \quad e_1' \mapsto w_1',\quad e_2'\mapsto w_2',\quad e_3'\mapsto w_3' \]
+	where $ w_1,w_2,w_1',w_2',w_3' \in W $. So this follows that we can write the action of $ f,g $ together as
+	\[ 
+	\begin{pmatrix}
+		\begin{pmatrix}
+			| & | \\
+			w_1 & w_2 \\
+			| & | 
+		\end{pmatrix} & 0 \\
+		0 & \begin{pmatrix}
+			| & | & | \\
+			w_1' & w_2' & w_3' \\
+			| & | & | 
+		\end{pmatrix}
+	\end{pmatrix}
+	\begin{bmatrix}
+		a_1 \\ a_2 \\ b_1 \\ b_2 \\ b_3
+	\end{bmatrix}
+	 \]
+	So in fact, we concatenate the basis vectors of the older spaces to get a new basis for the new space so that we can express any pair of linear maps $ (f,g) $ as a single linear map.
+\end{observation}
+
+
+\begin{observation}[How to quickly define a bilinear form?]
+	Let $ U = \R^2 $ and $ V = \R^3 $ and assume we want to define a bilinear form. It is enough to specify
+	\[ (e_1,e_1)\mapsto \alpha_1, \quad (e_1,e_2)\mapsto \alpha_2, \quad (e_1,e_3) \mapsto \alpha_3, \quad (e_2,e_1)\mapsto \alpha_4, \quad (e_2,e_2)\mapsto \alpha_5, \quad (e_2,e_3) \mapsto \alpha_6. \]
+	Let $ u\in U $ and $ v \in V $. Then we can write $ f(u,v) $ as 
+	\[ \begin{pmatrix}
+		\alpha_1 & \alpha_2 & \alpha_3 & \alpha_4 & \alpha_5 & \alpha_6
+	\end{pmatrix} 
+	\begin{bmatrix}
+		u_1 \begin{bmatrix}
+			v_1 \\ v_2 \\ v_3
+		\end{bmatrix} \\
+		u_2 \begin{bmatrix}
+			v_1 \\ v_2 \\ v_3
+		\end{bmatrix}
+	\end{bmatrix}.
+	 \]
+\end{observation}
+
+\begin{observation}[A simple example for Theorem 14.6 Roman]
+	In this observation box I will demonstrate some example for the representation of tensors. I will use the vector notation to represent the tensors (instead of the matrix notation) as it makes more sense to work with this notation in this example.
+	Let $ U = \R^2 $ and $ V = \R^3 $, and we are using the convention that 
+	\[ u \otimes v = \begin{bmatrix}
+		u_1 \begin{bmatrix}
+			v_1 \\ v_2 \\ v_3
+		\end{bmatrix} \\
+		u_2 \begin{bmatrix}
+			v_1 \\ v_2 \\ v_3
+		\end{bmatrix}
+	\end{bmatrix} = 
+	\begin{bmatrix}
+		u_1 v_1 \\ u_1 v_2 \\ u_1 v_3 \\ u_2 v_1 \\ u_2 v_2 \\ u_2 v_3
+	\end{bmatrix}. \]
+	Consider the following tensor
+	\[ z = r_{11}e_1\otimes e_1 + r_{12}e_1\otimes e_2 + r_{13} e_1\otimes e_3 + r_{21} e_2\otimes e_1 + r_{22} e_2\otimes e_2 + r_{23}e_2\otimes e_3. \]
+	One representation for this tensor is to write (representation (1) in theorem 14.6 Roman)
+	\[ z 
+	= \begin{bmatrix}
+		r_{11} \\ r_{12} \\ r_{13} \\ r_{21} \\ r_{22} \\ r_{23}
+	\end{bmatrix}
+	 \]
+	 Another possible way to write this is (representation (2) in theorem 14.6)
+	\[ \begin{bmatrix}
+		r_{11} \\ r_{12} \\ r_{13} \\ r_{21} \\ r_{22} \\ r_{23}
+	\end{bmatrix} = 
+	\begin{bmatrix}
+		r_{11} \\ r_{12} \\ r_{13} \\ 0 \\ 0 \\ 0
+	\end{bmatrix} + 
+	\begin{bmatrix}
+		0 \\ 0 \\ 0 \\ r_{21} \\ r_{22} \\ r_{23}
+	\end{bmatrix} = 
+	\begin{bmatrix}
+		1 \\ 0
+	\end{bmatrix} \otimes 
+	\begin{bmatrix}
+		r_{11} \\ r_{12} \\ r_{13}
+	\end{bmatrix} + 
+	\begin{bmatrix}
+		0 \\ 1
+	\end{bmatrix} \otimes 
+	\begin{bmatrix}
+		r_{21} \\ r_{22} \\ r_{23}
+	\end{bmatrix}
+	 \]
+	Also, we can write (representation (3) in theorem 14.6 Roman)
+	\[  
+	 \begin{bmatrix}
+		r_{11} \\ r_{12} \\ r_{13} \\ r_{21} \\ r_{22} \\ r_{23}
+	\end{bmatrix} =
+	 \begin{bmatrix}
+		r_{11} \\ 0 \\ 0 \\ r_{21} \\ 0 \\ 0
+	\end{bmatrix}  + 
+	 \begin{bmatrix}
+		0 \\ r_{12} \\ 0 \\ 0 \\ r_{22} \\ 0 
+	\end{bmatrix} + 
+	 \begin{bmatrix}
+		0 \\ 0 \\ r_{13} \\ 0 \\ 0 \\ r_{23}
+	\end{bmatrix} =
+	\begin{bmatrix}
+		r_{11} \\ r_{21}
+	\end{bmatrix} 
+	\otimes
+	\begin{bmatrix}
+		1 \\ 0 \\ 0
+	\end{bmatrix}
+	+ 
+	\begin{bmatrix}
+		r_{12} \\ r_{22}
+	\end{bmatrix} 
+	\otimes
+	\begin{bmatrix}
+		0 \\ 1 \\ 0
+	\end{bmatrix}
+	+ 
+	\begin{bmatrix}
+		r_{13} \\ r_{23}
+	\end{bmatrix} 
+	\otimes
+	\begin{bmatrix}
+		0 \\ 0 \\ 1
+	\end{bmatrix}
+	\]
+	
+\end{observation}
+
+\begin{observation}[Theorem 14.5 Roman]
+	Let $ \set{u_1\cdots,u_n} \subset U $ be linearly independent, and $ \set{v_1\cdots,v_n} \subset V $ be arbitrary vectors. Then
+	\[ \sum_{i=1}^{n} u_i \otimes v_i = 0 \]
+	implies that $ v_i = 0 $ for all $ i $.
+	\begin{proof}
+		Let $ f = \tau \circ t $ be any bilinear form, where $ \tau $ is its mediating morphism. Then
+		\[ \tau (\sum_{i=1}^{n} u_i \otimes v_i) = \sum_{i=1}^{n} \tau(u_i\otimes v_i) = \sum_{i=1}^{n} f(u_i,v_i) = 0.  \]
+		This holds true for any bilinear form $ f $. Choose $ f $ to be given as 
+		\[ f(u,v) = u^k(u)\beta(v), \]
+		where $ u^k $ is the dual basis for $ \set{u_k} $ and $ \beta \in V^* $. Using above, we can see that
+		\[ \tau (\sum_{i=1}^{n} u_i \otimes v_i) = \sum_{i=1}^{n}u^k(u)\beta(v_i) = \beta(v_k) = 0. \]
+		This holds true for all $ k $ and all $ \beta $. So $ v_k = 0 $ for all $ k $.
+	\end{proof}
+\end{observation} 
+
+\begin{observation}[Injectivity of inclusion map in Theorem 14.7 Roman]
+	In this theorem, we define a linear map $ \theta: U^*\times V^* \to (U\times V)^* $ by using the universal property of tensor products. I.e. we exhibit a bilinear map $ F: U^*\times V^* \to (U\otimes V)^* $ defined by
+	\[ (F(f,g))(u\otimes v) = f(u)g(v), \]
+	for $ f \in U^* $ and $ g\in V^* $. So this induces a unique linear map $ \theta: U^*\otimes V^* \to (U\otimes V)^* $. We now want to show that this linear map is indeed an injection. Let $ h\in U^*\otimes V^* $ be in the kernel of $ \theta $. I.e. $ \theta(h) $ will be the zero functional on $ U\otimes V $. I.e. for all $ z\in U\otimes V $ we can write
+	\[ (\theta(h))(z) = 0. \] 
+	However, we can represent $ h $ as 
+	\[ h = \sum_{i=1}^{m} f_i \otimes g_i \]
+	where $ \set{f_i} \subset U^* $ and $ \set{g_i} \subset V^* $ are linearly independent. So
+	\[ \theta(h) = \sum_{i=1}^{m} \theta(f_i\otimes g_i) = 0. \]
+	Let $ \set{e_k \otimes e'_l}_{k,l} $ be basis vectors of $ U\otimes V $. Since $ \theta(h) $ is the zero functional, for all $ k,l $ we need to have
+	\[ (\theta(h))(e_k\otimes e'_l) = \sum_{i=1}^{m} f_i(e_k)g_i(e'_l) = 0 \quad \forall k,l. \]
+	We can interpret this in two ways:
+	\[ \sum_{i=1}^{m} g_i(e'_l) f_i = 0, \quad \text{and}\quad \sum_{i=1}^{m} f_i(e_k) g_i = 0, \]
+	Since $ \set{f_i} $ and $ \set{g_i} $ are linearly independent, it follows that $ g_i(e'_l) = 0 $ for all $ i $ and $ l $. So $ \set{g_i} $ are all zero functionals. We can similarly conclude that $ \set{f_i} $ are all zero functionals.
+
+\end{observation}
+	
 	
 
 

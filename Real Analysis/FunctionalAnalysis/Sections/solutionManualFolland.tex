@@ -19,7 +19,36 @@ Here is a list of theorems that are used in the problem sets.
 \section{Elements of Functional Analysis}
 
 
-\begin{problem}[Folland: Ch5,P7]
+\begin{problem}[Folland: Ch5, P1]
+	The essence of the proof is to show that if $ u $ is close to $ u' $ and $ v $ is close to $ v' $ the $ u+v $ is close to $ u'+v' $. This is true because
+	\[ \norm{(u+v) - (u'+v')} \leq \norm{u-u'} + \norm{v-v'} < 2\epsilon, \]
+	where we choose $ \norm{u-u'} <\epsilon $ and $ \norm{v-v'}<\epsilon $. 
+	
+	To prove the continuity of the multiplication, we also use a similar idea. Want to show that if $ u $ is close to $ u' $ then $ \alpha u $ is also close to $ \alpha u' $. To see this we can write
+	\[ \norm{\alpha u - \alpha u'} = \alpha \norm{u - u'} < \alpha\epsilon \]
+	where we choose $ \norm{u-u'} < \epsilon $.
+	
+	To prove the continuity of the norm we need to show that if $ u $ is close to $ v $ then $ \norm{u} $ is close to $ \norm{v} $ (as real numbers). So we need to prove
+	\[ \abs{\norm{u} - \norm{v}} \leq \norm{u - v}. \]
+	This is reverse triangle inequality. To prove this we can write
+	\[ \norm{y} = \norm{y \pm x} \leq \norm{y-x} +\norm{x}. \]
+	This implies
+	\[ \norm{y} - \norm{x} \leq \norm{y-x}. \]
+	By a similar argument we can also write
+	\[ \norm{x} - \norm{y} \leq \norm{y-x}. \]
+	These two inequalities implies that 
+	\[ \abs{\norm{x}-\norm{y}} \leq \norm{x- y}. \]
+
+\end{problem}
+
+\begin{problem}[Folland: Ch5, P4]
+	Briefly, we want to prove that given any $ \epsilon>0 $ we can make $ T $ is close enough to $ S $ and $ x $ close enough to $ y $ such that $ Tx $ is closer to $ Sy $ that $ \epsilon $.
+	Fix $ (T,y) \in L(X,Y)\times X $. We want to show continuity at this point. For the given $ \epsilon>0 $ as above if we have $ \norm{T-S} < \epsilon/\norm{y} $ and $ \norm{x-y} <\epsilon/\norm{T} $, then 
+	\[ \norm{Tx - Sy} \leq \norm{Tx-Ty} + \norm{Sy-Ty} \leq \norm{T}\norm{x-y} + \norm{S-T}\norm{y} < 2\epsilon.  \] 
+\end{problem}
+
+
+\begin{problem}[Folland: Ch5, P7]
 	\begin{solution}
 		\begin{enumerate}[(a)]
 			\item First, we want to show that the series $ \sum_{n=0}^\infty (I-T)^n  $ converges. First, observe that this series converges absolutely. Because
