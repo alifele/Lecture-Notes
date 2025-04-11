@@ -692,7 +692,31 @@
 	Since $ \set{f_i} $ and $ \set{g_i} $ are linearly independent, it follows that $ g_i(e'_l) = 0 $ for all $ i $ and $ l $. So $ \set{g_i} $ are all zero functionals. We can similarly conclude that $ \set{f_i} $ are all zero functionals.
 
 \end{observation}
+
+\begin{observation}[Useful fact!]
+	When we are seeking a linear map whose domain is a tensor product, we need to find a bilinear form whose domain is a Cartesian product of the spaces, and then to use to universal property of the tensor products get the linear map from the tensor product space.
+\end{observation}
 	
+	
+\begin{observation}[Infinitesimals Vs. Nilpotents]
+	In the context of linear algebra, the nilpotent maps are the maps that if raised to a large enough power, will be a zero map. This is a very interesting concept because it has very interesting similarities to the infinitesimals. When working with Floating Point representation of numbers in computers, then we are also dealing with nilpotents. For instance, in a floating point system, we can have (0.1)**5 = 0. So in this system $ 0.1 $ acts as a nilpotent of degree less than five.
+	
+	Presence of nilpotents in linear algebra, terminates some power series involving matrices. With a similar idea, all of the power series in a floating point representation is a finite sum. That is because if small values are raised to high enough powers, then at some point they become negligible compared to the machine precision, and this leads to the termination of the power series.
+\end{observation}
+
+\begin{observation}[A convenient way to represent any bilinear form ]
+	Any bilinear form $ (\cdot,\cdot): U\times V \to F $ can be represented in a very convenient way. Let $ u \in U $ and $ v \in V $ with $ u = \sum_{i=1}^{n}u_i e_i $ and $ v = \sum_{j=1}^{m} v_j e'_j $. So we can write the bilinear form as
+	\[ (u,v) = (\sum_{i=1}^{n}u_i e_i, \sum_{j=1}^{m} v_j e'_j) = \sum_{i,j} u_i v_j (e_i,e'_j) = \sum_i u_i \sum_j (e_i,e'_j)v_j = \sum_i u_i (Fv)_i = a^tFb, \]
+	where 
+	\[ (F)_{i,j} = (e_i, e_j). \]
+\end{observation}
+
+
+\begin{observation}[Some thoughts on the tensor product of weird stuff with other weird stuff]
+	It is quote common in the topic of tensor products to see tensor product of spaces that look very bizarre! For instance, $ U\otimes \End V$, $ U^*\otimes U $, $ U^*\otimes \Hom(V,W) $, and etc are few examples.
+\end{observation}
+
+
 	
 
 
