@@ -713,9 +713,51 @@
 
 
 \begin{observation}[Some thoughts on the tensor product of weird stuff with other weird stuff]
-	It is quote common in the topic of tensor products to see tensor product of spaces that look very bizarre! For instance, $ U\otimes \End V$, $ U^*\otimes U $, $ U^*\otimes \Hom(V,W) $, and etc are few examples.
+	It is quote common in the topic of tensor products to see tensor product of spaces that look very bizarre! For instance, $ U\otimes \End V$, $ U^*\otimes U $, $ U^*\otimes \Hom(V,W) $, and etc are few examples. Trying to interpret these objects can be quite messy and there is a danger of overthinking leading to a very detailed and non functional intuition about their nature. 
+	
+	However, there is a simple intuitive way to look at these objects. And in fact, everybody has been interacting with these kind of objects from their high school. One of the prime examples is working with functions that are parameterized. For instance, consider $ f(x) = x^2 - \alpha $ that arises in studying the bifurcations in dynamical systems. Assume we want to consider the behaviour of this function for different values of its parameters. One way is to define a function with a same name but $ f: \R \times I \to \R $, where $ \alpha \in I $. I.e. we can assume that the function is defined on the Cartesian product of $ \R $ (where $ x $ lives) and $ I $ (where $ \alpha $ lives). However, this is not continent in different ways, and instead, we might choose to talk about a family of functions $ \set{f_\alpha}_{\alpha \in I} $ and $ f_\alpha: \R \to \R $ given by $ f_\alpha (x) = x^2 - \alpha $. In this way, the emphasis is still on the the values of the function defined on the original space $ \R $, but we also consider the parameter $ \alpha $ in an elegant way.
+	
+	The objects in the tensor spaces above has a very similar stories, but with even more information. For instance, consider $ U \otimes \End V $. The objects in the space, are \emph{endomorphisms} from $ V $ to $ V $ that are parameterized by $ U $, and the parameterization is \emph{linear}. So $ \sigma \in U\otimes \End V $, in its input, should receive a package, that contains about $ v \in V $ (on which the elements of $ \End V $ acts). And in the output, we need to distribute these inputs among the appropriate consumers and combine their results in a suitable way (there might be several ways to do so). What we have described above, is simply saying that there is an injection
+	\[ \theta: U\otimes \End V \to \Hom( V, U\otimes V), \]
+	where for instance for $ u\otimes \sigma $ we can write
+	\[ (\theta(u\otimes \sigma))(v) = u\otimes \sigma(v) \] 
+	
+	Or, as another example, consider $ U^* \otimes \Hom(V,W) $. Objects in this space are linear operators from $ V $ to $ W $ that are parameterized by some linear functional on $ U $. So for instance for $ f \otimes \sigma $ where $ f\in U^* $ and $ \sigma \in \Hom(V,W) $ we can write
+	\[ (f\otimes \sigma) (u, v) = f(u) \sigma(v). \]
 \end{observation}
 
+\begin{observation}[Some verbal explanation on a hard looking problem]
+	Somewhere in one of the homework problems, one asks to find a natural isomorphism 
+	\[ \theta: \End(U\otimes V) \to \Hom(U,U\otimes \End(V)). \]
+	At first, this might seem like a hard problem, but there is nothing hard about it. The proof is writing down almost everything comes into your mind in your natural language. First, lets make a guess on what this isomorphism can be. I.e. given any element in $ \End (U\otimes V) $, then $ \theta(\sigma) $ should be interpreted by an element in $ \Hom(U,U\otimes \End(V)) $. Let's go through this one step at a time. If $ \theta(\sigma) $ is an element in $ \Hom(U,U\otimes \End(V)) $, then it should accept $ u\in U $, and $ [\theta\sigma](u) $ should be an element in $ U\otimes \End V $, i.e. an endomorphism on $ V $ parameterized by a vector $ u $. So $ [\theta\sigma](u) $, thought as a parameterized endomorphism,  should receive $ v\in V $ and do with it anything that a parameterized endomorphsim does (i.e. parameter $ \otimes $ result of the endomorphism on $ v $). So 
+	\[ ([\theta\sigma](u))(v) = \sigma(u\otimes v). \]
+	
+	As another example, we want to find a natural isomorphism 
+	\[ \theta: \Hom(U\otimes V_1, U\otimes V_2) \to \Hom(U, U\otimes\Hom(V_1,V_2)). \]
+	Let $ \sigma \in \Hom(U\otimes V_1,U\otimes V_2) $. So we can write
+	\[ ((\theta\sigma)(u))(v_1) = \sigma(u\otimes v_1). \]
+\end{observation}
+
+
+\begin{observation}
+	Let $ U, V $ be real vector spaces equipped with non-degenerate inner products. We can show that 
+	\[ \langle u_1\otimes v_1, u_2\otimes v_2 \rangle_{U\otimes V} := \langle u_1, u_2 \rangle_U \langle v_1, v_2 \rangle. \]
+	Let $ A \in \End(V) $ and $ B \in \End(V) $. Then we can show that 
+	\[ (A\otimes B)^\dagger = A^\dagger \otimes B^\dagger. \]
+	To see this observe that
+	\begin{align*}
+		\langle (A\otimes B)^\dagger u\otimes v, x\otimes y \rangle &= \langle u\otimes v, (A\otimes B)(x\otimes y) \rangle \\
+		&= \langle u\otimes v, Ax\otimes By \rangle \\ 
+		&= \langle u, Ax \rangle \langle v, By \rangle \\
+		&= \langle A^\dagger u, x \rangle \langle B^\dagger v, y \rangle \\
+		&= \langle A^\dagger u \otimes B^\dagger v, x\otimes y \rangle  \\
+		&= \langle (A^\dagger \otimes B^\dagger)(u\otimes v), x\otimes y \rangle \\
+	\end{align*}
+\end{observation}
+
+\begin{observation}
+	Theorem 14.5 in Roman and P2 in Lior's homework problems seems to be quite uncompatible. But there is a very subtle difference. What Lior is saying is that a pure tensor is zero if and only if and only if one of their components is zero. But the statement in Theorem 14.5 is not saying this.
+\end{observation}
 
 	
 
