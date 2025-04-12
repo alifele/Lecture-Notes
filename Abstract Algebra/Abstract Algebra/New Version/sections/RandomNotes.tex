@@ -759,6 +759,30 @@
 	Theorem 14.5 in Roman and P2 in Lior's homework problems seems to be quite uncompatible. But there is a very subtle difference. What Lior is saying is that a pure tensor is zero if and only if and only if one of their components is zero. But the statement in Theorem 14.5 is not saying this.
 \end{observation}
 
+\begin{observation}[Some notes and the dual basis]
+	The dual basis might be quite confusing for people who encounter it for the first time. However, there is a very simple and intuitive semantics behind it, which is as described below. Let $ f \in U^* $ be a linear functional $ f: U\to F $, where $ F $ is the underlying field. $ f $ will be uniquely determined by its values on the basis vectors and extending it linearly to the whole space. So if $ U = \Span{u_1,\cdots,u_n} $ then to fully specify $ f $ we need to determine
+	\[ u_1\mapsto \alpha_1,\quad u_2 \mapsto \alpha_2, \quad \cdots,\quad u_n \mapsto \alpha_n. \]
+	An alternative way to write the mappings above in a more compact and computationally useful way is to write
+	\[ f = \alpha_1 u^1 + \alpha_2 u^2 +\cdots + \alpha_n u^n, \]
+	where $ u^i $ is a special kind of linear function that is determined by mapping $ u_i $ to one and all the rest basis vectors to zero. Now we can record all these information in a row matrix, and $ f(x) $ for some vector $ x $ will by simply multiplying that row vector in $ x $ from left. 
+	
+	Also, using the machinery of the tensor product we can do a similar thing with the bilinear forms. Let $ F: U\otimes U\to F $ be a bilinear form. By the universal property of the tensor products we can see that it induces a linear form $ \tau: U\otimes V $. So its value can be determined by its values on the basis vectors of $ U\otimes U $, that is $ \set{e_i\otimes e_j}_{i,j} $. One way to write down this specification is to write
+	\[ e_1\otimes e_1 \mapsto \alpha_{11}, \quad e_1\otimes e_2 \mapsto \alpha_{12}, \quad  \cdots, e_{i} \otimes e_j \mapsto \alpha_{i,j}, \quad e_n\otimes e_n \mapsto \alpha_{n,n}. \]
+	Or since $ \sigma  $ is a linear functional, similar to the previous example we can write it simply as 
+	\[ \sigma = \sum_{i,j} \alpha_{i,j} e^i\otimes e^j, \]
+	where $ e^i\otimes e^j $ is a special kind of linear functional on $ U\otimes U $ that is specified by sending $ e_i\otimes e_j $ to zero and everything else to zero. In other words
+	\[ (e^i\otimes e^j)(e_k\otimes e_l) = \delta_{i,k}\delta_{j,l}.  \]
+	Now we can record all this information in a matrix as 
+	\[ M = \begin{pmatrix}
+		a_{11} & a_{12} & \cdots & a_{1m} \\
+		a_{21} & a_{22} & \cdots & a_{2m} \\ 
+		\vdots & \vdots & \ddots & \vdots \\
+		a_{n1} & a_{n2} & \cdots & a_{nn}
+	\end{pmatrix} \]
+	And then $ \sigma(u\otimes v) = F(u,v) $ will simply be
+	\[ u^t M v. \]
+\end{observation}
+
 	
 
 
