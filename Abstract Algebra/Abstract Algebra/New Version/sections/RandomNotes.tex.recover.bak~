@@ -862,30 +862,9 @@
 	
 	For the second isomorphism, Let $ f \in (\Sym^2 U)' $ (similar to above). Now let $ h \in \Sym^2(U') $ given by
 	\begin{align*}
-		g &= \alpha e_1\otimes e_1 + \beta e_2\otimes e_2 + \gamma e_3\otimes e_3 \\
+		h &= \alpha e_1\otimes e_1 + \beta e_2\otimes e_2 + \gamma e_3\otimes e_3 \\
 		&+ \omega (e_1\otimes e_2 + e_2\otimes e_1) + \lambda(e_1\otimes e_3 + e_3\otimes e_1) + \mu (e_2\otimes e_3 + e_3\otimes e_2).
-	\end{align*}
-	For the converse, we will do the a similar thing by in reverse.
-\end{observation}
-
-\begin{observation}[On the universal property of direct sum]
-	The universal property of direct sum (demonstrated here for two spaces), simply states that when I have a pair of vector spaces $ (V_1,V_2) $ and $ A_1 \in \Hom(V_1,W) $ and $ A_2 \in \Hom(V_2,W) $ where $ W $ is any other vector space, then there is a vector space $ V_1\oplus V_2 $ on which $ (A_1,A_2) $ can be thought of as a single linear map $ T: V_1\oplus V_2 \to W $, where 
-	\[ (A_1, A_2) = T \circ (\iota_1, \iota_2) = (T\circ \iota_1, T\circ \iota_2), \]
-	where $ \iota_1: V_1\to V_1\oplus V_2 $ and $ \iota_2: V_2\to V_1\oplus V_2 $ are the inclusion maps. Solving the problem below, will demonstrate an application.
-	\begin{problem}
-		Let $ \set{V_i}_{i\in I} $ be a family of vector spaces, and let $ A_i \in \End(V_i) $. 
-		\begin{enumerate}[(a)]
-			\item Show that there is a unique element $ \oplus_i A_i \in \End(\oplus_i V_i) $ whose restriction to the image of $ V_i $ in the sum is $ A_i $.
-		\end{enumerate}
-	\end{problem}
-	\begin{solution}
-		\begin{enumerate}[(a)]
-			\item We are looking for a map whose domain is $ \oplus_i V_i $. So we need to first find a linear map for each of the vector spaces in the direct sum above. Consider
-			\[ \iota_i \circ A_i : V_i \mapsto \oplus_i V_i. \]
-			So by the universal property of the direct sum, there exists $ \oplus_i A_i: \oplus_i V_i \to \oplus_i V_i $, such that 
-			\[ \iota_i \circ A_i = \oplus_i A_i \circ \iota_i. \]
-		\end{enumerate}
-	\end{solution}
+	\end{align*
 \end{observation}
 
 
