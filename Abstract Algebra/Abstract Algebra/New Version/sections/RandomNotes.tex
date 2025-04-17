@@ -888,6 +888,44 @@
 	\end{solution}
 \end{observation}
 
+\begin{observation}[Sup or Inf?]
+	Let $ (V,\norm{\cdot}) $ be a vector space and $ T \in \End(V) $. Then there are at least two ways to define the operator norm for a linear operator (induced by $ \norm{\cdot} $ that is defined on the vector space):
+	\[ \norm{T} = \inf\set{a>0: \norm{Tx}\leq a\norm{x} \quad \forall x\in X} = \sup\set{\frac{\norm{Tx}}{\norm{x}}: x\in X\backslash\set{0}}. \]
+	These two definitions are equivalent. To see this let 
+	\[ \alpha = \inf\set{a>0: \norm{Tx}\leq a\norm{x} \quad \forall x\in X}, \qquad \beta = \sup\set{\frac{\norm{Tx}}{\norm{x}}: x\in X\backslash\set{0}}. \]
+	Since $ \alpha $ is the infimum of $ \set{a>0: \norm{Tx}\leq a\norm{x}} $, for any $ \epsilon>0 $ we have $ \norm{Tx} \leq (\alpha+\epsilon) \norm{x} $. Assuming $ x\neq 0 $, we can write
+	\[ \forall \epsilon>0, \quad \frac{\norm{Tx}}{\norm{x}} \leq \alpha+\epsilon \quad \forall x\in X\backslash\set{0}. \]
+	In other words
+	\[ \forall \epsilon >0,\quad \sup_{x\in X}\frac{\norm{Tx}}{\norm{x}} \leq \alpha+\epsilon. \]
+	Since this is true for all $ \epsilon>0 $ we will have
+	\[ \beta = \sup_{x\in X} \frac{\norm{Tx}}{\norm{x}} \leq \alpha. \]
+	Also, again using the fact that $ \alpha $ is the infimum, we know that $ \forall \epsilon>0 $, we can find $ x\in X $ such that 
+	\[ \norm{Tx} > (M-\epsilon)\norm{x}. \]
+	Assuming $ x\neq 0 $ we can write
+	\[ \forall \epsilon>0,\ \exists x\in X, \st \frac{\norm{Tx}}{\norm{x}} > (\alpha-\epsilon). \]
+	This also implies that
+	\[ \sup_{x\in X}\frac{\norm{Tx}}{\norm{x}} > \alpha - \epsilon, \quad \forall\epsilon>0. \]
+	Letting $ \epsilon \to 0 $ we will get
+	\[ \beta = \sup_{x\in X} \frac{\norm{Tx}}{\norm{x}} \geq \alpha. \]
+	Combining this result with our result before we will get
+	\[ \beta = \alpha. \]
+\end{observation}
+
+\begin{observation}
+	We want to show that for $ A \in \End(V) $, we have
+	\[ \rho(A) = \inf\set{\norm{A}: \norm{\cdot}\text{ is a norm}}. \]
+	To see this, first, observe that is an lower bound, i.e.
+	\[ \rho(A) \leq \norm{A} \quad \forall \norm{\cdot}. \]
+	That is because if $ \lambda > \norm{A} $, then it follows that $ \lambda \in R(A) $, i.e. it belongs to the resolvent set. To see why, observe that $ A/\lambda - I $ is invertible when $ \norm{A/\lambda} < 1 $, or equivalently $ \norm{A}< \lambda $. Now we need to show that $ \rho(A) $ is indeed the greatest lower bound. To see this, let $ \epsilon > 0 $. Then we want to show there exists $ \norm{\cdot} $ for which $ \norm{A} \leq \rho(A) + \epsilon $. Let $ P $ be the change of basis matrix to the Jordan canonical form, i.e. its $ j^\text{th} $ column is $ x_j $, where $ (x_j) $ is an ordered Jordan basis. Let $ y_i = \epsilon^i $, and form the new change of basis matrix $ P_\epsilon $ whose columns are $ y_i $'s. Define
+	\[ \norm{\cdot} = \norm{P_\epsilon (\cdot) \inv{P_\epsilon}}_\infty. \]
+	So 
+	\[ \norm{A} = \norm{P A \inv{P}}_\infty = \norm{D}_\infty, \]
+	where $ D $ has elements $ c_i $ on the main diagonal (the eigenvalues) and $ \epsilon $ on the upper main diagonal. So
+	\[ \norm{A} = \max(\abs{c_i} + \epsilon\abs{b_i}), \]
+	So 
+	\[ \norm{A} \leq \rho(A) +\epsilon. \]
+\end{observation}
+
 
 \section{Ongoing thoughts}
 
