@@ -1,13 +1,57 @@
 \chapter{Review of the Category of Groups}
 
+
+\section{Summary}
+
 \begin{summary}[Random Notes]
 	$  $\\
-	\begin{enumerate}[(a)]
+	\begin{enumerate}[(i)]
 		\item In example 2.1.11 L\"{o}h, we discuss the notion of the isometry groups. One good example for such group is the group of unitary matrices. The reason is that these matrices preserve the inner product, and hence the norm induced by the inner product. Indeed $ \inv{U} = U\dagger $, so
 		\[ \norm{U a} = \langle Ua, Ua \rangle^{1/2} = \langle UU^\dagger a, a\rangle^{1/2} = \langle a,a \rangle =  \norm{a}. \]
 		
 		
 		\item Dihedral group is the symmetry group (isometry group) of regular polygon. A bit of interpretation is needed to clarify we mean here. When we say, the symmetry group of a regular polygon, implicitly, we consider the regular polygon as a metric space. And one natural question is, what is the metric? We can let the metric be the one inherited by restricting the Euclidean metric to the polygon (assuming it is embedded in $ \R^n $), or we can use other notions of metric, like the word metric (i.e. minimum number of edges between two nodes of interest). 
 		
+		
+		\item In proposition 2.1.19, part (2) in L\"{o}h, we prove that every group $ G $ is isomorphic to $ \Aut(X) $ for some object $ X $ in some category $ C $. When I was thinking on this problem, initially, I thought the following construction would also do the job: Let $ C $ be the category of all sets, and $ X $ be the underlying set of $ G $. But this is not true. I.e. $ \Aut(X) $ is not the same as $ G $. But rather $ G $ is a subgroup of $ \Aut(X) $. This is already discussed in Proposition 2.1.19 (Cayley's theorem) where we showed that every group is some subgroup of some symmetric group. $ \Aut(X) $ in the category of all sets is the same as $ S_X $, i.e. the symmetric group of $ X $.
+		
+		\item Automorphsism group is one way to associate meaningful groups to interesting objects.
+		
+		
+	
 	\end{enumerate}
 \end{summary}
+
+\begin{observation}
+	Proposition 2.1.19 states that $ \Aut(X) $ for any object $ X $ in any category is a group. This group has special names in different categories as summarized below:
+	\begin{enumerate}[(a)]
+		\item Let $ C $ be the category of all sets, where the morphisms are the set-theoretic mappings. Then $ \Aut(X) $ is the Symmetric group $ S_X $.
+		\item In the category of all metric spaces, where the morphisms are the isometric embeddings, then for any object $ X $, $ \Aut(X) $ is the symmetry (isometry) group of $ X $.
+	\end{enumerate}
+\end{observation}
+
+
+\begin{summary}[Interesting examples]
+	\begin{enumerate}[(a)]
+		\item $ \SLNR \lhd \GLNR $. So $ \GLNR/\SLNR $ is a group, and in fact
+		\[ \GLNR/\SLNR \cong (\R,\times). \]
+		Because $ \det(g\cdot \SLNR) = \det(g) \in \R $. Having an isomorphism between $ \GLNR/\SLNR $ and $ (\R,\times) $ means that given any coset in $ \GLNR/\SLNR $ we can come up with a real number, and vise versa in a way that the group structure is preserved. I.e. if we multiply two cosets and get a third one, the third one maps to a real number that is equal to the multiplication of the numbers to which the first two cosets are mapped.
+	\end{enumerate}
+\end{summary}
+
+
+\begin{theorem}
+	Kernel of group homomorphisms is normal subgroup of the domain group. Conversely, any normal subgroup, is the kernel of some group homomorphism.
+\end{theorem}
+\begin{proof}
+	Let $ \phi: G\to H $ be a group homomorphism. Let $ n \in \ker \phi $ and let $ g\in G $ be any group element. Then
+	\[ \phi(gn\inv{g}) = \phi(g) \phi(n) \phi(\inv{g}) = \phi(g) \phi(\inv{g}) = \phi(g\inv{g}) = \phi(e) = e. \]
+	So $ gn\inv{g} \in \ker \phi $. So $ \ker \phi \lhd G $.
+	
+	For the converse, let the group homomorphism be the canonical projection map to the quotient group $ G/N $. I.e. $ \phi: G\to G/N $ given by $ g \mapsto gN $ (here we only considered the left cosets).
+\end{proof}
+\begin{remark}
+	Recall that from linear algebra, the kernel of a linear map is a subspace, and the quotient of a vector space with any subspace is a vector space. However, in the case of groups, the quotient of a group with only a normal subgroup is a group. By the theorem above, then for any group homomorphism $ \phi $, $ G/\ker \phi $ is a group.
+\end{remark}
+
+
