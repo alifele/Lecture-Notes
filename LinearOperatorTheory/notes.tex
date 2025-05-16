@@ -1,0 +1,49 @@
+\documentclass[10pt]{book}
+\usepackage{commands}
+
+\usepackage{bbm}
+
+\newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\SLNR}{\operatorname{SL}(n,\R)}
+\newcommand{\GLNR}{\operatorname{GL}(n,\R)}
+
+\begin{document}
+
+
+
+
+\begin{tikzpicture}[remember picture,overlay]
+	% If a chapter image has been specified
+	\expandafter\ifstrequal\expandafter{\thechapterimage}{}{}{
+		% Output the chapter image
+		\node[
+		anchor=north west, % Anchor point on the image
+		inner sep=0pt, % Inner padding
+		] at (current page.north west) {\includegraphics[angle=0,width=\paperwidth]{Images/output}};
+	}
+\end{tikzpicture}
+
+\vspace{7cm}
+
+\heading{Linear Operator Theory}
+
+
+%\begin{figure}[h!]
+%	\centering
+%	\includegraphics[width=1\linewidth]{Images/realAnalysis}
+%	\caption*{$\mathbb{R}$eal Analysis, Created by DALL-E!}
+%	\label{fig:realanalysis}
+%	
+%\end{figure}
+
+
+
+
+\tableofcontents
+
+
+\input{sections/TopologicalSpaces.tex}
+
+
+
+\end{document}

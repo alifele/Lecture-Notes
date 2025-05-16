@@ -39,6 +39,115 @@
 	\end{enumerate}
 \end{summary}
 
+\begin{observation}[Important characterization of equality of two cosets]
+	Trying to see if an operation is well defined (specially over the quotient structure of groups or vector spaces), can sometimes be very confusing. There is a very easy characterization of the equality of two cosets, that can be very useful in showing the well-definedness of definition. We will describe it in two settings: vector spaces, and groups.
+	\begin{enumerate}[(a)]
+		\item 
+		Let $ W \subset V $ be a subspace of the vector space $ V $. Then for $ u,v \in V $ two cosets $ u + W $ and $ v+W $ are equal if and only if $ u-v\in W $ (or equivalently $ v-w\in W, $ as $ W $ is a subspace). In other words
+		\[ u + W = v + W \quad \text{iff} \quad u - v \in W. \]
+		
+		\item Let $ H \subset G $ by \emph{any} subgroup of the group $ G $. Then for $ a,b \in G $, two cosets $ aH $ and $ bH $ are equal if and only if $ \inv{a} b \in H $ (or equivalently $ \inv{b}a \in H $, as $ H $ is a subgroup). In simple words
+		\[ aH = bH \quad \text{iff}\quad  \inv{a}b \in H. \]
+	\end{enumerate}
+	\begin{proof}
+		We will show the proof for the case of groups. For the forward direction we assume $ aH = bH $. So $ \exists h_1,h_2 \in H $ such that $ ah_1 = b h_2 $. We can write this as $ \inv{a} b = h_1\inv{h_2} $. Since $ H $ is a subgroup, then $ \inv{h_2}\in H $ and $ h_1\inv{h_2}\in  H $. This implies that $ \inv{a}b \in H $. For the converse, we assume $ \inv{a}b  \in H$. Since $ H $ is a subgroup, then $ \inv{\inv{a}b} = \inv{b}a \in H $ as well. Let $ ah_1 \in aH $ for some $ h_1 \in H $. Then $ ah_1 = b\inv{b}ah_1 = bh'h_1 $ for some $ h'\in H $. So $ ah_1 \in bH $. Let $ bh_2 \in bH $. Then $ a\inv{a}bh_2 = ah''h_2 \in aH $. So $ bh_2 \in aH $.
+	\end{proof}
+	
+	The characterization above helps us to quickly see why the quotient multiplication for $ G/N $ is well-defined when $ N $ is a normal subgroup of $ G $, i.e. $ N \lhd G $. Let $ a_1N = a_2N $ and $ b_1N = b_2N $. To show the well-definedness of the multiplication we need to show $ (a_1b_1)N = (a_2b_2)N $, or equivalently, from the characterization above $ (a_1b_1)^{-1} (a_2b_2)\in N $. To see this we start with the characterization of $ a_1N = a_2N $ and $ b_1N = b_2N $. These will result in $ \inv{a_1}a_2 \in N $ and $ \inv{b_1}b_2 \in N $ respectively. Indeed
+	\[ (a_1b_1)^{-1}(a_2b_2) = \inv{b_1}\inv{a_1}a_2b_2 = b_1^{-1} n_1 b_2 = b_1^{-1} n_1 b_1\inv{b_1} b_2 = n_2 \inv{b_1}b_2 \in N.   \]
+\end{observation}
+
+
+\begin{observation}[An explicit example of not well-defined multiplication for quotient with non-normal subgroups]
+	We construct an explicit example. Consider $ S_3 $, the permutation group of $ \set{1,2,3} $ as
+	\[ \sigma_0 = (1,2,3),\ \sigma_1 = (1,3,2),\ \sigma_2=(2,1,3),\ \sigma_3 =(2,3,1),\ \sigma_4 = (3,1,2),\ \sigma_5 = (3,2,1). \]
+	The multiplication table will be
+	\[ 
+	\begin{matrix}
+		\cdot\ \ \vline & \sigma_0 & \sigma_1 & \sigma_2 & \sigma_3 & \sigma_4 & \sigma_5 \\
+		\hline
+		\sigma_0 \vline & \sigma_0 & \sigma_1 & \sigma_2 & \sigma_3 & \sigma_4 & \sigma_5 \\
+		\sigma_1 \vline & \sigma_1 & \sigma_0 & \sigma_4 & \sigma_5 & \sigma_2 & \sigma_3 \\
+		\sigma_2 \vline & \sigma_2 & \sigma_3 & \sigma_0 & \sigma_1 & \sigma_5 & \sigma_4 \\
+		\sigma_3 \vline & \sigma_3 & \sigma_2 & \sigma_5 & \sigma_4 & \sigma_0 & \sigma_1 \\
+		\sigma_4 \vline & \sigma_4 & \sigma_5 & \sigma_1 & \sigma_0 & \sigma_3 & \sigma_2 \\
+		\sigma_5 \vline & \sigma_5 & \sigma_4 & \sigma_3 & \sigma_2 & \sigma_1 & \sigma_0 
+	\end{matrix}
+	 \]
+	 The cyclic subgroups will be
+	 \[ \set{\sigma_0,\sigma_1},\quad \set{\sigma_0,\sigma_2},\quad \set{\sigma_0,\sigma_3,\sigma_3^2},\quad \set{\sigma_0,\sigma_5}. \]
+	 The subgroup $ H = \set{\sigma_0, \sigma_1} $ is not a normal subgroup because $ \sigma_2 \sigma_1 \inv{\sigma_2} = \sigma_2 \sigma_1 \sigma_2 = \sigma_2 \sigma_4 = \sigma_5 \notin H $. So we expect $ G/H $ not to have a group structure. This is true because
+	 \[ G/H = \set{\set{\sigma_0,\sigma_1}, \set{\sigma_2,\sigma_3},\set{\sigma_4,\sigma_5}}, \]
+	 where
+	 \[ \sigma_0 H  = \sigma_1 H = \set{\sigma_0,\sigma_1},\quad \sigma_2H = \sigma_3 H = \set{\sigma_2,\sigma_3},\quad \sigma_4H=\sigma_5H = \set{\sigma_4,\sigma_5}.\]
+	 But
+	 \[ (\sigma_0 H)\cdot (\sigma_2 H) = \sigma_2 H \quad (\sigma_1H)\cdot(\sigma_3 H) = \sigma_5 H, \]
+	 but
+	 $ \sigma_2 H \neq \sigma_3 H $.
+	 
+	 
+	 \begin{example}[Quotient of $ S_3 $]
+	 	From what we had above, we see that $ N = \set{\sigma_0, \sigma_3,\sigma_3^2} $ is the normal subgroup of $ G $. So it is interesting to ask what kind of group $ G/N $ will be? To answer this question, we need to calculate the cosets $ N $. A simple calculation shows
+	 	\[ \sigma_0N = \sigma_3N = \sigma_4N = \set{\sigma_0,\sigma_3,\sigma_4}, \qquad  \sigma_1N =\sigma_2N = \sigma_5 N = \set{\sigma_1,\sigma_2,\sigma_5}.  \]
+	 	Let $ a = \sigma_0 N $ and $ b = \sigma_1N $. Then it is easy to see $ aa = a,\ ab = b,\ ba = b,\ bb = a $. So we can say that 
+	 	\[ G/N \cong S_2, \qquad \text{or alternatively} \qquad G/N \cong \Z_2. \]
+	 \end{example}
+	 
+	 
+	 \begin{example}[Demonstration of the Cayley's theorem]
+	 	It is very easy to see the Cayley's theorem (Proposition 2.1.9) from the multiplication table above. Each line of this multiplication table can be thought of as a permutation of the elements of $ G $. For instance, the line corresponding to $ \sigma_2 $ can be thought of as the following permutation
+	 	\[ \begin{pmatrix}
+	 		0 & 1 & 2 & 3 & 4 & 5 \\
+	 		2 & 3 & 0 & 1 & 5 & 4 
+	 	\end{pmatrix} \]
+	 	and the line corresponding to $ \sigma_3 $:
+	 	\[ \begin{pmatrix}
+	 		0 & 1 & 2 & 3 & 4 & 5 \\
+	 		3 & 2 & 5 & 4 & 0 & 1
+	 	\end{pmatrix}. \]
+	 	Multiplying $ \sigma_2 \sigma_3 $ according to the multiplication table will result in $ \sigma_2 \sigma_3 = \sigma_1 $, and composing the permutations above we will get
+	 	\[ 
+	 	\begin{pmatrix}
+	 		0 & 1 & 2 & 3 & 4 & 5 \\
+	 		2 & 3 & 0 & 1 & 5 & 4 
+	 	\end{pmatrix} 
+	 	\begin{pmatrix}
+	 		0 & 1 & 2 & 3 & 4 & 5 \\
+	 		3 & 2 & 5 & 4 & 0 & 1
+	 	\end{pmatrix}
+	 	=
+	 	\begin{pmatrix}
+	 		0 & 1 & 2 & 3 & 4 & 5 \\
+	 		1 & 0 & 4 & 5 & 2 & 3
+	 	\end{pmatrix},
+	 	 \]
+	 	 which is precisely the permutation corresponding to $ \sigma_1 $.
+	 \end{example}
+	 
+	 \begin{example}[Learning from my mistake!]
+	 	As demonstrated in the example above, we have
+	 	\[ \set{g\cdot(\square): g\in G} \overset{G}{\subseteq} S_G. \]
+	 	For a while, I was thinking the permutations defined in this way are actually automorphisms and I was thinking the group on the left hand side is a subgroup of $ \Aut(G) $. But a simple calculation proved me that I am wrong. That is because for $ a,b \in G $, $ g\cdot(ab) \neq (ga)\cdot(gb) $. However, consider the following permutations
+	 	\[ \set{g\cdot(\square)\cdot \inv{g}: g\in G}, \]
+	 	then it is very easy to check that for $ a,b\in G $
+	 	\[  g(ab)\inv{g} = ga\inv{g} g b \inv{g} = (ga\inv{g})(gb\inv{g}),  \]
+	 	and it preserves the group structure of $ G $, and after checking that it is indeed a bijection we can conclude that it is a subgroup of $ \Aut(G) $. It is also easy to check that $ \set{g\cdot\square\cdot \inv{g}: g\in G} $ is also a normal subgroup of $ \Aut{G} $. That is because for $ \sigma \in \Aut(G) $, we have
+	 	\[ \sigma\circ f_g \circ \inv{\sigma} = f_h, \]
+	 	where $ f_g(\square) = g\square\inv{g}, $ and $ f_h(\square) = h\square\inv{h} $, for $ h = \sigma(g) $. That is because
+	 	\[  \sigma\circ f_g \circ \inv{\sigma}(a) = \sigma(g(\inv{\sigma}a)\inv{g}) = \sigma(g) a \sigma(\inv{g}) = ha\inv{h} = f_h, \]
+	 	where we have used the fact if $ \sigma $ is an homomorphism, then $ \sigma(\inv{g}) = \inv{\sigma(g)} $.
+	 	So the correct inclusion will be
+	 	\[ \set{g\cdot\square\cdot\inv{g}: g\in G} \lhd \Aut(G) \overset{G}{\subseteq} S_G, \]
+	 	and
+	 	\[ \set{g\cdot\square: g\in G} \overset{G}{\subseteq} S_G, \]
+	 	(as demonstrated in the Cayley's theorem).
+	 \end{example}
+	 
+	 
+	 
+	 
+\end{observation}
+
 
 \begin{theorem}
 	Kernel of group homomorphisms is normal subgroup of the domain group. Conversely, any normal subgroup, is the kernel of some group homomorphism.

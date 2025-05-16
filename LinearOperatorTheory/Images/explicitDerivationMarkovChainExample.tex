@@ -1,0 +1,23 @@
+\begin{figure}[h!]
+	\centering
+	
+	\begin{center}
+		\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=1.9cm,
+			semithick,scale=0.4]
+			\tikzstyle{every state}=[circle, draw, fill=orange!50,
+			inner sep=0pt, minimum size=15pt]
+			
+			\node[state] (A)              {$1$};
+			\node[state] (B) [right of=A] {$2$};
+			
+			\path 
+			(A) edge [loop left] node {$\frac{1}{2}$} (A)
+			(A) edge [bend left] node {$\frac{1}{2}$} (B)
+			(B) edge [loop right] node {$\frac{1}{2}$} (B)
+			(B) edge [bend left] node {$\frac{1}{2}$} (A);
+			
+		\end{tikzpicture}
+	\end{center}
+
+
+\end{figure}
