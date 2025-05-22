@@ -147,3 +147,42 @@
 	\[ d(x,y) = (\abs{x_1-y_1}^{1/2} + \abs{x_2-y_2}^{1/2})^2. \]
 	Is $ (X,d) $ a metric space?
 \end{problem}
+\begin{solution}
+	No. Because the triangle inequality breaks. Let 
+	\[ x = (0,0), \qquad y = (0,1/4), \qquad z = (1/4,1/4). \]
+	It is easy to check that the triangle inequality $ d(x,z) \leq d(x,y) + d(y,z) $ does not hold. Because
+	\[ 1 = d(x,z) \leq d(x,y) + d(y,z) = 1/4 + 1/4 = 1/2, \]
+	is a contradiction.
+	\begin{remark}
+		With a similar idea of proof, it is easy to show that $ d_p $ fails to satisfy the triangle inequality if $ 0<p<1 $.
+	\end{remark}
+\end{solution}
+
+\begin{problem}
+	In $ \R^2 $ let $ A \set{x=(x_1,x_2): (\abs{x_1}^2 + \abs{x_2}^2)^{1/2} < 1} $, and
+	\[ d(x,y) = \set{\abs{x_1-y_1}^2 + \abs{x_2-y_2}^2}^{1/2}. \]
+	Compute $ d(x,A) $. Show that $ d(x,A) = 0 $ if and only if 
+	\[ \abs{x_1}^2 + \abs{x_2}^2 \leq 1. \]
+\end{problem}
+\begin{solution}
+	Let $ x = (x_1,x_2) \in \R^2 $ (WLOG we assume that $ x_1>0 $) that does not belong to $ A $. The ray that passes through $ x $ is given by $ y = \frac{x_2}{x_1}x $, and this ray intersects the unit circle at
+	\[ \tilde{x} = (\frac{1}{\sqrt{1+(x_2/x_1)^2}}, \frac{x_2/x_1}{\sqrt{1+(x_2/x_1)^2}} ). \]
+	So the distance between $ x $ and the point above is
+	\[ d(x,\tilde{x}) = \left( \abs{\frac{1}{\sqrt{1+(x_2/x_1)^2}}-x_1}^2 + \abs{\frac{x_2/x_1}{\sqrt{1+(x_2/x_1)^2}}-x_2}^2 \right)^{1/2}. \]
+	
+	To show that $ d(x,A) = 0 $ if and only if $ x_1^2 + x_2^2 \leq 1 $, we first do the forward direction. Let $ d(x,A) = 0 $. From our explicit formula above, it is easy to see that we should have
+	\[ x_1 = \frac{1}{\sqrt{1+(x_2/x_1)^2}}, \qquad x_2 = \frac{x_2/x_1}{\sqrt{1+(x_2/x_1)^2}}.  \]
+	It is easy to check that $ x_1^2 + x_2^2 =1 $ which implies $ x_1^2 + x_2^2 \leq 1 $. For the converse direction, we assume $ x_1^2 + x_2^2 \leq 1 $. When $ x_1^2 + x_2^2 < 1 $, then $ x\in A $, and by the definition of $ d(x,A) $ we see $ d(x,A) = 0 $. When $ x_1^2 + x_2^2 = 1 $, then we can write $ 1+(x_1/x_2)^2 = 1/x_1^2 $. Using the fact that $ x_1 > 0 $ this implies that
+	\[ d(x,A) = 0, \]
+	where we have used the explicit formula above.
+\end{solution}
+
+
+\begin{problem}
+	In example 5, the metric $ d_\infty $ was defined with a ``sup'' instead of ``max''. In order to see the necessity of this let $ x = (x_1,x_2,\cdots), y = (y_1,y_2,\cdots) $ be given by 
+	\[ x_n = \frac{1}{n+1}, \qquad  y_n = \frac{n}{n+1}. \]
+	And argue why ``sup'' should be used instead of ``max''? What about Example 8 and Example 11?
+\end{problem}
+\begin{solution}
+	The reason is that if on $ \ell_\infty $ we define $ d_\infty $ by ``max'', then for the presented examples $ d_\infty(x,y) $ does not exist. In the case of example 8, we \textbf{can} replace ``max'' with ``sup''. The reason is that if $ x,y \in C[0,T] $, then $ f = \abs{x-y} \in C[0,T] $. On the other hand, a continuous function defined on a compact set, attains its maximum and minimum. For Example 11, we can \textbf{not} use ``max'' in place of ``sup''.
+\end{solution}
