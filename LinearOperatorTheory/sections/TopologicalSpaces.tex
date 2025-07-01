@@ -1,8 +1,109 @@
 \chapter{Topological Spaces}
 
 
+
+\section{Random Notes}
+
+\begin{observation}[Some notes on Example 2 page 63]
+	In this example we study $ X\subset L^2(-\infty,+\infty) $ the functions in $ L^2(-\infty,+\infty) $ that their primitive functions also belongs to $ L^2(-\infty,+\infty) $. I.e. they roughly look like the following function
+	\begin{center}
+		\includegraphics[width=0.4\linewidth]{Images/L2WithL2Primitive.png}
+	\end{center}
+	Then we define the map $ \Phi: X\to X $ given by
+	\[ \Phi(x)(t) = \int_{-\infty}^{t} x(\tau) d\tau. \]
+	We want to show that this map is not continouse at any point of its domain. Since $ L^2(-\infty,+\infty) $ is a vector space, it is enough to show this for the origin. So we want to show that this map is not continuous at the origin. Let $ x $ be the function whose graph is given as below (the red curve). It is easy to see that the blue curve is its primitive function.
+	\input{Images/L2WithPrimitveL2NotCont.tex}
+		
+	 The $ L^2 $ norm is roughly the area under the curve, so the $ L^2 $ norm of $ x $ is $ AB $ while the $ L^2 $ norm of $ \Phi(x) $ is $ AB^2 $. Now to prove that the mapping $ \Phi $ is not continuous at the origin, we need to change $ A,B $ such that the $ L^2 $ norm $ x $ goes to zero but the norm of $ \Phi(x) $ gets larger and larger. Suppose we want to make the norm of $ x $ to be half and double the norm of $ \Phi(x) $. So we need to solve
+	\[ \frac{A'B'}{AB} = \frac{1}{2}, \quad \frac{A'B'^2}{AB^2} = 1. \]
+	It is easy to see that we need to have
+	\[ \frac{A'}{A} = 4, \qquad \frac{B'}{B} = \frac{1}{2}. \]
+
+\end{observation}
+
+\begin{observation}[Some notes on Example 4, page 64]
+	Putting this example in contrast to the example above, teaches us a lot! In the example above we observed that the ``integration'' of $ L^(-\infty,+\infty) $ functions is nowhere continuous. However, in this example, we will see that the integration operator in $ L^2[0,T] $ is a uniformly  continuous operator! This is a huge contrast and the surprising fact is that in both cases we are dealing with the ``same'' operator and the only difference is their domain. To see this let $ X = L^2[0,T] $ and let $ \Phi: L^2[0,T] \to L^2[0,T] $ defined as
+	\[ [\Phi(x)](t) = \int_{0}^{t} x(\tau)d\tau. \]
+	\begin{remark}
+		We need to check to see if $ \Phi(x) $ really belongs to $ L^2[0,T] $. However the argument will be very similar to what we will see below, so we have skipped this part. 
+	\end{remark}
+	Since $ L^2[0,T] $ is a vector space and $ \Phi  $ is a linear map, it is enough to show the continuity at the origin. Let $ x\in L^2[0,T] $. Then
+	\begin{align*}
+		d(\Phi(x),0)^2 &= \int_{0}^{T} \abs{\int_{0}^{t} [\Phi(x)](\tau)d\tau}^2 dt \leq \int_{0}^{T} \left(\int_{0}^{t} \abs{[\Phi(x)](\tau)}d\tau\right)^2 dt \\ 
+		& \leq \int_{0}^{T} \left(\int_{0}^{T} \abs{[\Phi(x)](\tau)}d\tau\right)^2 dt \\
+		& \leq \int_{0}^{T} \left( \int_{0}^{T} 1 d\tau \right) \left( \int_{0}^{T}\abs{[\Phi(x)](t)}^2 d\tau \right) dt \\
+		&= T^2 \int_{0}^{T}\abs{[\Phi(x)](t)}^2 d\tau \\
+		&= T^2 d(x,0).
+	\end{align*}
+	So we have
+	\[ d(\Phi(x),0) \leq T d(x,0). \]
+	Since the expansion factor $ T $ does not depend on $ x $, we can conclude that $ \Phi $ is actually uniformly continuous.
+\end{observation}
+
+\begin{observation}[Discrete version of the example above]
+	We can construct a discrete version of the example above, where the underlying space is $ \R^n $, and the integration operator $ \Phi $ is a linear map $ \Phi: \R^n \to \R^n $ given by
+	\[ \Phi: \begin{bmatrix}
+		x_1 \\ x_2 \\ x_3 \\ \vdots \\ x_n
+	\end{bmatrix} \mapsto 
+	\begin{bmatrix}
+		x_1 \\ x_1+x_2 \\ x_1+x_2+x_3 \\ \vdots \\ x_1+\cdots+x_n
+	\end{bmatrix}.
+	 \]
+	 This can be represented by the matrix
+	 \[ M = \begin{bmatrix}
+	 	1 & 0 & 0 & 0 & \cdots & 0 \\
+	 	1 & 1 & 0 & 0 & \cdots & 0 \\
+	 	1 & 1 & 1 & 0 & \cdots & 0 \\
+	 	1 & 1 & 1 & 1 & \cdots & 0 \\
+	 	\vdots & \vdots & \vdots & \vdots & \ddots & \vdots  \\
+	 	1 & 1 & 1 & 1 & \cdots & 1
+	 \end{bmatrix} \]
+	 However, from the Example 1 from page 62 we know that a linear map between vector spaces is continuous with the operator norm at most $ \sum_{ij} \abs{m_{i,j}} $. So the operator norm of this matrix will be
+	 \[ \norm{\Phi} \leq  \left( \frac{n(n+1)}{2} \right)^{1/2} \approx n. \]
+\end{observation}
+
+\begin{summary}[Some notes on Example 5 on page 65]
+	The example 5 demonstrates the observation above in a very useful way. It explicitly shows that the example above is just a very special matrix and we can have more general linear maps with arbitrary elements in their matrix representation. So the matrix operators between finite dimensional vector spaces correspond to the integration kernels. consider $ L_2[0,T] $ and let $ k \in L^2([0,T]\times [0,T]) $, i.e.
+	\[ \int_{0}^{T} \int_{0}^{T} \abs{k(t,\tau)}^2 d\tau dt = M^2 < \infty. \] 
+	And we define the linear map $ \Phi_k: L_2[0,T] \mapsto L_2[0,T] $ 
+	\[ [\Phi_k(x)](t) = \int_{0}^{T} k(t,\tau)  x(\tau) d\tau.  \]
+	The Example 5 shows that this is a continouse map (bounded linear map) with operator norm 
+	\[ \norm{\Phi_k} \leq M. \]
+	Compare this with Example 1.
+	
+	\begin{remark}
+		One special kind of kernel integrals are convolutions where the kernel is of the form $ k(t,\tau) = h(t-\tau) $ for some function $ h $ of appropriate type (I think it is enough to have $ L_2[0,T] $, with the definition that $ h(t-\tau) = 0 $ if $ t-\tau \notin [0,T] $). We often write convolution as
+		\[ (f\ast h) (t) = \int_{0}^{t} h(t-\tau)f(\tau) d\tau. \]
+	\end{remark}
+\end{summary}
+
+
+
 \section{Solved Problems}
 
+
+\subsection{Metric Spaces}
+
+\begin{summary}[A metric for bounded functions defined on any set $ S $]
+	Let $ S $ be a nonempty set and let $ X = B(S) $ denote the collection of all bounded real-valued functions defined on $ S $. Then
+	\[ d(f,g) = \sup\set{\abs{f(s)-g(s)}:s\in S}, \]
+	is a metric on $ X $.
+\end{summary}
+
+\begin{summary}[A metric for differential operators]
+	Let $ X(n) $ denote all the differential operators of the form
+	\[ P(D) = p_0D_0 + p_1D_1 + \cdots + p_nD_n. \]
+	Then $ d $ is a metric on $ X(n) $:
+	$ d(P(D),Q(D)) = \sum_{i=0}^{n} \abs{p_i - q_i} $.
+\end{summary}
+
+
+\begin{summary}
+	Let $ X $ denote the collection of all bounded closed intervals $ [a,b] $ from the real line. Let $ [a,b] $ and $ [c,d] $ be two sets. Then the symmetric difference $ [a,b] \delta [c,d] $ is the union of at most two bounded intervals. $ \rho([a,b],[c,d]) $ to be the sum of the lengths of these intervals. Then $ \rho $ is a pseudometric. In particular, the distance between any two single points is zero.
+\end{summary}
+\begin{remark}
+	{\color{red} \noindent TODO:} I am still thinking why the triangle inequality of the metric defined above holds.
+\end{remark}
 
 \begin{problem}
 	Let $ d $ be a metric on $ X $ and let $ d_\alpha = \alpha d $, where $ 0 < \alpha < 1 $. Show that $ d_\alpha \not\equiv d $ if $ X $ has more than two points.
@@ -142,6 +243,8 @@
 \end{solution}
 
 
+\subsection{Examples of Metric Spaces}
+
 \begin{problem}
 	Let $ X=\R^2 $ and let 
 	\[ d(x,y) = (\abs{x_1-y_1}^{1/2} + \abs{x_2-y_2}^{1/2})^2. \]
@@ -186,3 +289,247 @@
 \begin{solution}
 	The reason is that if on $ \ell_\infty $ we define $ d_\infty $ by ``max'', then for the presented examples $ d_\infty(x,y) $ does not exist. In the case of example 8, we \textbf{can} replace ``max'' with ``sup''. The reason is that if $ x,y \in C[0,T] $, then $ f = \abs{x-y} \in C[0,T] $. On the other hand, a continuous function defined on a compact set, attains its maximum and minimum. For Example 11, we can \textbf{not} use ``max'' in place of ``sup''.
 \end{solution}
+
+
+\begin{problem}
+	Sketch the set of points $ x=(x_1,x_2) $ in $ \R^2 $ for which 
+	\[ d_p(0,x) = 1, \]
+	where $ 0=(0,0) $ and $ d_p $ is defined in Example 1. With $ x,y $ fixed show that $ d_p(x,y) $ is decreasing in $ p $. Hence
+	\[ d_p(x,y) \leq d_q(x,y). \]
+\end{problem}
+\begin{solution}
+	It is easy to find such sketches online. For the second part, fix $ x,y\in \R^2 $. Then
+	\[ \frac{d d_p(x,y)}{dp} = -\frac{A}{p^2}, \]
+	where $ A $ is a positive quantity (can be calculated explicitly by using the chain rule). So $ d_p(x,y) $ is decreasing.
+\end{solution}
+\begin{summary}
+	For fixed $ x,y\in \R^n $, $ d_p(x,y) $ is decreasing in $ p $. So 
+	\[ p\leq q \quad \implies \quad d_p(x,y) \geq d_q(x,y). \]
+\end{summary}
+
+\begin{problem}
+	Let $ C $ be the unit circle in the complex plane, that is $ C = \set{z:\abs{z}=1} $. Let $ X $ denote all complex-valued functions $ f(z) $ defined on $ C $ for which
+	\[ \int_C \abs{f(z)}dz < \infty. \]
+	Show that 
+	\[ d(f,g) = \left(\int_C \abs{f(z)-g(z)}dz\right)^{1/2} = \left(\int_{0}^{2\pi} \abs{f(e^{2i\pi\theta}) - g(e^{2i\pi\theta})}d\theta \right)^{1/2}  \]
+	is a metric on $ X $.
+\end{problem}
+\begin{solution}
+	It is easy to check the other properties of being a metric. Thus we will show that $ d $ satisfies the triangle inequality. To see this let $ f,g,h \in X $. Then 
+	\begin{align*}
+		d(f,g) = \left( \int \abs{\tilde{f} - \tilde{g}}^2  \right)^{1/2} = \left( \int \abs{\tilde{f} -\tilde{g} \pm \tilde{h}}^2 \right)^{1/2} = \left( \int \abs{u+v}^2  \right)^{1/2},
+	\end{align*}
+	where $ u = \tilde f - \tilde h $ and $ v = \tilde{h} - \tilde{g} $, and $ \tilde{f}(\theta) = f(e^{2i\pi\theta}) $. Observe that
+	\[ \int \abs{u+v}^2 = \int (u+v) \conj{(u+v)} = \int (\abs{u}^2 + \abs{v}^2 + 2\Re{u\conj{v}}) = \int \abs{u}^2 + \int \abs{v}^2 + 2\int \Re{u\conj{v}}.\]
+	Also
+	\[ \int \Re{u\conj{v}} \leq \Re{ \int u\conj{v}} \leq \Re{\norm{u}\norm{v}} = \norm{u}\norm{v},  \]
+	where $ \norm{\cdot} $ is the norm that induces the metric. So
+	\[ \int \abs{u+v}^2 \leq \norm{u}^2 + \norm{v}^2 + 2\norm{u}\norm{v} = (\norm{u} + \norm{v})^2. \]
+	so we can conclude
+	\[ d(f,g) = \left( \int \abs{u+v}^2 \right)^{1/2} \leq \norm{u} + \norm{v} = d(f,h) + d(h,g). \]
+\end{solution}
+
+\begin{problem}
+	Let $ X $ denote the class of all complex-valued functions $ f(z) $ that are analytic for $ \abs{z} < 1 $. Let $ f(z) = \sum_{n=0}^{\infty} a_nz^n $ and $ g(z) = \sum_{n=0}^{\infty} b_n z^n $ be the power series expansion for $ f,g $ in $ X $. Show that the following functions are metrics, or pseudo-metrics.
+	\begin{enumerate}[(a)]
+		\item $ d(f,g) = \sup\set{\abs{f(z)-g(z)}\ :\ \abs{z}\leq \rho} $, where $ 0 < \rho < 1 $.
+		\item $ d(f,g) = \abs{a_0 - b_0} $.
+		\item $ d(f,g) = \abs{a_0 - b_0} + \abs{a_1 - b_1} $.
+		\item $ d(f,g) = \sum_{n=0}^{\infty} \abs{a_n - b_n}\rho^n $, where $ 0<\rho<1 $.
+		\item 
+		\[ d(f,g) = \sup\set{\abs{\int_{\abs{\xi}=0} \frac{f(\xi) - g(\xi)}{z-\xi}d\xi}\ :\ \abs{z} < \rho}, \quad \text{where $ 0<\rho<1 $.} \]
+	\end{enumerate}
+\end{problem}
+
+\begin{solution}
+	Since we need to choose between a metric or a pseudometric, we don't check the triangle inequality.
+	\begin{enumerate}[(a)]
+		\item Is a metric. 
+		\item Is a pseudometric. Because the distance between functions in which in their expansion only the first term is the same will be zero.
+		\item Is a pseudometric. Because of a similar argument as above.
+		\item Is a metric. Because if $ d(f,g) = 0 $, then every term in the positive series should be zero, hence $ \abs{a_n - b_n} = 0 $ for all $ n\in \N $.
+		\item {\color{red} \noindent Still thinking!}
+	\end{enumerate}
+\end{solution}
+
+
+
+\subsection{Continuity}
+
+
+\begin{problem}
+	Let $ C^\infty[0,T] $ denote the set of all real-valued smooth functions defined on $ [0,T] $. Let $ D $ be the mapping of $ C^\infty[0,T] $ to itself defined by
+	\[ Df = \frac{df}{dt}. \]
+	\begin{enumerate}[(a)]
+		\item Let $ d_1 $ be the sup-metric on $ C^\infty[0,T] $. Is $ D $ a continuous mapping  of $ (C^\infty[0,T],d_1) $ into itself?
+		
+		\item Define a metric $ d_2 $ on $ C^\infty[0,T] $ by
+		\[ d_2(x,y) = d_1(x,y) + d_1(Dx,Dy). \]
+		Is $ D $ a continouse mapping of $ (C^\infty[0,T], d_2) $ into $ (C^\infty[0,T], d_1) $?
+	\end{enumerate}
+\end{problem}
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item No. Consider the sequence of functions $ (f_n)_n $ where 
+		\[ f_n(t) = \frac{\sin(2^n x)}{n}. \]
+		Then $ d_1(f_n, 0)\to 0 $ as $ n\to \infty $ but $ d_1(Df_n, 0) $ becomes arbitrary large. 
+		
+		\item Yes. Let $ f,g \in  C^\infty[0,T] $ then
+		\[ d_1(Df, Dg) \leq d_1(Df, Dg) + d_1(f,g) = d_2(f,g). \]
+		So for any $ \epsilon>0 $ we let $ \delta = \epsilon $. Then if $ d_2(f,g) < \delta $ it implies that $ d_1(f,g) < \epsilon $.
+	\end{enumerate}
+\end{solution}
+
+\begin{problem}
+	A delay line is a device whose output is ideally a delayed version of its input, i.e.
+	\[ y(t) = x(t-\tau). \]
+	Suppose that $ x,y \in L_2(-\infty,+\infty) $, where $ L_2(-\infty,+\infty) $ has the usual metric. Is the mathematical model of the delay line a continouse mapping of $ L_2(-\infty,+\infty) $ into itself?
+\end{problem}
+
+\begin{solution}
+	We know that integration, in the sense of Lebesgue, is not sensitive to shift. I.e.
+	\[ \int_{-\infty}^{+\infty} f(t) dt = \int_{-\infty}^{+\infty} f(t-\tau) dt, \]
+	for all $ \tau \in \R $. So for any $ f,g \in L_2(-\infty,+\infty) $ we have
+	\[ d(f,g) = d(Sf, Sg). \]
+\end{solution}
+
+
+
+\begin{problem}
+	Let $ Y = C[0,T] $ be given with the sup-metric $ d(x,y) $. Let 
+	\[ X = (C[0,T],d) \times (C[0,T],d), \]
+	be the product space. Consider the mapping $ F $ of $ X $ into $ Y $ defined by $ F(x) = x_1x_2 $, where $ x=(x_1,x_2) $. (That is $ F $ is a multiplier). Is $ F $ continuous? Is $ F $ uniformly continuous?
+\end{problem}
+\begin{solution}
+	Assume that the norm on $ X $ is $ d_2(f,g) = d(f_1,g_1) + d(f_2,g_2) $ (we could chose other metrics on the product space as well, but we chose this one for the convenience). Then we can write
+	\begin{align*}
+		d(F(f),F(g)) &= \sup_{t\in[0,T]} \abs{[F(f)](t) - [F(g)](t)} \\
+		&= \sup_{t\in[0,T]} \abs{f_1(t)g_1(t) - f_2(t)g_2(t)} \\
+		&= \sup_{t\in[0,T]} \abs{f_1(t)g_1(t) - f_2(t)g_2(t) \pm f_1(t)g_2(t)} \\
+		&= \sup_{t\in[0,T]} \abs{f_1(t)(g_1(t)-g_2(t)) + g_2(t)(f_1(t)-f_2(t))} \\
+		&\leq \norm{f_1}_\infty d(g_1,g_2) + \norm{g_2}_\infty d(f_1,f_2) \\ 
+		&\leq \max\set{\norm{f_1}_\infty, \norm{g_2}_\infty} (d(g_1,g_2)+d(f_1,f_2)) \\
+		&= \max\set{\norm{f_1}_\infty, \norm{g_2}_\infty} d_2(f,g).
+	\end{align*}
+	So for a given $ \epsilon>0 $ we can let $ \delta = \epsilon/(\max\set{\norm{f_1}_\infty, \norm{g_2}_\infty}) $. However, since the choice of $ \delta $ depends on the point $ f,g $, then the uniform continuity fails.
+\end{solution}
+
+
+\begin{problem}
+	Let $ (X,d) $ be a metric space, where $ X $ is nonempty. Let $ Y = BC(X,\R) $ denote the collection of all bounded, continuous real-valued functions defined on $ X $. 
+	\begin{enumerate}[(a)]
+		\item Show that the functions
+		\begin{align*}
+			f_1 &: x\mapsto \frac{d(x,x_0)}{1+d(x,x_0)}, \\
+			f_2 &: x\mapsto d(x,x_1) - d(x,x_0), \\
+			f_3 &: x\mapsto 3,
+		\end{align*}
+		are in $ Y $.
+		
+		\item Show that 
+		\[ \sigma(f,g) = \sup\set{\abs{f(x)-g(x)}: x\in X} \]
+		is a metric on $ Y $.
+	\end{enumerate}
+\end{problem}
+
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item Fix $ x_0\in X $. We want to show the function $ f:X\mapsto \R $ given as $ f(x) = d(x,x_0) $ is a continuous function. Because
+		\[ d(f(x),f(y)) = \abs{f(x)-f(y)} = \abs{d(x,x_0)+d(y,y_0)} \leq \abs{d(x,y)+d(y,x_0)-d(y,x_0)} = d(x,y). \] 
+		On the other hand since the function $ g:\R\to\R $ given by $ x\mapsto x/(1+x) $ is a bounded continouse function, then $f_1 =  d/1+d $ is also a bounded continouse function. Continuoity of $ f_2 $ follows from a similar reasoning. For the boundedness, observe that 
+		\[ d(x,x_1) - d(x,x_0) \leq d(x,x_0) + d(x_0,x_1) - d(x,x_0) = d(x_0,x_1). \]
+		
+		\item Follows from the result of Exercise 13 page 56.
+	\end{enumerate}
+\end{solution}
+
+
+\begin{problem}
+	Let $ f: X \to X $ be a continuous mapping, where $ X $ has a metric $ d $. Let $ G(f) $ denote the graph of $ f $ in $ X\times X $, and $ \Delta $ the diagonal set
+	\[ \Delta = \set{(x,y): x=y} = \set{(x,x):x\in X}. \]
+	Assume that $ X\times X $ has the metric 
+	\[ d((x_1,y_1),(x_2,y_2)) = d(x_1,x_2) + d(y_1,y_2). \]
+	Define $ g: \Delta \to G(f) $ by
+	\[ g(x,x) = (x,f(x)). \]
+	Show that $ g $ is continuous. Show that $ g $ is invertible. Is $ \inv{g} $ continuous?
+\end{problem}
+
+\begin{solution}
+	$ g $ is continuous. To see this let $ (x_1,x_1), (x_2,x_2) \in \Delta $. So
+	\begin{align*}
+		d(g(x_1,x_1), g(x_2,x_2)) &= d((x_1,f(x_1)), (x_2,f(x_2))) \\
+		&= d(x_1,x_2) + d(f(x_1),f(x_2)) \\
+		&\leq (1+A(x_1,x_2))d(x_1,x_2) \\
+		&= \frac{1}{2}(1+A(x_1,x_2))d((x_1,x_1), (x_2,x_2)).
+	\end{align*}
+	where we have used the continuity of $ f $, i.e. $ d(f(x_1),f(x_2)) \leq A(x_1,x_2) d(x_1,x_2) $.
+	So $ g $ is a continuous mapping. Define the inverse of $ g $ as
+	\[ h= \inv{g}: G(f)\to \Delta, \qquad \inv{g}(x,f(x)) = (x,x). \]
+	$ \inv{g} $ is indeed inverse of $ g $ as it is straightforward to check $ \inv{g}\circ g $ and $ g\circ\inv{g} $ are both identity maps. However, $ h = \inv{g} $ is not necessarily continuous. To see this let $ (x_1,f(x_1)), (x_2,f(x_2)) \in G(x) $. Then
+	\[ d(h(x_1,f(x_1)), h(x_2,f(x_2))) = d((x_1,x_1),(x_2,x_2)) = d(x_1,x_2) + d(x_1,x_2) = 2d(x_1,x_2). \]
+	So we can come up with examples where $ (x_1,x_1) $ and $ (x_2,x_2) $ are close to each other, but $ (x_1,g(x_1)) $ and $ (x_2,g(x_2)) $ are not. For instance consider the following graph:
+	\input{Images/question11Cont.tex}
+	Note that the diagram above is just a schematic representation of the idea behind the provided example to demonstrate some cases where $ \inv{g} $ is not continuous, and there is no particular meaning behind the fact that $ X\times X $ looks like the Euclidean 2 plane. The only case that this can fail is when all sets in $ X $ are bounded (see Exercise 3 page 46).
+\end{solution}
+
+\begin{observation}[Learning from a mistake]
+	For the question above, after some discussions we found out that our answer is wrong. That is because, assuming the continuoity for $ f $, then $ d(f(x_1),f(x_2)) $ can not get very large, because
+	$ d(f(x_1),f(x_2)) \leq M(x_1,x_2) d(x_1,x_2) $. 
+\end{observation}
+
+
+
+
+
+
+\subsection{Convergence of Sequences}
+\begin{problem}
+	Let $ X $ denote the set of all bounded piecewise continuous functions defined on $ 0\leq t\leq T $, with the sup-metric $ d_\infty $.
+	\begin{enumerate}[(a)]
+		\item Obviously $ C[0,T] $ is a subspace of $ X $. Let $ x_0 $ be an arbitrary point in $ C[0,T] $. Suppose that $ x_0 $ is to be approximated by piecewise constant functions is shows in Figure 3.6.1 in text book. That is
+		\[ x_n(t) = x_0(j\frac{T}{n}) \ \text{for}\ j\frac{T}{n} \leq t < (j+1)\frac{T}{n} \ \text{and}\ j=0,1,\cdots,(n-1). \]
+		and
+		\[ x_n(T) = x_0(\frac{n-1}{n}T). \]
+		Is it true that the sequence $ \set{x_n} $ converges in $ (X,d) $? If so, is it true that $ x_0 = \lim_{n\to\infty}x_n $? [Hint: Use the fact that a real-valued continuous function, defined on a bounded closed interval is uniformly continuous, compare with Exercise 13, Section 17.]
+		
+		\item Suppose $ x_0 $ is not restricted to the subspace $ C[0,T] $, and suppose that $ x_0 $ is approximated by function $ x_n $ as in (a). Is it true that $ x_0 \lim_{n\to\infty}x_n $?
+		
+		
+		\item Consider a different metric on $ X $, namely the $ d_2 $ metric. Does the sequence $ (x_n) $ converges to $ x_0 $ in $ (X,d_2) $?
+	\end{enumerate}
+\end{problem}
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item Since the points in $ C[0,T] $ are uniformly continuous, then for any choice of $ \epsilon>0 $ we can choose $ \delta>0 $ such that $ \abs{x-y}<\delta $ implies $ \abs{f(x)-f(y)}<\epsilon $. Let $ n = T/(\delta/2) $. So on each interval $ jT/n \leq t M (j+1)T/n $ we have 
+		\[ \sup_{jT/n \leq t M (j+1)T/n} \abs{x_n(t) - x_0(jT/n)} < \epsilon. \]
+		This also implies
+		\[  \sup_{0\leq t\leq T} \abs{x_n(t) - x_0(jT/n)} < \epsilon. \]
+		Thus $ x_n \to x_0 $ in $ d_\infty $ metric.
+		
+		\item No. The uniform continuity is crucial as observed above. For instance, consider the function $ x_0(t) = 0 $ when $ t\in [0,T) $ and $ x_0(t) = 1 $ when $ t=1 $. With the approximation scheme as above, $ x_n \equiv 0 $ for all values of $ n\in \N $, however, $ d_\infty (x_n,x_0) = 1 $ for all $ n\in \N $.`
+		
+		\item Yes. On any closed interval that misses one of the points of discontinuity, the function $ x_0 $ is uniformly continuous, hence on this interval $ x_n $ converges to $ x_0 $ uniformly (in sup norm), thus in $ d_2 $ norm. On the intervals that contains a point of discontinuity, we can bound the $ L_2 $ norm as follows. Choose $ n $ large enough that each point of discontinuity sits inside one interval $ jT/n \leq t < (j+1)T/n $, and the length of each interval is less than $ \eta $. Let $ \norm{x_0}_\infty = M $ and let $ K\in \N $ denote the number of discontinuities. So on the intervals that we have a discontinuity point we have
+		\[ \int_{\text{on inter. w. dis. cont.}} \abs{x(t)-x_0(t)}^2 \leq M^2 K \eta, \]
+		that goes zero as $ \eta\to 0 $.
+	\end{enumerate}
+\end{solution}
+
+\begin{problem}
+	Suppose that in a metric space $ (X,d) $ a sequence $ \set{x_n} $ converges to a point $ x_0 $. Does it follow that
+	\[ d(x_1,x_0) \geq d(x_2,x_0) \geq d(x_3,x_0) \geq \cdots \geq d(x_n,x_0) \geq \cdots ? \]
+	Either prove that it does, or give a counterexample.
+\end{problem}
+\begin{solution}
+	No it does not. For instance consider the sequence $ \set{\sin(n)} $.
+\end{solution}
+\begin{remark}
+	However in the question above, we can say if $ x_n\to x_0 $ as $ n\to\infty $, then there exists a subsequence $ \set{x_{n_k}} $ such that
+	\[ d(x_{k_1},x_0) \geq d(x_{k_2},x_0) \geq d(x_{k_3},x_0) \geq \cdots   \]
+\end{remark}
+
+
+
+
+
+
+
