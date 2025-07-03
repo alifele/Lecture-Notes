@@ -1,0 +1,86 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[left=2cm, right=2cm, top=2cm, bottom=2cm]{geometry}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{thmtools}
+\usepackage{xcolor}
+\usepackage{nameref}
+\usepackage[colorlinks=true, linkcolor=blue, citecolor=cyan]{hyperref}
+\usepackage{natbib} 
+\usepackage{tkz-graph}
+\usepackage{placeins}
+
+
+\newcommand{\grad}{\operatorname{grad}}
+\newcommand{\curl}{\operatorname{curl}}
+\renewcommand{\div}{\operatorname{div}}
+\newcommand{\img}{\operatorname{img}}
+\renewcommand{\span}{\operatorname{span}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\set}[1]{\{#1\}}
+\newcommand{\abs}[1]{|#1|}
+
+
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+
+
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+
+\title{Topology of Digital Images}
+\author{Ali Fele Paranj}
+
+
+
+\begin{document}
+	
+	\maketitle
+	\begin{abstract}
+		In this note I will give a crash course on the topology of digital images. I will define the concepts of local neighborhood, and the topology that it generates. I will discuss the open and closed sets in a digital image, as well as the closure (dilation) and the interior (erosion) operator.
+	\end{abstract}
+	
+	The backbone of a digital image, i.e. its canvas $ D $, can be though of as a subset of $ \Z^2 $, and any particular digital image is simple a function from this domain to $ \set{0,\cdots,255}^3 $ where we have assumed that the image is a three channel 8-bit RGB image. However for our purpose here, we will follow a different point of view. We fix a particular binary image (hence a particular function $ f: D\to \set{0,1} $), and then each binary image can be thought of as a set of black and white (or alternatively 0,1) pixels. Using our first point of view, we are in fact working with the product space $ D\times\set{0,1} $, and the image will be the graph of the function $ f $. For instance, consider the following digital image.
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=0.3\linewidth]{images/digitalImageExample}
+		\label{fig:digitalimageexample}
+	\end{figure}
+
+	\FloatBarrier
+	With our point of view, this image can be though of as the set
+	\[ I = \set{(0,0,0),(0,1,0),(0,2,0),(0,3,1),(0,4,0),(1,0,0),(1,1,1),(1,2,1),\cdots,(4,3,1),(4,4,0)}. \]
+	Since the white pixels and the black pixels carry the dual information (knowing the set of white pixels we can determine the black pixels and vice versa), it is more convenient to assume the white pixels to be the ``background'' and the black pixels to be the ``foreground'' and express the e image $ I $ by only specifying the foreground pixels. So with this point of view we have
+	\[ I = \set{(0,3),(1,1),(1,2),(1,3),(2,1),\cdots,(4,2),(4,3)}, \]
+	where we have also dropped the third component because it is a redundant information (as we know from the context that we are representing the foreground pixels). 
+	
+	We can now equip this set with a topology, and there are multiple ways to do some. One simple way is by defining a metric on the space. Two metrics are very popular: taxicab metric ($ d_1 $), and max-metric ($ d_\infty $) given as below.
+	\[ d_1((n_1,n_2),(m_1,m_2)) = \abs{m_1-n_1} + \abs{m_2-n_2}, \qquad d_\infty((n_1,n_2),(m_1,m_2))=\max\set{\abs{m_1-n_1},\abs{m_2-n_2}}. \]
+	These metrics define the neighborhood pixels of a particular pixel, using which we can define a topology on the set. For instance, the following figure demonstrates the local neighborhood of a pixel marked with red dot with the taxicab metric (left figure) and the max-metric (right figure). We can also say that these are the unit balls of radius 1 with the corresponding metric used.
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=0.5\linewidth]{images/NeighborhoodMetric}
+		\label{fig:neighborhoodmetric}
+	\end{figure}
+	\FloatBarrier
+	
+	These local neighborhoods is a neighborhood base for a topology, and we can determine this topology by determining the open sets, which are the sets where every point in the set has a local neighborhood that is contained in the set. Once we have the notion of topology, then we can talk about the boundary, interior, and the closure of a set. These concepts are depicted in the figure below.
+	
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=1\linewidth]{images/openAndClosedSets}
+		\caption{}
+		\label{fig:openandclosedsets}
+	\end{figure}
+	\FloatBarrier
+	
+	 
+	
+	
+	
+	
+\end{document}
