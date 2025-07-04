@@ -12,6 +12,8 @@
 \usepackage{natbib} 
 \usepackage{tkz-graph}
 \usepackage{placeins}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
 
 
 \newcommand{\grad}{\operatorname{grad}}
@@ -55,12 +57,12 @@
 	With our point of view, this image can be though of as the set
 	\[ I = \set{(0,0,0),(0,1,0),(0,2,0),(0,3,1),(0,4,0),(1,0,0),(1,1,1),(1,2,1),\cdots,(4,3,1),(4,4,0)}. \]
 	Since the white pixels and the black pixels carry the dual information (knowing the set of white pixels we can determine the black pixels and vice versa), it is more convenient to assume the white pixels to be the ``background'' and the black pixels to be the ``foreground'' and express the e image $ I $ by only specifying the foreground pixels. So with this point of view we have
-	\[ I = \set{(0,3),(1,1),(1,2),(1,3),(2,1),\cdots,(4,2),(4,3)}, \]
+	\[ I = \set{(0,3),(1,1),(1,2),(1,3),(2,1),\cdots,(4,2),(4,3)}, \tag{1}\]
 	where we have also dropped the third component because it is a redundant information (as we know from the context that we are representing the foreground pixels). 
 	
 	We can now equip this set with a topology, and there are multiple ways to do some. One simple way is by defining a metric on the space. Two metrics are very popular: taxicab metric ($ d_1 $), and max-metric ($ d_\infty $) given as below.
 	\[ d_1((n_1,n_2),(m_1,m_2)) = \abs{m_1-n_1} + \abs{m_2-n_2}, \qquad d_\infty((n_1,n_2),(m_1,m_2))=\max\set{\abs{m_1-n_1},\abs{m_2-n_2}}. \]
-	These metrics define the neighborhood pixels of a particular pixel, using which we can define a topology on the set. For instance, the following figure demonstrates the local neighborhood of a pixel marked with red dot with the taxicab metric (left figure) and the max-metric (right figure). We can also say that these are the unit balls of radius 1 with the corresponding metric used.
+	These metrics define the neighborhood pixels of a particular pixel, using which we can define a topology on the set. For instance, the following figure demonstrates the local neighborhood of a pixel marked with red dot with the taxicab metric (left figure) and the max-metric (right figure). We can also say that these are the unit balls of radius 1 with the corresponding metric used. These are also sometime called 4-neighborhood, or 8-neighborhood cells.
 	\begin{figure}[h!]
 		\centering
 		\includegraphics[width=0.5\linewidth]{images/NeighborhoodMetric}
@@ -72,13 +74,36 @@
 	
 	\begin{figure}[h!]
 		\centering
-		\includegraphics[width=1\linewidth]{images/openAndClosedSets}
-		\caption{}
+		\includegraphics[width=0.6\linewidth]{images/openAndClosedSets}
 		\label{fig:openandclosedsets}
 	\end{figure}
 	\FloatBarrier
 	
-	 
+	In the figure above, the subplot (Left, Up) corner represents a binary digital image where the back pixels are the foreground and the white pixels are the background. We can express this space as a set similar to (1). In the (Right, Up) subplot, three subsets are shown: gray, green and yellow. The green set is an open set, because for every point in it, there is a local neighborhood (both 4-neighborhood and 8-neighborhood) that is contained in the digital image (black region). This means that this set is open in both topologies induced by $ d_1 $ as well as $ d_\infty $. The gray set is neither open, nor closed. And the yellow set is closed, because it contains the neighborhoods (both 4-neighborhood, and 8-neighborhood) of all of its elements. So the yellow set is open in both topologies induced by $ d_1 $ and $ d_\infty $. In the middle row, the left subplot shows the boundary of the black region in the topology induced by the 4-neighborhood. In a topological space a point is a boundary point every neighborhood if that point has non-empty intersection with the image and its complement complement. The plot in the right, shows a gray set, that when considered along with the dashed regions, is the closure of the gray set. The plots on the third row are the same as the ones on the second row, with the only difference that we have used the topology induced by the 8-neighborhood.
+	
+	Note that to construct a topological space there is not need for any metric function (although a metric always induces a topology). This means that we can define neighborhoods as arbitrary as we want, without worrying about the metric functions that can generate those neighborhoods.
+	
+	Erosion and dilation of a binary image are intuitively pealing off/adding layers from/to the boundary of regions. For any erosion and dilation operator an structural element is needed, that is often denoted as $ H $. The following figure demonstrates erosion and dilation operations with a particular structure element.
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=0.7\linewidth]{images/dilationErosion}
+		\label{fig:dilationerosion}
+	\end{figure}
+	\FloatBarrier
+	
+	Erosion acts like the $\cdot^\circ$ operator (interior) in topology literature in analysis, where as Dilation acts like the $\overline{\cdot}$ operator (closure) in the topology that its local neighborhood basis is successive dilation of the structure element with itself. With this point of view, the duality between erosion and dilation, as expressed in (9.17) in [THE TEXT BOOK], is nothing but a well know fact in analysis
+	\[ (A^\circ)^c = (\overline{A})^\circ \]
+	where  the structural element $ H $ should be a hermitian (symmetric in this case) matrix. The following figure shows some common structuring elements and the corresponding edge in that topological space.
+	
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=0.5\linewidth]{images/all_kernels_results}
+
+		\label{fig:allkernelsresults}
+	\end{figure}
+	\FloatBarrier
+	
+	
 	
 	
 	
