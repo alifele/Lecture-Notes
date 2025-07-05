@@ -5,6 +5,7 @@
 \usepackage{mathtools}
 \usepackage{amssymb}
 \usepackage{amsthm}
+\usepackage{amsmath}
 \usepackage{thmtools}
 \usepackage{xcolor}
 \usepackage{nameref}
@@ -102,6 +103,45 @@
 		\label{fig:allkernelsresults}
 	\end{figure}
 	\FloatBarrier
+	
+	\subsection*{Opening and Closing}
+	Opening and closing are two morphological operations that are achieved by sucssevice appliation of dilation and eorosion. Fixing some structring element $H$, and an image $I$, the opening is often written as $I\circ H$ and the closing operator is denoted by $I \bullet H$ that is defined as:
+	
+%	\begin{align*}
+%		I\circ H &= (I\ominus H) \oplus H, 
+%		I\bullet H &= (I\oplus H) \ominus H.
+%	\end{align*}
+	
+	
+	\[ I\circ H = (I\ominus H) \oplus H, \qquad I\bullet H = (I\oplus H) \ominus H \]
+	
+	
+%	\begin{align*}
+%		I\circ H = (I\ominus H) \oplus H, \\
+%		I\bullet H = (I\oplus H) \ominus H.
+%	\end{align*}
+	
+	In opening, we first do an erosion and then perform a dilation. One might think that the dilation will undo the dilation and the total effect is the same as identity operator that does nothing. This is almost true, except for the islands in the image that are smaller thank the structuring element (in the topological terminology, isolated sets that has no interior). These sets will vanish once the first erosion is performed, and in the followup dilation, no pixels will grow out of these regions. So the opening can be used to eliminate the scatters noisy pixels. 
+	
+	Closing does the opposite job compared to opening. It is easy to argue that by applying the closing operator, the wholes in the foreground that are smaller than the structuring element (or in the terminology of the topology, those whose all of whose pixels are the limit points of the set that contains them) will close after closing. Furthermore, those disjoint sets that share common limit points will merge after the closing operation.
+	
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=0.6\linewidth]{images/openingAndClosing.png}
+		\caption{Caption}
+		\label{fig:enter-label}
+	\end{figure}
+	
+	
+	\FloatBarrier
+	\subsection*{Connectivity detection}
+	
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=0.8\linewidth]{images/catWithHolesMontage.png}
+		\caption{Caption}
+		\label{fig:enter-label}
+	\end{figure}
 	
 	
 	
