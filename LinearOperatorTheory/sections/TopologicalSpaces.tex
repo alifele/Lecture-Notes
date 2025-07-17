@@ -543,7 +543,16 @@
 	In the metric space $ C[0,1] $ with the sup-metric $ d_\infty $. Is $ (x_n) $ a convergent sequence?
 \end{problem}
 \begin{solution}
-	No. Because the limiting function has value 1 at the rational points, and has value 0 at the irrational points, thus it is a discontinuous function and does not belong to $ C[0,1] $. So the sequence $ (x_n) $ does not converge to any point in $ C[0,1] $.
+	Let $ p\in \Q\cap[0,1] $ be a rational number. Then we can write $ p = \frac{a}{b} $ for $ a,b\in \N $, were $ (a,b)=1 $. We claim $ \forall n>b $ we have $ x_n(p) = 1 $. That is because
+	\[ x_n(p) = (\cos(n!\pi \frac{a}{b}))^{2n} = (\cos(n(n-1)(n-1)\cdots(b!)\pi\frac{a}{b}) )^{2n}= (\cos(2k\pi))^{2n} = 1,  \]
+	where $ k\in \Z $. On the other hand, for $ q\in [0,1]\backslash\Q $, since the $ \cos $ function is equal to one if and only if its argument is a multiple of $ \pi $, then $ \cos(n!\pi q) \neq 1 $ for all $ n\in \N $. So
+	\[ x_n(q) = (\cos(n!\pi q))^{2n} \to 0 \quad \text{as } n\to\infty. \]
+	So the limiting function $ x $ can be written as
+	\[ x(t) = \begin{cases}
+		1 \quad  t\in \Q\cap[0,1] \\
+		0 \quad  t\in [0,1]\backslash\Q
+	\end{cases}. \]
+	However, $ x \notin C[0,1] $ so the sequence does not converge.
 \end{solution}
 
 
