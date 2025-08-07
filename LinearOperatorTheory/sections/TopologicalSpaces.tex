@@ -557,6 +557,115 @@
 
 
 
+\begin{problem}
+	If $ \set{x_n} $ and $ \set{y_n} $ are convergent sequences in metric space $ (X,d) $, show that the sequence of real number $ \set{d(x_n,y_n)} $ converges to $ d(x_0,y_0) $ where $ x_0=\lim_{n\to\infty}x_n $ and $ y_0 = \lim_{n\to\infty}y_n $. (This exercise should be reconsidered after studying Section 7).
+\end{problem}
 
+
+\begin{solution}
+	By the definition of converges $ x_n\to x_0 $ as $ n\to\infty $ is equivalent to $ d(x_n,x_0) \to 0 $ as $ n\to\infty $. Similarly for $ \set{y_n} $ we have $ d(y_n,y_0) \to \infty $ as $ n\to\infty $.  So using the triangle inequality for the metric function we can write
+	\[ d(x_n,y_n) \leq d(x_n,x_0) + d(y_n,x_0) \leq d(x_n,x_0) + d(y_n,y_0) + d(x_0,y_0), \]
+	and also
+	\[ d(x_0,y_0) \leq d(x_n,x_0)+d(x_n,y_0) \leq d(x_n,x_0) + d(x_n,y_n) + d(y_n,y_0). \]
+	For any given $ \epsilon>0 $ we can choose $ n $ large enough such that
+	\[ d(x_n,x_0) < \epsilon/2, \quad\text{and}\quad d(y_n,y_0)<\epsilon/2. \]
+	So combining the inequalities above we will get
+	\[ d(x_0,y_0) - \epsilon \leq d(x_n,y_n) \leq d(x_0,y_0) + \epsilon. \]
+	Or equivalently
+	\[ \abs{d(x_n,y_n) - d(x_0,y_0)} <\epsilon. \]
+	So $ d(x_n,y_n) \to d(x_0,y_0) $ as $ n\to\infty $.
+\end{solution}
+
+
+\begin{problem}
+	Let $ a $ be a real number satisfying $ 0\leq a\leq 1 $ and set $ b=1-a $. Let $ y_0 =0 $ and
+	\[ y_{n+1} = \frac{1}{2}(b+y_n^2). \]
+	\begin{enumerate}[(a)]
+		\item Show that the sequence $ \set{y_n} $ is bounded and monotone, and therefore converges. Let $ y=\lim y_n $, and $ x = 1-y $. Show that $ x^2=a $.
+		\item Modify part (a) for the case $ a>1 $.
+\end{enumerate}
+
+	
+\end{problem}
+
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item First we show the sequence being bounded. We do it by proof by induction. First, observe that $ y_0  = 0 \leq1 $. Then assume $ y_k \leq 1 $ and we show that $ y_{k+1} \leq 1 $. This is true because
+		\[ y_{k+1} = \frac{1}{2} (b+y_k^2) \leq \frac{1}{2} (1+1) = 1. \]
+		So by induction $ y_n \leq 1 $ for all $ n\in \N $.
+		
+		To show that the sequence is monotonically increasing, we also use the proof by induction. Since $ y_0 = 0 $, we have $ y_1 = b/2 $. So $ y_1 - y_0 = b/2 \geq 0 $. Now assume $ y_{k} - y_{k+1} \geq 0 $. We want to show $ y_{k+1} - y_k \geq 0 $. Observe that
+		\[ y_{k+1}-y_k = \frac{1}{2}(b+y_k^2) - \frac{1}{2}(b+y_{k-1}^2) = \frac{1}{2}(y_{k}-y_{k-1})(y_k+y_{k+1}) \geq 0.\]
+		So by induction $ y_{n+1} - y_n \geq 0 $ for all $ n\in \N $. 
+		
+		Since $ \set{y_n} $ is increasing and bounded, then it converges. So taking the limit from both sides we will have
+		\[ y = \frac{1}{2}(b+y^2). \]
+		By completing the square, we will have $ (y-1) = \sqrt{1-b} = \sqrt{a} $. So $ x = y - 1 = \sqrt{a} $.
+		
+		\item If $ a >1 $ then we can use the following identity.
+		\[ \sqrt{a} = \frac{1}{\sqrt{\frac{1}{a}}} \]
+		In other words, we calculate the square root for $ a'=1/a \leq 1 $ and then we have $ \sqrt{a} = 1/\sqrt{a'} $.
+	\end{enumerate}
+	
+\end{solution}
+
+
+\begin{problem}
+	Let $ \set{x_n} $ be a sequence in a metric space $ (X,d) $ with the property that for some $ \epsilon>0 $ one has $ d(x_n,x_m) \geq \epsilon $ for all $ n,m $. Show that $ \set{x_n} $ is not convergent.
+\end{problem}
+\begin{solution}
+	Assume otherwise. So $ \exists x_0 \in X $ such that for all $ \epsilon>0 $, exists $ N\in \N $ such that $ \forall n>N $ we have $ d(x_n,x_0)<\epsilon $. This contradicts the assumption.
+\end{solution}
+
+
+
+
+
+\begin{problem}
+	Let $ X = \R^n $ be given with the metric $ d(x,y) = \sum_{i=1}^n\abs{x_i - y_i} $. Show that a sequence $ \set{x_n} $ in $ X $ converges to $ x_0 $ if and only if  $ x_{n,i}\to x_{0,i} $ for all $ i=1,\cdots,n $.
+\end{problem}
+
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item [$ \boxed{\Rightarrow}$] Assume $ x_n\to x_0 $. Then $ d(x_n,x_0) \to 0 $. So 
+		\[ \sum_{i=1}^{N} \abs{x_{n,i} - x_{0,i}} \to 0. \]
+		So each term in the sum should go to zero, i.e. $ \abs{x_{n,i}-x_{0,i}}\to 0 $ as $ n\to\infty $. So $ x_{n,i}\to x_{0,i} $ as $ n\to\infty $.
+		
+		\item [$\boxed{\Leftarrow}$] Assume $ x_{n,i}\to x_{0,i} $ for all $ i=1,\cdots, n $. So by definition $ \abs{x_{n,i}-x_{0,i}}\to 0 $ as $ n\to\infty $. So $ \sum_{i=1}^{N}\abs{x_{n,i}-x_{0,i}} \to 0 $ as $ n\to\infty $. So $ x \to x_0 $ in $ (\R^N, d) $.
+	\end{enumerate}
+\end{solution}
+
+
+\begin{problem}
+	Let $ x_n(t) $ be a sequence of continuous real-valued functions where $ x_n(t) $ is periodic with period $ \tau_n >0 $. Assume that $ x_n(t) \to x(t) $ uniformly for $ \tau\in \R $ and $ \tau_n\to\tau $. Show that $ x(t) $ is periodic in $ t $ with period $ \tau $. 
+\end{problem}
+\begin{solution}
+	First, observe that $ x_n(t+\tau_n) \to x(t+\tau) $ as $ n\to\infty $. Indeed, since $ t+\tau_n\to t+\tau $ as $ n\to\infty $, for any $ k\in \N $ we have $ x_k(t+\tau_n) \to x_k(t+\tau) $ that follows from continuity of $ x_n $. Because of the uniform convergence of $ x_n $, we can write $ x_n(t+\tau_n)\to x(t+\tau) $ as $ n\to\infty $. On the other hand, we want to show $ x_n(t+\tau_n) \to x(t) $. To see this 
+	\[ \abs{x_n(t+\tau_n) - x(t)} = \abs{x_n(t)-x(t)} \to 0 \quad \text{as} \quad n\to\infty. \]
+	So $ x_n(t+\tau_n)\to x(t) $ and $ x_n(t+\tau_n)\to x(t+\tau) $ both uniformly. Then it follows that $ x(t) = x(t+\tau) $.
+\end{solution}
+
+
+\begin{problem}
+	Let $ f $ and $ g $ be functions in $ C[0,T] $. Define $ x_0 = f $ and $ x_1 = g $. Let
+	\[ x_{n+1} = \frac{1}{2}(x_n+x_{n-1}), \quad n = 1,2,\cdots. \]
+	Show that $ \lim x_n = \frac{1}{3}(f+2g) $ when $ C[0,T] $ has the sup-metric.
+\end{problem}
+
+\begin{solution}
+	Let $ t \in [0,T] $. Define $ a_0 = f(t) $ and $ a_1 = g(t) $, and define $ a_n = x_n(t) $. Then $ \set{a_n} $ is a sequence of real numbers where
+	\[ a_{n+1} = \frac{1}{2}(a_n + a_{n-1}). \]
+	We can writ this recursive equation as
+	\[ \vectt{a_{n}}{a_{n+1}} = \matt{0}{1}{1/2}{1/2}\vectt{a_{n-1}}{a_n}. \]
+	So we will have
+	\[ \vectt{a_n}{a_{n+1}} = A^n\vectt{a_0}{a_1}. \]
+	Writing $ A $ in its Jordan block form we will have
+	\[ A = P \matt{-1}{0}{0}{2} \inv{P}, \]
+	where 
+	\[ P = \matt{-2}{1}{1}{1}, \qquad \inv{P} = \frac{1}{3}\matt{-1}{1}{1}{2}. \]
+	So 
+	\[ \lim A^n = \frac{1}{3}\matt{1}{2}{1}{2}. \]
+	Then it follows that $ \lim a_n = 1/3(f+2g). $ So the sequence $ \set{x_n} $ converges to the function $ h = \frac{1}{3}(f+2g) $ point-wise. To show the uniform convergence, i.e. the converges with the sup norm, we use the fact that the point-wise convergence of the uniform /.
+\end{solution}
 
 
