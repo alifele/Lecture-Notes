@@ -277,7 +277,36 @@
 	\[ \int_{-\infty}^{t} e^{at}x(\tau)d\tau = 0 \quad \forall t. \]
 	Differentiating with respect to $ t $ one gets
 	\[ e^{a\tau}x(\tau) \equiv 0. \]
-	This implies $ x(\tau) \equiv 0 $.
+	This implies $ x(\tau) \equiv 0 $. 
+\end{solution}
+
+\begin{problem}
+	Let $ k(t,s) $ be continuous for $ 0\leq s\leq t \leq T $ and consider 
+	\[ y(t) = x(t) + \int_{0}^{t} k(t,s)y(s)ds. \]
+	The following steps will lead to a proof that the relationship $ y=Fx $ implicitly given above, does define a linear mapping $ F $ on $ C[0,\alpha] $ provided $ \alpha $ is a sufficiently small positive number. 
+	\begin{enumerate}[(a)]
+		\item Define $ G $ by $ x=Gy $, where
+		\[ x(t) = y(t) - \int_{0}^{t}k(t,s) y(s) ds. \]
+		Show that $ G $ is linear.
+		
+		\item Assume that for some $ \alpha > 0 $, $ G $ maps $ C[0,\alpha] $ onto itself. Show that if $ G $ is one-to-one, then $ \inv{G} $ exists and is $ F $, so $ F $ is linear.
+		
+		\item Let $ M $ satisfy $ \abs{k(t,s)}\leq M $ for $ 0\leq s\leq t \leq T $, then show that $ Gy = 0 $ reduces to 
+		\[ \abs{y(t)} \leq M \int_{0}^{t} \abs{y(s)}ds. \]
+		Now use the Gronwall inequality, see Cesari [1,p.35], to show that $ G $ is one-to-one.
+	\end{enumerate}
+\end{problem}
+
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item Both terms in the RHS of 
+		\[ x(t) = y(t) - \int_{0}^{t}k(t,s)y(s)ds \]
+		with respect to the position  of $ y $ (you know what I mean!!). So the linearity of $ G $ follows immediately.
+		
+		\item By assumption $ G $ is onto and one-to-one. So $ \inv{G} $ exists. It remains to show that $ \inv{G} $ is $ F $. So we need to show $ GF = FG = I $. STILL THINKING ON THIS.
+		
+		\item STILL THINKING ON THIS.
+	\end{enumerate}
 \end{solution}
 
 
