@@ -1,0 +1,283 @@
+\chapter{Algebraic Structure}
+
+
+\begin{summary}
+	Let $ A:V\to W $ be a linear map between vector spaces. Then the pre-image of any linearly independent set contains a linearly independent set. Let $ \set{w_n} $ be a linearly independent set of vectors in $ W $. Let $ v_n = \inv{A}(w_n) $, i.e. \textbf{one} of the pre-images of $ w_n $ (if $ A $ is not injective, then $ w_n $ can have multiple pre-images. But we choose just one pre-image. Any of them will work). Then let $ \sum_n \beta_n v_n = 0 $. Using the fact that $ v_n = \inv{A}(w_n) $, one can write
+	\[ 0 = A(\sum_n \beta_n v_n) = \sum_n \beta_n A(\inv{A}(v_n)) = \sum_n \beta_n w_n,  \]
+	which implies $ \beta_n = 0 $ for all $ n $. So $ \set{v_n} $ is linearly independent.
+	
+	But note that the image of a linearly independent set is not necessarily a linearly independent set. Because a linear map can collapse some of the vectors to the origin, and the resulting collection will not be a linearly independent set of vectors. 
+\end{summary}
+
+\begin{summary}
+	Even in infinite dimensional vector spaces, an infinite sum of the form $ \sum_{n=1}^{\infty} \alpha_n v_n $ for $ \alpha_n \in F $ and $ v_n\in V $ for all $ n $, is  meaningless, and one needs a topological structure on the space to make sense of such infinite sums.
+\end{summary}
+
+
+\begin{summary}[Causality and subspaces]
+	Consider the space of functions defined on the real line (no regularity condition is necessary). Denote this space with $ X $. Let $ A:X\to X $ be a linear map between these two space, and let $ L_T $ denote the subspace that $ x\in L_T $ iff $ x(t) = 0 $ for all $ t\leq T $. $ L $ is a causal map iff $ L_T $ is invariant under $ A $, that is $ A(L_T) \subset L_T $.
+	
+	\begin{proof}
+		Assume $ A $ is causal map and we want to show that $ L_T $ is invariant. Let $ x\in L_T $. So $ x(t) = 0 $ for all $ t\leq T $. The origin $ x_0 \in L_T $ also satisfies $ x_0(t)=0 $ for all $ t\leq T $. From causality of $ A $ we need to have $ [Ax](t) = [Ax_0](t) $ for all $ t\leq T $. Since $ A $ is linear it sends the origin to the origin, i.e. $ A(x_0) =0 $. This implies $ [Ax](t) =0 $ for all $ t\leq T $. So $ Ax \in L_T $. So $ L_T $ is invariant under $ L $.
+		
+		Now assume $ L_T $ is invariant under $ A $ and we want to show that $ A $ is causal. Let $ x,y\in X $ with $ x(t) = y(t) $ for all $ t\leq T $. Then $ (x-y)(t) = 0 $ for all $ t\leq T $, this $ x-y\in L_T $. So is $ A(x-y) = Ax - Ay $. So $ (Ax-Ay)(t) = 0 $ for all $ t\leq T $. So $ [Ax](t) = [Ay](t) $ for all $ t\leq T $. So $ A $ is causal.
+	\end{proof}
+\end{summary}
+\begin{summary}
+	Not that $ \cup_\alpha B_\alpha $ can be a linear subspace and in the \autoref{prob:intersectionOfSubspaces} we did not rule out the possibility of $ \cup_\alpha B_\alpha $ to be a linear subspace. For instance, consider the space of all functions defined on the real line $ X $, and let $ X_T $ denote the subspace of functions that vanish to the left of $ T\in\R $, i.e. $ x(t) = 0 $ for all $ t\leq T $. In this case $ \cup_T X_T $ is the space of all functions that vanishes to the left of some finite time. This is a subspace of $ X $.
+\end{summary}
+
+
+\begin{summary}
+	It is well know that the set of all linear transformations from a linear space to another linear space is itself a linear space. However, there is even more! Let $ X $ be an arbitrary nonempty set and let $ Y $  be a linear space. Then $ \mathcal{F} $, the set of all mappings of $ X $ into $ Y $, is a linear space (with the addition of mappings and scalar multiplies of mappings are defined as in Example 2 Section 2. 
+\end{summary}
+
+
+\begin{summary}
+	A linear transformation is one-to-one (injective) if its kernel only contains the origin.
+	\begin{proof}
+		Let $ L $ be injective, and let $ a\in \ker L $. Then $ La = 0 $, and from linearity of $ L $ we have $ L0 = 0 $. From injectivity of $ L $ we must have $ a =0  $.
+		
+		Let $ \ker L = \set{0} $. Let $ x,y\in V $ such that $ f(x) = f(y) $. Then from linearity of $ f $ we can write $ f(x-y) = 0 $. Since the kernel only contains the origin we will have $ x-y= 0 $, so $ x= y $.
+	\end{proof}
+\end{summary}
+
+\begin{summary}
+	The inverse of a linear transformation, if exists, is linear. 
+	\begin{proof}
+		Let $ L:V\to V $ be a linear transformation that its inverse exists denoted by $ \inv{L} $. Let $ y_1,y_2 \in V $. Then exists $ x_1,x_2\in V $ such that $ y_1 = Lx_1 $ and $ y_2 = Lx_2 $. Consider
+		\begin{align*}
+			\inv{L}(\alpha y_1 + y_2) = \inv{L}(\alpha Lx_1+ Lx_2) = \inv{L}(L(\alpha x_1+x_2)) = \alpha x_1 + x_2  = \alpha\inv{L}(y_1) + \inv{L}(y_2).
+		\end{align*}
+		So $ \inv{L} $ is linear when exists.
+	\end{proof}
+\end{summary}
+
+
+
+\section{Problems}
+
+\subsection{Linear Spaces and Linear Subspaces}
+\begin{problem}
+	Let $ X $ be the linear space $ \R^4 $, For what values of $ r $, if any, is the set
+	\[ A_r = \set{x\in\R^4: x_1+x_2+x_3+x_4 = r}, \]
+	where $ r $ is a real number, a linear subspace of $ X $? For what values of $ r $, if any,
+	is the set
+	\[ B_r = \set{x\in \R^4: x_1^2 + x_2^2 + x_3^2+x_4^2 = r^2} \]
+	a linear space of $ X $?
+\end{problem}
+
+\begin{solution}
+	Let $ x,y \in A_r $. Then we need to have
+	\[ \alpha x + y \in A_r \qquad \forall\alpha\in F \]
+	Thus we need to have $ r\alpha + r = r $ for all $ \alpha $ in the underlying field. Thus we need to have
+	\[ r = 0. \]
+	
+	Let $ x \in B_r $. Since we need to have $ \alpha x \in B_r $ for all $ \alpha\in F $, it follows that $ \alpha r^2 = r^2 $, thus $ r=0 $. So $ B_0 $, i.e. the origin, is the only case that $ B_r $ can be a linear subspace of $ \R^4 $.
+\end{solution}
+
+
+\begin{problem}
+	Let $ X $ be the linear space made up of all complex-valued functions $ T(s) $ defined on the imaginary axis of the complex plane such that
+	\[ \Abs{\int_{-i\infty}^{i\infty} \abs{T(s)} ds}<\infty, \] 
+	where the integral is along the imaginary axis. That is, $ X = L_2(-i\infty,i\infty) $. Let $ A $ be the set made up of all rational functions, that is all functions of the form
+	\[ T(s) = \frac{a_0s^m + \cdots + a_m}{b_0s^n + \cdots + b_n}, \]
+	where $ a_0 \neq0 $ and $ b_0 \neq 0 $, and $ m,n $ are integers. Is the set $ A $ a linear subspace of $ X $? Next consider the subset $ B $ of $ A $ made up of all rational functions with $ n>m$. Is $ B $ a linear subspace of $ X $? What about the subset $ C $ of $ B $ made up of all functions with all their finite poles in the left hand plane?
+\end{problem}
+
+\begin{solution}
+	The first part of the question is quite vague. Because $ T(s) = 1/s $ belongs to $ A $ but not to $ X $ as
+	\[ \int_{-\infty}^{\infty} \frac{1}{\abs{x}^2} dx = \infty \]
+	So $ A $ is not a subset of $ X $. However, if we want to consider $ A\cap X $, then it is a linear subspace of $ X $. That is because $ T, L \in A $, then $ \alpha T + \beta L $ still has the rational function form, and since $ T,L \in X $, and $ X $ is a linear space, then $ \alpha T + \beta L $ still satisfies the integral inequality, hence belongs to $ A\cap X $.
+	
+	STILL THINKING ON THE OTHER PARTS OF THE QUESTION.
+\end{solution}
+
+
+\begin{problem}
+	Show that the set of all $ n\times m $ matrices can be viewed as a linear space.
+\end{problem}
+\begin{solution}
+	We exhibit an homomorphism between $ M_{n\times m} $ and $ \R^{mn} $. Let $ A \in M_{n\times m} $ and $ v \in R^{mn} $. Let $ \phi: M_{n\times m} \to \R^{mn} $ be defined as $ \phi(A) = v $, where
+	\[ v_{ni+j} = a_{ij}. \]
+	It is straightforward to show that $ \phi $ is bijection. Using this function we can transfer all of the properties of  $ \R^{mn} $ to $ M_{m\times n} $. So $ M_{m\times n} $ is a linear space, and $ \phi $ is in fact an homomorphism of vector spaces. So $ M_{m\times n} $ has dimension $ mn $.
+\end{solution}
+
+
+
+\begin{problem}
+	Let $ X $ be the linear space $ C[0,T] $. Which, if any, of the following subsets of $ X $ are linear subspaces?
+	\begin{enumerate}[(a)]
+		\item $ B_1 = \set{x\in C[0,T]: x(0) = x(T)} $,
+		\item $ B_2 = \set{x\in C[0,T]: x(0) = x(T) = 0} $,
+		\item $ B_3 = \set{x\in C[0,T]: x(t_1)=x(t_2) \text{ for all $ t_1,t_2 $ such that $ t_1+t_2 = T $}} $,
+		\item $ B_4 = \set{x\in C[0,T]: x(0) = 1} $,
+		\item $ B_5 = \set{x\in C[0,T]: \int_{0}^{T} x(\tau) d\tau = 1 } $,
+		\item $ B_6 = \set{x\in C[0,T]: \abs{x(t_1)-x(t_2)}\leq 10\abs{t_1-t_2} \text{ for all $ t_1,t_2\in [0,T] $}} $.
+	\end{enumerate}
+\end{problem}
+
+\begin{solution}
+	\item Yes. $ x,y\in B_1 $, then $ x(0) = x(T) $ and $ y(0) = y(T) $. Then it follows that $ (\alpha x+y)(0) = \alpha x(0) + y(0) = \alpha x(1) + y(1) = (\alpha x + y)(1) $. So $ \alpha x + y \in B_1 $.
+	
+	\item Yes. Special case of above.
+	
+	\item Yes. Let $ x,y\in B_3 $. Then $ x(t) = x(T-t) $ and $ y(t) = y(T-t) $. Then one can write
+	\[ (\alpha x + y)(t) = \alpha x(t) + y(t) = \alpha x(T-t) + y(T-t) = (\alpha x+y)(T-t). \]
+	So $ \alpha x + y \in B_3 $.
+	
+	\item No. $ x\equiv 1 $ is in $ B_4 $, but $ 2x $ is not.
+	
+	\item No. Let $ x\in B_5 $. Then $ \int_{0}^{T} (2x)(\tau) d\tau = 2 \neq 1$, so $ 2x \notin B_5 $.
+	
+	\item No.  $ x(t) = 10t $ is in $ B_6 $ but $ 2x $ is not.
+\end{solution}
+
+
+\begin{problem}
+	\label{prob:intersectionOfSubspaces}
+	Show that if $ \set{B_\alpha} $ is a family of linear subspaces of a linear space $ X $, then $ B = \cap_\alpha B_\alpha $ is a linear subspace of $ X $. What about $ \cup_\alpha B_\alpha $?
+\end{problem}
+
+\begin{solution}
+	Let $ x,y \in B $. Then $ \forall \alpha $ we have $ x,y\in B_\alpha $. Since $ B_\alpha $ is a linear subspace, it follows that $ ax + by \in B_\alpha $, which is true for all $ \alpha $. Thus $ ax+by \in B $. The same is not true in the case of $ \cup_\alpha B_\alpha $. For instance in the case of $ \R^2 $, consider the subspaces $ B_1 = \set{(\alpha,0):\alpha\in\R} $ and $ B_2\set{(0,\beta):\beta\in\R} $. Then $ (1,0)\in B_1 $ and $ (0,1)\in B_2 $ but $ (1,1) \notin B_1\cup B_2 $ (in fact $ (1,1) \in B_1+B_2 $, where $ B_1+B_2 $ is the smallest subspace that contains $ B_1 $ and $ B_2 $).
+\end{solution}
+\begin{remark}
+	Not that $ \cup_\alpha B_\alpha $ can be a linear subspace and in the problem above we did not rule out the possibility of $ \cup_\alpha B_\alpha $ to be a linear subspace. For instance, consider the space of all functions defined on the real line $ X $, and let $ X_T $ denote the subspace of functions that vanish to the left of $ T\in\R $, i.e. $ x(t) = 0 $ for all $ t\leq T $. In this case $ \cup_T X_T $ is the space of all functions that vanishes to the left of some finite time. This is a subspace of $ X $.
+\end{remark}
+
+
+\begin{problem}
+	Let $ X $ be the linear space made up of all real-valued sequences. Show that $ A_1 $, the set of all sequences that have a finite number of nonzero entries only, is a linear subspace of $ X $. Show that $ A_2 $, the set of all sequences that have an infinite number of nonzero entries, is not a linear subspace of $ X $.
+\end{problem}
+
+\begin{solution}
+	Let $ a,b\in A_1 $ with their number of non-zero elements as $ n_1,n_2 $ respectively. Then $ \alpha a+ \beta b $ has at most $ n_1+n_2 $ number of non-zero elements, hence in $ A_1 $. $ A_2 $ is not a linear subspace of $ X $ because it does not contain the origin.
+\end{solution}
+
+
+
+\begin{problem}
+	Often in systems theory the linear space $ L_2(-\infty,\infty) $ is a good mathematical model for the set $ X $ of all inputs to a system as well as the set $ Y $ contains the range. Let $ \mathcal{A} $ be the set of all mappings (linear and nonlinear) of $ X $ into $ Y $. Show that $ \mathcal{A} $ can be viewed as a linear space. Show that the subset $ \mathcal{L} \subset \mathcal{A} $ of all mappings representing causal (Section 2.8) systems is a linear subspace of $ \mathcal{A} $.
+\end{problem}
+
+\begin{solution}
+	Let $ \phi,\psi \in \mathcal{A} $, and define the addition and scalar multiplication in this space as
+	\[ (\alpha\phi + \beta \psi)(f) = \alpha \phi(f) + \beta\psi(f). \]
+	It is straightforward to check that with these definitions, $ \mathcal{A} $ is a vector space.
+	
+	Let $ F, G \in \mathcal{L} $ be causal maps. Then for all $ T\in\R $, $ x(t) = y(t) $ for $ t <T $ implies $ [Fx](t) = [Fy](t) $, and $ [Gx](t) = [Gy](t) $ for all $ t<T $. Then for $ t\leq T $ one can write
+	\[ [\alpha F + G](x)(t) = \alpha [Fx](t) + [Gx](t) = \alpha[Fy](t) + [Gy](t) = [\alpha F+G](y)(t). \]
+	Thus $ \mathcal{L} $ is a linear subspace.
+\end{solution}
+
+\begin{remark}[Review of the causal maps]
+	$ \Phi: L_2(-\infty,\infty) \to L_2(-\infty,\infty) $ is causal, if f1or all $ T\in \R $, $ x(t) = y(t) $ for all $ t\leq T $, implies $ (\Phi(x))(t) = (\Phi(t))(t) $ for all $ t\leq T $.
+\end{remark}
+
+
+\begin{problem}
+	Let $ X $ be the linear space made up of all absolutely convergent sequences of real numbers. Show that $ B $, the set of all absolutely convergent sequences of real numbers with limit zero, is a linear subspace of $ X $.
+\end{problem}
+\begin{solution}
+	I can not understand what does absolutely convergent \textbf{sequence} means (in contrast to the absolutely convergent series). Also, not sure about the meaning of the abs. conv. sequences with limit zero. 
+\end{solution}
+
+
+
+\begin{problem}
+	Let $ X $ be the set of all convergent sequences of real numbers. Is $ X $ a linear space?
+\end{problem}
+\begin{solution}
+	Yes. Viewing $ \R $ is a linear space, and using the continuity of the addition and scalar multiplication, if $ x_n\to x $ and $ y_n \to y $, then $ \alpha x_n + \beta y_n \to \alpha x+ \beta y $. 
+\end{solution}
+
+
+
+\begin{problem}
+	Let $ X $ denote the collection of all real-valued Lipschitz-continuous functions $ x(t) $ defined for $ -\infty < t < \infty $. That is $ x(t) $ satisfies $ \abs{x(t) - x(s)} \leq k\abs{t-s}$ for some constant $ k $ which depends on $ x $ and for all $ t,s $. Show that $ X $ is a real linear space.
+\end{problem}
+\begin{solution}
+	Let $ x,y\in X $. Then we claim that $ \alpha x + \beta y  $ is also in $ X $ with Lipschitz constant $ k \leq \alpha K_x + \beta K_y $. Because
+	\[ \abs{(\alpha x(t) + \beta y(t)) - (\alpha x(s) - \beta y(s))} \leq k_x\abs{t-s} + k_2\abs{t-s}. \]
+\end{solution}
+
+
+\subsection{Linear Transformation}
+
+
+\begin{problem}
+	Let $ X $ and $ Y $ be linear spaces over the same scalar field. Show that $ I:X\to X $ the identity transformation, and $ 0:X\to Y $ the zero transformation are linear. 
+\end{problem}
+\begin{solution}
+	Let $ x,y\in X $. The $ I(\alpha x+y) = \alpha x + y = \alpha I(x) + I(y) $, so $ I $ is linear. The zero transformation is trivially linear.
+\end{solution}
+
+
+
+\begin{problem}
+	Let $ X,Y $, and $ Z $ be linear spaces over the same scalar field, and let $ L_1:X\to Y $ and $ L_2:Y\to Z $ be linear. Show that the composition $ L_2L_1:X\to Z $ is linear. 
+\end{problem}
+\begin{solution}
+	Let $ x,y\in X $. Then 
+	\[ L_2(L_1(\alpha x+y)) = L_2(\alpha(L_1x) + L_1y) = \alpha L_2(L_1(x)) + L_2(L_1(y)) = \alpha (L_2L_1)x + L_2L_1 y.  \]
+	So $ L_2L_1 $ is linear.
+\end{solution}
+
+
+\begin{problem}
+	Suppose that we consider a system whose output is a delayed version of the input. That is, if $ x(t) $ is the input, then the output $ y(t) = x(t-\tau) $, where $ \tau $ is a constant. Let $ X $ be the linear space $ C(-\infty,\infty) $ of continuous real-valued functions defined on $ (-\infty,\infty) $. Let $ D $ denote the system operation. Is $ D $ a linear transformation of $ X $ into itself? suppose that instead of being constant the delay $ \tau $ is given by $ \tau = e^{-t} $. Do we have a linear transformation? Then suppose that $ \tau = \exp[-\int_{-\infty}^{t}\abs{x(\xi)d\xi}] $, where of course the linear space $ X $ must be selected so that the integral exists. Do we have a linear transformation?
+\end{problem}
+
+\begin{solution}
+	In all of the cases $ D $ is a linear operator. Assume the delay is given as a function $ \tau(t) $. Let $ x,y\in C(-\infty,\infty) $. Then one can write
+	\begin{align*}
+		[D(\alpha x +y)](t) = (\alpha x + y)(t-\tau(t)) = \alpha x(t-\tau(t)) + y(t-\tau(t)) = \alpha [Dx](t) + [Dy](t).
+	\end{align*}
+\end{solution}
+
+
+
+\begin{problem}
+	Let $ Y = C([0m\infty],\R^n) $ be the linear space made up of all continuous mappings of $ [0,\infty) $ into $ \R^n $, that is, each component is continuous. Let $ X = C^1([0,\infty],\R^n) $ be the linear subspace of $ Y $ made up of all elements of $ Y $ with continuous derivatives, that is, each component has a continuous derivative. Does the expression $ y = Tx $, where
+	\[ Tx = \frac{dx}{dt} - Ax \]
+	and $ A $ is a real $ n\times n $ matrix, represent of linear transformation of $ X $ into $ Y $?
+\end{problem}
+
+\begin{solution}
+	Yes. Let $ x,y\in X $. Then
+	\[ T(\alpha x + y) = \alpha \frac{dx}{dt} + \frac{dy}{dt} - \alpha Ax - Ay=  \alpha Tx + Ty, \]
+	where we have used the linearity of the differentiation operator and the linearity of multiplication by a matrix.
+\end{solution}
+
+\begin{problem}
+	Let $ Y = BC(-\infty,\infty) $ denote the space of all bounded real-valued continuous functions $ y(t) $ defined for $ -\infty < t < \infty $ and let $ X $ denote the space of all Lipschitz continuous functions. Define $ x = Ly $ be $ x(t) = \int_{0}^{t}y(s)ds $. Show that $ L $ is a linear mapping of $ Y $ into $ X $.
+\end{problem}
+\begin{solution}
+	Follows from the properties of integration: for $ y_1,y_2 \in Y $
+	\[ \int_{0}^{t}(\alpha y_1+y_2)ds = \alpha \int_{0}^{t}y_1(s)ds + \int_{0}^{t}y_2(s)ds. \]
+\end{solution}
+
+\begin{remark}
+	Note that in the example above, integration improved the regularity of the functions. The input of the operator was $ BC(-\infty,\infty) $ and its output is Lipschitz continuous functions.
+\end{remark}
+
+
+
+\subsection{Inverse Transformation}
+\begin{problem}
+	Show that the linear transformation $ y = Lx $ on $ L_2(-\infty,\infty) $ given by
+	\[ y(t) = \int_{-\infty}^{t}\inv{a}e^{a(t-\tau)}x(\tau) d\tau \]
+	is one-to-one. \emph{Hint: Show that $ Lx = 0 $ reduces to $ \int_{-\infty}^{t} e^{a\tau}x(\tau)d\tau = 0$. Then differential and use theorem D.13.3.}
+\end{problem}
+\begin{solution}
+	The transformation $ L $ is linear. So $ L $ is injective iff $ \ker L = 0 $. Let $ x\in \ker L $. Then one can write
+	\[ \int_{-\infty}^{t}\inv{a}e^{-a(t-\tau)}x(\tau) d\tau = \inv{a} e^{-at} \int_{-\infty}^{t}e^{a\tau}x(\tau) d\tau = 0 \quad \forall t. \]
+	This implies
+	\[ \int_{-\infty}^{t} e^{at}x(\tau)d\tau = 0 \quad \forall t. \]
+	Differentiating with respect to $ t $ one gets
+	\[ e^{a\tau}x(\tau) \equiv 0. \]
+	This implies $ x(\tau) \equiv 0 $.
+\end{solution}
+
+

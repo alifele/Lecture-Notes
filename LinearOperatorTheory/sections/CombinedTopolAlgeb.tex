@@ -150,3 +150,17 @@
 	
 	Now assume $ d(x,y)  = \norm{x-y} $ is a metric. $ \norm{x} = d(x,0) \leq 0 $, so $ \norm{\cdot}$ is non-negative. Also $ d(x,y) = d(y,x) $ implies $ \norm{x} = \norm{-x} $. Furthermore, in $ d(x,y) \leq d(x,z) + d(z,y) $, let $ z=0 $, and we will recover $ \norm{x-y} \leq \norm{x} + \norm{-y} $. Let $ \tilde{y} = -y $. Then $ \norm{x+\tilde{y}} \leq \norm{x} + \norm{\tilde{y}} $, hence the triangle inequality for the norm. Lastly, for the positive definiteness, Let $ \norm{x} = 0 $. Since $ \norm{x} = \norm{x-0} = d(x,0) $, it follows that $ d(x,0) = 0 $. Thus $ x=0 $ from metric properties. Also if $ x=0 $, then $ \norm{0} = \norm{0-0} = d(0,0) = 0 $.
 \end{solution}
+
+
+\begin{problem}
+	Let $ (X,\norm{\cdot}) $ be a normed linear space and let $ \set{x_n} $ be a sequence in $ X $ with $ x=\lim_{n\to\infty} x_n $. Assume that $ \norm{x_n-y} \leq a $ for all $ n $. Show that $ \norm{x-y} \leq a $. 
+\end{problem}
+\begin{solution}
+	Since $ x_n \to x $, from the continuity of the addition in vector space, it also follows that $ x_n -y \to x-y $. From continuity of $ \norm{\cdot} $ it follows that the real sequence $ \set{\norm{x_n-y}} $ converges to $ \norm{x-y} $. Since all elements of the real sequence $ \norm{x_n-y} $ is less than or equal to $ a $, then the for the limit will will have $ \norm{x-y} \leq a $. This property for the real sequences can be shown with a simple proof by contradiction.
+\end{solution}
+
+
+\begin{problem}
+	Show that a Hamel basis for a Banach space is either finite or uncountably infinite. (Completeness is important for this. Use Exercise 17, section 3.13).
+\end{problem}
+
