@@ -63,6 +63,67 @@
 	\[ f(z) = \sum_{n=-\infty}^{\infty}\xi_n z^{-n}. \]
 	This is the two-sided z transform.
  \end{summary}
+ \begin{remark}
+ 	In the example above, using appropriate change of variable, and utilizing the fact that functions in $ Z $ are defined on the unit circle we can write
+ 	\[ \frac{1}{2\pi i}\int_C \abs{f(z)}^2 dz/z = \frac{1}{2\pi i}\int_{0}^{2\pi}\abs{f(e^{i\theta})}^2 d\theta. \]
+ 	In the second form, the connection to the Fourier transform is more clear.
+ \end{remark}
+ \begin{remark}
+ 	In the example above, the subspace $ L \subset X$ where $ x\in L $ if $ x_i=0 $ for all $ i<0 $ maps to the Hardy space $ H^2 $ via the constructed isomorphism. Hardy space is the space of all that are restriction of harmonic functions to the unit sphere.
+ \end{remark}
+ 
+ 
+ \begin{summary}[Some definitions]
+ 	There are some important nuances in some definitions in linear algebra. We will highlight those definitions here.
+ 	\begin{definition}[Linear Combination]
+ 		Let $ V $ be a vector space, and $ A\subset V $. Then $ x\in V $ is said to be a linear combination of elements in $ A $ if there is a \textbf{finite} sum such that
+ 		\[ x = \sum_{i=1}^{n}\alpha_i v_i, \quad v_i \in A \text{ for all $ i $}. \]
+ 		Accordingly, $ \vspan{A} $ is defined to be the set of all \textbf{finite} linear combinations of $ A $.
+ 	\end{definition}
+ 	\begin{remark}
+ 		Regardless of the nature of the linear space (finite or infinite dimensional), a linear combination is always a finite sum.
+ 	\end{remark}
+ 	\begin{proposition}
+ 		For any collection of vectors $ A \subset V $, $ \vspan{A} $ is \textbf{the smallest subspace} of $ V $ that \textbf{contains} $ A $.
+ 	\end{proposition}
+ 	
+ 	\begin{proposition}[Linear Independence]
+ 		Let $ A\subset V $ be a collection of vectors. Then the followings are equivalent.
+ 		\begin{enumerate}[(a)]
+ 			\item $ A $ is a linearly independent set of vectors.
+ 			\item For every $ x\in A $ we have $ x\notin\vspan{A\backslash\set{x}} $. That is $ x $ is not a linear combination of the points in $ A\backslash\set{x} $.
+ 			\item For every \textbf{finite} sub-collection $ \set{v_1,\cdots,v_n} \subset A $ we have
+ 			\[ \sum_{i=1}^{n}\alpha_i v_i = 0 \quad \implies \quad v_i = 0 \quad \forall i=1,\cdots,n. \]
+ 			\item For $ v\neq 0 \in \vspan{A} $ there exists one and only one finite subset of $ A $, say $ \set{v_i}_{i=1}^n $ and a unique $ n $-tuple of non-zero elements such that
+ 			\[ v = \sum_{i=1}^{n} \alpha_i v_i.  \]
+ 			
+ 			\item $ A $ a linearly independent set of vectors if and only if there exists no proper subset $ A_0 \subset A $ such that $ \vspan{A_0} = \vspan{A} $. I.e. for all $ B \in 2^A $ one has $ \vspan{B} \subseteq \vspan{A} $.
+ 		\end{enumerate}
+ 	\end{proposition}
+ 	\begin{remark}
+ 		Note that in item (d) above we have excluded the origin, and also forced the $ n $-tuple to have non-zero elements. Because $  0 = 0 v_1 + 0v_2 = 0v_3 + 0v_4 $, etc assuming $ v_1,v_2,v_3,v_4\in A $. Furthermore, let $ v \in A $, that trivially $ v\in \vspan{A} $. Then one can write $ v = 1v $, $ v=1v+0v_1 $, etc. I.e. one can add more vectors from $ A $ with zero coefficients.
+ 	\end{remark}
+ \end{summary}
+ 
+ 
+ \begin{summary}
+ 	In Example 5, page 179, we discuss a very important example about the subspace $ A_x \subseteq l_2(-\infty,\infty) $ and its connection to $ Z $, the set of all complex valued functions defined on $ \mathbb{T} $ such that 
+ 	\[ \int_C \abs{f(z)}^2 dz/z = \int_{0}^{2\pi} \abs{f(e^{i\theta})}^2d\theta < \infty. \]
+ 	$ Z $ and $ l_2(-\infty,\infty) $ are isomorphic via $ \phi $ given as:
+ 	\[ (\cdots,\xi_{-1}, \xi_{0},\xi_{1},\cdots) \mapsto \sum_{n=-\infty}^{+\infty} \xi_n z^{-n}. \]
+ 	It turns out
+ 	\[ \phi[S_r^n x](t) = t^{-n} \phi[x](t), \]
+ 	i.e. shifting the sequence $ x $ to the right by $ n $-positions, is the same as multiplying $ [\phi x](t) $ be the monomial $ t^{-n} $. So $ A_x = \set{\sum_{n=M}^{N}\alpha_n S_r^n x} $ is the same as $ L\subset Z $ given by
+ 	\[ L = \set{g(z)\cdot f_x(z): g(z)\text{ is a Laurent polynomial}}. \]
+ 	
+ 	\begin{remark}
+ 		 The importance of the monomial like $ f(z) = z^n $ becomes more evident when one restricts $ f $ to the unit-circle in the complex domain, i.e. $ \mathbb{T} = \set{\abs{z}=1} $. Because
+ 		 \[ f\big|_{\mathbb{T}}(z) = f(e^{i\theta}), \quad \text{where }z=e^{i\theta}. \]
+ 		 Thus restricting $ f(z)=z $ to $ \mathbb{T} $ we will get
+ 		 \[ f(e^{i\theta}) = e^{in\theta} = cos(n\theta) + i\sin(n\theta). \]
+ 	\end{remark}
+
+ \end{summary}
 
 
 \section{Problems}
@@ -394,3 +455,6 @@
 \begin{problem}
 	Show that $ l_2(-\infty,\infty) $ is isomorphic with $ l_2(0,\infty) $.
 \end{problem}
+\begin{solution}
+	Map every negative indexed element of the sequence in $ l_2(-\infty,\infty) $ to an odd index, and every positive indexed element of the sequence to an even index. Since the sequence is absolutely summable, so is the new sequence, hence in $ l_2(0,\infty) $.
+\end{solution}
