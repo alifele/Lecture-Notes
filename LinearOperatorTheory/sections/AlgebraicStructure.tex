@@ -54,6 +54,16 @@
 \end{summary}
 
 
+\begin{summary}
+	Let $ X = l_2(-\infty,\infty) $ and $ Z $ be the linear space made up of all complex-valued functions $ f(z) $ defined on the unit circle of the complex plane such that
+	\[ \frac{1}{2\pi i} \int_C \abs{f(z)}^2 dz/z <\infty. \]
+	The usual assumption is made that if $ f_1(z) $ and $ f_2(z) $ differ only on a set of measure zero, then $ f_1 $ and $ f_2 $ are considered to be the same function. These two spaces are isomorphic as linear spaces with
+	\[ (\cdots,\xi_{-1},\xi_0, \xi_1,\cdots) \mapsto f(z) \]
+	with
+	\[ f(z) = \sum_{n=-\infty}^{\infty}\xi_n z^{-n}. \]
+	This is the two-sided z transform.
+ \end{summary}
+
 
 \section{Problems}
 
@@ -310,3 +320,77 @@
 \end{solution}
 
 
+\subsection{Isomorphisms}
+\begin{problem}
+	Let $ \chi $ denote the set of all linear spaces over a scalar field $ F $. Show that the relation $ X\sim Y  \Leftrightarrow (\text{$X,Y$ are isomorphic})$ is an equivalent relation and, therefore, induces a partition on $ \chi $.
+\end{problem}
+
+\begin{solution}
+	Every linear space is isomorphic with itself with the identity operator. If $ U $ is isomorphic to $ Y $ via $ \phi:U\to V $, then $ V $ is also isomorphic to $ U $ via $ \inv{\phi}:V\to U $. Lastly, let $ \phi:U\to V $ and $ \psi: V\to W $ be isomorphism between spaces. Then $ U $ and $ W $ are also isomorphic via the isomorphism $ \phi\circ \psi $.  
+\end{solution}
+
+\begin{problem}
+	Referring to the Example 2 in Page 174 of the text book, under what conditions on real numbers $ c_{11},c_{12},c_{21},c_{22} $ does
+	\[ T_2(x) = (c_{11}x_1 + c_{12}x_2) + (c_{21}x_1 + c_{22}x_2)t,\]
+	where $ x=(x_1,x_2) $, define an isomorphism from $ \R^2 $ to $ Z $?
+\end{problem}
+
+\begin{solution}
+	Let $ v=(v_1,v_2) $ denote the function $ v_1+v_2t \in Z $. Then we want the following matrix to be invertible
+	\[ \vectt{v_1}{v_2} = \matt{c_{11}}{c_{12}}{c_{21}}{c_{22}}\vectt{x_1}{x_2}. \]
+	So the matrix should have a non-zero determinant. I.e.
+	\[ c_{11}c_{22} - c_{12}c_{21} \neq 0. \]
+\end{solution}
+
+\begin{problem}
+	Show that the real linear space $ X $ made up of all functions of the form $ x = a\cos(\omega t+\phi) $, where $ \omega $ is fixed, is isomorphic to the complex numbers considered as a real linear space. This fact is the cornerstone of the so-called phasor method of analyzing alternating current electrical networks.
+\end{problem}
+\begin{solution}
+	Given $ a\cos(\omega t+\phi) $ observe that
+	\[ a\cos(\omega t+\phi) = \Re{a\cos(\omega t+\phi) + ia\sin(\omega t+\phi)} = \Re{ae^{i\phi}e^{i\omega t}}. \]
+	So let the map between these to spaces be
+	\[ a\cos(\omega t+\phi) \mapsto z=ae^{i\phi}. \]
+	Showing the linearity of the mapping above is very dense with different trigonometric identities. So we exhibit the mapping that is the other way around. Consider the following map
+	\[ z \mapsto \Re{ze^{i\omega t}}. \]
+	This map is linear and onto. Linearity follows from linearity of the $ \Re{\cdot} $ map and it is onto because for any $ a\cos(\omega t + \phi) $ we have a preimage given by $ z = ae^{i\phi} $. It is also bijective because it is linear and its kernel contains only the origin. So The mapping above is isomorphism between vector spaces.
+\end{solution}
+
+\begin{problem}
+	Let $ L_2^\sigma(-\infty,\infty) $ denote the linear space made up do all complex-valued functions $ x $ defined on $ (-\infty,\infty) $ such that
+	\[ \int_{-\infty}^{\infty}\abs{x(t)}^2e^{-2\sigma t} dt < \infty, \]
+	where $ \sigma $ is a real number. Show that $ L_2^\sigma(-\infty,\infty) $ is isomorphic to $ L_2^\tau(-\infty,\infty) $ for any $ \sigma $ and $ \tau $.
+\end{problem}
+
+
+\begin{solution}
+	Let $ x\in L_2^\sigma $. Consider the mapping $ \phi $
+	\[ x(t) \mapsto x(t)e^{(\sigma-\tau)t}. \]
+	This map is linear because
+	\[ \phi(\alpha x + y) = (\alpha x(t)+y(t))e^{(\sigma-\tau)t} = \alpha\phi(x)(t) + \phi(y)(t). \]
+	The inverse map is $ \inv{\phi} $ given by
+	\[ \inv{\phi}(y)(t) = y(t)e^{-(\sigma-\tau)t}.  \]
+	It is straightforward to check that $ \phi\inv{\phi},$ and $\inv{\phi}\phi $ are the identities maps of the corresponding spaces. It only remains to show that for $ x\in L_2^\sigma $, $ \phi x $ really belongs to $ L_2^\tau $. This is true because
+	\[ \int_{-\infty}^{\infty}\abs{[\phi x](t)}^2 e^{-2\tau t}dt =\int_{-\infty}^{\infty}\abs{x(t)e^{(\sigma -\tau)}}^2 e^{-2\tau t}dt = \int_{-\infty}^{\infty}\abs{x(t)}^2 e^{-2\sigma t}dt < \infty.  \] 
+\end{solution}
+
+
+\begin{problem}
+	Show that $ L_2(-\infty,\infty) $ is isomorphic to $ L_2[0,\infty). $
+\end{problem}
+\begin{solution}
+	Consider the following linear functions
+	\[ \phi: L_2(-\infty,+\infty) \to L_2[0,+\infty),\qquad [\phi x](t) = x(\log(t))/\sqrt{t}, \]
+	and 
+	\[ \psi: L_2[0,+\infty) \to L_2(-\infty,+\infty),\qquad [\psi y](t) = y(e^{t})e^{t/2}. \]
+	It is easy to show that $ \psi\phi $ and $ \phi\psi $ are the identity maps of the corresponding spaces, so are inverses of each other.
+	Now we need to show that for $ x\in L_2(-\infty,+\infty) $, $ \phi x $ belongs to $ L_2[0,+\infty) $. Consider the integral
+	\[ \int_{0}^{\infty}\abs{[\phi x](t)}^2dt = \int_{0}^{\infty}\abs{x(\log(t))}^2 dt/t. \]
+	We do the change of variable $ \tau = \log(\abs{t}) $.
+	\[ \int_{0}^{\infty}\abs{[\phi x](t)}^2dt = \int_{-\infty}^{\infty}\abs{x(\tau)}^2 d\tau = \int_{-\infty}^{\infty} \abs{x(\tau)}^2 d\tau < \infty. \]
+	A similar approach can be used to show that for $ y\in L_2[0,\infty) $ we have $ \phi y \in L_2(-\infty,\infty) $.
+\end{solution}
+
+
+\begin{problem}
+	Show that $ l_2(-\infty,\infty) $ is isomorphic with $ l_2(0,\infty) $.
+\end{problem}
