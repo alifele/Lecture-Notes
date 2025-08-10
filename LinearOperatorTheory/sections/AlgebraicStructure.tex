@@ -114,7 +114,8 @@
  	It turns out
  	\[ \phi[S_r^n x](t) = t^{-n} \phi[x](t), \]
  	i.e. shifting the sequence $ x $ to the right by $ n $-positions, is the same as multiplying $ [\phi x](t) $ be the monomial $ t^{-n} $. So $ A_x = \set{\sum_{n=M}^{N}\alpha_n S_r^n x} $ is the same as $ L\subset Z $ given by
- 	\[ L = \set{g(z)\cdot f_x(z): g(z)\text{ is a Laurent polynomial}}. \]
+ 	\[ L = \set{g(t)\cdot [\phi x](t): g(t)\text{ is a Laurent polynomial}}. \]
+ 	A Laurent polynomial is a polynomial in variables $ z $ and $ 1/z $.
  	
  	\begin{remark}
  		 The importance of the monomial like $ f(z) = z^n $ becomes more evident when one restricts $ f $ to the unit-circle in the complex domain, i.e. $ \mathbb{T} = \set{\abs{z}=1} $. Because
@@ -458,3 +459,123 @@
 \begin{solution}
 	Map every negative indexed element of the sequence in $ l_2(-\infty,\infty) $ to an odd index, and every positive indexed element of the sequence to an even index. Since the sequence is absolutely summable, so is the new sequence, hence in $ l_2(0,\infty) $.
 \end{solution}
+
+
+\subsection{Linear Independence and Dependence}
+\begin{problem}
+	Let $ T $ be an isomorphic mapping of a linear space $ X $ onto a linear space $ Y $. Show that $ A\subset X $ is linearly independent if and only if its image $ T(A)\subset Y $ is linearly independent.
+\end{problem}
+\begin{solution}
+	Assume $ \set{T(A)} $ is linearly independent. We want to prove that $ A $ is linearly independent. To see this consider a sub-collection $ \set{x_i} \subset A $. Let the following be any linear combination of these vectors that is equal to zero
+	\[ \sum_{i=1}^{n}\alpha_i x_i = 0 \]
+	One can apply $ T $ and using its linearity
+	\[ 0 = T(\sum_{i=1}^{n}\alpha_i x_i) = \sum_{i=1}^{n}\alpha_i T(x_i).  \]
+	Since $ \set{T(x_i)} $ is linearly independent, it follows that $ \alpha_i = 0 $ for all $ i $. So $ \set{x_i} $.
+	
+	For the converse let $ A $ be a linearly independent set of vectors. We want to show $ \set{T(A)} $ is also linearly independent. Consider the following linear combination of $ \set{T(x_i)}_{i=1}^n $ where
+	\[ \sum_{i=1}^{n}\alpha_i T(x_i) =0. \]
+	Applying $ \inv{T} $ to both sides and using its linearity we have
+	\[ \sum_{i=1}^n \alpha_i x_i = 0. \]
+	Since $ \set{x_i} $ is linearly independent, it follows that $ \alpha_i = 0 $ for all $ i $. Since this is true for any sub-collection of vector in $ \set{T(A)} $ it follows that $ \set{T(A)} $ is linearly independent.
+\end{solution}
+
+\begin{remark}
+	Note that one $ \set{T(A)} $ being linearly independent (L.I.) implies $ \set{A} $ being L.I., however, the converse is not true. Because a map might not be injective and can send some of the vectors to the origin, thus the image will not be linearly independent set of vectors. 
+\end{remark}
+
+\begin{problem}
+	Let $ X = L_2(\Omega,\mathcal{F},\prob) $, the linear space made up of all complex-valued random variables $ x $ defined on a probability space $ (\Omega, \mathcal{F}, \prob) $ such that 
+	\[ \E{x\conj{x}} = \int_\Omega = \int_\Omega \abs{x}^2 d\prob, \]
+	where $ \conj{x} $ denotes the complex conjugate of $ x $. Let $ A\subset X $ be the set containing two random variables $ x_1 $ and $ x_2 $ such that
+	\[ \E{x_1\conj{x_1}} = 1, \qquad \E{x_2\conj{x_2}} = 1, \qquad \E{x_1\conj{x_2}} = 0.  \]
+	Sow that $ y \in X $ is a linear combination of points in $ A $ if and only if 
+	\[ \E{y\conj{y}} = \abs{\E{y\conj{x}}}^2 + \abs{\E{y\conj{x_2}}}^2. \]
+	Moreover, show that $ A $ is linearly independent.
+\end{problem}
+\begin{solution}
+	We are dealing with a linear space that we have a notion of inner product, hence projection, etc. So I will use that notation here. For two random variables $ x,y $ define
+	\[ \innerProd{x}{y} = \E{x\conj{y}}. \]
+	So with this language the properties in the question statement can be written as
+	\[ \innerProd{x_1}{x_1} = 1, \qquad \innerProd{x_2}{x_2}=1, \qquad \innerProd{x_1}{x_2}=0.  \]
+	To show the forward direction let $ y = \alpha x_1 + \beta x_2 $. Then 
+	\[ \E{y\conj{y}} = \innerProd{y}{y} = \abs{\alpha}^2 + \abs{\beta}^2 = \abs{\E{y\conj{x_1}}}^2 + \abs{\E{y\conj{x_2}}}^2. \]
+	
+	For the converse, assume
+	\[ \E{y\conj{y}} = \abs{\E{y\conj{x_1}}}^2 + \abs{\E{y\conj{x_2}}}^2 \]
+	holds. We want to show $ y = \alpha x_1 + \beta x_2 $ for some $ \alpha, \beta $. Let $ p = \alpha x_1 + \beta x_2 $. Then
+	\[ \innerProd{y-p}{x_1} = \innerProd{y}{x_1} - \innerProd{p}{x_1} = \abs{\alpha}^2  - \abs{\alpha}^2 = 0. \]
+	And for a similar reason one can write
+	\[ \innerProd{y-p}{x_2} = 0. \]
+	So $ y-p \perp \vspan{x_1,x_2} $. See the following figure
+	\input{Images/InnerProductOrthogonal.tex}
+	
+	So we can write
+	\[ \norm{y-p}^2 = \norm{y}^2 + \norm{p}^2. \]
+	Using the fact that $ \norm{y}^2 = \abs{\alpha}^2 + \abs{\beta}^2 $ and $ \norm{p}^2 = \abs{\alpha}^2 + \abs{\beta}^2 $ one gets
+	\[ \norm{y-p} = 0. \]
+	Using the properties of the norm we have
+	\[ y= p. \]
+	
+	To show that $ A $ is linearly independent, consider the following linear combination
+	\[ \alpha x_1 + \beta x_2 = 0. \]
+	By applying $ \innerProd{x_1}{\cdot} $ and $ \innerProd{x_2}{\cdot} $ to both sides one gets
+	\[ \alpha =0, \qquad \beta = 0. \]
+	So $ A $ is a linearly independent set of vectors. 
+\end{solution}
+
+\begin{problem}
+	Let $ X $ be the linear space $ L_2[0,2\pi] $ and $ A $ the set of all functions $ x_n(t) = e^{int} $, $ n=0,1,2,\cdots $. Show that $ A $ is linearly independent.
+\end{problem}
+\begin{solution}
+	In order not to deal with messy sums, we demonstrate the linear independence of the subset $ \set{1,e^{it},e^{2it}} $. The linear independence for arbitrary finite subset of $ A $ can be shown in a similar way. Consider
+	\[ \alpha_0 + \alpha_1 e^{it} + \alpha_2e^{2it} = 0. \]
+	It follows that $ \alpha_0 =0 $. Furthermore, differentiating both sides and dividing by $ ie^{it} $ one gets
+	\[ \alpha_1 + 2\alpha_2 e^{2it} = 0. \]
+	This time we get $ \alpha_1 = 0 $. Differentiating again and dividing by $ e^{2it} $ one gets
+	$ \alpha_2 = 0 $. So $ \set{1,e^{it},e^{2it}}  $ is linearly independent.
+\end{solution}
+
+\begin{problem}
+	Show that a finite set $ A = \set{x_1,\cdots,x_n} $ is a linear space $ X $ is linearly independent if and only if the only $ n $-tuple of scalars satisfying the equation
+	\[ a_1x_1 + \cdots + a_nx_n = 0 \]
+	is $ a_1 = \cdots = a_n = 0. $.
+\end{problem}
+\begin{solution}
+	Assume $ A $ is linearly independent. We want to show $ a_1x_1 + \cdots + a_n x_n = 0 $ implies $ a_1=\cdots=a_n=0 $. We show this by contrapositive. Let $ a_1x_1 + \cdots + a_n x_n = 0 $ with not all of $ a_i $ equal to zero. Then one can write \[ x_i = \beta_1 x_1 + \cdots + \beta_n x_n \], where $ x_i $ is the vector that its corresponding coefficient $ \alpha_i $ was not zero. This implies that the set $ A $ is not linearly independent.
+	
+	For the converse we want to show $ a_1x_1 + \cdots + a_nx_n = 0 $ implying $ a_i = 0 $ for all $ i $ implies $ A $ is linearly independent. We do it by proof by contrapositive. Assume $ A $ is not linearly independent. WLOG we can assume $ x_1 $ is linear combination of others: 
+	\[ x_1 = \sum_{i=2}^{n} \alpha x_i. \]
+	Rearranging this sum one gets
+	\[ x_1 - \alpha_2x_2 - \cdots - \alpha_nx_n = 0 \]
+	with not all of coefficients equal to zero. This finishes the proof.
+\end{solution}
+
+
+\begin{problem}
+	Let $ X $ be the linear space $ \R^n $, and let $ A $ be the set containing the $ n $ vectors
+	\[ x_i = (x_{1i},x_{2i},\cdots,x_{ni}) \quad \text{for $ i=1,\cdots, n $}. \]
+	Show that this set is linearly independent if and only if
+	\[ \det\begin{bmatrix}
+		x_{11} & x_{12} &  \cdots & x_{1n} \\
+		x_{21} & x_{22} & \cdots & x_{2n} \\
+		\vdots & \vdots & \ddots & \vdots \\
+		x_{n1} & x_{n2} & \cdots & x_{nn}
+	\end{bmatrix} \neq 0.\]
+\end{problem}
+\begin{solution}
+	Assume the determinant is non zero and we want to show that $ A $ is linearly independent. We do this by contrapositive. Assume $ A $ is not linearly independent. So we can write one column of the matrix as the linear combination of the other column. Then by elementary column operations (that keeps the determinant intact) one can reduce that column to zero column and hence the determinant will be zero.
+	
+	Now assume $ A $ is linearly independent and we want to show that the determinant is non-zero. Let $ c=(c_1,\cdots,c_n) $ be a vector of coefficients. Then columns of $ A $ being linearly independent is the same as saying the following system of equations has the only zero answer
+	\[ Ac = 0 \quad \text{only when} c=(0,\cdots,0). \]
+	In other words, $ \ker A = \set{0} $. This implies $ A $ is invertible (because it is automatically onto), and thus $ \det(A) \neq 0. $
+\end{solution}
+
+
+
+
+
+
+
+
+
+
