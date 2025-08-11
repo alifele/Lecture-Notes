@@ -125,6 +125,81 @@
  	\end{remark}
 
  \end{summary}
+ 
+ \begin{summary}[More intuition about the basis]
+ 	We know that if $ A $ is linearly independent, then every non-zero vector in $ \vspan{A} $ has a unique linear combination of the vectors in $ A $. With this characterization of linear independence, and appropriate definition of spanning, we can have the following proposition.
+ 	\begin{proposition}
+ 		$ A\subset X $ is a basis if and only if every non-zero vector has a unique linear combination of vectors in $ A $.
+ 	\end{proposition}
+ \end{summary}
+ 
+ \begin{summary}
+ 	Let $ X = \ell(\R) $ be the space of real sequences. Then one might tend to think that the set $ A = \set{e_1, e_2,\cdots} $ where $ e_i[j]=\delta_{ij} $, i.e. the $ i^\text{th} $ position of $ e_i $  is non-zero (equal to one). But this set is not a basis. Because one can not write the sequence with infinite support as a finite linear combination of elements in this collection. In fact $ \vspan{A} $ is a proper subspace of $ X $ consisting of all sequences with finite support.
+ \end{summary}
+ 
+ \begin{summary}
+ 	Some useful facts
+ 	\begin{enumerate}[(a)]
+ 		\item Cardinality of the Hamel basis of a vector space is the dimension of the space.
+ 		\item Two Hamel bases for a fixed space have the same Cardinal numbers.
+ 		\item Two vector spaces are isomorphic if and only if the have the same dimension.
+ 	\end{enumerate}
+ 	\begin{proof}
+ 		\begin{enumerate}[(a)]
+ 			\item It is a definition!
+ 			\item See Appendix B in the text book
+ 			\item Let $ B_1 $ be a basis for $ V_1 $ that is isomorphic to $ V_2 $ via $ \phi $. Then $ \phi(B_1) $ is a basis for $ V_2 $ and since $ \phi $ is a bijection, then $ B_1 $ and $ \phi(B_1) $ both has the same cardinality. For the converse, assume $ B_1 $ and $ B_2 $ has the same cardinality so there is a bijection between these two sets. Let $ \phi $ be a linear map that maps the bases to bases according to the bijection. This is a linear map and is a bijection by construction. So $ V_1 $ and $ V_2 $ are isomorphic.
+ 		\end{enumerate}
+ 	\end{proof}
+ \end{summary}
+ 
+
+ 
+ 
+ \begin{summary}[Facts about subspaces]
+ 	Consider the following two propositions.
+ 	\begin{proposition}
+ 		Let $ V $ be a linear space and $ A\subset V $ be a set of vectors. Then $ a \implies b $ and $ b,c $ are equivalent.
+ 		\begin{enumerate}[(a)]
+ 			\item $ \vspan{A} $ is the set of all linear combinations of vectors in $ A $.
+ 			\item $ \vspan{A} $ is the smallest subspace containing $ A $.
+ 			\item $ \vspan{A} $ is the intersection of all subspaces containing $ A $.
+ 		\end{enumerate}
+ 		\begin{proof}
+ 			The equivalence between (b), and (c) is merely the definition of intersection. Now we want to establish $ a\implies b $. The fact that $ \vspan{A} $ contain $ A $ and $ \vspan{A} $ are easy. We will show that $ \vspan{A} $ is the smallest such space. So we prove that $ \forall W \subset V $ a linear subspace, if $ A \subset W $ then $ \vspan{A} \subset W $. Let $ W $ be any subspace that contains $ A $, and let $ x \in \vspan{A} $. Then $ x $ is a linear combination of the points in $ A $, and since $ W $ also contains $ A $ and is a subspace, then it also contains the linear combination above, thus it contains $ x $. So $ \vspan{A} \subset W $.
+ 		\end{proof}
+ 	\end{proposition}
+ 	One important side effect of the proposition above is the following corollary:
+ 	\begin{corollary}
+ 		$ A $ is a linear subspace if and only if $ A = \vspan{A} $.
+ 		\begin{proof}
+ 			$ \vspan{A} $ is the smallest subspace that contains $ A $. Since $ A $ is subspace itself, the it follows then the smallest subspace containing $ A $ is itself. Thus $ \vspan{A} = A $. The converse is also immediate using the fact that $ \vspan{A} $ is a linear space.
+ 		\end{proof}
+ 	\end{corollary}
+ 	There is an interesting similarity between the notions above and the notion of the set closure in the topological setting. Closure of a set $ A $ in a topological space is the smallest closed set that contains $ A $. Equivalently, it is the intersection of all closed sets that contains $ A $. Similar to the fact that the linear combination of any points (finite) is the span, the topological equivalence is that if there is a sequence is a closed set, then the limit of the sequence (if exists) is also in the set.
+ \end{summary}
+ 
+ 
+ 
+ 
+ \begin{summary}[An important question]
+ 	\begin{problem}
+ 		Consider the following differential equation defined on $ C^2[0,\infty) $
+ 		\[ \frac{d^2x}{dt^2} + b\frac{dx}{dt} + cx = 0. \]
+ 		If $ X $ denotes the set of all solutions of the equation above, show that $ X $ is a linear subspace of $ C^[0,\infty) $ and that $ \dim(X) = 2 $.
+ 	\end{problem}
+ 	\begin{solution}
+ 		Let $ X \subset C^2[0,\infty) $ be the set of all solutions to the differential equation. Observe that one can write the equation as
+ 		\[ (\frac{d^2}{dt^2} + b\frac{d}{dt} + c)x = \mathcal{L}x = 0, \]
+ 		where $ \mathcal{L}: C^2[0,\infty) \to \R $ is a linear operator. Then the solution set $ X $ is in fact the pre-image of the origin $ 0\in \R $, i.e. the kernel of the linear operator. The kernel of any linear operator is a linear subspace. So $ X $ is a linear subspace. 
+ 	\end{solution}
+ \end{summary}
+ 
+ 
+ 
+ 
+ 
+ 
 
 
 \section{Problems}
@@ -626,18 +701,83 @@
 \end{solution}
 
 
+\subsection{Hamel Basis}
+
+\begin{problem}
+	Prove the Rank-Nullity Theorem. I.e. for a linear map $ L: V\to W $ we have
+	\[ \mathcal{R}(L) + \mathcal{N}(L) = \dim V, \]
+	where
+	\[ \mathcal{R}(L) = \dim\operatorname{Image}(L),\qquad \mathcal{N}(L) = \dim\ker(L) \]
+\end{problem}
+\begin{solution}
+	Let $ B_\mathcal{N} $ be a basis for $ \mathcal{N}(L) $. We can extend this basis to a basis to the whole space:
+	\[ B = B_\mathcal{R} \cup B_\mathcal{N}. \]
+	So we have
+	\[  \dim V = \abs{B} = \abs{B_\mathcal{R}} + \abs{B_\mathcal{N}}. \]
+	We already have $ \abs{B_\mathcal{N}} = \dim \ker(L) = \mathcal{N}(L) $. Thus it remains to show $ B_\mathcal{R} = \mathcal{R}(L) = \dim\operatorname{Image}(L) $. To see this we need to show that $ L(B_\mathcal{R}) $ is linearly independent. Consider
+	\[ 0 = \sum_{i=1}^{n}\alpha_i L(x_i), \qquad x_i \in B. \]
+	Applying $ L $ and using linearity one gets
+	\[ L(\sum_{i=1}^{n}\alpha_i x_i) = 0. \]
+	However, $ x_i\notin B_\mathcal{N} $ for all $ i $. So this implies that $ \alpha_i = 0 $ for all $ i $. Hence $ L(B_\mathcal{R}) $ is linearly independent and using that fact that it spans $ \operatorname{Image}(L) $ we conclude that it is a basis for the image of $ L $, thus $ \dim\operatorname{Image}(L) = \abs{B_\mathcal{R}} $.
+\end{solution}
+
+
+\begin{problem}
+	Let $ X $ be a finite-dimensional space with $ \dim(X) = n $. Show that every set containing $ n+1 $ points is linearly dependent.
+\end{problem}
+\begin{solution}
+	Assume otherwise. If there are $ n+1 $ vectors linearly independent in the set, then there is a basis that contains those linearly independent vectors (or in other words, this set can be extended to a basis for the whole space). So that dimension of the space should be at least $ n+1 $, which a contradiction.
+\end{solution}
 
 
 
+\begin{problem}
+	Let $ A $ be a linear subspace of a linear space $ X $. Show that $ \dim(A)\leq \dim(X) $. Moreover, if $ X $ is finite dimensional and $ A $ is a proper linear subspace of $ X $, show that $ \dim(A) < \dim(X) $.
+\end{problem}
+\begin{solution}
+	There exists a basis for the subspace $ A $ that can further be extended to a basis for the whole space. 
+	\begin{enumerate}
+		\item In the case that $ X $ is finite dimensional, then it implies that the cardinality of the basis for $ X $ is at least the cardinality of $ A $, thus $ \dim A \leq \dim X $.
+		\item In the case that $ X $ is infinite dimensional (countable), then if $ X $ is finite dimensional then we automatically have $ \dim A \leq \dim X $ and if $ X $ is also infinite dimensional (countable), then $ \dim A = \dim X $.
+		\item In the case that $ X $ infinite dimensional (uncountable, equal to $ \mathfrak{c} $), then if $ A $ either finite or countable we will have $ \dim A \leq \dim X $ and if $ A $ is also infinite dimensional (uncountable, equal to $ \mathfrak{c} $) then we will have $ \dim A = \dim X $.
+	\end{enumerate}
+	
+	For the case that $ X $ is finite dimensional and $ A $ is a proper subset of $ X $, let $ B_A $ be a basis for $ A $ and extend it to a basis for $ X $ called $ B_X $. Then $ B_X\backslash B_A \neq \emptyset $ (otherwise $ A $ is not a proper subspace. That is because $ \vspan{B_A} $ is the smallest subspace that contains $ A $ and if it contains all the elements that $ B_X $ has then it should be at least the whole space $ A\supseteq X $. And using $ A\subset X $ one reaches to the contradiction). This implies there are vectors in $ B_X $ that is not in $ B_A $. So $ \dim A \leq \dim X $.
+\end{solution}
 
 
+\begin{problem}
+	Consider the following differential equation defined on $ C^2[0,\infty) $
+	\[ \frac{d^2x}{dt^2} + b\frac{dx}{dt} + cx = 0. \]
+	If $ X $ denotes the set of all solutions of the equation above, show that $ X $ is a linear subspace of $ C^[0,\infty) $ and that $ \dim(X) = 2 $.
+\end{problem}
+\begin{solution}
+	Let $ X \subset C^2[0,\infty) $ be the set of all solutions to the differential equation. Observe that one can write the equation as
+	\[ (\frac{d^2}{dt^2} + b\frac{d}{dt} + c)x = \mathcal{L}x = 0, \]
+	where $ \mathcal{L}: C^2[0,\infty) \to C^2[0,\infty) $ is a linear operator. Then the solution set $ X $ is in fact the pre-image of the origin $ 0\in \R $, i.e. the kernel of the linear operator. The kernel of any linear operator is a linear subspace. So $ X $ is a linear subspace. One can transform this second order equation into a system of first order equations by letting:
+	\[ \phi_0 = x, \qquad \phi_1 = x' \]
+	Thus the equivalent equation (that its solutions are in one-to-one correspondence with the solutions of $ \mathcal{L}x=0 $) will be
+	\[ \Phi' = A\Phi \]
+	where $ A $ is the companion matrix of the polynomial $ t^2 + bt+c = 0 $. The ODE above has the solution
+	\[ \Phi(t) = e^{At} \Phi(0). \]
+	Thus every solution is characterized by $ \Phi(0) = (\phi_0(0),\phi_1(0)) = (x(0),x'(0)) $.
+\end{solution}
+\begin{remark}
+	One can solve this problem more ``manually'', the way that Braun did in Theorem 2, Page 132. I.e. to show that $ x = \alpha_1 y_1 + \alpha_2 y_2$ is a solution (where $ y_1,y_2 \in \ker \mathcal{L} $), and also showing that any solution is of this form (by utilizing uniqueness and existence theorem). But note that one must argue that $ \ker \mathcal{L} $ contains at least two elements, which can be done by transforming the second order into two first order ODEs and arguing there exist a solution for each, and utilizing those solutions to construct two solutions, i.e. $ y_1, y_2 $
+\end{remark}
 
 
+\begin{problem}
+	Show that if $ A $ is a set in a linear space $ X $ with $ V(A) = X $, then $ A $ contains a Hamel basis of $ X $.
+\end{problem}
+\begin{solution}
+	Let $ B \subset A $ be a maximal linearly independent subset of $ A $ (exist by Zorn's lemma). Then $ \vspan{B} = \vspan{A} $. Because otherwise, considering the fact $ B\subset A $ thus $ \vspan{B} \subset \vspan{A} $, if there exists $ a \in \vspan{A} $ such that $ a\notin \vspan{B} $, then $ B\cup \set{a} $ is a larger linearly independent subset of $ A $, contradicting the maximality of $ B $. Since $ \vspan{B} = \vspan{A} = X $, it follows that $ B $ is a basis for $ X $.
+\end{solution}
 
 
-
-
-
+\begin{problem}
+	Let $ X $ be the real linear space made up of all functions of the form $ x(t) = a\cos(\omega t+\phi) $, where $ \omega $ is fixed. Show that $ B=\set{\cos\omega t, \sin\omega t} $ is a basis for $ X $.
+\end{problem}
 
 
 
