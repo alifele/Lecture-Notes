@@ -573,6 +573,69 @@
 
 
 
+\begin{problem}
+	Let the state of a dynamical system be a point in the linear space $ X = \R^n $. Let the state at time $ k=0,1,2,\cdots $ be denoted by $ x_k $. Further, suppose that the evolution of the system is characterized by a linear transformation $ T:X\to X $. In particular, $ x_k = Tx_{k-1} $. Let $ x_0 $ be an arbitrary initial state, and consider the set
+	\[ A = \set{x_0, Tx_0, T^2x_0,\cdots}. \]
+	Show that there exists an integer $ p $ such that for
+	\[ A_p = \set{x_0,Tx_0,\cdots,T^px_0} \]
+	one has $ V(A) = V(A_p) $, that is, $ A $ and $ A_p $ span exactly the same linear spaces.
+\end{problem}
+
+\begin{solution}
+	Let $ A = \set{x_1,x_2,\cdots,x_N} $ be the first linearly independent vectors that appear in $ A $. Note that $ N\leq n $, as the space $ X $ is $ n $ dimensional. Let $ p=N $. Then $ \vspan{A} = \vspan{A_p} $.
+\end{solution}
+
+
+\begin{problem}
+	Let $ X $ be the linear space made up of all real-valued random variables defined on some probability space. Let $ A $ be a set of random variables in $ X $. Show that if a random variable $ z\in X $ is stochastically independent of each random variable in $ A $, then $ z $ is ot in $ V(A) $.
+\end{problem}
+\begin{solution}
+	STILL THINKING ON THIS.
+\end{solution}
+
+\begin{problem}
+	Let $ X $ be a linear space. A set $ K\subset X $ is said to be convex if
+	\[ \lambda x + (1-\lambda)y \in K \qquad (0\leq \lambda \leq 1), \]
+	whenever $ x,y\in K $. Let $ K_1 $ and $ K_2 $ be two convex sets in $ X $. 
+	\begin{enumerate}[(a)]
+		\item Show that $ K_1\cap K_2 $ is convex.
+		\item Is $ K_1\cup K_2 $ convex?
+	\end{enumerate}
+\end{problem}
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item Let $ x,y\in K_1\cap K_2 $. Then since $ K_1 $  and $ K_2 $ are convex we have
+		\[ \lambda x + (1-\lambda)y \in K_1 \quad \lambda x + (1-\lambda)y \in K_2 \quad (0\leq \lambda \leq 1). \]
+		Thus $ \lambda x + (1-\lambda) y \in K_1\cap K_2 $ for $ \lambda \in [0,1] $. Thus $ K_1\cap K_2 $ is convex.
+		
+		\item No. Let $ x_1,x_2 \in X $ be two points in the vector space. Each of the sets $ \set{x_1} $ and $ \set{x_2} $ are convex, but $ \set{x_1,x_2}$ is not.
+	\end{enumerate}
+\end{solution}
+
+\begin{problem}
+	Let $ y = f(x) $ be a $ C^2 $ function defined for $ -\infty < x <\infty $. Find a condition on $ d^2f/dx^2 $ in order that
+	\[ K = \set{(x,y)\in \R^2: y\geq f(x)} \]
+	be convex.
+\end{problem}
+\begin{solution}
+	We use the fact that $ f''>0 $ implies $ f $ is convex, i.e. 
+	\[ f(\lambda x_1 + (1-\lambda)x_2) \leq \lambda f(x_1) + (1-\lambda) f(x_2), \qquad \lambda\in [0,1] \]
+	Choose $ (x_1,y_1),(x_2,y_2) \in K $. So by definition $ y_1 \geq f(x_1) $ and $ y_2 \geq f(x_2) $. Thus
+	\[ f(\lambda x_1 + (1-\lambda)x_2) \leq \lambda y_1 + (1-\lambda) y_2, \qquad \lambda\in [0,1].  \]
+	So $ \lambda y_1 + (1-\lambda) y_2 \in K  $ for all $ \lambda $. Thus $ K $ (the epigraph of $ f $) is convex if and only if $ f'' >0 $.
+\end{solution}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
