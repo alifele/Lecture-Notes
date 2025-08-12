@@ -778,7 +778,65 @@
 \begin{problem}
 	Let $ X $ be the real linear space made up of all functions of the form $ x(t) = a\cos(\omega t+\phi) $, where $ \omega $ is fixed. Show that $ B=\set{\cos\omega t, \sin\omega t} $ is a basis for $ X $.
 \end{problem}
+\begin{solution}
+	We want to show that $ B $ is linearly independent, and spans $ X $. For the linear independence consider
+	\[ a\cos\omega t + b\sin\omega t = 0. \]
+	Since both $ \cos\omega t $ and $ \sin\omega t $ has countably many zeros, then the equality above is true for all $ t $ only when $ a,b = 0 $. So $ B $ is linearly independent. 
+	For the spanning, we want to show that every $ a\cos(\omega t + \phi) $ is a linear combination of $ \sin\omega t $ and $ \cos\omega t $ (uniqueness follows from linear independentness show above). We use
+	\[ \cos(x+y) = \cos(x) \cos(y) - \sin(x) \sin(y). \]
+	So one can write
+	\[ a\cos(\omega t + \phi) = a(\cos\phi\cos(\omega t) - \sin(\phi)\sin(\omega t)). \]
+	So $ B $ is a basis for the space $ X $.
+\end{solution}
+
+
+\begin{problem}
+	Show that $ C[0,T] $ is infinite dimensional. \textit{Hint: Construct a linearly independent set of dimension $ n $, where $ n $ is an arbitrary integer.}
+\end{problem}
+\begin{solution}
+	The set $ \set{1,t,t^2,t^3,\cdots} $ is a linearly independent set of vectors (any attempt to write some $ t^k $ as a linear combination (finite) of other vectors results in the conclusion that a polynomial has infinitely many zeros, which is not correct). So the dimension of $ X $ is at least $ \aleph_0 $, thus infinite.
+\end{solution}
+
+
+\begin{problem}
+	Let $ L $ be a linear transformation of $ X $ into $ Y $ where $ X $ and $ Y $ are both finite dimensional.
+	\begin{enumerate}[a]
+		\item Show that $ L $ maps $ X $ onto $ Y $ if and only if $ \dim \mathcal{R}(L) = \dim Y $.
+		\item Show that $ L $ is one-to-one if any only if $ \dim \mathcal{R}(L) = \dim X $.
+		\item Show that $ L $ is invertible if and only if $ \dim X = \dim Y = \dim \mathcal{R}(L) $.
+		\item What can one say about infinite-dimensional spaces?
+	\end{enumerate}
+	
+\end{problem}
+
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item STILL THINKING.
+
+		
+		\item Using the rank nullity theorem one gets $ \mathcal{N} (L)  = 0 $. So $ \mathcal{N}(L) = \set{0} $. So $ L $ is one to one. 
+		\item Follows from (a) and (b).
+		\item For instance (b) fails (for example consider the left shift operator defined on $ \ell_2 $). (a) can not fail.
+ 	\end{enumerate}
+\end{solution}
 
 
 
 
+
+
+
+\subsection{Matrix Representation of Operators}
+\begin{problem}
+	Let $ [T] $ be an $ m\times n $ matrix of scalars, and let $ X $ and $ Y $ be linear spaces where $ \dim(X) = n $ and $ \dim(Y) = m $. Show that there exists a linear transformation $ T:X\to Y $ such that $ [T] $ represents $ T $ relative to some Hamel basis.
+\end{problem}
+\begin{solution}
+	Let $ \set{e_i}_{i=1}^n $ and $ \set{\hat{e}_j}_{j=1}^m $ be a basis for $ X $ and $ Y $. Let $ L:X\to Y $ be a linear transformation that
+	\[ Te_i = \sum_{j=1}^{m} [T]_{ji} \hat{e}_j. \] 
+	I.e. maps each $ e_i $ to a vector in $ Y $ that its coordinates are the entries in the $ i^\text{th} $ column of the matrix.
+\end{solution}
+
+
+\begin{problem}
+	Let $ X $ and $ Y $ be finite-dimensional linear spaces with $ \dim X = n $ and $ \dim Y = m $. Consider the linear space $ lt[X,Y] $ of all linear transformation $ T:X\to Y $ and the linear space $ M_{mn} $ of all $ m\times n $ matrices of scalars. The relation ``$ [T] $ represents $ T $ relative to $ B_1 $ and $ B_2 $'' is a mapping of $ lt[X,Y] $ into $ M_{mn} $. Show that it is an isomorphism. In other words, $ lt[X,Y] $ and $ M_{mn} $ are isomorphic.
+\end{problem}
