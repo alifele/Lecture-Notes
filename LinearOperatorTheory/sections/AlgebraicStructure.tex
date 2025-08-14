@@ -219,6 +219,41 @@
  
  
  
+ \subsection{Direct Sums and Sums}
+ Direct sums, sums, inner sums, outer sums, etc, are in the Category of notions that because they are very important it has been discussed by different people and different fields, and this has lead to many wrong interpretations about these concepts. So it is very easy for someone to get lost in the subtle nuances between these notions. In this section I will keep everything simple.
+ 
+Let $ X,Y $ be any two vector spaces (maybe subspaces of a same containing vector space). Then $ X\oplus Y $ is a vector space whose underlying set is $ X\times Y $. It is also possible to view this from the universal property point of view, which we will not do here. See Roman for more on this.
+
+\begin{example}
+	Let $ V $ be a vector space and let $ B = \set{e_1,e_2,e_3} $ be a basis for this space. Let $ X_1 = \vspan{e_1} $ and $ X_2 = \vspan{e_1,e_2} $ be two subspaces. Then $ X_1\oplus X_2 $ is the set of all vectors of the form $ (\alpha_1 e_1, \alpha_2 e_1+\alpha_3 e_3) $. One can write
+	\[ (\alpha_1 e_1, \alpha_2 e_1 + \alpha_3 e_3) = \alpha_1(e_1,0) + \alpha_2(0,e_2) + \alpha_3(0,e_3).  \]
+\end{example}
+
+In contrast, $ X_1+X_2 $ is the smallest subspace that contain $ X_1 $ and $ X_2 $ and is only defined when $ X_1 $ and $ X_2 $ are subspaces of a containing linear space. Equivalently, $ X_1+X_2 $ is the set of all vectors that are linear combination of elements in $ X_1 $ or $ X_2 $.
+
+The following proposition is very important.
+\begin{proposition}
+	Let $ X_1,X_2 $ be subspaces of $ X $. Then the followings are equivalent:
+	\begin{enumerate}[(a)]
+		\item $ X_1\cap X_2 = \set{0} $.
+		\item Every $ x\in X_1+X_2 $ has a unique representation $ x=x_1+x_2 $ with $ x_1\in X_1 $ and $ x_2 \in X_2 $.
+		\item If $ \alpha_1 x_1 + \alpha_2 x_2 = 0 $ then $ \alpha_1 = \alpha_2 = 0 $. I.e. $ 0 $ has a unique representation.
+	\end{enumerate}
+\end{proposition}
+
+When $ X_1 $ and $ X_2 $ are both subspaces of a containing vector space, then there is a natural mapping between $ X_1\oplus X_2 $ and $ X_1+X_2 $ given as
+\[ \Phi(x_1,x_2) = x_1+x_2. \]
+\begin{proposition}
+	$ \Phi $ is isomorphism of vector spaces if $ X_1\cap X_2 = \emptyset $. 
+\end{proposition} 
+\begin{proof}
+	Every $ (x_1,x_2) $ determines a unique $ x_1+x_2 \in X_1+X_2 $. For the converse, from the proposition above if $ X_1\cap X_2 = \emptyset $, then every point in $ X_1+X_2 $ is uniquely determined via $ (x_1,x_2) $. So $ \Phi $ is an isomorphism.
+\end{proof}
+
+\begin{proposition}
+	In general ones has
+	\[ \dim(X\oplus Y) = \dim(X) + \dim (Y), \qquad \dim(X+Y) = \dim(X) +\dim(Y) - \dim(X\cap Y). \]
+\end{proposition}
  
  
 
@@ -1171,14 +1206,66 @@
 \begin{problem}
 	Let $ X,Y, \mathcal{X},\mathcal{Y} $ be finite dimensional linear spaces over the same scalar field, where $ X $ and $ \mathcal{X} $ are isomorphic and $ Y $ and $ \mathcal{Y} $ are isomorphic. Let $ T:X\to Y $ and $ \mathcal{T}:\mathcal{X}\to\mathcal{Y} $ be linear. Show that $ T $ and $ \mathcal{T} $ are isomorphically equivalent if and only if $ \operatorname{rank}(T) = \operatorname{rank}(\mathcal{T}) $.
 \end{problem}
+\begin{solution}
+	Let $ \Phi:X\to\mathcal{X} $ and $ \Psi:Y\to\mathcal{Y} $ be the isomorphism.
+	For the forward direction we want to show that similarity of $ T $ and $ \mathcal{T} $ implies $ \rk T = \rk\mathcal{T} $. We show this by proof by contrapositive. Assume $ \rk T \neq \rk\mathcal{T} $. So $ \dim T(X) = m_1 $ and $ \dim \mathcal{T}\mathcal{X} = m_2 $ where $ m_1\neq m_2 $. Using the fact that $ \Phi $ and $ \Psi $ do preserve the dimension, one can write
+	\[ \dim \Psi T(X) = m_1,\qquad  \dim \mathcal{T}\Phi(X) = m_2. \]
+	Since $ m_1\neq m_2 $, thus $ \Psi T \neq \mathcal{T}\Phi $. 
+	
+	For the converse, we want to show that $ \rk T = \rk\mathcal{T} $ implies $ T $ and $ \mathcal{T} $ are similar.  We use proof by contrapositive. Assume $ \rk T \neq \rk \mathcal{T} $. Since $ \Phi $ and $ \Psi $ both preserves the dimension, it follows that 
+	\[ \rank \Psi T \neq \rank \Phi\mathcal{T}. \]
+	So $ \Psi T \neq \Phi \mathcal{T}. $
+\end{solution}
+\begin{remark}
+	In short, the proof idea of the question above is to use the fact that the isomorphism preserves the dimension. So to prove equal rank implies similarity, by contrapositive we need to show non similarity implies non-equal rank. So if
+	\[ \Psi T \neq \Phi \mathcal{T}, \]
+	then it follows that $ \rank \Psi T \neq \rank \Phi\mathcal{T} $ which furthermore implies that $ \rank T \neq \rank \mathcal{T} $. And to show that similarity implies equal rank, by contrapositive we need to show that non-equal rank implies non-similarity. So if
+	\[  \rank T \neq \rank \mathcal{T} \]
+	then it follows that 
+	\[ \rank \Psi T \neq \rank \mathcal{T}\Phi. \]
+	So $ \Psi T \neq \mathcal{T}\Phi $.
+\end{remark}
+
+\begin{problem}
+	Let $ S $ and $ T $ be linear operators on $ \R^2 $ and assume that there is a basis for $ \R^2 $ in which $ S $ and $ T $ have the following representation.
+	\[ S = \matt{1}{1}{0}{1},\qquad T = \matt{\lambda}{0}{0}{\mu}. \]
+	\begin{enumerate}[(a)]
+		\item Show that $ S $ and $ T $ are not similar.
+		\item Are $ S $ at $ T $ ever isomorphically equivalent?
+	\end{enumerate}
+\end{problem}
+
+\begin{solution}
+	
+	\begin{enumerate}[(a)]
+		\item The matrix $ S $ has one eigenvalue $ \lambda = 1 $ with algebraic multiplicity equal to 2. However, the geometric multiplicity (dimension of the null space of $ A-\lambda I $) is 1. So this matrix is deficient and can not be diagonalized. So $ S $ and $ T $ are not similar.
+		
+		\item No. Because of the reason above.
+	\end{enumerate}
+	
+\end{solution}
 
 
-
-
-
-
-
-
+\begin{problem}
+	Let $ M $ and $ N $ be linear operators on $ C^n $ that can be represented as diagonal matrices
+	\[ [M] = \operatorname{diag}\set{\mu_1,\cdots,\mu_n},\qquad [N] = \operatorname{diag}\set{\nu_1,\cdots,\nu_n}, \]
+	in terms of some basis. Show that $ M $ and $ N $ are similar if and only if the two sets $ \set{\mu_1,\cdots,\mu_n} $ and $ \set{\nu_1,\cdots,\nu_n} $ are the same.
+\end{problem}
+\begin{solution}
+	Assume  the sets $ \set{\mu_1,\cdots,\mu_n} $ and $ \set{\nu_1,\cdots,\nu_n} $ are the same. So there is a permutation $ \sigma \in S_n $ that maps the ordered tuple $ (\mu_1,\cdots,\mu_n) $ to $ (\nu_1,\cdots,\nu_n) $. If $ \sigma \mu_i = \mu_j $, then let $ S $ be a matrix that in its $ i^\text{th} $ row, all of the columns are zero except for the $ j^\text{th} $ row. So
+	\[ M = \inv{S} N S. \]
+	
+	For the converse, note that $ M $ and $ N $ commutes with any other matrix. So assuming $ M,N $ are similar, then $ M = S N \inv{S} $. One can write
+	\[ M = SN\inv{S} = NS\inv{S} = N. \]
+	So $ \set{\mu_1,\cdots,\mu_n} = \set{\nu_1,\cdots,\nu_n} $.
+\end{solution}
+\begin{remark}
+	To prove that $ N $ commutes with any other matrix, let $ A $ be any matrix. Then
+	\[ [AN]_{ij} = \sum_k A_{ik}N_{kj} = A_{ij}N_{jj}. \]
+	And
+	\[ [NA]_{ij} = \sum_k N_{ik}A_{kj} = N_{ii}A_{ij}. \]
+	Since $ N^T = T $, then it follows that $ [AN]_{ij} = [NA]_{ij} $.
+\end{remark}
 
 
 
