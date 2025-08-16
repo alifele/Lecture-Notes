@@ -78,7 +78,19 @@
 \end{summary}
 
 
+\begin{summary}[Checking Continuity]
+	By definition, a map between two topological spaces $ F:U\to V $ is continuous if and only if the pre-image of open sets are open. However, instead of checking the pre-image of every open sets in $ \mathcal{T}_V $, it is enough to check it on the basis of the topology. Since in a metric space, the basis of the topology is the set of all open balls, then to check to see if a map is continuous, it is enough to check to see if the pre-image of every open ball in $ V $ is open in $ U $, i.e. contains an open ball of $ U $.
+\end{summary}
 
+\begin{summary}[Isometric embedding of metric space in a Banach space]
+	In \autoref{prob:embeddingMetricSpaceInBanachSpace} we showed a very important fact! We showed that for any metric space $ (X,d) $ one can come up with in isometric embedding of $ X $ onto $ BC(X,\R) $, the space of all continuous and bounded functions defined on $ X $. For $ x_0 \in X $ the embedding $ \Phi: X\to BC(X,\R) $ is given as
+	\[ [\Phi(y)](x) = d(x,y) - d(x,x_0). \]
+	This is known as Kuratowski embedding. Also, note that $ BC(X,\R) $ is a Banach space, because $ \R $ is complete.
+\end{summary}
+
+
+
+\newpage
 \section{Solved Problems}
 
 
@@ -668,4 +680,80 @@
 	Then it follows that $ \lim a_n = 1/3(f+2g). $ So the sequence $ \set{x_n} $ converges to the function $ h = \frac{1}{3}(f+2g) $ point-wise. To show the uniform convergence, i.e. the converges with the sup norm, we use the fact that the point-wise convergence of the uniform /.
 \end{solution}
 
+\subsection{More on open sets}
+\begin{problem}
+	Let $ f:X\to Y $ be continuous, where $ (X,d_1) $ and $ (X,d_2) $ are metric spaces. Let $ A $ be a connected set in $ X $, that is the metric space $ (A,d_1) $ is connected. Show that $ f(A) $ is connected in $ Y $, that is $ (f(A),d_2) $ is a connected space.
+\end{problem}
+\begin{solution}
+	We show this by contrapositive. Assume $ (f(A).d_2) $ is not a connected space. So there are non-empty open sets $ B'_1,B'_2 $ in $ \mathcal{T}_{f(A)} $ such that $ B'_1\cap B'_2 = \emptyset $ and $ B'_1\cup B'_2 = A $. Since $ \mathcal{T}_A $ is the induced subspace topology, this implies there exists $ B_1,B_2 \in \mathcal{T} $ such that $ B_1\cap A = B'_1 $ and $ B_2\cap A = B'_2 $ and $ B_1\cap B_2 = \emptyset $ and $ f(A) \subset B_1\cup B_2 $. Considering the pre-image one gets
+	\[ A = \inv{f}(f(A)) = \inv{f}(B_1)\cup \inv{f}(B_2). \]
+	Since $ f $ is continuous, $ \inv{f}(B_1) $ and $ \inv{f}(B_2) $ are both continuous and \[  C_1 = \inv{f}(B_1)\cap A,\qquad  C_2 = \inv{f}(B_2)\cap A ,\qquad C_1,C_2 \in \mathcal{T}_A \]
+	such that
+	\[  C_1\cup C_2 = A, \qquad C_1\cap C_2 = \emptyset. \]
+	So $ (A,d_1) $ is a connected space.
+\end{solution}
 
+
+\begin{problem}
+	Suppose that $ F $ is a one-to-one mapping of a set $ X $ onto a metric space $ (Y,d_2) $. 
+	\begin{enumerate}[(a)]
+		\item Does $ d_1(x_1,x_2) = d_2(f(x_1),f(x_2)) $ define a metric on $ X $?
+		\item If so, is $ F $ a homeomorphism? Anything stronger?
+	\end{enumerate}
+\end{problem}
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item Yes. $ d_1 $ is a metric. Because $ d_1(x_1,x_1) = d_2(f(x_1),f(x_1)) = 0 $. Furthermore, $ d_1(x_1,x_2) = d_1(x_2,x_1) $ that follows from the symmetric property of $ d_2 $. Lastly, for $ x_1,x_2,x_3 \in X $ we can write
+		\[ d_1(x_1,x_2) + d_1(x_2,x_3) = d_2(f(x_1),f(x_2)) + d_2(f(x_2),f(x_3)) \geq d_2(f(x_1),f(x_3)) = d_1(x_1,x_3), \]
+		where we have used the bijectivity of $ f $.
+		
+		\item More explicitly, we want to see if $ F: (X,d_1) \to (Y,d_2) $ is a homomorphism. It is. It is in fact an isometry between two metric spaces. To show the homomorphism we need to show that $ F $ is continuous with continuous inverse. Let $ B_{y_0}(r) $ be an open ball in $ Y $. Then
+		\[ \inv{F}(B_{y_0}(r)) = \inv{F}(\set{y\in Y: d_2(y,y_0)<r}) = \set{\inv{F}(y): d_2(y,y_0)<r} = \set{x\in X: d_1(F(x),F(x_0)) < r} = B_{x_0}(r), \]
+		where $ x_0 = F(y_0). $
+		
+		With a similar reasoning one can show that the images of open balls are open (even stronger, i.e. open balls). 
+		\end{enumerate}
+\end{solution}
+
+
+\begin{problem}[{\color{orange} Important}]
+	\label{prob:embeddingMetricSpaceInBanachSpace}
+	Let $ (X,d) $ be a metric space, where $ X $ is nonempty, and let $ Y = BC(X,R) $
+ denote the collection of all bounded, continuous real-valued functions defined on $ X $. Assume that $ Y $ has the sup metric. Let $ x_0 $ be a fixed point in $ X $ and define
+ \[ f_y(x) = d(x,y) - d(x,x_0). \]
+ Show that the mapping $ G:y\mapsto f_y $ is an isometry from $ X $ onto a subspace of $ Y $.
+\end{problem}
+\begin{solution}
+	First, we want to show that $ f_y \in BC(X,\R)  $. Note that for any $ x_0 \in X $, the mapping $ d(\cdot,x_0): X\to \R $ is continuous. That is because
+	\[ \abs{d(x,x_0) -d(y,x_0)} \leq \abs{d(x,y) + d(y,x_0) - d(y,x_0)} = d(x,y). \]
+	Since $ f_y $ is sum of two continuous functions, it follows that $ f_y $ is also continuous. Furthermore, we want to show that $ f_y $ is bounded. This is true since using the triangle inequality one can write
+	\[ \abs{d(x,y) - d(x,x_0)} \leq \abs{d(x,x_0) + d(x_0,y) - d(x,x_0) } = d(x_0,y). \]
+	So for each choice of $ y $ one has $ \abs{f_y(x)} \leq d(x_0,y) $. So it follows that
+	\[ \sigma(f,0) = \sup_x\set{f_y(x)} = d(x_0,y). \]
+	So $ f_y $  is also bounded. So $ G $ is indeed a mapping from $ X $ onto a subspace of $ Y $. To show $ G $ is an isometry, we need to show that $ G $ is one-to-one, and also preservers the distance. To show the injectivity of $ G $, let $ y_1,y_2 \in X $ such that $ G(y_1) \equiv G(y_2) $.
+	\[ f_{y_1}(x) = d(x,y_1) - d(x,x_0) ,\qquad f_{y_2}(x) = d(x,y_2)-d(x,x_0). \]
+	Then we can write
+	\[ f_{y_1}(x) - f_{y_2}(x) = d(x,y_1)-d(x,y_2) = 0. \]
+	I.e. $ d(x,y_1) = d(x,y_2) $ for all $ x\in X $. This implies $ y_1=y_2 $.
+	So $ G $ is injective. Lastly, we want to show that $ G $ preserves the metric. I.e. we want to show
+	\[ d(y_1,y_2) = \sigma(G(y_1),G(y_2)). \]
+	One can write 
+	\[ \sigma(G(y_1),G(y_2)) = \sup\set{\abs{d(x,y_1)-d(x,y_2)}: x\in X}. \]
+	Observe that
+	\[ d(x,y_1) - d(x,y_2) \leq d(x,y_2) + d(y_2,y_1) - d(x,y_2) = d(y_2,y_1). \]
+	and for $ x=y_2 $ one has $ (d(x,y_1) - d(x,y_2))\big|_{x=y_2} = d(y_1,y_2) $. This implies that $ \sup\set{\abs{d(x,y_1)-d(x,y_2)}: x\in X} = d(y_1,y_2) $ (because every element in the set is less than $ d(y_1,y_2) $ and for $ x=y_2 $ this value is also achieved. So the $ \sup $ of the set is $ d(y_1,y_2) $).
+\end{solution}
+ 
+ \begin{problem}
+ 	In the problem above, assume $ X=\R $ with the usual metric. Sketch a few of the functions $ f_y $.
+ \end{problem}
+ \begin{solution}
+ 	The graph of such a function is shown below
+ 	\input{Images/isometryXtoBCXR.tex}
+ \end{solution}
+ 
+ 
+ \begin{problem}
+ 	Let $ X = C(a,b) $ be the space of continuous real-valued functions defined on the open bounded interval $ (a,b) $. 
+ \end{problem}
+ 

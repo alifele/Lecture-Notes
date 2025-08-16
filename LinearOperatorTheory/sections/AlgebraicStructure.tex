@@ -1,6 +1,9 @@
 \chapter{Algebraic Structure}
 
 
+\section{Summaries}
+
+
 \begin{summary}
 	Let $ A:V\to W $ be a linear map between vector spaces. Then the pre-image of any linearly independent set contains a linearly independent set. Let $ \set{w_n} $ be a linearly independent set of vectors in $ W $. Let $ v_n = \inv{A}(w_n) $, i.e. \textbf{one} of the pre-images of $ w_n $ (if $ A $ is not injective, then $ w_n $ can have multiple pre-images. But we choose just one pre-image. Any of them will work). Then let $ \sum_n \beta_n v_n = 0 $. Using the fact that $ v_n = \inv{A}(w_n) $, one can write
 	\[ 0 = A(\sum_n \beta_n v_n) = \sum_n \beta_n A(\inv{A}(v_n)) = \sum_n \beta_n w_n,  \]
@@ -254,6 +257,23 @@ When $ X_1 $ and $ X_2 $ are both subspaces of a containing vector space, then t
 	In general ones has
 	\[ \dim(X\oplus Y) = \dim(X) + \dim (Y), \qquad \dim(X+Y) = \dim(X) +\dim(Y) - \dim(X\cap Y). \]
 \end{proposition}
+
+
+\subsection{Linear Functionals}
+The 0 level set of every non-zero linear functional is a hyperplane. So the null-set of a linear functional is maximal in the sense that the only subspace that contains it is the whole space. The following theorem makes this precise.
+
+\begin{proposition}
+	Let $ \ell:V\to \R $ be a linear functional. Then $ \dim \mathcal{N}(\ell) = n-1 $. Furthermore, for any subspace $ A $ that contains $ \mathcal{N}(\ell) $ but is not equal to it, we have $ A = X $. 
+\end{proposition}
+\begin{proof}
+	Since $ \ell $ is a non-zero functional, $ \exists x_0 \in X $ such that $ \ell(x_0) \neq 0$. Let $ x \in X $. One can write
+	\[ x = x \pm \frac{\ell(x)}{\ell(x_0)}x_0 = (x-\frac{\ell(x)}{\ell(x_0)}x_0) + \frac{\ell(x)}{\ell(x_0)}x_0. \]
+	Observe that the first term belongs to $ \mathcal{N}(\ell) $ (apply $ \ell $ and utilize linearity). Call $ M = \vspan \set{x_0} $ and since any arbitrary $ x\in X $ can be written as a linear combination of a point in $ \mathcal{N}(\ell) $ and a point in $ M $ it follows that
+	\[ X = \mathcal{N}(\ell) + M. \]
+	Using the fact that $ \mathcal{N}(\ell) \cap M = \set{0} $ it follows that the sum above is direct and in fact $ X = \mathcal{N}(\ell) \oplus M $. So $ M $ is the algebraic complement of $ \mathcal{N}(\ell) $ and thus $ \mathcal{N}(\ell) $ has co-dimension 1. Thus it is a hyperplane.
+	
+	For the second part of the proposition, let $ A $ be a subspace that contains $ \mathcal{N}(\ell) $. Since it is not equal to $ \mathcal{N}(\ell) $, then we can choose $ x_0 \in A \backslash\mathcal{N}(\ell) $, and the rest of proof follows. 
+\end{proof}
  
  
 
@@ -1266,6 +1286,68 @@ When $ X_1 $ and $ X_2 $ are both subspaces of a containing vector space, then t
 	\[ [NA]_{ij} = \sum_k N_{ik}A_{kj} = N_{ii}A_{ij}. \]
 	Since $ N^T = T $, then it follows that $ [AN]_{ij} = [NA]_{ij} $.
 \end{remark}
+
+
+\subsection{Projection}
+\begin{problem}
+	Let $ P $ be a projection on a linear space $ X $. Show that the range of $ P $ is given by
+	\[ \mathcal{R}(P) = \set{x\in X: Px=x}. \]
+\end{problem}
+\begin{solution}
+	Let $ y\in \mathcal{R}(P) $. Then $ \exists x\in X $ such that $ Px=  y $. Applying $ P $ to both sides one gets $ P^2x = Py $. Since $ P^2 = P $ one gets $ Px= Py $ and since $ Px = y $ one gets $ y = Py $. So $ y\in \set{x\in X: Px=x} $. For the converse, let $ x \in \set{x\in X: Px=x} $. By definition of the range we have $ x\in \mathcal{R}(P) $.
+\end{solution}
+
+\begin{problem}
+	Let $ X = L_2[-\pi,\pi] $ and show that
+	\[ (Px)(t) = \int_{-\pi}^\pi K(t,\tau)x(\tau) d\tau,  \]
+	where 
+	\[ K(t,\tau) = \frac{1}{2\pi} \sum_{n=-10}^{10} e^{in(t-\tau)} \]
+	represents a projection on $ X $.
+\end{problem}
+\begin{solution}
+	To see this observe that
+	\[ e^{in(t-\tau)} = \cos(n(t-\tau)) + i\sin((t-\tau)). \]
+	Since the sum in $ K(t,\tau) $ runs from $ -10 $ to $ +10 $, then the sine terms will cancel out (because they are even functions). So we will have
+	\[ K(t,\tau) = \frac{1}{2\pi}\sum_{n=-10}^{10}\cos(n(t-\tau)). \]
+	Furthermore, it is easy to check that
+	\[ \int_{-\pi}^{\pi} \cos(n(t-s))\cos(m(s-\tau))  ds = 2\pi\delta_{n,m}\cos(n(t-\tau)).  \]
+	So 
+	\[ \int_{-\pi}^{\pi} K(t,s)K(s,\tau) = K(t,\tau) .\]
+	So one can write
+	\[ P(Px)(t) = \int_{-\pi}^{\pi} K(t,s) \int_{-\pi}^{\pi} K(s,\tau) x(\tau)d\tau ds = \int_{-\pi}^{\pi} K(t,\tau) x(\tau) d\tau = (Px)(t). \]
+	So since $ P $ is linear and $ P^2 = P $, $ P $ is a projection map.
+\end{solution}
+
+
+
+\begin{problem}
+	Let $ X = C[0,T] $ and define $ P $ by
+	\[ (Px)(t) = x(0)(1-t), \qquad \text{for } 0\leq t\leq T. \]
+	Show that $ P $ is a projection.
+\end{problem}
+\begin{solution}
+	$ P $ is a linear map. Further more, observe that
+	\[ P(Px)(t) = (Px)(0)(1-t) = x(0)(1-t). \]
+	So $ P^2 = P $ and $ P $ is a projection map.
+\end{solution}
+\begin{remark}
+	In general, for a nice enough function
+	\[ (Px)(t) = x(0)f(t), \]
+	where $ f(0) = 1 $ is a projection map.
+\end{remark}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
