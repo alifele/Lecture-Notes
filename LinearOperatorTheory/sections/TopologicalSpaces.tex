@@ -754,6 +754,20 @@
  
  
  \begin{problem}
- 	Let $ X = C(a,b) $ be the space of continuous real-valued functions defined on the open bounded interval $ (a,b) $. 
+ 	Let $ X = C(a,b) $ be the space of continuous real-valued functions defined on the open bounded interval $ (a,b) $.  For $ x,y\in X $ let
+ 	\[ D(x,y) = \set{t\in(a,b): x(t)\neq y(t)}. \]
+ 	\begin{enumerate}[(a)]
+ 		\item Show that $ D(x,y) $ is the union of disjoint open intervals.
+ 		\item Let $ d(x,y) $ denote the sum of the length of these intervals. Show that $ d $ is a metric on $ X $.
+ 		\item Find a sequence of bounded functions in $ X $ that converges to $ x(t) = (t-a)^{-1} $.
+ 	\end{enumerate}
  \end{problem}
+ 
+ \begin{solution}
+ 	\begin{enumerate}[(a)]
+ 		\item For $ x,y\in X $ let $ \phi = x-y $. Then 
+ 		\[ D = \inv{\phi}(\set{0}^c). \]
+ 		Since $ \set{0}^c $ is an open set, its pre-image is also open (because $ x-y $ is continuous), thus $ D $ is union of some open intervals. Some of these open intervals might be overlapping. So for each $ t $ let $ I_t $ be the maximal open intervals containing $ t $. So one can write $ D = \cup_{t\in D} I_t $.
+  	\end{enumerate}
+ \end{solution}
  
