@@ -21,6 +21,32 @@
 	Any metric $ d $ on a vector space $ V $ comes from a function $ \norm{x} $ that need to satisfy all norm properties except for the homogeneity condition. And it also need to satisfy $ \norm{x} = \norm{-x} $. See \autoref{prob:allMetricsOnLinearSpace}.
 \end{summary}
 
+
+\begin{summary}[A common confusion]
+	Note that the collection $ B = \set{e_1,e_2,e_3,\cdots} $ is not a basis for $ \ell_2(\R) $. That is because the sequences with infinite support can not be written as a finite linear combination of elements in the basis. But by the Zorn's lemma, every vector space does contain a Hamel basis. And in this case, this Hamel basis exists but is not constructive.
+\end{summary}
+
+
+\begin{summary}[A very dangerous intuition]
+	In studying the theory of the convergence of series of real numbers, one might build the following mental picture
+	% https://q.uiver.app/#q=WzAsNSxbMSwwLCJcXHRleHR7Q29udmVyZ2VudCBzZXJpZXN9Il0sWzAsMSwiXFx0ZXh0e2NvbmRpdGlvbmFseSBjb252ZXJnZW50fSJdLFsyLDEsIlxcdGV4dHt1bmNvbmRpdGlvbmFseSBjb252ZXJnZW50fSJdLFsyLDIsIlxcdGV4dHthYnNvbHV0ZWx5IGNvbnZlcmdlbnR9Il0sWzAsMiwiXFx0ZXh0e25vdCBhYnNvbHV0ZWx5IGNvbnZlcmdlbnR9Il0sWzAsMV0sWzAsMl0sWzIsM10sWzEsNF1d
+	\[\begin{tikzcd}
+		& {\text{Convergent series}} \\
+		{\text{conditionaly convergent}} && {\text{unconditionaly convergent}} \\
+		{\text{not absolutely convergent}} && {\text{absolutely convergent}}
+		\arrow[from=1-2, to=2-1]
+		\arrow[from=1-2, to=2-3]
+		\arrow[from=2-1, to=3-1]
+		\arrow[from=2-3, to=3-3]
+	\end{tikzcd}\]
+	Howerver, this is not true in a general metric space. I.e. in general it is possible to come up with an unconditionaly convergent series that is not absolutely convergent! In the note in page 227 of the text book, we read that Dvoretzky and Rogers have proved that an unconditionaly convergent series is absolutely convergent if and only if the space is finite dimensional. This givens us enough hint to come up with our own example. Because and unconditional convergence is absolutely convergent if and only if the space is finite dimensional, it follows that it is some property of infinite dimension that can lead to an unconditional convergent series that is not absolutely convergent. One possible property of the infinite dimension that we can exploit is the escape of the mass to the infinity. Consider the sequence $ \set{x_n} $ in $(C(\R),\norm{\cdot}) $ where one particular $ x_n $ is shown as below
+	\input{Images/escapeToInfinity.tex}
+	The sequence of partial sums in $ \sum_n x_n $ is monotone and bounded (an upper bound is 5. That is because at each $ t $, the series for that value is $ \sum_n 1/n^2 $ with except one term replaced by 1. So the worst that can happen is that keep all the terms and add one to the final infinite sequence. So an upper bound would be $ \sum_n 1/n^2 + 1 $.)
+\end{summary}
+
+\newpage
+
+
 \section{Problems}
 \subsection{Normed Linear Spaces}
 \begin{problem}
@@ -163,4 +189,83 @@
 \begin{problem}
 	Show that a Hamel basis for a Banach space is either finite or uncountably infinite. (Completeness is important for this. Use Exercise 17, section 3.13).
 \end{problem}
+
+\begin{solution}
+	Let $ X $ be a Banach space with countable Hamel basis, i.e. $ B = \set{e_1,e_2,\cdots} $. Consider $ A_n = \vspan{e_1,e_2,\cdots,e_n} $ (see the remark below). Then since $ \forall v\in X $, $ v $ is a finite linear combination of some basis vectors, it follows that $ v \in \vspan{A_n} $ for some $ n $. Thus
+	\[ X = \cup_{n\in \N} A_n. \] 
+	We know that every finite dimensional vector space is closed. But non of $ A_n $ contains an open ball (hence an open set), (otherwise with translation and scaling this implies $ A_n $ contains the unit ball, which implies that $ A_n = X $). Using the result of Exercise 17, section 3.13 we conclude that $ X $ is not complete, which is a contradiction to the assumption that $ X $ is a Banach space. 
+\end{solution}
+\begin{remark}
+	Note that one can not write $ A_n = \vspan{e_n} $ and claim $ X = \cup_n A_n $. This is not true! Instead, one can write $ A_n = \vspan{e_1,\cdots,e_n} $. Then each $ A_n $ is finite dimensional, and since $ B $ is a Hamel basis, any $ v\in X $ is in some $ A_n $. Thus $ X = \cup_n A_n $. Note that if one writes $ X = \cup_{A\in \mathcal{I}}A $, where $ \mathcal{I} $ is the set of all finite dimensional subspaces of $ X $, one should note that the union is on uncountably infinite collection of sets.
+\end{remark}
+
+\begin{problem}[{\color{orange} Important}]
+	Let $ X $ denote the collection of all sequences $ x=  (x_1,x_2,\cdots) $ of complex numbers and define
+	\[ \norm{x} = \sum_{n=1}^{\infty}2^{-n}\min(1,\abs{x_n}). \]
+	\begin{enumerate}[(a)]
+		\item Is $ \norm{\cdot} $ a norm on $ X $?
+		\item Does $ \norm{x-y} $ define a metric on $ X $? If so, explain the meaning of $ \norm{x^{(n)}-x}\to 0 $ as $ n\to0 $.
+	\end{enumerate}
+\end{problem}
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item No. Let $ x = (1,1,\cdots) $. Then $ \norm{x} = 2 $. However, $ \norm{2x} = 2 \neq 2\norm{x} $. So $ \norm{\cdot} $ is not homogeneous, hence not a norm.
+		
+		\item Yes $ \norm{x-y} $ does define a metric. Symmetry and positive definiteness comes from the properties of $ \abs{\cdot} $. For the triangle inequality, it follows from
+		\[ \min(1,\abs{a+b}) \leq \min(1,\abs{a} + \abs{b}) \leq \min(1,\abs{a}) + \min(1,\abs{b}).  \]
+		
+		The meaning of convergence in this metric is similar to the convergence of real numbers (or complex numbers) when expanded in their decimal expansion. 
+ 	\end{enumerate}
+\end{solution}
+
+\begin{problem}[\color{orange} Important]
+	Give and example of a metric $ d $ on a linear space such that $ d(x,0) $ is not a norm.
+\end{problem}
+\begin{solution}
+	First consider the following Lemma
+	\begin{lemma}
+		for $ 0<p<1 $ one has
+		\[ \abs{expression}^p \leq \abs{x}^p + \abs{y}^p. \]
+		\begin{proof}
+			Let $ \beta = 1-p $. Then
+			\[ \abs{x+y}^p = \frac{\abs{x+y}}{\abs{x+y}^{\beta}}\leq \frac{\abs{x}}{\abs{x+y}^\beta} + \frac{\abs{y}}{\abs{x+y}^\beta} \leq \frac{\abs{x}}{\abs{x}^\beta} + \frac{\abs{y}}{\abs{y}^\beta} = \abs{x}^p + \abs{y}^p. \]
+		\end{proof}
+		So $ d(x,y) = \abs{x-y}^p $ is a metric. However, $ d(x,0) = \abs{x}^p $ is not a norm as it is not homogeneous.
+ 	\end{lemma}
+\end{solution}
+
+
+\begin{problem}
+	A real-valued function $ f $ defined on a linear space $ X $ is said to be convex, if
+	\[ f(\alpha x + \beta y) \leq \alpha f(x) + \beta f(y), \]
+	for all $ 0\leq \alpha,\beta \leq 1 $ with $ \alpha + \beta = 1 $. Show that a norm is a convex function.
+\end{problem}
+\begin{solution}
+	It follows from the homogeneity of the norm and the triangle inequality.
+	\[ \norm{\lambda x + (1-\lambda)y} \leq \norm{\lambda x} + \norm{(1-\lambda)y} = \abs{\lambda} \norm{x} + \abs{1-\lambda}\norm{y} = \lambda\norm{x} + (1-\lambda)\norm{y}. \] 
+\end{solution}
+
+\begin{remark}
+	An alternative formulation of a convex function is to write
+	\[ f(\lambda x + (1-\lambda)y) \leq \lambda f(x) + (1-\lambda)f(y). \]
+\end{remark}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

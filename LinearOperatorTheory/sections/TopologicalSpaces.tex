@@ -768,6 +768,26 @@
  		\item For $ x,y\in X $ let $ \phi = x-y $. Then 
  		\[ D = \inv{\phi}(\set{0}^c). \]
  		Since $ \set{0}^c $ is an open set, its pre-image is also open (because $ x-y $ is continuous), thus $ D $ is union of some open intervals. Some of these open intervals might be overlapping. So for each $ t $ let $ I_t $ be the maximal open intervals containing $ t $. So one can write $ D = \cup_{t\in D} I_t $.
+ 		
+ 		
+ 		\item Observe that if $ z(t) \neq x(t) $, then at least one of the followings holds: $ z(t)\neq y(t) $ and $ x(t) \neq y(t) $. So this implies that
+ 		\[ D(x,z) \subset D(x,y) \cup D(y,z). \]
+ 		Using the monotonicity of the length operation $ \ell $ and its sub-additivity, one gets
+ 		\[ \ell(D(x,z)) \leq \ell(D(x,y)) + \ell(D(y,z)). \]
+ 		This shows that the triangle inequality holds for $ d $. It is easy to check to remaining properties of $ d $ being a metric.
+ 		
+ 		\item Let $ x_n(t) = (t-a)^{-1} \wedge n $. All of these functions are bounded (as a function, not as a point in the metric space $ (X,d) $, which also holds). And it is easy to see $ d(x_n,x) = 1/n $. So $ d(x_n,x)\to 0 $ as $ n\to \infty $. 
   	\end{enumerate}
  \end{solution}
+ \begin{remark}
+ 	An appropriate and more useful way to generalize the point of problem above is to be less strict with the way we decide if two functions are equal or not. Define
+ 	\[ D_\epsilon(x,y) = \set{t\in(a,b) : \abs{x(t)-y(t)}>\epsilon} = \set{\abs{x(t)-y(t)}>\epsilon}. \]
+ 	Then one can write $ d $ metric as
+ 	\[ d(x,y) = \prob(\abs{x(t)-y(t)}>\epsilon), \]
+ 	where $ \prob $ is the generalized notion of $ \ell $, i.e. it is a measure. Convergence with respect to this metric is called convergence in probability. I.d. $ x_n\to y $ as $ n\to\infty $ if for all $ \epsilon>0 $ one has
+ 	\[ \prob(\abs{x_n-y}>\epsilon) \to 0,\quad \text{as $ n\to\infty $}.  \]
+ \end{remark}
+ 
+ 
+ 
  
