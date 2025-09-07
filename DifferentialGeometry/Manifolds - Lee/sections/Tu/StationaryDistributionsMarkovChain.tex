@@ -1,0 +1,133 @@
+\chapter{Stationary Distributions of Markov Chains}
+
+\section{Time Evolution of Distributions}
+
+Let $ \set{X_n}_n $ be a discrete Markov with finite state space $ S = \set{1,2,\cdots,N} $. Then, we know that starting at a state $ X_0 = 1 $, then the probability to be at state $ j $ after one step is the $ (1,j) $ element of the transition matrix. To be more concrete, let's assume that the Markov chain is defined on $ \set{1,2,3} $, and assume $ X_0 = 1 $. Then $ P(1,3)=\prob_1(X_1=3) $ is the element $ (1,3) $ of the transition matrix. Don't forget that $ \set{X_n} $ are all random variables. Thus while we can talk about the cases that what will happen if, for example $ X_0 $, be $ X_0=1 $ and etc. We can also talk about the probability that the random variable has specific values, which is the idea of distribution. Let $ \mu_{X_0}(i) $ for $ i \in \set{1,2,3} $ be the distribution of $ X_0 $. In other words, we have
+\[   \mu_{X_0}(i) = \prob(X_0 = i) \qquad \text{for $ i \in \set{1,2,3}$}.  \]
+We can also introduce the vector notation for the distribution. Note that we can drop the subscript $ X_0 $ as shown in the following notation.
+\[  \mu_0=\mu_{X_0} = (\mu_{X_0}(1),\mu_{X_0}(2),\mu_{X_0}(3)). \]
+Now, suppose we want to find the distribution of $X_1$ given the distribution of $X_0$, i.e. we want to calculate the time evolution of the distribution after one step. Let's calculate what happens for $  \mu_0 $ after one step:
+\[  \mu_1 = \mu_{X_1} = (\mu_1(1),\mu_1(2),\mu_1(3)).  \]
+To calculate $ \mu_1(1) $ we can write
+\[ \mu_1(1) = \prob(X_1 = 1) = \underbrace{\prob_1(X_1 = 1)}_{P(1,1)}\underbrace{\prob(X_0=1)}_{\mu_0(1)} + \underbrace{\prob_2(X_1 = 1)}_{P(2,1)}\underbrace{\prob(X_0=2)}_{\mu_0(2)} +  \underbrace{\prob_3(X_1 = 1)}_{P(3,1)}\underbrace{\prob(X_0=3)}_{\mu_0(3)}. \]
+In summary
+\[ \mu_1(1) = P(1,1)\mu_0(1) + P(2,1)\mu_0(2) + P(3,1)\mu_0(3). \]
+By a similar argument, we can quickly see that
+\[  \mu_1 = \mu_0 M  \]
+where $ M $ is the transition matrix.
+\begin{proposition}
+	Let $ X_0 \sim \mu_0 $. Then $ X_n \sim \mu_n $ where
+	\[ \mu_n = \mu_0 M^n \]
+	where $ M $ is the transition matrix. 
+\end{proposition}
+
+Now we can state the following important observation.
+\begin{observation}
+	For a given discrete Markov chain $ \set{X_n} $ defined on a \emph{finite} state space $ S = \set{1,2,\cdots, N} $, the sequence of distributions of the random variables at each time step
+	\[ \mu_{X_n} = \mu_n = (\mu_n(1),\mu_n(2),\cdots,\mu_n(N)), \]
+	defines a discrete time Markov chain with continuous state space $ \R^{N-1} $. The transition matrix for $ \set{\mu_n}_n $ will be the same as the original Markov chain. The state space will in fact be an affine hyperplane at $ \R^N $, that intersects each axis at 1. That is because we require the distributions to sum up to 1. Thus we will have a discrete map 
+	\[  \mu_{n+1} = \mu_n M.  \]
+\end{observation}
+
+\begin{observation}[Be careful here!]
+	You need to be careful here and pay special attention to the notations and conventions here. We said that any Markov chain defines another Markov chain $ \set{\mu_n} $ which is the distribution of the Markov chain random variable at each step. And also we said that this Markov chain has the same Transition matrix as the original Markov chain. However, you need to note that $ \mu $ is defined to be a \emph{row} vector 
+	\[  \mu_n = (\mu_n(1) \quad \mu_n(2) \quad \cdots \quad \mu_n(N)).  \]
+	Thus value of $ \mu_{n+1} $ will be $ \mu{n} $ multiplied by the transition matrix from \emph{left}. We can develop the whole theory using the notion of transpose, but here we will keep this convention as it is more straight forward. 
+\end{observation}
+
+
+\begin{example}
+	Consider the Markov chain $ \set{X_n}_n $ defined on the state space $ S = \set{1,2,3} $, with the following transition probability
+	\[ 
+	M = \begin{bmatrix}
+		0.43 & 0.30 & 0.27 \\
+		0.10 & 0.77 & 0.12 \\
+		0.22 & 0.20 & 0.58 \\
+	\end{bmatrix}
+	 \]
+	 Now assume that the distribution of $ X_0 $ is $ \mu_0 = (0.2, 0.5, 0.3) $. The $ \set{\mu_n} $ is a Markov chain defined on $ \R^3 $. To be more precise, since all of the distributions should be normalized, the state space if $ \set{\mu_n} $ is in fact the 2D plane that cuts through each axis at 1, as shown in the figure below. 
+	 \begin{figure}[h!]
+	 	\centering
+	 	\includegraphics[width=0.3\linewidth]{Images/hyperPlanein3D}
+	 	\label{fig:hyperplanein3d}
+	 \end{figure}
+	 This is basically a two dimensional manifold that is embedded in 3 dimensional Euclidean space. We can consider the projection of $ \mu_n $ on the $ x-y $ plane as the 2d atlas (this projection is the diffeomorphism). The following is the time evolution of the distribution with $ \mu_0 = (0.2,0.5,0.3) $.
+	 \begin{figure}[h!]
+	 	\centering
+	 	\includegraphics[width=0.7\linewidth]{Images/timeEvolutionOfDistribution}
+	 	\label{fig:timeevolutionofdistribution}
+	 \end{figure}
+	 This example demonstrates that the time evolution of the distribution of a Markov chain is a Markov chain with the same transition matrix.
+\end{example}
+\FloatBarrier
+
+The following is the definition of the stationary distribution for a Markov chain.
+
+\begin{definition}
+	Let $ \set{X_n} $ be a Markov chain defined on the state space $ S $. The distribution vector $ \pi $ is a stationary distribution if we have
+	\[ \pi = \pi P. \]
+\end{definition}
+
+\begin{remark}
+	Given a distribution, we can do the following test to check if it is a stationary distribution. First, it needs to be a distribution, i.e.
+	\[ \sum_{x\in S} \pi(x) = 1, \]
+	And secondly, it needs to satisfy the definition for a stationary distribution, i.e. for all $ x\in S$ we have
+	\[ \pi(x) = \sum_{y\in S} \pi(y)P(y,x). \]
+\end{remark}
+
+\begin{observation}
+	A stationary distribution is a left eigenvector for the transition matrix with eigenvalue 1. 
+\end{observation}
+
+\begin{proposition}
+	Let $ \Gamma = (E,V) $ be a connected graph with at least two vertices. Then the stationary distribution for a simple random walk on the graph is given as
+	\[ \pi(x) = \frac{\deg(x)}{2\abs{E}} \]
+	where $ \abs{E} $ is the number of edges of the graph.
+\end{proposition}
+\begin{remark}
+	We can show that this is true by two simple checks of the stationary distributions. First, we need to check this is indeed distribution, i.e. sums up to 1.
+	\[ \sum_{x\in S} \pi(x) = \frac{1}{2\abs{E}} \sum_{x\in S}\deg(x) = \frac{2\abs{E}}{2\abs{E}} = 1. \]
+	Now, we need to check if it is a stationary distribution, i.e. $ \forall x \in S $ we have
+	\[ \sum_{y\in S}\pi(y)P(y,x) = \sum_{x\sim y} \frac{\pi(y)}{\deg(y)} = \sum_{x\sim y} \frac{\deg(y)}{2\abs{E}}\frac{1}{\deg(y)} = \frac{\deg(x)}{2\abs{E}}. \]
+\end{remark}
+
+\begin{observation}[Intuition behind the distribution]
+	Intuitively speaking, the notion of distribution for a Markov chain on a graph, is intuitively speaking similar to the idea of considering the vertices as containers that has some sort of liquid in it, and the transition probability as the rate at which a flow moves between these vertices. Thus at each step, the liquid moves around and the stationary distribution is a distribution where the input and output flow of each vertex is just balanced, that we see no change in the liquid content of each vertex through time. 
+\end{observation} 
+
+
+\subsection{Uniqueness of the stationary distribution on the irreducible and finite Markov Chains }
+
+For this section, we will need the notion of a harmonic function on a graph, as defined below.
+\begin{definition}
+	Let $ \set{X_n} $ be a Markov chain defined on the \emph{finite} state space $ S $. Then a function $ h: S \to \R $ is harmonic if it satisfies
+	\[ h(x) = \sum_{y\sim x} P(x,y)h(y) \qquad \forall x\in S \]
+\end{definition}
+The notion of a harmonic function on a graph has more intuitive characterization, as follows.
+
+\begin{observation}
+	Let $ \Gamma = (V,E) $ be a connected graph. Then a harmonic function defined on $ \Gamma $ is $ h: V \to \R $ where $ \forall x \in V $ we have
+	\[ h(x) = \sum_{y \sim x} P(x,y)h(y) = \frac{1}{\deg(x)} \sum_{y\sim x}h(y). \]
+	Thus we can see that a function defined on a graph is harmonic if its value at a particular vertex $ x $ is the average of its values at the neighborhood vertices.  
+\end{observation}
+
+\begin{lemma}
+	Let $ \set{X_n} $ be a Markov chain defined on a finite state space $ S $, and denote the transition  matrix of this Markov chain as $ P $. Then $ h $ is a harmonic function on $ S $ if it satisfies
+	\[ Ph = h, \]
+	i.e. $ h $ is the right eigenvector of $ P $ with eigenvalue 1. 
+\end{lemma}
+
+The following proposition shows a deep connection between the harmonic functions and the first step analysis. 
+
+\begin{proposition}
+	Let $ \set{X_n} $ be a Markov chain defined on a finite state space $ S $. Let $ W,Z \subset S $ disjoint. Then the following function
+	\[ h(x) = \prob_x(T_W < T_Z) \]
+	is harmonic on $ S \backslash (W \cup Z) $.
+\end{proposition}
+\begin{proof}
+	This immediately follows from the first step argument. Define the event $ E = T_W < T_Z $. Then by the first step analysis we have
+	\[ \prob_x(E) = \sum_{y\in S} P(x,y) \prob_y(E). \]
+	Thus we can see that the function $ h $ satisfies
+	\[ h(x) = \sum_{y \in S} P(x,y)h(y) \qquad \forall x\in S. \]
+	Thus we conclude that the function $ h $ is harmonic. 
+\end{proof}

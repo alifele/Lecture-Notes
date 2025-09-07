@@ -1,0 +1,106 @@
+\chapter{Appendix}
+
+
+\section{Change of Basis}
+Let $ V $ be a vector space of dimension $ n $, and $ \mathbb{B}_1 = \set{e_i}_{i=1}^{n} $ be a basis. Then for $ \alpha \in V $ we can write it uniquely as 
+\[ \alpha  = \sum_i \alpha^i e_i. \]
+Once we know a particular basis, we can do the following association
+\[ e_i \longleftrightarrow 
+\begin{bmatrix}
+	0 \\
+	\vdots \\
+	\underbrace{1}_{i-\text{th element}} \\
+	\vdots \\
+	0
+\end{bmatrix} 
+\qquad 
+\alpha \longleftrightarrow
+\vec{a} = 
+\begin{bmatrix}
+	\alpha^1 \\
+	\alpha^2 \\
+	\vdots \\
+	\alpha^{n-1} \\
+	\alpha^n
+\end{bmatrix} 
+\]
+And we define the transpose operator to be $ \vec{a}^T = (\alpha^1\ \cdots\ \alpha^n) $. Then we can write the unique decomposition of $ \alpha $ to the basis vectors as 
+\[ \alpha = (\alpha_1\ \cdots\ \alpha_n) 
+\begin{bmatrix}
+	e^1\\
+	\vdots\\
+	e^n
+\end{bmatrix}
+ \]
+where these symbols act with the usual multiplication of vectors. Since these representations of elements of the vector space by column vectors depends on the particular basis that we choose, then then natural question is that how these symbols will change if we change the basis. Assume that the old basis is changed to the new $ \mathbb{B}_2 = \set{e'_i}_{i=1}^n $ where
+\[ 
+\begin{bmatrix}
+	e'_1 \\
+	e'_2 \\
+	\vdots\\
+	e'_n
+\end{bmatrix}
+= 
+\begin{pmatrix}
+	r_{11} & r_{12} & \cdots & r_{1N} \\
+	r_{21} & r_{22} & \cdots & r_{2N} \\ 
+	\vdots & \vdots & \ddots & \vdots \\
+	r_{N1} & r_{N2} & \cdots & r_{NN}
+\end{pmatrix}^T
+\begin{bmatrix}
+	e_1 \\
+	e_2 \\
+	\vdots \\
+	e_n
+\end{bmatrix} = 
+R^T 
+\begin{bmatrix}
+	e_1 \\
+	e_2 \\
+	\vdots \\
+	e_n
+\end{bmatrix}
+ \]
+To find the coordinates of $ \alpha $ in the new basis we can write
+\[ \alpha = \underbrace{(\alpha_1\ \cdots\ \alpha_n) \inv{(R^T)} }_{(\beta_1\ \cdots\ \beta_2)}
+\begin{bmatrix}
+	e_1 \\
+	e_2 \\
+	\vdots \\
+	e_n
+\end{bmatrix}
+ \]
+Thus the the relation between then new coordinate of $ \alpha $ and the old coordinate is 
+\[ \vecttt{\alpha_1}{\vdots}{\alpha_n} = R \vecttt{\beta_1}{\vdots}{\beta_n} \]
+
+To observer how does linear map representation in new coordinates change consider the equation 
+\[ \vecttt{x_1}{\vdots}{x_n} = M \vecttt{y_1}{\vdots}{y_n}. \]
+where the representation of column vectors and the matrix $ M $ is in the basis $ \mathbb{B}_1 $. If we change it to a new basis by the change of basis matrix $ R $, then for the new coordinates we will have
+\[ R\vecttt{x_1'}{\vdots}{x_n'} = M R \vecttt{y_1'}{\vdots}{y_n'}. \] 
+This implies
+\[ \boxed{\vecttt{x_1'}{\vdots`}{x_n'} = \underbrace{\inv{R}M R }_{M'}\vecttt{y_1'}{\vdots}{y_n'}}. \]
+
+\begin{summary}[Change of basis]
+	In a nutshell, Let $ V $ is a vector space of dimension $ N $. Then after specifying a basis $ \mathbb{B}_1 = \set{e_i} $, we can represent the elements of vector space as column vectors. If we want to change the basis to a new basis $ \mathbb{B}_2 = \set{e'_i} $ with the change of basis matrix $ R $ (whose $ j-\text{th} $) column contains the coordinates of $ e'_i $ in terms of $ \mathbb{B}_1 $ basis vectors. Then the relation between new coordinates and the old coordinates is 
+	\[ \underbrace{\vecttt{x_1}{\vdots}{v_n}_{\mathbb{B}_1} }_\text{represented according to $ \mathbb{B}_1 $}= R \overbrace{\vecttt{x'_1}{\vdots}{x'_n}_{\mathbb{B}_2}}^{\text{represented according to $ \mathbb{B}_2 $}}. \]
+	Also if 
+	\[ \vecttt{y_1}{\vdots}{y_n}_{\mathbb{B}_1} = M \vecttt{x_1}{\vdots}{x_n}_{\mathbb{B}_2} \]
+	then 
+	\[ \vecttt{y'_1}{\vdots}{y'_n}_{\mathbb{B}_2} = \inv{R}M R \vecttt{x'_1}{\vdots}{x'_n}. \]
+\end{summary}
+
+
+\section{Change of Basis (A second go!)}
+This is my 89053291-th time that I am thinking about the change of basis and what is an appropriate way to express this. I always forget how to write the change of basis matrix appropriately. Should it appear as $ \inv{R} $, or as $ R^T $? The right hand side should be the new basis vectors, or they should be on the right hand side, and all these kind of questions. Different approaches by different people  (for example Sadri Hassani book) make it even more challenging to remember a working principle for the future references. Here is the way that I did last time and it worked very well. I first started with a first initial guess
+\[ \vecttt{e'_1}{\vdots}{e'_n} = R \vecttt{e_1}{\vdots}{e_n}. \]
+where $ \set{e_1,e_2,e_3} $ is the old basis vectors and the ones with $ ' $ appearing on them are the new ones. Let $ v $ be any vector in your vector space. We can write it as
+\[ v = \sum_i \nu_i e_i \quad \text{or} \quad v = \left[ \nu_1 \quad \cdots \quad \nu_n \right] \vecttt{e_1}{\vdots}{e_n}.  \]
+From the change of basis formula we can it as
+\[ v = \left[ \nu_1 \quad \cdots \quad \nu_n \right] \inv{R} \vecttt{e'_1}{\vdots}{e'_n}. \]
+This implies that the new coordinates are
+\[\left[ \nu'_1 \quad \cdots \quad \nu'_n \right] = \left[ \nu_1 \quad \cdots \quad \nu_n \right] \inv{R} \]
+Thus the new coordinates in terms of the old coordinates will be written as
+\[  \vecttt{\nu'_1}{\vdots}{\nu'_n} = (R^T)^{-1} \vecttt{\nu'_1}{\vdots}{\nu'_n}. \]
+We don't want the matrix above look that ugly! So do the right thing from the beginning and start with
+\[ \vecttt{e_1}{\vdots}{e_n} = R^T \vecttt{e'_1}{\vdots}{e'_n}. \]
+

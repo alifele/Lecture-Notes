@@ -1,0 +1,951 @@
+\chapter{Euclidean Spaces}
+
+\section{Basic Notions and Definitions}
+
+\subsection{A Review on the algebraic structures}
+
+Here in this chapter I will be covering the details of some notions that was challenging for me do digest in the first read.
+
+
+\begin{definition}[Axioms of Group]
+	Group is a set $ A $ along with a binary operation $ *: A\times A \to A $ that satisfies the following properties. Let $ a,b,c \in A $, then
+	\begin{itemize}
+		\item \textbf{Associativity}: $ a*(b*c) = (a*b)*c $.
+		\item \textbf{Identity element}: $ \exists 1 \in A $ such that 
+		\[ 1*a = a*1 = a. \]
+		\item \textbf{Inverse element}: $ \forall a \in A\ \exists\hat{a}\in A $ such that 
+		\[ a*\hat{a} = \hat{a}*a = 1. \]
+	\end{itemize}
+\end{definition}
+\begin{remark}
+	A set along with a binary operation that does not satisfy any properties is called a \textbf{magma}. If the binary operation is only associative, then we are dealing with \textbf{semi-group}. If the binary operation has an identity element as well, then we call this algebraic structure as \textbf{monoid}.
+\end{remark}
+
+\begin{definition}[Axioms of Ring]
+	A ring is a set $ R $ along with two operations $ +: R\times R \to R $ and $ *: R\times R \to R $, where
+	\begin{itemize}
+		\item $ (R,+) $ is an Abelian group.
+		\item $ (R,*) $ is a monoid.
+		\item The operator $ (*) $ has distributive (left and right) law over $ (+) $ i.e.
+  			\[a*(b+c) = (a*b)+(a*c), \qquad (b+c)*a = (b*a) + (c*a).\].
+	\end{itemize}
+\end{definition}
+
+\begin{remark}
+	\textbf{Field} is a ring where every non-zero element (i.e. inverse element in the $ (R,+) $ group in the ring) has a multiplicative inverse.
+\end{remark}
+
+\begin{definition}[Axioms of Module]
+	A \textbf{module} is a group $ M $ along with a ring $ R $ where the monoid of the ring acts on $ M $ (through scalar multiplication) (i.e. it satisfies the idenity and compatibility properties) and satisfies the distributive property. I.e.
+	\begin{itemize}
+		\item \textbf{Compatibility of the monoid action}: $ a,b \in R,\ u \in M $ then 
+		\[ a(bu) = (ab)u. \]
+		\item \textbf{Identity of the monoid action}: Let $ 1 $ be the identity element of the ring $ R $. Then $ \forall u \in M $
+		\[1u = u1 = u. \]
+		\item \textbf{Distribution law}: $ a,b \in R $ and $ u,v \in M $ then
+		\begin{itemize}
+			\item $ (a+b)u = au + bu $.
+			\item $ a(u+v) = au + av $.
+		\end{itemize}
+	\end{itemize}
+\end{definition}
+\begin{remark}
+	A module $ (M,R) $ is called a \textbf{vector space}, if the \textbf{ring} $ R $ is a \textbf{field}.
+\end{remark}
+
+\begin{definition}[Axioms of Algebra]
+	\label{def:algebra}
+	An Algebra over field $ F $ is a ring $ A $ that $ F $ acts on it (thus $ A $ has vector space structure as well), where the monoid operation of $ F $ (i.e. multiplication) satisfies the homogeneity property. I.e. for $ r \in F $ and $ u,v \in A $ we have
+	\[ r(uv) = (ru)v = u (rv). \]
+\end{definition}
+
+There are some important observations when combining different algebraic structures with each other to get a new one. The first is that when we combine two structures with different operators, then the operators need to satisfy the distributive laws. Also, note that when an algebraic structure (like group or monoid) acts on another algebraic structure, we need to have the identity and and compatibility conditions satisfied.
+
+The following diagram shows how different algebraic structures are combined with each other to produce another structure.
+
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.5]{Images/algebraicStructures.pdf}
+\end{figure}
+\FloatBarrier
+Note that in the figure above, I have used some non-standard notations to make the figure concise. For instance, the expression ``\textbf{$ R_{\text{mon}} @ M \ \text{with $\cdot$}$}'' means that the monoid structure in the field $ R $ acts on the group $ M $ with the ($ \cdot $) symbol. Or the expression ``\textbf{$ \times $ in $ M_{\text{mon}} $ satisfies homogen cond.}'' means the multiplication operation of the monoid structure inside the ring $ M $ satisfies the homogeneity condition (see the definition of the algebra in \autoref{def:algebra} ). Finally, $ M_{g} $ means the group structure inside the ring $ M $.
+
+
+\subsection{Directional Derivative}
+The notion of directional derivative is very central in generalization of the multi-variable calculus manifolds. 
+
+\begin{definition}[Directional derivative]
+	\label{def:directionalDerivative}
+	Let $ f:U \to \R $ where $ U \subset \R^n $ and $ f \in C^\infty(U) $. Then we define a directional derivative at $ p\in U $ and in the direction $ v \in T_p(\R^n) $ as 
+	\[ D_v f \big|_p = \lim_{t\to 0 } \frac{f(p + tv) - f(p)}{t} = \frac{d}{dt}\big|_{t=0} f(p+vt). \]
+	We denote the set of all directional derivatives at $ p $ by $ \mathcal{D}(C_p^\infty(U)) $.
+\end{definition}
+\begin{remark}
+	By the chain rule we have
+	\[ D_v f \big|_p = \sum_{i=1}^{n} v^i \frac{\partial f}{\partial x^i}(p). \]
+\end{remark}
+
+
+\begin{proposition}[Directional derivative is $ R-$linear map satisfying the Leibniz rule]
+	A directional derivative $ D_v $ at point $ p $ is a $ \R-$linear operator that maps  \[f\in C_p^\infty \mapsto D_vf \in \R\] such that satisfies the Leibniz rule,
+	\[ D_v(fg) = D_v(f)g + fD_v(g). \]
+\end{proposition}
+\begin{proof}
+	Let $ D_v \in \mathcal{D}(C_p^\infty(U)) $. Then by the remark above we can write it as  
+	\[ D_v f \big|_p = \sum_{i=1}^{n} v^i \frac{\partial f}{\partial x^i}(p). \]
+	Since each of the partial derivatives above are $ \R-$linear and satisfy the Leibniz rule, then $ D_v $ inherits those properties as well.
+\end{proof}
+
+\section{Tangent Spaces and Derivations}
+
+\begin{definition}[Informal definition of tangent space]
+	Let $ p \in \R^n $. A tangent space at $ p $ denoted by $ T_p(\R^n) $ is a linear space containing all of vectors emerging from $ p $.
+\end{definition}
+\begin{remark}
+	Note that the definition above is an informal definition of the tangent space. For a more formal and technical definition, we can use the notion of curves, or the notion of manifolds. We wont' touch this level of technicality in the early chapters.
+\end{remark}
+
+To distinguish between points in $ \R^n $ and vectors in $ T_p(\R^n) $ we denote a point $ p\in\R^n $ by 
+\[ p = (p^1, p^2, \cdots, p^n), \]
+while for a vector $ v \in T_p(\R^n) $ we write
+\[ v = \<  v_1,v_2,\cdots,v_n \>. \]
+
+As we observed in \autoref{def:directionalDerivative}, we have a natural one-to-one correspondence between each $  v\in T_p(\R^n) $ and a $ D_v \in \mathcal{D}(C_p^\infty(U)) $, i.e. these linear spaces are isomorphic.
+
+\begin{proposition}
+	Let $ p \in\R^n $. The set of all directional derivatives at $ p $, i.e. $ \mathcal{D}(C_p^\infty(U)) $ is isomorphic to the tangent space at $ p $ i.e. $ T_p(\R^n) $.
+\end{proposition}
+\begin{proof}
+	Proof follows immediately from the following natural association in the definition of the directional derivative.
+	
+	\[ D_v f \big|_p \longleftrightarrow \sum_{i=1}^{n} v^i \frac{\partial f}{\partial x^i}(p) \]
+\end{proof}
+
+
+
+\begin{definition}[Point derivations at a point]
+	\label{def:pointDerivation}
+	Let $ p \in \R^n $, and $ U $ an open set containing $ p $. A \textbf{derivation at $ p $} or a \textbf{point-derivation of $ C_p^\infty(U) $} is a \emph{linear} operator
+	\[ D: C_p^\infty(U) \to \R \]
+	such that satisfies the Leibniz property, i.e. for $ f,g \in C_p^\infty(U) $ we have
+	\[ D(fg) = D(f)g - fD(g). \]
+	We denote the set of all such maps as $ \mathbb{D}(C_p^\infty(U)) $.
+\end{definition}
+
+\begin{remark}
+	We know that a directional derivative at $ p $ satisfies the Leibniz rule. Thus $ \mathcal{D}(C_p^\infty(U)) \subset \mathbb{D}(C_p^\infty(U))$. On the other hand, we know that both $ \mathcal{D} $ and $ \mathbb{D} $ are linear spaces. So $ \mathcal{D}(C_p^\infty(U)) $ is in fact a \emph{linear subspace} of $\mathbb{D}(C_p^\infty(U))$. Thus the zero of these two linear spaces match.
+\end{remark}
+
+
+The following Lemma follows form the algebraic property of the point derivation.
+
+\begin{lemma}
+	\label{lem:PointDerivationOfConstantFunction}
+	Let $ D $ be a point derivation of $ C_p^\infty(U)$. Then $ D(c) = 0 $ for any constant function  $ c $. 
+\end{lemma}
+\begin{proof}
+	Let $ c $ be a constant function, i.e. a real number. Since $ D $ is $ R- $linear, then we can write $ D(c) = c D(1). $ On the other hand, from the Leibniz property we can write
+	\[ D(1) = D(1 \cdot 1) = D(1) + D(1) = 2D(1) \]
+	Thus $ D(1) = 0 $, which implies $ D(c) = 0 $.
+\end{proof}
+
+The following theorem is very important as it states that all of the point derivations are in fact the directional derivatives and vise-versa. This is a very interesting result, since we are in fact stating that an operator is a point derivative if and only if it satisfies an algebraic property. This means that we can abstract away all of the detailed limit processes in the definition of derivative, and replace that with an axiomatic requirement which is a purely algebraic property. We can see these kind of ideas, i.e. axiomatic generalization all over the mathematics. For instance, in the PDE theory, at some point we need to relax the definition of derivative and talk about the weak derivatives. To do so, we get an identity that derivatives satisfy and carefully use that identity to define the notion of weak derivatives. 
+
+\begin{theorem}[The set of all point-derivations is isomorphic to the set of all directional derivatives]
+	Let $ p \in U \subset \R^n $. Then $ \mathbb{D}(C_p^\infty(U)) $ is isomorphic to $ T_p(\R^n) $.
+\end{theorem}
+
+\begin{proof}
+	Let $ \phi : T_p(\R^n) \to \mathbb{D}(C_p^\infty(U))  $ be a linear isomorphism between the linear spaces. We need to show that this map is surjective and bijective. To show the bijectivity, we use the fact that a linear map is bijective if and only if its kernel is a singleton. To find the kernel of the map, let need to find all points in $ T_p(\R^n) $ that maps to the zero of $ \mathbb{D} $. As we discussed in the remark of \autoref{def:pointDerivation}, the zero $ \mathbb{D} $ is the same as the zero directional derivative, i.e. $ D_v = 0 $. We need to prove that $ v $ is the zero vector, i.e. the zero of $ T_p(\R^n) $. To do this, we apply the $ D_v $ to the coordinate functions
+	\[ 0 = D_v(x^i) = \sum_{j=1}^n v^j \frac{\partial x^i}{\partial x^j} = v^j\]
+	Thus $ v = 0 \in T_p(\R^n) $, thus $ \phi $ is injective. In other words, the injectivity follows immediately from $ T_p(\R^n) $ being isomorphic to $  \mathcal{D} $, and $  \mathcal{D} $ being a linear subspace of $ \mathbb{D} $.
+	
+	To prove the surjectivity, let $ D $ be a point derivation at $ p $, and let $ (f,V) $ be a representative of a germ in $ C_p^\infty $. Marking $ V $ smaller if necessary, we may assume that $ V $ is an open ball, hence star shaped. By Taylor's approximation theorem we know there exists $ C^\infty $ functions $ g_i(x) $ such that
+	\[ f(x) = f(p) + \sum_{i=1}^{n} (x^i-p^i)g_i(x),\qquad g_i(p) = \frac{\partial f}{\partial x^i}(p). \]
+	From Lemma \autoref{lem:PointDerivationOfConstantFunction}, we know that $ D(f(p)) = 0$ as well as $ D(p^i) = 0 $. Thus we can write
+	\[ D(f(x)) = \sum_{i=1}^{n}(D(x^i)g_i(x) + (p^i - p^i)D(g_i(x))) =  \sum_{i=1}^{n}D(x^i)g_i(x) = \sum_{i=1}^{n}D(x^i)\frac{\partial f}{\partial x^i}(p). \]
+	This is in fact a directional derivative in the direction $ v = \< D(x^1), D(x^2), \cdots, D(x^n) \> $. So for every $ D $ in $ \mathbb{D} $ we can find a vector in $ T_p(\R^n) $. Thus $ \phi $ is surjective.
+\end{proof}
+
+\begin{observation}
+	Let $ D $ be a point derivation of $ C_p^\infty (U) $. This corresponds to the directional derivative at $ p $ corresponding to the vector 
+	\[ v = \< D(x^1), D(x^2), \cdots, D(x^n) \>. \]
+\end{observation}
+
+\begin{observation}
+	Let $ p \in U \subset \R^n $. Then 
+	\[ T_p(\R^n) \equiv \mathcal{D}(C_p^\infty(U)) \equiv \mathbb{D}(C_p^\infty(U)), \]
+	i.e. they are all isomorphic linear spaces.
+\end{observation}
+
+Because of the observation above, we identify the standard basis $ \set{e^1, e^2, \cdots, e^n} $ with the partial derivatives $ \set{\frac{\partial}{\partial x^1}, \frac{\partial}{\partial x^2}, \cdots,\frac{\partial}{\partial x^n}}. $ Thus we can write a vector $ v \in T_p(\R^n) $ as 
+\[ v = \sum_{i=1}^{n} v^i \frac{\partial}{\partial x^i}. \]
+
+
+
+\section{Summary}
+
+
+\begin{summary}[Don't confuse the naming conventions]
+	Note the following different names that might be confusing in some cases!
+	\begin{itemize}
+		\item \textbf{k-linear function $ \equiv $ k-tensor $ \equiv $ multi-linear function}: All of these names are for functions $ f: V^k \to \R $. We denote the set of all k-tensors defined on vector space $ V $ as $ L_k(V) $. If $ \alpha^1 \cdots \alpha^n $ are the dual basis for $ V $, then a basis for $ L_k(V) $ is
+		\[ \mathcal{B}(L_k(V)) = \set{\alpha^{i_1} \otimes \cdots \otimes \alpha^{i_k}}_\text{for all multi-indices $ (i_1,\cdots,i_k) $} \]
+		Also we have
+		\[ \dim L_k(V) = n^k \]
+		\item \textbf{alternating k-tensors $ \equiv $ k-covectors $ \equiv $ multi-covectors of degree k}: All of these names are for function k-linear functions that are \textbf{alternating}. We denote the set of all k-covectors on $ V $ as $ A_k(B) $. A basis for this set is
+		\[ \mathcal{B}(A_k(V)) = \set{\alpha^{i_1}\wedge \cdots \wedge \alpha^{i_k}}_{\text{for all multi-indices $ (i_1,\cdots,i_k) $ in ascending order }} \]
+		Also we have
+		\[ \dim A_l(v) = \binom{n}{k}. \]
+	\end{itemize}
+\end{summary}
+
+\begin{summary}[Determining sign of permutation]
+	Let $ \sigma \in S_k $. There we can find the sign of the permutation by decomposing it into cycles, or counting its number of inversions. For instance, consider $ \sigma \in S_9 $ where
+
+	\[
+	\sigma = \begin{pmatrix}
+		1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 \\
+		2 & 4 & 9 & 3 & 7 & 8 & 5 & 6 & 1
+	\end{pmatrix}
+	\]
+	\begin{enumerate}[(i)]
+		\item \textbf{Determining sign by cycle decomposition}. For $ \sigma $ we can write it as
+		\[ \sigma = (1\ 2\ 4\ 3\ 9 )(5\ 7)(6\ 8) = (1\ 9)(1\ 3)(1\ 4)(1\ 2)(5\ 7)(6\ 8). \]
+		Since $ \sigma $ has 6 transpositions in it, then its sign is \textbf{even}.
+		\item \textbf{Determining sign by counting the number of inversions}. For $ \sigma $ the inversions are
+		\begin{align*}
+			(2,1),(3,1),(4,3),(4,1),(5,1),(6,1),(7,5),(7,6),(7,1),\\
+			(8,5),(8,6),(8,1),(9,1),(9,3),(9,5),(9,6),(9,7),(9,8).
+		\end{align*}
+		Since $ \sigma $ has 18 inversions, then it is sign is \textbf{even}.
+
+	\end{enumerate}
+\end{summary}
+
+\begin{summary}
+	Let $ f \in A_k(V) $ and $ g \in A_l(V) $. Then
+	\[ f\wedge g = (-1)^{kl}(g\wedge f). \]
+	In particular, if $ f $ is odd-linear function, then 
+	\[ f \wedge f = 0. \]
+\end{summary}
+
+
+\begin{summary}[Some intuition about the alternating functions]
+	In this summary box, we will go through a concrete example to make some intuition about the alternating functions and their basis. Let $ V = \R^3 $, with standard basis $ \set{e_1,e_2,e_3} $ and the dual basis $ \set{\alpha^1,\alpha^2,\alpha^3} $. Let $ f \in A_2(V) $. Then we know that we can decompose $ f $ in term of its basis
+	\[ f = g_1 \alpha^1 \wedge \alpha^2 + g_2 \alpha^1 \wedge \alpha^3 + g_3 \alpha^2 \wedge \alpha^3. \]
+	The key step in making the intuition is to observe that for any $ l $ 1-covectors $ \omega^1,\cdots,\omega^l $ we have $ (\omega^1\wedge \cdots \wedge \omega^l)(v_1,\cdots,v_l)  = \det\left[ \omega^i(v_j) \right]$. Thus for the first term in the decomposition of $ f(u,v) $ for $ u,v \in \R^3 $ we have
+	\[ (\alpha^1 \wedge \alpha^2)(u,v) = 
+	\det \matt{\alpha^1(u)}{\alpha^1(v)}{\alpha^2(u)}{\alpha^2(v)}.
+	 \]
+	 This is the area covered by two vectors that we can get by projecting $ u,v $ onto the $ x-y $ plane. With a similar argument, $ \alpha^1\wedge\alpha^3 $ gives the area between the vectors when projected to the $ x-z $ plane, and etc. The following figure summarizes these in a neat way.
+	 \begin{center}
+	 		 \includegraphics[width=0.4\textwidth]{Images/intuitiveWedge.png}
+	 \end{center}
+	 \FloatBarrier
+	 In the figure above, we will get the red, green and orange volumes by applying $ \alpha^1 \wedge \alpha^2,\ \alpha^2\wedge \alpha^3,\ \alpha^1\wedge\alpha^3 $ on $ (u,v) $ respectively.
+
+
+\end{summary}
+
+\begin{summary}
+	Consider the following $ n\times n $ matrix
+	\[ 
+	M = \begin{pmatrix}
+		a_{11} & a_{12} & \cdots & a_{1n} \\
+		a_{21} & a_{22} & \cdots & a_{2n} \\
+		\vdots & \vdots & \ddots & \vdots \\
+		a_{n1} & a_{n2} & \cdots & a_{nn}
+	\end{pmatrix}
+	 \]
+	The, determinant is defined to be
+	\[ \det(A) = \sum_{\sigma \in S_n} \sign(\sigma)\ a_{1\sigma(1)}a_{2\sigma(2)}\dots a_{n\sigma(n)} \]
+\end{summary}
+
+\begin{summary}
+	Let $ V $ be a vector space, and $ \alpha^1,\cdots, \alpha^k $ be 1-linear functions (i.e. 1-covectors) defined on $ V $. Then we have
+	\[ (\alpha^1  \wedge \cdots \wedge \alpha^k)(v_1,\cdots,v_k) = \det\left[ \alpha^i(v_j) \right]. \] 
+	In particular, For two 1-covectors we have
+	\[ (\alpha^1 \wedge \alpha^2)(v_1,v_2) = 
+	\det \matt{\alpha^1(v_1)}{\alpha^1(v_2)}{\alpha^2(v_1)}{\alpha^2(v_2)}
+	 \]
+	 See Problem \autoref{problem:1-covectorAndDeterminant} for the a detailed proof.
+\end{summary}
+
+\begin{summary}
+	Let $ V $ be a vector space with dimension $ n $, with $ \set{e_1,\cdots,e_n} $ as its basis and $ \set{\alpha^1, \alpha^2, \cdots, \alpha^n} $ as its dual basis. Let e$ A_k(V) $ be the set of all \textit{alternating} k-linear functions defined on $ V $. 
+	Then we have
+	\[ \dim A_k = \binom{n}{k}. \]
+	In particular, let $ V = \R^n $ with standard basis $ \set{e_1,e_2,e_3} $, and the corresponding dual basis $ \set{\alpha^1,\alpha^2,\alpha^3} $. Then we have
+	\begin{align*}
+		\mathbb{B}(A_0) &= \set{1 \in \R}\\
+		\mathbb{B}(A_1) &= \set{\alpha^1,\alpha^2,\alpha^3},\\
+		\mathbb{B}(A_2) &= \set{\alpha^1 \wedge \alpha^2, \alpha^1 \wedge \alpha^3, \alpha^2 \wedge \alpha^3},\\
+		\mathbb{B}(A_3) &= \set{\alpha^1 \wedge \alpha^2 \wedge \alpha^3}.
+	\end{align*}
+	It is clear from the basis sets above that the dimensions of $ A_0,A_1,A_2 $ and $ A_3 $ are $ 1,3,3,1 $ respectively.
+	
+	Also, observe that $ A_k = 0 $ for all $ k > n $. This follows from the fact that $ f\wedge f = 0 $ for $ f $ a 1-covector.
+\end{summary}
+
+\begin{summary}
+	Let $ V $ be $ n $ dimensional vector space with a basis $ \set{e_1,\cdots,e_n} $, and $ \set{\alpha^1,\cdots,\alpha^n} $ as its dual basis. Let $ L_k(V) $ be the set of all $ k $-linear functions defined on $ V $. Then a basis for $ L_k(V) $ is
+	\[ \mathcal{B} = \set{\alpha^{i_1} \otimes \cdots \otimes \alpha^{i_k}} \]
+	for all multi-indices $ (i_1,\cdots,i_k) $. This shows that 
+	\[ \dim L_k(V) = n^k. \]
+	For instance, Let $ V = \R^2 $. Then for $ L_1(V) $ we have
+	\[ \mathcal{B}(L_1(V)) = \set{\alpha^1,\alpha^2,\alpha^3}. \]
+	Similarly, for $ L_2(V) $ we have
+	\[ \mathcal{B}(L_2(V)) = \set{\alpha^1\otimes \alpha^2,\alpha^1\otimes \alpha^3,\alpha^2\otimes \alpha^3,\alpha^2\otimes \alpha^1,\alpha^3\otimes \alpha^1,\alpha^3\otimes \alpha^2,\alpha^1\otimes\alpha^1,\alpha^2\otimes\alpha^2,\alpha^3\otimes\alpha^3} \]
+	For a side by side comparison, compare it with the basis for $ A_2(V) $ that is 
+	\[ \mathcal{B}(A_2(V)) = \set{\alpha^1 \wedge \alpha^2, \alpha^2 \wedge \alpha^3, \alpha^1 \wedge \alpha^3}. \]
+
+	
+\end{summary}
+
+\begin{summary}
+		Looking at the dimension $ L_1(V), L_2(V), \cdots $, it reveals the fact that why most of the non-technical people are interested in interpreting tensors as multi-dimensional matrices! For instance, when $ V = \R^2 $ and $ K=3 $, then $ L_3(V) $ has dimension $ 2^3 = 8 $ with the basis
+	\[
+	\mathcal{B} (\mathbb{R}^2) = 
+	\begin{aligned}
+		\{&\alpha^1 \otimes \alpha^1 \otimes \alpha^1, \alpha^1 \otimes \alpha^1 \otimes \alpha^2, \alpha^1 \otimes \alpha^2 \otimes \alpha^1, \alpha^1 \otimes \alpha^2 \otimes \alpha^2, \\
+		&\alpha^2 \otimes \alpha^1 \otimes \alpha^1, \alpha^2 \otimes \alpha^1 \otimes \alpha^2, \alpha^2 \otimes \alpha^2 \otimes \alpha^1, \alpha^2 \otimes \alpha^2 \otimes \alpha^2 \}
+	\end{aligned}
+	\]
+	It is very tempting to think of elements of $ L_3(V) $ as $ 2\times 2\times 2 $ matrix like structures. In the case of $ L_2(V) $ we can identify $ L_2(V) $ with the set of all $ 2\times 2 $ matrices.
+\end{summary}
+
+\begin{summary}[Determinant of a matrix is zero if its column vectors are linearly dependent]
+	A $ k$-tensor $ f $ is alternating if and only if $ f(v_1,\cdots,v_k) = 0 $ whenever two of the vectors $ v_1,\cdots,v_k $ are equal. With a simple generalization, we can state a more general statement that $ f $ is alternating k-tensor if and only if $ f(v_1,\cdots,v_k) = 0 $ the vectors $ v_1,\cdots,v_k $ are linearly dependent.
+	
+	As an important (and simple!) Corollary for this statement, we can conclude that determinant of an $ n\times n $ matrix (which is an alternating n-tensor) is zero when its column vectors are linearly dependent.
+\end{summary}
+
+\begin{summary}
+	Let $ U \subset \R^n $ open, and let $ \set{x_1,\cdots,x_n} $ be standard basis for $ \R^n $, and $ \set{x^1,\cdots,x^n} $ the standard dual basis. Let $ p \in U $. Then for $ T_p(\R^n) $ and $ T^*_p(\R^n) $ we have
+	\[ \mathcal{B}(T_p(\R^n)) = \set{\frac{\partial}{\partial x_1}\big|_{p},\cdots,\frac{\partial}{\partial x_n}\big|_{p}}, 
+	\qquad
+	\mathcal{B}(T_p^*(\R^n)) = \set{ dx^1\big|_{p},\cdots,dx^n\big|_{p} }.
+	 \]
+\end{summary}
+
+\section{Solved Problems}
+\begin{problem}[Algebra structure on $ C_p^{\infty} $]
+	Define carefully addition, multiplication, and scalar multiplication in $ C_p^\infty $. Prove that addition in $ C_p^\infty $ is commutative.
+\end{problem}
+\begin{solution}
+	First, note that the elements of $ C_p^\infty $ are actually the equivalence classes, where two functions are equivalent if they both define the same germ.
+	\begin{itemize}
+		\item For the definition of the addition, we can use the point-wise addition of the functions. However, we need to check to see if this definition is well-defined (i.e. the result of the addition of two functions does not depend on the choice of representative of the equivalence class). Let $ f_1, f_2, g_1, g_2 \in C_p^\infty$ where $ f_1 $ and $ f_2 $ define the same germ, and similarly for $ g_1 $ and $ g_2 $. Then, we claim that $ f_1+g_1 $ define the same germ as $ f_2 + g_2 $. That is because for $ f_1, f_2 $ there is an open set $ U_1 $ containing $ p $ where $ f_1(x) = f_2(x) \ \forall x \in U $. Similarly, there is an open set $ U_2 $ that contains $ p $ and for all $ x \in U_2 $ we have $ g_1(x) = g_2(x) $. Let $ W = U_1 \cap U_2 $. Then on for all $ x \in W $ we have $ f_1(x) + f_2(x) = g_1(x) + g_2(x) $. Hence $ f_1+g_1 $ defines the same germ as $ f_2 + g_2 $.
+		\item For the scalar multiplication, we can use the notion of scalar multiplication in functions, and following an idea similar to the reasoning above, we can show that this definition is well-defined.
+		\item For the multiplication on $ C_p^\infty $ we can use of the point-wise multiplication of functions as the definition, and with a similar reasoning to the one in item 1, we can show that this definition is well-defined.
+	\end{itemize}
+	For the commutativity of the addition on $ C_p^\infty $, we need to emphasis that it follows immediately from the commutativity of the point-wise addition of functions.
+\end{solution}
+
+
+\begin{problem}[Vector space structure on derivations at a point]
+	Prove that the set of all point derivatives is closed under addition and scalar multiplication.
+\end{problem}
+\begin{solution}
+	Let $ D $ and $ D' $ be derivations at $ p\in\R^n $, and define $ \hat{D} = D + D' $. Let $ f,g \in C_p^\infty $. Then we can write
+	\begin{align*}
+		\hat{D} (fg) = (D + D')(fg)
+	\end{align*}
+	On the other hand we have
+	\[ D(fg) = D(f)g + fD(g), \qquad D'(fg) = D'(f)g + fD'(g). \]
+	Adding two equations we will get
+	\[ D(fg) + D'(fg) = (D(f) + D'(f))g + f(D(g)+D'(g)) \]
+	Defining $ \hat{D} = (D+D')(f) = D(f)+D'(f) $ we will get
+	\[ \hat{D}(fg) = \hat{D}(f) g + f \hat{D}(g).  \]
+	which shows that $ \hat{D} $ is also a point derivation at $ p $.
+	For the scalar multiplication, let $ r \in \R $ and define $ \tilde{D} = rD $. By defining $ (rD)(f) = rD(f) $, we can write
+	\[ (rD)(fg) = rD(fg) = rD(f)g + rfD(g) = rD(f)g + frD(g),  \]
+	which shows that $ rD $ also satisfies the Leibniz property, this it is a point derivation.
+\end{solution}
+
+\begin{problem}
+	Let $ A $ be an algebra over a field $ K $. If $ D_1 $ and $ D_2 $ are derivations of $ A $, show that $ D_1\circ D_2 $ is not necessarily a derivation (it is if $ D_1 $ or $ D_2 = 0 $), but $ D_1\circ D_2 - D_2 \circ D_1 $ is always a derivation of $ A $.	
+\end{problem}
+\begin{solution}
+	{\color{orange} TO BE ADDED. }
+\end{solution}
+
+
+
+\begin{problem}
+	Find the inversions in the permutation $ \tau = (1\ 2\ 3\ 4\ 5) $.
+\end{problem}
+\begin{solution}
+	This permutation can be written as
+	\[ \begin{pmatrix}
+		1 & 2 & 3 & 4 & 5 \\
+		2 & 3 & 4 & 5 & 6
+	\end{pmatrix}. \]
+	Thus the number of inversions can be written as $ (2,1),(3,1),(4,1)$, and $ (5,1) $.
+\end{solution}
+
+\begin{problem}
+	Let $ f:V^k \to \R $ be a k-linear function defined on vector space $ V $. Show that the following functions is alternating.
+	\[ Af = \sum_{\sigma \in S_k} \sign(\sigma)\ \sigma f. \]
+\end{problem}
+\begin{solution}
+	Let $ \tau \in S_k $. Then
+	\[ \tau (Af)  = \sum_{\sigma \in S_k} \sign(\sigma)\ (\tau \sigma)f = \sum_{\sigma \in S_k} \sign(\sigma)\sign(\tau)\sign(\tau)\ (\tau \sigma)f = \sign(\tau) \sum_{\sigma \in S_k} \sign(\tau\sigma)\ (\tau \sigma)f  \]
+	Note that since in the sum above $ \sigma $ runs through all permutations $ S_k $, so does $ \tau \sigma $. Thus we can write
+	\[ \tau (A f) = \sign(\tau) (Af). \]
+	This shows that $ Af $ is alternating.
+\end{solution}
+
+
+\begin{problem}
+	Let $ f: V^k \to \R $ be a k-linear function. Show that $ Sf $ given below is symmetric.
+	\[ Sf = \sum_{\sigma \in S_k} \sigma f. \]
+\end{problem}
+\begin{solution}
+	Let $ \tau \in S_k $. Then we
+	\[ \tau (Sf) = \sum_{\sigma \in S_k} \tau \sigma f = Sf. \]
+	Note that the last equality above holds, since $ \sigma $ rums through all permutations $ S_k $ and so does $ \tau \sigma. $
+\end{solution}
+
+
+\begin{problem}
+	If $ f $ is a 3-linear function on a vector space $ V $ and $ v_1, v_2, v_3 \in V $, what is $ (Af)(v_1, v_2, v_3) $?
+\end{problem}
+\begin{solution}
+	\[ (Af)(v_1, v_2, v_3) = f(v_1,v_2,v_3)-f(v_2,v_1,v_3)+f(v_3,v_1,v_2)-f(v_1,v_3,v_2)+f(v_2,v_3,v_1)-f(v_3,v_2,v_1) \]
+\end{solution}
+
+\begin{problem}
+	Show that the tensor product of multi-linear functions is associative: If $ f,g $, and $ h $ are multi-linear functions on $ V $, then
+	\[ (f\otimes g)\otimes h = f \otimes (g\otimes h). \]
+\end{problem}
+\begin{solution}
+	We start with the left hand side. I.e. 
+
+	\begin{align*}
+		((f \otimes g) \otimes h)(v_1 \cdots, v_{k+l+m}) 
+		&= (f \otimes g)(v_1,\cdots,v_{k+l})h(k_{k+l+1},\cdots,k_{k+l+m}) \\ 
+		&= \big(f(v_1,\cdots,v_k)g(v_{k+1},\cdots,v_{k+l})\big)h(v_{k+l+1},\cdots,v_{k+l+m})\\
+		&= f(v_1,\cdots,v_k) \big(g(v_{k+1},\cdots,v_{k+l})h(v_{k+l+1},\cdots,v_{k+l+m})\big) \\
+		&= (f \otimes (g \otimes h))(v_{1},\cdots,v_{k+l+m}).
+	\end{align*}
+\end{solution}
+
+\begin{problem}
+	Consider following two ways that we can express the sum in the wedge product formula. Let $ f \in A_k(V) $ and $ g \in A_l(V) $. Then the wedge product $ f \wedge g $ can be written as
+	\[ (f \wedge g)(v_1,\cdots,v_{k+l}) = \frac{1}{k!l!}\sum_{\sigma \in S_k}\sign(\sigma)\ \sigma f(v_{\sigma(1)},\cdots,v_{\sigma(k)})g(v_{\sigma(k+1)},\cdots,v_{\sigma(k+l)}). \]
+	Or, alternatively, we can write it as $ (k,l)-$shuffle
+	\[ (f \wedge g)(v_1,\cdots,v_{k+l}) = \sum_{(k,l)- \text{shuffles} \ \sigma}\sign(\sigma)\ \sigma f(v_{\sigma(1)},\cdots,v_{\sigma(k)})g(v_{\sigma(k+1)},\cdots,v_{\sigma(k+l)}). \]
+	Now, as a concrete example, let $ f,g \in A_2(V) $. Write $ f\wedge g $ in these two forms.
+\end{problem}
+
+\begin{solution}
+	First, we want to use the sum on the all permutations. 
+	\begin{align*}
+		 4(f \wedge g)(v_1, v_2, v_3, v_4) = f(v_1,v_2)g(v_3,v_4) - f(v_2,v_1)g(v_3,v_4) + f(v_2,v_1)g(v_4,v_3) - f(v_1,v_2)g(v_4,v_3)  \\
+		 - f(v_1,v_3)g(v_2,v_4) + f(v_3,v_1)g(v_2,v_4) - f(v_3,v_1)g(v_4,v_2) + f(v_1,v_3)g(v_4,v_2)   \\
+		 + f(v_1,v_4)g(v_2,v_3) - f(v_4,v_1)g(v_2,v_3) + f(v_4,v_1)g(v_3,v_2) - f(v_1,v_4)g(v_3,v_2)  \\
+		 +f(v_2,v_3)g(v_1,v_4) - f(v_3,v_2)g(v_1,v_4) + f(v_3,v_2)g(v_4,v_1) - f(v_2,v_3)g(v_4,v_1)   \\
+		 - f(v_2,v_4)g(v_1,v_3) + f(v_4,v_2)g(v_1,v_3) - f(v_4,v_2)g(v_3,v_1) + f(v_2,v_4)g(v_3,v_1)  \\
+		 +f(v_3,v_4)g(v_1,v_2) - f(v_4,v_3)g(v_1,v_2) + f(v_4,v_3)g(v_2,v_1) - f(v_3,v_4)g(v_2,v_1).
+	\end{align*}
+	Note that in every row, the functions are equal to each at (because $ f,g $ are alternating). Thus we have the factor of 4 not to count the redundant terms. However, we can do this sum using the (2,2)-shuffles. This means that we only keep the very first column, as their argument permutation is the same as all (2,2)-shuffles on 4 symbols. Thus we can write
+	\begin{align*}
+		(f\wedge g)(v_1,v_2,v_3,v_4) = &f(v_1,v_2)g(v_3,v_4) - f(v_1,v_3)g(v_2,v_4) + f(v_1,v_4)g(v_2,v_3)\\
+		 + &f(v_2,v_3)g(v_1,v_4) - f(v_2,v_4)g(v_1,v_3)\\
+		 + &f(v_3,v_4)g(v_1,v_2).
+	\end{align*}
+\end{solution}
+\begin{observation}
+	How do we count the (2,2)-shuffles of $ \set{v_1,v_2,v_3,v_4} $? We start by a vertical line where in its left side we put $ v_1,v_2 $ and in its right side we write $ v_3,v_4 $. Like the following table. This is already a shuffle (identity). To write the next shuffle, we keep $ v_1 $ in the first position, and write the next symbol whose its subscript is larger than 2 (i.e. $ v_3 $), and write the remaining symbols in the right hand side of the vertical line in increasing order. Then we continue this process, until there are no possible shuffles for its first element be $ v_1 $. Then we put $ v_2 $ in the first place and right next to it we write the next symbol that its subscript is larger than 2 (i.e. $ v_3 $), and we continue.
+
+	\begin{center}
+		\begin{tabular}{c|c}
+			$ v_1,v_2 $ & $ v_3,v_4 $  \\
+			$ v_1,v_3 $ & $ v_2,v_4 $ \\
+			$ v_1,v_4 $ & $ v_2,v_3 $ \\
+			& \\
+			$ v_2,v_3 $ & $ v_1,v_4 $ \\
+			$ v_2,v_4 $ & $ v_1,v_3 $ \\
+			& \\
+			$ v_3,v_4 $ & $ v_1,v_2 $ \\
+		\end{tabular}
+	\end{center}
+	
+	In order to find the sign of the each of these permutations, it is enough to extract the independent cycles. For instance, consider the following shuffle, corresponding to last row above.
+	\[ \sigma = \begin{pmatrix}
+		1 & 2 & 3 & 4 \\
+		3 & 4 & 1 & 2
+	\end{pmatrix}  \]
+	This permutation is the same as the permutation given by the cycle $ \tau = (1\ 3)(2\ 4) $. To extract this we start with $ 1 $ and track where it goes, and we do this tracking until we get back to 1. Then we start this process with the remaining element until we get all of the cycles. This cycle decomposition of $ \tau $ clearly shows that $  \tau $ is an even permutation (can be written as 2 cycles). However, in the case of $ v_2,v_4,v_1,v_3 $, the corresponding permutation is 
+	\[ \tau = 
+	\begin{pmatrix}
+		1 & 2 & 3 & 4 \\
+		2 & 4 & 1 & 3
+	\end{pmatrix}.
+	 \]
+	 We can write this as $ \tau = (1\ 2\ 4\ 3) $. As with every cycle, we can decompose this into smaller cycles (not necessarily independent) as $ \tau = (1\ 3)(1\ 4)(1\ 2) $. This shows that this particular permutation is odd.
+	
+\end{observation}
+
+
+\begin{problem}[Wedge product of covectors and determinant]
+	\label{problem:1-covectorAndDeterminant}
+	Let $ V $ be a vector space and let $ \beta^1,\cdots \beta^l \in A_1(V) $. Prove that 
+	\[ (\beta^1 \wedge \cdots \wedge \beta^l)(v_1,\cdots,v_l) = \det\left[ \beta^i(v_j) \right]  \]
+\end{problem}
+\begin{solution}
+	This follows simply from the definition. From the definition of wedge product we have
+	\[ (\beta^1 \wedge \cdots \wedge \beta^l) = A \left[\beta^1(v_1)\cdots \beta^l(v_l)\right] = \sum_{\sigma \in S_l} \sign(\sigma) \beta^1(v_{\sigma(1)}) \cdots \beta^l(v_{\sigma(l)}) = \det\left[ \beta^i(v_j) \right] \]
+	where $ \left[ \beta^i(v_j) \right] $ is $ l\times l $ square matrix.
+\end{solution}
+
+\begin{problem}
+	Verify 
+	\[ f \wedge g = (-1)^{kl}(g\wedge f) \]
+	for $ f $ and $ g $ being $ k $ and $ l $ linear maps correspondingly. Do this verification by considering $ f\in A_2(V) $ and $ g \in A_1(V) $.
+\end{problem}
+
+\begin{solution}
+	For $ f\wedge g $ we can write (using $ (2,1) $-shuffles)
+	\[(f\wedge g)(v_1,v_2,v_3) = f(v_1,v_2)g(v_3) - f(v_1,v_3)g(v_2) + f(v_2,v_3)g(v_1).\]
+	However, for $ g\wedge f $, we can use $ (1,2) $-shuffles to show
+	\[ (g\wedge f)(v_1,v_2,v3) = g(v_1)f(v_2,v_3) - g(v_2)f(v_1,v_3) + g(v_3)f(v_1,v_2).  \]
+	Evaluating two expressions above reveals that $ f\wedge g = g \wedge f. $
+\end{solution}
+
+\begin{problem}[Tensor product of covectors (from W. Tu)]
+	Let $ e_1,e_2,\cdots,e_n $ be a basis for vector space $ V $ and let $ \alpha^1,\cdots,\alpha^n $ be its dual basis in $ V^\vee $. Suppose $ \left[g_{i,j}\right] \in \R^{n\times n} $ is an $ n\times n $ matrix. Define a bilinear function $ f: V\times V \to \R $ by
+	\[ f(v,w) = \sum_{1 \leq i,j \leq n} g_{i,j}v^i w^j \]
+	for $ v = \sum v^i e_i $ and $ w = \sum w^j e_j $ in $ V $. Describe $ f $ in terms of the tensor products of $ \alpha^i $ and $ \alpha^j $, $ 1 \leq i, j \leq n $.
+\end{problem}
+\begin{solution}
+	We know that $ v^i = \alpha^i (v) $, and similarly $ w^j = \alpha^j (w) $. So we can write
+	\[ v^i w^j = \alpha^i(v) \alpha^j (w) = (\alpha^i \otimes \alpha^j)(v,w). \]
+	Thus the bilinear function can be written as
+	\[ f = \sum_{1\leq i,j \leq n} g_{i,j} \alpha^i \otimes \alpha^j. \]
+	This bilinear function is very similar to the notion of weighted inner product.
+\end{solution}
+
+\begin{problem}[Hyperplanes(from W. Tu)]
+	\begin{enumerate}[(a)]
+		\item Let $ V $ be a vector space of dimension $ n $, and $ f:V \to \R$ a nonzero linear functional. Show that $ \dim \ker f  = n-1 $. A linear subspace of $ V $ of dimension $ n-1 $ is called a hyperplane in $ V $.
+		\item Show that a nonzero linear functional on a vector space $ V $ is determined up to multiplicative constant by its kernel, a hyperplane in $ V $. In other words, if $ f $ and $ g : V \to \R $ are nonzero linear functionals and $ \ker f = \ker g $, then $ g = cf $ for some constant $ c \in \R $.
+	\end{enumerate}
+	
+\end{problem}
+
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item 	We can use the Rank-Nullity theorem for the linear function $ f $. This theorem states that 
+		\[ \dim \rank f + \dim \ker f = \dim V. \]
+		We know that $ \dim\rank f = 1 $, and $ \dim V = n $. This implies $ \dim\ker f = n-1 $.
+		
+		\item Let $ f,g $ be two linear functionals on $ V $ that has the same kernel, which we call it the set $ K $. Since $ K $ is $ n-1 $ dimensional linear subspace of $ K $, then we can find a basis for it, call it $ \mathcal{B}_1 = \set{\hat{e}_1,\cdots , \hat{e}_{n-1}} $. Let $ \hat{e}_n $ be a vector normal to $ \mathcal{B}_1 $. We can do all of these since $ V $ is $ n $ dimensional and we have just modified the basis vectors as described above. Let $ z\in V $ where $ z = \sum_{i=1}^{n} z_i \hat{e}_i $. Thus we have
+		\[ f(z) = z_n f(\hat{e}_n), \qquad g(z) = z_n g(\hat{e}_n). \]
+		This is true because $ f(\hat{e}_i) = g(\hat{e}_i) = 0 $ for all $ \hat{e}_i \in \mathcal{B} $. Since $ f,g $ are non-zero functional, then we can write
+		\[ \frac{f(z)}{g(z)} = \frac{f(\hat{e}_n)}{g(\hat{e}_n)} = c \qquad \text{for some $ c\in \R $}\]
+		Thus we can write
+		\[ f = cg. \]
+		Note that $ c $ is determined by $ \hat{e}_n $. $ \hat{e}_n $ itself is determined by the kernel of $ f,g $, i.e. the hyperplane mentioned above.
+	\end{enumerate}
+\end{solution}
+
+\begin{observation}
+	I have this weird observation that I think it must be wrong, but I don't know how! Consider the set of all linear functionals defined on $ \R^2 $. From duality, we know that this set (denoted by $ L_1(\R^2) $) is isomorphic to $ \R^2 $. But here comes the strange argument that leads to the non-real observation. As we saw in the question above, every hyperplane (in this case every line that passes through the origin) determines a linear functional up to a constant multiplication. On the other hand, we know that the set of all liens passing through the origin is the real projective plane (which is in fact $ L_1(\R^2)/\sim $ where $ \sim $ identifies linear functionals that are constant multiple of each other), which definitely is not isomorphic to $ \R^2 $.
+\end{observation}
+
+\begin{problem}[A basis for $ k $-tensors (from W. Tu)]
+	Let $ V $ be a vector space of dimension $ n $ with basis $ e_1,\cdots,e_n $. Let $ \alpha^1,\cdots,\alpha^n $ be the dual basis for $ V^\vee $. Show that a basis for the space $ L_k(V) $ of k-linear functions on $ V $ is $ \set{\alpha^{i_1}\otimes \cdots \otimes \alpha^{i_k}} $ for all multi-indices $ (i_1,i_2,\cdots,i_k) $. In particular, this show that $\dim L_k(V) = n^k $.
+\end{problem}
+
+\begin{solution}
+	To show this, we need to show that the basis vectors are linearly independent, and spans all $ L_k(v) $. To show the linear independence, consider the following linear combination of all basis vectors, where the total sum is set to zero.
+	\[ \sum C_{i_1,\cdots,i_k} \alpha^{i_1}\otimes \cdots \otimes \alpha^{i_k}  = 0, \]
+	where the sum is done on all of the multi-indices $ (i_1,\cdots,i_k) $. This sum implies that all of the coefficients are zero. We can see this by applying $ (e_{j_1},\cdots,e_{j_k}) $ to both sides. We have
+	\[ (\alpha^{i_1}\otimes \cdots \otimes \alpha^{i_k})(e_{j_1},\cdots,e_{j_k}) = 0 \]
+	if there is any mismatch between the multi-indices $ I, J$. This implies $ C_{j_1,\cdots,j_k} = 0$ for all multi-indices. Thus we can conclude that the basis vectors are linearly independent.
+	
+	To show that the basis vectors span all the space $ L_k(V) $, let $ f \in L_k(V) $ be any k-tensor. Define
+	\[ g = \sum f(e_{i_1},\cdots,e_{i_k})\alpha^{i_1}\otimes \cdots \otimes \alpha^{i_k}. \]
+	We can see that 
+	\[ g(e_{j_1},\dots,e_{j_k}) = f( e_{j_1},\dots,e_{j_k} ) \qquad \text{for all multi-indices} \]
+	From linearity we can deduce that $ f=g $. Thus the basis vectors span the whole space.
+\end{solution}
+
+\begin{problem}[A characterization of alternating $ k $-vectors (from W. Tu)]
+	Let $ f $ be a $ k $-tensor on a vector space $ V $. Prove that $ f $ is alternating if and only if $ f $ changes sign whenever two successive arguments are interchanged
+	\[ f(\cdots,v_{i+1},v_i,\cdots) = -f(\cdots, v_i, v_{i+1},\cdots). \]
+\end{problem}
+
+\begin{solution}
+	The first direction follows immediately from the definition. I.e. assume $ f $ is alternating. Then sign of the permutation corresponding interchanging two successive arguments is a single transposition which has sign -1. Thus from definition we have $ f(\cdots,v_{i+1},v_i,\cdots) = -f(\cdots, v_i, v_{i+1},\cdots) $.
+	
+	\noindent For the converse, first observe that we can decompose arbitrary permutation to cycles, and then decompose cycles into transpositions. Eventually, we can decompose every transposition to transposition of adjacent elements. See the Lemma below
+	\begin{lemma}[Decomposing arbitrary transposition to transposition of adjacent elements]
+		Let $ \tau = (k\ l) $ be an arbitrary transposition where $ k < l $.  Assume that $ k,l $ are $ m $ distance apart (i.e. $ l-k = m $). Then we can write
+		\[ (k\ l) = (k\ k+1)\cdot(k+1\ k+2)\cdots(l-1\ l)\cdot(l-2\ l-1)\cdots(k\ k+1). \]
+		Thus $ (k\ l) $ can be decomposed to $ 2m - 1 $ adjacent transpositions.
+	\end{lemma}
+	
+	Let $ \sigma \in S_k $ be an arbitrary permutation. We can decompose it to the following permutations
+	\[ \sigma = \tau_1 \tau_2 \cdots \tau_l, \]
+	where from the number of permutations we can see that $ \sign(\sigma) = (-1)^l $. Let $ \tau_i $ be one of the transpositions above that interchanges two elements $ m $ distance apart. Then
+	\[ \tau_i f = (-1)^{2m-1}f = - f. \]
+	This follows immediately from the Lemma above. Thus we can write
+	\[ \sigma f = (-1)^l f = \sign(\sigma) f. \]
+	This shows that $ f $ is an alternating k-tensor.
+\end{solution}
+
+
+\begin{problem}[Another characterization of alternating k-tensors (from W. Tu)]
+	\label{problem:k-TensorCharacter}
+	Let $ f $ be a $ k $-tensor on a vector space $ V $. Prove that $ f $ is alternating if and only if 
+	\[ f(v_1,\cdots,v_k) = 0 \]
+	whenever two of the vectors $ v_1,\cdots,v_k $ are equal.
+\end{problem}
+
+\begin{solution}
+	We first start with the forward direction. Assume $ f $ is alternating. Thus for $ \sigma \in S_k $ we have $ \sigma f = \sign(\sigma) f $. Without loss of generality, we can assume $ i < j $ and let $ (v_1,\cdots,v_i,\cdots,v_j,\cdots,v_k) \in V^k$ where $ v_i = v_j $.Thus we can write
+	\[ f(v_1,\cdots,v_i,\cdots,v_j,\cdots,v_k) = f(v_1,\cdots,v_j,\cdots,v_i,\cdots,v_k). \]
+	Furthermore,  let $ \tau = (v_i, v_j) $, i.e. a transposition that interchanges $ v_i $ with $ v_j $. Hence
+	\begin{align*}
+		f(v_1,\cdots,v_i,\cdots,v_j,\cdots,v_k) &= \tau f(v_1,\cdots,v_j,\cdots,v_i,\cdots,v_k) \\
+		&=- f(v_1,\cdots,v_j,\cdots,v_i,\cdots,v_k).
+	\end{align*}
+	This implies 
+	\[ f(v_1,\cdots,v_i,\cdots,v_j,\cdots,v_k) = f(v_1,\cdots,v_j,\cdots,v_i,\cdots,v_k) = 0 \]
+	
+	To show the converse, let $ \sigma \in S_k $ be any permutation. We can decompose this permutation into transpositions, i.e. $ \sigma = \tau_1 \tau_2 \cdots \tau_r $. Let $ \tau $ be any of transpositions above that permutes $ (i\ j) $. Let $ (v_1,\cdots,v_i,\cdots,v_j,\cdots,v_k) \in V^k $. Since $ V^k $ is a vector space we can write
+	\[ (v_1,\cdots,v_i,\cdots,v_j,\cdots,v_k) - (v_1,\cdots,v_i,\cdots,v_i,\cdots,v_k) - (v_1,\cdots,v_j,\cdots,v_j,\cdots,v_k) = -(v_1,\cdots,v_j,\cdots,v_i,\cdots,v_k). \]
+	Applying $ f $ to both sides, and using the hypothesis and k-linearity of $ f $ we will get
+	\[ f(v_1,\cdots,v_i,\cdots,v_j,\cdots,v_k) = - f(v_1,\cdots,v_j,\cdots,v_i,\cdots,v_k) = - \tau f (v_1,\cdots,v_i,\cdots,v_j,\cdots,v_k). \]
+	Thus for each transposition in the decomposition $ \sigma = \tau_1 \tau_2 \cdots \tau_r $ we will get a factor of -1. Thus
+	\[ \sigma f = (-1)^r f = \sign(\sigma) f \]
+\end{solution}
+
+\begin{problem}[Wedge product and scalars (from W. Tu)]
+	Let $ V $ be a vector space. For $ a,b\in \R $, $ f \in A_k(V) $, and $ g \in A_\ell(v) $, show that $ af\wedge bg = (ab) f\wedge g $.
+\end{problem}
+\begin{solution}
+	This follows immediately from the definition of wedge product.
+	\[ af \wedge bg = \frac{1}{k! \ell!} A\left( af \otimes bg \right) = \frac{ab}{k! \ell!} A(f\otimes g) = (ab) f\wedge g. \]
+\end{solution}
+
+\begin{problem}[Transformation rule for a wedge product of covectors (from W. Tu)]
+	\label{problem:wedgeProductTransformation}
+	Suppose two sets of covectors on  a vector space $ V $, $ \beta^ 1,\cdots,\beta^k $ and $ \gamma^1,\cdots, \gamma^k $ are related by
+	\[ \beta^i = \sum_{j=1}^{k} a_j^i \gamma ^j, \qquad i = 1,2,\cdots, k, \]
+	for a $ k\times k $ matrix $ A = \left[a_j^i\right] $. Show that 
+	\[ \beta^1 \wedge \cdots \wedge \beta^k = (\det A) \gamma^1 \wedge \cdots \wedge \gamma^k. \]
+\end{problem}
+\begin{solution}
+	It will be helpful if we write the relation between $ \beta^i $'s and $ \gamma^j $s as a matrix multiplication. To do so we can write
+	\[ 
+	\begin{pmatrix}
+		\beta^1 \\
+		\beta^2 \\
+		\vdots \\
+		\beta^k
+	\end{pmatrix} = 
+	\begin{pmatrix}
+		a^1_1 & a^1_2 & \cdots & a^1_k \\
+		a^2_1 & a^2_2 & \cdots & a^2_k \\
+		\vdots & \vdots & \ddots & \vdots \\
+		a^k_1 & a^k_2 & \cdots & a^k_k
+	\end{pmatrix}
+	\begin{pmatrix}
+		\gamma^1 \\
+		\gamma^2 \\
+		\vdots \\
+		\gamma^k
+	\end{pmatrix}
+	 \]
+	 On the other hand, we know
+	 \begin{align*}
+	 	(\beta^1\wedge\cdots \wedge \beta^k)(v_1,\cdots,v_k) 
+	 	&= \det 
+	 	\begin{pmatrix}
+	 		\beta^1(v_1) & \beta^1(v_2) & \cdots & \beta^1(v_k) \\
+	 		\beta^2(v_1) & \beta^2(v_2) & \cdots & \beta^2(v_k) \\
+	 		\vdots & \vdots & \ddots & \vdots \\
+	 		\beta^k(v_1) & \beta^k(v_2) & \cdots & \beta^k(v_k)
+	 	\end{pmatrix}
+	 	\\
+	 	&= \det \left[
+	 	\begin{pmatrix}
+	 		a^1_1 & a^1_2 & \cdots & a^1_k \\
+	 		a^2_1 & a^2_2 & \cdots & a^2_k \\
+	 		\vdots & \vdots & \ddots & \vdots \\
+	 		a^k_1 & a^k_2 & \cdots & a^k_k
+	 	\end{pmatrix}
+	 	\begin{pmatrix}
+	 		\gamma^1(v_1) & \gamma^1(v_2) & \cdots & \gamma^1(v_k) \\
+	 		\gamma^2(v_1) & \gamma^2(v_2) & \cdots & \gamma^2(v_k) \\
+	 		\vdots & \vdots & \ddots & \vdots \\
+	 		\gamma^k(v_1) & \gamma^k(v_2) & \cdots & \gamma^k(v_k)
+	 	\end{pmatrix}
+	 	\right] \\
+	 	&= \det(A) \det \begin{pmatrix}
+	 		\gamma^1(v_1) & \gamma^1(v_2) & \cdots & \gamma^1(v_k) \\
+	 		\gamma^2(v_1) & \gamma^2(v_2) & \cdots & \gamma^2(v_k) \\
+	 		\vdots & \vdots & \ddots & \vdots \\
+	 		\gamma^k(v_1) & \gamma^k(v_2) & \cdots & \gamma^k(v_k)
+	 	\end{pmatrix} \\
+	 \end{align*}
+	Thus we can write
+	\[  (\beta^1\wedge\cdots \wedge \beta^k)(v_1,\cdots,v_k) = \det(A) (\gamma^1 \wedge\cdots \wedge \gamma^k)(v_1,\cdots,v_k). \]
+\end{solution}
+
+\begin{problem}[Transformation rule for k-covectors (from W. Tu)]
+	Let $ f $ be a k-covector on a vector space $ V $ (of say, dimension $ n $). Suppose two sets of vectors $ u_1,\cdots,u_k $ and $ v_1,\cdots,v_k $ in $ V $ are related by
+	\[ u_j = \sum_{i=1}^{k} a_j^i v_i, \qquad j = 1,\cdots,k, \]
+	for a $ k\times k $ matrix $ A = \left[a_j^i\right] $. Show that
+	\[ f(u_1,\cdots, u_k) = (\det A) f(v_1,\cdots,v_k). \]
+	By
+\end{problem}
+
+\begin{solution}
+	Since $ f $ is a $ k $-vector, then we can expand it in its basis
+	\[ f = \sum_{I \in AM} C_I \alpha^I, \]
+	where $ AM $ is the set of all ascending multi-indices $ I = (i_1,\cdots,i_k) $ for $ 1 \leq i_1 < i_2 < \cdots < i_k \leq n $. Thus
+	\[ f(u_1,\cdots,u_k) = \sum_{I \in AM} C_I \alpha^I (u_1,\cdots,u_k). \]
+	Let's focus on the term $ I = (i_1,\cdots,i_k) $. For this term we can write
+	\begin{align*}
+		(\alpha^{i_1} \wedge \cdots \wedge \alpha^{i_k})(u_1,\cdots,u_k) 
+		&= \det\begin{pmatrix}
+			\alpha^{i_1}(u_1) & \alpha^{i_1}(u_2) & \cdots & \alpha^{i_1}(u_k) \\
+			\alpha^{i_2}(u_1) & \alpha^{i_2}(u_2) & \cdots & \alpha^{i_2}(u_k) \\
+			\vdots & \vdots & \ddots & \vdots \\
+			\alpha^{i_k}(u_1) & \alpha^{i_k}(u_2) & \cdots & \alpha^{i_k}(u_k)
+		\end{pmatrix}\\
+		&= \det \left[
+		\begin{pmatrix}
+			\alpha^{i_1}(v_1) & \alpha^{i_1}(v_2) & \cdots & \alpha^{i_1}(v_k) \\
+			\alpha^{i_2}(v_1) & \alpha^{i_2}(v_2) & \cdots & \alpha^{i_2}(v_k) \\
+			\vdots & \vdots & \ddots & \vdots \\
+			\alpha^{i_k}(v_1) & \alpha^{i_k}(v_2) & \cdots & \alpha^{i_k}(v_k)
+		\end{pmatrix}
+		\begin{pmatrix}
+			a^1_1 & a^1_2 & \cdots & a^1_k \\
+			a^2_1 & a^2_2 & \cdots & a^2_k \\
+			\vdots & \vdots & \ddots & \vdots \\
+			a^k_1 & a^k_2 & \cdots & a^k_k
+			\end{pmatrix}
+		\right]\\
+		&= \det (A) \det \begin{pmatrix}
+			\alpha^{i_1}(v_1) & \alpha^{i_1}(v_2) & \cdots & \alpha^{i_1}(v_k) \\
+			\alpha^{i_2}(v_1) & \alpha^{i_2}(v_2) & \cdots & \alpha^{i_2}(v_k) \\
+			\vdots & \vdots & \ddots & \vdots \\
+			\alpha^{i_k}(v_1) & \alpha^{i_k}(v_2) & \cdots & \alpha^{i_k}(v_k)
+		\end{pmatrix}\\
+		&= \det(A) (\alpha^{i_1} \wedge \cdots \wedge \alpha^{i_k})(v_1,\cdots,v_k) 
+	\end{align*}
+	Thus we can write
+	\[f(u_1,\cdots,u_k) = \sum_{I \in AM} C_I \alpha^I (u_1,\cdots,u_k) =  \det(A) \sum_{I \in AM} C_I \alpha^I (v_1,\cdots,v_k) \]
+	or
+	\[ \boxed{f(u_1,\cdots,u_k) = \det(A) f(v_1,\cdots,v_k).} \]
+	\qed
+\end{solution}
+
+\begin{problem}[Vanishing of a covector of top degree (from W. Tu)]
+	Let $ V $ be a vector space of dimension $ n $. Prove that if an $ n $-covector $ \omega $ vanishes on a basis $ e_1,\cdots,e_n $ for $ V $, then $ \omega $ is the zero covector on $ V $.
+\end{problem}
+
+\begin{solution}
+	First, observe that for a vector space of dimension $ n $ we have
+	\[ \dim(A_n) = \binom{n}{n} = 1, \qquad \mathcal{B}= \set{\alpha^1 \wedge \cdots \wedge \alpha^k}. \]
+	Let $ f \in A_n(V) $. Thus we can write
+	\[ f = g \alpha^1\wedge \cdots \wedge \alpha^n  \qquad \text{for some}\ g \in \R.\] 
+	On the other hand, we know
+	\[ (\alpha^1\wedge \cdots\wedge \alpha^n)(e_1,\cdots,e_n) = \det \left[ \alpha^i(e_j) \right] = 1.\]
+	This $ f(e_1,\cdots, e_n) = 0 $ if and only if $ g = 0 $.
+\end{solution}
+
+\begin{problem}[Linear independence of covectors (from W. Tu)]
+	Let $ \alpha^1,\cdots,\alpha^k $ be 1-covectors on a vector space $ V $. Show that $ \alpha^1 \wedge \cdots \wedge \alpha^k \neq 0 $ if and only if $ \alpha^1, \cdots, \alpha^k $ are linearly independent in the dual space $ V^{\vee} $.
+\end{problem}
+\begin{solution}
+	For the forward direction, we want to show
+	\[ \alpha^1 \wedge \cdots \wedge \alpha^k \neq 0 \implies \alpha^1,\cdots,\alpha^k\ \text{are linearly independent.} \]
+	To show this we will prove the contrapositive. Assume $ \alpha^1,\cdots,\alpha^k $ are linearly dependent. Thus we can write one of them as a linear combination of others. With out loss of generality, assume 
+	\[ \alpha^1 = c_2 \alpha^2 + \cdots + c_n \alpha^n, \]
+	where $ c_i $s are not all zero. Consider
+	\[ \alpha^1\wedge \cdots\wedge \alpha^k  = c_2 \alpha^2 \wedge \cdots\wedge\alpha^k + \cdots +  c_k \alpha^k \wedge \cdots \wedge \alpha^{k} = 0. \]
+	The last equality is true since $ \alpha^I = 0 $ if the multi-indices $ I $ as at least two repetitive indices. 
+	
+	For the converse, we want to show
+	\[\alpha^1,\cdots,\alpha^k\ \text{are linearly independent.} \implies \alpha^1 \wedge \cdots \wedge \alpha^k \neq 0 \]
+	Assume $ \alpha^1,\cdots,\alpha^k $ are linearly independent. Then it can be extended as a basis for $ V^\vee $ as as $ \alpha^1,\cdots,\alpha^k,\cdots,\alpha^n $. Let $ v_1,v_2,\cdots,v_n $ be the dual basis for $ V $. Then
+	\[ (\alpha^1\wedge\cdots\wedge\alpha^k) (v_1,\cdots,v_k) = \det\left[ \alpha^i(v_j) \right] = 1 \neq 0.  \]
+	Thus $ \alpha^1\wedge\cdots\wedge\alpha^k $ can not be a zero k-covector.
+\end{solution}
+
+\begin{problem}[Exterior multiplication (from W. Tu)]
+	Let $ \alpha $ be a non-zero 1-covector and $ \gamma $ a $ k $-covector on a finite dimensional vector space $ V $. Show that $ \alpha \wedge \gamma = 0 $ if and only if $ \gamma = \alpha \wedge \beta $ for some $ (k-1) $-covector $ \beta $ on V.
+\end{problem}
+\begin{solution}
+	First, we prove the first direction. Let $ \gamma \in A_k(V), \alpha \in A_1(V) $ such that $ \gamma = \alpha \wedge \beta  $ for some $ \beta \in A_{k-1}(V) $. Then
+	\[ \alpha \wedge \gamma = \alpha \wedge \alpha \wedge \beta = 0. \]
+	For the converse, let $ \alpha$ and $ \gamma $ as before and we want to prove
+	\[ \alpha \wedge \gamma = 0 \implies \gamma = \alpha \wedge \beta\ \text{for some $\beta \in A_{k-1}(V)$}. \]
+	We prove the contrapositive. Assume $ \forall \beta \in A_{k-1}(V) $ we have $ \gamma \neq \alpha \wedge \beta $. Then by wedge product of $ \alpha $ to both sides we will get
+	\[ \alpha \wedge \gamma \neq \alpha\wedge\alpha\wedge\beta = 0. \]
+	This completes the proof.\qed
+\end{solution}
+
+
+\begin{problem}[A basis for 3-covectors (from W. Tu)]
+	Let $ x^1,x^2,x^3,x^4 $ be the coordinates on $ \R^4 $ and $ p $ a point in $ \R^4 $. Write down a basis for the vector space $ A_3(T_p(\R^4)) $.
+\end{problem}
+\begin{solution}
+	First, observe that a basis for $ T_p(\R^4) $ is $ \set{\frac{\partial}{\partial x^1}|_p,\cdots,\frac{\partial}{\partial x_4}|_p} $, and for $ T_p^*(\R^n) $ a standard basis is $ \set{dx_1|_p,\cdots,dx_4 |_p} $. Thus a standard basis for $ A_3(T_p(\R^4)) $ would be
+	\[ \mathcal{B} = \set{dx^1\wedge dx^2\wedge dx^3|_p,\ dx^1\wedge dx^2\wedge dx^4|_p,\ dx^1\wedge dx^3\wedge dx^4|_p,\ dx^2\wedge dx^3 \wedge dx^4|_p }. \]
+\end{solution}
+
+\begin{problem}[Wedge product of a 2-form with a 1-form (from W. Tu)]
+	Let $ \Omega $ be a 2-form and $ \tau $ a 1-form on $ \R^3 $. If $ X,Y,Z $ are vector fields on $ M $ find an explicit formula for $ (\omega \wedge \tau)(X,Y,Z) $ in terms of the values of $ \omega $ and $ \tau $ on the vector fields $ X,Y,Z $.
+\end{problem}
+
+\begin{solution}
+	From the definition of wedge product, and using the notion of $ (2,1) $ shuffles, that are $ (1<2,3), (1<3,2), (2<3,1) $ with respective signs $ +,-,+ $ we can write
+	\[ (\omega \wedge \tau) (X,Y,Z) = (\omega\otimes\tau)(X,Y,Z) -   (\omega\otimes\tau)(X,Z,Y) +  (\omega\otimes\tau)(Y,Z,X),   \]
+	or alternatively
+	\[ (\omega \wedge \tau) (X,Y,Z) = \omega(X,Y)\tau(Z) - \omega(X,Z)\tau(Y) + \omega(Y,Z)\tau(X). \]
+\end{solution}
+
+\begin{problem}[A closed 1-form on the punctured plane (from W. Tu)]
+	Define a 1-form $ \omega $ on $ \R^2 - \set{0} $ by
+	\[ \omega = \frac{1}{x^2+y^2}(-ydx + xdy). \]
+	Show that $ \omega $ is closed.
+\end{problem}
+\begin{solution}
+	define $ f,g: \R^2-\set{0} \to \R $ as 
+	\[ f(x,y) = \frac{-y}{x^2 + y^2}, \qquad g(x,y) = \frac{x}{x^2 + y^2}. \]
+	Thus we can write $ \omega $ as $ \omega = f dx + g dy $. The exterior derivative of $ \omega $ will be
+	\[ d\omega = (g_x - f_y) dx \wedge dy. \]
+	By a simple calculation we can observe
+	\[ f_x(x,y) = \frac{y^2 - x^2}{x^2 + y^2}, \qquad g_y(x,y) = \frac{y^2 - x^2 }{x^2 + y^2}. \]
+	Thus we will have
+	\[ d\omega = 0. \]
+\end{solution}
+
+
+\begin{problem}[A 1-form on $ \R^3 $ (from W. Tu)]
+	Let $ \omega $ be the 1-form $ zdx - dz $, and let $ X $ be the vector field $ y \frac{\partial}{\partial x} + x \frac{\partial}{\partial y} $ on $ \R^3 $. Compute $ \omega(X) $ and $ d\omega $.
+\end{problem}
+\begin{solution}
+	To calculate $ \omega(X) $ we can write
+	\[ \omega(X) = X \omega = (y \frac{\partial}{\partial x} + x \frac{\partial}{\partial y})( zdx - dz) = yz - x. \]
+	And to calculate $ d\omega $ we have
+	\[ d\omega  =  dz \wedge dx \]
+\end{solution}
+
+\begin{problem}[A 2-form on $ \R^3 $ (from W. Tu)]
+	At each point $ p \in \R^3 $, define a bilinear function $ \omega_p  $ on $ T_p(\R^3) $  by
+	\[ \omega_p(a,b) = \omega_p\left( \vecttt{a^1}{a^2}{a^3}, \vecttt{b^1}{b^2}{b^3}\right) = p^3 \det\matt{a^1}{b^1}{a^2}{b^2}, \]
+	For tangent vectors $ a,b\in T_p(\R^3) $, where $ p^3 $ is the third component of $ p = (p^1, p^2, p^3) $. Since $ \omega_p $ is an alternating bilinear function on $ T_p(\R^3) $, $ \omega $ is a 2-form on $ \R^3 $. Write $ \omega $ in terms of the standard basis $ dx^i \wedge dx^j $ at each point.
+\end{problem}
+\begin{solution}
+	In the definition of $ \omega $, we can replace determinant by the following wedge product 
+	\[ \omega_p = p^3 dx^1 \wedge dx^2.  \]
+\end{solution}
+
+\begin{problem}[Exterior calculus (from W. Tu)]
+	Suppose the standard coordinates on $ \R^2 $ are called $ r $ and $ \theta $ (this $ \R^2 $ is the $ (r,\theta) $ plane not the $ (x,y) $ plane). If $ x = r\cos\theta $ and $ y = r\sin\theta $, calculate $ dx, dy $, and $ dx\wedge dy $ in terms of $ dr $ and $ d\theta $.
+\end{problem}
+\begin{solution}
+	Using the relations $ x = r\cos\theta $ and $ y = r \sin\theta $, we can use the definition of exterior derivative to have
+	\[ dx = \cos\theta\ dr - r\sin\theta d\theta, \qquad dy = \sin\theta dr + r\cos\theta\ d\theta. \]
+	We can write this in a more clean way as
+	\[ \vectt{dx}{dy} = \matt{\cos\theta}{-r\sin\theta}{\sin\theta}{r\cos\theta}\vectt{dr}{d\theta}. \]
+	By using the fact proved in Problem \autoref{problem:wedgeProductTransformation} we will have
+	\[ dx \wedge dy = \det(A) dr\wedge d\theta = r dr\wedge d\theta. \]
+\end{solution}
+
+\begin{problem}[Exterior calculus (from W. Tu)]
+	Suppose the standard coordinates on $ \R^3 $ are called $ \rho,\phi $ and $ \theta $. If $ x = \rho\cos\phi\sin\theta $, $ y = \rho\sin\phi\sin\theta $, and $ z = \rho\cos\theta $, calculate $ dx, dy, dz, $ and $ dx\wedge dy\wedge dz $ in terms of $ d\rho,d\phi $, and $ d\theta $.
+\end{problem}
+
+\begin{solution}
+	Similar to the problem above, using the definition of the exterior derivative we have
+	\begin{align*}
+		dx &= \cos\phi\sin\theta\ d\rho - \rho\sin\phi\sin\theta\ d\phi +  \rho\cos\phi\cos\theta\ d\theta ,\\
+		dy &= \sin\phi\sin\theta\ d\rho + \rho\cos\phi\sin\theta\ d\phi + \rho\sin\phi\cos\theta\ d\theta,\\
+		dz &= \cos\theta\ d\rho - \rho\sin\theta\ d\theta.
+	\end{align*}
+	or in matrix notation we have
+	\[ \vecttt{dx}{dy}{dz} = 
+	\begin{pmatrix}
+		\cos\phi\sin\theta & -\rho\sin\phi\sin\theta & \rho\cos\phi\cos\theta \\
+		\sin\phi\sin\theta & \rho\cos\phi\sin\theta & \rho\sin\phi\cos\theta \\
+		\cos\theta & 0 & -\rho\sin\theta
+	\end{pmatrix}
+	\vecttt{d\rho}{d\phi}{d\theta}.
+	 \]
+	 From the fact proved in Problem \autoref{problem:wedgeProductTransformation} we can write
+	 \[ dx\wedge dy \wedge dz = \det(A)\ d\rho \wedge d\theta \wedge d\phi. \]
+	 We now need to calculate $ \det(A) $
+	 \[ \det(A) = -\rho^2\cos^2\theta\sin\theta - \rho^2\sin^3\theta = -\rho^2\sin\theta.  \]
+	 Thus we have
+	 \[ dx \wedge dy \wedge dz = (-\rho^2 \sin\theta )\ d\rho \wedge d\phi \wedge d\theta. \]
+\end{solution}
+
+\begin{problem}[Wedge product (from W. Tu)]
+	Let $ \alpha $ be a 1-form and $ \beta $ a 2-form on $ \R^3 $. Then
+	\begin{align*}
+		\alpha &= a_1 dx^1 + a_2 dx^2 + a_3 dx^3,\\
+		\beta &= b_1 dx^1\wedge dx^3 + b_2 dx^3 \wedge dx^1 + b_3 dx^1\wedge dx^2.
+	\end{align*}
+	Simplify the expression $ \alpha\wedge \beta $ as much as possible.
+\end{problem}
+
+\begin{solution}
+	By following the rules for the wedge product we will have
+	\[ \alpha \wedge \beta = (a_2b_2 + a_3b_3 - a_2b_1)\ dx^1\wedge dx^2 \wedge dx^3 \]
+\end{solution}
+
+\begin{problem}[Wedge product and cross product (from W. Tu)]
+	The correspondence between differential forms and vector fields on an open subset of $ \R^3 $ also makes sense point wise. Let $ V $ be a vector space of dimension $ 3 $ with basis $ e_1,e_2,e_3 $, and dual basis $ \alpha^1,\alpha^2,\alpha^3 $. To a 1-covector $ \alpha = a_1 \alpha^1 + a_2 \alpha^2 + a_3 \alpha^3 $ on V, we associate the vector $ v_\alpha =  \langle a_1,a_2,a_3 \rangle \in \R^3 $. To the 2-covector
+	\[ \gamma = c_1\alpha^1 \wedge \alpha^3 + c_2 \alpha^3 \wedge \alpha^1 + c_3 \alpha^1 \wedge \alpha^2, \]
+	on $ V $, we associate the vector $ v_\gamma = \langle c_1,c_2,c_3 \rangle \in \R^3 $. Show that under this correspondence, the wedge product of 1-covectors corresponds to the cross product of vectors in $ \R^3 $: if $ \alpha = a_1 \alpha^1 + a_2\alpha^2 + a_3\alpha^3 $ and $ \beta = b_1\alpha^1 + b_2\alpha^2 + b_3\alpha^3 $, then we have
+	\[ v_{\alpha\wedge \beta} = v_\alpha \cross v_\beta. \]
+\end{problem}
+
+\begin{solution}
+	Let $ \alpha = a_1 \alpha^1 + a_2 \alpha^2 + a_3 \alpha^3 $, and $ \beta = b_1 \alpha^1 + b_2 \alpha^2 + b_3 \alpha^3 $. Then for the wedge product we have
+	\[ \alpha\wedge\beta = (a_1b_2 - a_2b_1)\alpha^1\wedge\alpha^3 + (a_1b_3 - a_3b_1)\alpha^1\wedge\alpha^3 + (a_2b_3 - a_3b_2)\alpha^3\wedge\alpha^2. \]
+	We can associate this with vector $ v_{\alpha\wedge\beta} = \langle a_1b_2 - a_2b_1, a_1b_3 - a_3b_1, a_2b_3 - a_3b_2 \rangle \in \R^3 $. On the other hand, we can write
+	$ v_\alpha\times v_\beta = \langle a_1,a_2,a_3 \rangle \times \langle b_1,b_2,b_3 \rangle = \langle a_1b_2 - a_2b_1, a_1b_3 - a_3b_1, a_2b_3 - a_3b_2 \rangle $. This shows that 
+	\[ v_{\alpha\wedge\beta} = v_\alpha\times v_\beta. \]
+\end{solution}
+
+\begin{problem}[Commutator of derivations and antiderivations (from W. Tu)]
+	Let $ A = \bigoplus_{k=-\infty}^{\infty} A^k $ be a graded algebra over a field $ K $ with $ A^k = 0 $ for $ k < 0 $. Let $ m $ be an integer. A superderivation of $ A $ of degree $ m $ is a $ K $-linear map $ D:A\to A $ such that for all $ k $, $ D(A^k) \in A^{k+m}$ and for all $ a\in A^k $ and $ b \in A^\ell $,
+	\[ D(ab) = (Da)b + (-1)^{k\ell} aD(b). \]
+	If $ D_1 $ and $ D_2 $ are two superderivations of $ A $ of respective degrees $ m_1 $ and $ m_2 $, define their commutator to be
+	\[ [D_1,D_2] = D_1\circ D_2 - (-1)^{m_1m_2}D_2\circ D_1. \]
+	Show that $ [D_1,D_2] $ is a superderivation of degree $ m_1+m_2 $. A superderivation is said to be even or odd depending on the parity of its degree. An even superderivation is a derivation; an odd superderivation is an antiderivation.
+\end{problem}
+
+\begin{solution}
+	To show that $ [D_1,D_2] $ is a superderivation of degree $ m_1+m_2 $ we need to show
+	\[ [D_1,D_2](ab) \stackrel{?}{=} [D_1,D_2](a)b + (-1)^{k(m_1+m_2)}a[D_1,D_2](b). \]
+	Using the definition of $ [D_1,D_2] $ we can expand this as
+	\[ [D_1,D_2](ab) \stackrel{?}{=}
+	 \left[ D_1(D_2(a)) - (-1)^{m_1m_2}D_2(D_1(a)) \right]b + (-1)^{k(m_1+m_2)}a\left[ D_1(D_2(b)) - (-1)^{m_1m_2}D_2(D_1(b)) \right]. \tag{Q.1} \]
+	 To show this, we simply start with $ [D_1,D_2] $ and apply it on $ a \in A_k, b \in A_\ell $ and use the definition of $ [D_1,D_2] $ to simplify it and turn it into the format of equation $ (Q.1) $.
+	 \begin{align*}
+	 	[D_1,D_2](ab) &= (D_1\circ D_2)(ab) - (-1)^{m_1m_2} (D_2\circ D_1)(ab) = D_1(D_2(ab)) - (-1)^{m_1m_2} D_2(D_1(ab)) \\
+	 	&= D_1(D_2(a))b + (-1)^{m_1(k+m_2)}D_2(a)D_1(b) + (-1)^{m_2k}\left[ D_1(a)D_2(b) + (-1)^{m_1k}aD_1(D_2(b)) \right] \\
+	 	&-(-1)^{m_1m_2}\big[  D_2(D_1(a))b + (-1)^{m_2(k+m_1)}D_1(a)D_2(b) + (-1)^{m_1k} \big[ D_2(a)D_1(b) + (-1)^{m_2k}a D_2(D_1(b)) \big]  \big]
+	 \end{align*}
+	 Now by matching the terms we can write
+	 \begin{align*}
+	 	[D_1,D_2](ab) &= \left[ D_1(D_2(a)) - (-1)^{m_1m_2}D_2(D_1(a)) \right]b + (-1)^{k(m_1+m_2)}a\left[ D_1(D_2(b)) - (-1)^{m_1m_2}D_2(D_1(b)) \right]\\
+	 	&+ \underbrace{D_1(a)D_2(b)\left[  (-1)^{m_2k} - (-1)^{m_2(k+2m_1)}  \right]}_{=0}.
+	 \end{align*}
+	 The last term is equal to zero since if $ m_2k $ is even, then $ m_2k + 2m_1m_2 $ is also even, which leads to $ (-1)^{m_2k} - (-1)^{m_2(k+2m_1)} = -1 + 1 = 0 $. As the other case, if $ m_2k $ is even, then $ m_2k + 2m_1m_2 $ is also even, where we will have $ (-1)^{m_2k} - (-1)^{m_2(k+2m_1)} = 1- 1 = 0 $. This proves that $ [D_1,D_2] $ is indeed an superderivative of order $ m_1+m_2 $.
+\end{solution}

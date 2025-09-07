@@ -41,8 +41,11 @@
 	\end{tikzcd}\]
 	Howerver, this is not true in a general metric space. I.e. in general it is possible to come up with an unconditionaly convergent series that is not absolutely convergent! In the note in page 227 of the text book, we read that Dvoretzky and Rogers have proved that an unconditionaly convergent series is absolutely convergent if and only if the space is finite dimensional. This givens us enough hint to come up with our own example. Because and unconditional convergence is absolutely convergent if and only if the space is finite dimensional, it follows that it is some property of infinite dimension that can lead to an unconditional convergent series that is not absolutely convergent. One possible property of the infinite dimension that we can exploit is the escape of the mass to the infinity. Consider the sequence $ \set{x_n} $ in $(C(\R),\norm{\cdot}) $ where one particular $ x_n $ is shown as below
 	\input{Images/escapeToInfinity.tex}
-	The sequence of partial sums in $ \sum_n x_n $ is monotone and bounded (an upper bound is 5. That is because at each $ t $, the series for that value is $ \sum_n 1/n^2 $ with except one term replaced by 1. So the worst that can happen is that keep all the terms and add one to the final infinite sequence. So an upper bound would be $ \sum_n 1/n^2 + 1 $.)
+	The sequence of partial sums in $ \sum_n x_n $ is monotone and bounded (an upper bound is $ \pi^2/6 + 1 $. That is because at each $ t $, the series for that value is $ \sum_n 1/n^2 $ with except one term replaced by 1. So the worst that can happen is that keep all the terms and add one to the final infinite sequence. So an upper bound would be $ \sum_n 1/n^2 + 1 $). 
 \end{summary}
+\begin{remark}
+	I am not sure the example brewed above works or not!
+\end{remark}
 
 \newpage
 

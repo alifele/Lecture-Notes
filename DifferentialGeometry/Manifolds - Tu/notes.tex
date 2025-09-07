@@ -1,0 +1,53 @@
+\documentclass[10pt]{book}
+\usepackage{commands}
+
+\usepackage{bbm}
+
+
+\begin{document}
+
+
+
+
+\begin{tikzpicture}[remember picture,overlay]
+	% If a chapter image has been specified
+	\expandafter\ifstrequal\expandafter{\thechapterimage}{}{}{
+		% Output the chapter image
+		\node[
+		anchor=north west, % Anchor point on the image
+		inner sep=0pt, % Inner padding
+		] at (current page.north west) {\includegraphics[angle=0,height=\paperheight]{Images/output}};
+	}
+\end{tikzpicture}
+
+\vspace{7cm}
+
+\heading{Manifolds}
+
+
+%\begin{figure}[h!]
+%	\centering
+%	\includegraphics[width=1\linewidth]{Images/realAnalysis}
+%	\caption*{$\mathbb{R}$eal Analysis, Created by DALL-E!}
+%	\label{fig:realanalysis}
+%	
+%\end{figure}
+
+
+
+
+\tableofcontents
+
+\input{sections/EuclideanSpaces.tex}
+
+\input{sections/manifolds.tex}
+
+\input{sections/TangentSpaces.tex}
+
+\input{sections/LieGroupsAndLieAlgebra.tex}
+
+
+\input{sections/appendix.tex}
+
+
+\end{document}
