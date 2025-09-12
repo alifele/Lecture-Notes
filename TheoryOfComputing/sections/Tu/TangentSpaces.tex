@@ -1,0 +1,968 @@
+\chapter{Tangent Spaces}
+
+\section{Tangent Spaces}
+
+For several reasons, the notion of tangent space is more easily developed using algebraic view point rather than the geometric one. Then we can easily construct our geometric intuition from using the developed theory. We start with the notion of derivation.
+
+
+\begin{definition}[Derivation at a point]
+	Let $ M $ be a manifold and $ p $ a point of manifold. Let $ C_p^\infty(M) $ denote the germ of $ C^\infty $ functions at $ p $. Derivation at $ p $ is a linear map 
+	\[ D: C_p^\infty(M) \to \R \]
+	such that for $ f,g \in C_p^\infty(M) $ we have
+	\[ D(fg) = D(f)g + fD(g). \]
+\end{definition}
+The definition above is a purely algebraic one.
+\begin{remark}
+	The set of all point derivations at $ p $ forms a vector space.
+\end{remark}
+
+\begin{definition}[Tangent space]
+	Let $ M $ be a manifold and $ p \in M $. The tangent space at $ p $ denoted by $ T_p(M) $ is the vector space of all point derivations at $ p $.
+\end{definition}
+In the following proposition we will see a very familiar point derivation.
+\begin{proposition}[Partial derivative $ \partial/\partial x^i |_p $ is a tangent vector]
+	Let $ M $ be a manifold and $ p \in M $. Let $ (U,\phi) $ be a coordinate chart containing $ p $ and $ f:M \to \R $ a function defined at a neighborhood of $ p $. By definition we have
+	\[ \frac{\partial }{\partial x^i}\big|_p f = \frac{\partial}{\partial r^i}\big|_{\phi(p)} (f\circ\inv{\phi}) \]
+	where $ x^i = r^i \circ f $ with $ r^i $ as the standard coordinate function of $ \R^n $. The map $ \frac{\partial}{\partial x^i}\big|_{p} $ is a point derivation at $ p $, thus a tangent vector.
+\end{proposition}
+\begin{proof}
+	First observe that $ \partial/\partial x_i|_p $ is indeed a linear map from $ C_p^\infty(M) $ to $ \R $. Let $ f,g \in C_p^\infty(U) $ and $ (U,x^1,\cdots,x^n) $ a coordinate chart. Then we have
+	\begin{align*}
+		\frac{\partial}{\partial x^i}\big|_p (fg) &=  \frac{\partial}{\partial  r^i}\big|_{\phi(p)}((fg)\circ \inv{\phi} ) = \frac{\partial}{\partial  r^i}\big|_{\phi(p)}(f\circ\inv{\phi} \cdot g\circ\inv{\phi}) \\
+		&= \frac{\partial}{\partial  r^i}\big|_{\phi(p)}(f\circ\inv{\phi})\cdot g(p) + f(p)\cdot \frac{\partial}{\partial  r^i}\big|_{\phi(p)} (g\circ\inv{\phi})\\
+		&=(\frac{\partial}{\partial  x^i}\big|_{p}f ) g + f(\frac{\partial}{\partial  x^i}\big|_{p} g).
+	\end{align*}
+\end{proof}
+
+\begin{definition}[Differential of a smooth map]
+	Let $ F:N\to M $ be a smooth map between manifolds. This map induces a \emph{linear} map  called the \emph{differential of $ F $}
+	\[ F_*: T_p N \to T_{F(p)}M \]
+	where for $ X_P \in T_p N $ we have
+	\[ (F_*(X_p))f = X_p(f\circ F) \]
+	where $ f $ is a germ at $ p $.
+\end{definition}
+
+\begin{proposition}
+	Let $ F:N\to M $. It differential $ F_* $ is a derivation at $ F(p) $ for $ p \in N $. 
+\end{proposition}
+\begin{proof}
+	See \autoref{prob:DifferentialOfAMapIsADerivation}
+\end{proof}
+
+\subsubsection{Differential of a map between Euclidean spaces}
+To see what kind of an object is the differential of a map, we calculate it explicitly on Euclidean spaces. Let $ F:\R^n \to \R^m $ be a map and let $ x^1,\cdots,x^n $ be the standard coordinate functions of $ \R^n $ while $ y^1,\cdots,y^m $ be the standard coordinate functions of $ \R^m $. Let $ p \in \R^n $. since $ F_* $ is a linear map between two vector spaces, then we can write it as a matrix once we fix the basis for the spaces. The basis for $ T_p(\R^n) $ is the set $ \set{\partial/\partial x^i|_p}_{i} $, while for $ T_p(\R^m) $ is $ \set{\partial/\partial y^j|_p}_j $. To get the matrix representation of $ F_* $ we need to find its effect on the basis vectors
+\[ F_*(\frac{\partial}{\partial  x^j}\big|_{p}) = \sum_{k} a^k_j\  \frac{\partial}{\partial  y^k}\big|_{F(p)}. \]
+By applying it on $ y_i $ we will get
+\[ a_j^i = F_*(\frac{\partial}{\partial  x^j}\big|_{p})y^i = \frac{\partial}{\partial  x^j}\big|_{p} (y^i \circ F) =  \frac{\partial}{\partial  x^j}\big|_{p}F^i. \]
+This is precisely the Jacobian matrix of $ F $ evaluated at $ p $.
+
+\subsubsection{The Chain Rule}
+A nice thing behind this algebraic point of view is that we can now write the notion of chain rule in a much simpler form. The following propositions captures this ides.
+
+\begin{proposition}[The chain rule]
+	\label{prop:ChainRule}
+	Let $ F: N \to M $ and $ G:M\to P $ be maps between manifolds, and $ p \in N $. Then the differential of $ F $ at $ p $ and $ G $ at $ F(p) $ are linear maps
+	\[ T_pN \xrightarrow{F_{*,p}} T_pM \xrightarrow{G_{*,F(p)}} T_pP. \]
+	Then we have
+	\[ (G\circ F)_{*,p} = G_{*,F(p)} F_{*,p}. \]
+\end{proposition}
+\begin{proof}
+	Let $ X_p \in T_p(N) $. From definition we have for some $ f: G \to \R $ we have
+	\[ ((G\circ F)_{*,p}X_p)f = X_p(f\circ G\circ F) = X_p ((f\circ G)\circ F) = (F_{*,p}X_p)(f\circ G).\]
+	Let $ Y_q = F_{*,p}X_p $ where $ q = F(p) $. Then 
+	\[ Y_q (f\circ G) = (G_{*,q}Y_q) f.  \]
+	This implies that 
+	\[ (G\circ F)_{*,p} = G_{*,q} F_{*,p} \]
+	and this completes the proof.
+\end{proof}
+
+\begin{example}
+	Let $ F:\R \to \R^3 $ and $ G:\R^3 \to \R $. Then the differential of the composite function $ G\circ F $ is the matrix multiplication of the differential of each map. I.e.
+	\[ (G \circ F)_* = G_* F_* = (G_x\ G_y\ G_z)\cdot 
+	\begin{pmatrix}
+		F_1' \\
+		F_2' \\
+		F_3'
+	\end{pmatrix}
+	= G_x F_1' + G_y F_2' + G_z F_3' 
+	= \frac{\partial G}{\partial x} \frac{d F_1}{dt} 
+	+\frac{\partial G}{\partial y} \frac{d F_2}{dt} 
+	+\frac{\partial G}{\partial z} \frac{d F_3}{dt},
+	 \]
+	 which is the same chain rule in calculus.
+\end{example}
+Writing the chain rule in this form not only is visually appealing, but also we can deduce two important Corollaries from it as follows.
+
+\begin{corollary}[Diffeomorphism of Manifolds vs. Isomorphism of Tangent Spaces]
+	Let $ F:N\to M $ be a diffeomorphism of manifolds and $ p \in N $. Its differential $ F_* $ is an isomorphism of tangent spaces $ T_pN $ and $ T_{F(p)}M $.
+\end{corollary}
+\begin{proof}
+	$ F $ being a diffeomorphism of manifolds, it implies that we have $ G: M \to N $ such that $ G\circ F = \mathbbm{1}_N $ and $ F\circ G = \mathbbm{1}_M $. Now using \autoref{prop:ChainRule} we can write
+	\begin{align*}
+		(G\circ F)_* = G_* \circ F_* = (\mathbbm{1}_N)_* = \mathbbm{1}_{T_pN}\\
+		(F\circ G)_* = F_* \circ G_* = (\mathbbm{1}_M)_* = \mathbbm{1}_{T_{F(p)}M}.
+	\end{align*}
+	This shows that $ F_* $ and $ G_* $ are the right and left inverses of each other, hence an isomorphism of vector spaces.
+\end{proof}
+\begin{corollary}[Invariance of Dimension]
+	Let $ U \subset \R^n $ and $ V \subset R^m $ be open subsets that are diffeomorphic. Then $ m = n $.
+\end{corollary}
+\begin{proof}
+	Let $ F: U \to V $ be a diffeomorphism and $ p \in U $. Then $ F_* $ is an isomorphism of tangent spaces $ T_pU $ and $ T_{F(p)}V $, thus of the same dimension. Since in a Euclidean space the tangent space has the same dimension as the space itself (by definition and the way that we construct a basis for tangent space using the standard coordinate vectors) then this implies that $ n = m $.
+\end{proof}
+
+\begin{corollary}[Tangent Space Has the Same Dimension as Manifold]
+	\label{cor:TangentSpaceIsoMorphismToRn}
+	Let $ M $ be a manifold of dimension $ n $ and $ p \in M $. Then $ T_p(M) $ is isomorphic to $ \R^n $ and has dimension $ n $.
+\end{corollary}
+\begin{proof}
+	Let $ (U,\phi) $ be a coordinate chart containing the point $ p $. Since $ M $ is assumed to be a smooth manifold, then the coordinate map $ \phi $ automatically upgrades to a diffeomorphism between $ U $ and $ \R^n $. Thus the tangent spaces $ T_p(U) $ and $ T_{\phi(p)}(\R^n) $ are isomorphic. This implies that $ T_p(U) $ is also of dimension $ n $.
+\end{proof}
+
+\section{Basis for the Tangent Space at a Point}
+\begin{proposition}[Differential of a Coordinate Map]
+	\label{prop:DifferentialOfACoordinateMap}
+	Let $ M $ be a manifold, $ p \in M $, and $ (U,x^1\cdots,x^n) $ a coordinate chart containing $ p $. Then
+	\[ \phi_* (\frac{\partial}{\partial  x^i}\big|_{p}) = \frac{\partial}{\partial  r^i}\big|_{\phi(p)} \]
+\end{proposition}
+\begin{proof}
+	This follows immediately from the definition. Namely for a function $ f $ defined on $ U $ we have
+	\begin{align*}
+		(\phi_*(\frac{\partial}{\partial  x^i}\big|_{p}))f = \frac{\partial}{\partial  x^i}\big|_{p}(f\circ \phi) = \frac{\partial}{\partial  r^i}\big|_{\phi(p)}(f\circ\phi\circ\inv{\phi}) = \frac{\partial}{\partial  r^i}\big|_{\phi(p)}f.
+	\end{align*}
+	This implies 
+	\[ \phi_*(\frac{\partial}{\partial  x^i}\big|_{p}) = \frac{\partial}{\partial  r^i}\big|_{\phi(p)}. \]
+\end{proof}
+\begin{remark}
+	\label{remark:differentialOfCoordinateMapActingOnBases}
+	Remember that in \autoref{def:DirectionalDerivativeOnManifold} we defined
+	\[ \frac{\partial}{\partial  x^i}\big|_{p} f = \frac{\partial}{\partial  r^i}\big|_{\phi(p)}(f\circ\inv{\phi}).\tag{\eighthnote} \]
+	where $ (U,\phi) $ is a coordinate chart containing $ p $ and $ x^i = r^i \circ \phi $. The proposition above justifies this definition. This proposition states that $ T_p(M) \simeq T_{\phi(p)}(R^n) $ with $ \phi_* $ as an isomorphism. This basically means that $ \partial/\partial x^i $ maps to $ \partial/\partial r^i $ with map $ \phi_* $, or equivalently,  $ \partial/\partial r^i $ maps to $ \partial/\partial x^i $ with the map $ \inv{\phi}_* $. I.e.
+	\[ \frac{\partial}{\partial  x^i}\big|_{p} \mapsto \frac{\partial}{\partial  r^i}\big|_{\phi(p)} \quad\text{via } \phi_* \]
+	and 
+	\[ \frac{\partial}{\partial  r^i}\big|_{p} \mapsto \frac{\partial}{\partial  x^i}\big|_{\phi(p)} \quad\text{via } \inv{\phi}_* \]
+	Thus starting with the LHS of $ (\eighthnote) $ we can write
+	\[ \frac{\partial}{\partial  x^i}\big|_{p}f = (\inv{\phi}_*(\frac{\partial}{\partial  r^i}\big|_{\phi(p)}))f = \frac{\partial}{\partial  r^i}\big|_{\phi(p)}(f\circ \inv{\phi}).  \]
+\end{remark}
+
+
+\begin{proposition}[Basis for Tangent Space]
+	\label{prop:BasisForTangetSpace}
+	Let $ M $ be a manifold of dimension $ n $ and $ p \in M $. Then the vectors $ \partial/\partial x^1|_p,\cdots, \partial/\partial x^n|_p $ is a basis for the tangent space $ T_p(M) $.
+\end{proposition}
+\begin{proof}
+	Let $ (U,\phi) $ be a coordinate chart containing $ p $. By \autoref{cor:TangentSpaceIsoMorphismToRn} we see that $ T_pM $ is isomorphic to $ \R^m $ with $ \phi_* $ as a possible isomorphism. Since an isomorphism of vector spaces carries basis to a basis, and by \autoref{prop:DifferentialOfACoordinateMap} $ \phi_* $ maps the standard basis $ \frac{\partial}{\partial  r^1}\big|_{\phi(p)},\cdots,\frac{\partial}{\partial  r^n}\big|_{\phi(p)} $ to $ \partial/\partial x^1|_p,\cdots, \partial/\partial x^n|_p $ respectively, then this forms a basis for $ T_p(M) $.
+\end{proof}
+
+\begin{remark}
+	For a point $ p \in M $, once we fix a coordinate chart containing $ p $ we have a basis for $ T_p(M) $
+\end{remark}
+
+
+\begin{proposition}[Transition Matrix for Coordinate Vectors]
+	Let $ M $ be a manifold and $ p \in M $. Let $ (U,\phi=(x^1,\cdots,x^n)) $ and $ (V,\psi=(y^1,\cdots,y^n)) $ be two coordinate charts containing $ p $. By \autoref{prop:BasisForTangetSpace} the following two collection of tangent vectors form two possible bases for $ T_pM $
+	\[ \set{ \frac{\partial}{\partial  x^1}\big|_{p}, \cdots, \frac{\partial}{\partial  x^n}\big|_{p} }, \qquad \set{\frac{\partial}{\partial  y^1}\big|_{p},\cdots,\frac{\partial}{\partial  y^n}\big|_{p}}. \]
+	The transition rule between these two basis is given by
+	\[ \frac{\partial}{\partial  x^j} = \sum_{i} \frac{\partial y^i}{\partial x^j} \frac{\partial}{\partial y^i},  \]
+	on $ U \cap V $.
+\end{proposition}
+\begin{proof}
+	We can think of this as $ \psi $ is a map between manifolds, i.e. $ \psi: U\cap V \subset M \to \R^n $. Considering the chart $ (W,\mathbbm{1}_{\R^n}) $ for the target manifold of $ \psi $, what we are looking after is to see how does $ \psi_* $ maps the tangent vector $ \partial/\partial x^j $. For $ \psi_* $ it is a map from $ T_pN $ to $ T_{\psi(p)}\R^n $ where the basis for $ T_{\psi(p)}\R^n $ is the collection $ \set{\partial /\partial r^i}_i $. Thus we can write
+	\[ \psi_*(\partial/\partial x^j|_p) = \sum_k a_j^k \partial/\partial r^k|_{\psi(p)}. \]
+	Applying $ r^i $ to both sides will result in 
+	\[ a_j^i  =  \phi_*(\partial/\partial x^j|_p) r^i = \partial/\partial x^j|_p (r^i\circ\phi) = \partial/\partial x^j|_p y^i. \]
+	So far we have shown that 
+	\[ \psi_*(\frac{\partial }{\partial x^j}) = \sum_i \frac{\partial y^i}{\partial x^j}\frac{\partial}{\partial r^i} \]
+	Now by applying $ \inv{\psi_*} $ to both sides and using the observation in \autoref{remark:differentialOfCoordinateMapActingOnBases} we can write
+	\[ \frac{\partial}{\partial x^j} = \sum_i \frac{\partial y^i}{\partial x^j} \frac{\partial}{\partial y^i} \]
+	where we have used the fact that $ \inv{\psi}_* $ is linear.
+\end{proof}
+\begin{remark}
+	The relation above can be written symbolically as matrix multiplication
+		\[ 
+	\begin{bmatrix}
+		\partial/\partial x^1 \\
+		\partial/\partial x^2 \\
+		\vdots \\
+		\partial/\partial x^n
+	\end{bmatrix} = 
+	\begin{pmatrix}
+		\partial y^1/\partial x^1 & \partial y^1/\partial x^2 &  \cdots & \partial y^1/\partial x^n \\
+		\partial y^2/\partial x^1 & \partial y^2/\partial x^2 &  \cdots & \partial y^2/\partial x^n \\
+		\vdots & \vdots & \ddots & \vdots \\
+		\partial y^n/\partial x^1 & \partial y^n/\partial x^2 &  \cdots & \partial y^n/\partial x^n
+	\end{pmatrix}^T
+	\begin{bmatrix}
+		\partial/\partial y^1 \\
+		\partial/\partial y^2 \\
+		\vdots \\
+		\partial/\partial y^n
+	\end{bmatrix}
+	\]
+\end{remark}
+
+
+\subsubsection{A Local Expression for the Differential}
+We start with the following proposition.
+\begin{proposition}[Local Expression for the Differential]
+	Let $ F: N\to M $ be a map between manifolds, and $ p \in N $. Let $ (U,x^1\cdots,x^n) $ be a coordinate chart in $ N $ containing $ p $ and $ (V,y^1,\cdots,y^n) $ containing $ F(p) $ be a coordinate chart in $ M $. Relative to the bases $ \set{\partial /\partial x^j|_{p}} $ for $ T_pN $ and $ \set{\partial/\partial y^i|_{F(p)}} $ for $ T_pM $, the differential $ F_*: T_pN \to T_pM $ is represented by the matrix
+	\[ [\partial F^i/\partial x^j(p)], \]
+	where $ F^i = y^i \circ F $.
+\end{proposition}
+\begin{remark}
+	We can state the inverse function theorem for manifolds \autoref{thm:InverseFunctionTheoremForManifolds} in a coordinate free description: A $ C^\infty $ function $ F:N\to M $ is locally invertible at point $ p\in N $ if and only if $ F_*: T_pN \to T_pM $ is an isomorphism of vector spaces.
+\end{remark}
+
+
+\section{Curves in a Manifold}
+The notion of a curve in a manifold is a very important one as it will allow us to define the tangent space in an alternative way. We start by the definition of a curve in a manifold.
+
+\begin{definition}[Curves in a Manifold]
+	Let $ M $ be a manifolds and $ p \in M $. a \emph{curve} in manifold is a map
+	\[ c: (a,b) \to M. \]
+	Usually $ 0 \in (a,b) $ and we say $ c $ is a \emph{curve starting at $ p $} if $ c(0) = p $. The \emph{velocity vector} $ c'(t_0) $ of the curve at time $ t_0 \in (a,b) $ is defined to be
+	\[ c'(t_0) = c_*(\frac{d}{dt}\big|_{t_0}) \in T_{c(t_0)}M. \]
+\end{definition}
+
+\begin{remark}
+	Note that the velocity vector of the curve $ c $ at time $ t_0 $ denoted by $ c'(t_0) $ is a tangent vector at $ T_{c(p)}M $. This in particular can be a source of confusion when the target space of the curve is $ \R $. That is because in the calculus the notation $ c'(t) $ is the derivative of a real-valued function and is therefore a scalar. If it is necessary to distinguish between these two meanings of $ c'(t) $ when $ c $ maps into $ \R $, we will write $ \dot{c}(t) $ for the calculus derivative. For a clarification on this point visit \autoref{prob:VelocutyVecotrAndCalculusNotation}.
+\end{remark}
+\begin{remark}
+	Alternative notations for $ c'(t_0) $ are
+	\[ \frac{d}{dt}\big|_{t_0} c, \qquad \frac{dc}{dt}(t_0). \]
+	However, I prefer the notation introduced in the definition box above as it has more emphasis on the fact that $ c'(t) $ is a vector in $ T_pM $.
+\end{remark}
+
+\begin{example}{Velocity vector of a curve is consistent with the results in calculus}
+	\label{example:VelocityVectorWorkedExample}
+	In this example we will demonstrate that the notion of the velocity vector of a curve is consistent with the similar notion in calculus. Define $ c:\R \to \R^2 $. 
+	\[ c(t)  = (t^2, t^3). \]
+	The velocity vector $ c'(t) $ is in tangent space $ T_{c(t)}\R^2 $. Let $ (\R^2, \mathbbm{1}_{\R^2}) $ be the atlas for manifold $ \R^2 $. Then we can write $ c'(t)$ in terms of the basis for tangent space.
+	\[ c'(t) = a \frac{\partial}{\partial  x}\big|_{c(t)} + b \frac{\partial}{\partial  y}\big|_{c(t)}. \] 
+	To determine the coefficients we apply the standard coordinate function $ x,y $ to both sides and we will get
+	\[ c'(t)x = a, \qquad c'(t)y = b. \]
+	From definition we have
+	\[ c'(t) x = c_*(\frac{d}{dt}\big|_t) x = \frac{d}{dt}\big|_t (x\circ c) = \frac{d}{dt}\big|_t (t^2) = 2t.   \]
+	Similarly we can get $ c'(t) y = 3t^2$. Thus
+	\[ c'(t) = (2t) \frac{\partial}{\partial  x}\big|_{c(t)} + (3t^2) \frac{\partial}{\partial  y}\big|_{c(t)}. \]
+\end{example}
+
+The steps that we took in the example above motivates us for the following proposition.
+\begin{proposition}[Velocity Vector in a Local Coordinate]
+	\label{prop:VelocityVectorInLocalCorodinate}
+	Let $ c:(a,b)\to M $ be a smooth curve, and let $ (U,x^1,\cdots,x^n) $ be a coordinate chart about $ c(t) $. Write $ c^i = x^i\circ c $ for the i-th component of $ c $ in the chart. Then $ c'(t) \in T_{c(t)}M $ is given by
+	\[ c'(t) = \sum_i \dot{c}_i \frac{\partial}{\partial x^i}\big|_{c(t)}. \] 
+	Thus relative to the bases $ \set{\partial /\partial x^i|_p} $ for $ T_{c(t)}M $ the velocity vector $ c'(t) $ can be written as
+	\[ \begin{bmatrix}
+		\dot{c}_1(t) \\
+		\dot{c}_2(t) \\
+		\vdots \\
+		\dot{c}_n(t)
+	\end{bmatrix} \]
+\end{proposition}
+\begin{proof}
+	First, observe that by definition $ c'(t) \in T_{c(t)}M  $ thus can be written in the local coordinate  of $ T_{c(t)}M $ as
+	\[ c'(t) = \sum_i a^i \frac{\partial}{\partial x^i}\big|_{c(t)}. \]
+	Now we apply both sides to $ x_j $, and simply use the definition of the differential of a map and write
+	\[x^j = c_*(\frac{d}{dt}\big|_{t}) x^j  =  \frac{d}{dt}\big|_{t}(x^j\circ c) = \dot{c}^j(t). \]
+	This completes the proof.
+\end{proof}
+
+So far, we observed that every smooth curve $ c $ at $ p $ in a manifold $ M $ gives rise to a tangent vector in $ T_pM $. The following proposition states the converse of this, i.e. for every tangent vector in tangent space $ T_pM $ there exists a curve passing through $ p $.
+
+\begin{proposition}[Existence of a Curve with a Given Initial Vector]
+	For any point $ p $ in a manifold $ M $ and any tangent vector $ X_p \in T_pM $, there are $ \epsilon>0 $ and a smooth curve $ c:(-\epsilon,\epsilon) \to M $ such that $ c(0) = p $ and $ c'(0) = X_p $
+\end{proposition}
+\begin{proof}
+	Let $ p \in M $ and $ X_p \in T_pM $.  Let $ (U,\phi = (x^1,\cdots,x^n)) $ be a coordinate chart centered at $ p $. The differential of $ \phi $ given by $ \phi_* $ maps $ X_p $ to $ Y_{\mathbf{0}} \in T_\mathbf{0}\R^n $. For instance, assume 
+	\[ X_p = \sum_i a^i \frac{\partial}{\partial  x^i}\big|_{p}. \]
+	Applying $ \phi_* $ to both sides and using \autoref{prop:DifferentialOfACoordinateMap} we will get
+	\[ Y_\mathbf{0} =  \sum_i a^i \frac{\partial}{\partial  r^i}\big|_{\mathbf{0}}  \]
+	where $ r^i $ is the standard coordinate function of $ \R^n $. Define the smooth curve $ \gamma: (-\epsilon, \epsilon) \to \R^n $ given by
+	\[ \gamma(t) = (a^1t, \cdots, a^n t). \]
+	For small enough $ \epsilon $ this curve is in $ \phi(U) $. We claim that the curve $ c:(-\epsilon,\epsilon)\to M $ given by
+	\[ c = \inv{\phi} \circ \gamma \] 
+	has the desired property. First, observe by definition we will have $ c(0) = p $
+	\[ c(0) = \inv{\phi}(\gamma(0)) = p. \]
+	For $ c'(0) $ we use the definition
+	\[ c'(0) = c_*(d/dt|_{0}) = (\inv{\phi}\circ \gamma)_*(d/dt|_{0}) = (\inv{\phi}_*  \gamma_*)(d/dt|_{0})  \]
+	It now remains to calculate the $ (\inv{\phi}_* \gamma_*) $. To calculate this, first observe that $ \gamma_* $ maps $ d/dt|_0 $ to $ Y_\mathbf{0} $. And also observe that $ \inv{\phi}_* $ maps $ X_p $ to $ Y_\mathbf{0} $. I.e.
+	\[ Y_\mathbf{0} = \phi_* X_p, \qquad Y_\mathbf{0} = \gamma_* \frac{d}{dt}\big|_0. \]
+	Then we will get
+	\[ \phi_* X_p = \gamma_* \frac{d}{d  t}\big|_{0} \implies X_p = \inv{\phi}_* \gamma_* \frac{d}{dt}\big|_0. \]
+	Thus we have
+	\[ c'(0) =  \inv{\phi}_* \gamma_* \frac{d}{dt}\big|_0. = X_p\]
+	and this completes the proof.
+\end{proof}
+
+Now using the notion of curves, we can calculate the differential of a map between manifolds via curves. The following proposition discusses this statement.
+\begin{proposition}[Computing Differentials Using Curves]
+	\label{prop:curvesToComputeDifferential}
+	Let $ F: N  \to M$ be a smooth map between manifolds, and $ p \in N $ and $ X_p \in T_pN $. Let $ c $ be a curve on $ N $ such that $ c(0) = p $, and $ c'(0) = X_p $. Then
+	\[ F_{*,p} X_p = (F\circ c)' (0). \]
+\end{proposition}
+\begin{proof}
+	We simply follow the definition
+	\[(F\circ c)'(0) = (F\circ c)_* (\frac{d}{dt}\big|_0) = F_* c_* (\frac{d}{dt}\big|_0) = F_* \left(  c_* (\frac{d}{dt}\big|_0) \right) = F_* X_p \]
+	and this completes the proof.
+\end{proof}
+
+
+\section{Immersion and Submersion}
+We start with the definitions of Immersion and Submersion.
+\begin{definition}[Immersion and Submersion]
+	Let $ F:N\to M $ be a smooth map, and let $ F_{*,p} $ denote its differential at a point $ p \in N $. Then 
+	\begin{itemize}[noitemsep]
+		\item $ F $ is an Immersion if and only if $ F_{*,p} $ is injective.
+		\item $ F $ is a Submersion if and only if $ F_{*,p} $ is surjective.
+	\end{itemize}
+\end{definition}
+
+Now we can define the notion of critical point and regular points of a mapping.
+\begin{definition}[Critical and Regular points of a smooth map between manifolds]
+	Let $ F:N \to M $ be a smooth map between manifolds. A point point $ p  \in N$ is
+	\begin{itemize}[noitemsep]
+		\item a \emph{critical point} if $ F_{*,p} $ fails to be surjective, and
+		\item a \emph{regular point} if $ F_{*,p} $ is surjective.
+	\end{itemize}
+	A point $ q \in M $ is critical value of the map $ F $ if it is the image of a critical point.
+\end{definition}
+
+The following proposition gives a more intuitive characterization of the critical points of function defined from a manifold to the real number line.
+
+\begin{proposition}[Critical points of a map to real number line]
+	\label{prop:CriticalPointOfARealMap}
+	Let $ f: N \to \R $ be a smooth map from manifold $ N $ to the real number line. A point $ p \in N $ is a critical point of the map $ f $ in and only if all of its partial derivatives relative to some chart $ (U,\phi=(x^1,\cdots,x^n)) $ are zero at $ p $, i.e.
+	\[ \frac{\partial }{\partial x^i}\big|_{p} f = 0 \qquad \text{for all } i = 1,\cdots, n. \]
+\end{proposition}
+\begin{proof}
+	The differential of $ f $ in the local coordinates can be written as the matrix
+	\[ f_{*,p} = [ \frac{\partial}{\partial  x^1}\big|_{p} f, \cdots, \frac{\partial}{\partial  x^n}\big|_{p} f ]. \]
+	The point $ p $ is a critical point if and only if $ f_{*,p} $ is not surjective. Since the image of $ f_{*,p} $ is $ \R $, then its column space is either one dimensional or zero dimensional. Thus $ f_{*,p} $ is not surjective if and only if all of its entries are zero, i.e.
+	\[ \frac{\partial }{\partial x^i}\big|_{p} f = 0 \qquad \text{for all } i = 1,\cdots, n. \]
+\end{proof}
+
+\section{Vector Fields on Manifolds}
+Intuitively speaking, vector fields assign to every point $ p $ in manifold $ M $ a tangent vector from $ T_pM $. Or, formally speaking, A vector filed on a manifold $ M $ is a sections of the tangent bundles $ TM $ of manifold $ M $.
+
+As we will see later, every smooth vector field can be seen locally as the velocity vector field of a fluid flow. The path traced out by a point under this flow is called an \emph{integral curve} of the vector field. In other words, integral curves are curves whose velocity vector field is the restriction of the given vector field to the curve. Finding the integral curve is equivalent to solving a system of first order differential equations.
+
+The set of all vector fields on a manifold, denoted by $ \mathfrak{X}(M) $ has a vector space structure. Introducing the notion of multiplication by Lie bracket $ [\cdot,\cdot] $ makes it into a Lie algebra. More details are covered throughout this section.
+
+\subsection{Smoothness of vector fields}
+The smoothness of the vector fields on a manifold, formally seen as sections of tangent bundle over a manifold, can be traced back to the smoothness of the section. However, to keep stuff simple, we will give some other characterization of smooth vector fields.
+
+\begin{proposition}[Smoothness of a Vector Field on a Chart]
+	Let $ M $ be a manifold with $ p \in M $. And let $ (U,x^1,\cdots,x^n) $ be a local chart on the manifold. A vector field given as
+	\[ X = \sum_i a^i \frac{\partial}{\partial  x^i}\big|_{p} \] 
+	is smooth on $ U $ if and only in the coefficient functions $ a^i $ are smooth on $ U $.
+\end{proposition}
+
+\begin{proposition}[Smoothness of a Vector Field in Terms of Functions]
+	\label{prop:smoothnessOfVectorFieldInTermsOfFunctions}
+	A vector field $ X $ defined on manifold $ M $ is smooth, if and only if for any smooth function $ f $ defined on $ M $, the function $ Xf $ is also smooth.
+\end{proposition}
+
+\begin{observation}[Vector fields as derivations of algebra $ C^\infty(M) $]
+	By the characterization of smooth vector fields over a manifold given by the proposition above, we can see a vector field $ X $ on a manifold $ M $ as a linear map on the algebra of $ C^\infty $ functions on manifold.
+	\[ X : C^\infty (M) \to C^\infty (M). \]
+	It is also straight forward to show that $ X $ is a derivation of the algebra $ C^\infty (M) $, i.e. for $ f,g \in C^\infty (M) $ we have
+	\[ X(fg)  = X(f)g + fX(g). \]
+\end{observation}
+
+\section{Integral Curves}
+Intuitively speaking, an integral curve of a smooth vector field is the curve traced out by a point under the given vector field. The following is a formal definition of an integral curve of a vector field.
+
+\begin{definition}[Integral Curve of a Vector Field]
+	\label{def:integralCurveOfAVectorField}
+	Let $ X $ be a smooth vector field defined on a manifold $ M $. An integral curve of $ X $ is a curve $ c:(a,b) \to M $ such that 
+	\[ c'(t) = X|_{c(t)},  \]
+	where $ X|_{c(t)}  $ means restricting vector field $ X $ to the curve $ c(t) $. An integral curve is called \emph{maximal} if its domain can not be extended to a larger interval.
+\end{definition}
+
+\begin{remark}
+	We call point $ p \in M $ the initial point of the curve $ c $ and say $ c $ starts in $ p $ if $ c(0) = p $. Also we write $ c_t(p) $ instead of $ c(t) $. With this notation the flow structure of $ c $ will be more evident, namely 
+	$ c_s(c_t(p)) = c_{s+p}(t). $
+\end{remark}
+
+As we can observe in the following example, computing the integral curve passing through a point $ p \in M $ is the same as solving an initial value problem.
+
+\begin{example}
+	Consider the Euclidean space $ M = \R^2 $ as a manifold. Define the vector field $ X $ to be
+	\[ X = -y \frac{\partial}{\partial x} + x\frac{\partial }{\partial y}. \]
+	We want to find an integral curve passing $ p = (1,0) $. For $ c:(a,b) \to \R^2 $ given as $ c(t) = (x(t),y(t)) $ to be an integral curve, we need its differential be the same as $ X|_{c(t)}  $ for $ t \in (a,b) $. By \autoref{prop:VelocityVectorInLocalCorodinate} we can write
+	\[ c'(t) = \dot{x} \frac{\partial }{\partial x} + \dot{y} \frac{\partial }{\partial y}. \]
+	And for $ c'(t) $ to an integral curve we need to have
+	\[ 
+	\vectt{\dot{x}}{\dot{y}} = \vectt{-y}{x}, \qquad x(0) = 1, y(0) = 0.
+	 \]
+	Solving the initial value problem above we will get
+	\[ x(t) = \cos (t), \qquad y(t) = \sin(t). \]
+\end{example}
+
+
+Given a vector field $ X $ on manifold $ M $, finding the integral curve of $ X $ starting at a point $ p \in M $ reduces to solving an initial value problem as described below. By \autoref{def:integralCurveOfAVectorField} a curve $ c:(a,b) \to M $ is an integral curve starting at $ p $ if we have
+\[ X|_{c(t)} = c'(t) \quad \text{for } t\in (a,b),\qquad c(0) = p.   \]
+Choosing a local coordinate chart $ (U,x^1,\cdots,x^n) $ that contains $ p $, we can write the restricted vector field $ X|_{c(t)} $ as
+\[ X|_{c(t)} = \sum_i a^i(c(t)) \frac{\partial}{\partial x^i}\big|_{p}.  \]
+On the other hand, by \autoref{prop:VelocityVectorInLocalCorodinate} we can write $ c'(t) $ in the local coordinates as
+\[ c'(t) = \sum_i \dot{c}^i(t) \frac{\partial }{\partial x^i}\big|_{p},    \]
+where $ c^i = x^i \circ c $.
+Thus we will have
+\[ \dot{c}^i(t) = a^i(c(t)) \quad \text{for } i=1,\cdots,n,\ \text{and} \qquad c(0) = p.\]
+Since the coefficient functions $ a^i $ are all smooth, then by the existence and uniqueness theorem we conclude the existence of the desired integral curve. 
+
+\begin{theorem}[Existence-Uniqueness Theorem of ODE]
+	\label{thm:existenceUniqTheoremODE}
+	Let $ V \subset \R^n $ be an open set, and $ f: V\to \R^n $ be a \emph{smooth} vector field defined on $ V $. For any $ p \in V $,  the integral curve of $ f $ starting at $ p $, or equivalently, the solution of the ODE system given by
+	\[ \frac{d y }{dt}(t) = f(y(t)), \quad y(0) = p, \]
+	has a unique \emph{smooth} solution $ y:(a(p),b(p)) \to \R^n $ where $ (a(p),b(p)) $ is the maximal open interval containing $ 0 $ on which $ y $ is defined. 
+\end{theorem}
+
+A smooth vector field, gives us more than what we have stated above. The following theorem states such an statement.
+
+\begin{theorem}[Smooth dependence of starting point of an integral curve]
+	Let $ V\subset \R^n $ be an open set, and $ f:V\to \R^n $ be a smooth vector field defined on $ V $. The for every $ p \in \R^n $, there exist an open neighborhood $ W $ containing $ p $ and a number $ \epsilon>0 $, and a smooth map \emph{smooth map} $ y $
+	\[ y: (-\epsilon,\epsilon) \times W \to \R^n \]
+	such that for all $ q \in W $ the map $ y(t,q) $ as a function of $ t $ is an integral curve of $ f $ starting at $ q $. Or equivalently, it is the unique solution of the ODE system given as
+	\[ \frac{\partial y}{\partial t}(q,t) = f(y(q,t)), \quad y(0,q) = q.\]
+\end{theorem}
+
+We can use the theorems above to proof a similar statement for the case of manifold as given in the following proposition.
+
+\begin{proposition}[Existence of Local Smooth Flow]
+	Let $ M $ be a manifold and $ X $ be a \emph{smooth} vector field defined on a $ U $. Then for any point $ p \in U $, there are a neighborhood $ W $ containing $ p $, an $ \epsilon>0 $, and a \emph{smooth} map 
+	\[ F: (-\epsilon,\epsilon) \times W \to U \]
+	such that for all $ q \in U $ the map $ F(t,q) $ as a function of $ t $ is an integral curve of $ X $ starting at $ q $. The map $ F $ is called a\emph{local flow} generated by the vector field $ X $.
+\end{proposition}
+\begin{remark}
+	We write $ F_t(q) $ instead of $ F(t,q) $. Let $ t,s \in (-\epsilon,\epsilon) $ such that $ F_t(F_s(q)) $ and $ F_{t+s}(q) $ are both defined. These two maps as a function of $ t $ are integral curves of $ X $ starting at $ F_s(q) $ that corresponds to $ t = 0 $. By the existence and uniqueness theorem it follows that 
+	\[ F_t(F_s(q)) = F_{t+s}(q). \]
+\end{remark}
+\begin{remark}
+	The map $ F(t,q) $ is called a \emph{local flow}, and for each $ q \in W $ the map $ F(t,q) $ is an integral curve of $ X $ starting at $ q $ and is called a \emph{flow line}. Thus local flow is a map from $ (-\epsilon,\epsilon)\times W $ to $ U $ while a flow line is a particular integral curve.
+\end{remark}
+\begin{remark}
+	If the local flow $ F $ is defined on $ \R\times M $ it is called a \emph{global flow}. Thus for all $ t \in \R $ and $ q \in M $
+	\[ F_t(q) \circ F_{-t}(q) = F_{-t})(q) \circ F_{t}(q) = F_0(q) \mathbbm{1}_M. \]
+	This shows that $ F_t : M\to M $ is a diffeomorphism (is smooth while its inverse is also smooth). Thus we can summarize that a global flow gives rise to a \emph{one-parameter group of diffeomorphisms} of $ M $. 
+\end{remark}
+
+We can summarize the discussion above in the following definition.
+\begin{definition}[Local Flow on a Manifold]
+	Let $ M $ be a manifold and $ p \in M $, and $ U $ be a coordinate open set containing $ p $. A \emph{local flow} defined on $ U $ is a smooth map 
+	\[ F: (-\epsilon,\epsilon) \times W \to U \]
+	where $ \epsilon>0 $ and $ W $ is an open neighborhood of $ p $, writing $ F(t,q) = F_t(q) $, such that 
+	\begin{itemize}[noitemsep]
+		\item $ F_0(q) = q, $
+		\item $ F_t(F_s(q)) = F_{t+s}(q) $ whenever both sides are defined.
+	\end{itemize} 
+\end{definition}
+
+\section{The Lie Bracket}
+As we say before, a vector field $ X $ on a manifold $ M $ is $ \R\text{-linear} $ map from the algebra $ C^\infty(M) $ to $ C^\infty(M) $ that satisfies the Leibniz rule, i.e. for $ f,g \in C^\infty(M) $ we have
+\[ X(fg) = X(f)g + fX(g). \]
+And we also saw that the set of all vector fields on $  M $ denoted by $ \mathfrak{X}(M) $ has a vector space structure. However, for $ Y \in \mathfrak{X}(M) $, the vector fields $ X\circ Y  = XY $ and $ YX $ are
+\begin{itemize}
+	\item $ \R\text{-linear} $, and
+	\item smooth (because by \autoref{prop:smoothnessOfVectorFieldInTermsOfFunctions} $ X(Y(f)) $ is smooth given $ Y(f) $ is smooth, and similarly for $ Y(X(f)) $).
+\end{itemize}
+However, $ XY $ fails to be a derivation of the algebra $ C^\infty(M) $. To see this, let $ f,g \in C^\infty (M) $. Then 
+\[ XY(fg) = X(Y(fg)) = X(Y(f)g + fY(g)) = XY(f)g + Y(f)X(g) + X(f)Y(g) + fXY(g). \]
+Because of the two middle terms, $ XY $ fails to be a derivation. However, the symmetries of the expression suggests that $ XY - YX $ will not have the two middle terms and thus will be a derivation. By explicit calculation as above we will have
+\[ (XY - YX)(fg) = (XY - YX)(f) g + f(XY - YX)(g).  \]
+Writing $ [X,Y] = XY - YX $ motivates us for the definition of a Lie bracket.
+
+\begin{definition}[Lie bracket of two vector fields]
+	Let $ X,Y $ be two vector fields defined on manifold $ M $. Their Lie Bracket $ [X,Y] $ is a vector field on $ M $ that at $ p $ has the value
+	\[ [X,Y]_p f = (X_p Y - Y_p X)f, \]
+	for any germ of a smooth function $ f $ at $ p $.
+\end{definition}
+\begin{remark}
+	The Lie bracket $ [X,Y]_p $ is a derivation of $ C^\infty_p(M) $, hence is a tangent vector.
+\end{remark}
+
+\begin{proposition}[Properties of Lie Bracket]
+	Let $ X,Y,Z $ be vector fields over a manifold $ M $. Then 
+	\begin{enumerate}[(i)]
+		\item \textbf{Bilinearity:} $ [aX+bY,Z] = a[X,Y] + b[Y,Z] $ and $ [Z,aX+bY] = a[Z,X] + b[Z,Y]. $
+		\item \textbf{Anticommutativity:} $ [X,Y] = - [Y,X] $,
+		\item \textbf{Jacobi identity:} $ \sum_\text{cyclic} [X,[Y,Z]] = 0 $.
+	\end{enumerate}
+\end{proposition}
+\begin{proof}
+	The property $ (i) $ follows immediately from the definition of Lie bracket. For $ (ii) $, first we expand the sum
+	\[ \sum_\text{cyclic}[X,[Y,Z]] = [X,[Y,Z]] + [Z,[X,Y]] + [Y,[Z,X]]. \]
+	Now we can expand each term from the definition of Lie bracket.
+	\begin{align*}
+		& [X,[Y,Z]] = X[Y,Z] - [Y,Z]X = XYZ - XZY - YZX + ZYX,\\
+		& [Z,[X,Y]] = Z[X,Y] - [X,Y]Z = ZXY - ZYX - XYZ + YXZ,\\
+		& [Y,[Z,X]] = Y[Z,X] - [Z,X]Y = YZX - YXZ - ZXY + XZY.
+	\end{align*}
+	Thus in the cyclic sum all of terms with opposite sigh cancel each other, hence the cyclic sum is zero.
+\end{proof}
+
+The following definition abstracts the notion of Lie bracket to be a product operation that satisfies some axioms.
+
+\begin{definition}[Lie Algebra]
+	\label{def:LieAlgebra}
+	A Lie algebra over a field $ K $ is a vector space $ V $ over $ K $ along with a product $ [\cdot,\cdot]: V\times V \to V $, called the \emph{bracket}, such that for $ X,Y,Z \in V $ and $ a,b \in K $ we have 
+	\begin{enumerate}[(i)]
+		\item \textbf{Bilinearity:} $ [aX+bY,Z] = a[X,Y] + b[Y,Z] $ and $ [Z,aX+bY] = a[Z,X] + b[Z,Y]. $
+		\item \textbf{Anticommutativity:} $ [X,Y] = - [Y,X] $,
+		\item \textbf{Jacobi identity:} $ \sum_\text{cyclic} [X,[Y,Z]] = 0 $.
+	\end{enumerate}
+\end{definition}
+\begin{example}
+	For any vector space $ V $ define $ [X,Y] = 0 $ for all $ X,Y \in V $. With this bracket, $ V $ becomes a Lie algebra called \emph{abelian Lie algebra}.
+\end{example}
+
+\begin{carefull}[Lie algebra might not even be an algebra]
+	From the definition of algebra, as an algebraic structure, the product operation has to be associative. In terms of bracket, for it to be associative we need to have 
+	\[ [X,[Y,Z]] = [[X,Y],Z] \quad \text{for all } X,Y,Z \in V. \]
+	An abelian algebra is automatically associative, thus it is algebra. However, a bracket in a Lie algebra, might not always be associative. Thus a Lie algebra might not even be an algebra. In Lie algebra, the product operation satisfies the Jacobi identity instead of associativity property. However, note the following important remark.
+\end{carefull}
+\begin{remark}
+	If $ A $ is any algebra over a field $ K $, then the product 
+	\[ [x,y] = xy - yx, \]
+	for $ x,y \in A $ turns $ A $ into a Lie algebra over $ K $.
+\end{remark}
+
+\begin{example}[Lie bracket as the bracket]
+	Let $ M $ be a manifold and $ \mathfrak{X}(M) $ be the set of all smooth vector fields defined on $ M $. Then $ \mathfrak{X}(M) $ is a Lie algebra with the Lie bracket as the bracket.
+\end{example}
+
+\begin{proposition}
+	Let $ V $ be a Lie algebra over a field $ K $. Define 
+	\[ \operatorname{ad}_X: V \to V, \qquad \operatorname{ad}_X(Y) = [X,Y]. \]
+	Prove that $ \operatorname{ad}_X $ is a derivation $ V $
+\end{proposition}
+\begin{proof}
+	From the Jacobi identity, for all $ X,Y,Z \in V $ we have
+	\[ [X,[Y,Z]] + [Z,[X,Y]] + [Y,[Z,X]] = 0. \]
+	By using bilinearity and anitcommutativity properties we can re-write this expression as
+	\[ [X,[Y,Z]] = [[X,Y],Z] + [Y,[X,Z]]. \]
+	We can re-write this as
+	\[ \operatorname{ad}_X([Y,Z]) = [\operatorname{ad}_X(Y),Z] + [Y,\operatorname{ad}_X(Z)].\]
+	This completes the proof.
+\end{proof}
+
+
+\section{Pushforward of a Vector Field}
+A smooth map $ F:N\to M $ between manifolds $ N $ and $ M $, pushes forward a tangent vector $ X_p \in T_p(N) $ where $ p \in N $ by its differential. I.e. $ F_*(X_p) $ is the pushforward of $ X_p $. However, this notion does not exist in general for vector fields. That is because if $ F $ is not injective and for $ p,q \in N $ two distinct points such that $ z = F(p) = F(q) $, then the pushforward of $ X_p $ and $ X_y $ by $ F_* $ are two tangent vectors at $ T_z(M) $, and there is no reason that $ F_*(X_p) $ should be equal to $ F_*(X_q) $.
+
+However, if $ F $ is a \emph{diffeomorphism}, then it makes sense to talk about the pushforward of a vector field by $ F $. That is because $ F $ is injective, then there is no ambiguity of the type discussed above, and also since $ F $ is surjective, the pushed forward vector field is defined everywhere on $ M $.
+
+\begin{definition}[$ F\text{-related} $ Vector Fields]
+	Let $ F: N \to M $ be a smooth map between manifolds and $ X $, $ \bar{X} $ be two vector fields defined in $ N $ and $ M $ respectively. Then we say $ X $ is $ F\text{-related} $ to $ \bar{X} $ if for all $ p \in N $ we have
+	\[ F_* X_p = \bar{X}_{F(p)}. \] 
+\end{definition}
+
+The following proposition gives a useful characterization of the $ F\text{-related} $ vector fields.
+
+\begin{proposition}[A characterization of related vector fields]
+	Let $ F: N\to M $ be a smooth map between manifolds, and $ X $ and $ \bar{X} $ be two vector fields defined on $ N $ and $ M $ respectively. Then $ X $ and $ \bar{X} $ are $ F\text{-related} $ if and only if for all $ g \in C^\infty(M) $ we have
+	\[ X(g\circ F) = (\bar{X} g) \circ F.  \]
+\end{proposition}
+\begin{proof}
+	{\color{red} \noindent TODO: To be added.}
+\end{proof}
+
+\begin{proposition}
+	Let $ F:N\to M $ be a smooth map between manifolds. Let $ X,Y $ be smooth vector fields on $ N $ that are $ F\text{-related} $ to the smooth vector fields $ \bar{X},\bar{Y} $ on $ M $ respectively. The the Lie bracket $ [X,Y] $ defined on $ N $ is $ F\text{-related} $ to Lie bracket $ [\bar{X},\bar{Y}]$ defined on $ N $.
+\end{proposition}
+\begin{proof}
+	{\color{red} \noindent TODO: To be added.}
+\end{proof}
+
+
+\section{Submanifolds}
+So far, despite our thorough analysis of manifolds, we have little tools to see if a given topological space is a manifold. Of course, we can use the definition of a smooth manifold and directly show that a given topological space is second countable and Hausdorff, and also exhibit a smooth atlas, hence a manifold. While this is a possibility, but it is seldom done in mathematics. That is why we tend to develop more tools that helps us in identifying if a space is a manifold. For instance, the quotient space construction and the discussion of the criteria under which the quotient space is second countable and Hausdorff was an effort in this direction. Here in this subsection we will develop much more powerful tools to show a particular space is manifold. These tools will be used extensively in the next chapters.
+
+
+\subsection{Submanifolds}
+We will introduce the notion of submanifolds. As a very simple example, the $ xy $ plane in $ \R^3 $ is a \emph{regular submanifold} of the manifold $ \R^3 $ where it is defined as the set on which the $ z $ coordinate function vanishes. 
+
+\begin{definition}[Regular Submanifold]
+	Let $ M $ be a manifold of dimension $ n $. A subset $ S \subset M $ is called a \emph{regular sub-manifold} of dimension $ k $, if for any $ p \in S $, there exist a chart $ (U,\phi = x^1,\cdots,x^n) $ such that the set $ U\cap S $ is defined by vanishing $ n-k $ coordinate functions. I.e. we need to have
+	\[ U \cap S = \set{p \in U\ |\ x^{k+1}(p)=\cdots=x^n(p) = 0}, \]
+	 where we assumed that by renumbering the coordinate functions, we may assume that these vanishing coordinates are $ x^{k+1},\cdots,x^n $. We call such chart an \emph{adapted chart} of $ S $ relative to $ M $. Furthermore, we call $ n-k $ the \emph{co-dimension} of $ S $.
+\end{definition}
+\begin{remark}
+	In different wording, we could say that if $ (U,\phi) $ is an adapted chart of $ S  $ relative to $ M $, then it means that $ S\cap U $ is precisely the zero level set of $ n-k $ coordinate functions of $ \phi $. 
+\end{remark}
+\begin{remark}
+	As a topological space, the submanifold $ S $ is required to have the subspace topology.
+\end{remark}
+
+\begin{example}[A trivial submanifold]
+	Let $ S $ be an open subset of manifold $ M $. Then $ S $ is defined by vanishing of no coordinates of any chart overlapping by $ S $. Thus every open subset of a manifold, is trivially a regular submanifold.
+\end{example}
+
+\begin{example}[A submanifold of $ \R^2 $]
+	The set $ S = (-1,1) \times \set{0} $ (as a subset of $ x\text{-axis} $) is a regular submanifold of $ \R^2 $. That is because considering the chart $ \set{U=(-1,1)\times(-1,1),\phi= (x,y)} $ for any $ p \in S $ we have $ y = 0 $. Thus $ S $ is a regular submanifold of $ \R^2 $, and $ (U,\phi) $ is an adapted chart. However, note that the chart $ (V = \R^2, \psi=(x,y)) $ is not an adapted chart since $ V \cap S = (-1,1)\times \set{0} $ but the point on $ V $ where one of the coordinate functions vanish, say $ x $ or $ y $, is the set $ \R\times{0} $ or $ \set{0}\times \R $ none of which are equal to $ S $. For the same reason the chart $ (W = (-2,2), \omega=(x,y)) $ is also not an adapted chart.
+\end{example}
+
+
+The following important proposition states that the regular submanifold is also a manifold.
+
+\begin{proposition}[Regular Submanifold is a Manifold]
+	\label{prop:regularSubmanifoldIsAManifold}
+	Let $ S $ be a regular submanifold of the manifold $ M $. Let $ \mathfrak{U} = 
+	\set{(U,\phi)} $ be a collection of \emph{compatible} and \emph{adopted} charts that \emph{covers} $ S $. Then the collection $ \set{(U\cap S), \phi_S)} $ is a compatible chart for $ S $, hence $ S $ is a manifold. Further more, if $ S $ is defined by the vanishing of $ n-k $ local coordinate maps, then $ S $ has coordinate $ k $.
+\end{proposition}
+
+\begin{proof}
+	To show that the collection $ \set{(U\cap S,\phi_S)} $ is an atlas, we first need to show that it covers the whole space $ S $. This follows immediately from the fact that the collection $ \mathfrak{U} $ covers the set $ S $. To show the compatibility of the charts in the collection $ \set{(U\cap S, \phi_S)} $, Let $ (U,\phi = (\phi^1,\cdots,\phi^n)) $ and $ (V,\psi=(\psi^1,\cdots,\psi^n)) $ be two coordinate charts where both of them contains the point $ p \in S $. By re-numbering the coordinate component function we assume that $ \phi^k, \cdots, \phi^n $ and $ \psi^k,\cdots, \psi^n $ vanish at $ p $. Since $ \phi\circ\inv{\psi}  $ and $ \psi\circ\inv{\phi} $ are both smooth, then it follows immediately that the corresponding restricted charts are also compatible.
+\end{proof}
+
+\begin{carefull}
+	What about the other properties of manifold? In the proposition above we only exhibited a compatible chart, but we did not checked for other properties of manifolds, like being Hausdorff or second countable. These two properties follows from the fact that $ S $ is a subset of $ M $ and has the subspace topology. Thus given that $ M $ is second countable and Hausdorff, then $ S $ is also second countable and Hausdorff.
+\end{carefull}
+
+\begin{definition}[Level Set of a Map]
+	Let $ F: N \to M $ be a map between manifolds. For $ c \in M $ the level set of $ F $ with level $ c $ is the set 
+	\[ \inv{F}(\set{c}) = \set{x \in N\ |\ F(x) = c}. \]
+\end{definition}
+\begin{remark}
+	In the case $ F : N \to \R^m $ the set $ \inv{F}(\set{\mathbf{0}}) $ is called the \textit{zero set} of the function $ F $.
+\end{remark}
+\begin{remark}
+	Recall that a point $ c \in M $ is a regular value of the map $ F $ if either it is not in the image of $ F $ (i.e. $ \inv{F}(\set{c}) = \emptyset $), or for all $ p \in \inv{F}(\set{c}) $ the differential $ F_{*,p} : T_p N \to T_pM $ is surjective. 
+\end{remark}
+
+\begin{definition}[Regular Level-Set]
+	The inverse image of a regular value of a map is called a regular level set. I.e. Let $ F: N \to M $ be a manifold, and $ c \in M $ be a \emph{regular value} of the map $ F $. Then level set $  \inv{F}(c) $ is a \emph{regular level set} of $ F $.  
+\end{definition}
+\begin{remark}
+	\label{remark:SurjectivityAndDimension}
+	In different words, a level set of a map is a \emph{regular level set} if for every point on the level set, the differential of the map is \emph{surjective}. This implies that $ \dim N \geq \dim M $. To see this observe that for the linear map $ F_*: T_pN \to T_{F(p)}M $, the maximum number of linearly independent rows or columns is $ \min\set{\dim N, \dim M} $. In order for $ F_* $ to be full rank, the rank of $ F_* $  should be equal to $ \dim M $. This means that we need to have
+	\[ \min\set{\dim N, \dim M} = \dim M \implies \boxed{\dim N \geq \dim M}. \]
+\end{remark}
+
+\begin{example}[$ S^2 $ in $ \R^3 $]
+	We can express the manifold $ S^2 $ as a regular level set of a carefully designed map and we will make an adopted chart for it. To do this, consider the map
+	\[ g: \R^3 \to \R \] 
+	given by
+	\[ g(x,y,z) = x^2+y^2+z^2 . \]
+	It level set with level $ 1 $ is given as
+	\[ S^2 = \set{(x,y,z)\ |\ x^2+y^2+z^2 = 1}, \]
+	which is precisely $ S^2 $ as a subset of $ \R^3 $. We can equivalently express this as a zero set of $ f: \R^3 \to \R $  given as
+	\[ f(x,y,z) = x^2+y^2+z^2 - 1. \]
+	To see if this level set is a regular level set or not, we need to determine if the Jacobian matrix of $ f $ is full rank on $ S^2 $. The Jacobian matrix of this map is given by
+	\[ f_*(x,y,z) =  \begin{bmatrix}
+		2x & 2y & 2z
+	\end{bmatrix}. \]
+	The rank of this matrix is 1 except when $ x=y=z=0 $. Since $ (0,0,0) \notin S^2 $, then all of the points on the 2-sphere are regular level sets. To create an adopted chart, we will use a trick which will be more formalized in the next sections. Let $ p $ be a point on $ S^2 $. Since $f_*  $ is surjective at $ p $, then not all of its elements are zero. This translates to the fact that there is at least one coordinate of $ f_* $ that does not vanish. Without loss of generality we can assume at $ p $ we have $ x(p) \neq 0 $. Then consider the coordinate map given by $ \phi = (f,y,z) $. Its Jacobian matrix will be
+	\[ J[\phi] = \begin{bmatrix}
+				2x & 2y & 2z \\
+				0 & 1 & 0 \\ 
+				0 & 0 & 1
+	\end{bmatrix} \]
+	and its determinant will be $ \det[J[\phi]] = 2x $. We can observe that at $ p $ the determinant is not zero. So by \autoref{cor:MapsAsLocalCoordinateSystems} we can see that there exists an open neighborhood containing $ p $, i.e. $ U_p $ on which $ \phi $ is locally invertible, thus it is a local coordinate chart. Thus for the point $ p $ the chart $ (U_p,\phi) $ is an adopted chart (since $ U_p\cap S^2 $ is defined by the vanishing of the first element of $ \phi $ ), hence $ (U_p\cap S^2, \phi_S = (y,z)) $ will be a local chart for $ S^2 $. This shows that $ S^2 $, as a regular level set of $ f $ is a submanifold.
+\end{example}
+
+The idea of the example above is very important, as we can use its strategy almost verbatim to prove the following proposition.
+
+\begin{proposition}[Regular Level Set of a Function is a Sub-Manifold]
+	Let $ f:N \to \R $ be a function defined on the manifold. Let $ c \in \R $. If $ c $ is a \emph{regular} value of the function $ f $, then its level curve $ \inv{f}(\set{c}) $ is a regular level curve, and is a sub-manifold.
+\end{proposition}
+\begin{proof}
+	To start, we need to following Lemma.
+	\begin{quote}
+		\begin{lemma}[Zero Level Curve]
+			Let $ f,g : N \to \R  $ be real-valued functions on a manifold $ N $. Let $ c \in \R $. Then the level set of $ f $ with level $ c $ is the same as the level set of $ g $ with level $ 0 $. Furthermore, $ \inv{f}(\set{c}) $ is a regular level curve if and only if $ \inv{g}(\set{0}) $ is a regular level set.
+		\end{lemma}
+		\begin{proof}[Proof of the lemma]
+			Let $ S, S' $ be defined as
+			\[ S = \set{p \in N\ |\ f(p) = c}, \qquad S' = \set{p'\in N\ |\ g(p) = 0}. \]
+			We will need to show $ S = S' $. We can see this by
+			\[ p \in S \biImp f(p) = c \biImp f(p)-c =0 \biImp g(p)=0 \biImp p \in S'. \]
+			To see proof for the second part, note that $ f_* = g_* $,  thus $ f_* $ will be surjective if and only if $ g_* $ is surjective, thus $ \inv{f}(\set{c}) $ will be a regular level set if and only if $ \inv{g}(\set{0}) $ is a regular level set.
+		\end{proof}
+	\end{quote}
+	By using the Lemma above, let $ g = f-c $. So the level set $ \inv{f}(\set{c}) $ will be the same as $ \inv{g}(\set{0}) $, and will be a regular level set if and only if $ \inv{g}(\set{0}) $ is a regular level set. So we will prove that the zero set of $ g $ is a submanifold. Let $ p \in S = \inv{g}(\set{0}) $, and let $ (U,\phi=(x^1,\cdots,x^n)) $ be a local chart containing $ p $. Then the differential of $ g $ at $ p $ will be given by
+	\[ g_{p,*} = \begin{bmatrix}
+		\frac{\partial}{\partial  x^1}\big|_{p} g & \cdots & \frac{\partial}{\partial  x^n}\big|_{p} g
+	\end{bmatrix} .\]
+	Since the level set $ \inv{g}(\set{0}) $ is a regular level set, $ g_{p,*} $ is surjective. This implies that not all of the components of $ g_{p,*} $ be zero at the same time (or alternatively, there exists at least one element in $ g_{p,*} $) that is not zero. In a nutshell, for any choice of $ p $, we can find at least one element of $ g_{p,*} $ that is not zero. Fix $ p \in \inv{g}(\set{0}) $ and without loss of generality assume that $ \partial g/\partial x^1 \neq 0 $. Then consider the map $ \phi(g,x^2,\cdots, x^n) $ from some open neighborhood of $ p $ to $ \R^n $. It Jacobian matrix is given by
+	\[ J[\phi] = \begin{bmatrix}
+		\frac{\partial}{\partial  x^1}\big|_{p}g & \frac{\partial}{\partial  x^2}\big|_{p} g & \cdots & \frac{\partial}{\partial  x^n}\big|_{p} \\
+		0 & 1 & \cdots & 0 \\
+		\vdots & \vdots & \ddots & \vdots \\
+		0 & 0 & \cdots & 1
+	\end{bmatrix} .\]
+	The determinant of the Jacobian matrix above is given by $ \det(J[\phi]) = \frac{\partial}{\partial  x^1}\big|_{p} g  \neq 0$. Thus by \autoref{cor:MapsAsLocalCoordinateSystems}, there exists an open neighborhood $ U_p $ containing $ p $ such that $ \phi $ is locally invertible, thus $ (U_p,\phi) $ is a local chart. Observe that $ S \cap U_p $ is given by vanishing the first component of $ \phi $, i.e. $ g=0 $. Thus $ (U_p,\phi) $ is an adopted chart. Since the point $ p $ was arbitrary, then we proved that for all $ p \in S $ there exist an adopted chart, hence $ S $ is a submanifold.
+\end{proof}
+
+
+Now we can extend this theorem more generally form maps between manifolds. This theorem is often called the regular level set theorem, implicit function theorem, pre-image theorem, etc. We will use the name ``regular level set theorem''.
+
+
+\begin{theorem}[Regular Level Set Theorem]
+	\label{thm:regularLevelSetTheorem}
+	Let $ F: N \to M $ be map between manifolds, and let $ c \in M $. The level set $ \inv{F}(\set{c}) $ is a submanifold of dimension $ n-m $ if the level set is regular. 
+\end{theorem}
+\begin{proof}
+	Assume $ \inv{F}(\set{c}) $ is non-empty (otherwise it is trivially a submanifold). Let $ (V,\psi = (y^1,\cdots,y^n)) $ be a local chart on $ M $ centered at $ c $, i.e. $ \psi(c) = 0 $. Then we will have $ \inv{F}(\set{c}) = \inv{F}(\inv{\psi}(\set{0}))  = (\psi \circ F)^{-1}(\set{0})$. If we call $ F^i = y^i \circ F $ then the level set $ S = \inv{F}(\set{c}) $ is the common zero set of the functions $ F^1,\cdots,F^m $. Fix $ p \in N $ and choose a local chart $ (U,\psi) $ that contains $ p $ and $ U \subset \inv{F}(V) $. Since $ S $ is a regular level set, then $ F_{*,p} $ is surjective which also implies that $ F_{*,p} $ has at least $ M $ linearly-independent vectors. Without loss of generality we can assume that the first $ M $ columns in $ F_{*,p} $ are linearly-independent, hence 
+	\[ \det\underbrace{\left[\frac{\partial F^i}{\partial x^j}\right]_{1\leq i,j \leq m}}_D \neq 0. \]
+	Replace first $ m $ coordinates of $ \phi $ with $ F^1,\cdots,F^n $. I.e. let $ \phi = (F^1,\cdots,F^m,x^{m+1},\cdots,x^n) $. The Jacobian matrix of this map is given by
+	\[ J[\phi] = \matt{D}{*}{0}{I}. \]
+	and its determinant is given by \[ \det J[\phi] = \det S \neq 0 .\]
+	Thus the map $ \phi $ is locally invertible in a neighborhood of $ p $ possibly smaller than $ U $, call it $ U_p $. We can also now see that $ S\cap U_p $ is defined by the common zero set of $ F^1\cdots,F^m $. Thus $ (U_p,\phi) $ is an adopted chart for $ S $, hence it is a submanifold.
+\end{proof}
+
+
+Regular level set theorem, is very powerful tool to prove that some spaces are manifolds. For instance, the following proposition reflects an example of this elegant use.
+
+\begin{proposition}[Special Linear Group is a Manifold]
+	\label{prop:SpecialLonearGroupIsManifold}
+	The special linear group $ SL(n,\R) $ is a subset of $ GL(n,\R) $ that contains matrices with determinant 1. $ SL(n,\R) $ is a manifold.
+\end{proposition}
+\begin{proof}
+	Let $ \det: GL(n,\R) \to \R $ be a function which is the determinant function we know from linear algebra. Then $ SL(n,\R) $ can be defined by the level set $ \inv{\det}(\set{1}) $. To show that this level set is regular, we need to show that the determinant function is surjective on the level set. To see this, we first need to calculate the differential of $ \det $ function. Let $ m_{i,j} $ denote the $ (i,j)\text{-minor} $ of a matrix. Given a matrix $ A \in GL(n,\R) $ we can expand the determinant function as
+	\[ \det(A) = \sum_j (-1)^{i+j} a_{ij} m_{ij}. \]
+	This implies that 
+	\[ \frac{\partial}{\partial  a^{ij}}\big|_{A} \det = (-1)^{i+j} m_{ij} \]
+	By \autoref{prop:CriticalPointOfARealMap} we have
+	\[ \det\text{ is not surjective} \implies \frac{\partial}{\partial  a^{ij}}\big|_{A} \det 0 \forall i,j \implies m_{ij}=0 \forall i,j \implies \det(A)=0. \]
+	So we can conclude 
+	\[ \det(A) \neq 0 \implies \det\text{ is surjective}. \]
+	Since $ SL(n,\R) $ is a subset of $ GL(n,\R) $, then it follows that the matrices in this set are not singular, hence $ \det $ is surjective which implies that the level set $ SL(n,\R) $  is a regular level set, hence, is a regular manifold.
+\end{proof}
+
+
+\subsection{The Rank of a Smooth Map}
+Recall that the rank of a smooth map between manifolds is defined by the rank of its differentials. Consider the following important observation.
+
+\begin{observation}[Surjectivity implies maximal rank, but the converse is not true!]
+	Let $ F: V \to W $ be a linear map between vector spaces. If $ F $ is surjective, then its rank is \emph{maximal}. However, the converse is not true. If $ F $ has full rank, then this does not implies that $ F $ is surjective. The converse is only true when we have $ \dim V \geq \dim W $.
+	
+	Also, as a general fact from linear algebra, recall that the rank of $ F $ is at most $ \min\set{\dim V, \dim W} $. I.e.  $ \rank F \leq \min\set{\dim V, \dim W} $.
+\end{observation}
+
+So for a smooth map between manifolds, say $ F: N\to M $, assuming that it has maximal rank at $ p \in N $, we will have the following three cases that are not mutually exclusive:
+\begin{enumerate}[(i)]
+	\item if $ \dim N = \dim M $, then since $ F_* $ has full rank, thus its determinant is not singular, hence it is locally invertible. So $ F $ is a local diffeomorphism at $ p $.
+	\item If $ \dim N \leq \dim M $, then by the observation box above, the maximal rank does not necessarily imply being surjective. However the maximality of the rank implies that $ \rank F = \dim N $, hence $ F_* $ is injective, thus an immersion.
+	\item If $ \dim N \geq \dim M $, then the map $ F $ is an submersion.
+\end{enumerate}
+
+In this section, we will basically apply the idea of the constant rank theorem for Euclidean spaces to the manifolds. To make sure we understand every step, we are giving a proof of the constant rank theorem in the case of Euclidean spaces. 
+
+\begin{theorem}[Constant Rank Theorem for Euclidean Spaces]
+	Let $ f: \R^n \supset U \to \R^m $ be a map between Euclidean spaces. Assume that $ f $ has a constant rank $ k $ in a neighborhood of $ p \in U $. Then there exists diffeomorphisms of $ G $ and $ F $ (as a local coordinate changes) such that 
+	\[ (F\circ f \circ\inv{G})(x^1,\cdots,x^n) = (x^1,\cdots,x^k,0,\cdots,0).  \]
+\end{theorem}
+\begin{proof}
+	We will do the proof for the case where $ n = m = 2 $ and $ k = 1 $ to better highlight the ideas behind the proof. Consider the Jacobian matrix of $ f $ at $ p $ given as
+	\[ Jf = \matt{\partial_x f^1}{\partial_y f^1}{\partial_x f^2}{\partial_y f^2}. \]
+\end{proof}
+Since $ f $ has constant rank $ 1 $, then we should be able to find a non-zero column vector in the Jacobian matrix. Without loss of generality we can assume that $ \partial_x f^1 \neq 0$. Let $ G(x,y) = (f^1(x,y),y) $. Its Jacobian matrix is given by
+\[ JG = \matt{\partial_x f^1}{\partial_y f^1}{0}{1} \]
+and its determinant is $ \partial_x f^1 $ which is non-zero from the assumption. Thus it is locally invertible, i.e. $ \exists V \ni f(p) $ and $ U_1 \ni p $ such that $ G: U_1\to V $ is a local diffeomorphism. We can make $ U_1 $ smaller such that $ U_1\subset U $. Thus on $ U_1 $ the function $ f $ has constant rank, and $ G $ is locally invertible. Observe that $ f^1 \inv{G} = u $ since
+$ (u,v) = (G\circ \inv{G})(u,v) = (f^1\circ \inv{G}, y\circ\inv{G})(u,v) $, 
+thus we can write
+\[ f\circ \inv{G} = (u, h(u,v)) \]
+where $ h = y \circ\inv{G} $. Note that since $ G $ is a local diffeomorphism, then $ f\circ\inv{G} $ has constant rank 1 on $ U_1 $ as well (similar to $ f $). Thus in its Jacobian matrix
+\[ J (f\circ\inv{G}) = \matt{1}{0}{\partial_x h}{\partial_y h}. \]
+In order for $ f\circ\inv{G} $ have the same rank as $ f $ on $ U_1 $ we need to have $ \partial_y h = 0$ everywhere on $ U_1 $. This means that $ h $ is only a function of $ u $. Define $ F(x,y) = (x,y-h(y)) $ which is a diffeomorphism. This implies 
+\[ (F\circ f\circ\inv{G})(u,v) = (u,0). \]
+
+\begin{example}[A useful characterization of constant rank for a map]
+	Let $ f: \R^n \supset U \to \R^m $ be a map that has a non-zero Jacobian at $ p \in U $. Then by continuity, it has non-zero Jacobian at a neighborhood of $ p $, hence it has a constant rank. Thus non-zero Jacobian for a map at a point, implies constant rank of map at a neighborhood of that point. 
+\end{example}
+
+
+This idea of the constant rank theorem can easily be extended to the manifolds with almost no cost. The following proposition captures this idea.
+
+\begin{proposition}[Constant Rank Theorem for Manifolds]
+	Let $ F: N\to M $ be a map between manifold that has constant rank $ k $ in a neighborhood of $ p \in N $. Then there exists charts $ (U,\phi) $ centered at $ p \in N $ and $ (V,\psi) $ centered at $ F(p) \in M $ such that 
+	\[ (\psi\circ F \circ \inv{\phi})(r^1,\dots,r^n) = (r^1,\dots,r^k,0,\dots,0). \]
+\end{proposition}
+\begin{proof}
+	Let $ (U,\bar{\phi}) $ and $ (V,\bar{\psi}) $ be two charts centered at $ p \in N $ and $ F(p) \in M $ respectively. Observe that since $ \bar{\phi} $ and $ \bar{\psi} $ are diffeomorphisms, then the map $ H = \bar{\psi}\circ F \circ \bar{\phi} $ has a constant rank $ k $ (another way to see this is the consider the differential $ H_* = \bar{\psi}_*\circ F_* \circ \bar{\phi}_* $, and since $ \bar{\psi}_* $ and $ \bar{\phi}_* $ are isomorphisms, then $ H_* $ has the same rank as $ F_* $). Now by the constant rank theorem for the vector spaces, there exists local diffeomorphisms $ G $ in a neighborhood of $ \phi(p) $ and $ F $ in a neighborhood of $ \psi(F(p)) $ such that 
+	\[ (F \circ H \circ \inv{G})(r^1,\dots,r^n) = (r^1,\dots,r^k,0,\cdots,0). \] 
+	Let $ \phi = G\circ\bar{\phi} $ and $ \psi = F\circ\bar{\psi}$. This completes the proof.
+\end{proof}
+
+
+By the regular level set theorem, we know that the pre-image of a regular value of map between manifolds is a regular submanifold. However, we can use constant rank theorem to show it suffices for the map to have a constant map in a neighborhood of the pre-image, and this guarantees that the level set is a regular submanifold.
+
+\begin{proposition}[Constant Rank Level set Theorem]
+	Let $ F:N\to M $ be a map between manifolds, and $ c\in M $. If $ F $ has a constant rank in a neighborhood of $ \inv{F}(\set{c}) $, then the level set $ \inv{F}(\set{c}) $ is a regular submanifold.
+\end{proposition}
+\begin{proof}
+	Let $ p \in \inv{F}(c) $. In order for $ \inv{F}(c) $ to be a manifold, then we need to find a chart containing $ p $ such that the intersection of the local open coordinate neighborhood with $ \inv{F}(c) $ is defined by vanishing of $ k $ coordinate functions of $ \phi $. The key in finding such a local chart in the constant rank theorem for the manifolds. For $ p \in \inv{F}(c) $ chosen as above, by the constant rank theorem we can find local charts $ (U,\phi) $ containing $ p $, and $ (V,\psi) $ containing $ F(p) $ such that we can write
+	\[ (\psi\circ F \circ \inv{\phi}) (r^1,\dots,r^n) = (r^1,\dots,r^k,0,\dots,0). \]
+	Thus the level set $ \inv{(\psi\circ F \circ \inv{\phi})}(0) \subset \R^n $ is defined by vanishing of the coordinate vectors $ r^1,\cdots,r^k $. On the other hand, this zero set, is the image of $ \inv{F}(c) \cap U $ under the map $ \phi $. Because
+	\[ \phi(\inv{F}(c)) = \phi(\inv{F(\inv{\psi(0)})}) = (\phi\circ \inv{F} \circ \inv{\psi})(0) = \inv{(\psi\circ F \inv{\phi})}(0). \]
+	Thus $ \inv{F}(c)\cap U $ is defined by the vanishing of the coordinate functions $ r^1,\cdots,r^k $. Since the point $ p  $ was arbitrary, then this proves that $ \inv{F}(c) $ is a regular submanifold.
+\end{proof}
+ 
+The constant rank level set theorem is a very powerful theorem that helps us to show some very important level sets are in fact manifolds. The orthogonal group $ O(n) $ is an example.
+
+\begin{proposition}[The orthogonal group $ O(n) $ is a manifold.]
+	The orthogonal group $ O(n) $ as a subset of $ GL(n,\R) $ is the set of all matrices in $ GL(n,\R) $ such that $ A^T A = I $. $ O(n) $ is a regular submanifold of $ GL(n,\R) $, thus is a manifold.
+\end{proposition}
+\begin{proof}
+	Define the map $ f: GL(n,\R) \to GL(n,\R)  $ given as $ f(A^T A) = I $. So the orthogonal group defined above can also be seen as the level set $ \inv{f}(I) $. To show that $ O(n) $ is a regular submanifold, we will show $ f $ has a constant rank in a neighborhood of $ \inv{f}(I) $, and in fact on the entire $ GL(n,\R) $. To see this, first observe that for any $ A, B \in GL(n,\R) $ there exists $ C \in GL(n,\R) $ such that $ B = AC $, or $ B = r_C(A) $. Consider
+	\[ f(AC) = (AC)^T (AC) = C^T (A^T A) C = C^T f(A) C, \]
+	or in a more useful notation
+	\[ (f\circ r_C)(A) = (l_{C^T}\circ r_C \circ f)(A). \]
+	Since $ A $ was arbitrary, then $ f\circ r_C = l_{C^T}\circ r_C \circ F $. By the chain rule we have
+	\[ f_{*,AC} \circ (r_C)_{*,A} = (l_{C^T})_{*,\star}\circ(r_C)_{*,\star} \circ f_{*,A}. \]
+	Since the right and the left multiplication are diffeomorphisms, thus we have
+	\[ \rank f_{*,AC} = \rank f_{*,A}. \]
+	Thus $ f $ has constant rank on $ GL(n,\R) $. From the constant rank level set theorem, we conclude that $ O(n) $ is a regular submanifold of $ GL(n,\R) $.
+\end{proof}
+
+\subsubsection{Immersion and Submersion theorem}
+The constant rank level set theorem helps us to write a local canonical form for any submersion and immersion. The development of this idea is based on following two observations.
+
+\begin{observation}[Submersion and Immersion Implies Maximal Rank]
+	Let $ F: N\to M $ be a map between manifolds of dimension $ n $ and $ m $ respectively.
+	\begin{itemize}
+		\item $ F $ is an immersion $ \implies n \leq m,\ \rank F = n $.
+		\item $ F $ is an submersion $ \implies  n \geq m,\ \rank F = m $.
+	\end{itemize}
+	We can see that in both cases, the map being a submersion or immersion implies the maximality of its rank.
+\end{observation} 
+
+\begin{observation}[Rank Maximality is an open Condition]
+	Let $ F: N \to M $ be a map between manifolds were it has a maximal rank at $ p \in N $. Then the maximality of rank persists in an open neighborhood of $ p $. To see why this is true, observe that $ F_* $ has $ k $ (the maximal rank of $ F $ at $ p $) linearly independent columns. By rearranging the columns, assume that the first $ k $ columns are linearly independent. This implies that the determinant of the first $ k\times k $ block of $  F_* $ is non zero. Since determinant is continuous, then this non-zero determinant persists in an open neighborhood of $ p \in N $.
+\end{observation}
+
+In conclusion, we see that being an immersion or submersion at a point, implies the rank is constant on an open neighborhood of that point. Thus we can write the following normal forms for immersion and submersion.
+
+\begin{proposition}[Normal Forms for Immersion and Submersion]
+	Let $ F: N\to M$ be a map between manifolds, and let $ p \in N $. Then
+	\begin{itemize}[noitemsep]
+		\item If $ F $ is immersion at $ p $, then there are charts $ (U,\phi) $ containing $ p \in N $ and $ (V,\psi) $ containing $ F(p)\in M $ such that 
+		\[ (\psi \circ F \circ \inv{\phi})(r^1,\cdots,r^n) = (r^1,\cdots,r^n,0,\cdots,0). \]
+		\item If $ F $ is submersion at $ p $, then there are charts $ (U,\phi) $ containing $ p \in N $ and $ (V,\psi) $ containing $ F(p)\in M $ such that 
+		\[ (\psi \circ F \circ \inv{\phi})(r^1,\cdots,r^m,r^{m+1},\cdots,r^n) = (r^1,\cdots,r^m). \]
+	\end{itemize}
+\end{proposition}
+\begin{proof}
+	The proof of this proposition is based on the fact that being an immersion or submersion at a point implies the maximality of the rank, and also the fact that the maximality of the rank is an open condition, and finally applying the constant rank theorem level set theorem.
+\end{proof}
+
+\begin{observation}
+	The important observation of the proposition above is that every immersion locally looks like an inclusion map, and every submersion, locally looks like a projection map.
+\end{observation}
+
+
+
+
+
+\newpage
+
+
+\section{Summary}
+\begin{summary}[Coordinate Map and Its Differential]
+	Let $ M $ be a manifold and $ p \in M $. Let $ (U,\phi) $ be a coordinate chart containing $ p $. We saw in \autoref{propositio:coordinateMapsAreSmooth} that $ \phi $ is a diffeomorphism between $ U $ and $ \R^n $. In \autoref{cor:TangentSpaceIsoMorphismToRn} we also saw that $ T_p(U) $ is isomorphic to $ T_{\phi(p)}(\R^n) $. In a nutshell
+	\begin{quote}
+		Under a coordinate chart $ (U,\phi) $, $ U $ is diffeomorphic to $ \R^n $ and at a point $ p \in U $ the tangent space at $ p $, i.e. $ T_p(U) $, is isomorphic to the tangent space at $ \phi(p) $, i.e. $ T_\phi(p)_n $.
+	\end{quote}
+\end{summary}
+
+\begin{summary}
+	Let $ F: V \to W $ be a linear map between vector spaces. If $ F $ is surjective then $ \dim V \geq \dim W $. See \autoref{remark:SurjectivityAndDimension} for more details and reasoning.
+\end{summary}
+
+
+\begin{summary}[Differential of a Map Between Euclidean Spaces]
+	Let $ F: \R^n \to \R^m $. It differential at point $ p \in \R^n $ is its Jacobian matrix evaluated at point $ p $.
+	\[ F_* = 
+	\begin{pmatrix}
+		\frac{\partial F^1}{\partial x^1} & \cdots & \frac{\partial F^1}{\partial x^n} \\
+		\frac{\partial F^2}{\partial x^1} & \cdots & \frac{\partial F^2}{\partial x^n} \\
+		\vdots & \ddots & \vdots \\
+		\frac{\partial F^m}{\partial x^1} & \cdots & \frac{\partial F^m}{\partial x^n}
+	\end{pmatrix}(p)
+	 \]
+\end{summary}
+
+\begin{summary}{Differential of a coordinate map acting on a tangent vector}
+	Let $ M $ be a manifold and $ (U,\phi = (x^1,\cdots,x^n)) $ a coordinate chart containing $ p \in M $. Then we have
+	\[ \phi_*(\frac{\partial}{\partial  x^i}\big|_{p}) = \frac{\partial}{\partial  r^i}\big|_{\phi(p)} ,\]
+	or equivalently
+	\[ \inv{\phi_*}(\frac{\partial}{\partial  r^i}\big|_{\phi(p)}) = \frac{\partial}{\partial  x^i}\big|_{p}. \]
+	To show these equation we use the definition of directional derivatives on a manifold (\autoref{def:DirectionalDerivativeOnManifold}). However, we can see that how these equations can reproduce the definition of the directional derivative on a manifold. Let $ f:M \to \R $
+	\[ \frac{\partial}{\partial  x^i}\big|_{p} f = \inv{\phi_*}(\frac{\partial}{\partial  r^i}\big|_{\phi(p)})f = \frac{\partial}{\partial  r^i}\big|_{\phi(p)}(f\circ\inv{\phi}).  \]
+	where we have used the definition of the differential of a map.
+\end{summary}
+
+\begin{summary}[Bases for Tangent Space at a Point on a Manifold]
+	\label{summary:BasesFor TangentSpace}
+	Let $ M $ be a manifold with $ p \in M $. $ T_pM $ is the the tangent space at point $ p $ that contains all of the point derivatives $ D: C_p^\infty \to \R$. For each coordinate chart containing $ p $ we can write a natural bases for $ T_pM $. For instance, let $ (U,\phi=(x^1,\cdots,x^n)) $ be a coordinate chart containing $ p $. Then the collection of tangent vectors
+	\[ \set{ \frac{\partial}{\partial  x^1}\big|_{p}, \cdots, \frac{\partial}{\partial  x^n}\big|_{p} } \]
+	is a basis for $ T_pM $. While choosing a different coordinate chart containing $ p $, e.x. $ (V,\psi=(y^1,\cdots,y^n)) $ we can write another natural basis for $ T_pM $
+	\[ \set{\frac{\partial}{\partial  y^1}\big|_{p},\cdots,\frac{\partial}{\partial  y^n}\big|_{p}}. \]
+	The change of basis matrix $ R $ maps these two basis to each other. This map is given by
+	\[ 
+	\begin{bmatrix}
+		\partial/\partial x^1 \\
+		\partial/\partial x^2 \\
+		\vdots \\
+		\partial/\partial x^n
+	\end{bmatrix} = 
+	\begin{pmatrix}
+		\partial y^1/\partial x^1 & \partial y^1/\partial x^2 &  \cdots & \partial y^1/\partial x^n \\
+		\partial y^2/\partial x^1 & \partial y^2/\partial x^2 &  \cdots & \partial y^2/\partial x^n \\
+		\vdots & \vdots & \ddots & \vdots \\
+		\partial y^n/\partial x^1 & \partial y^n/\partial x^2 &  \cdots & \partial y^n/\partial x^n
+	\end{pmatrix}^T
+	\begin{bmatrix}
+		\partial/\partial y^1 \\
+		\partial/\partial y^2 \\
+		\vdots \\
+		\partial/\partial y^n
+	\end{bmatrix}
+	 \]
+\end{summary}
+
+\begin{summary}[Velocity vector of a curve into $ \R^n $]K
+	Let $ c:(a,b) \to \R^n $. Then is velocity vector at $ t_0 \in (a,b) $ is given by
+	\[ 
+	c'(t) = 
+	\begin{bmatrix}
+		\dot{c}_1(t_0) \\
+		\dot{c}_2(t_0) \\
+		\vdots \\
+		\dot{c}_n(t_0)
+	\end{bmatrix}
+	 \]
+	where $ c_1,\cdots,c_n $ are the components of the curve $ c $. See \autoref{example:VelocityVectorWorkedExample} for a worked example.
+\end{summary}
+
+
+\begin{summary}[Finding Local Integral Curves]
+	Given a vector field $ X $ on manifold $ M $, finding the integral curve of $ X $ starting at a point $ p \in M $ reduces to solving an initial value problem as described below. By \autoref{def:integralCurveOfAVectorField} a curve $ c:(a,b) \to M $ is an integral curve starting at $ p $ if we have
+	\[ X|_{c(t)} = c'(t) \quad \text{for } t\in (a,b),\qquad c(0) = p.   \]
+	Choosing a local coordinate chart $ (U,x^1,\cdots,x^n) $ that contains $ p $, we can write the restricted vector field $ X|_{c(t)} $ as
+	\[ X|_{c(t)} = \sum_i a^i(c(t)) \frac{\partial}{\partial x^i}\big|_{p}.  \]
+	On the other hand, by \autoref{prop:VelocityVectorInLocalCorodinate} we can write $ c'(t) $ in the local coordinates as
+	\[ c'(t) = \sum_i \dot{c}^i(t) \frac{\partial }{\partial x^i}\big|_{p},    \]
+	where $ c^i = x^i \circ c $.
+	Thus we will have
+	\[ \dot{c}^i(t) = a^i(c(t)) \quad \text{for } i=1,\cdots,n,\ \text{and} \qquad c(0) = p.\]
+	Since the coefficient functions $ a^i $ are all smooth, then by the existence and uniqueness theorem we conclude the existence of the desired integral curve. 
+\end{summary}
+
+\begin{summary}[Lie bracket and the bracket]
+	\emph{Lie bracket} is defined as 
+	\[ [X,Y] = XY - YX, \]
+	for $ X,Y \in \mathfrak{X}(M) $ as vector fields defined on the manifold $ M $. However, \emph{the bracket}, is the product operator defined on Lie algebra that satisfies three properties in \autoref{def:LieAlgebra}. The set $ \mathfrak{X}(M) $ along with the Lie bracket as the bracket is a Lie algebra. 
+\end{summary}
+
+\begin{summary}[Regular Submanifold Characterized by an Adapted Chart]
+	In different wording, we could say that if $ (U,\phi) $ is an adapted chart of $ S  $ relative to $ M $, then it means that $ S\cap U $ is precisely the zero level set of $ n-k $ coordinate functions of $ \phi $.
+\end{summary}
+
+
+
+\newpage
+
+\input{sections/TangentSpacesSolvedProblemes.tex}

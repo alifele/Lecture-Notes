@@ -1,0 +1,118 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[left=2cm, right=2cm, top=2cm, bottom=2cm]{geometry}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{thmtools}
+\usepackage{xcolor}
+\usepackage{nameref}
+\usepackage[colorlinks=true, linkcolor=blue, citecolor=cyan]{hyperref}
+\usepackage{natbib} 
+\usepackage{tkz-graph}
+\usepackage{placeins}
+
+
+\newcommand{\grad}{\operatorname{grad}}
+\newcommand{\curl}{\operatorname{curl}}
+\renewcommand{\div}{\operatorname{div}}
+\newcommand{\img}{\operatorname{img}}
+
+
+
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\newtheorem{prob}{Problem Statemnt}
+\newtheorem{example}{Example}
+
+
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+
+\title{Some thoughts on the stable matching problem}
+\author{Ali Fele Paranj}
+
+
+
+\begin{document}
+	\maketitle
+	
+	\section{Problem statement}
+	Assume $ n $ applicants and $ n $ employers where each of the applicants and employers has their list of preference over the other group. And we want to match the applicants to the employers so that there is not blocking match. $ a_i $ matched to $ e_j $ is a blocking match if $ a_i $ matched to $ e' $ , then $ a_i $ will be happier with their new assignment, and so will be $ e' $. And stable match is a matching that there is not blocking match.
+	
+	\begin{prob}
+		Let $ n $ be given. Let $ P_A = (\sigma_i)_{i=1}^n $ and $ P_E = (\tau_i)_{i=1}^n $ be the list of preferences of applicants and employers respectively, where $ \sigma,\tau \in S_n $ be permutations. Then a matching $ \mu \in S_n $ is stable if it does not have a blocking match. 
+	\end{prob}
+	
+	\begin{example}
+		Let $ n=3 $, and let 
+		\[ P_A = \begin{pmatrix}
+			3 & 1 & 2 \\
+			2 & 1 & 3 \\ 
+			1 & 3 & 2
+		\end{pmatrix}, \qquad
+		P_E = \begin{pmatrix}
+			3 & 1 & 2 \\
+			2 & 1 & 3 \\
+			1 & 3 & 2
+		\end{pmatrix},
+		 \]
+		where the corresponding permutations are shown as the rows of a matrix. In words, it is the same way of saying
+		\begin{align*}
+			a_1: e_3,e_1,e_2, \qquad e_1:a_3,a_1,a_2 \\
+			a_2: e_2,e_1,e_3, \qquad e_2:a_2,a_1,a_3 \\
+			a_3: e_1,e_3,e_2, \qquad e_3:a_1,a_3,a_2 \\
+		\end{align*}
+		In this case, the matching $ \sigma_A = (2,3,1)$, which says that $ a_1 $ chose $ e_2 $, $ a_3 $ chose $ e_3 $, and $ a_3 $ chose $ e_1 $. This is not stable matching. Because if we consider $ (3,2,1) $, then $ a_1 $ gets $ e_3 $ (which was their preferred choice over $ e_2 $), and $ e_3 $ gets happier as well (because $ a_1 $ was their preferred choice over $ a_2 $). 
+	\end{example}
+	
+	As demonstrated in the example above, it gets quite complicated to argue if one matching is blocking or not. So instead, we can transform the given data of the problem into a notation that makes the argument easier. 
+	
+	Given $ P_A = (\sigma_i)_i $ and $ P_E = (\tau_j)_j $, consider \[ P_A^* = (\sigma_i^{-1})_i, \qquad P_H^* = (\tau_j^{-1})_j^T, \]
+	where what we really mean is $ P_A^* $ is a matrix that its $ i^\text{th} $ \textit{row} is $ \sigma_i^{-1} $ and $ P_H^* $ is a matrix that its $ j^\text{th} $ \textit{column} is $ \tau_j^{-1} $. For instance, for the example above
+	
+	\[
+	P_A^* =
+	\bordermatrix{
+		& e_1 & e_2 & e_3 \cr
+		a_1 & 2   & 3   & 1   \cr
+		a_2 & 2   & 1   & 3   \cr
+		a_3 & 1   & 3   & 2   \cr
+	}
+	\]
+	
+	\[
+	P_E^* =
+	\bordermatrix{
+		& e_1 & e_2 & e_3 \cr
+		a_1 & 2   & 2   & 1   \cr
+		a_2 & 3   & 1   & 3   \cr
+		a_3 & 1   & 3   & 2   \cr
+	}
+	\]	
+	 The matrices $ P_A $ and $ P_E $ where merely a list of lists that were put on top of each other to look like a matrix, but $ P_A^* $ and $ P_E^* $ are qualified more to be called matrices. In words, $ (P_A^*)_{ij} $ means the rank (order in the list) that the applicant $ a_i $ gave to the employer $ e_j $, and $ (P_E^*)_{ij} $ is the rank that $ e_j $ gave to applicant $ a_i $. Now every possible solution, i.e. a permutation like in the example above, will be a selection of the elements of the matrices above in the following way: For instance $ \sigma_A = (2,3,1) $ as one possible matching (which is unstable) in the question above, corresponds to 
+ 	\[
+ 	P_A^* =
+ 	\bordermatrix{
+ 		& e_1 & e_2 & e_3 \cr
+ 		a_1 & 2   & \boxed{3}   & 1   \cr
+ 		a_2 & 2   & 1   & \boxed{3}   \cr
+ 		a_3 & \boxed{1}   & 3   & 2   \cr
+ 	}, \qquad 
+ 	P_E^* =
+ 	\bordermatrix{
+ 		& e_1 & e_2 & e_3 \cr
+ 		a_1 & 2   & \boxed{2}   & 1   \cr
+ 		a_2 & 3   & 1   & \boxed{3}   \cr
+ 		a_3 & \boxed{1}   & 3   & 2   \cr
+ 	}
+ 	\]
+ 	
+
+	
+	
+	
+	
+\end{document}

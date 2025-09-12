@@ -1,0 +1,783 @@
+\chapter{Manifolds}
+
+\begin{quote}
+	{\color{orange} \textbf{Very important note:}} Throughout this text, to avoid repeating some words like \emph{smooth,  and etc}, we often omit them and we let the context to reflect these notions. So we emphasis that throughout this text, unless otherwise specified, by a \textbf{manifold} we always mean a $ C^\infty $ manifold. An atlas of a chart on a smooth manifold means an atlas or a chart contained in the differentiable structure of the smooth manifold.
+\end{quote} 
+
+
+\section{Topological manifolds and Smooth manifolds}
+
+We start with the definition of topological manifolds. We will later study the smooth manifolds that are of our main interest in this lecture. But first, we need to review some basic definition.
+
+\begin{definition}[Hausdorff topological space]
+	A set $ A $, along with a collection of subsets of $ A $ called $ \mathcal{T} \subset 2^A $, i.e. $ (A,\mathcal{T}) $ is called a topological space if we have
+	\begin{enumerate}[(I)]
+		\item $ \emptyset \in \mathcal{T} $ and $ A \in \mathcal{T} $.
+		\item For any infinite collection $ \set{A_\alpha}_\alpha \subset \mathcal{T} $ we have
+		\[ \bigcup_{\alpha} A_\alpha \in \mathcal{T}. \]
+		\item For a finite collection $ \set{A_i}_{i \in I} $ where $ I = \set{1,2,\cdots,N} $ for some $ N \in \N $, we have
+		\[ \bigcap_{i \in I} A_i \in \mathcal{T}. \]
+		\item $ \forall x,y \in A $ there exists $ U,V \in \mathcal{T} $ such that $ x\in U $ and $ y \in V $ and we have $ U \cap V = \emptyset $.
+	\end{enumerate}
+\end{definition}
+
+
+The following definition reviews the notion of second countable topological spaces.
+
+\begin{definition}[Second countable topological spaces]
+	Let $ (X,\mathcal{T}) $ be a topological space. This space is second countable if there exists an at most countable collection of sets $ \mathcal{B} \subset \mathcal{T} $ such that $ \forall U \in \mathcal{T} $ we have
+	\[ U = \bigcup_{A \in \mathcal{B}} A. \]
+	I.e. any open set in $ \mathcal{T} $ can be written as a union of sets in $ \mathcal{B} $
+\end{definition} 
+
+The last piece of definition that we need is the notion of locally Euclidean spaces.
+
+\begin{definition}[Locally Euclidean topological spaces]
+	Let $ (X,\mathcal{T}) $ be a topological space. We say $ X $ is locally Euclidean if $ \forall p \in X $, there exists an open neighborhood $ p \in U \in \mathcal{T}$ such that is homeomorphic to an \emph{open} subset of $ \R^n $. I.e. there is a homeomorphism $ \phi: U \to \R^n $. We call the pair $ (U,\phi:U\to\R^n) $ a \emph{chart}, $ U $ a \emph{coordinate neighborhood} or a \textbf{coordinate open set}, and $ \phi $ a \emph{coordinate map} or \emph{coordinate system} on $ U $. 
+\end{definition}
+
+
+\begin{definition}[Topological manifolds]
+	A topological manifold is a Hausdorff, second countable topological space that is locally Euclidean space. It is said to be of dimension $ n $, if it is locally Euclidean of dimension $ n $.
+\end{definition}
+
+
+In the following section, we will review the notion of compatible charts which will be central to our study of manifolds. Assume we have two charts $ (U,\phi) $ and $ (V,\psi) $. Since $  U,V $ are open in $ M $ (the manifold), then $ U\cap V $ is open in $ U $ and $ V $. Furthermore, since $ \phi $ is a homeomorphism to an open subset of $ \R^n $ then $ \phi(U\cap V) $ and $ \psi(U\cap V) $ are also open. One way to show this, let $ \phi(U cap V) = B, \phi(U) = A, $ and $ A\backslash B = C $. We know that $  A $ is open, and $ B\cup C = A, B \cap C = \emptyset $. Then $ A $ being open implies $ B $ and $ C $ is open. Now we can make the following definition for $ C^\infty $-compatible maps.
+
+\begin{definition}[$ C^\infty $ compatible maps]
+	Let $ M $ be a topological manifold, where $ (U,\phi) $ and $ (V,\psi) $ are two charts. These charts are called $ C^\infty $-compatible if the maps
+	\[ \phi\circ \inv{\psi} : \psi(U\cap V) \to \phi(U\cap V)\qquad \text{and} \qquad  \psi \circ\inv{\phi}: \phi(U \cap V) \to \psi(U\cap V),  \]
+	are $ C^\infty $. These two maps are called \emph{transition functions} between charts. 
+\end{definition}
+
+\begin{remark}
+	If two $ U,V $ in the definition above, i.e. $ U\cap V = \emptyset $, then they are automatically compatible.
+\end{remark}
+
+\begin{definition}[$ C^\infty $ atlas]
+	Let $ M $ be a topological manifold. The collection of charts $ \mathcal{U} = \set{(U_\alpha, \phi_\alpha)} $ is called a $ C^\infty $ atlas, or simply an atlas if 
+	\begin{itemize}
+		\item all of the charts are pairwise $ C^\infty $ compatible,
+		\item the charts cover the whole manifold, i.e. $ M = \bigcup_\alpha U_\alpha $.
+	\end{itemize}
+\end{definition}
+
+\begin{lemma}
+	Let $ \mathcal{A} = \set{(U_\alpha,\phi_\alpha)}_{\alpha \in I} $ be an atlas for the manifold $ M $. Let $ (V,\psi) $ and $ (W,\sigma) $ be two charts where both of them are compatible with the atlas $ \mathcal{A} $. Then these two charts are compatible with each other.
+\end{lemma}
+
+\begin{proof}
+	We start by showing that $ \psi\circ \inv{\sigma} $ is $ C^\infty $ on $ V\cap W $. Let $ p \in V \cap W $. Then $ \exists \alpha \in I $ such that $ p \in U_\alpha $ for the chart $ (U_\alpha,\phi_\alpha) $. Then 
+	\[ (\psi \circ \inv{\phi_\alpha})\circ (\phi_\alpha \circ \inv{\sigma}): \sigma(W\cap U_\alpha \cap V) \to \psi(W \cap U_\alpha \cap V) \]
+	is $ C^\infty $ in $ \sigma(W\cap U_\alpha \cap V) $, because it is the composition of $ C^\infty $ maps. Call $ \mathbb{B}_\alpha  = W\cap U_\alpha \cap V $. Then what we have shows is simply $ \forall p \in V \cap W $, there exists an open set $ p \in \mathbb{B}_\alpha \subset V\cap W $ for $  \alpha \in I $ and the map $ \psi \circ \inv{\sigma}  $ is $ C^\infty $ in $ \mathbb{B}_\alpha $. Since this holds for every $ p \in V \cap W $ this proves that $ \psi\circ \inv{\sigma} $ is $ C^\infty $ on $ \sigma (V\cap W) $. Similarly, we can show $ \sigma \circ \inv{\psi} $ is $ C^\infty $ on $ \psi(V\cap W) $, and this completes the proof.
+\end{proof}
+
+\begin{remark}
+	Note that in an equality like $ \psi \circ \inv{\sigma} =(\psi \circ \inv{\phi_\alpha})\circ (\phi_\alpha \circ \inv{\sigma}) $, two functions in the sides of the equality have different domains. So the equality sign here means that these two functions are equal on their common domain.
+\end{remark}
+
+
+\begin{definition}[Maximal atlas]
+	Let $ \mathcal{U} $ be an atlas for the manifold $ M $. Then $ \mathcal{U} $ is called maximal if it contains any other atlas of the manifold $ M $. Or equivalently, if $ \mathcal{M} $ is any other atlas containing $ \mathcal{U} $ then $ \mathcal{U} = \mathcal{M} $.
+\end{definition}
+
+We can use the notion of the maximal atlas to define a smooth manifold.
+
+\begin{definition}[Smooth manifold]
+	A topological manifold together with a maximal atlas is called a smooth manifold. The maximal atlas is also called a differentiable structure on $ M $.
+\end{definition}
+
+
+In practice, to show that a topological manifold is smooth, it is not necessary to exhibit a maximal atlas. Existence of any atlas will do so, as proposed by the following proposition.
+
+
+\begin{proposition}
+	Any atlas of a locally euclidean space is contained in a \emph{unique} maximal atlas.
+\end{proposition}
+
+\begin{proof}
+	Let $ \frak{U} = \set{(U_\alpha, \phi_\alpha)} $ be any atlas for the locally Euclidean space $ M $. Let $ S = \set{(V_i, \psi_i)} $ denote the set of all charts compatible with $ \frak{U} $. Construct the set $ \frak{M} = \frak{U} \cup S $. We claim that this set is a maximal atlas. Let $ (W,\psi) $ be a chart compatible with $ \frak{M} $. Then it should also be compatible with $ \frak{U} $, thus it is contained in the set $ S $, i.e. $ (W,\psi) \in S $, thus in $ \frak{M} $. This shows that the atlas $ \frak{M} $ is maximal.
+	
+	To show the uniqueness, let $ \frak{M}' $ be another maximal atlas. Since $ \frak{M}' $ is compatible with $ \frak{U} $, thus it is also compatible with $ \frak{M} $. But due to the construction it is contained in the new atlas, thus $ \frak{M}' \subset \frak{M} $. Thus the maximal atlas is unique.
+\end{proof}
+
+Considering the proposition above, we arrive at the following important observation.
+
+\begin{observation}[Showing a space is an smooth manifold]
+	To show that a space is an smooth manifold, we just need to show that the space is
+	\begin{itemize}
+		\item a Hausdorff topological space that is also second countable,
+		\item there exists any $ C^\infty $ atlas (not necessarily maximal).
+	\end{itemize}
+\end{observation}
+
+
+\section{Smooth maps on a manifold}
+In this section, we will study the notion of smooth maps between manifolds. We will use the notion of coordinate charts to transfer the notion of smooth maps from Euclidean spaces to manifolds. We start with the functions on manifolds.
+
+\begin{definition}[Smooth functions on manifolds]
+	Let $ f:M \to R $ be a function on a manifold. The function $ f $ is smooth at point $ p \in M $ if there exists a chart $ (U,\phi) $ such that $ p \in U $ and the map
+	\[ f \circ \inv{\phi}\ :\ \phi(U) \to \R \]
+	is smooth at $ p $. The function $ f $ is said to be $ C^\infty $ on $ M $ if it is $ C^\infty $ at every point of $ M $.
+\end{definition}
+\begin{remark} 
+	Note that the smoothness of the function $ f $ in the definition above is independent of the local chart $ (U,\psi) $ that we choose. Let $ (V,\psi) $ be another local chart containing the point $ p $. Then the map $ f \circ \inv{\psi} $ is also smooth at $ p $. Because
+	\[ f \circ \inv{\psi}: (f\circ \inv{\phi}) \circ (\phi \circ \inv{\psi}). \]
+	We know that the map $ (\phi \circ \inv{\psi} $ is smooth at $ p $ (since the local charts in an atlas are compatible). Also $ (f\circ \inv{\phi}) $ is smooth (we have assumed so). Thus $ f \circ \inv{\psi} $ is smooth.
+\end{remark}
+
+\begin{proposition}[Smoothness of real valued functions]
+	Let $ M $ be a manifold of dimension $ n $ with atlas $ \frak{U} $, and let $ f: M \to \R $ a real-valued function on $ M $. The following are equivalent:
+	\begin{enumerate}[(i)]
+		\item The function $ f : M \to \R $ is $ C^\infty $.
+		\item The manifold $ M $ has an atlas such that for every chart $ (U,\phi) $ in the atlas, $ f\circ \inv{\phi}: \phi(U) \to \R$ is $ C^\infty $.
+		\item For every chart $ (V,\psi) $ on $ M $, the function $ f\circ \inv{\psi}: \psi(V) \to \R $ is $ C^\infty $.
+	\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+	We prove a cyclic chain of implications $ (ii)\implies (i) \implies (iii) \implies (ii) $.
+	
+	\noindent $ (ii) \implies (i) $: Let $ p \in M $. From the assumption we know that there is an atlas with the desired property. Thus $ \exists (U_\alpha,\phi_\alpha)  $ that contains $ p $ and the function $ f\circ\inv{\phi}: \phi(U) \to \R $ is smooth. 
+	Thus $ f:M\to \R $ is smooth at $ p $, ans since the point $ p $ was arbitrary, then $ f $ is smooth on $ M $.
+	
+	\noindent $ (i) \implies (iii) $: Let $ p \in U $. From assumption we know that there is a coordinate open set $ U_\alpha $ such that $ f \circ \inv{\phi_\alpha}: \phi_\alpha(U)\to \R $ is smooth. Then we can write
+	\[ f\circ\inv{\psi} = (f\circ\inv{\phi_\alpha})\circ(\phi_\alpha \circ \inv{\psi}) \]
+	which shows that $ f\circ\inv{\psi}  $ is smooth (look at the remark below).
+	
+	\noindent $ (iii) \implies (ii) $: This follows immediately from the definition.
+\end{proof}
+
+%\begin{quote}
+%	{\color{orange} I am not sure about the remark below. I need to discuss this with Ata in one of our weekly meetings$\ \Downarrow\Downarrow\Downarrow\Downarrow$.}
+%\end{quote}
+%\begin{remark}
+%	Note that when we are saying ``let $ M $ be a manifold of dimension $ n $'' (in the first part of the proposition), what we really means is that the set $ M $ along with the collection of compatible charts (i.e. atlas) $ \frak{U} $ forms a manifold. In the part (iii) of the proposition above, when we say ``for every chart $ (V,\phi) $'' on manifold $ M $, what we really mean is $ (V,\phi) $ is compatible with $ \frak{U} $.
+%\end{remark}
+
+\begin{remark}
+	Considering the ``very important note'' at the beginning of this chapter, we need to emphasis again that in part $ (iii) $, when we say \emph{for every chart $ (V,\psi) $ on $ M $}, we mean a chart in the unique differentiable structure of the manifold that contains the atlas $ \frak{U} $.
+\end{remark}
+
+\begin{observation}[From W. Tu]
+	The smoothness conditions from the proposition above will be a recurrent motif through out the book. To prove the smoothness of an object, it is sufficient that a smoothness criterion hold on the charts of some atlas. Once the object is shown to be smooth, it then follows that the same smoothness criterion holds on every chart on the manifold.
+\end{observation}
+
+
+\begin{definition}[Pull back of a function]
+	Let $ F: N\to M $ be a a map between manifolds, and $ \phi: M \to \R $. Then the pullback of the function $ \phi $ by $ F $ is denoted by $ F*\phi $ is defined as 
+	\[ F^* \phi = \phi\circ F. \]
+\end{definition}
+
+\begin{remark}
+	In this terminology, a function $ f:M \to \R $ is smooth on a chart $ (U,\phi) $ if and only if the pullback $ (\inv{\phi})^* f$ is smooth on the subset $ \phi(U) $ of Euclidean space.
+\end{remark}
+
+\subsection{Smooth maps between manifolds}
+Here in this section we will discuss the smooth maps between manifolds. We will be able to recover the definition of the smooth functions on manifolds as a special case. 
+
+\begin{definition}[Smooth maps between manifolds]
+	\label{def:SmoothMapsBetweenManifolds}
+	Let $ M, N $ be manifolds with dimensions $ m,n $ respectively. A map $ F: M \to N $ is said to be smooth at point $ p \in M $, if there exists charts $ (U,\phi) $ and $ (V,\psi) $ such that $ p \in U $ and $ F(p) \in V $, and the function 
+	\[ \psi\circ F \circ \inv{\phi}: \R^m \supset \phi(\inv{F}(V) \cup U) \to \R^n  \]
+	is smooth at $ p $. The map $ F $ is said to be smooth on manifold $ M $ if it is smooth at every point of the manifold.
+\end{definition}
+\begin{remark}
+	The following figure helps to digest the definition above.
+	\input{Images/mapsBetweenManifolds.tex}
+\end{remark}
+
+\begin{remark}
+	Since the Euclidean space is indeed a smooth manifolds, then we can recover the definition of smooth functions on manifolds form the definition above. Let $ M $ be a manifold, and $ N = \R^n $ with the atlas $ \set{(\R^n, \mathds{1}: \R^n \to \R^n)} $, then we will have the notion of vector valued functions on manifold. By setting $ n=1 $ we will recover the definition of smooth function on manifold.
+\end{remark}
+
+In the following proposition we will be showing that the smoothness of the map is independent of the charts chosen, thus the smoothness of the map is well-defined.
+
+\begin{proposition}[Smoothness of maps between manifolds is well-defined]
+	\label{prop:SmoothnessWellDefined}
+	Suppose $ F: N \to M $ is $ C^\infty $ at $ p \in N $. If $ (U,\phi) $ is any chart in $ N $ that contains $ p $ and $ (V,\psi) $ is any chart in $ M $ that contains $ F(p) $, then $ \psi \circ F \circ \inv{\phi} $ is smooth at $ \phi(p) $.
+\end{proposition}
+
+\begin{proof}
+	Since $ F: N \to M $ is smooth at $ p \in N $, then there are charts $ (G,\gamma) $ and $ (L, \lambda) $ (from the corresponding maximal atlases) such that $ p \in G \subset N $ and $ F(p) \in L \subset M $ and the function 
+	\[ (\lambda \circ F \circ \inv{\gamma}): \gamma(\inv{F}(L) \cap G ) \to \lambda(F(G)) \]
+	is smooth at $ p $. Consider the charts $ (U,\phi) $ and $ (V,\psi) $ as above. Then the function
+	\[ \psi \circ F \circ \inv{\phi} = (\psi \circ \inv{\lambda})\circ(\lambda\circ F \circ \inv{\gamma})\circ(\gamma\circ \inv{\phi}). \]
+	Note that the equality sign above merely means the functions are equal on their common domain, as the function in RHS and the function in LHS have different domains. We know that the coordinate maps $ \psi, \lambda $, and $ \gamma, \phi$ are compatible respectively. Thus the function $ \psi \circ F \circ \inv{\phi} $ is smooth at $ \phi(p) $. See the remark below for mode details.
+\end{proof}
+
+\begin{remark}
+	In the proof above and in the equality 
+	\[ \psi \circ F \circ \inv{\phi} = (\psi \circ \inv{\lambda})\circ(\lambda\circ F \circ \inv{\gamma})\circ(\gamma\circ \inv{\phi}) \]
+	thus equality sign does not indicate that these function are equal, but it just indicates that these two functions are equal in their common domain. To be more clear, for the function in the LHS we have
+	\[ \psi \circ F \circ \inv{\phi} : \phi(\inv{F}(V)\cap U) \to \psi(F(U)). \]
+	But for the function in the LHS we have
+	\[ (\psi \circ \inv{\lambda})\circ(\lambda\circ F \circ \inv{\gamma})\circ(\gamma\circ \inv{\phi}):
+	\phi(\inv{F}(L\cap V) \cap (G\cap U)) \to \psi(F(L\cap V))
+	 \]
+\end{remark}
+
+\begin{proposition}[Smoothness of maps in terms of charts]
+	\label{prop:smoothnessInTermsOfCharts}
+	Let $ N $ and $ M $ be smooth manifolds, and $ F: N \to M $ a continuous map. The following are equivalent:
+	\begin{enumerate}[(i)]
+		\item The map $ F: N\to M $ is $ C^\infty $.
+		\item There are atlases $ \frak{U} $ for $ N $ and $ \frak{V} $  for $ M $ such that for every chart $ (U,\phi) $ in $ \frak{U} $ and $ (V,\psi) $ in $ \frak{V} $ the map
+		\[ \psi \circ F \circ \inv{\phi}: \phi(\inv{F}(V)\cap U) \to \R^m  \]
+		is $ C^\infty $.
+		\item For every chart $ (U,\phi) $ on $ N $ and $ (V,\psi) $ on $ M $, the map
+		\[ \psi \circ F \circ \inv{\phi}: \phi(U \cap \inv{F}(V)) \to \R^m \]
+		is $ C^\infty $.
+	\end{enumerate}
+\end{proposition}
+\begin{proof}
+	We will prove this by showing a cyclic chain of implications $ (ii)\implies (i)\implies (iii)\implies (ii) $.
+	\begin{itemize}
+		\item $ (ii)\implies (i) $. Let $ p \in N $. Then by hypothesis there are charts $ (U,\phi) $ and $ (V,\psi) $  such that $ p \in U $ and $ F(p) \in V $ and the map 
+		\[ \psi \circ F \circ \inv{\phi}: \phi(\inv{F}(V)\cap U) \to \R^m \]
+		is smooth at $ \phi(p) $, thus $ F $ is smooth at $ p $. Since $ p $ is arbitrary, then $ F $ is smooth on $ N $.
+		\item $ (i) \implies (iii) $. This follows immediately from \autoref{prop:SmoothnessWellDefined}.
+		\item $ (iii) \implies (ii) $. Since $ N, M $ are smooth manifolds, then they have maximal atlases. Let $ \frak{U} $ be the maximal atlas for $ N $ and $ \frak{V} $ be the maximal atlas for $ M $. This $ (ii) $ follows immediately form $ (iii) $.
+		
+	\end{itemize}
+\end{proof}
+
+\begin{proposition}[Composition of $ C^\infty $ maps]
+	If $ F:N\to M $ and $ G:M\to P $ are $ C^\infty $ maps of manifolds, then the composite $ G\circ F: N \to P $ is a smooth map.
+\end{proposition}
+
+\begin{proof}
+	We will demonstrate two proofs for this proposition to demonstrate what happens if we do not notice a possible level of abstraction. The first proof below is a very crude, hard-core, direct proof, that seems to be tough and easy to make mistakes, just because it is not encapsulating some of the details into another proposition. However, for the second proof, it will encapsulate some of the details into the results of the \autoref{prop:smoothnessInTermsOfCharts}, which will allows us to do a more high level thinking.
+	
+	\textbf{proof 1.} Let $ p \in M $. Since $ F $ is smooth, then $ \exists\ (U,\gamma) $ chart for $ M $ and $ \exists\ (V,\phi) $ chart for $ M $ such that $ p \in U $ and $ F(p) \in V $ and the map
+	\[ \phi\circ  F \circ \inv{\gamma}: \gamma(\inv{F}(V)\cap U) \to \phi(V)  \]
+	is smooth at $ \gamma(p) $. Also, since $ G $ is smooth, then at $ F(p) $, there exists the charts $ (W,\lambda) $ for $ M $ and $ (Y,\psi) $ for $ P $ such that $ F(p) \in W $ and $ G(F(p)) \in Y $ and the map
+	\[ \psi\circ G \circ \inv{\lambda}: \lambda(\inv{G}(Y)\cap W) \to \psi(Y)  \]
+	is smooth at $ \lambda(F(p)) $. Also note that since the charts $ (W,\lambda) $ and $ (V,\phi) $ for $ M $ are compatible (they both are chosen from the maxima atlas), then the maps
+	\[ \phi \circ \inv{\lambda}: \lambda(W\cap V) \to \phi(W\cap V) \quad \text{and}\ \quad \lambda\circ \inv{\phi}:\phi(W\cap V) \to \lambda(W\cap V) \]
+	are both smooth. Now it is time to glue all of these pieces together to infer the smoothness of the composite function $ G\circ F $. Based on these pieces, the function
+	\[ \psi \circ (G \circ F) \circ \inv{\gamma} = ( \psi\circ G \circ \inv{\lambda})\circ (\lambda \circ \inv{\phi}) \circ (\phi\circ  F \circ \inv{\gamma}) : \gamma(\inv{F}(\inv{G}(Y)\cap V\cap W)\cap U)\to \psi(G(F(p))) \]
+	is smooth at $ \gamma(p) $. Since the point $ p \in N $ was arbitrary, then the map $ G\circ F $ is smooth on $ M $.
+	
+	\textbf{proof 2.} In this proof, we will hide much of the details of the proof 1 in higher level of abstractions encapsulated in \autoref{prop:smoothnessInTermsOfCharts}.  Since $ F $ is smooth, then ($ (i)\implies (iii) $ of \autoref{prop:smoothnessInTermsOfCharts}) for every chart $ (U,\gamma) $  for $ M $ and $ (V,\phi) $  for $ M $ the map
+	\[ \phi\circ  F \circ \inv{\gamma}: \gamma(\inv{F}(V)\cap U) \to \phi(V)  \]
+	is smooth.. Also, since $ G $ is smooth, then for every chart  $(Y,\psi) $ for $ P $ the map
+	\[ \psi \circ G \circ \inv{\phi}: \phi(\inv{G}(Y)\cap V) \to \psi(Y)  \]
+	is smooth. Since the composition of smooth real vector valued functions is smooth, then 
+	\[ \psi\circ(G\circ F)\circ\inv{\gamma} = (\psi\circ G\circ \inv{\phi})\circ(\phi \circ F \circ \inv{\gamma}) \]
+	is smooth. Since for every chart $ (U,\gamma) $ and $ (Y,\phi) $ the function $ \psi\circ(G\circ F)\circ\inv{\gamma} $ is smooth, then by $ (iii)\implies (i) $ of \autoref{prop:smoothnessInTermsOfCharts} we proved that $G\circ F $ is smooth.
+\end{proof}
+
+
+\section{Diffeomorphisms}
+We start with the definition of diffeomorphism.
+
+\begin{proposition}[Diffeomorphism between manifolds]
+	A map $ F:M\to N $ between manifolds $ M $ and $ N $ is called a diffeomorphism if
+	\begin{itemize}[nosep]
+		\item $ F $ is a bijection,
+		\item $ F $ is $ C^\infty $, and
+		\item $ \inv{F} $ is also $ C^\infty $.
+	\end{itemize}
+\end{proposition}
+
+The following observation box summarizes the differences between homeomorphisms and diffeomorphisms.
+
+\begin{observation}[Difference between homeomorphisms and diffeomorphisms]
+	homeomorphisms are isomorphisms in the category of topological spaces. However, the diffeomorphisms are isomorphisms in the category of smooth manifolds, where the isomorphism preserves the differential structures. The following figure (original idea from\footnote{\href{https://www.math.unipd.it/~maraston/An2Byaounde/An2BCam_1213_1_mfds.pdf}{ mathematical analysis lecture notes.}}) demonstrates some of these ideas.
+\end{observation}
+	\input{Images/diffeoMorphVsHomeomorph.tex}
+	
+According to the two following propositions, in a \emph{smooth} manifold, the coordinate maps are diffeomorphisms, and conversely, any diffeomorphism from an open subset of the manifold to an open subset of a Euclidean space can serve as a coordinate map. 
+
+\begin{proposition}[Coordinate maps are diffeomorphisms]
+	\label{propositio:coordinateMapsAreSmooth}
+	If $ (U,\phi) $ is a chart on a manifold $ M $ of dimension $ n $, then the coordinate map $ \phi:U\to\phi(\phi) \in \R^n$ is a diffeomorphism.
+\end{proposition}
+\begin{proof}
+	For the proof, we will use the notion of smooth maps between manifolds in a smart way! First, observe that since $ \phi $ is a coordinate map, thus it is automatically a homeomorphism. Thus we just need to show that $ \phi $ and $ \inv{\phi} $ are smooth. Let $ U $ be a manifold with an atlas $ \set{(U,\phi)} $. Also, let $ \phi(U) \subset\R^n $ be a manifold (this is indeed a manifold as it is an open subset of a Euclidean space), with an atlas $ \set{(\phi(U),\mathds{1}_{\phi(U)})} $. In this point of view, the coordinate map $ \phi $ is in fact a map between manifolds. This is smooth, since 
+	\[ \mathds{1}_{\phi(U)}\circ \phi\circ \inv{\phi}: \underbrace{\phi(U \cap \inv{\phi}(\phi(U)))}_{\phi(U)} \to \phi(U) \]
+	is smooth, then by \autoref{prop:smoothnessInTermsOfCharts} $ (ii) \implies (i) $, the map $ \phi $ is smooth.
+	
+	To show the smoothness of the map $ \inv{\phi} $, we observe that this is a map from the manifold with atlas $ \set{(\phi(U),\inv{\phi})} $ to the manifold with atlas $ \set{(U,\phi)} $. Since the following map
+	\[ \phi \circ \inv{\phi} \circ \mathds{1}_{\phi(U)}: \phi(U) \to \phi(U) \]
+	is smooth (since it is just the identity map), then by \autoref{prop:smoothnessInTermsOfCharts} $ (ii) \implies (i) $ the map $ \inv{\phi} $ is smooth.
+	
+	Putting these two results together, we have shown that the coordinate map $ \phi $ is indeed a diffeomorphism from $ U $ to $ \R^n $.
+\end{proof}
+
+
+The following proposition is the converse of the proposition above.
+
+\begin{proposition}
+	Let $ U $ be an open subset of a manifold $ M $ of dimension $ n $. If $ F: U \to F(U) \subset \R^n $ is a diffeomorphism onto an open subset of $ \R^n $, then $ (F,U) $ is a chart in the differentiable structure of $ M $.
+\end{proposition}
+\begin{proof}
+	Since $ F $ is a diffeomorphism, then it is certainly a homeomorphism. 
+	Thus we just need to show that $ (U,F) $ is a chart, i.e. compatible with the maximal atlas of the manifold (note that since $ M $ is an smooth manifold, then there exists a maximal atlas). Let $ p \in  U $ and let $ (V,\psi) $ be a chart that contains $ p $. Then consider the function
+	\[ F \circ \inv{\psi}: \psi(U\cap V) \to F(U\cap V) \qquad \psi\circ \inv{F}: F(U\cap V) \to \psi(U\cap V). \]
+	By the proposition above, we know that since $ \phi $ is a coordinate chart of a smooth manifold, then $ \phi $ and $ \inv{\phi} $ are both smooth. Then the functions above are a composition of smooth functions, thus they are smooth as well. This proves that $ (U,F) $ is compatible with the chart $ (V,\psi) $. Since this chart was arbitrary, then it is compatible with the whole atlas, thus $ (U,F) $ is a chart. Also, by the maximality of the atlas, $  (U,F) $ is contained in the atlas.
+\end{proof}
+
+Now using the notion of smooth maps between manifolds, we can define a Lie group.
+\begin{definition}[Lie group]
+	A \emph{Lie group} is a $ C^\infty $ manifold $ G $ having a group structure such that the multiplication map
+	\[ \mu: G\times G \to G \]
+	and the inverse map
+	\[ \iota: G\to G, \qquad \iota(x) = \inv{x}, \]
+	are both $ C^\infty $.
+\end{definition}
+
+\begin{remark}
+	Similar to the definition above, a topological group is a topological space having a group structure such that the multiplication and the inverse maps are both continuous. Note that a topological group is required to be a topological space, but not a topological manifold.
+\end{remark}
+
+The followings are some examples of Lie groups. We can easily check the group operation and the inverse map are both smooth by using the definitions that we have had above.
+
+\begin{enumerate}[(i)]
+	\item The Euclidean space $ \R^n $ is a Lie group under addition.
+	\item The set $ \C^{\times} $ of nonzero complex numbers is a Lie group under multiplications.
+	\item Subsequently, the unit circle in $ \C^\times $ is a Lie group under multiplication.
+\end{enumerate}
+
+
+\section{Partial Derivatives}
+In this section we will define the notion of partial derivatives of the maps between manifolds. We will use the notion of coordinate charts for this definition. Let $ N $ be a manifold of dimension $ n $, and let $ (r^1,\cdots,r^n) $ be the standard coordinate function on $ \R^n $. For a chart $ (U,\phi) $ on the manifold, $ \phi $ is a vector valued function on manifold. We denote its coordinate functions as $ x^i $ where $ x^i = r^i \circ \phi $. This is just a fancy (but very useful) way of writing the $ i\text{-th}$ coordinate of the vector valued function $ \phi $. Now we can define the directional derivatives for the functions on manifolds.
+
+\begin{definition}[Directional derivative]
+	\label{def:DirectionalDerivativeOnManifold}
+	Let $ N $ be a manifold, and $ f:N \to \R $ an smooth function. Let $ p\in U $ and $ (U,\phi) $ any chart containing $ p $, where $ \phi = (x^1,\cdots,x^n) $. We define the direction derivative of $ f $ at $ p $ as 
+	\[ \frac{\partial f}{\partial x^i}(p) = \frac{\partial (f\circ \inv{\phi})}{\partial r^i}(\phi(p)) = \frac{\partial}{\partial r^i}\big|_{\phi(p)} (f\circ\inv{\phi}). \]
+\end{definition}
+
+\begin{remark}
+	In the definition above, we can re-write it as
+	\[ \frac{\partial f}{\partial x^i}(p) =\frac{\partial f}{\partial x^i}(\underbrace{\inv{\phi}(\phi(p))}_{p}) = \frac{\partial (f\circ \inv{\phi})}{\partial r^i}(\phi(p)). \]
+	We can now write
+	\[ \frac{\partial (f\circ \inv{\phi})}{\partial r^i} =\frac{\partial f}{\partial x^i} \circ \inv{\phi} = [\inv{\phi}]^* [\frac{\partial f}{\partial x^i}],  \]
+	where shows that $ \frac{\partial (f\circ \inv{\phi})}{\partial r^i} $ is the pull back of the function $ \frac{\partial f}{\partial x^i} $ when viewed as a function on the manifold. Since the pull back of $ \frac{\partial f}{\partial x^i} $ is smooth (as $ f\circ \inv{\phi} $ is smooth), then $ \frac{\partial f}{\partial x^i} $ is smooth when viewed as a real valued function on the manifold.
+\end{remark}
+
+\begin{proposition}
+	Suppose $ (U,x^1,\cdots,x^n) $ is a chart on a manifold. Then we have
+	\[ \frac{\partial x^i}{\partial x^j} = \delta^i_j. \]
+\end{proposition}
+\begin{proof}
+	We view $ x^i $ as a real valued function on the manifold. For a point $ p $ in the manifold, we can use the definition of partial derivative to write
+	\[ \frac{\partial x^i}{\partial x^j}(p) = \frac{\partial (x^i \circ \inv{\phi})}{\partial r^j} = \frac{\partial (r^i \circ \phi \circ \inv{\phi})}{\partial r^j} = \frac{\partial r^i}{\partial r^j} = \delta^i_j. \]
+	Note that we have used the fact that $ \phi = (x^1,\cdots,x^n) $.
+\end{proof}
+
+Using the notion of partial derivatives, we can define the notion of Jacobian matrix for the maps between manifolds.
+
+\begin{definition}[Jacobian matrix of maps between manifolds]
+	Let $ F:N \to M $ be a smooth map, and let $ (U,\phi) = (U,x^1,\cdots,x^n) $ and $ (V,\psi) = (V,y^1,\cdots,y^m) $ be charts on $ N $ and $ M $ respectively such that $ F(U) \subset V $. Denote by
+	\[ F^i = y^i \circ F = r^i \circ \psi \circ F : U \to \R \]
+	the $ i\text{-th} $ component of $ F $ in the chart $ (V,\psi) $. The following matrix
+	\[ J = \left[ \frac{\partial F^i}{\partial x^j} \right] \]
+	is called the Jacobian matrix of $ F $ relative to the charts given as above. In case $ M,N $ have the same dimension, the determinant of this matrix is called the Jacobian determinant of $ F $ relative to the two charts. The Jacobian determinant is also written as 
+	\[ \det(J) = \frac{\partial (F^1,\cdots,F^n)}{\partial(x^1,\cdots,x^n)}. \]
+\end{definition}
+
+\section{Inverse function theorem}
+As we studied before, on a manifold $ N $ of dimension $ n $, a diffeomorphism $ f: U \to \R^n $ is indeed a coordinate map. In this section, we want to study the conditions under which a smooth map between manifolds can be upgraded to a local diffeomorphism. For this end, we will use a slight generalization of the inverse function theorem in the Euclidean spaces.
+
+\begin{definition}[Inverse function theorem in Euclidean spaces]
+	Let $ F: W \to \R^n $ where $ W \subset \R^n $ be a smooth map. We say this function is a \emph{local diffeomorphism} or locally invertible at point $ p $, if there exists an open set $ U \subset W $ containing $ p $ such that the Jacobian determinant is non-zero at $ p $, i.e.
+	\[ \det \left[  \frac{\partial F^i}{\partial r^j} \right](p) \neq 0.  \]
+\end{definition}
+We will skip proving this theorem here and we will just use it to prove the generalized version of this theorem for smooth maps between manifolds.
+
+\begin{theorem}[Inverse function theorem for manifolds]
+	\label{thm:InverseFunctionTheoremForManifolds}
+	Let $ F: N \to M $ be a smooth map between two manifolds of the same dimension, and $ p \in N $. Suppose for some charts $ (U,\phi) = (U,x^1,\cdots,x^n) $ about $ p $ in $ N $ and $ (V,\psi) = (V,y^1,\cdots,y^n)$ about $ F(p) $ in $ M, F(U) \subset V $. Set $ F^i = y^i \circ F $. Then $ F $ is locally invertible at $ p $ if and only if its Jacobian determinant $ \det(\partial F^i/\partial x^j)(p) $ is nonzero.
+\end{theorem}
+\begin{proof}
+	First, observe the proof structure in the observation box below. We just need to show two following bi-directional implications.
+	\[ F \text{ is locally invertible} \Longleftrightarrow \psi\circ F \circ \inv{\phi} \text{ is locally invertible.} \]
+	and also
+	\[ \det \left[ \frac{\partial (\psi\circ F \circ \inv{\phi})^i}{\partial r^j}  \right](\phi(p)) \neq 0 \Longleftrightarrow \det\left[ \frac{\partial F^i}{\partial x^j} \right](p) \neq 0. \]
+	
+	For the first bi-directional implication since $ \phi,\psi $ are coordinate maps, thus are invertible (they are bijective) and from the composition of functions it follows that the bi-directional implication is true.
+	
+	For the second bi-directional implication we start with the forward direction. We can write
+	\[ \frac{\partial (\psi\circ F \circ \inv{\phi})^i}{\partial r^j} = \frac{\partial (r^i \circ \psi \circ F \circ \inv{\phi})}{\partial r^j} = \frac{\partial(y^i\circ F\circ \inv{\phi})}{\partial r^j} = \frac{\partial( F^i \circ \inv{\phi})}{\partial r^j} =  \frac{\partial F^i}{\partial x^j}. \]
+	This proves the forward direction. We can do this starting from the last equation which proves the backward direction.
+\end{proof}
+
+\begin{observation}[Some hidden treasures!]
+	When proving the theorem above, we can figure out what should be the structure of the proof, even if we can not demonstrate the proof steps completely. For me, there is some sense of dimensional analysis if physics in what I am saying. By looking only at the ingredients of the problem/theorem/etc, we can figure out what is the possible way that we can combine those ingredients to achieve to a full proof. The following figure reveals this structure for the proof.
+\end{observation}
+	\input{Images/InverseFunctiontheoremProofIdea.tex}
+	
+\begin{corollary}[Maps as local coordinate system]
+	\label{cor:MapsAsLocalCoordinateSystems}
+	Let $ N $ be a manifold of dimension $ n $. A set of $ n $ smooth functions $ F^1,\dots,F^n $ defined on a coordinate neighborhood $ (U,x^1,\cdots,x^n) $ of a point $ p \in N $ forms a coordinate system about $ p $ if and only if the Jacobian determinant 
+	\[ \left[  \frac{\partial F^i}{\partial x^j}  \right](p) \neq 0. \]
+\end{corollary}
+
+
+
+\begin{proof}
+	define the vector valued function as $ F = (F^1,\cdots,F^n) $. Then we have
+	\begin{itemize}
+		\item[$\,$] $ \det[\partial F^i/\partial x^j] \neq 0 $.
+		\item[$\Longleftrightarrow$] $ F $ is locally invertible.
+		\item[$\Longleftrightarrow$] There is a neighborhood $ W $ containing $ p $ such that $ F:W \to F(W) \subset \R^n $ is a diffeomorphism.
+		\item[$\Longleftrightarrow$] $ (W,F) $ is a coordinate system in the maximal atlas of $ N $.
+	\end{itemize}
+\end{proof}
+
+
+
+
+\section{Quotients}
+The quotient construction is a process of simplification. Starting with an equivalence relation on a set, we identify each equivalence class to a point. If the original set is a topological space, then it is always possible to give the quotient space a topology so that the natural projection map (i.e. $ \pi: S\to S/\sim\ ,\ x\mapsto [x] $) becomes continuous. However, if the original set is a manifold, then it is not always true that the quotient set is also manifold, as the conditions like being Hausdorff or second countable might break.
+
+\begin{definition}[Quotient topology]
+	Let $ (X,\mathcal{T}) $ be a topological space, and $ \sim $ an equivalence relation with $ \pi $ as the natural projection map. A set $ U \in X/\sim $ is open, if and only if $ \inv{\pi}(U) \in \mathcal{T} $, i.e. open. 
+\end{definition}
+\begin{remark}
+	In the definition above, clearly the empty set $ \emptyset $ and the whole quotient space $ X/\sim $ are open. That is because $ \inv{\pi}(\emptyset) = \emptyset \in \mathcal{T} $ (since the equivalence relation $ \sim $ partitions the set), and $ \inv{\pi}(X/\sim) = X \in \mathcal{T}  $. Also, for any map, in particular $ \pi $ we have
+	\[ \inv{\pi}(\bigcup_\alpha U_\alpha) = \bigcup_\alpha \inv{\pi}(U_\alpha), \qquad \inv{\pi}(\bigcap_i U_i) = \bigcap_i \inv{\pi}(U_i) \]
+	where $ \inv{\pi}(U) $ means the pre-image of the set $ U $ under the map $ \phi $. This shows that an arbitrary union of the open sets in the quotient space is open, and also a finite intersection of open sets of the quotient space is also open. Thus the space $ (X/\sim, \mathcal{T}') $ where $ U \in \mathcal{T}' $ if and only if $ \inv{\pi}(U) \in \mathcal{T} $ is a topological space.
+	\newline 
+	\noindent Also Note that since $ \inv{\pi} $ maps open sets of $ X/\!\sim $ to the open sets of $ X $, then $ \pi $ is automatically (i.e. by design) a continuous function.
+\end{remark}
+
+\subsection{Continuity of a map on a Quotient}
+
+Let $ S $ be a topological space and $ \sim $ and equivalence relation on this set. Give the quotient set $ S/\sim $ the quotient topology. Then a function $ f:S\to Y $ from $ S $ to another topological space, where it is constant for all elements in the same equivalence class. This map then induces a map on $ S/\sim $, i.e. $ \bar{f}: S/\sim \to Y $ where
+ \[ \bar{f}([p]) = f(p) \qquad \text{for $ p\in S $}. \] 
+ or in other words
+ \[ \bar{f}(\pi(p)) = f(p) \qquad \text{or equivalently} \qquad \bar{f}\circ\pi  = f. \]
+
+\begin{proposition}
+	\label{prop:ContinousInducedmap}
+	The induced map $ \bar{f}:S/\sim \to Y $ is continuous if and only if the map $ f: S \to Y $ is continuous.
+\end{proposition}
+\begin{solution}
+	First, we will show that continuity of $ \bar{f} $ implies the continuoity of $ f $. Let $ U \in \mathcal{T}_Y $. Since $ \bar{f} $ is continuous, then $ \inv{\bar{f}}(U) \in \mathcal{T}_{S/\sim} $. Furthermore, since $ \pi $ is continuous then $ \inv{\pi}(\inv{\bar{f}}(U)) \in \mathcal{T}_{S} $, thus $ (\bar{f}\circ \pi) $ is continuous. Since $  f = \bar{f}\circ \pi $, then $ f $ is also continuous. As an alternative prove, we could start with the fact that $ f = \bar{f}\circ \pi $, and since $ \bar{f} $ and $ \pi $ are both continuous, then so is $ f $.
+	
+	For the converse, we want to show that the continuoity of $ f $ implies the continuoity of $ \inv{f} $. Let $ V \in \mathcal{T}_Y $. Since $ f $ is continuous, then $ \inv{f}(V) \in \mathcal{T}_S $. On the other hand, we have $ \inv{f}(V) =( \inv{\pi}\circ \inv{\bar{f}})(V) $. Since $ \inv{\pi} $ sends open sets to open sets, then $ \bar{f}(V) \in \mathcal{T}_{S/\sim} $. Thus $ \bar{f} $ is continuous.
+\end{solution}
+
+\begin{definition}[Identification of a subset to a point]
+	Let $ S $ be a topological space and $ A \subset S $. Let $ \sim $ be s relation on $ S $ where 
+	\[ x\sim x \qquad \forall x \in S, \]
+	and also
+	\[ x\sim y \qquad \forall x,y \in A. \]
+	This is an equivalence relation on $ S $. We call the quotient space $ S/\sim $ is obtained from $ S $ by identifying the set $ A $ to a point.
+\end{definition}
+
+\section{Hausdorff and Second Countablity Conditions}
+The quotient construction often does not preserve the second countablity and Hausdorff property of a topological space. We start with the following proposition.
+
+\begin{proposition}
+	Let $ X $ be a topological space, and $ \sim $ an equivalence relation on $ X $. If $ X/\sim $ is Hausdorff then equivalent class $ [p] $ of any $ p \in X $ is closed in $ X $.
+\end{proposition}
+\begin{proof}
+	In a Hausdorff space, every singleton set is closed. let $ p \in X $. Then $ \set{\pi(p)} $ is closed in $ X/\sim $. Since $ \pi $ is continuous, then the pre image $ \inv{\pi}(\set{\pi(p)}) = [p] $ is closed in $ X $. This completes the proof.
+\end{proof}
+
+\begin{remark}
+	In the proof above, we claimed that in a Hausdorff space, every singleton set is closed. To see this, let $ p \in S $ a Hausdorff space. Consider the singleton $ \set{p} $ and its complement, i.e. $ S - \set{p} $. We claim that set $ S - \set{p} $ is open. To show this, let $ U \in \mathcal{T} $ where $ p \in U $. Since $ S $ is Hausdorff, then there exists an open set $ V \in \mathcal{T} $ such that contains any point $ q \in S - \set{p} $ and do not overlap with $ U $. This $ q \in V \subset S - \set{p} $. Thus for every point $ S - \set{p} $ we can find an open set containing $ q $ that is contained in the set $ S - \set{p} $.
+\end{remark}
+
+\begin{definition}[Open equivalence relation]
+	Let $ \sim $ be an equivalence relation defined on a set. This equivalence relation is said to be open, if $ \pi(U) $ is open for some open set $ U $
+\end{definition}
+\begin{remark}
+	\label{remark:OpenEquivReleation}
+	We can give a useful characterization of open equivalence relations. Let $ U $ be an open set. Then $ \pi(U) $ being open means that $ \inv{\pi}(\pi(U)) $ is also open. Thus an equivalence relation is open if and only if 
+	\[ \inv{\pi}(\pi(U)) = \bigcup_{x \in  U} [x] \]
+	is open.
+\end{remark}
+
+\begin{theorem}
+	\label{thm:QuotientIsHausdorff}
+	Let $ S $ be a topological space, and $ \sim $ an open equivalence relation defined on $ S $. Then $ S/\sim $ is Hausdorff if and only if the graph $ R $ of the relation is closed in $ S\times S $.
+\end{theorem}
+\begin{proof}
+	First, consider the following chain of bidirectional implications.
+	
+	\begin{itemize}[noitemsep]
+		\item [] $ R $ is closed in $ S\times S $
+		\item [$ \biImp $] $ S\times S - R $ is closed in $ S\times S $
+		\item [$ \biImp $] For all $ (x,y) \in (S\times S) - R $, there exist an open cell $ U\times V \ni (x,y) $ such that $ U\times V \cap R = \emptyset $.
+		\item [$ \biImp $] For all pair $ x,y \in S $ where $ x\not\sim y $, there exists open sets $ U\ni x $ and $ V \ni y $ such that no element of $ U $ is equivalent to an element of $ V $. 
+		\item [$ \biImp $] For all two points in $ [x]\neq [y] \in S/\sim $ there exists open sets $ U\ni x,V \ni y $ open in $ S $ such that $ \pi(U) \cap \pi(V)  = \emptyset $. 
+	\end{itemize}
+		Now what remains to show is to show that the last statement (call it statement *) is equivalent to being Hausdorff. If $ * $ is true, then since $ \pi $ is open, then $ S/\sim $ being Hausdorff follows immediately. For the converse, if $ S/\sim $ Hausdorff, then for $ [x]\neq [y] \in S/\sim $ we can find open sets $ A,B $ containing $ [x],[y] $ respectively where $ A \cap B = \emptyset $. From the surjectivity of $ \pi $  we know that $ \pi(\inv{\pi}(A)) = A $. Thus let $ U = \inv{\pi}(A) $ and $ V = \inv{\pi}(B) $, thus the statement (*) follows.
+\end{proof}
+
+A very simple use of the theorem above is that consider a case where the equivalence relation is simply the equality. Then we will have the following corollary.
+
+\begin{corollary}[Hausdorff characterization]
+	\label{coro:HuasdorffCarachterization}
+	Let $ S $ be a topological space. This space is Hausdorff if and only if the diagonal $ \Delta = \set{(x,x) \in S\times S} $ is closed in $ S\times S $.
+\end{corollary}
+\begin{remark}
+	Surprisingly, we can prove \autoref{thm:QuotientIsHausdorff} using the corollary above. See \autoref{problem:CorollaryImpliedTheorem_HauadorffCharacter}.
+\end{remark}
+
+Similar to our procedure above, we can find some conditions under which a quotient space of a second countable space is still second countable. This criterion is given in the proposition below.
+\begin{proposition}[Second Countability of a Quotient Space ]
+	\label{prop:secondCountalbeQuotientSpace}
+	Let $ X $ be a second countable topological space, and let $ \sim $ be an equivalence relation. The quotient space $ X/\sim $ is second countable of $ \sim $ is an \emph{open equivalence relation}, i.e. $ \pi $ is an open map.
+\end{proposition}
+\begin{proof}
+	We need to show that $ X/\sim $ posses a countable basis for its open sets. We claim that if $ \mathcal{B} = \set{B_\alpha} $ is countable basis for $ X $, then $ \set{\pi(B_\alpha)} $ is a countable basis for $ X/\sim $. To show this let $ U \subset X/\sim $ be an open set. By continuoity of $ \inv{\pi} $ the set $ \inv{\pi}(U) $ is also open in $ X $. Thus we can write
+	\[ \inv{\pi}(U) \subset \bigcup_{\alpha \in I} B_\alpha. \] 
+	Then we can write
+	\[ U \subset \pi( \bigcup_{\alpha \in I} B_\alpha) = \bigcup_{\alpha\in I} \pi( B_\alpha). \]
+	Thus $ \set{\pi(B_\alpha)} $ is indeed a countable basis for $ X/\sim $. This completes the proof.
+\end{proof}
+
+\section{Real Projective Space}
+Here in this section we will review one of the very interesting manifolds that we can construct by quotient of another manifold. We start with the definition.
+
+\begin{definition}[Real Projective Space]
+	Consider the set $ \R^{n+1} - \set{0} $. Define the equivalence relation $ \sim $ as follows
+	\[ x \sim y \qquad \Longleftrightarrow\qquad x = ty \quad \text{for some $ t \in \R $} \]
+	where $ x,y \in \R^n - \set{0} $. The quotient set under this equivalence relation is called the real projective space or $ \R P^n $.
+\end{definition}
+
+\begin{remark}
+	When I was writing this, it came to me what do we need to generalize this notion of projective plane to any vector space. Because the only ingredients that we use in this definition is the vector space properties of the underlying set. 
+\end{remark}
+
+Geometrically, the real projective plane can be tough of the set of all point passing through the origin. On the other hand, we know that every line passing through the origin hits the unit sphere $ S^n $ in exactly two antipodal points. The following proposition reveals the connections between the some quotient structure of unit spheres and the real projective space. 
+
+\begin{proposition}
+	Define an equivalence relation on $ S^n $ by identifying the antipodal points. I.e. 
+	\[ x \sim y \quad \Longleftrightarrow \quad x = \pm y. \]
+	The quotient set $ S^n/\sim $ is homeomorphic to the real projective space.
+\end{proposition}
+\begin{proof}
+	To show this we need to find homeomorphisms between these two sets. Define $ f: \R^{n+1}-\set{0} \to S^n$ be
+	\[ f(x) = \frac{x}{\norm{x}} \]
+	where $ \norm{x} = (\sum_{i}x_i^2)^{1/2} $ is the modulus of the point $ x=(x_1,\cdots,x_n) $. This function is continuous since the denominator is never zero and both nominator and denominator are continuous functions (note that $ \norm{x} $ is a composition of smooth functions). Consider the following diagram. 
+%	\begin{figure}[h!]
+%		\centering
+%		\includegraphics[width=0.3\linewidth]{Images/conuttativeDiagranQuestion1.png}
+%	\end{figure}
+
+% https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXFJee24rMX0tXFx7MFxcfSJdLFsyLDAsIlNebiJdLFswLDIsIlxcUiBQIF5uIl0sWzIsMiwiU15uL1xcc2ltIl0sWzAsMSwiZiJdLFswLDIsIlxccGlfMSIsMl0sWzEsMywiXFxwaV8yIl0sWzIsMywiXFxiYXJ7Zn0iLDJdXQ==
+	\[\begin{tikzcd}
+		{\R^{n+1}-\{0\}} && {S^n} \\
+		\\
+		{\R P ^n} && {S^n/\sim}
+		\arrow["f", from=1-1, to=1-3]
+		\arrow["{\pi_1}"', from=1-1, to=3-1]
+		\arrow["{\pi_2}", from=1-3, to=3-3]
+		\arrow["{\bar{f}}"', from=3-1, to=3-3]
+	\end{tikzcd}\]
+	The function $ \bar{f}: \R P^n \to S^n/\sim $ is a function induced by $ f $ given by
+	\[ \bar{f}([x]) = \left[\frac{x}{\norm{x}}\right] \in S^n/\sim. \]
+	This function is well defined as it dose not depend on the representative of the equivalence class that we choose. Since for any other element in the equivalence class we will have
+	\[ \bar{f}([tx]) = \left[ \frac{tx}{\norm{tx}} \right]=\left[ \frac{tx}{\abs{t}\norm{x}} \right] = \left[ \pm \frac{x}{\norm{x}} \right] = \left[ \frac{tx}{\norm{tx}} \right]  = \bar{f}([x]).  \]
+	Since the function \[ \pi_2\circ f \] is continuous, then the function $ \bar{f} $ is also continuous. Next, define $ g: S^n \to R^{n+1} - \set{0} $ given by $ g(x) = x $. This map induces a map $ \bar{g}: S^n/\sim \to \R P^n $ given by $ g([x]) = [x] $. By the same argument as above, $ \bar{g} $ is continuous and well defined. It just remains to show that these two maps are inverses of each other. To show this we have
+	\[ (\bar{f}\circ\bar{g})([x]) = \bar{f}([x]) = \left[ \frac{x}{\norm{x}} \right]  = [x], \]
+	and also 
+	\[ (\bar{g}\circ\bar{f})([x]) = \bar{g}(\left[ \frac{x}{\norm{x}} \right]) = \left[ \frac{x}{\norm{x}} \right] = [x]. \]
+	Thus the spaces $ \R P^n $ and $ S^n/\sim $ are homeomorphic to each other.
+\end{proof}
+
+\section{Real Projective Plane}
+Here in this section we will focus on the real projective plane, which is the set of all lines passing through origin in $ \R^3 $. Although imagining an sphere with identified antipodal points are much easier than imagining the set of all line passing through the origin, but it is still hard to imagine the final geometrical and global properties of such a set. So we need more simplification.
+
+\begin{proposition}
+	\label{prop:UnitSphereHomoToUpperHemisphere}
+	Let $ S^2/\sim $ be a unit sphere that its antipodal points are identified. This set is homeomorphic to the closed upper hemisphere where its antipodal points on the equator are identified.
+\end{proposition}
+\begin{proof}
+	The proof is given as the solution to \autoref{prob:H2HomoS^2Sim}.
+\end{proof}
+
+Now, we can go further and simplify this space more.
+
+\begin{proposition}
+	\label{prop:H^2HomoToD^2Sim}
+	Let $ H^2/\sim $ be the quotient space adopted from the closed upper hemisphere by identifying the antipodal points on its equator. Also, let $ D^2/\sim $ be the quotient space adopted from the closed unit disk $ D^2 $ by identifying the antipodal points on its boundary circle. Then $ H^2/\sim $ and $ D^2/\sim $ are homeomorphic.
+\end{proposition}
+
+\begin{proof}
+	We need to find a homeomorphism between $ H^2/\sim $ and $ D^2/\sim $. Consider the projection map
+	\[ f:H^2 \to D^2 \qquad (x,y,z) \mapsto (x,y).  \]
+	Consider the following commutative diagram.
+	% https://q.uiver.app/#q=WzAsNCxbMiwwLCJEXjIiXSxbMCwwLCJIXjIiXSxbMiwyLCJEXjIvXFxzaW0iXSxbMCwyLCJIXjIvXFxzaW0iXSxbMCwyLCJcXHBpXzIiXSxbMSwzLCJcXHBpXzEiLDJdLFszLDIsIlxcYmFye2Z9IiwyXSxbMSwwLCJmIl0sWzEsMiwiXFxwaV8yXFxjaXJjIGYiLDFdXQ==
+	\[\begin{tikzcd}
+		{H^2} && {D^2} \\
+		\\
+		{H^2/\sim} && {D^2/\sim}
+		\arrow["f", from=1-1, to=1-3]
+		\arrow["{\pi_1}"', from=1-1, to=3-1]
+		\arrow["{\pi_2\circ f}"{description}, from=1-1, to=3-3]
+		\arrow["{\pi_2}", from=1-3, to=3-3]
+		\arrow["{\bar{f}}"', from=3-1, to=3-3]
+	\end{tikzcd}\]
+	The map $ \pi_2 \circ f $ is continuous and assumes a constant value for all of points in its domain that are in a same equivalence class. Thus this induces a continuous map $ \bar{f}: H^2 /\sim \to D^2 /\sim $. To find the inverse for this function, consider 
+	\[ g: D^2 \to S^2 \qquad (x,y) \mapsto (x,y,\sqrt{1-(x^2+y^2)}). \]
+	Consider the following commutative diagram.
+	% https://q.uiver.app/#q=WzAsNCxbMCwwLCJEXjIiXSxbMiwwLCJIXjIiXSxbMCwyLCJEXjIvXFxzaW0iXSxbMiwyLCJIXjIvXFxzaW0iXSxbMCwyLCJcXHBpXzIiLDJdLFsxLDMsIlxccGlfMSJdLFswLDMsIlxccGlfMVxcY2lyYyBnIiwxXSxbMCwxLCJnIl0sWzIsMywiXFxiYXJ7Z30iLDJdXQ==
+	\[\begin{tikzcd}
+		{D^2} && {H^2} \\
+		\\
+		{D^2/\sim} && {H^2/\sim}
+		\arrow["g", from=1-1, to=1-3]
+		\arrow["{\pi_2}"', from=1-1, to=3-1]
+		\arrow["{\pi_1\circ g}"{description}, from=1-1, to=3-3]
+		\arrow["{\pi_1}", from=1-3, to=3-3]
+		\arrow["{\bar{g}}"', from=3-1, to=3-3]
+	\end{tikzcd}\]
+	The map $ \pi_1\circ g $ is continuous and assumes a constant value for all points in its domain that are in the same equivalence class. Thus it induces a map $ \bar{g} $ that is continuous.
+	
+	\noindent We now need to show that $ \bar{f} $ and $ \bar{g} $ are inverses of each other. To see this consider the map 
+	\[ \bar{f}\circ\bar{g}: H^2/\sim \to H^2/\sim. \]
+	We can write
+	\[\bar{f}(\bar{g}([x,y])) = \bar{f}([x,y,\sqrt{1-(x^2+y^2)}]) = [x,y]. \]
+	With a similar argument for $ \bar{g}\circ\bar{f} $ we can show that these two functions are inverses of each other, thus we could find the explicit homeomorphism.
+\end{proof}
+
+In summary, we have the following chain of homeomorphisms
+
+% https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXFIgUF4yIl0sWzEsMCwiU14yL1xcc2ltIl0sWzIsMCwiSF4yL1xcc2ltIl0sWzMsMCwiRF4yL1xcc2ltIl0sWzAsMSwiXFxzaW0iXSxbMiwzLCJcXHNpbSJdLFsxLDIsIlxcc2ltIl1d
+\[\begin{tikzcd}
+	{\R P^2} & {S^2/\sim} & {H^2/\sim} & {D^2/\sim}
+	\arrow["\sim", from=1-1, to=1-2]
+	\arrow["\sim", from=1-2, to=1-3]
+	\arrow["\sim", from=1-3, to=1-4]
+\end{tikzcd}\]
+
+
+
+\section{Standard $ C^\infty $ Atlas on a Real Projective Space}
+
+
+
+\section{Summary}
+
+
+\begin{summary}[A useful thing!]
+	Let $ N $ be a manifold of dimension $ n $, and $ (U,\phi) $ a local coordinate system containing $ p \in N $. Then $ \phi $ can be viewed as a vector valued real function $ \phi:U \to \R^n $. Let $ r^i $ be the standard coordinate functions of $ \R^n $. Then the $ i\text{-th} $ of $ \phi $ can be written as.
+	\[ x^i = r^i \circ \phi . \]
+\end{summary}
+\begin{summary}
+	Let $ S $ be a manifold, and $ \sim $ an equivalence relation. Then $ S/\sim $ is 
+	\begin{itemize}
+		\item Second countable if the equivalence relation is open.
+		\item Hausdorff if the graph of the equivalence relation is \emph{open} and its graph is closed in $ S\times S $.
+	\end{itemize}
+\end{summary}
+
+\begin{summary}[Two ways to show that two quotient spaces are homeomorphic]
+	\label{summary:ShowingHomeoInQuotientSpaces}
+	In general, in order to show that two spaces are homeomorphic, we need to find an homeomorphism between the spaces (a continuous bijection with continuous inverse). In particular, if two spaces are quotient spaces, it is often easier to work with the original spaces (that are not necessarily homeomorphic). In this summary box I will talk about two important ways that we can do this. 
+	
+	\begin{enumerate}
+		\item \textbf{Direct method}. In this method we directly find the homeomorphism. Consider showing that the real projective space $ \R P^n $ is homeomorphic to $ S^n/\sim $ where the equivalence relation $ \sim $ identifies the antipodal points in the unit sphere. The followings are the steps that we take
+		\begin{itemize}
+			\item Find $ f: \R^n-\set{0} \to S^n $ where $ \pi_2 \circ f $ assumes a constant value for all of the points in the same equivalence relation defined on $ \R^{n+1}-\set{0} $. This induces a map $ \bar{f}: \R P^n \to S^n/\sim $. From \autoref{prop:ContinousInducedmap} it follows that $ \bar{f} $ is continuous iff $ \pi^2 \circ f $ is continuous (consider the following commutative diagram).
+			
+			
+			% https://q.uiver.app/#q=WzAsNCxbMiwwLCJTXm4iXSxbMCwwLCJcXFJee24rMX0tXFxzZXR7MH0iXSxbMiwyLCJTXm4vXFxzaW0iXSxbMCwyLCJcXFIgUF5uIl0sWzAsMiwiXFxwaV8yIl0sWzEsMywiXFxwaV8xIiwyXSxbMSwwLCJmIl0sWzMsMiwiXFxiYXJ7Zn0iLDJdXQ==
+			\[\begin{tikzcd}
+				{\R^{n+1}-\set{0}} && {S^n} \\
+				\\
+				{\R P^n} && {S^n/\sim}
+				\arrow["f", from=1-1, to=1-3]
+				\arrow["{\pi_1}"', from=1-1, to=3-1]
+				\arrow["{\pi_2}", from=1-3, to=3-3]
+				\arrow["{\bar{f}}"', from=3-1, to=3-3]
+			\end{tikzcd}\]
+			\noindent Also note that since the domain of $ \bar{f} $ is equivalence classes, we need to make sure that the value of the function does not depend on the specific representative that we choose for a particular equivalence class. I.e. we need to show that the function is well defined. ({\color{orange} I think this is the same as the fact that this function assumes a constant value for all of the elements in the same equivalence class}).
+			\item We need to find $ g: S^n \to \R^n-\set{0}  $ that induces a map $ \bar{g}: S^n/\sim \to \R^n-\set{0}/\sim  $. Again, using \autoref{prop:ContinousInducedmap}, $ \bar{g} $ is continuous if and only if $ \pi_1\circ g $ is continuous. Similar to what we did for $ \bar{f} $ we need to show that $ \bar{g} $ is indeed well defined.
+			\item As the last step, we need to check if $ \bar{f} $ and $ \bar{g} $ are indeed inverses of each other, i.e. their composition leads to identity maps on the corresponding domains. 
+			
+		\end{itemize}
+					
+		Also look at the proof of \autoref{prop:H^2HomoToD^2Sim} for a similar argument.
+		
+		\item \textbf{Using compactness arguments}. Some times it is hard to find the homeomorphism directly. In this case we follow our approach as in \autoref{prob:IntervalHomo2CircleSim} and \autoref{prob:H2HomoS^2Sim}, as well as the following important proposition
+		\begin{proposition}
+			A bijection from a compact space to a Hausdorff space is a homeomorphism.
+		\end{proposition}
+	\end{enumerate}
+\end{summary}
+
+\begin{summary}
+	There are some points in the proposition above that I will highlight by this summary box. First, note that the composition of two function, possibly one or both of them discontinuous, can be a continuous function (see \href{https://math.stackexchange.com/questions/3080559/composition-of-discontinuous-functions#:~:text=A%20simple%20example%20of%20the,functions%20giving%20a%20continuous%20one.&text=g(x)%3Dx(,x)%2B%E2%8C%8Ax%E2%8C%8B.&text=(g%E2%88%98f)(x,discontinuous%20maps%20may%20be%20continuous.}{this}). Thus in the summary box above, neither of $ f $ or $ g $ need to be continuous. The function that need to be continuous are $ \pi_2\circ f $ and $ \pi_1\circ g $.
+\end{summary}
+
+
+\begin{summary}
+	Let $ S $ be a topological space and $ G $ be a topological group. Consider the right action of the group $ G $ on $ S $ via the map 
+	\[ \alpha : S \times G \to S, \qquad \alpha(s,g) = sg \]
+	If the right action if \emph{continuous} (i.e. the map $ \alpha $ is continuous) Then for $ g \in G $ the map
+	\[ \alpha_g: S \to S \]
+	is a \emph{homeomorphism}. See \autoref{prob:orbitSpace} for the proof.
+\end{summary}
+
+
+\begin{summary}[Showing a space is an smooth manifold]
+	\label{summary:ShowingSpaceIsSmoothManifold}
+	To show that a space is an smooth manifold, we just need to show that the space is
+	\begin{itemize}
+		\item a Hausdorff topological space that is also second countable,
+		\item there exists any $ C^\infty $ atlas (not necessarily maximal).
+	\end{itemize}
+\end{summary}
+
+
+\begin{summary}[A confusing thing about the equivalence classes]
+	Define $ \sim $ on $ \R $ as
+	\[ x\sim y \qquad \text{iff} \qquad x-y = 2n\pi \quad\text{for some $ n \in \Z $}. \]
+	Then consider the following sets in $ \R/\sim $.
+	\[ V_1 = \set{[t]\ |\ t\in (-\pi,\pi) }, \qquad V_2 = \set{[t]\ |\ t\in(0,2\pi)}. \]
+	In words, what we really mean is that $ V_1 $ contains the equivalence classes whose representatives comes from the set $ (-\pi,\pi) $. Similarly for $ V_2 $, we say that it contains the equivalence classes whose representatives comes from the set $ (0,2\pi) $. We define the following coordinate maps
+	
+	\[
+	\begin{array}{cc}
+		\begin{aligned}
+			\phi_1 &: V_1 \to \mathbb{R} \\
+			[t] &\mapsto t 
+		\end{aligned}
+		&\qquad
+		\begin{aligned}
+			\phi_2 &: V_2 \to \mathbb{R} \\
+			[t] & \mapsto t 
+		\end{aligned}
+	\end{array}
+	\]
+	
+	Note that although the functions $ \phi_1 $ and $ \phi_2 $ look similar, but they are different functions as they have different domains. These two functions both return the representative of the equivalence classes in their argument. Note that we said \emph{the representative} and not \emph{a representative}) because of the design of their domain. For instance, let's parse the following operation 
+	\[ \phi_1 ([23.5\pi]) =  -0.5\pi. \]
+	Since the domain of $ \phi_1 $ is the equivalence classes whose representatives comes from the set $ (-\pi,\pi) $, then we need to find a representative for $ [23.5\pi] $ that lives in $ (-\pi,\pi) $. I.e. $ [23.5\pi] = [1.5\pi] = [-0.5\pi] $.
+\end{summary}
+
+\begin{summary}[Strategy to show an equivalence relation is open]
+	Let $ S $ be a topological space and $ \sim $ be an equivalence relation on $ S $. This equivalence relation can also be given by a group action of $ G $ acting on $ S $. I.e. we can write
+	\[ x\sim y \qquad \text{iff}  \qquad x = yg \quad \text{for some $ g \in G $}. \] 
+	Then to show that the equivalence relation $ \sim $ is open, or equivalently, to show that the projection map $ \pi : S \to S/G $ is an open map, then we need to show for $ U \subset S $ open we have
+	\[ \inv{\pi}(\pi(U)) = \bigcup_{g\in G} Ug \]
+	is open. By \autoref{lemma:contGroupActionOpenProjection}, this set is open if and only if the group action is continuous. See \autoref{problem:Grassmannian} for a detailed example.
+\end{summary}
+
+\begin{summary}[Grassmannian]
+	Grassmannian $ G(k,n) $ is a generalization of the real projective plane. $ G(k,n) $ defined to be the set all of $ k\text{-planes} $ passing through the origin as the linear subspaces of $ \R^n $.
+	
+	The Grassmannian $ G(k,n) $ is in one-to-one correspondence with $ F(k,n)/GL(k,\R) $, where $ F(k,n) $ is the set of all $ n\times k $ matrices with rank $ k $. 
+	
+	As a concrete example, consider $ G(2,4) $. The open coordinate sets are given as $ U_{ij} = V_{ij} / GL(2,\R) $, where
+	\[ V_{ij} = \set{A \in F(2,4) \ |\ A_{ij} \text{ is nonsingular}}. \]
+	The corresponding coordinate maps are induced by the maps
+	\[ \tilde{\phi}_{ij} : V_{ij} \to \R^{2\times 2}. \]
+	where for instance
+	$ \tilde{\phi}_{12}(A) = A_{34}\inv{A}_{12}. $
+	See \autoref{problem:Grassmannian} for a detailed discussion.
+\end{summary}
+
+\newpage
+
+\input{sections/Manifold_SolvedProbelms.tex}
