@@ -1,0 +1,82 @@
+\chapter{Regular Languages}
+
+\begin{observation}
+	The transition rules of a finite automaton can formally shown as $ \Sigma \times S \to S $. When $ \Sigma $ is a group, then some transition rules are actually group actions (satisfies the conditions for being a group action). When $ \Sigma = S = G $ for some group, then interesting stuff can happen. For instance, let $ \Sigma = S = \Z_4 $ cyclic group of order 4. Then the resulting finite automta can accept the strings that their sum is mod 4. Then the transition rules will be as below. This finite state machine can accept the strings that their numerical sum of the values of the string is 0 modulo 4.
+\end{observation}
+
+\begin{center}
+	\begin{tikzpicture}
+		\node[state, accepting] (s0) {$s_0$};
+		\node[state] at (-2,2) (s1) {$s_1$};
+		\node[state] at (-4,0) (s2) {$s_2$};
+		\node[state] at (-2,-2) (s3) {$s_3$};
+		
+		\draw (s0) edge[loop right] node {$0$} (s0)
+		(s1) edge[loop above] node {$0$} (s1)
+		(s2) edge[loop left] node {$0$} (s2)
+		(s3) edge[loop below] node {$0$} (s3)
+		(s0) edge[bend right, below] node{$1$} (s1)
+		(s1) edge[bend right, below] node{$1$} (s2)
+		(s2) edge[bend right, below] node{$1$} (s3)
+		(s3) edge[bend right, below] node{$1$} (s0)
+		(s0) edge[ below] node{$3$} (s3)
+		(s3) edge[ below] node{$3$} (s2)
+		(s2) edge[ above] node{$3$} (s1)
+		(s1) edge[ above] node{$3$} (s0)
+		(s0) edge[bend right, above] node{$2$} (s2)
+		(s2) edge[bend right, above] node{$2$} (s0)
+		(s1) edge[bend right, above] node{$2$} (s3)
+		(s3) edge[bend right, above] node{$2$} (s1);
+	\end{tikzpicture}
+\end{center}
+
+
+\subsubsection{Cartesian product of finite automaton}
+\begin{example}
+	Let $ M_1 $ and $ M_2 $ be finite automota, and let $ L_1 $ and $ L_2 $ be the languages that they recognize respectively. Then $ M_1 \oplus M_2 $ is the finite automoton that recognizes $ L_1 \cup L_2 $. For instance, consider the following FSM's: 
+	
+	
+	\begin{center}
+		\begin{tikzpicture}
+			\node[state, initial,
+			initial right] (p0) {$p_0$};
+			\node[state] at (-1.5,2) (p1) {$p_1$};
+			\node[state, accepting] at (-3,0) (p2) {$p_2$};
+			
+			
+			\draw (p0) edge[bend right, above, sloped] node {$1$} (p1)
+			(p1) edge[bend right, above, sloped] node {$1$} (p2)
+			(p2) edge[bend right, below, sloped] node {$1$} (p0)
+			(p1) edge[loop above] node {$0$} (p1)
+			(p2) edge[bend right=20, above, sloped] node {$0$} (p1)
+			(p0) edge[bend right=20, below] node {$0$} (p2);
+			
+		\end{tikzpicture}
+	\end{center}
+	
+	
+		\begin{center}
+		\begin{tikzpicture}
+			\node[state, initial,
+			initial right] (q0) {$q_0$};
+			\node[state] at (-1.5,0) (q1) {$q_1$};
+			\node[state] at (-3,0) (q2) {$q_2$};
+			\node[state, accepting] at (-4.5,0) (q3) {$q_3$};
+			
+			
+			\draw (q0) edge[above] node {$1$} (q1)
+			(q1) edge[above, bend right] node {$0$} (q2)
+			(q2) edge[bend right, above] node {$1$} (q3)
+			(q3) edge[loop left] node {$0$} (q3)
+			(q1) edge[loop above] node {$1$} (q1)
+			(q3) edge[bend right, below] node {$0$} (q2)
+			(q0) edge[loop below] node {$0$} (q0)
+			(q2) edge[bend right, below] node {$0$} (q1);
+			
+		\end{tikzpicture}
+	\end{center}
+	
+	The state space of $ M_1 \oplus M_2 $ is $ S_1\times S_2 $ and the transition functions is $ \delta = \delta_1 \otimes \delta_2 $, given by
+	\[ \delta ((p,q),s) = \delta_1 \otimes \delta_2 ((p,q),s) = (\delta_1(p,s),\delta_2(q,s)). \]
+	
+\end{example}

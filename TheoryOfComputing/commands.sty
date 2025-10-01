@@ -13,7 +13,7 @@
 \usepackage{tensor}
 \usepackage{mathtools}
 \usepackage{pgfplots}
-\usetikzlibrary{arrows.meta}
+%\usetikzlibrary{arrows.meta}
 \usepackage{xcolor}
 \usepackage{float}
 %\usepackage{fullpage}[style={margin,empty}]
@@ -26,11 +26,14 @@
 \numberwithin{figure}{section}
 \usepackage{caption}
 \usepackage{placeins}
+\usepackage{tikz}
 \usepackage{tikz-cd}
 
 
 \usetikzlibrary{matrix}
-\usetikzlibrary{arrows,automata}
+\usetikzlibrary{automata, positioning, arrows}
+
+
 
 \usepackage[utf8]{inputenc}
 \usepackage{dsfont}
@@ -41,7 +44,7 @@
 \usepackage{nameref}
 \usepackage{xcolor}
 \usepackage[shortlabels]{enumitem}
-\usepackage{tikz}
+
 \usepackage{wasysym}
 \usepackage{xspace}
 \usetikzlibrary{fadings}
@@ -50,6 +53,14 @@
 \usetikzlibrary{shapes}
 
 \usetikzlibrary{positioning,calc}
+
+\tikzset{
+	->, % makes the edges directed
+	>=stealth, % makes the arrow heads bold
+	node distance=3cm, % specifies the minimum distance between two nodes. Change if necessary.
+	every state/.style={thick, fill=gray!10}, % sets the properties for each ’state’ node
+	initial text=$ $, % sets the text that appears on the start arrow
+}
 
 
 \usepackage{physics}
@@ -395,7 +406,7 @@ newparttoc, % Required for writing the part toc entry number in a standard way (
 \newtheorem{corollaryT}{Corollary}[chapter]
 \newtheorem{lemmaT}{Lemma}[chapter]
 \newtheorem{summaryT}{Summary \faPenNib}[chapter]
-\newtheorem{obsBoxT}{Observation}[section]
+\newtheorem{obsBoxT}{Observation}[chapter]
 \newtheorem{careFullT}{Be Careful Here! \faHiking\faMountain}[section]
 
 \theoremstyle{blacknumNOTboxExample}

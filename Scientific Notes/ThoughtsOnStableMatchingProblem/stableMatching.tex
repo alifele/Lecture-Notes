@@ -12,6 +12,10 @@
 \usepackage{natbib} 
 \usepackage{tkz-graph}
 \usepackage{placeins}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\usepackage{tikz-cd}
+
 
 
 \newcommand{\grad}{\operatorname{grad}}
@@ -19,6 +23,16 @@
 \renewcommand{\div}{\operatorname{div}}
 \newcommand{\img}{\operatorname{img}}
 
+
+\newcommand{\boxedR}[1]{\fcolorbox{red}{white}{#1}}
+\newcommand{\boxedG}[1]{\fcolorbox{green}{white}{#1}}
+
+\newcommand{\xc}[1]{%
+	\tikz[baseline=(n.base)]{
+		\node[inner sep=0pt] (n) {$#1$};
+		\draw[red,thick] (n.west) -- (n.east);
+	}%
+}
 
 
 
@@ -109,6 +123,270 @@
  		a_3 & \boxed{1}   & 3   & 2   \cr
  	}
  	\]
+ 	
+ 	This is not an stable matching, because one can have the following arrangement  
+ 	\[
+ 	P_A^* =
+ 	\bordermatrix{
+ 		& e_1 & e_2 & e_3 \cr
+ 		a_1 & 2   & {3}   & \boxed{1}   \cr
+ 		a_2 & 2   & \boxed{1}   & {3}   \cr
+ 		a_3 & \boxed{1}   & 3   & 2   \cr
+ 	}, \qquad 
+ 	P_E^* =
+ 	\bordermatrix{
+ 		& e_1 & e_2 & e_3 \cr
+ 		a_1 & 2   & {2}   & \boxed{1}   \cr
+ 		a_2 & 3   & \boxed{1}   & {3}   \cr
+ 		a_3 & \boxed{1}   & 3   & 2   \cr
+ 	}
+ 	\]
+ 	
+ 	Observe that in the $ P_A^* $ matrix, both applicant $ a_1 $ and $ a_2 $ are happier as they are not matched with a company that has lower rank in their list, also $ e_2 $ and $ e_3 $ are happier as well, as they are matched with students that has lower rank in their list as well.
+ 	
+ 	\begin{example}[Stable matching problem with 5 applicants]
+ 		Consider the following matching problem with 5 applicants and 5 employers.
+ 		\begin{align*}
+ 			a_1: e_3,e_5,e_1,e_4,e_2, \qquad e_1:a_2,a_5,a_4,a_1,a_3, \\
+ 			a_2: e_2,e_1,e_4,e_5,e_3, \qquad e_2:a_5,a_3,a_2,a_4,a_1, \\
+ 			a_3: e_5,e_4,e_2,e_3,e_1, \qquad e_3:a_3,a_1,a_5,a_4,a_2, \\
+ 			a_4: e_1,e_3,e_5,e_2,e_4, \qquad e_4:a_4,a_5,a_1,a_2,a_3, \\
+ 			a_5: e_4,e_2,e_3,e_1,e_5, \qquad e_5:a_1,a_4,a_3,a_5,a_2. \\
+ 		\end{align*}
+ 		So
+ 		\[ P_A = \begin{pmatrix}
+ 			3 & 5 & 1 & 4 & 2 \\
+ 			2 & 1 & 4 & 5 & 3 \\
+ 			5 & 4 & 2 & 3 & 1 \\
+ 			1 & 3 & 5 & 2 & 4 \\
+ 			4 & 2 & 3 & 1 & 5 \\
+ 		\end{pmatrix}, \qquad
+ 		P_E = \begin{pmatrix}
+ 			2 & 5 & 4 & 1 & 3 \\
+ 			5 & 3 & 2 & 4 & 1 \\
+ 			3 & 1 & 5 & 4 & 2 \\
+ 			4 & 5 & 1 & 2 & 3 \\
+ 			1 & 4 & 3 & 5 & 2
+ 		\end{pmatrix}.
+ 		\]
+ 		One can easily compute the matrices $ P_A^* $ and $ P_E^* $ as follows
+ 		
+ 		\[
+ 		P_A^{*}=\begin{pmatrix}
+ 			3 & 5 & 1 & 4 & 2 \\
+ 			2 & 1 & 5 & 3 & 4 \\
+ 			5 & 3 & 4 & 2 & 1 \\
+ 			1 & 4 & 2 & 5 & 3 \\
+ 			4 & 2 & 3 & 1 & 5
+ 		\end{pmatrix},
+ 		\qquad
+ 		P_E^*=\begin{pmatrix}
+ 			4 & 5 & 2 & 3 & 1 \\
+ 			1 & 3 & 5 & 4 & 5 \\
+ 			5 & 2 & 1 & 5 & 3 \\
+ 			3 & 4 & 4 & 1 & 2 \\
+ 			2 & 1 & 3 & 2 & 4
+ 		\end{pmatrix}.
+ 		\]
+ 		
+ 		
+ 		One possible strategy (not the only one) to determine a stable match is to make applicant to run their first offers based on their first choices and then see that if some company will accept them or will reject them tentatively. In fact, if we denote the set of all stable matches as $ \mathcal{S} $, in the first round of offers from the applicants we propose the following pairs to be in our stable match:
+ 		\[ \{ (1,3),(2,2), (3,5), (4,1), (5,4) \} \overset{\text{?}}{\subset} S \in \mathcal{S}.  \]
+ 		In order to determine this, we ask the companies being requested to see if they will accept their offers or will tentatively reject them. Observe that in the 
+ 		\[
+ 		P_A^{*} = \begin{pmatrix}
+ 			3 & 5 & \boxed{1} & 4 & 2 \\
+ 			2 & \boxed{1} & 5 & 3 & 4 \\
+ 			5 & 3 & 4 & 2 & \boxed{1} \\
+ 			\boxed{1} & 4 & 2 & 5 & 3 \\
+ 			4 & 2 & 3 & \boxed{1} & 5
+ 		\end{pmatrix},
+ 		\qquad
+ 		P_E^*=  \begin{pmatrix}
+ 			4 & 5 & \boxed{2} & 3 & 1 \\
+ 			1 & \boxed{3} & 5 & 4 & 5 \\
+ 			5 & 2 & 1 & 5 & \boxed{3} \\
+ 			\boxed{3} & 4 & 4 & 1 & 2 \\
+ 			2 & 1 & 3 & \boxed{2} & 4
+ 		\end{pmatrix}.
+ 		\]
+ 		Observe that no company has received their best choice, so they won't make a decision yet. In the second round, we propose the following pairs to be in the stable match
+ 		\[ \{ (1,4),(2,1), (3,4), (4,3), (5,2) \} \overset{\text{?}}{\subset} S \in \mathcal{S}. \]
+ 		It turns out that $ \{ (1,5),(2,1),(5,2) \} \in S $, because in this round the companies has received their best choice ever.
+ 		\[
+ 		P_A^{*} = \begin{pmatrix}
+ 			\xc{3} & \xc{5} & \xc{1} & \xc{4} & \boxedG{2} \\
+ 			\boxedG{2} & \xc{1} & \xc{5} & \xc{3} & \xc{4} \\
+ 			\xc{5} & \xc{3} & {4} & \boxed{2} & \xc{1} \\
+ 			\xc{1} & \xc{4} & \boxed{2} & {5} & \xc{3} \\
+ 			\xc{4} & \boxedG{2} & \xc{3} & \xc{1} & \xc{5}
+ 		\end{pmatrix},
+ 		\qquad
+ 		P_E^*=  \begin{pmatrix}
+ 			\xc{4} & \xc{5} & \xc{2} & \xc{3} & \boxedG{1} \\
+ 			\boxedG{1} & \xc{3} & \xc{5} & \xc{4} & \xc{5} \\
+ 			\xc{5} & \xc{2} & 1 & \boxed{5} & \xc{3} \\
+ 			\xc{3} & \xc{4} & \boxed{4} & 1 & \xc{2} \\
+ 			\xc{2} & \boxedG{1} & \xc{3} & \xc{2} & \xc{4}
+ 		\end{pmatrix}.
+ 		\]
+ 		
+ 		Note that we have crossed each entry in the same row and column of a matched (i.e. green square) in the matrix. Continuing with the offers, when the applicants are offering to their $ 4^\text{th} $ popular choice then $ (a_3,e_3) $ will match since $ e_3 $ will accept the offer as it is the best potion left for it. And then the only possible match $ (a_4,e_4) $ will happen. So a stable matching will be 
+ 		
+ 		\[
+ 		\boxed{
+ 		P_A^{*} = \begin{pmatrix}
+ 			\xc{3} & \xc{5} & \xc{1} & \xc{4} & \boxedG{2} \\
+ 			\boxedG{2} & \xc{1} & \xc{5} & \xc{3} & \xc{4} \\
+ 			\xc{5} & \xc{3} & \boxedG{4} & \xc{2} & \xc{1} \\
+ 			\xc{1} & \xc{4} & \xc{2} & \boxedG{5} & \xc{3} \\
+ 			\xc{4} & \boxedG{2} & \xc{3} & \xc{1} & \xc{5}
+ 		\end{pmatrix},
+ 		\qquad
+ 		P_E^*=  \begin{pmatrix}
+ 			\xc{4} & \xc{5} & \xc{2} & \xc{3} & \boxedG{1} \\
+ 			\boxedG{1} & \xc{3} & \xc{5} & \xc{4} & \xc{5} \\
+ 			\xc{5} & \xc{2} & \boxedG{1} & \xc{5} & \xc{3} \\
+ 			\xc{3} & \xc{4} & \xc{4} & \boxedG{1} & \xc{2} \\
+ 			\xc{2} & \boxedG{1} & \xc{3} & \xc{2} & \xc{4}
+ 		\end{pmatrix}.}
+ 		\]
+ 		
+ 		Observe that in this stable matching all of the employers has got their favorite ones. We can do this process from the other way around as well, i.e. the employers send their offers and the students either accept that or tentatively reject them. In this case this will lead to the following stable match:
+ 		
+ 		\[
+ 		\boxed{
+ 		P_A^{*}=\begin{pmatrix}
+ 			3 & 5 & \boxedG{1} & 4 & 2 \\
+ 			2 & \boxedG{1} & 5 & 3 & 4 \\
+ 			5 & 3 & 4 & 2 & \boxedG{1} \\
+ 			\boxedG{1} & 4 & 2 & 5 & 3 \\
+ 			4 & 2 & 3 & \boxedG{1} & 5
+ 		\end{pmatrix},
+ 		\qquad
+ 		P_E^*=\begin{pmatrix}
+ 			4 & 5 & \boxedG{2} & 3 & 1 \\
+ 			1 & \boxedG{3} & 5 & 4 & 5 \\
+ 			5 & 2 & 1 & 5 & \boxedG{3} \\
+ 			\boxedG{3} & 4 & 4 & 1 & 2 \\
+ 			2 & 1 & 3 & \boxedG{2} & 4
+ 		\end{pmatrix}.}
+ 		\]
+ 		
+ 		
+ 	\end{example}
+ 	
+ 	
+ 	\section{Lattice of Solutions}
+ 	As a quick reminder of the lattices in abstract algebra, consider the following lattice, where the comparison is based on ``is a divisor of''. 
+ 	% https://q.uiver.app/#q=WzAsMjQsWzIsMCwiNjAiXSxbMSwxLCIzMCJdLFswLDIsIjE1Il0sWzAsMywiNSJdLFsxLDIsIjEwIl0sWzIsMSwiMjAiXSxbMywxLCIxMiJdLFszLDIsIjQiXSxbMiwzLCIyIl0sWzEsMywiMyJdLFsyLDIsIjYiXSxbMSw0LCIxIl0sWzQsMiwiXFx7Myw1XFx9Il0sWzUsMiwiXFx7Miw1XFx9Il0sWzYsMiwiXFx7MiwzXFx9Il0sWzcsMiwiXFx7Miw0XFx9Il0sWzQsMywiXFx7NVxcfSJdLFs1LDMsIlxcezNcXH0iXSxbNiwzLCJcXHsyXFx9Il0sWzUsNCwiXFxlbXB0eXNldCJdLFs1LDEsIlxcezIsMyw1XFx9Il0sWzYsMSwiXFx7Miw0LDVcXH0iXSxbNywxLCJcXHsyLDMsNFxcfSJdLFs2LDAsIlxcezIsMyw0LDVcXH0iXSxbMCwxLCIyIiwxXSxbMSwyXSxbMiwzXSxbMCw1LCIzIiwxXSxbNSw0XSxbNCwzXSxbMCw2LCI1IiwxXSxbNSw3XSxbNiw3XSxbNyw4XSxbNiwxMF0sWzEwLDldLFszLDExXSxbOSwxMV0sWzgsMTFdLFsyLDldLFsxLDEwXSxbMTAsOF0sWzQsOF0sWzEsNF0sWzIzLDIwXSxbMjAsMTJdLFsxMiwxNl0sWzE2LDE5XSxbMTcsMTldLFsxOCwxOV0sWzE1LDE4XSxbMjIsMTVdLFsyMywyMV0sWzIzLDIyXSxbMjEsMTVdLFsyMSwxM10sWzEzLDE2XSxbMTMsMThdLFsxMiwxN10sWzE0LDE3XSxbMjIsMTRdLFsyMCwxM10sWzIwLDE0XSxbMTQsMThdXQ==
+ 	\[\begin{tikzcd}
+ 		&& 60 &&&& {\{2,3,4,5\}} \\
+ 		& 30 & 20 & 12 && {\{2,3,5\}} & {\{2,4,5\}} & {\{2,3,4\}} \\
+ 		15 & 10 & 6 & 4 & {\{3,5\}} & {\{2,5\}} & {\{2,3\}} & {\{2,4\}} \\
+ 		5 & 3 & 2 && {\{5\}} & {\{3\}} & {\{2\}} \\
+ 		& 1 &&&& \emptyset
+ 		\arrow["2"{description}, from=1-3, to=2-2]
+ 		\arrow["3"{description}, from=1-3, to=2-3]
+ 		\arrow["5"{description}, from=1-3, to=2-4]
+ 		\arrow[from=1-7, to=2-6]
+ 		\arrow[from=1-7, to=2-7]
+ 		\arrow[from=1-7, to=2-8]
+ 		\arrow[from=2-2, to=3-1]
+ 		\arrow[from=2-2, to=3-2]
+ 		\arrow[from=2-2, to=3-3]
+ 		\arrow[from=2-3, to=3-2]
+ 		\arrow[from=2-3, to=3-4]
+ 		\arrow[from=2-4, to=3-3]
+ 		\arrow[from=2-4, to=3-4]
+ 		\arrow[from=2-6, to=3-5]
+ 		\arrow[from=2-6, to=3-6]
+ 		\arrow[from=2-6, to=3-7]
+ 		\arrow[from=2-7, to=3-6]
+ 		\arrow[from=2-7, to=3-8]
+ 		\arrow[from=2-8, to=3-7]
+ 		\arrow[from=2-8, to=3-8]
+ 		\arrow[from=3-1, to=4-1]
+ 		\arrow[from=3-1, to=4-2]
+ 		\arrow[from=3-2, to=4-1]
+ 		\arrow[from=3-2, to=4-3]
+ 		\arrow[from=3-3, to=4-2]
+ 		\arrow[from=3-3, to=4-3]
+ 		\arrow[from=3-4, to=4-3]
+ 		\arrow[from=3-5, to=4-5]
+ 		\arrow[from=3-5, to=4-6]
+ 		\arrow[from=3-6, to=4-5]
+ 		\arrow[from=3-6, to=4-7]
+ 		\arrow[from=3-7, to=4-6]
+ 		\arrow[from=3-7, to=4-7]
+ 		\arrow[from=3-8, to=4-7]
+ 		\arrow[from=4-1, to=5-2]
+ 		\arrow[from=4-2, to=5-2]
+ 		\arrow[from=4-3, to=5-2]
+ 		\arrow[from=4-5, to=5-6]
+ 		\arrow[from=4-6, to=5-6]
+ 		\arrow[from=4-7, to=5-6]
+ 	\end{tikzcd}\]
+ 	
+ 	\begin{example}
+ 		Consider the following list of preferences between men and women:
+ 		\begin{align*}
+ 			m_1: w_1,w_2,w_3, \qquad w_1:m_2,m_1,m_3, \\
+ 			m_2: w_3,w_1,w_2, \qquad w_2:m_1,m_2,m_3, \\
+ 			m_3: w_2,w_1,w_3, \qquad w_3:m_1,m_3,m_2.
+ 		\end{align*}
+ 		The the matrix of preferences will be
+ 		\[ 
+ 		P_M^* = \begin{pmatrix}
+ 			1 & 2 & 3 \\
+ 			2 & 3 & 1 \\
+ 			2 & 1 & 3
+ 		\end{pmatrix}, \qquad
+ 		P_W^* = \begin{pmatrix}
+ 			3 & 1 & 1 \\
+ 			1 & 2 & 3 \\
+ 			2 & 3 & 2
+ 		\end{pmatrix}.
+ 		 \]
+ 		Then the if men propose (i.e. women oriented match), then the stable match will be
+ 		\[ \mu_w = (2,1,3), \qquad
+ 		P_M^* = \begin{pmatrix}
+ 			1 & \boxedG{2} & 3 \\
+ 			\boxedG{2} & 3 & 1 \\
+ 			2 & 1 & \boxedG{3}
+ 		\end{pmatrix}, \qquad
+ 		P_W^* = \begin{pmatrix}
+ 			3 & \boxedG{1} & 1 \\
+ 			\boxedG{1} & 2 & 3 \\
+ 			2 & 3 & \boxedG{2}
+ 		\end{pmatrix}.
+ 		\]
+ 		And if women propose (i.e. men oriented match), then the stable match will be
+ 		\[ \mu_m = (1,3,2),
+ 		\qquad
+ 		P_M^* = \begin{pmatrix}
+ 			\boxedG{1} & 2 & 3 \\
+ 			2 & 3 & \boxedG{1} \\
+ 			2 & \boxedG{1} & 3
+ 		\end{pmatrix}, \qquad
+ 		P_W^* = \begin{pmatrix}
+ 			\boxedG{3} & 1 & 1 \\
+ 			1 & 2 & \boxedG{3} \\
+ 			2 & \boxedG{3} & 2
+ 		\end{pmatrix}. \]
+ 		Now we want to create the lattice of matches that interpolates between two cases $ \mu_m $ where all men are weakly happy and $ \mu_w $ where all women are weakly happy.
+ 		
+ 		\input{images/matchingLattice.text}
+ 		
+ 		There is a simple algorithmic way to obtain the elements of the lattice. Consider the man-optimal match $ (1,3,2) $ (in which women were proposing). Then we are interested in finding the ``next-best'' match, where some of the men are willing to compromise on their list and the resulting match is still stable. 
+ 		
+ 		We start with $ m_1 $ and we try to see if there is any way that this man can compromise in his list that leads to a ``next-best'' stable match. The next woman in his list is $ w_2 $, and if he proposes to her, she would accept that because she is currently matched with $ m_3 $ and he was her 3rd rank and $ m_1 $ was his 1st rank. So $ m_2 $ accepts the offer. Now $ m_3 $ should compromise and the next one in his list is $ w_1 $. Then $ w_1 $ would accept the offer since she was assigned to $ m_1 $ (was ranked 3) and the new offer is ranked 2, so she would accept the offer. Since her previous man $ m_1 $ was the man that we already started with, the swap loop terminates here. 
+ 		
+ 		Now assume that man $ m_2 $ wants to compromise on their choice. The second on his list is $ w_1 $, and if he offers, she would accept that over her current match $ m_1 $. So $ m_1 $ should compromise, and he proposes to $ w_2 $ and she accepts his offer to her current match $ m_3 $, and $ m_3 $ has only $ w_3 $ to offer, that she accepts because he is still better that her current match $ m_2 $.
+ 		
+ 		This will lead to the following lattice of solutions.
+ 		
+ 	\end{example}
  	
 
 	

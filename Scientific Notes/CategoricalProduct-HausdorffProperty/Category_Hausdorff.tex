@@ -1,0 +1,85 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[left=2cm, right=2cm, top=2cm, bottom=2cm]{geometry}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{thmtools}
+\usepackage{xcolor}
+\usepackage{nameref}
+\usepackage[colorlinks=true, linkcolor=blue, citecolor=cyan]{hyperref}
+\usepackage{natbib} 
+\usepackage{tkz-graph}
+\usepackage{placeins}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\usepackage{tikz-cd}
+\usepackage{quiver}
+
+
+\newcommand{\grad}{\operatorname{grad}}
+\newcommand{\curl}{\operatorname{curl}}
+\renewcommand{\div}{\operatorname{div}}
+\newcommand{\img}{\operatorname{img}}
+
+\newcommand{\Obj}{\operatorname{Obj}}
+\newcommand{\Morph}{\operatorname{Morph}}
+
+
+\newcommand{\boxedR}[1]{\fcolorbox{red}{white}{#1}}
+\newcommand{\boxedG}[1]{\fcolorbox{green}{white}{#1}}
+
+\newcommand{\xc}[1]{%
+	\tikz[baseline=(n.base)]{
+		\node[inner sep=0pt] (n) {$#1$};
+		\draw[red,thick] (n.west) -- (n.east);
+	}%
+}
+
+
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\newtheorem{prob}{Problem Statemnt}
+\newtheorem{example}{Example}
+
+
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+
+\title{Hausdorff Spaces and Categorical Products}
+\author{Ali Fele Paranj}
+
+
+
+\begin{document}
+	\maketitle
+	
+	\begin{abstract}
+		Do not think too hard. This is a short note about some intuitive remarks on the Hausdorff spaces and the Categorical products, in a disjoint way!
+	\end{abstract}
+	
+	\section{Categorical Product}
+	We start with a definition.
+	\begin{definition}
+		Let  $ C $ be a category. ``The'' categorical product of $ X,Y \in \Obj(C) $, if it exists, is $ X\times Y \in \Obj(C) $ along with two morphisms $ \pi_1: X\times Y \to X $ and $ p_2:X\times Y \to Y $ with the following universal property: For any other $ Z\in \Obj(C) $, along with two maps $ f_1:Z\to X $ and $ f_2:Z\to Y $, there exists a unique morphism $ f: Z\to X\times Y $ such that the following diagram commutes.
+		
+		% https://q.uiver.app/#q=WzAsNCxbMiwxLCJYXFx0aW1lcyBZIl0sWzMsMCwiWCJdLFszLDIsIlkiXSxbMCwxLCJaIl0sWzAsMSwiXFxwaV8xIiwxXSxbMCwyLCJcXHBpXzIiLDFdLFszLDAsImYiLDEseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XSxbMywyLCJmXzIiLDEseyJjdXJ2ZSI6Mn1dLFszLDEsImZfMSIsMSx7ImN1cnZlIjotMn1dXQ==
+		\[\begin{tikzcd}
+			&&& X \\
+			Z && {X\times Y} \\
+			&&& Y
+			\arrow["{f_1}"{description}, curve={height=-12pt}, from=2-1, to=1-4]
+			\arrow["f"{description}, dashed, from=2-1, to=2-3]
+			\arrow["{f_2}"{description}, curve={height=12pt}, from=2-1, to=3-4]
+			\arrow["{\pi_1}"{description}, from=2-3, to=1-4]
+			\arrow["{\pi_2}"{description}, from=2-3, to=3-4]
+		\end{tikzcd} \]
+		
+		The categorical product of $ X $ and $ Y $ is unique up to isomorphism. In fact, more is true. They are unique up to unique isomorphism.
+	\end{definition}
+	
+	
+	
+\end{document}

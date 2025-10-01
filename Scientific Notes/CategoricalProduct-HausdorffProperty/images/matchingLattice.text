@@ -1,0 +1,106 @@
+\begin{figure}[h!]
+	\centering
+	
+	
+	\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
+	
+	\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+		%uncomment if require: \path (0,300); %set diagram left start at 0, and has height of 300
+		
+		%Rounded Rect [id:dp751934742942387] 
+		\draw   (290,26) .. controls (290,17.16) and (297.16,10) .. (306,10) -- (354,10) .. controls (362.84,10) and (370,17.16) .. (370,26) -- (370,84) .. controls (370,92.84) and (362.84,100) .. (354,100) -- (306,100) .. controls (297.16,100) and (290,92.84) .. (290,84) -- cycle ;
+		%Rounded Rect [id:dp6869839784047321] 
+		\draw   (200,166) .. controls (200,157.16) and (207.16,150) .. (216,150) -- (264,150) .. controls (272.84,150) and (280,157.16) .. (280,166) -- (280,224) .. controls (280,232.84) and (272.84,240) .. (264,240) -- (216,240) .. controls (207.16,240) and (200,232.84) .. (200,224) -- cycle ;
+		%Rounded Rect [id:dp3136825225820381] 
+		\draw   (370,166) .. controls (370,157.16) and (377.16,150) .. (386,150) -- (434,150) .. controls (442.84,150) and (450,157.16) .. (450,166) -- (450,224) .. controls (450,232.84) and (442.84,240) .. (434,240) -- (386,240) .. controls (377.16,240) and (370,232.84) .. (370,224) -- cycle ;
+		%Straight Lines [id:da0634924094837126] 
+		\draw    (300,100) -- (241.54,148.72) ;
+		\draw [shift={(240,150)}, rotate = 320.19] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+		%Straight Lines [id:da5428601302792252] 
+		\draw    (350,100) -- (408.46,148.72) ;
+		\draw [shift={(410,150)}, rotate = 219.81] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+		%Straight Lines [id:da36395938908598857] 
+		\draw    (280,190) -- (368,190) ;
+		\draw [shift={(370,190)}, rotate = 180] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+		
+		% Text Node
+		\draw    (309, 25) circle [x radius= 10, y radius= 10]   ;
+		\draw (303,25) node [anchor=west] [inner sep=0.75pt]  [font=\tiny]  {$\ 1$};
+		% Text Node
+		\draw    (309, 55) circle [x radius= 10, y radius= 10]   ;
+		\draw (303,55) node [anchor=west] [inner sep=0.75pt]  [font=\tiny]  {$\ 2$};
+		% Text Node
+		\draw    (309, 85) circle [x radius= 10, y radius= 10]   ;
+		\draw (303,85) node [anchor=west] [inner sep=0.75pt]  [font=\tiny]  {$\ 3$};
+		% Text Node
+		\draw    (353, 25) circle [x radius= 10, y radius= 10]   ;
+		\draw (347,25) node [anchor=west] [inner sep=0.75pt]  [font=\tiny]  {$\ 1$};
+		% Text Node
+		\draw    (353, 55) circle [x radius= 10, y radius= 10]   ;
+		\draw (347,55) node [anchor=west] [inner sep=0.75pt]  [font=\tiny]  {$\ 2$};
+		% Text Node
+		\draw    (353, 85) circle [x radius= 10, y radius= 10]   ;
+		\draw (347,85) node [anchor=west] [inner sep=0.75pt]  [font=\tiny]  {$\ 3$};
+		% Text Node
+		\draw    (219, 165) circle [x radius= 10, y radius= 10]   ;
+		\draw (213,165) node [anchor=west] [inner sep=0.75pt]  [font=\tiny]  {$\ 1$};
+		% Text Node
+		\draw    (219, 195) circle [x radius= 10, y radius= 10]   ;
+		\draw (213,195) node [anchor=west] [inner sep=0.75pt]  [font=\tiny]  {$\ 2$};
+		% Text Node
+		\draw    (219, 225) circle [x radius= 10, y radius= 10]   ;
+		\draw (213,225) node [anchor=west] [inner sep=0.75pt]  [font=\tiny]  {$\ 3$};
+		% Text Node
+		\draw    (263, 165) circle [x radius= 10, y radius= 10]   ;
+		\draw (257,165) node [anchor=west] [inner sep=0.75pt]  [font=\tiny]  {$\ 1$};
+		% Text Node
+		\draw    (263, 195) circle [x radius= 10, y radius= 10]   ;
+		\draw (257,195) node [anchor=west] [inner sep=0.75pt]  [font=\tiny]  {$\ 2$};
+		% Text Node
+		\draw    (263, 225) circle [x radius= 10, y radius= 10]   ;
+		\draw (257,225) node [anchor=west] [inner sep=0.75pt]  [font=\tiny]  {$\ 3$};
+		% Text Node
+		\draw    (389, 165) circle [x radius= 10, y radius= 10]   ;
+		\draw (383,165) node [anchor=west] [inner sep=0.75pt]  [font=\tiny]  {$\ 1$};
+		% Text Node
+		\draw    (389, 195) circle [x radius= 10, y radius= 10]   ;
+		\draw (383,195) node [anchor=west] [inner sep=0.75pt]  [font=\tiny]  {$\ 2$};
+		% Text Node
+		\draw    (389, 225) circle [x radius= 10, y radius= 10]   ;
+		\draw (383,225) node [anchor=west] [inner sep=0.75pt]  [font=\tiny]  {$\ 3$};
+		% Text Node
+		\draw    (433, 165) circle [x radius= 10, y radius= 10]   ;
+		\draw (427,165) node [anchor=west] [inner sep=0.75pt]  [font=\tiny]  {$\ 1$};
+		% Text Node
+		\draw    (433, 195) circle [x radius= 10, y radius= 10]   ;
+		\draw (427,195) node [anchor=west] [inner sep=0.75pt]  [font=\tiny]  {$\ 2$};
+		% Text Node
+		\draw    (433, 225) circle [x radius= 10, y radius= 10]   ;
+		\draw (427,225) node [anchor=west] [inner sep=0.75pt]  [font=\tiny]  {$\ 3$};
+		% Text Node
+		\draw (241,106.4) node [anchor=north west][inner sep=0.75pt]  [font=\scriptsize]  {$m_{1} ,m_{3}$};
+		% Text Node
+		\draw (311,192.4) node [anchor=north west][inner sep=0.75pt]  [font=\scriptsize]  {$m_{2} ,m_{3}$};
+		% Text Node
+		\draw (371,106.4) node [anchor=north west][inner sep=0.75pt]  [font=\scriptsize]  {$m_{2}$};
+		% Connection
+		\draw    (319,25) -- (343,25) ;
+		% Connection
+		\draw    (317.26,60.63) -- (344.74,79.37) ;
+		% Connection
+		\draw    (317.26,79.37) -- (344.74,60.63) ;
+		% Connection
+		\draw    (224.91,216.94) -- (257.09,173.06) ;
+		% Connection
+		\draw    (227.26,170.63) -- (254.74,189.37) ;
+		% Connection
+		\draw    (227.26,200.63) -- (254.74,219.37) ;
+		% Connection
+		\draw    (397.26,189.37) -- (424.74,170.63) ;
+		% Connection
+		\draw    (397.26,170.63) -- (424.74,189.37) ;
+		% Connection
+		\draw    (399,225) -- (423,225) ;
+		
+	\end{tikzpicture}
+\end{figure}
