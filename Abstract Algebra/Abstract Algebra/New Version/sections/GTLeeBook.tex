@@ -1,0 +1,223 @@
+
+\chapter{Intro to Groups (G. T. Lee Book)}
+
+\section{Groups}
+\begin{theorem}
+	Let $ G $ be a group and let $ a \in G $. Suppose $ i,j \in \Z $. Then
+	\begin{enumerate}[(i)]
+		\item If $ a $ has infinite order, then $ a^i = a^j $ if and only if $ i = j $.
+		\item If $ \abs{a} = n < \infty $, then $ a^i = a^j $ if and only if $ i\equiv j \pmod n $.  
+	\end{enumerate}
+\end{theorem}
+\begin{proof}
+	Proof for (i) and (ii) is as follows.
+	\begin{enumerate}[(i)]
+		\item $ \boxed{\Rightarrow} $ : Assume $ a^i = a^j $ for some $ i,j \in \Z $. Thus $ a^{i-j} = e $. However, since $ a $ has infinite order, it implies that $ i-j = 0 $, hence $ i=j $.
+		
+		\noindent $\boxed{\Leftarrow} $ : The converse direction follows immediately from the definition of group.
+		
+		
+		\item $ \boxed{\Rightarrow} $ : Assume $ a^i = a^j $ for some $ i,j\in \Z $. We can write $ a^{i-j} = e $. Using division algorithm we can write $ i-j = nq + r $ where $ q,r \in \Z $ and $ 0 \leq r < n $. So
+		\[ a^{i-j} = (a^n)^q a^r = e. \]
+		Since $ n $ is the order of $ a $, it implies that $ a^n = e $. Thus the equality above implies that $ a^r = e $. By definition $ n $ was the smallest number with this property, and by division algorithm we have $ 0 \leq r < n $. This implies that $ r = 0 $. So $ i-j = nq $ or equivalently $ i \equiv j \pmod n $.
+		
+		\noindent $ \boxed{\Leftarrow} $ : Assume $ i\equiv j \pmod n $. This implies $ i-j = qn $ for some $ q\in \Z $. Thus $ a^{i-j} = (a^n)^q = e $. This implies $ a^{i} = a^j $.
+		
+	\end{enumerate}
+\end{proof}
+
+
+
+\subsection{Solved Problems}
+The following problems are from Gregory T. Lee abstract algebra book in SUMS.
+\begin{problem}
+	In $ S_4 $ let $ \sigma = \begin{pmatrix} 1 & 2 & 3 & 4 \\ 3 & 1 & 4 & 2 \end{pmatrix} $ and $ \tau  = \begin{pmatrix} 1 & 2 & 3 & 4 \\ 3 & 4 & 1 & 2 \end{pmatrix} $. Calculate the followings.
+	\begin{enumerate}[(a)]
+		\item $ \sigma \tau $
+		\item $ \tau\sigma $
+		\item the inverse of $ \sigma $
+	\end{enumerate}
+\end{problem}
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item 
+		\[ \sigma\tau = \begin{pmatrix} 1 & 2 & 3 & 4 \\ 4 & 2 & 3 & 1 \end{pmatrix}. \]
+		\item 
+		\[ \tau \sigma = \begin{pmatrix} 1 & 2 & 3 & 4 \\ 1 & 3 & 2 & 4 \end{pmatrix}. \]
+		\item \[ \sigma^{-1} = \begin{pmatrix} 1 & 2 & 3 & 4 \\ 2 & 4 & 1 & 3 \end{pmatrix}. \]
+	\end{enumerate}
+\end{solution}
+
+\begin{problem}
+	In $ S_5 $, let $ \sigma = \begin{pmatrix} 1 & 2 & 3 & 4 & 5 \\ 5 & 3 & 2 & 1 & 4 \end{pmatrix} $ and $ \tau = \begin{pmatrix} 1 & 2 & 3 & 4 & 5 \\ 2 & 4 & 1 & 3 & 5\end{pmatrix} $. Calculate the following.
+	\begin{enumerate}[(a)]
+		\item $ \sigma\tau\sigma $
+		\item $ \sigma\sigma\tau $
+		\item the inverse of $ \sigma $
+	\end{enumerate}
+\end{problem}
+
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item 
+		\[ \sigma\tau\sigma = \begin{pmatrix} 1 & 2 & 3 & 4 & 5 \\ 4 & 5 & 1 & 3 & 2 \end{pmatrix}. \]
+		\item 
+		\[ \sigma \sigma \tau = \begin{pmatrix} 1 & 2 & 3 & 4 & 5 \\ 2 & 5 & 4 & 3 & 1 \end{pmatrix}. \]
+		\item 
+		\[ \inv{\sigma} = \begin{pmatrix} 1 & 2 & 3 & 4 & 5 \\ 4 & 3 & 2 & 5 & 1 \end{pmatrix}. \]
+	\end{enumerate}
+\end{solution}
+
+\begin{problem}
+	How many permutations are there in $ S_n $? How many of those permutation satisfy $ \alpha(2) = 2 $?
+\end{problem}
+\begin{solution}
+	There are $ n $ choices for $ \alpha(1) $, $ n-1 $ choices for $ \alpha(2) $, and so on. So there are in total $ n! $ elements in $ S_n $. Fixing the value of $ \alpha(2) = 2 $ will leave $ 4 $ possible values for $ \alpha(1) $, 3 possible values for $ \alpha(3) $, and so on. Thus there will be $ 4! = 24 $ permutations satisfying $ \alpha(2) = 2 $.
+\end{solution}
+
+\begin{problem}
+	Let $ H $ be the set of all permutations $ \alpha \in S_5 $ satisfying $ \alpha(2) =2 $. Which of the properties, closure, associativity, identity, and inverse does $ H $ enjoy under composition of functions?
+\end{problem}
+\begin{solution}
+	Closure is satisfied: Let $ \alpha,\beta \in H $. Then $ \alpha(\beta(2)) = \alpha(2) = 2 $ and also $ \beta(\alpha(2)) = \beta(2) = 2 $. Associativity is satisfied which follows from the axioms of the group. The identity of the group is in $ H $, which is given by
+	\[ e = \begin{pmatrix} 1 & 2 & 3 & 4 & 5 \\ 1 & 2 & 3 & 4 & 5\end{pmatrix}. \] 
+	Every element in $ H $ also has an inverse. Let $ \alpha \in H $. Let $ \tau \in S_5 $ be its inverse. We have
+	\[ \tau(2) = \tau(\alpha(2)) = e(2) = 2. \]
+	Thus $ \tau \in H $.
+\end{solution}
+
+\begin{problem}
+	Consider the set of all functions from $ \set{1,2,3,4,5} $ to $ \set{1,2,3,4,5} $. Which of the properties, i.e. closure, associativity, identity, and inverse does this set enjoy under the composition of functions.
+\end{problem}
+\begin{solution}
+	The composition of any two functions is a function, thus the set is closed under composition. The associativity follows from the properties of the function composition. The identity function is the function that maps every element to itself hence is in the set. But not every function necessarily has an inverse (injectivity, and surjectivity is needed to guarantee the inverse).
+\end{solution}
+
+\begin{problem}
+	Give group tables for the following additive groups
+	\begin{enumerate}[(a)]
+		\item $ U(12) $,
+		\item $ S_3 $.
+	\end{enumerate}
+\end{problem}
+
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item
+		\[
+		\begin{array}{c|ccc}
+			* & 0 & 1 & 2  \\
+			\hline
+			0 & 0 & 1 & 2 \\
+			1 & 1 & 2 & 0 \\
+			2 & 2 & 0 & 1 
+		\end{array}
+		\]
+		\item 
+		\[ \begin{array}{c|cccccc}
+			*     & (0,0) & (0,1) & (1,0) & (1,1) & (2,0) & (2,1) \\
+			\hline
+			(0,0) & (0,0) & (0,1) & (1,0) & (1,1) & (2,0) & (2,1) \\
+			(0,1) & (0,1) & (0,0) & (1,1) & (1,0) & (2,1) & (2,0) \\
+			(1,0) & (1,0) & (1,1) & (2,0) & (2,1) & (0,0) & (0,1) \\
+			(1,1) & (1,1) & (1,0) & (2,1) & (2,0) & (0,1) & (0,0) \\ 
+			(2,0) & (2,0) & (2,1) & (0,0) & (0,1) & (1,0) & (1,1) \\
+			(2,1) & (2,1) & (2,0) & (0,1) & (0,0) & (1,1) & (1,0)
+		\end{array} \]
+	\end{enumerate}
+\end{solution}
+
+\begin{problem}
+	Give group tables from the following groups.
+	\begin{enumerate}[(a)]
+		\item $ U(12) $.
+		\item $ S_3 $.
+	\end{enumerate}
+\end{problem}
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item First observe that $ U(12) = \set{1,5,7,11}. $
+		So 
+		\[ \begin{array}{c|cccc}
+			* & 1 & 5 & 7 & 11 \\
+			\hline
+			1 & 1 & 5 & 7 & 11 \\
+			5 & 5 & 1 & 11 & 7 \\ 
+			7 & 7 & 11 & 1 & 5 \\
+			11 & 11 & 7 & 5 & 1
+		\end{array} \]
+		\item Call the following permutations as $ \sigma_1,\sigma_2,\sigma_3,\sigma_4,\sigma_5, $ and $ \sigma_6 $ respectively
+		\[ \begin{pmatrix} 1&2&3\\1&2&3 \end{pmatrix}, \begin{pmatrix} 1&2&3\\1&3&2 \end{pmatrix}, \begin{pmatrix} 1&2&3\\2&1&3 \end{pmatrix},\begin{pmatrix} 1&2&3\\2&3&1  \end{pmatrix},\begin{pmatrix} 1&2&3\\3&1&2 \end{pmatrix},\begin{pmatrix} 1&2&3\\3&2&1 \end{pmatrix}, \]
+		\[ 
+		\begin{array}{c|cccccc}
+			*        & \sigma_1 & \sigma_2 & \sigma_3 & \sigma_4 & \sigma_5 & \sigma_6 \\
+			\hline 
+			\sigma_1 & \sigma_1 & \sigma_2 & \sigma_3 & \sigma_4 & \sigma_5 & \sigma_6 \\ 
+			\sigma_2 & \sigma_2 & \sigma_1 & \sigma_5 & \sigma_6 & \sigma_3 & \sigma_4 \\ \sigma_3 & \sigma_3 & \sigma_4 & \sigma_1 & \sigma_2 & \sigma_6 & \sigma_5 \\ 
+			\sigma_4 & \sigma_4 & \sigma_3 & \sigma_6 & \sigma_5 & \sigma_1 & \sigma_2 \\
+			\sigma_5 & \sigma_5 & \sigma_6 & \sigma_2 & \sigma_1 & \sigma_4 & \sigma_3 
+		\end{array}
+		\]
+	\end{enumerate}
+\end{solution}
+
+
+\section{Ideas, Factor Rings, Homomorphisms}
+
+\begin{problem}
+	List all of the elements in each of the following principal ideals of $ \Z_4 \oplus \Z_6 $.
+	\begin{enumerate}[(a)]
+		\item $ ((0,5)) $.
+		\item $ ((2,3)) $.
+	\end{enumerate}
+\end{problem}
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item $ ((0,5)) = \set{(0,0),(0,5),(0,4),(0,3),(0,2),(0,1)} = \set{0} \oplus \Z_6 $.
+		
+		\item $ ((2,3)) = \set{(0,0),(2,0),(0,2),(2,3)}. $
+	\end{enumerate}
+\end{solution}
+
+\begin{problem}
+	Let $ I $ be the set of all polynomials in $ \Z[x] $ whose constant term is a multiple of $ 5 $. Show that $ I $ is an ideal of $ \Z[x] $.
+\end{problem}
+\begin{solution}
+	Let $ f(x) \in I $. Then we have $ f(0) =0 \mod5 $. Let $ g(x) \in \Z[x] $. Then $ g(0) f(0) = \mod5 $. So $ I $ is an ideal.
+\end{solution}
+
+\begin{problem}
+	Show that the intersection of ideals $ I $ and $ J $ in a ring $ R $ is also an ideal. Extend this to the intersection of an arbitrary collection of ideals.
+\end{problem}
+\begin{solution}
+	Let $ r\in I \cap J $. Then for all $ s\in R $ we have $  rs \in I $ and $ rs \in J $. So $ rs \in I \cap J $. So $ I\cap J $ is an ideal. If $ K $ is another ideal, then $  \cap J \cap K$ is also an ideal. To see this first notice that $  I\cap J$ is an ideal, thus $ (I\cap J) \cap K $ is an ideal. By induction, the intersection of an arbitrary collection of ideals is an ideal.
+\end{solution}
+
+\begin{problem}
+	Let $ m $ and $ n $ be positive integers. Show that $ m\Z + n\Z = (m,n) \Z $.
+\end{problem}
+\begin{solution}
+	Observe that for any $ m,n\in \Z $, exists $ a,b\in \Z $ such that $ am + bn = (m,n) $. So
+	\[ (m,n)\Z = (am + bn)\Z = am\Z + bn\Z = m\Z + n\Z. \]
+\end{solution}
+
+\begin{problem}
+	Given a ring $ R $ and an element $ a $, let $ S = \set{ra:r\in R} $. Show by example that
+	\begin{enumerate}[(a)]
+		\item $ S $ need not contain $ a $, even if $ \R $ is commutative.
+		\item $ S $ need no be an ideal, even if $ R $ has an identity.
+	\end{enumerate}
+\end{problem}
+\begin{solution}
+	newEnv
+\end{solution}
+
+
+
+
+
+
+
+
+
+
