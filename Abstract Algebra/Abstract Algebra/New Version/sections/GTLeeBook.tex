@@ -163,6 +163,8 @@ The following problems are from Gregory T. Lee abstract algebra book in SUMS.
 
 
 \section{Ideas, Factor Rings, Homomorphisms}
+\input{Images/correspondenceTheorem.tex }
+
 
 \begin{problem}
 	List all of the elements in each of the following principal ideals of $ \Z_4 \oplus \Z_6 $.
@@ -209,15 +211,43 @@ The following problems are from Gregory T. Lee abstract algebra book in SUMS.
 	\end{enumerate}
 \end{problem}
 \begin{solution}
-	newEnv
+	\begin{enumerate}[(a)]
+		\item This can happen if the underlying ring does not have an identity. For instance, consider the ring $ R = 2\Z $. Then the principal ideal $ (2) = 4\Z $ does not contain $ 2 $.
+		
+		\item This can happen if $ R $ is not commutative, like in the ring of matrices. In this case, one needs to talk about the left and right ideals.
+	\end{enumerate}
+\end{solution}
+
+\begin{problem}
+	Let $ R $ be a commutative ring. If $ I = \set{a\in R: a^n = 0\text{ for some $ n\in \N $}} $, show that $ I $ is an ideal of $ R $.
+\end{problem}
+\begin{solution}
+	Let $ r\in I $ and $ s\in R $. Then we claim that $ sr \in I $. Because $ (sr)^n = s^n r^n = s^n 0 = 0 $. 
 \end{solution}
 
 
+\begin{problem}
+	Let $ R $ be a commutative ring with identity and having exactly two ideals. Show that $ R $ is a field.
+\end{problem}
+\begin{solution}
+	Let $ a\in R $, and consider the principal ideal  $ (a) $. $ (a) $ is not empty, and since $ R $ has only two ideals, it follows that $ (a) = R $. Since $ R $ has identity, it implies that $ \exists b\in R $ such that $ ab = 1 $. So $ a $ has an inverse, hence $ R $ is a field.
+\end{solution}
 
 
+\begin{problem}
+	Consider the additive group $ G $ of all sequences integers with element-wise addition, and the subgroup $ H $ of all elements of $ G $ that has finitely many non-zero elements (have finite support). Define a multiplication operation by element wise multiplication. Show that $ G $ is a ring and $ H $ is an ideal.
+\end{problem}
 
+\begin{solution}
+	$ G $ being a ring follows from $ \Z $ having a ring structure. Furthermore, $ H $ is an ideal because if $ a\in H $ and $ b\in G $ then $ ab $ still has finite support. So $ ab\in H $.
+\end{solution}
 
-
+\begin{problem}
+	In the preceding exercise, show that $ H $ is not a principal ideal.
+\end{problem}
+\begin{solution}
+	Assume $ H $ is a principal ideal. Then $ H = (g) $ for some $ g\in G $ that has finite support. However, the support of all elements of $ H $ is the same as $ g $, which is not true. Indeed, let $ \tilde{g} $ such that its support is larger than $ g $ (has more non-zero terms). By definition $ \tilde{g} \in H $ but there is no $ r\in G $ that $ \tilde{g} = r g $.
+\end{solution}
 
 
 

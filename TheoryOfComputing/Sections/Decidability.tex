@@ -1,0 +1,57 @@
+\chapter{Decidability}
+
+
+\section{Problems}
+
+\begin{problem}[Sipser]
+	Consider the problem of determining whether a DFA and a regular expression are equivalent. Express this problem as a language and show that this is decidable.
+\end{problem}
+\begin{solution}
+	Consider the following language
+	\[ L = \set{\<D,R\>\ |\ \text{$ D\in\mathcal{D} $ is equivalent to $ R \in\mathcal{R} $}}, \]
+	where we have used th notation $ \mathcal{D} $ and $ \mathcal{R} $ to denote the set of all DFA and regular expressions respectively. Let $ \<D,R\> \in L $ and denote their corresponding language by $ \mathcal{L}(D) $ and $ \mathcal{L}(R) $. $ D $ is equivalent to $ R $ if and only if $ \mathcal{L}(D) = \mathcal{L}(R) $ if and only if $ \mathcal{L}(D) \Delta \mathcal{L}(R) = \emptyset $, where $ \Delta $ denotes the symmetric difference. Since both of the languages above are regular languages, and the set of regular languages is closed under symmetric difference (follows from the set of regular languages being closed under the elementary operations defining symmetric difference), $ L_\Delta = \mathcal{L}(D) \Delta \mathcal{L}(R) $ is a regular language. So $ \exists C \in \mathcal{D} $ such that $ \mathcal{L}(C) = L_\Delta $. Using the fact that $ E_{DFA} = \set{D\in\mathcal{D}\ |\ L(D)=\emptyset} $ (i.e. the set of DFAs with empty language) is decidable, we can decide if $ \mathcal{L}(C) = \emptyset $, hence we can decide if $ \<D,R\>\in L $, hence $ L $ is decidable.
+\end{solution}
+
+
+\begin{problem}[Sipser]
+	Let $ ALL_{DFA} = \set{\<A\>|\text{$ A $ is a DFA and $ \mathcal{L}(A) = \Sigma^* $}} $. Show that $ ALL_{DFA} $ is decidable.
+\end{problem}
+\begin{solution}
+	First, consider the following identity
+	\[ (\mathcal{L}(A))^c = \mathcal{L}(A^c), \]
+	where $ A^c $ is a new DFA that its accept states are complement to that of $ A $. So we can write
+	\[  ALL_{DFA} =  \set{\<A\>|\mathcal{L}(A) = \Sigma^*} = \set{\<A\>|\mathcal{L}(A)^c = (\Sigma^*)^c} = \set{\<A\>|\mathcal{L}(A^c) = \emptyset}. \]
+	So given $ A \in ALL_{DFA} $:
+	\begin{enumerate}[(i)]
+		\item convert $ A $ to $ A^c $,
+		\item decide if $ \mathcal{L}(A^c) = \emptyset $,
+		\item decide if $ \mathcal{L}(A) = \Sigma^* $.
+	\end{enumerate}
+\end{solution}
+
+\begin{problem}[Sipser]
+	Let $ E_{TM} = \set{\<M\>|\text{$ M $ is a TM and $ \mathcal{L}(M)=\emptyset $}}$. Show that $ E_{TM}^c $ is Turing-recognizable.
+\end{problem}
+\begin{solution}
+	Let $ m \in E_{TM}^c $. Then $ \mathcal{L}(m) \neq \emptyset $. So $ \exists w \in \Sigma^* $ such that $ m $ accepts $ w $. Put the elements of $ \Sigma^* $ in lexicographical order $ s_1,s_2,\cdots, $. $ w $ should appear somewhere in this sequence, say $ s_p $ for some $ p\in\N $. Then do the following
+	\begin{enumerate}[(i)]
+		\item Run $ i $ steps of $ m $ on $ s_1,\cdots,s_i $ for each $ i\in \N $.
+	\end{enumerate}
+	Then $ m $ will eventually halt as $ m $ accepts $ s_p $ in $ N_p $ steps.
+\end{solution}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
