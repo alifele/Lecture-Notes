@@ -1,6 +1,15 @@
 \chapter{Decidability}
 
 
+\begin{theorem}[Halting problem is undecidable]
+	The language
+	\[ A_{TM} = \set{\<T,\omega\>\ |\ \text{$ T $ accepts $ \omega $}}, \]
+	is undecidable.
+\end{theorem}
+\begin{proof}[Informal proof]
+	There are multiple ways to show this, but some of these methods often gets cluttered with many intermediate definitions and sometimes mind bending self references. Here I will take a simple approach. Assume to the contrary that $ A_{TM} $ is decidable. I.e. $ \exists \eta \in TM $ such that $ \eta $ decides $ A_{TM} $. Informally speaking, the problem with the existence of such Turing machine is that the negated variants of this machine, denoted by $ \bar{\eta} $, has a special power that is forbidden by the Cantor's diagonalization argument. I.e. it can accept the Turing machines that do not accept themselves. To put in other words, define $ D: \Sigma^* \to 2^\Sigma $, where for $ \omega\in \Sigma^* $, $ D(\omega) $ is the language that $ \omega $ recognizes ($ D(\omega)=\empty $ if $ \omega $ is not a Turing machine). Let $ \alpha \in TM $ such that $ \alpha \notin D(\alpha) $, i.e. $ \alpha $ does not accept itself. So $ \<\alpha,\alpha\> \notin A_{TM} $. So $ \bar{\eta} $ accepts $ \<\alpha,\alpha\> $. This implies that $ T = \set{\omega\in\Sigma^*\ |\ \omega\notin D(\omega)} \subset D(\bar{\eta}) $. This is a contradiction by the Cantor's theorem.
+\end{proof}
+
 \section{Problems}
 
 \begin{problem}[Sipser]
