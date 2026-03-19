@@ -13,3 +13,55 @@
 		\item When a compact set $ K $ is contained in an open set $ D $, then the boundary of $ D $, i.e. $ \partial D $ is uniformly away from the boundary of $ K $ (i.e. $ \partial K $).
 	\end{itemize}
 \end{remark}
+
+
+\section{Cauchy-Riemann Equations in Polar Coordinates}
+In Cartesian coordinates, there is a very simple interpretation of the Cauchy-Riemann equations. Consider $ f:\C\to \C $ given by $ f(z) = u(x,y) + iv(x,y) $ for $ u,v:\R^2\to\R $. There are strong similarities between the function above, and the function $ F:\R^2\to\R^2 $ given by $ F(x,y) = (u(x,y),v(x,y)) $ where $ u,v $ are as given above. The Cauchy-Riemann equation ensures that the Jacobian of $ F $ is of the form
+ \[ \begin{pmatrix}
+ 	a  & -b \\
+ 	b & a
+ \end{pmatrix}, \]
+ thus $ u_x = v_y $ and $ u_y = -v_x $. One can build a similar reasoning as summarized in the figure below.
+ \input{Images/Cauchy_Riemman.tex}
+ \FloatBarrier
+ 
+ 
+ 
+ \begin{observation}
+ 	In this observation box we explore the intuition behind the formula
+ 	\[ f(\xi) = \frac{1}{2\pi i}\int_\gamma \frac{f(z)}{z-\xi} dz, \]
+ 	where $ \gamma $ contains $ \xi $, and $ f(z) $ is holomorphic around $ \xi $. Using the holomorphicity of $ f(z) $ near $ \xi $ one can write
+ 	\[ f(z) = a_0 + a_1(z-\xi) + \cdots. \]
+ 	So
+ 	\[ \int_\gamma \frac{f(z)}{z-\xi} = \int_\gamma \frac{a_0}{z-\xi} = a_02\pi i = 2\pi i f(\xi), \]
+ 	where we have used the fact that other terms are all analytic so the corresponding integral terms vanish, and we have used the fact that
+ 	\[ \int_\gamma \frac{1}{z-\xi}dz = 2\pi i. \]
+ 	So 
+ 	\[ \boxed{f(\xi) = \frac{1}{2\pi i} \int_\gamma \frac{f(z)}{z-\xi}dz}. \]
+ 	Also, more generally, one can write
+ 	\[ \frac{f(z)}{(z-\xi)^{n+1}} = \frac{a_0}{(z-\xi)^{n+1}} + \cdots + \frac{a_n}{(z-\xi)} + \cdots, \]
+ 	So
+ 	\[ \int_\gamma \frac{f(z)}{(z-\xi)^{n+1}} dz = a_n \int_\gamma \frac{1}{(z-\xi)}dz = 2\pi i a_n,   \]
+	where $ a_n = f^{(n)}(\xi)/n! $.
+	So
+	\[ f^{(n)}(\xi) = \frac{n!}{2\pi i}\int_\gamma \frac{f(z)}{(z-\xi)^{n+1}}dz. \]
+ \end{observation}
+ 
+ \begin{remark}
+ 	Note that the argument above works in the cases when $ f(z) $ is analytic inside the contour. Otherwise, one can not replace the contour integration with a local integration near $ \xi $. As an example, if $ f $ has a pole at $ w $ inside the integration contour, then we will have
+ 	\[ \int_\gamma \frac{f(z)}{z-\xi}dz = 2\pi i (f(\xi) + \Res(\frac{f(z)}{z-\xi},w)). \]
+ \end{remark}
+ 
+ 
+ 
+\begin{remark}
+	Note that one does not need to memorize the details of the formulas above, as many of them can be used on the fly. The following method turns out to be the easiest to reproduce every time.
+	
+	\[ \int_\Gamma \frac{5z^2+2z+1}{(z-i)^3}dz  = \int_\Gamma \frac{a_2}{(z-i)} = 2\pi i a_2,  \]
+	where $ a_2 $ is the coefficient in the expansion
+	\[ f(z) = \sum_n a_n (z-i)^n. \]
+	So from Taylor's formula we have 
+	\[ a_2 = f^{(2)}(i)/2! = 5. \]
+	So
+	\[ \int_\Gamma \frac{5z^2+2z+1}{(z-i)^3}dz = 10\pi i. \]
+\end{remark}

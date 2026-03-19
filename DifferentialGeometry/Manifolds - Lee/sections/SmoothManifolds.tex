@@ -9,3 +9,48 @@
 \begin{solution}
 	Denote the topological space $ Y = X/\sim $. The open sets in $ Y $ are those that their pre-image under the quotient map $ \pi: X \mapsto X/\sim $ is open. Denote the open sets around the origins as $ I, I_+ $, and $ I_- $, where $ \pi((0,-1)) \in I_- $, $ \pi((0,1))\in I_+ $, and bot holds for $ I $.
 \end{solution}
+
+
+
+\begin{problem}[Exercise 1.3]
+	A logarithmic spiral means a plane curve of the form
+	\[ \gamma(t) = c(e^{\gamma t} \cos(t),e^{\gamma t}\sin(t)), \quad t\in\R, \]
+	where $ c,\lambda \in \R $ with $ c\neq 0 $. Use an improper integral to prove that a restriction of this curve to $ [0,\infty) $ has finite arc length, even though it makes infinitely many loops around the origin.
+\end{problem}
+\begin{solution}
+	Consider
+	\[ \gamma'(t) = ce^{\lambda t} (\lambda\cos(t) - e^{\lambda t}\sin(t), \lambda\sin(t) + e^{\lambda t}\cos(t)) \]
+	Observe that
+	\[ \norm{\gamma'(t)} = ce^{\lambda t}(\lambda^2+1). \]
+	So the length of this curve will be
+	\[ \int_0^\infty \norm{\gamma'(t)}dt = \lambda c (\lambda^2 + 1) < \infty, \]
+	for $ \lambda < 0 $.
+\end{solution}
+
+
+
+\begin{problem}[Exercise 1.4]
+	Consider the curve
+	\[ \gamma(t) = (\sin(t), \cos(t)+\ln(\tan(t/2))), \qquad t\in(\pi/2,\pi). \]
+	Demonstrate that for every point $ p $ of its image, the segment of the tangent line at $ p $ between $ p $ and the $ y $-axis has length 1. This curve is called a tractrix.
+\end{problem}
+\begin{solution}
+	Consider 
+	\begin{align*}
+		\gamma'(t) &= (\cos t, -\sin t + \frac{1/2\sec^2(t/2)}{\tan (t/2)}) \\
+		&= (\cos t, -\sin t+ \frac{\cos(t/2)}{2\cos^2(t/2)\sin(t/2)}) \\
+		&=(\cos t, -\sin t + \frac{1}{\sin t}) \\
+		&=(\cos t, \frac{\cos t}{\tan t}).
+	\end{align*}
+	Consider the line $ \ell(s) $ tangent to $ \gamma(t) $ given by
+	\[ \ell(s) = \gamma(t) + \gamma'(t) s. \]
+	Let $ s^* $ be such that $ \ell(s^*) = (0,1)^T  $. Length of this line segment will be
+	\[ L = \int_0^{s^*} \norm{\ell'(s)}ds = \int_0^{s^*} \norm{\gamma'(t)} ds = \abs{s^*} \cdot \norm{\gamma'(t)}. \]
+	Observer that
+	\[ \norm{\gamma'(t)} = \left( \frac{1}{\tan^2 t} \right)^{1/2} = \frac{1}{\tan t}. \]
+	On the other hand, using $ \ell(s^*) = (0,1)^T $ we can write
+	\[ \sin t + s^*t \cos t = 0. \]
+	So $ \abs{s^*} = \tan t. $
+	This implies 
+	\[ L = 1. \]
+\end{solution}

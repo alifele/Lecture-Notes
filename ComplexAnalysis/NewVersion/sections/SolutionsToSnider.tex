@@ -1,0 +1,70 @@
+\chapter{Solutions to Snider}
+
+
+\section{Questions from Chapter 3}
+\begin{problem}
+	Show that if $ p_n(z) $ has degree $ n $, then fro all $ z $ with $ \abs{z} $ sufficiently large, there are positive constants $ c_1 $ and $ c_2 $ such that
+	\[ c_1\abs{z}^n < \abs{p_n(z)} < c_2 \abs{z}^n. \]
+\end{problem}
+
+\begin{solution}
+	Let $ p_n(z) = a_0 + \cdots + a_nz^n $. Away from origin, we have
+	\[ \frac{p_n(z)}{z^n} = \frac{a_0}{z^n} + \cdots a_n. \]
+	So
+	\begin{align*}
+		\abs{\frac{p_n(z)}{z^n}} &= \abs{\frac{a_0}{z^n} + \cdots + a_n} \\
+		&\leq \abs{\frac{a_0}{z^n}} + \cdots + \abs{a_n}.
+	\end{align*}
+	For $ z $ large enough we have $ \abs{a_i/z^{n-1}} < 1 $ for all $ i=0,\cdots,n-1 $. so
+	\[ \abs{\frac{p_n(z)}{z^n}} \leq n + \abs{a_n}. \]
+	So for large enough $ z $ one has
+	\[ \abs{p_n(z)} \leq (n+\abs{a_n})\abs{z^n}. \]
+	To show the other side of the inequality, using the reverse triangle inequality one can write
+	\begin{align*}
+		\abs{p_n(z)/z} &= \abs{a_0/z^{n}+\cdots a_{n-1}/z + a_n} \\
+		&\geq \abs{ \abs{a_n} - \abs{a_0/z^{n}+\cdots+a_{n-1}/z}}
+	\end{align*}
+	For large enough $ z $, one will have
+	\[ \abs{a_0/z^n + \cdots + a_{n-1}/z} \leq \abs{a_n}/2. \]
+	Hence
+	\[ \abs{a_n} - \abs{a_0/z^n + \cdots + a_{n-1}/z} \geq \abs{a_n}/2. \]
+	This implies
+	\[ \abs{\frac{p_n(z)}{z^n}} \geq \frac{\abs{a_n}}{2} \qquad \text{for large enough $ z $}. \]
+\end{solution}
+
+\begin{problem}
+	Let $ R_{m,n}(z) = P(Z)/Q(Z) $ and $ r_{m,n} = p(z)/q(z) $ be two rational functions each with numerator degree $ m $ and denominator degree $ n $. Show that if $ R_{m,n} $ and $ r_{m,n} $ agree at $ m+n+1 $ distinct points, then $ R_{m,n} = r_{m,n} $ for all $ z $.
+\end{problem}
+\begin{solution}
+	Let $ F(z) = R_{m,n}(z) - r_{m,n}(z) $. One can write
+	\begin{align*}
+		F(z) &= \frac{P(z)}{Q(z)} - \frac{p(z)}{q(z)} \\
+		&= \frac{P(z)q(z) - p(z)Q(z)}{q(z)Q(z)} = \frac{h(z)}{g(z)}.
+	\end{align*}
+	Observe that $ \deg(g) \leq m+n $, and if it is a non-zero polynomial, it has at most $ m+n $ roots . If $ F(z) = 0 $ on $ m+n+1 $, implies $ g(z) $ has $ m+n+1 $ roots. So $ g\equiv 0 $. This implies $ F \equiv 0 $. 
+	
+\end{solution}
+
+\begin{problem}
+	Show that if the rational function $ R(z) $ has a pole of order $ m $ at $ z_0 $, then its derivative $ R'(z) $ has a pole of order $ m+1 $ at $ z_0 $.
+\end{problem}
+\begin{solution}
+	Let $ R(z) = \frac{h(z)}{(z-z_0)^m g(z)} $ where $ h(z_0) \neq 0 $ and $ g(z_0)\neq 0 $. Calculating the derivative one can write
+	\begin{align*}
+		R'(z) &= \frac{h'(z)(z-z_0)^mg(z) - h(z)(m(z-z_0)^{m-1}g(z) + (z-z_0)^mg'(z))}{(z-z_0)^{2m}g^2(z)} \\
+		&=\frac{k(z)}{(z-z_0)^{m+1}g^2(z)},
+	\end{align*}
+	where $ k(z_0) \neq 0 $.
+\end{solution}
+
+\begin{problem}
+	Show that if $ R_{m,n}(z) $ is a rational function with numerator degree $ m $ and denominator degree $ n $, then for all $ \abs{z} $ sufficiently large, there are positive constants $ c_1 $ and $ c_2 $ such that 
+	\[ c_1\abs{z}^{m-n} < \abs{R_{m,n}(z)} < c_2\abs{z}^{m-n}. \]
+\end{problem}
+\begin{solution}
+	Let $ R_{m,n}(z) = g(z) / h(z) $ with $ \deg(g) = m $ and $ \deg{h} = n$. Observe that for large enough $ z $ there are constants such that
+	\[ c_1\abs{z^m} < g(z) < c_2 \abs{z^m}, \qquad c_1'\abs{z^n} < h(z) < c_2'\abs{z^n}.  \]
+	So
+	\[ \frac{c_1\abs{z^m}}{c_2'\abs{z^n}} < \frac{g(z)}{h(z)} < \frac{c_2\abs{z^m}}{c_1'\abs{z^n}}. \]
+	
+\end{solution}
