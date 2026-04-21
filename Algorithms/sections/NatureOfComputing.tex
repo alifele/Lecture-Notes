@@ -1,0 +1,43 @@
+\chapter{Nature of Computing}
+This chapter contains the solutions to the exercises of the book ``Nature of Computing''.
+
+
+\section{Chapter 1}
+
+\begin{problem}[Hand shake theorem]
+	Prove that in any finite graph, the number of verticies with odd degree is even.
+\end{problem}
+\begin{solution}
+	Observe that the sum of degrees of all vertices is an even number,
+	\[ \sum_{x\in N} \deg(x) = 2\abs{E}. \]
+	So there should be even number of verticies that has odd degree (other wise the sum above will be an odd number).
+\end{solution}
+
+\begin{problem}[Pigeons and holes]
+	Show that in any finite simple graph with more than one vertex, there is at least one pair of vertices that have the same degree.
+\end{problem}
+\begin{solution}
+	We consider three exhaustive cases: The graph $ G $ has:
+	\begin{enumerate}[(i)]
+		\item no isolated nodes: Then the $ \deg $ function is
+		\[ \deg: \set{n_1,\cdots,n_N} \to \set{1,\cdots,N-1}, \]
+		This function can not be one-to-one, because the size of the range is smaller than the size of the domain. So $ \exists n_i,n_j $ such that $ \deg(n_i) = \deg(n_j) $.
+		\item Exactly one isolated nodes: without loss of generality, assume $ n_1 $ is the isolated node. So $ \deg $ restricted on the non-isolated nodes will be
+		\[ \deg: \set{n_2,\cdots,n_N} \to \set{1,\cdots,N-2}. \]
+		For the same reason as above $ \deg $ is not one-to-one.
+		
+		\item More than one isolated nodes: Then immediately we have at least two nodes that both have zero degree.
+	\end{enumerate}
+\end{solution}
+
+\begin{problem}[Proving Euler's Claim]
+	Prove that having vertices with even degree is sufficient for a connected graph to be Eulerian. \emph{Hint: First show that if every vertex has even degree, we can cover the graph with a set of cycles such that every edge appears exactly once. Then consider combining cycles.}
+\end{problem}
+
+\begin{solution}
+	First, we show that if the degree of all nodes is even, then one can cover the graph with independent cycles. Starting with a non-isolated node $ n_1 $, let $ c_1 $ be a cycle that contains $ n_1 $. To show that such a cycle exists, let $ \tilde{c}_1 $ be a $ n_1\to\tilde{n}_1 $ simple path, where $ \tilde{n}_1 $ is a neighbor of $ n_1 $ that is not on the path. Note that such a neighbor exists, because $ \deg{n_1} $ is non zero and even). Let $ c_1 $ be the path that one gets by connecting the path $ \tilde{c}_1 $ to $ n_1 $. Now delete all the edges in $ c_1 $ from the graph $ G $ to get the new graph $ G_1 $. Observe that every node in $ G_1 $ still has even degree, with possibly more isolated nodes compared to $ G $. We continue this process. Since $ G $ is finite, then this process will terminate. The set of paths $ \set{c_1,\cdots,c_n} $ are independent simple cycles.
+	For two cycles $ c_i $ and $ c_j $ that share a node $ n $, we merge then according to the following diagram
+	\input{Images/cycleMapping.tex} 
+	By this construction $ c_{ij} $ is a bigger non-simple cycle (it is non-simple because it intersects itself). By continuing merging cycles to one another, we eventually get the Euler cycle.
+
+\end{solution}

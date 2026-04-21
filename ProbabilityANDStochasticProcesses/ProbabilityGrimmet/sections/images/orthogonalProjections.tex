@@ -1,0 +1,78 @@
+\begin{figure}[h!]
+	\centering
+	
+	
+	% Pattern Info
+	
+	\tikzset{
+		pattern size/.store in=\mcSize, 
+		pattern size = 5pt,
+		pattern thickness/.store in=\mcThickness, 
+		pattern thickness = 0.3pt,
+		pattern radius/.store in=\mcRadius, 
+		pattern radius = 1pt}
+	\makeatletter
+	\pgfutil@ifundefined{pgf@pattern@name@_nfn9n8gyh lines}{
+		\pgfdeclarepatternformonly[\mcThickness,\mcSize]{_nfn9n8gyh}
+		{\pgfqpoint{0pt}{0pt}}
+		{\pgfpoint{\mcSize+\mcThickness}{\mcSize+\mcThickness}}
+		{\pgfpoint{\mcSize}{\mcSize}}
+		{\pgfsetcolor{\tikz@pattern@color}
+			\pgfsetlinewidth{\mcThickness}
+			\pgfpathmoveto{\pgfpointorigin}
+			\pgfpathlineto{\pgfpoint{\mcSize}{0}}
+			\pgfusepath{stroke}}}
+	\makeatother
+	\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
+	
+	\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+		%uncomment if require: \path (0,300); %set diagram left start at 0, and has height of 300
+		
+		%Shape: Parallelogram [id:dp02672482103561835] 
+		\draw  [pattern=_nfn9n8gyh,pattern size=6pt,pattern thickness=0.75pt,pattern radius=0pt, pattern color={rgb, 255:red, 80; green, 227; blue, 194}] (210.2,140) -- (360,140) -- (309.8,190) -- (160,190) -- cycle ;
+		%Straight Lines [id:da7753646005287649] 
+		\draw    (210,140) -- (368,140) ;
+		\draw [shift={(370,140)}, rotate = 180] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+		%Straight Lines [id:da929587782210769] 
+		\draw    (210,140) -- (210,42) ;
+		\draw [shift={(210,40)}, rotate = 90] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+		%Straight Lines [id:da6837966087242489] 
+		\draw    (210,140) -- (151.41,198.59) ;
+		\draw [shift={(150,200)}, rotate = 315] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+		%Straight Lines [id:da7487680502686203] 
+		\draw [color={rgb, 255:red, 74; green, 144; blue, 226 }  ,draw opacity=1 ][line width=1.5]    (210,140) -- (300,190) ;
+		%Straight Lines [id:da424752948452328] 
+		\draw    (276.9,154.3) -- (262.2,169.8) ;
+		%Straight Lines [id:da05429552172161167] 
+		\draw    (276.9,74.3) -- (276.9,154.3) ;
+		%Straight Lines [id:da7626670919446294] 
+		\draw    (276.9,75) -- (262.2,169.8) ;
+		%Shape: Circle [id:dp4995512018686352] 
+		\draw  [color={rgb, 255:red, 0; green, 0; blue, 0 }  ,draw opacity=1 ][fill={rgb, 255:red, 208; green, 2; blue, 27 }  ,fill opacity=1 ] (275.2,75) .. controls (275.2,74.06) and (275.96,73.3) .. (276.9,73.3) .. controls (277.84,73.3) and (278.6,74.06) .. (278.6,75) .. controls (278.6,75.94) and (277.84,76.7) .. (276.9,76.7) .. controls (275.96,76.7) and (275.2,75.94) .. (275.2,75) -- cycle ;
+		%Shape: Circle [id:dp7658492482039172] 
+		\draw  [color={rgb, 255:red, 0; green, 0; blue, 0 }  ,draw opacity=1 ][fill={rgb, 255:red, 245; green, 166; blue, 35 }  ,fill opacity=1 ] (275.2,154.3) .. controls (275.2,153.36) and (275.96,152.6) .. (276.9,152.6) .. controls (277.84,152.6) and (278.6,153.36) .. (278.6,154.3) .. controls (278.6,155.24) and (277.84,156) .. (276.9,156) .. controls (275.96,156) and (275.2,155.24) .. (275.2,154.3) -- cycle ;
+		%Shape: Circle [id:dp8096973835269348] 
+		\draw  [color={rgb, 255:red, 0; green, 0; blue, 0 }  ,draw opacity=1 ][fill={rgb, 255:red, 235; green, 123; blue, 235 }  ,fill opacity=1 ] (260.8,168.7) .. controls (260.8,167.76) and (261.56,167) .. (262.5,167) .. controls (263.44,167) and (264.2,167.76) .. (264.2,168.7) .. controls (264.2,169.64) and (263.44,170.4) .. (262.5,170.4) .. controls (261.56,170.4) and (260.8,169.64) .. (260.8,168.7) -- cycle ;
+		%Straight Lines [id:da9770902758667479] 
+		\draw    (272,159) -- (272,150.25) ;
+		%Straight Lines [id:da018882205731138635] 
+		\draw    (277.25,144) -- (272,150.25) ;
+		
+		% Text Node
+		\draw (281,148.4) node [anchor=north west][inner sep=0.75pt]  [font=\scriptsize]  {$\mathbb{E}[ X|\mathcal{F}]$};
+		% Text Node
+		\draw (220,168.4) node [anchor=north west][inner sep=0.75pt]  [font=\scriptsize]  {$\mathbb{E}[ X|\mathcal{G}]$};
+		% Text Node
+		\draw (282.2,62.8) node [anchor=north west][inner sep=0.75pt]  [font=\scriptsize]  {$X$};
+		% Text Node
+		\draw (280.2,110.8) node [anchor=north west][inner sep=0.75pt]  [font=\scriptsize,color={rgb, 255:red, 0; green, 0; blue, 0 }  ,opacity=1 ]  {$a$};
+		% Text Node
+		\draw (271.4,160.4) node [anchor=north west][inner sep=0.75pt]  [font=\scriptsize,color={rgb, 255:red, 0; green, 0; blue, 0 }  ,opacity=1 ]  {$b$};
+		% Text Node
+		\draw (257,120.4) node [anchor=north west][inner sep=0.75pt]  [font=\scriptsize,color={rgb, 255:red, 0; green, 0; blue, 0 }  ,opacity=1 ]  {$c$};
+		% Text Node
+		\draw (201,202.4) node [anchor=north west][inner sep=0.75pt]    {$a^{2} +b^{2} =c^{2}$};
+		
+		
+	\end{tikzpicture}
+\end{figure}

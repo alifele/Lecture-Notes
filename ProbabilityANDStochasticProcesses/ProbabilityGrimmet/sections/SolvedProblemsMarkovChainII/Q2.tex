@@ -1,0 +1,112 @@
+\begin{problem}
+	There are 6 coins on a table, each showing heads (H) or tails (T). In each step we 
+	\begin{itemize}
+		\item Select uniformly one of the coins. 
+		\item If it is heads, toss it and replace on the table (with random side).
+		\item If it sis tails, toss it. If it comes up heads, leave it at that. If it comes up tails, toss it a second time, and leave the result as it is.
+		Let $X_n$ be the number of heads showing after $n$ such steps. Answer the following questions
+		\begin{enumerate}[(a)]
+			\item Determine the transition probabilities for this Markov chain.
+			\item Draw the transition diagram and write the transition matrix.
+			\item What is $\prob(X_2 = 4| X_0=5)$?
+		\end{enumerate}
+	\end{itemize}
+\end{problem}
+\begin{solution}
+	\begin{enumerate}[(a)]
+		\item To compute the transition probabilities, we need to perform the first step analysis. Let the events \[I = \set{X_1 = a+1},\qquad S = \set{X_1 = a},\qquad D = \set{X_1 = a-1},\]
+		where $0 \leq a \leq 6$ is the number of heads. So to compute the transition probabilities, we need to compute
+		\[ P(a,a+1) = \prob_a(I), \qquad P(a,a) = \prob_a(S), \qquad P(a,a-1) = \prob_a(D). \]
+		We start with $\prob_a(I)$. Let $ST$ be the event where the selected coin is tails, and $SH$ be the event where the selected coin is heads. These two events are disjoint and the probability of their union is 1, thus
+		\[ \prob_a(I) = \underbrace{\prob_a(I|SH)}_{\text{see Eq (2.I.1)}}\underbrace{\prob_a(SH)}_{\frac{a}{6}} + \underbrace{\prob_a(I|ST)}_{\text{see Eq (2.I.2)}}\underbrace{\prob_a(ST)}_{\frac{6-a}{6}}. \tag{2.I}\]
+		Note that if we start with $a$ coins heads, then the chance we choose a random coin from the table and find it heads is $\frac{a}{6}$, hence $\prob_a(SH) = \frac{a}{6}$, and $\prob_a(ST) = \frac{6-a}{6}$. Now we need to expand the remaining terms with appropriate conditioning. Let $TT$ be the event where we toss a coin and find it tails and $TH$ be the event where we toss a coin and find it heads. Thus we can write
+		\[ \prob_a(I|SH) = \underbrace{\prob_a(I|SH,TH)}_{0}\underbrace{\prob_a(TS)}_\frac{1}{2} + \underbrace{\prob_a(I|SH,TT)}_{0}\underbrace{\prob_a(TT)}_\frac{1}{2}. \tag{2.I.1}  \]
+		Note that $\prob_a(TT) = \prob_a(TH) = \frac{1}{2}$, since the coin tossing is fair. Also, note that $\prob_a(I|SH,TH)=\prob_a(I|SH,TT)=0$ since if we select a heads, and then toss it, finding it either heads or tails will not increase the total number of heads on the table. Similarly, for the other term in $(2.1)$ we have
+		\[ \prob_a(I|ST) = \underbrace{\prob_a(I|ST,TH)}_{1}\underbrace{\prob_a(TH)}_{\frac{1}{2}} + \underbrace{\prob_a(I|ST,TT)}_\text{see Eq (2.I.3)}\underbrace{\prob_a(TT)}_{\frac{1}{2}}. \tag{2.I.2} \]
+		Now we need to expand the remaining terms in the equation above.
+		\[ \prob_a(I|ST,TT) = \underbrace{\prob_a(I|ST,TT,TH)}_{1}\prob_a(TH) + \underbrace{\prob_a(I|ST,TT,TT)}_{0}\prob_a(TT) = \frac{1}{2}. \tag{2.I.3}  \]
+		Putting all together we can write
+		\[ \boxed{P(a,a+1) = \prob_a(I) = \frac{6-a}{8}}. \]
+		Similarly, we can compute other transition probabilities. For instance for $\prob_a(S)$ we can write
+		\[ \prob_a(S) = \underbrace{\prob_a(S|SH)}_{\text{see Eq (2.S.1)}}\underbrace{\prob_a(SH)}_{\frac{a}{6}} + \underbrace{\prob_a(S|ST)}_{\text{see Eq (2.S.2)}}\underbrace{\prob_a(ST)}_{\frac{6-a}{6}}. \tag{2.S}\]
+		and for the remaining terms we can write
+		\[ \prob_a(S|SH) = \underbrace{\prob_a(S|SH,TH)}_{1}\underbrace{\prob_a(TS)}_\frac{1}{2} + \underbrace{\prob_a(S|SH,TT)}_{0}\underbrace{\prob_a(TT)}_\frac{1}{2}, \tag{2.S.1}  \]
+		and
+		\[ \prob_a(S|ST) = \underbrace{\prob_a(S|ST,TH)}_{0}\underbrace{\prob_a(TH)}_{\frac{1}{2}} + \underbrace{\prob_a(S|ST,TT)}_\text{see Eq (2.S.3)}\underbrace{\prob_a(TT)}_{\frac{1}{2}}. \tag{2.S.2} \]
+		And for the remaining term above
+		\[ \prob_a(S|ST,TT) = \underbrace{\prob_a(S|ST,TT,TH)}_{0}\prob_a(TH) + \underbrace{\prob_a(S|ST,TT,TT)}_{1}\prob_a(TT) = \frac{1}{2}. \tag{2.S.3}  \]
+		and by putting all together we will get
+		\[\boxed{ P(a,a) =  \prob_a(S) = \frac{6+a}{24}}. \]
+		Finally, since $\prob_a(I\cup S \cup D) = 1$, and $I,S,D$ are mutually disjoint, we can write 
+		\[ \prob_a(D) = 1 - (\prob_a(I) + \prob_a(S)), \] 
+		hence
+		\[ \boxed{P(a,a-1) = \prob_a(D) = \frac{a}{12}}. \]
+		so the transition probabilities are as calculated.
+		
+		\item The transition diagram is plotted below. 
+		
+		\begin{center}
+			\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=1.9cm,
+				semithick,scale=0.4]
+				\tikzstyle{every state}=[circle, draw, fill=orange!50,
+				inner sep=0pt, minimum width=10pt]
+				
+				\node[state] (A)              {$0$};
+				\node[state]         (B) [right of=A] {$1$};
+				\node[state]         (C) [right of=B] {$2$};
+				\node[state]         (D) [right of=C] {$3$};
+				\node[state]         (E) [right of=D] {$4$};
+				\node[state]         (F) [right of=E] {$5$};
+				\node[state]         (G) [right of=F] {$6$};
+				
+				\path (A) edge [bend left] node {$p_{01}$} (B)
+				(B) edge [bend left] node {$p_{10}$} (A)
+				(A) edge [loop left] node {$p_{00}$} (A)
+ 				
+				(B) edge [bend left] node {$p_{12}$} (C)
+				(B) edge [loop above] node {$p_{11}$} (C)
+				(C) edge [bend left] node {$p_{21}$} (B)
+				
+				(C) edge [bend left] node {$p_{23}$} (D)
+				(C) edge [loop below] node {$p_{22}$} (D)
+				(D) edge [bend left] node {$p_{32}$} (C)
+				
+				(D) edge [bend left] node {$p_{34}$} (E)
+				(D) edge [loop above] node {$p_{33}$} (E)
+				(E) edge [bend left] node {$p_{43}$} (D)
+				
+				(E) edge [bend left] node {$p_{45}$} (F)
+				(E) edge [loop below] node {$p_{44}$} (E)
+				(F) edge [bend left] node {$p_{54}$} (E)
+				
+				(F) edge [bend left] node {$p_{56}$} (G)
+				(F) edge [loop above] node {$p_{55}$} (E)
+				(G) edge [bend left] node {$p_{65}$} (F)
+				(G) edge [loop right] node {$p_{66}$} (G);
+			\end{tikzpicture}
+		\end{center}
+		And the transition matrix is
+		\[  M =
+		\begin{pmatrix}
+			1/4 & 3/4 & 0 & 0 & 0 & 0 & 0 \\
+			1/12 & 7/24 & 5/8 & 0 & 0 & 0 & 0 \\
+			0 & 1/6 & 1/3 & 1/2 & 0 & 0 & 0 \\
+			0 & 0 & 1/4 & 3/8 & 3/8 & 0 & 0 \\
+			0 & 0 & 0 & 1/3 & 5/12 & 1/4 & 0 \\
+			0 & 0 & 0 & 0 & 5/12 & 11/24 & 1/8 \\
+			0 & 0 & 0 & 0 & 0 & 1/2 & 1/2
+		\end{pmatrix}
+		 \]
+		 
+		 \item $\prob(X_2 = 4|X_0=5)$ is the second transition probability $P_2(5,4)$. To compute this, we need to fine the element in the 6-th row and 5-th column in the $M^2$ matrix, which is basically the inner product between the vectors formed by the 6-th row and the 5-th column.
+		 \[ P_2(5,4) = (\frac{5}{12})^2 + \frac{11}{24}\cdot\frac{5}{12} = \frac{35}{96} \]
+		 which after simplification becomes
+		 \[ \boxed{P_2(5,4) = \frac{35}{96}}. \]
+		\qed
+
+		
+		
+		
+	\end{enumerate}
+	
+\end{solution}

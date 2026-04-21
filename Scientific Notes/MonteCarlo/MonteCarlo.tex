@@ -106,10 +106,28 @@
 	
 	
 	
-	\section{In reality}
-	In reality, we often start with a function that we want to integrate, 
+	\section{Integrating Functions}
+	The ``hello world program'' in the world of MonteCarlo integration is often a thermal system, like a lattice of spins, or the idea gas model. Assume we have a collection of $ N $ particles in $ 3D $ space, confined to some volume. Each particle will has a position vector in $ V \subset \R^3 $ and a momentum vector in $ \R^3 $. So for each particle we have a space $ V\times\R^3 $. Combining these spaces (i.e. their direct sum), we will get what is so called ``phase space'' in physics literature, denoted as $ S $.
+	\[ S = (V\times\R^3)\oplus(V\times\R^3)\oplus\cdots\oplus(V\times\R^3)\cong \ (V\times\R^3)^{N} \cong V\times\R^{3N}. \]
+	Now each point of $ S $, is a configuration of particles (each particle has a specific position and a specific velocity). For instance 
+	\[ ((0,0,\cdots,0),(0,0,\cdots,0)) \in S, \]
+	is the configuration where all the particles are still and are all positioned at the origin. The physical feasibility of such configurations is another story, which is told by the probability density function (distribution) on this space. One common way to do so, is by defining some energy function $ H:S\to\R $ on the space, and let the probability density function be $ p:S\to\R $
+	\[ p(x) = \frac{e^{-\beta H(x)}}{\int_S e^{-\beta H(\xi)}d\xi} = \frac{e^{-\beta H(x)}}{Z},  \]
+	where $ Z $ is the partition function that ensures $ \int_S p(x) dx  = 1$. In the language of the measure theoretic probability theory, we are in fact turning $ S $ to a probability space $ (S,\Prob_p) $ where $ p  = d\Prob_p/d\lambda $, i.e. the probability density function is the Radon-Nikodym derivative of the probability function with respect to the Lebesgue measure. So given any measurable function $ f:S\to\R $ we can compute its average:
+	\[ \E_p[f]  = \int_S f d\Prob_p = \int_S f(x)p(x) dx, \]
+	where the subscript $ p $ in $ \E_p $ is to emphasis expectation with respect to the probability measure $ \Prob_p $. However, the integral in the RHS above, is not feasible to do when $ S $ is high dimensional. The alternative method is the MonteCarlo integration. Let $ (X_n)_{n\in N} $ be i.i.d. random variables with states space $ S $ and with distribution $ p $. Using probability theory nomenclature, we are constructing probability space $ (\Omega,\mathcal{F},\Prob) $ and some stochastic process $ (X_n)_{n\in\N} $ with values in $ S $ that are i.i.d. and $ \Prob $ is such that $ \Prob_p $ is the pushforward measure of $ \Prob $ under any of $ X_i $, say $ X_1 $. Define the pullback map $ f\circ X:\Omega \to \R $. Let
+	\[ S_n = \sum_i f(X_i), \qquad \hat{f}_n = \frac{S_n}{n}. \]
+	Strong law of large numbers implies that
+	\[ \hat{f}_n \to \E_\Prob[f\circ X] = \E_p[f], \]
+	where the last equality holds because of the ``Law of the unconscious statistician'' or the change of variable rule. And by the Central Limit Theorem, one observes that
+	\[ \operatorname{Var}_\Prob(\hat{f}_n) \sim \frac{\operatorname{Var}_p(f)}{{n}}. \]
 	
-	
+	\begin{quote}
+		So in short, instead of calculating the integral $ \int_S f(x) p(x) dx $, we generate independent samples from the probability space $ (S,\Prob_p) $ (using Monte Carlo Markov Chain), $ X_1,\cdots,X_n $, and calculate the average
+		\[ \hat{f}_n =  \frac{f(X_1)+f(X_2)+\cdots+f(X_n)}{n}, \]
+		and ensuing the samples are independent, then one uses SLLN and CLT to show
+		\[ \hat{f}_n \to I = \int_S f(x) p(x) dx, \qquad \abs{\hat{f}_n - I} \sim \frac{\operatorname{Var}_p(f)}{\sqrt{n}} \]
+	\end{quote}
 	
 	
 	

@@ -1,0 +1,125 @@
+\section{What is a Graph}
+
+\begin{problem}
+	As in the text book.
+\end{problem}
+\begin{solution}
+	$ k_{1,1} $ is the only complete bipartite graph that is also complete.
+\end{solution}
+
+\begin{problem}
+	As in the textbook.
+\end{problem}
+\begin{solution}
+	The adjacency matrices are:
+	\[ A_1 = \begin{pmatrix}
+		0 & 1 & 0 \\
+		1 & 0 & 1 \\
+		0 & 1 & 0
+	\end{pmatrix},\qquad
+	A_2 = \begin{pmatrix}
+		0 & 1 & 1 \\
+		1 & 0 & 0 \\
+		1 & 0 & 0
+	\end{pmatrix}, \qquad 
+	A_3 = \begin{pmatrix}
+		0 & 0 & 1 \\
+		0 & 0 & 1 \\
+		1 & 1 & 0
+	\end{pmatrix}.
+	 \]
+	And the corresponding incidence matrices are:
+	\[ 
+	M_1 = \begin{pmatrix}
+		1 & 0 \\
+		1 & 1 \\
+		0 & 1
+	\end{pmatrix}, \qquad
+	M_2 = \begin{pmatrix}
+		1 & 1 \\
+		1 & 0 \\
+		0 & 1 
+	\end{pmatrix}, \qquad 
+	M_3 = \begin{pmatrix}
+		1 & 0 \\
+		0 & 1 \\
+		1 & 1
+	\end{pmatrix}
+	 \]
+	 
+	An adjacency matrix for a path with six vertices is:
+	\[ A = \begin{pmatrix}
+		0 & 1 & 0 & 0 & 0 & 0 \\
+		1 & 0 & 1 & 0 & 0 & 0 \\
+		0 & 1 & 0 & 1 & 0 & 0 \\
+		0 & 0 & 1 & 0 & 1 & 0 \\
+		0 & 0 & 0 & 1 & 0 & 1 \\
+		0 & 0 & 0 & 0 & 1 & 0 \\
+	\end{pmatrix}.
+	 \]
+	And an adjacency matrix for a cycle with six vertices is:
+	\[ A = \begin{pmatrix}
+		0 & 1 & 0 & 0 & 0 & 1 \\
+		1 & 0 & 1 & 0 & 0 & 0 \\
+		0 & 1 & 0 & 1 & 0 & 0 \\
+		0 & 0 & 1 & 0 & 1 & 0 \\
+		0 & 0 & 0 & 1 & 0 & 1 \\
+		1 & 0 & 0 & 0 & 1 & 0 \\
+	\end{pmatrix}.
+	\]
+\end{solution}
+
+\begin{problem}
+	As in the textbook.
+\end{problem}
+\begin{solution}
+	An adjacency matrix for $ K_{n,m} $ can be written as
+	\[
+	A =
+	\begin{pmatrix}
+		0_{n \times n} & I_{n \times m} \\
+		I_{m \times n} & 0_{m \times m},
+	\end{pmatrix}
+	\]
+	for which we have ordered the vertices as $ (v_1,v_2,\cdots,v_n,v_{n+1},\cdots,v_{n+m}), $
+	where $ v_1,\cdots,v_m $ all belong to one partide, and $ v_{n+1},\cdots,v_{n+m} $ all belong to the other partide.
+\end{solution}
+
+
+\begin{problem}
+	From the definition of isomorphism, prove that $ G\cong H $ if and only if $ \overline{G} \cong \overline{H} $.
+\end{problem}
+\begin{solution}
+	For the first direction, assume $ G \cong H $. We want to show $ \overline{G} \cong \overline{H} $. Since $ G \cong H $, $ \exists f: V(G) \to V(H) $ such that $ ab \in E(G) $ iff $ f(a)f(b) \in E(H) $. Let $ xy \in E(\overline{G}) $. Then $ xy \notin E(G) $. Using the fact that $ f $ is isomorphism, $ f(x)f(y) \notin E(H) $. So $ f(x)f(y) \in E(\overline{H}) $. Furthermore, let $ uv \notin E(\overline{G}) $. So $ uv\in E(G) \biImp f(u)f(v) \in E(H) \biImp f(u)f(v)\notin E(\overline{H})$. So $ f $ is an isomorphism between $ \overline{G} $ and $ \overline{H} $. The other direction of the proof can be shown similarly.
+\end{solution}
+
+
+\begin{problem}
+	Prove or disprove. If every vertex of a simple graph $ G $ has degree 2, then $ G $ is a cycle.
+\end{problem}
+\begin{solution}
+	Not true. Two copies of $ K_3 $ is a counterexample.
+\end{solution}
+
+\begin{problem}
+	As in the textbook.
+\end{problem}
+\begin{solution}
+	Consider the following decomposition.
+	\input{Images/decomposeIntoTwoCycles.tex}
+\end{solution}
+
+\begin{problem}
+	Prove that a graph with more than six vertices of off degree can not be decomposed into three paths.
+\end{problem}
+
+
+
+
+
+
+
+
+
+
+
